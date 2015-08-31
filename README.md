@@ -10,7 +10,7 @@ language.
 
 ### Idioms
 
-* Constructor
+* [Constructor](idioms/ctor.md)
 
 ### Design patterns
 
