@@ -12,44 +12,44 @@ language.
 
 * [Constructor](idioms/ctor.md)
 * [Concatenating strings with `format!`](idioms/concat-format.md)
-* private field to indicate extensibility
-* trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/master/src/lib.rs#L1400)
-* Deref on Vec/String to treat like a smart pointer/borrowed view of such data
-* leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
-* dtor for finally
-* interior mutability - UnsafeCell, Cell, RefCell
-* treating Option like a list
+* TODO private field to indicate extensibility
+* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/master/src/lib.rs#L1400)
+* TODO Deref on Vec/String to treat like a smart pointer/borrowed view of such data
+* TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
+* TODO dtor for finally
+* TODO interior mutability - UnsafeCell, Cell, RefCell
+* TODO treating Option like a list
 
 ### Design patterns
 
 * [Builder](patterns/builder.md)
-* RAII ( + borrows - mutex guard)
-* newtype (can be used to restrict functionality, make by-move rather than by-copy, abstraction, e.g., https://github.com/rust-lang/rust/blob/master/src/libcore/str/mod.rs#L366-L372)
-* iterators (to safely avoid bounds checks)
-* closures and lifetimes (coupling to lifetime)
-* platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
-* affine types/session types
-* Entry API vs insert_or_update etc.
-* visitor
-* fold
-* small crates and semver
-* extension traits
-* destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
-* convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
-* late binding of bounds for better APIs (i.e., Mutex's don't require Send)
-* 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
-* composition of structs to please the borrow checker
+* TODO RAII ( + borrows - mutex guard, [style guide entry]())
+* [Newtype](patterns/newtype.md)
+* TODO iterators (to safely avoid bounds checks)
+* TODO closures and lifetimes (coupling to lifetime)
+* TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
+* TODO affine types/session types
+* TODO Entry API vs insert_or_update etc.
+* TODO visitor
+* TODO fold
+* TODO small crates and semver
+* TODO extension traits
+* TODO destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
+* TODO convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
+* TODO late binding of bounds for better APIs (i.e., Mutex's don't require Send)
+* TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
+* TODO composition of structs to please the borrow checker
 
 
 
 ### Anti-patterns
 
-* thread + catch_panic for exceptions
-* Clone to satisfy the borrow checker
-* Deref polymorphism
-* Matching all fields of a struct (back compat)
-* wildcard matches
-* tkaing an enum rather than having multiple functions
+* TODO thread + catch_panic for exceptions
+* TODO Clone to satisfy the borrow checker
+* TODO Deref polymorphism
+* TODO Matching all fields of a struct (back compat)
+* TODO wildcard matches
+* TODO tkaing an enum rather than having multiple functions
 
 
 

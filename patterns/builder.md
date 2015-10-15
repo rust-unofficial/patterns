@@ -81,7 +81,7 @@ of naming is not used.
 
 ## See also
 
-[Description in the guide](https://aturon.github.io/ownership/builders.html)
+[Description in the style guide](http://doc.rust-lang.org/stable/style/ownership/builders.html)
 
 [Constructor pattern](../idioms/ctor.md) for when construction is simpler.
 
