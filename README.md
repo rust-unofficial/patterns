@@ -55,7 +55,10 @@ language.
 
 ## Contributing
 
+Contributions are very welcome!
+
 You should start with [the template](template.md). Copy it into the appropriate
 directory, edit it, and submit a PR. You might not want every section, and you
-might want to add extra sections. Correction and elaboration PRs are also very
-welcome.
+might want to add extra sections.
+
+Correction and elaboration PRs are very welcome.
