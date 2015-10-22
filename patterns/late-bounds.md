@@ -1,8 +1,8 @@
-# A succinct name for the pattern
+# Late bound bounds
 
 ## Description
 
-A short, prose description of the pattern.
+TODO late binding of bounds for better APIs (i.e., Mutex's don't require Send)
 
 
 ## Example

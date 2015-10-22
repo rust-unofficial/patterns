@@ -1,4 +1,4 @@
-# A succinct name for the pattern
+# Entry API
 
 ## Description
 
@@ -30,12 +30,9 @@ Bad things about this pattern. Possible contraindications.
 
 ## Discussion
 
-A deeper discussion about this pattern. You might want to cover how this is done
-in other languages, alternative approaches, why this is particularly nice in
-Rust, etc.
+TODO vs insert_or_update etc.
 
 
 ## See also
 
-Related patterns (link to the pattern file). Versions of this pattern in other
-languages.
+[RFC](https://github.com/rust-lang/rfcs/blob/master/text/0216-collection-views.md)
