@@ -23,7 +23,7 @@ language.
 ### Design patterns
 
 * [Builder](patterns/builder.md)
-* [RAII guards](patterns/raii.md)
+* [RAII guards](patterns/RAII.md)
 * [Newtype](patterns/newtype.md)
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
