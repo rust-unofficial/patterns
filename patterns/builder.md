@@ -7,7 +7,7 @@ Construct an object with calls to a builder helper.
 
 ## Example
 
-```
+```rust
 struct Foo {
     // Lots of complicated fields.
 }
