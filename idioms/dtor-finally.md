@@ -2,7 +2,7 @@
 
 ## Description
 
-Rust does not provide he equivalent to `finally` blocks - code that will be
+Rust does not provide the equivalent to `finally` blocks - code that will be
 executed no matter how a function is exited. Instead an object's destructor can
 be used to run code that must be run before exit.
 
