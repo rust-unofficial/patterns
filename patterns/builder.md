@@ -39,7 +39,7 @@ impl FooBuilder {
 }
 
 fn main() {
-    let f = FooBuilder::new().named("Bar").with_attirbute(...).finish();
+    let f = FooBuilder::new().named("Bar").with_attribute(...).finish();
 }
 
 ```
