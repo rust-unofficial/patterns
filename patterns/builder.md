@@ -23,7 +23,7 @@ impl FooBuilder {
     }
 
     fn named(mut self, name: &str) -> FooBuilder {
-        // Set the name on self and return it
+        // Set the name on the builder itself, and return the builder by value.
     }
 
     // More methods that take `mut self` and return `FooBuilder` setting up
@@ -34,7 +34,7 @@ impl FooBuilder {
     // advantage. It means we can use the builder as a template for constructing
     // many Foos.
     fn finish(&self) -> Foo {
-        // Create a Foo from the FooBuilder.
+        // Create a Foo from the FooBuilder, applying all settings in FooBuilder to Foo.
     }
 }
 
