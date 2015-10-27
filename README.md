@@ -39,6 +39,7 @@ language.
 * [Late bound bounds](patterns/late-bounds.md)
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
+* TODO `Error` traits and `Result` forwarding
 
 
 
@@ -50,6 +51,7 @@ language.
 * TODO Matching all fields of a struct (back compat)
 * TODO wildcard matches
 * TODO taking an enum rather than having multiple functions
+* TODO `unwrap()`ing every `Result` instead of forwarding it
 
 
 
