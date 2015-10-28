@@ -21,7 +21,7 @@ fn bar() -> Result<(), ()> {
         }
     }
 
-    // The dtor of _exit is run however `bar` is exited.
+    // The dtor of _exit will run however the function `bar` is exited.
     let _exit = Foo;
     // Implicit return in try!.
     try!(baz());
