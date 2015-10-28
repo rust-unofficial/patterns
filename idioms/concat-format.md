@@ -13,7 +13,7 @@ non-literal strings.
 ```rust
 fn say_hello(name: &str) -> String {
     // We could construct the result string manually.
-    // let mut result = "Hello";
+    // let mut result = "Hello".to_owned();
     // result.push_str(name);
     // result.push('!');
     // result
@@ -28,4 +28,3 @@ fn say_hello(name: &str) -> String {
 
 Using `format!` is usually the most succinct and readable way to combine strings.
 In nearly all cases it will generate optimal code in terms of performance too.
-
