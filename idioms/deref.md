@@ -76,6 +76,6 @@ slicing syntax. The target will be the borrowed view.
 
 ## See also
 
-Deref polymorphism anti-pattern.
+[Deref polymorphism anti-pattern](../anti_patterns/deref.md).
 
 [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
