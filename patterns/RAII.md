@@ -1,4 +1,4 @@
-# RAII guards
+# RAII with guards
 
 ## Description
 

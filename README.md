@@ -19,6 +19,7 @@ language.
 * [Finalisation in destructors](idioms/dtor-finally.md)
 * TODO interior mutability - UnsafeCell, Cell, RefCell
 * TODO treating Option like a list
+* TODO `Default` trait
 
 ### Design patterns
 
@@ -40,6 +41,7 @@ language.
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
+* TODO graphs
 
 
 
@@ -47,7 +49,7 @@ language.
 
 * TODO thread + catch_panic for exceptions
 * TODO Clone to satisfy the borrow checker
-* TODO Deref polymorphism
+* [Deref polymorphism](anti_patterns/deref.md)
 * TODO Matching all fields of a struct (back compat)
 * TODO wildcard matches
 * TODO taking an enum rather than having multiple functions
