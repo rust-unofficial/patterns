@@ -42,6 +42,7 @@ language.
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
 * TODO graphs
+* [Compose structs together for better borrowing](patterns/compose-structs.md)
 
 
 
