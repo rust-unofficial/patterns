@@ -27,4 +27,9 @@ fn say_hello(name: &str) -> String {
 ## Advantages
 
 Using `format!` is usually the most succinct and readable way to combine strings.
-In nearly all cases it will generate optimal code in terms of performance too.
+
+## Disadvantages
+
+It is usually not the most efficient way to combine strings - a series of `push`
+operations on a mutable string is usually the most efficient (especially if the
+string has been pre-allocated to the expected size).
