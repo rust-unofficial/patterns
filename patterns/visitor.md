@@ -111,3 +111,6 @@ which performs the same duty.
 The visitor pattern is a common pattern in most OO languages.
 
 [Wikipedia article](https://en.wikipedia.org/wiki/Visitor_pattern)
+
+The [fold](fold.md) pattern is similar to visitor but produces a new version of
+the visited data structure.
