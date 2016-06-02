@@ -49,7 +49,7 @@ language.
 ### Anti-patterns
 
 * TODO thread + catch_panic for exceptions
-* TODO Clone to satisfy the borrow checker
+* [Clone to satisfy the borrow checker](anti_patterns/borrow_clone.md)
 * [Deref polymorphism](anti_patterns/deref.md)
 * TODO Matching all fields of a struct (back compat)
 * TODO wildcard matches
