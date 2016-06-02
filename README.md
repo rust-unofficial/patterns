@@ -31,7 +31,6 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 ### Anti-patterns
 
 * TODO thread + catch_panic for exceptions
-* TODO Clone to satisfy the borrow checker
 * TODO Matching all fields of a struct (back compat)
 * TODO wildcard matches
 * TODO taking an enum rather than having multiple functions
