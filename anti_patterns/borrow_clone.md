@@ -2,7 +2,7 @@
 
 ## Description
 
-The borrow checker prevents rust users from developing otherwise unsafe code by
+The borrow checker prevents Rust users from developing otherwise unsafe code by
 ensuring that either: only one mutable reference exists, or potentially many but
 all immutable references exist. If the code written does not hold true to these 
 conditions, this anti-pattern arises when the developer resolves the compiler
@@ -11,22 +11,21 @@ error by cloning the variable.
 
 ## Example
 
-```rust fn main() {
-    // define any variable
-    let mut x = 5;
-    
-    // Borrow `x` -- but clone it first
-    let y = &mut (x.clone()); 
+```rust
+// define any variable
+let mut x = 5;
 
-    // perform some action on the borrow to prevent rust from optimizing this
-    //out of existence
-    *y += 1;
+// Borrow `x` -- but clone it first
+let y = &mut (x.clone()); 
 
-    // without the x.clone() two lines prior, this line would fail on compile as
-    // x has been borrowed
-    // thanks to x.clone(), x was never borrowed, and this line will run.
-    println!("{}", x);
-}
+// perform some action on the borrow to prevent rust from optimizing this
+//out of existence
+*y += 1;
+
+// without the x.clone() two lines prior, this line would fail on compile as
+// x has been borrowed
+// thanks to x.clone(), x was never borrowed, and this line will run.
+println!("{}", x);
 ```
 
 
