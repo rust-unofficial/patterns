@@ -2,7 +2,7 @@
 
 ## Description
 
-It is usually recommended to prefer a `&str` type over a `&String` type for arguments.  In most cases `&str` has more flexibility.  An `&String` will coerce to a `&str` type when required -- however, the oppositive is not true.  
+It is usually recommended to prefer a `&str` type over a `&String` type for arguments.  In most cases `&str` has more flexibility.  A `&String` will coerce to a `&str` type when required -- however, the opposite is not true.  
 
 ## Example
 
