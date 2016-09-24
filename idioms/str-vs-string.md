@@ -9,7 +9,7 @@ It is usually recommended to prefer a `&str` type over a `&String` type.  In mos
 Let's look at a few examples.  Consider an example where we wish to determine if a word contains three consecutive vowels.  We certainly don't need to own the string to determine this so we will take a reference.  The code might look something like this:
 
 ``` rust
-fn has_three_vowles(word: &String) -> bool {
+fn has_three_vowels(word: &String) -> bool {
     let mut vowel_count = 0;
     for char in word.chars() {
         match char {
@@ -32,8 +32,8 @@ This example will work fine, as shown here:
 fn main() {
     let ferris = "Ferris".to_string();
     let curious = "Curious".to_string();
-    println!("{}: {}", ferris, three_vowles(&ferris));
-    println!("{}: {}", curious, three_vowles(&curious));
+    println!("{}: {}", ferris, three_vowels(&ferris));
+    println!("{}: {}", curious, three_vowels(&curious));
 }
 ```
 
@@ -47,13 +47,13 @@ Curious: true
 However, by using a `&String` type in our arguent we will find the following example fails:
 
 ``` 
-println!("Ferris: {}", three_vowles("Ferris"));
+println!("Ferris: {}", three_vowels("Ferris"));
 ```
 
 This example fails because a `&str` type will not coerce to a `&String` type.  We can fix this by simply modifying the type for our argument.  For instance, if we change our function declaration to:
 
 ``` rust
-fn three_vowles(word: &str) -> bool {
+fn three_vowels(word: &str) -> bool {
 ```
 
 then the previous example will not print
@@ -69,7 +69,7 @@ fn main() {
     let sentence_string = 
         "Once upon a time, there was a friendly curious crab named Ferris".to_string();
     for word in sentence_string.split(' ') {
-        if three_vowles(word) {
+        if three_vowels(word) {
             println!("{} has three consecutive vowels!", word);
         }
     }
