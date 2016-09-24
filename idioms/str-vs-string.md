@@ -9,7 +9,7 @@ It is usually recommended to prefer a `&str` type over a `&String` type.  In mos
 Let's look at a few examples.  Consider an example where we wish to determine if a word contains three consecutive vowels.  We certainly don't need to own the string to determine this so we will take a reference.  The code might look something like this:
 
 ``` rust
-fn has_three_vowels(word: &String) -> bool {
+fn three_vowels(word: &String) -> bool {
     let mut vowel_count = 0;
     for char in word.chars() {
         match char {
@@ -62,7 +62,7 @@ then the previous example will not print
 Ferris: false
 ```
 
-But wait, that's not all!  There is more to this story.  It's very likely that you may say: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"` as an input to our example).  Even ignoring this case we will find that using `&str` will give us more flexibility than using `&String`.  Let's now take an example where someone gives us a sentance, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.  We probably should make use of the function we have already defined and simply feed in each word from the sentence.  An example of this could look like this:
+But wait, that's not all!  There is more to this story.  It's very likely that you may say: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"` as an input to our example).  Even ignoring this case we will find that using `&str` will give us more flexibility than using `&String`.  Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.  We probably should make use of the function we have already defined and simply feed in each word from the sentence.  An example of this could look like this:
 
 ``` rust
 fn main() {
@@ -87,4 +87,4 @@ However, this example will not run when our function is declared with an argumen
 ## See also
 
 TODO: Add references to the book, rustbyexample, and possibly steve's post on the differences between a `String` and `str`.
-TODO: Possibly reorginize to have a smaller example first and this larger example under a `## Discussion` section.
+TODO: Possibly reorganize to have a smaller example first and this larger example under a `## Discussion` section.
