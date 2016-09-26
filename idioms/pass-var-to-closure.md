@@ -1,10 +1,10 @@
-# Pass clone to closure
+# Pass variable to closure
 
 ## Description
 
 By default, closures capture their environment by borrowing. Or you can use `move`-closure
-to move environment. However, often you want to give copy of some data to closure, pass it
-by reference, or perform some other transformation.
+to move whole environment. However, often you want to move just some variables to closure,
+give it copy of some data, pass it by reference, or perform some other transformation.
 
 Use variable rebinding in separate scope for that.
 
