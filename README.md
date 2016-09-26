@@ -21,7 +21,7 @@ language.
 * TODO interior mutability - UnsafeCell, Cell, RefCell
 * TODO treating Option like a list
 * TODO `Default` trait
-* [Pass clone to closure](idioms/clone-to-closure.md)
+* [Pass variables to closure](idioms/pass-var-to-closure.md)
 
 ### Design patterns
 
