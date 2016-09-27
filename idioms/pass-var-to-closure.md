@@ -1,4 +1,4 @@
-# Pass variable to closure
+# Pass variables to closure
 
 ## Description
 
