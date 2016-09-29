@@ -19,7 +19,7 @@ language.
 * TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
 * [Finalisation in destructors](idioms/dtor-finally.md)
 * TODO interior mutability - UnsafeCell, Cell, RefCell
-* TODO treating Option like a list
+* [Iterating over an `Option`](idioms/option-iter.md)
 * TODO `Default` trait
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 
