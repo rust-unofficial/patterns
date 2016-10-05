@@ -24,7 +24,7 @@ The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions f
 
 The [`url`](https://crates.io/crates/url) crate provides tools for working with URLs.
 
-The [`png`](https://crates.io/crates/png) crate decodes PNG image files.
+The [`num_cpus`](https://crates.io/crates/num_cpus) crate provides a function to query the number of CPUs on a machine.
 
 ## See also
 
