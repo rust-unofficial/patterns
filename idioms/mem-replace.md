@@ -19,7 +19,7 @@ fn a_to_b(e: &mut MyEnum) {
     // we could just take a reference to `name` and clone that, but why pay an
     // extra allocation for something we already have?
     let have_name = match *e {
-        MyEnum::A(ref mut name, x) if x == 0 => {
+        MyEnum::A { ref mut name, x } if x == 0 => {
             // this takes out our `name` and put in an empty String instead
             // note that empty strings don't allocate
             Some(mem::replace(name, "".to_string()))
@@ -28,7 +28,7 @@ fn a_to_b(e: &mut MyEnum) {
         _ => None
     };
     // the mutable borrow ends here, so we can change `e`
-    if let Some(name) = have_name { *e = MyEnum::B { name } }
+    if let Some(name) = have_name { *e = MyEnum::B { name: name } }
 }
 ```
 
@@ -80,4 +80,4 @@ like Indiana Jones, replacing the artifact with a bag of sand.
 This gets rid of the [Clone to satisfy the borrow checker] antipattern in a
 specific case.
 
-[Clone to satisfy the borrow checker]()
+[Clone to satisfy the borrow checker](TODO: Hinges on PR #23)

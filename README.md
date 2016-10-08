@@ -22,6 +22,7 @@ language.
 * [Iterating over an `Option`](idioms/option-iter.md)
 * TODO `Default` trait
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
+* [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
 
 ### Design patterns
 
