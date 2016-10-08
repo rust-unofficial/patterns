@@ -1,18 +1,18 @@
-# Using &str instead of &String
+# Using coercion for arguments
 
 ## Description
 
-It is usually recommended to prefer a `&str` type over a `&String` type for arguments.  In most cases `&str` has more flexibility.  A `&String` will coerce to a `&str` type when required -- however, the opposite is not true.  
+Usings a target of a deref coericion can increase the flexibility of your code when you are deciding which argument type to use for a function argument.  For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`, or even `&T` as opposed to a `&Box<T>`.  Not only that, you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as can be illustrated in each of the previous examples.  For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.  We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked.  And finally, using deref targets for a function can increase the number of viable inputs for your function which may increase its utility.
 
 ## Example
 
-Let's look at a few examples.  Consider an example where we wish to determine if a word contains three consecutive vowels.  We certainly don't need to own the string to determine this so we will take a reference.  The code might look something like this:
+For this example, we will illustrate some differences for using `&String` as a function argument versus using a `&str`, but the ideas easily apply to using `&Vec<T>` versus using a `&[T]`, or even using a `&T` versus a `&Box<T>`.  Consider an example where we wish to determine if a word contains three consecutive vowels.  We certainly don't need to own the string to determine this so we will take a reference.  The code might look something like this:
 
 ``` rust
 fn three_vowels(word: &String) -> bool {
     let mut vowel_count = 0;
-    for char in word.chars() {
-        match char {
+    for c in word.chars() {
+        match c {
             'a' | 'e' | 'i' | 'o' | 'u' => {
                 vowel_count += 1;
                 if vowel_count >= 3 {
@@ -26,7 +26,7 @@ fn three_vowels(word: &String) -> bool {
 }
 ```
 
-This example will work fine, as shown here:
+This example works fine, as shown here:
 
 ``` rust
 fn main() {
@@ -37,7 +37,7 @@ fn main() {
 }
 ```
 
-which will print
+which prints
 
 ``` bash
 Ferris: false
@@ -46,8 +46,9 @@ Curious: true
 
 However, by using a `&String` type in our arguent we will find the following example fails:
 
-``` 
+``` rust
 println!("Ferris: {}", three_vowels("Ferris"));
+println!("Curious: {}", three_vowels("Curious"));
 ```
 
 This example fails because a `&str` type will not coerce to a `&String` type.  We can fix this by simply modifying the type for our argument.  For instance, if we change our function declaration to:
@@ -56,10 +57,12 @@ This example fails because a `&str` type will not coerce to a `&String` type.  W
 fn three_vowels(word: &str) -> bool {
 ```
 
-then the previous example will now print
+then the both of the previous examples will compile and print the same output.
+
 
 ``` bash
 Ferris: false
+Curious: true
 ```
 
 But wait, that's not all!  There is more to this story.  It's likely that you may say to yourself: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"`).  Even ignoring this special example, you may still find that using `&str` will give you more flexibility than using a `&String`.  Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.  We probably should make use of the function we have already defined and simply feed in each word from the sentence.  An example of this could look like this:
@@ -82,7 +85,7 @@ Running this example using our function declared with an argument type `&str` wi
 curious has three consecutive vowels!
 ```
 
-However, this example will not run when our function is declared with an argument type `&String`.  This is because string slices are a `&str` and not a `&String`.  One way you can think about why this is the case: to have a `&String` you will need a reference to a `String` object which requires three things: a pointer to your data, the length of your data, and how much capacity you have left to insert new data.  This last entry doesn't make much sense when you are talking about string slices. A string slices only cares about a window of your data, needing only: a pointer to your data, and the length of your data slice.
+However, this example will not run when our function is declared with an argument type `&String`.  This is because string slices are a `&str` and not a `&String`.
 
 ## See also
 
