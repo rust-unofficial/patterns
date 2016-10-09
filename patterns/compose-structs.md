@@ -41,7 +41,7 @@ fn main(a: &mut A) {
 We can apply this design pattern and refactor `A` into two smaller structs, thus
 solving the borrow checking issue:
 
-```
+```rust
 // A is now composed of two structs - B and C.
 struct A {
     b: B,
