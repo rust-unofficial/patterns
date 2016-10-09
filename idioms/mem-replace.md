@@ -13,22 +13,26 @@ We can do this without cloning the `name`.
 ```rust
 use std::mem;
 
+enum MyEnum {
+    A { name: String, x: u8 },
+    B { name: String }
+}
+
 fn a_to_b(e: &mut MyEnum) {
+
     // we mutably borrow `e` here. This precludes us from changing it directly
-    // as in `*e = ...`, because the borrow checker won't allow it. Of course
-    // we could just take a reference to `name` and clone that, but why pay an
-    // extra allocation for something we already have?
-    let have_name = match *e {
-        MyEnum::A { ref mut name, x } if x == 0 => {
-            // this takes out our `name` and put in an empty String instead
-            // note that empty strings don't allocate
-            Some(mem::replace(name, "".to_string()))
-        }
-        // nothing to do in all other cases
-        _ => None
-    };
-    // the mutable borrow ends here, so we can change `e`
-    if let Some(name) = have_name { *e = MyEnum::B { name: name } }
+    // as in `*e = ...`, because the borrow checker won't allow it. Therefore
+    // the assignment to `e` must be outside the `if let` clause. 
+    *e = if let MyEnum::A { ref mut name, x: 0 } = *e {
+    
+        // this takes out our `name` and put in an empty String instead
+        // (note that empty strings don't allocate).
+        // Then, construct the new enum variant (which will 
+        // be assigned to `*e`, because it is the result of the `if let` expression).
+        MyEnum::B { name: mem::replace(name, "".to_string()) }
+        
+    // In all other cases, we return immediately, thus skipping the assignment
+    } else { return }
 }
 ```
 
@@ -49,9 +53,8 @@ changing `e` with only a mutable borrow.
 
 `mem::replace` lets us swap out the value, replacing it with something else. In
 this case, we put in an empty `String`, which does not need to allocate. As a
-result, we get the original `name` *as an owned value*. We can wrap this in
-an `Option` or another enum that we can destructure in the next step to put the
-contained values into our mutably borrowed enum.
+result, we get the original `name` *as an owned value*. We can then wrap this in
+another enum.
 
 ## Advantages
 
