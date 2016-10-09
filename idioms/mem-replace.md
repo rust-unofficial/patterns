@@ -19,10 +19,10 @@ fn a_to_b(e: &mut MyEnum) {
     // we could just take a reference to `name` and clone that, but why pay an
     // extra allocation for something we already have?
     let have_name = match *e {
-        MyEnum::A { ref mut name, x } if x == 0 => {
+        MyEnum::A { ref mut name, x: 0 } => {
             // this takes out our `name` and put in an empty String instead
             // note that empty strings don't allocate
-            Some(mem::replace(name, "".to_string()))
+            Some(mem::replace(name, String::new()))
         }
         // nothing to do in all other cases
         _ => None
