@@ -7,7 +7,7 @@ This creates a new type, rather than an alias to a type (`type` items).
 
 ## Example
 
-```
+```rust
 // Some type, not necessarily in the same module or even crate.
 struct Foo {
     ...
@@ -80,7 +80,7 @@ most common uses, but they can be used for other reasons:
 * making a type with copy semantics have move semantics,
 * abstraction by providing a more concrete type and thus hiding internal types, e.g.,
 
-```
+```rust
 pub struct Foo(Bar<T1, T2>);
 ```
 
