@@ -53,6 +53,11 @@ result, we get the original `name` *as an owned value*. We can wrap this in
 an `Option` or another enum that we can destructure in the next step to put the
 contained values into our mutably borrowed enum.
 
+Note, however, that we you are using an `Option` and are replacing its
+value with a `None`, `Option`’s `take()` method provides a shorter and
+more idiomatic alternative.
+
+
 ## Advantages
 
 Look ma, no allocation! Also you may feel like Indiana Jones while doing it.
@@ -74,6 +79,7 @@ later.
 However, in Rust, we have to do a little more work to do this. An owned value
 may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.
+
 
 ## See also
 
