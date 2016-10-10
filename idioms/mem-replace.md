@@ -53,7 +53,7 @@ result, we get the original `name` *as an owned value*. We can wrap this in
 an `Option` or another enum that we can destructure in the next step to put the
 contained values into our mutably borrowed enum.
 
-Note, however, that we you are using an `Option` and are replacing its
+Note, however, that if we are using an `Option` and want to replace its
 value with a `None`, `Option`’s `take()` method provides a shorter and
 more idiomatic alternative.
 
