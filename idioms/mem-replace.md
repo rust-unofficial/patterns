@@ -29,7 +29,7 @@ fn a_to_b(e: &mut MyEnum) {
         // (note that empty strings don't allocate).
         // Then, construct the new enum variant (which will 
         // be assigned to `*e`, because it is the result of the `if let` expression).
-        MyEnum::B { name: mem::replace(name, "".to_string()) }
+        MyEnum::B { name: mem::replace(name, String::new()) }
         
     // In all other cases, we return immediately, thus skipping the assignment
     } else { return }
