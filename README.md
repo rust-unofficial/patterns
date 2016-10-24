@@ -35,7 +35,7 @@ language.
 * [Entry API](patterns/entry.md)
 * [Visitor](patterns/visitor.md)
 * [Fold](patterns/fold.md)
-* TODO small crates and semver
+* [Prefer small crates](patterns/small-crates.md)
 * TODO extension traits
 * TODO destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
 * TODO convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
