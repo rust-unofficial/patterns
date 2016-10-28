@@ -57,7 +57,22 @@ This is how most of us start out programming. We learn that a program is a set o
 println!("{}", (1..11).fold(0, |a, b| a + b));
 ```
 
-Whoa! This is really different! What's going on here?
+Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing __what__ to do, rather than __how__ to do it. `fold` is a function that [composes](https://en.wikipedia.org/wiki/Function_composition) functions. The name is a convention from Haskell.
+
+Here, we are composing functions of addition (this closure: `|a, b| a + b)`) with a range from 1 to 10. The `0` is the starting point, so `a` is `0` at first. `b` is the first element of the range, `1`. `0 + 1 = 1` is the result. So now we `fold` again, with `a = 1`, `b = 2` and so `1 + 2 = 3` is the next result. This process continues until we get to the last element in the range, `10`.
+
+| `a` | `b` | result |
+| --- | --- | --- |
+| 0 | 1 | 1 |
+| 1 | 2 | 3 |
+| 3 | 3 | 6 |
+| 6 | 4 | 10 |
+| 10 | 5 | 15 |
+| 15 | 6 | 21 |
+| 21 | 7 | 28 |
+| 28 | 8 | 36 |
+| 36 | 9 | 45 |
+| 45 | 10 | 55 |
 
 ### Types
 
@@ -65,4 +80,4 @@ Rust has strong static types. This can be very different than what you are used 
 
 ### Ownership
 
-Ownership is arguably the central concept of Rust.
+Ownership is arguably the central concept of Rust. The ownership system is __the__ reason for the safety guarantees in Rust.
