@@ -10,6 +10,74 @@ There are many problems that share the same form. While the details are differen
 
 If overused, design patterns can add unnecessary complexity to programs (e.g., see `AbstractSingletonProxyFactoryBean`). However, I think they are a great way to share intermediate and advanced level knowledge about a programming language.
 
+### Creational design patterns
+
+- Abstract Factory
+	- Creates an instance of several families of classes
+- Builder
+	- Separates object construction from its representation
+- Factory Method
+	- Creates an instance of several derived classes
+- Object Pool
+	- Avoid expensive acquisition and release of resources by recycling objects that are no longer in use
+- Prototype
+	- A fully initialized instance to be copied or cloned
+- Singleton
+	- A class of which only a single instance can exist
+
+### Structural design patterns
+
+- Adapter
+	- Match interfaces of different classes
+- Bridge
+	- Separates an object's interface from its implementation
+- Composite
+	- A tree structure of simple and composite objects
+- Decorator
+	- Add responsibilities to objects dynamically
+- Facade
+	- A single class that represents an entire subsystem
+- Flyweight
+	- A fine-grained instance used for efficient sharing
+- Private Class Data
+	- Restricts accessor/mutator access
+- Proxy
+	- An object representing another object
+
+### Behavioral design patterns
+
+- Chain of responsibility
+	- A way of passing a request between a chain of objects
+- Command
+	- Encapsulate a command request as an object
+- Interpreter
+	- A way to include language elements in a program
+- Iterator
+	- Sequentially access the elements of a collection
+- Mediator
+	- Defines simplified communication between classes
+- Memento
+	- Capture and restore an object's internal state
+- Null Object
+	- Designed to act as a default value of an object
+- Observer
+	- A way of notifying change to a number of classes
+- State
+	- Alter an object's behavior when its state changes
+- Strategy
+	- Encapsulates and algorithm inside a class
+- Template Method
+	- Defer the exact steps of an algorithm to a subclass
+- Visitor
+	- Defines a new operation to a class without change
+
+### Criticism
+
+- Targets the wrong problem
+- Lacks formal foundations
+- Leads to inefficient solutions
+- Does not differ significantly from other abstractions
+
 ## Anti-patterns
 
 [Anti-patterns](https://en.wikipedia.org/wiki/Anti-pattern) are solutions to a "recurring problem that is usually ineffective and risks being highly counterproductive". Just as valuable as the knowledge of how to do a thing is how not to do it. Anti-patterns give us great counter-examples to consider relative to design patterns. Anti-patterns are not confined to code. A process can be an anti-pattern.
