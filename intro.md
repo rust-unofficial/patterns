@@ -2,7 +2,7 @@
 
 When developing programs, we have to solve many problems. A program can be viewed as a solution to a problem. It can also be viewed as a collection of solutions to many different problems. All of these solutions work together to solve a bigger problem.
 
-There are many problems that share the same form. While the details are different, since they have the same form they can be solved using the same methods. [Design patterns](#design-patterns) are methods to solve common problems when writing software. [Anti-patterns](#anti-patterns) are methods to solve these same common problems. However, while design patterns give us benefits, anti-patterns create more problems. [Idioms](#idioms) are guidelines to follow when coding. They are social norms of the community.
+There are many problems that share the same form. While the details are different, since they have the same form they can be solved using the same methods. [Design patterns](#design-patterns) are methods to solve common problems when writing software. [Anti-patterns](#anti-patterns) are methods to solve these same common problems. However, while design patterns give us benefits, anti-patterns create more problems. [Idioms](#idioms) are guidelines to follow when coding. They are social norms of the community. You can break them, but if you do you should have a good reason for it.
 
 ## Design patterns
 
@@ -18,7 +18,7 @@ So for these reasons, I have been thinking about design patterns in Rust, and in
 
 ## Idioms
 
-Idioms are commonly used styles and patterns largely agreed upon by a community. They are guidelines. Idioms do not _have_ to be used, but if you are not writing idiomatic code you should have a good reason for it. Writing idiomatic code allows other developers to understand what is happening because they are familiar with the form that it has.
+Idioms are commonly used styles and patterns largely agreed upon by a community. They are guidelines. Writing idiomatic code allows other developers to understand what is happening because they are familiar with the form that it has.
 
 ## Design patterns in Rust
 
