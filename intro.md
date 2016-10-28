@@ -2,6 +2,8 @@
 
 When developing programs, we have to solve many problems. A program can be viewed as a solution to a problem. It can also be viewed as a collection of solutions to many different problems. All of these solutions work together to solve a bigger problem.
 
+There are many problems that share the same form. While the details are different, since they have the same form they can be solved using the same methods. [Design patterns](#design-patterns) are methods to solve common problems when writing software. [Anti-patterns](#anti-patterns) are methods to solve these same common problems. However, while design patterns give us benefits, anti-patterns create more problems. [Idioms](#idioms) are guidelines to follow when coding. They are social norms of the community.
+
 ## Design patterns
 
 [Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) are "general reusable solutions to a commonly occurring problem within a given context in software design". Design patterns are a great way to describe some of the culture and 'tribal knowledge' of programming in a language. Design patterns are very language-specific - what is a pattern in one language may be unnecessary in another due to a language feature, or impossible to express due to a missing feature.
@@ -20,4 +22,10 @@ Idioms are commonly used styles and patterns largely agreed upon by a community.
 
 ## Design patterns in Rust
 
-Why Rust is a bit special - functional elements, type system - borrow checker
+TODO:
+
+- functional elements
+- type system
+- borrow checker
+
+Rust has many very unique features. These features give us great benefit by removing whole classes of problems.
