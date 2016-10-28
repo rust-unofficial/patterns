@@ -33,12 +33,29 @@ Rust is an imperative language, but it follows many functional programming parad
 ### Imperative
 
 ```rust
-let mut count = 0;
+let mut sum = 0;
 for i in 1..11 {
-	count += i;
+	sum += i;
 }
-println!("{}", count);
+println!("{}", sum);
 ```
+
+With imperative programs, we have to play compiler to see what is happening. Here, we start with a `sum` of `0`. Next, we iterate through the range from 1 to 10. Each time through the loop, we add the corresponding value in the range. Then we print it out.
+
+| `i` | `sum` |
+| --- | --- |
+| 1 | 1 |
+| 2 | 3 |
+| 3 | 6 |
+| 4 | 10 |
+| 5 | 15 |
+| 6 | 21 |
+| 7 | 28 |
+| 8 | 36 |
+| 9 | 45 |
+| 10 | 55 |
+
+This is how most of us start out programming. We learn that a program is a set of steps.
 
 ### Declarative
 
@@ -46,3 +63,4 @@ println!("{}", count);
 println!("{}", (1..11).fold(0, |a, b| a + b));
 ```
 
+Whoa! This is really different! What's going on here?
