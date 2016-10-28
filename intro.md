@@ -27,3 +27,22 @@ TODO:
 - borrow checker
 
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems.
+
+Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe __how__ to do something, whereas declarative programs describe __what__ to do. Let's sum the numbers from 1 to 10 to show this.
+
+### Imperative
+
+```rust
+let mut count = 0;
+for i in 1..11 {
+	count += i;
+}
+println!("{}", count);
+```
+
+### Declarative
+
+```rust
+println!("{}", (1..11).fold(0, |a, b| a + b));
+```
+
