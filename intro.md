@@ -20,12 +20,6 @@ Idioms are commonly used styles and patterns largely agreed upon by a community.
 
 ## Design patterns in Rust
 
-TODO:
-
-- functional elements
-- type system
-- borrow checker
-
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems.
 
 Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe __how__ to do something, whereas declarative programs describe __what__ to do. Let's sum the numbers from 1 to 10 to show this.
@@ -64,3 +58,11 @@ println!("{}", (1..11).fold(0, |a, b| a + b));
 ```
 
 Whoa! This is really different! What's going on here?
+
+### Types
+
+Rust has strong static types. This can be very different than what you are used to if you are coming from a loosely-typed language. Don't worry, though. Once you get used to them, you'll find the types actually make your life easier. Why? Because you are making implicit assumptions explicit.
+
+### Ownership
+
+Ownership is arguably the central concept of Rust.
