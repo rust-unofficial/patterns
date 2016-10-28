@@ -149,3 +149,7 @@ Rust has strong static types. This can be very different than what you are used 
 ### Ownership
 
 Ownership is arguably the central concept of Rust. The ownership system is __the__ reason for the safety guarantees in Rust.
+
+## Refactoring
+
+Refactoring is very important in relation to these topics. Just as important as the other topics covered here, is how to take undesirable code and turn it into great code.
