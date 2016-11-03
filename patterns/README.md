@@ -8,7 +8,7 @@ If overused, design patterns can add unnecessary complexity to programs. However
 
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems. For more about this, read why [Rust rocks](rust_rocks.md)! There are also some patterns that are unique to Rust.
 
-- The [Builder](patterns/builder.md) Pattern is for constructing structures with many optional parameters
+- [Builder](patterns/builder.md)
 
 TODO: Add links to all the pattern files.
 
