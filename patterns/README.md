@@ -76,6 +76,55 @@ If overused, design patterns can add unnecessary complexity to programs (e.g., s
 
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems.
 
+## Traditional Design Patterns
+
+### Strategy
+
+The Strategy pattern can be implemented in a straight-forward way using traits. Using traits will allow the desired behavior without the need to store an implementation.
+
+```rust
+trait TranportationToAirport {
+	fn go_to_airport(&self);
+}
+
+struct Bus;
+struct Car;
+struct Taxi;
+
+impl TranportationToAirport for Bus {
+	fn go_to_airport(&self) {
+		println!("Riding the bus");
+	}
+}
+
+impl TranportationToAirport for Car {
+	fn go_to_airport(&self) {
+		println!("Driving a car");
+	}
+}
+
+impl TranportationToAirport for Taxi {
+	fn go_to_airport(&self) {
+		println!("Riding in a taxi");
+	}
+}
+
+fn main() {
+	let bus = Bus;
+	let car = Car;
+	let taxi = Taxi;
+	bus.go_to_airport();
+	car.go_to_airport();
+	taxi.go_to_airport();
+}
+```
+
+### Observer
+
+```rust
+
+```
+
 Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe __how__ to do something, whereas declarative programs describe __what__ to do. Let's sum the numbers from 1 to 10 to show this.
 
 ## Imperative
