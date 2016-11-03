@@ -2,128 +2,13 @@
 
 [Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) are "general reusable solutions to a commonly occurring problem within a given context in software design". Design patterns are a great way to describe some of the culture and 'tribal knowledge' of programming in a language. Design patterns are very language-specific - what is a pattern in one language may be unnecessary in another due to a language feature, or impossible to express due to a missing feature.
 
-If overused, design patterns can add unnecessary complexity to programs (e.g., see `AbstractSingletonProxyFactoryBean`). However, they are a great way to share intermediate and advanced level knowledge about a programming language.
-
-## Creational design patterns
-
-- Abstract Factory
-	- Creates an instance of several families of classes
-- Builder
-	- Separates object construction from its representation
-- Factory Method
-	- Creates an instance of several derived classes
-- Object Pool
-	- Avoid expensive acquisition and release of resources by recycling objects that are no longer in use
-- Prototype
-	- A fully initialized instance to be copied or cloned
-- Singleton
-	- A class of which only a single instance can exist
-
-## Structural design patterns
-
-- Adapter
-	- Match interfaces of different classes
-- Bridge
-	- Separates an object's interface from its implementation
-- Composite
-	- A tree structure of simple and composite objects
-- Decorator
-	- Add responsibilities to objects dynamically
-- Facade
-	- A single class that represents an entire subsystem
-- Flyweight
-	- A fine-grained instance used for efficient sharing
-- Private Class Data
-	- Restricts accessor/mutator access
-- Proxy
-	- An object representing another object
-
-## Behavioral design patterns
-
-- Chain of responsibility
-	- A way of passing a request between a chain of objects
-- Command
-	- Encapsulate a command request as an object
-- Interpreter
-	- A way to include language elements in a program
-- Iterator
-	- Sequentially access the elements of a collection
-- Mediator
-	- Defines simplified communication between classes
-- Memento
-	- Capture and restore an object's internal state
-- Null Object
-	- Designed to act as a default value of an object
-- Observer
-	- A way of notifying change to a number of classes
-- State
-	- Alter an object's behavior when its state changes
-- Strategy
-	- Encapsulates and algorithm inside a class
-- Template Method
-	- Defer the exact steps of an algorithm to a subclass
-- Visitor
-	- Defines a new operation to a class without change
-
-## Criticism
-
-- Targets the wrong problem
-- Lacks formal foundations
-- Leads to inefficient solutions
-- Does not differ significantly from other abstractions
+If overused, design patterns can add unnecessary complexity to programs. However, they are a great way to share intermediate and advanced level knowledge about a programming language.
 
 # Design patterns in Rust
 
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems.
 
-## Traditional Design Patterns
-
-### Strategy
-
-The Strategy pattern can be implemented in a straight-forward way using traits. Using traits will allow the desired behavior without the need to store an implementation.
-
-```rust
-trait TranportationToAirport {
-	fn go_to_airport(&self);
-}
-
-struct Bus;
-struct Car;
-struct Taxi;
-
-impl TranportationToAirport for Bus {
-	fn go_to_airport(&self) {
-		println!("Riding the bus");
-	}
-}
-
-impl TranportationToAirport for Car {
-	fn go_to_airport(&self) {
-		println!("Driving a car");
-	}
-}
-
-impl TranportationToAirport for Taxi {
-	fn go_to_airport(&self) {
-		println!("Riding in a taxi");
-	}
-}
-
-fn main() {
-	let bus = Bus;
-	let car = Car;
-	let taxi = Taxi;
-	bus.go_to_airport();
-	car.go_to_airport();
-	taxi.go_to_airport();
-}
-```
-
-### Observer
-
-```rust
-
-```
+# Functional usage of Rust
 
 Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe __how__ to do something, whereas declarative programs describe __what__ to do. Let's sum the numbers from 1 to 10 to show this.
 
