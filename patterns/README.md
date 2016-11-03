@@ -6,7 +6,7 @@ If overused, design patterns can add unnecessary complexity to programs. However
 
 # Design patterns in Rust
 
-Rust has many very unique features. These features give us great benefit by removing whole classes of problems. For more about this, read why [Rust rocks](rust_rocks.md)! There are also some patterns that are unique to Rust.
+Rust has many very unique features. These features give us great benefit by removing whole classes of problems. For more about this, read why [Rust rocks](/rust_rocks.md)! There are also some patterns that are unique to Rust.
 
 - [Builder](patterns/builder.md)
 
