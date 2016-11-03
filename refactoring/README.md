@@ -6,9 +6,7 @@ We can use [design patterns](patterns/README.md) to DRY up code and generalize a
 
 > Shortcuts make for long days.
 
-We can also use [idioms](idioms/README.md) to structure our code in a way that is understandable. Computers understand [Assembly](https://en.wikipedia.org/wiki/Assembly_language), so why are we using Rust? For that nice abstraction layer. Since we have this abstraction layer, why not put it to good use and make it simple? Remember the KISS principle.
-
-> Code is there for humans, not computers, to understand.
+We can also use [idioms](idioms/README.md) to structure our code in a way that is understandable. 
 
 ## Tests
 
