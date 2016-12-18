@@ -36,6 +36,28 @@ fn a_to_b(e: &mut MyEnum) {
 }
 ```
 
+This also works with more variants:
+
+```Rust
+use std::mem;
+
+enum MultiVariateEnum {
+    A { name: String },
+    B { name: String },
+    C,
+    D
+}
+
+fn swizzle(e: &mut MultiVariateEnum) {
+    use self::MultiVariateEnum::*;
+    *e = match *e {
+        A { ref mut name } => B { name: mem::replace(name, String::new()) },
+        B { ref mut name } => A { name: mem::replace(name, String::new()) },
+        C => D,
+        D => C
+    }
+}
+```
 
 ## Motivation
 
