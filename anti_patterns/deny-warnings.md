@@ -92,8 +92,10 @@ Note that we explicitly did not set `deprecated`.
 
 ## See also
 
+- [`#[deprecated]`] documentation
 - Type `rustc -W help` for a list of lints on your system. Also type
 `rustc --help` for a general list of options
 - [rust-clippy] is a collection of lints for better Rust code
 
 [rust-clippy]: https://github.com/Manishearth/rust-clippy
+[`#[deprecated]`]: https://doc.rust-lang.org/reference.html#miscellaneous-attributes
