@@ -88,14 +88,14 @@ In addition, the following `allow`ed lints may be a good idea to `deny`:
        unused-results)]
 ```
 
-Note that we explicitly did not set `deprecated`.
+Note that we explicitly did not set the [deprecate attribute]
 
 ## See also
 
-- [`#[deprecated]`] documentation
+- [deprecate attribute] documentation
 - Type `rustc -W help` for a list of lints on your system. Also type
 `rustc --help` for a general list of options
 - [rust-clippy] is a collection of lints for better Rust code
 
 [rust-clippy]: https://github.com/Manishearth/rust-clippy
-[`#[deprecated]`]: https://doc.rust-lang.org/reference.html#miscellaneous-attributes
+[deprecate attribute]: https://doc.rust-lang.org/reference.html#miscellaneous-attributes
