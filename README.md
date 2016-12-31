@@ -20,7 +20,7 @@ language.
 * [Finalisation in destructors](idioms/dtor-finally.md)
 * TODO interior mutability - UnsafeCell, Cell, RefCell
 * [Iterating over an `Option`](idioms/option-iter.md)
-* TODO `Default` trait
+* [`Default` trait](idioms/default.md)
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
 
