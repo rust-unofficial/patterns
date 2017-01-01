@@ -51,6 +51,8 @@ enum MultiVariateEnum {
 fn swizzle(e: &mut MultiVariateEnum) {
     use self::MultiVariateEnum::*;
     *e = match *e {
+        // Ownership rules do not allow taking `name` by value, but we cannot
+        // take the value out of a mutable reference, unless we replace it:
         A { ref mut name } => B { name: mem::replace(name, String::new()) },
         B { ref mut name } => A { name: mem::replace(name, String::new()) },
         C => D,
