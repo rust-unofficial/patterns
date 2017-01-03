@@ -28,7 +28,7 @@ struct Interesting {
 }
 
 fn interestingness(i: &Interesting) -> usize {
-    if really {
+    if i.really {
         i.cardinality
     } else {
         // we can use `Option`'s `unwrap_or_default()` method here because our
