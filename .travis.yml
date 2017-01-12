@@ -1,0 +1,15 @@
+language: rust
+
+rust: stable
+
+sudo: false
+
+script:
+    |
+    set -e;
+    for name in idioms/*.md patterns/*.md anti_patterns/*.md intro.md
+    do
+        echo "## $name"
+        rustdoc --test-args "-q" --test $name
+    done
+    set +e;

@@ -18,7 +18,7 @@ mod a {
     }
 }
 
-fn main(s: a::S) {
+fn any(s: a::S) {
     // Because S::bar is private, it cannot be named here and we must use `..`
     // in the pattern.
     let a::S { foo: _, ..} = s;

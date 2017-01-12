@@ -7,7 +7,7 @@ Construct an object with calls to a builder helper.
 
 ## Example
 
-```rust
+```rust,ignore
 struct Foo {
     // Lots of complicated fields.
 }
@@ -85,7 +85,7 @@ The example takes and returns the builder by value. It is often more ergonomic
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like
 
-```
+```rust,ignore
 let mut fb = FooBuilder::new();
 fb.a();
 fb.b();

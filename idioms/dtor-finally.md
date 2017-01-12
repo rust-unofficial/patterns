@@ -10,6 +10,8 @@ be used to run code that must be run before exit.
 ## Example
 
 ```rust
+fn baz() -> Result<(), ()> { Ok(()) }
+
 fn bar() -> Result<(), ()> {
     // These don't need to be defined inside the function.
     struct Foo;

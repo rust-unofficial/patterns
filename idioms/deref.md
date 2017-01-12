@@ -8,16 +8,16 @@ and borrowed views of data.
 
 ## Example
 
-```rust
+```rust,ignore
 struct Vec<T> {
-    ...
+    //..
 }
 
 impl<T> Deref for Vec<T> {
     type Target = [T];
 
     fn deref(&self) -> &[T] {
-        ...
+        unimplemented!()
     }
 }
 ```

@@ -74,6 +74,10 @@ You should start with [the template](template.md). Copy it into the appropriate
 directory, edit it, and submit a PR. You might not want every section, and you
 might want to add extra sections.
 
+When writing examples, please try to make them compile. This allows us to test
+them. If you fail to write an example that is both complete and readable,
+please at least mark your example code with `ignore`.
+
 We suggest leaving a comment on the [issue tracker](https://github.com/rust-unofficial/patterns/issues)
 so that other people don't start working on the same topic.
 
