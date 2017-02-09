@@ -18,23 +18,19 @@ types implement `Default`, the more useful it becomes.
 ```rust
 // note that we can simply auto-derive Default here.
 #[derive(Default)]
-struct Interesting {
-    /// integers and floats default to zero
-    cardinality: usize,
-    /// bool defaults to false
-    really: bool,
-    /// collections default to empty
-    see_also: Vec<Interesting>
+struct MyConfiguration {
+    // Option defaults to None
+    output: Option<Path>,
+    // Vecs default to empty vector
+    search_path: Vec<Path>,
+    // Duration defaults to zero time
+    timeout: Duration,
+    // bool defaults to false
+    check: bool,
 }
 
-fn interestingness(i: &Interesting) -> usize {
-    if i.really {
-        i.cardinality
-    } else {
-        // we can use `Option`'s `unwrap_or_default()` method here because our
-        // `Interesting` struct implements `Default`.
-        i.see_also.first().unwrap_or_default().cardinality
-    }
+impl MyConfiguration {
+    // add setters here
 }
 ```
 
