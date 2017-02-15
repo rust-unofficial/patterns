@@ -57,7 +57,7 @@ language.
 * TODO wildcard matches
 * TODO taking an enum rather than having multiple functions
 * TODO `unwrap()`ing every `Result` instead of forwarding it
-
+* [`#[deny(warnings)]`](anti_patterns/deny-warnings.md)
 
 
 ## Contributing
