@@ -2,7 +2,28 @@
 use std::process::Command;
 use std::path::{Path, PathBuf};
 
+const HELP_MSG: &'static str = r"USAGE:
+    cargo run <SUBCOMMAND>
+
+SUBCOMMANDS:
+    render    Build the book from the markdown files
+    test     Test that code samples compile";
+
 fn main() {
+    let mut args = std::env::args();
+    let _ = args.next();
+    let _guard = preprocess();
+    match args.next() {
+        None => default(),
+        Some(ref cmd) if cmd == "render" => rendering(),
+        Some(ref cmd) if cmd == "test" => testing(),
+        _ => {
+            println!("{}", HELP_MSG);
+        }
+    }
+}
+
+fn default() {
     println!("Building start...");
     testing();
     rendering();
@@ -20,16 +41,25 @@ fn testing() {
 
 fn rendering() {
     print!("Rendering...");
-    let (olds, news) = before_rendering();
     let mut render_proc = Command::new("mdbook").arg("build").spawn()
                                 .expect("Failed to start the rendering process");
     let ecode = render_proc.wait().expect("Failed to finish the rendering process");
     assert!(ecode.success());
-    post_rendering(olds, news);
     println!("Done.");
 }
 
-fn before_rendering() -> (Vec<PathBuf>, Vec<PathBuf>) {
+struct Guard {
+    olds: Vec<PathBuf>,
+    news: Vec<PathBuf>,
+}
+
+impl Drop for Guard {
+    fn drop(&mut self) {
+        postprocess(&self.olds, &self.news);
+    }
+}
+
+fn preprocess() -> Guard {
     let root = std::env::current_dir().expect("WTF current directory does not exist");
     let file_paths = {
             fn file_paths(spath: &Path) -> Vec<String> {
@@ -71,9 +101,9 @@ fn before_rendering() -> (Vec<PathBuf>, Vec<PathBuf>) {
         old_paths.push(old);
         new_paths.push(new);
     }
-    (old_paths, new_paths)
+    Guard { olds: old_paths, news: new_paths }
 }
-fn post_rendering(olds: Vec<PathBuf>, news: Vec<PathBuf>) {
+fn postprocess(olds: &Vec<PathBuf>, news: &Vec<PathBuf>) {
     assert_eq!(olds.len(), news.len());
     for i in 0..olds.len() {
         std::fs::rename(news[i].as_path(), olds[i].as_path())
