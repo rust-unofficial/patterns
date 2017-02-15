@@ -1,1 +1,5 @@
 book
+target
+src
+!src/main.rs
+!src/SUMMARY.md
