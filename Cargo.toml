@@ -1,0 +1,6 @@
+[package]
+name = "build"
+version = "0.1.0"
+authors = ["Luxko <liarluxlux@gmail.com>"]
+
+[dependencies]
