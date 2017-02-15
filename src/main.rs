@@ -1,10 +1,10 @@
-//! Building scripts
+//! Building scripts for mdbook
 use std::process::Command;
 use std::path::{Path, PathBuf};
 
 fn main() {
     println!("Building start...");
-    //testing();
+    testing();
     rendering();
     println!("Building complete.");
 }
@@ -33,7 +33,7 @@ fn before_rendering() -> (Vec<PathBuf>, Vec<PathBuf>) {
     let root = std::env::current_dir().expect("WTF current directory does not exist");
     let file_paths = {
             fn file_paths(spath: &Path) -> Vec<String> {
-                use std::io::{Read, Write};
+                use std::io::Read;
                 let scontent = {
                 let sfile = std::fs::File::open(spath)
                     .expect("Failed to open SUMMARY.md");
