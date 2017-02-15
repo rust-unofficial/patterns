@@ -2,7 +2,7 @@
 
 ## Description
 
-Many types in Rust have a [Constructor]. However, this is *specific* to the
+Many types in Rust have a [constructor]. However, this is *specific* to the
 type; Rust cannot abstract over "everything that has a `new()` method". To
 allow this, the [`Default`] trait was conceived, which can be used with
 containers and other generic types (e.g. see [`Option::unwrap_or_default()`]).
@@ -36,11 +36,11 @@ impl MyConfiguration {
 
 ## See also
 
-- The [Constructor] idiom is another way to generate instances that may or may
+- The [constructor] idiom is another way to generate instances that may or may
 not be "default"
 - The [`Default`] documentation (scroll down for the list of implementors)
 - [`Option::unwrap_or_default()`]
 
-[Constructor]: ctor.md
+[constructor]: ctor.md
 [`Default`]: https://docs.rust-lang.org/doc/std/default/trait.Default.html
 [`Option::unwrap_or_default()`]: https://docs.rust-lang.org/doc/std/option/enum.Option.html#method.unwrap_or_default
