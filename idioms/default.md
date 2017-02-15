@@ -13,6 +13,10 @@ Not only do one-element containers like `Cow`, `Box` or `Arc` implement
 `#[derive(Default)]` for structs whose fields all implement it, so the more
 types implement `Default`, the more useful it becomes.
 
+On the other hand, constructors can take multiple arguments, while the
+`default()` method does not. There can even be multiple constructors with
+different names, but there can only be one `Default` implementation per type.
+
 ## Example
 
 ```rust
