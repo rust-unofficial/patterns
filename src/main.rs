@@ -86,8 +86,7 @@ fn preprocess() -> Guard {
         summary_path.push("SUMMARY.md");
         file_paths(summary_path.as_path())
     };
-    let mut old_paths = Vec::new();
-    let mut new_paths = Vec::new();
+    let mut ret = Guard { olds: Vec::new(), news: Vec::new() };
     for path in &file_paths {
         let mut old = root.to_path_buf();
         old.push(&path);
@@ -98,10 +97,10 @@ fn preprocess() -> Guard {
             .expect("Failed to move a file");
         std::fs::rename(old.as_path(), new.as_path())
             .expect("Failed to move a file");
-        old_paths.push(old);
-        new_paths.push(new);
+        ret.olds.push(old);
+        ret.news.push(new);
     }
-    Guard { olds: old_paths, news: new_paths }
+    ret
 }
 fn postprocess(olds: &Vec<PathBuf>, news: &Vec<PathBuf>) {
     assert_eq!(olds.len(), news.len());
