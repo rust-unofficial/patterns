@@ -44,7 +44,9 @@ impl MyConfiguration {
 not be "default"
 - The [`Default`] documentation (scroll down for the list of implementors)
 - [`Option::unwrap_or_default()`]
+- [`derive(new)`]
 
 [constructor]: ctor.md
 [`Default`]: https://docs.rust-lang.org/doc/std/default/trait.Default.html
 [`Option::unwrap_or_default()`]: https://docs.rust-lang.org/doc/std/option/enum.Option.html#method.unwrap_or_default
+[`derive(new)`]: https://crates.io/crates/derive-new/
