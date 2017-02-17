@@ -47,6 +47,6 @@ not be "default"
 - [`derive(new)`]
 
 [constructor]: ctor.md
-[`Default`]: https://docs.rust-lang.org/doc/std/default/trait.Default.html
-[`Option::unwrap_or_default()`]: https://docs.rust-lang.org/doc/std/option/enum.Option.html#method.unwrap_or_default
+[`Default`]: https://doc.rust-lang.org/stable/std/default/trait.Default.html
+[`Option::unwrap_or_default()`]: https://doc.rust-lang.org/stable/std/option/enum.Option.html#method.unwrap_or_default
 [`derive(new)`]: https://crates.io/crates/derive-new/
