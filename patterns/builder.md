@@ -94,7 +94,7 @@ as well as the `FooBuilder::new().a().b().finish()` style.
 
 ## See also
 
-[Description in the style guide](http://doc.rust-lang.org/stable/style/ownership/builders.html)
+[Description in the style guide](https://doc.rust-lang.org/1.0.0/style/ownership/builders.html)
 
 [Constructor pattern](../idioms/ctor.md) for when construction is simpler.
 
