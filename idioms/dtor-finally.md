@@ -93,4 +93,4 @@ resources in an unexpected state.
 
 ## See also
 
-[RAII](../patterns/raii.md).
+[RAII](../patterns/RAII.md).
