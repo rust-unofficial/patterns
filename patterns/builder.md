@@ -18,11 +18,11 @@ struct FooBuilder {
 }
 
 impl FooBuilder {
-    fn new(...) -> FooBuilder {
+    fn new(...) -> Self {
         // Set the minimally required fields of Foo.
     }
 
-    fn named(mut self, name: &str) -> FooBuilder {
+    fn named(mut self, name: &str) -> Self {
         // Set the name on the builder itself, and return the builder by value.
     }
 
