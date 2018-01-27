@@ -74,8 +74,8 @@ single method with a given name, having multiple constructors is less nice in
 Rust than in C++, Java, or others.
 
 This pattern is often used where the builder object is useful in its own right,
-rather than being just a builder. For example, see `std::process::Command` is a
-builder for `Child` (a process). In these cases, the `T` and `TBuilder` pattern
+rather than being just a builder. For example, see [`std::process::Command`](https://doc.rust-lang.org/std/process/struct.Command.html) is a
+builder for [`Child`](https://doc.rust-lang.org/std/process/struct.Child.html) (a process). In these cases, the `T` and `TBuilder` pattern
 of naming is not used.
 
 The example takes and returns the builder by value. It is often more ergonomic
