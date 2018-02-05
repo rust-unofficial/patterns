@@ -26,7 +26,6 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
-* TODO graphs
 
 ### Anti-patterns
 
