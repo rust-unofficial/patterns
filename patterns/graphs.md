@@ -20,6 +20,16 @@ pub struct Node<T> {
     pub data: T,
 }
 
+struct Graph<T> {
+    nodes: Vec<Node<T>>,
+}
+
+struct Node<T> {
+    index: usize,
+    adjacent: [usize; 6],
+    pub letter: T,
+}
+
 // indexes from the vector used for creating the graph.
 pub struct NodeId {
     index: usize,
