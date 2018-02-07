@@ -2,14 +2,33 @@
 
 ## Description
 
-Implement a graph data structure that is dynamically modifiable during runtime.
+Implement idiomatic graph data structures (tree, forest, graph...) that are dynamically modifiable during runtime.
 
 
 ## Example
 
+A simple graph structure:
+```rust
+struct Graph<T> {
+    // The graph contains only a Vec of nodes.
+    nodes: Vec<Node<T>>,
+}
+
+struct Node<T> {
+    //  Each node of the graph corresponds to an index.
+    index: usize,
+    //  The node knows the index of its neighbors.
+    adjacent: Vec<u32>,
+    // The actual data associated to this node.
+    pub data: T,
+}
+```
+
+A more advanced example: a forest
 ```rust
 // A node of the graph.
 pub struct Node<T> {
+    // Each node can have at max one parent: multiple roots can exist.
     parent: Option<NodeId>,
     previous_sibling: Option<NodeId>,
     next_sibling: Option<NodeId>,
@@ -18,16 +37,6 @@ pub struct Node<T> {
 
     // The actual data stored.
     pub data: T,
-}
-
-struct Graph<T> {
-    nodes: Vec<Node<T>>,
-}
-
-struct Node<T> {
-    index: usize,
-    adjacent: [usize; 6],
-    pub letter: T,
 }
 
 // indexes from the vector used for creating the graph.
