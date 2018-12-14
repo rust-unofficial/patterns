@@ -13,7 +13,7 @@ non-literal strings.
 ```rust
 fn say_hello(name: &str) -> String {
     // We could construct the result string manually.
-    // let mut result = "Hello".to_owned();
+    // let mut result = "Hello ".to_owned();
     // result.push_str(name);
     // result.push('!');
     // result
