@@ -17,7 +17,7 @@ If you have `unsafe` code, create the smallest possible module that can uphold t
 ## Examples
 
 * The [`optional`](https://crates.io/crates/optional) crate has one unsafe module for converting a `&T` to either a slice of one `[T]` or an empty slice.
-* `std`s `String` class is basically just a wrapper over `Vec<u8>` with the added invariant that the contents must be valid unicode. The operations on `String` ensure this behavior, however, users have the option of using an `unsafe` method to create a `String`, in which case the onus is on them to guarantee the validity of the contents.
+* `std`s `String` class is a wrapper over `Vec<u8>` with the added invariant that the contents must be valid UTF-8. The operations on `String` ensure this behavior. However, users have the option of using an `unsafe` method to create a `String`, in which case the onus is on them to guarantee the validity of the contents.
 
 ## See also
 
