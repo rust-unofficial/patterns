@@ -32,7 +32,7 @@ language.
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
 * TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
-* [Entry API](patterns/entry.md)
+* [Entry API](patterns/entry.md) (Currently just a boilerplate)
 * [Visitor](patterns/visitor.md)
 * [Fold](patterns/fold.md)
 * [Prefer small crates](patterns/small-crates.md)
