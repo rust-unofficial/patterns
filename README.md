@@ -39,7 +39,7 @@ language.
 * TODO extension traits
 * TODO destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
 * TODO convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
-* [Late bound bounds](patterns/late-bounds.md)
+* [Late bound bounds](patterns/late-bounds.md) (Currently just a boilerplate)
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
