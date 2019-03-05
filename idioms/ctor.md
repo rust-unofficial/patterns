@@ -9,7 +9,7 @@ is to use a static `new` method to create an object.
 ## Example
 
 ```rust
-// A Rust vector, see libcollections/vec.rs
+// A Rust vector, see liballoc/vec.rs
 pub struct Vec<T> {
     buf: RawVec<T>,
     len: usize,
