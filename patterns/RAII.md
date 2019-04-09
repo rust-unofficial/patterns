@@ -2,7 +2,7 @@
 
 ## Description
 
-RAII stands for "Resource allocation is initialisation" which is a terrible
+[RAII][wikipedia] stands for "Resource Acquisition is Initialisation" which is a terrible
 name. The essence of the pattern is that resource initialisation is done in the
 constructor of an object and finalisation in the destructor. This pattern is
 extended in Rust by using an RAII object as a guard of some resource and relying
@@ -109,7 +109,9 @@ works just as well.
 [Finalisation in destructors idiom](../idioms/dtor-finally.md)
 
 RAII is a common pattern in C++: [cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
-[wikipedia](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization).
+[wikipedia][wikipedia].
+
+[wikipedia]:	https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 
 [Style guide enty](http://doc.rust-lang.org/stable/style/ownership/raii.html)
 (currently just a placeholder).
