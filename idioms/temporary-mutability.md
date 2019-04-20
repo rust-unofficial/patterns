@@ -3,9 +3,9 @@
 ## Description
 
 Often it is necessary to prepare and process some data, but after that data are only inspected
-and never modified. It would be cool to turn mutable variable into immutable one.
+and never modified. The intention can be made explicit by redefining the mutable variable as immutable.
 
-It can be done either by processing data within nested block or by rebinding variable.
+It can be done either by processing data within nested block or by redefining variable.
 
 
 ## Example
@@ -43,5 +43,5 @@ Compiler ensures that you don't accidentally mutate data after some point.
 ## Disadvantages
 
 Nested block requires additional indentation of block body.
-One more line to return data from block or rebind variable (but it worth it).
+One more line to return data from block or redefine variable.
 
