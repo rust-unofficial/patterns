@@ -26,7 +26,7 @@ fn bar() -> Result<(), ()> {
     // Implicit return in try!.
     try!(baz());
     // Normal return.
-    OK(())
+    Ok(())
 }
 ```
 
