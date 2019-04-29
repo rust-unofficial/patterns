@@ -23,6 +23,7 @@ language.
 * [`Default` trait](idioms/default.md)
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
+* [Temporary mutability](idioms/temporary-mutability.md)
 
 ### Design patterns
 
