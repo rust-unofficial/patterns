@@ -33,14 +33,14 @@ language.
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
 * TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
-* [Entry API](patterns/entry.md)
+* [Entry API](patterns/entry.md) (Currently just a boilerplate)
 * [Visitor](patterns/visitor.md)
 * [Fold](patterns/fold.md)
 * [Prefer small crates](patterns/small-crates.md)
 * TODO extension traits
 * TODO destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
 * TODO convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
-* [Late bound bounds](patterns/late-bounds.md)
+* [Late bound bounds](patterns/late-bounds.md) (Currently just a boilerplate)
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
