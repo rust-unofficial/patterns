@@ -89,8 +89,8 @@ Here, `Bar` might be some public, generic type and `T1` and `T2` are some intern
 
 ## See also
 
-[Newtypes in the style guide](http://doc.rust-lang.org/stable/style/features/types/newtype.html).
+[Newtypes in the style guide](https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html).
 
 [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
 
-[Type aliases](https://doc.rust-lang.org/stable/book/type-aliases.html)
+[Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
