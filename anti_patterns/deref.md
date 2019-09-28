@@ -57,7 +57,7 @@ version (probably, you should use `#[repr(C)]` if you want to be sure)).
 
 In order to make the method call work we implement `Deref` for `Bar` with `Foo`
 as the target (returning the embedded `Foo` field). That means that when we
-dereference a `Foo` (for example, using `*`) then we will get a `Bar`. That is
+dereference a `Bar` (for example, using `*`) then we will get a `Foo`. That is
 pretty weird. Dereferencing usually gives a `T` from a reference to `T`, here we
 have two unrelated types. However, since the dot operator does implicit
 dereferencing, it means that the method call will search for methods on `Foo` as
