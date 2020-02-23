@@ -23,8 +23,8 @@ fn bar() -> Result<(), ()> {
 
     // The dtor of _exit will run however the function `bar` is exited.
     let _exit = Foo;
-    // Implicit return in try!.
-    try!(baz());
+    // Implicit return with `?` operator.
+    baz()?;
     // Normal return.
     Ok(())
 }
@@ -35,11 +35,11 @@ fn bar() -> Result<(), ()> {
 
 If a function has multiple return points, then executing code on exit becomes
 difficult and repetitive (and thus bug-prone). This is especially the case where
-return is implicit due to a macro. A common case is `try!` which returns if the
-result is an `Err`, but continues if it is `Ok`. `try!` is used as an exception
-handling mechanism, but unlike Java (which has `finally`), there is no way to
-schedule code to run in both the normal and exceptional cases. Panicking will
-also exit a function early.
+return is implicit due to a macro. A common case is the `?` operator which
+returns if the result is an `Err`, but continues if it is `Ok`. `?` is used as
+an exception handling mechanism, but unlike Java (which has `finally`), there is
+no way to schedule code to run in both the normal and exceptional cases.
+Panicking will also exit a function early.
 
 
 ## Advantages
