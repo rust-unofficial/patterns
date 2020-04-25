@@ -24,6 +24,7 @@ language.
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
 * [Temporary mutability](idioms/temporary-mutability.md)
+* TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 
 ### Design patterns
 
@@ -34,6 +35,7 @@ language.
 * TODO closures and lifetimes (coupling to lifetime)
 * TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
 * [Entry API](patterns/entry.md) (Currently just a boilerplate)
+* TODO Module organisation (by looking at examples such as Rusts `libstd`, and how it integrated into the Rusts source code, lessons can be learned about ergonomic project management and API design. Closely assosciated with platform-specific sub-modules)
 * [Visitor](patterns/visitor.md)
 * [Fold](patterns/fold.md)
 * [Prefer small crates](patterns/small-crates.md)
