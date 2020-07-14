@@ -24,6 +24,7 @@ language.
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
 * [Temporary mutability](idioms/temporary-mutability.md)
+* [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 
 ### Design patterns
