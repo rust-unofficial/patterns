@@ -12,47 +12,57 @@ Each of these methods should have examples.
 For example:
 
 ```rust
-struct ExampleStruct {
-    foo: Box<Foo>,
-    count: AtomicI64,
+
+struct Connection {
+    name: String,
+    stream: TcpStream,
+    //...
 }
 
-impl ExampleStruct {
-    /// Does something important.
+impl Connection {
+    /// Sends a request over the connection.
     /// # Example
-    /// ```
+    /// ```no_run
     /// # //This is some really borring boiler plate to get an example working.
-    /// # let baz = Baz::new(Bat::new(0, 1), 2, "Foo".to_owned());
-    /// # let foo = Box::new(Foo::new(baz));
-    /// # let example_struct = ExampleStruct{ foo: foo, count: AtomicI64::new(3) };
-    /// let result = example_struct.bar();
+    /// # let stream = TcpStream::connect("127.0.0.1:34254");
+    /// # let connection = Connection{ name: "Foo".to_owned(), stream: stream };
+    /// # let request = Request::new("ReuqestId", RequestType::Get, "dummy_payload");
+    /// let result = connection.send_reqest(request);
     /// // do stuff with result.
     /// ```
-    fn bar() -> u64 {
-        
+    fn send_reqest(&self, request: Request) -> Result<Status, SendErr> {
+        //...
     }
-    
+        
     /// Oh no all that boiler plate needs to be repeated here !!!
-    fn other_method() {
+    fn check_status(&self) -> Status {
+        //...
     }
 }
 ```
 
 ## Example
-Instead of typing all of this boiler plate to create an `ExampleStruct` it is easier to just create a dummy method to pass one in:
+Instead of typing all of this boiler plate to create an `Connection` and `Request` it is easier to just create a wrapping dummy function which takes them as arguments:
 ```rust
-struct ExampleStruct {
-    foo: Box<Foo>,
-    count: AtomicI64,
+
+struct Connection {
+    name: String,
+    stream: TcpStream,
+    //...
 }
-impl ExampleStruct {
-    /// Does something important.
+
+impl Connection {
+    /// Sends a request over the connection.
     /// # Example
     /// ```
-    /// # fn call_bar(example_struct: ExampleStruct) {
-    ///   let result = example_struct.bar();
+    /// # fn call_send(connection: Connection, request: Request) {
+    /// let result = connection.send_reqest();
     /// // do stuff with result.
     /// # }
+    /// ```
+    fn send_reqest(&self, request: Request) {
+        //...
+    }
 }
 ```
 ## Advantages
@@ -61,13 +71,13 @@ This is much more concise and avoids repetitive code in examples.
 
 ## Disadvantages
 
-Because the example is in a function, the code won't actually be tested. 
-It still will be compiled when running a `cargo test` but assertions can't be used to verify properties.
+Because the example is in a function, the code won't actually be tested. (Though it still will checked to make sure it compiles when running a `cargo test`)
+So this pattern is most useful when you would need to add `no_run` anyway.
 
 ## Discussion
 
 If assertions are not required this pattern works well. 
-If they are, an alternative can be to create a method to create a dummy instance which is annotated with:
 
-`#[doc(hidden)]`
+If they are, an alternative can be to create a public method to create a dummy instance which is annotated with `#[doc(hidden)]` (so that users won't see it).
+Then this method can be called inside of Rustdocs because it is part of the crate's public API.
 
