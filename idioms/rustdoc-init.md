@@ -50,7 +50,7 @@ impl ExampleStruct {
     /// # Example
     /// ```
     /// # fn call_bar(example_struct: ExampleStruct) {
-    ///   let result = example_struct.bar();
+    /// let result = example_struct.bar();
     /// // do stuff with result.
     /// # }
 }
@@ -70,4 +70,3 @@ If assertions are not required this pattern works well.
 If they are, an alternative can be to create a method to create a dummy instance which is annotated with:
 
 `#[doc(hidden)]`
-
