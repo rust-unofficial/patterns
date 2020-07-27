@@ -46,7 +46,6 @@ Instead of typing all of this boiler plate to create an `Connection` and `Reques
 struct Connection {
     name: String,
     stream: TcpStream,
-    //...
 }
 
 impl Connection {
