@@ -21,7 +21,7 @@ impl Connection {
     /// Sends a request over the connection.
     /// # Example
     /// ```no_run
-    /// # //This is some really borring boiler plate to get an example working.
+    /// # // Boilerplate are required to get an example working.
     /// # let stream = TcpStream::connect("127.0.0.1:34254");
     /// # let connection = Connection{ name: "Foo".to_owned(), stream: stream };
     /// # let request = Request::new("ReuqestId", RequestType::Get, "dummy_payload");
