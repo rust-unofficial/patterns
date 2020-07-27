@@ -55,15 +55,17 @@ impl Connection {
     /// # Example
     /// ```
     /// # fn call_send(connection: Connection, request: Request) {
-    /// let result = connection.send_reqest();
-    /// // do stuff with result.
+    /// let response = connection.send_request();
+    /// assert!(response.is_ok()); 
     /// # }
     /// ```
-    fn send_reqest(&self, request: Request) {
-        //...
+    fn send_request(&self, request: Request) {
+        // ...
     }
 }
 ```
+**Note** in the above example the line `assert!(response.is_ok());` will not actually run while testing because it is inside of a function which is never invoked.
+
 ## Advantages
 
 This is much more concise and avoids repetitive code in examples.
