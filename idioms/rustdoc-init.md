@@ -51,6 +51,7 @@ struct Connection {
 
 impl Connection {
     /// Sends a request over the connection.
+    ///
     /// # Example
     /// ```
     /// # fn call_send(connection: Connection, request: Request) {
