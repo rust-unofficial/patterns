@@ -15,7 +15,6 @@ For example:
 struct Connection {
     name: String,
     stream: TcpStream,
-    //...
 }
 
 impl Connection {
