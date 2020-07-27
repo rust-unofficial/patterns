@@ -12,7 +12,6 @@ Each of these methods should have examples.
 For example:
 
 ```rust
-
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -80,4 +79,3 @@ If assertions are not required this pattern works well.
 
 If they are, an alternative can be to create a public method to create a dummy instance which is annotated with `#[doc(hidden)]` (so that users won't see it).
 Then this method can be called inside of Rustdocs because it is part of the crate's public API.
-
