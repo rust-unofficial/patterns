@@ -32,7 +32,7 @@ impl Connection {
         //...
     }
         
-    /// Oh no all that boiler plate needs to be repeated here !!!
+    /// Oh no, all that boilerplate needs to be repeated here!
     fn check_status(&self) -> Status {
         //...
     }
