@@ -42,8 +42,8 @@ impl Connection {
 
 ## Example
 Instead of typing all of this boiler plate to create an `Connection` and `Request` it is easier to just create a wrapping dummy function which takes them as arguments:
-```rust
 
+```rust
 struct Connection {
     name: String,
     stream: TcpStream,
