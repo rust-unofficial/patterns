@@ -78,4 +78,4 @@ So this pattern is most useful when need `no_run`. With this, you do not need to
 If assertions are not required this pattern works well. 
 
 If they are, an alternative can be to create a public method to create a dummy instance which is annotated with `#[doc(hidden)]` (so that users won't see it).
-Then this method can be called inside of Rustdocs because it is part of the crate's public API.
+Then this method can be called inside of rustdoc because it is part of the crate's public API.
