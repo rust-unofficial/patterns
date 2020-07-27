@@ -19,6 +19,7 @@ struct Connection {
 
 impl Connection {
     /// Sends a request over the connection.
+    ///
     /// # Example
     /// ```no_run
     /// # // Boilerplate are required to get an example working.
