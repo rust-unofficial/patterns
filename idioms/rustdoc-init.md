@@ -29,7 +29,7 @@ impl Connection {
     /// assert!(response.is_ok());
     /// ```
     fn send_request(&self, request: Request) -> Result<Status, SendErr> {
-        //...
+        // ...
     }
         
     /// Oh no, all that boilerplate needs to be repeated here!
