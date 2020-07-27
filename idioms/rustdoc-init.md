@@ -70,7 +70,7 @@ This is much more concise and avoids repetitive code in examples.
 
 ## Disadvantages
 
-Because the example is in a function, the code won't actually be tested. (Though it still will checked to make sure it compiles when running a `cargo test`)
+As example is in a function, the code will not be tested. (Though it still will checked to make sure it compiles when running a `cargo test`)
 So this pattern is most useful when you would need to add `no_run` anyway.
 
 ## Discussion
