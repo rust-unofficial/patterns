@@ -23,12 +23,12 @@ impl Connection {
     /// ```no_run
     /// # // Boilerplate are required to get an example working.
     /// # let stream = TcpStream::connect("127.0.0.1:34254");
-    /// # let connection = Connection{ name: "Foo".to_owned(), stream: stream };
-    /// # let request = Request::new("ReuqestId", RequestType::Get, "dummy_payload");
-    /// let result = connection.send_reqest(request);
-    /// // do stuff with result.
+    /// # let connection = Connection { name: "foo".to_owned(), stream };
+    /// # let request = Request::new("RequestId", RequestType::Get, "payload");
+    /// let response = connection.send_request(request);
+    /// assert!(response.is_ok());
     /// ```
-    fn send_reqest(&self, request: Request) -> Result<Status, SendErr> {
+    fn send_request(&self, request: Request) -> Result<Status, SendErr> {
         //...
     }
         
