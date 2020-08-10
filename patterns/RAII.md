@@ -113,5 +113,5 @@ RAII is a common pattern in C++: [cppreference.com](http://en.cppreference.com/w
 
 [wikipedia]:	https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 
-[Style guide enty](http://doc.rust-lang.org/stable/style/ownership/raii.html)
+[Style guide entry](https://doc.rust-lang.org/1.0.0/style/ownership/raii.html)
 (currently just a placeholder).

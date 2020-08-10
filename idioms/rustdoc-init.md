@@ -2,8 +2,8 @@
 
 ## Description
 
-If a struct takes significant effort to initialize, when writing docs it can be quicker to wrap your example with a 
-function the struct as an argument.
+If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a 
+function which takes the struct as an argument.
 
 ## Motivation
 Sometimes there is a struct with multiple or complicated parameters and several methods.
