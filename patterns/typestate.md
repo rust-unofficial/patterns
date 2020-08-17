@@ -6,15 +6,16 @@
 
 The typestate pattern is an API design pattern that encodes information about an object's run-time state in its compile-time type. In particular, an API using the typestate pattern will have:
 
-Operations on an object (such as methods or functions) that are only available when the object is in certain states,
+* Operations on an object (such as methods or functions) that are only available when the object is in certain states,
 
-A way of encoding these states at the type level, such that attempts to use the operations in the wrong state fail to compile,
+* A way of encoding these states at the type level, such that attempts to use the operations in the wrong state fail to compile,
 
-State transition operations (methods or functions) that change the type-level state of objects in addition to, or instead of, changing run-time dynamic state, such that the operations in the previous state are no longer possible.
+* State transition operations (methods or functions) that change the type-level state of objects in addition to, or instead of, changing run-time dynamic state, such that the operations in the previous state are no longer possible.
 
 ## Example
 
-This is one example of how to implement the pattern for a simple type that needs to be initialized or otherwise prepared before use.
+This is one example of how to implement the pattern for a simple type that needs to be initialized or otherwise prepared before use 
+(that is, it has two states: (), and Ready). More states and operations may be added to implement a more complex state machine.
 
 See http://cliffle.com/blog/rust-typestate/ for more in-depth examples and techniques.
 
@@ -77,7 +78,7 @@ fn main() {
 
 ## Motivation
 
-When creating a system that functions as a state machine, typestates allow you to prevent invalid states from ever occuring in any runtime scenario.
+You are modelling a system that functions as a state machine, and want to ensure at compile-time that invalid states never occur in any runtime scenario.
 
 ## Advantages
 
