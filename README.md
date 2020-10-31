@@ -3,6 +3,7 @@
 An open source repository of design patterns and idioms in the Rust programming
 language.
 
+__Hint:__ If you haven't seen it already, there is also a really enlightening talk about ["Design Patterns in Rust" by Nick Cameron at the PDRust from 2016](https://www.youtube.com/watch?v=Pm_oO0N5B9k).
 
 ## Contents
 
