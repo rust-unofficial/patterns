@@ -13,6 +13,12 @@ pub struct Foo {
     bar: String,
 }
 
+impl PartialEq for Foo {
+    fn eq(&self, other: &Self) -> bool {
+        self.bar == other.bar
+    }
+}
+
 pub struct FooBuilder {
     // Probably lots of optional fields.
     bar: String,
@@ -42,8 +48,11 @@ impl FooBuilder {
 
 #[test]
 fn builder_test() {
-    let foo: Foo = FooBuilder::new().name("Y").build();
-    assert_eq!(format!("{:?}", foo), "Foo { bar: \"Y\" }");
+    let foo = Foo {
+        bar: String::from("Y"),
+    };
+    let foo_from_builder: Foo = FooBuilder::new().name("Y").build();
+    assert_eq!(foo, foo_from_builder);
 }
 ```
 
