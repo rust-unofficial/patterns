@@ -13,36 +13,36 @@ pub struct Foo {
     bar: String,
 }
 
-pub struct Builder {
+pub struct FooBuilder {
     // Probably lots of optional fields.
     bar: String,
 }
 
-impl Builder {
-    pub fn new() -> Builder {
+impl FooBuilder {
+    pub fn new() -> FooBuilder {
         // Set the minimally required fields of Foo.
-        Builder {
+        FooBuilder {
             bar: "X".to_string(),
         }
     }
 
-    pub fn name(mut self, bar: &str) -> Builder {
+    pub fn name(mut self, bar: &str) -> FooBuilder {
         // Set the name on the builder itself, and return the builder by value.
         self.bar = bar.to_string();
         self
     }
 
     // If we can get away with not consuming the Builder here, that is an
-    // advantage. It means we can use the builder as a template for constructing many Foos.
+    // advantage. It means we can use the FooBuilder as a template for constructing many Foos.
     pub fn build(self) -> Foo {
-        // Create a Foo from the Builder, applying all settings in Builder to Foo.
+        // Create a Foo from the FooBuilder, applying all settings in FooBuilder to Foo.
         Foo { bar: self.bar }
     }
 }
 
 #[test]
 fn builder_test() {
-    let foo: Foo = Builder::new().name("Y").build();
+    let foo: Foo = FooBuilder::new().name("Y").build();
     assert_eq!(format!("{:?}", foo), "Foo { bar: \"Y\" }");
 }
 ```
