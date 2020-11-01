@@ -7,16 +7,10 @@ Construct an object with calls to a builder helper.
 ## Example
 
 ```rust
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub struct Foo {
     // Lots of complicated fields.
     bar: String,
-}
-
-impl PartialEq for Foo {
-    fn eq(&self, other: &Self) -> bool {
-        self.bar == other.bar
-    }
 }
 
 pub struct FooBuilder {
