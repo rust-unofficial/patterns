@@ -22,13 +22,13 @@ impl FooBuilder {
     pub fn new() -> FooBuilder {
         // Set the minimally required fields of Foo.
         FooBuilder {
-            bar: "X".to_string(),
+            bar: String::from("X"),
         }
     }
 
-    pub fn name(mut self, bar: &str) -> FooBuilder {
+    pub fn name(mut self, bar: String) -> FooBuilder {
         // Set the name on the builder itself, and return the builder by value.
-        self.bar = bar.to_string();
+        self.bar = bar;
         self
     }
 
@@ -45,7 +45,7 @@ fn builder_test() {
     let foo = Foo {
         bar: String::from("Y"),
     };
-    let foo_from_builder: Foo = FooBuilder::new().name("Y").build();
+    let foo_from_builder: Foo = FooBuilder::new().name(String::from("Y")).build();
     assert_eq!(foo, foo_from_builder);
 }
 ```
