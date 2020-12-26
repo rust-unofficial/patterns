@@ -26,7 +26,11 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
 * [Temporary mutability](idioms/temporary-mutability.md)
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
-* TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
+* FFI usage
+  - [Idiomatic Errors](idioms/ffi-errors.md)
+  - [Accepting FFI Strings](idioms/ffi-accepting-strings.md)
+  - [Passing Strings to FFI](idioms/ffi-passing-strings.md)
+  - TODO More Items (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
 
 
@@ -35,6 +39,9 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [Builder](patterns/builder.md)
 * [RAII guards](patterns/RAII.md)
 * [Newtype](patterns/newtype.md)
+* FFI usage
+  - [Object-Based APIs](patterns/ffi-exports.md)
+  - [Type Consolidation into Wrappers](patterns/ffi-wrappers.md)
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
 * TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
