@@ -12,7 +12,6 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/v0.9.6/src/lib.rs#L1400)
 * TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
 * TODO interior mutability - UnsafeCell, Cell, RefCell
-* TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 
 
 ### Design patterns
