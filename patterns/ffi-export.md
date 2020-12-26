@@ -2,7 +2,7 @@
 
 ## Description
 
-When designing FFAPIs (Foreign Function APIs) in Rust which are exposed to other languages, there are two design principles which are contrary to normal Rust API design:
+When designing FFAPIs (Foreign Function APIs) in Rust which are exposed to other languages, there are some important design principles which are contrary to normal Rust API design:
 
 1. All Encapsulated types should be *owned* by Rust, *managed* by the user, and *opaque*.
 1. All Transactional data types should be *owned* by the user, and *transparent*.
@@ -27,7 +27,7 @@ The Object-Based API design allows for writing shims that have good memory safet
 
 ## Code Example
 
-The POSIX standard defines the API to access an on-file database, known as DBM[1]. It is an excellent example of an "object-based" API.
+The POSIX standard defines the API to access an on-file database, known as DBM [1]. It is an excellent example of an "object-based" API.
 
 Here is the definition in C, which hopefully should be easy to read for those involved in FFI. Commentary below should help explain it for those who miss the subtleties.
 
@@ -85,9 +85,9 @@ Here is how iteration would be done in Rust for `DBM`:
 struct Dbm { ... }
 
 impl Dbm {
-	/* ... */
+    /* ... */
     pub fn keys<'it>(&'it self) -> DbmKeysIter<'it> { ... }
-	/* ... */
+    /* ... */
 }
 
 struct DbmKeysIter<'it> {
@@ -102,15 +102,15 @@ This is clean, idiomatic, and safe. thanks to Rust's guarantees. However, consid
 ```rust
 #[no_mangle]
 pub extern "C" fn dbm_iter_new(owner: *const Dbm) -> *mut DbmKeysIter {
-	/* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
 }
 #[no_mangle]
 pub extern "C" fn dbm_iter_next(iter: *mut DbmKeysIter, key_out: *const datum) -> libc::c_int {
-	/* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
 }
 #[no_mangle]
 pub extern "C" fn dbm_iter_del(*mut DbmKeysIter) {
-	/* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
 }
 ```    
 
@@ -131,17 +131,17 @@ int count_key_sizes(DBM *db) {
 
     int l;
     while ((l = dbm_iter_next(owner, &key)) >= 0) { // an error is indicated by -1
-		free(key.dptr);
-		len += key.dsize;
+        free(key.dptr);
+        len += key.dsize;
         if (l == 0) { // end of the iterator
             dbm_close(owner);
         }
     }
-	if l >= 0 {
-		return -1;
-	} else {
-		return len;
-	}
+    if l >= 0 {
+        return -1;
+    } else {
+        return len;
+    }
 }
 ```
 
