@@ -15,15 +15,15 @@ This best practice shows different kinds of error codes, and how to expose them 
 
 ```rust
 enum DatabaseError {
-	IsReadOnly = 1, // user attempted a write operation
-	IOError = 2, // user should read the C errno() for what it was
-	FileCorrupted = 3, // user should run a repair tool to recover it
+    IsReadOnly = 1, // user attempted a write operation
+    IOError = 2, // user should read the C errno() for what it was
+    FileCorrupted = 3, // user should run a repair tool to recover it
 }
 
 impl From<DatabaseError> for libc::c_int {
-	fn from(e: DatabaseError) -> libc::c_int {
-		(e as u8).into()
-	}
+    fn from(e: DatabaseError) -> libc::c_int {
+        (e as u8).into()
+    }
 }
 ```
 
@@ -31,34 +31,34 @@ impl From<DatabaseError> for libc::c_int {
 
 ```rust
 enum DatabaseError {
-	IsReadOnly,
-	IOError(std::io::Error),
-	FileCorrupted(String), // message describing the issue
+    IsReadOnly,
+    IOError(std::io::Error),
+    FileCorrupted(String), // message describing the issue
 }
 
 impl From<DatabaseError> for libc::c_int {
-	fn from(e: DatabaseError) -> libc::c_int {
-		match e {
-			DatabaseError::IsReadOnly => 1,
-			DatabaseError::IOError(_) => 2,
-			DatabaseError::FileCorrupted(_) => 3,
-		}
-	}
+    fn from(e: DatabaseError) -> libc::c_int {
+        match e {
+            DatabaseError::IsReadOnly => 1,
+            DatabaseError::IOError(_) => 2,
+            DatabaseError::FileCorrupted(_) => 3,
+        }
+    }
 }
 
 #[no_mangle]
 pub extern "C" fn db_error_description(error: *const DatabaseError) -> *mut libc::c_char {
-	let error: &DatabaseError = unsafe {
-		/* SAFETY: pointer lifetime is greater than the current stack frame */
-		&*e
-	};
-	let error_str: String = match e {
-		DatabaseError::IsReadOnly => format!("cannot write to read-only database"),
-		DatabaseError::IOError(e) => format!("I/O Error: {}", e),
-		DatabaseError::FileCorrupted(s) => format!("File corrupted, run repair: {}", &s),
-	};
-	let c_error = /* copy error_str to an allocated buffer with a NUL character at the end */;
-	c_error
+    let error: &DatabaseError = unsafe {
+        /* SAFETY: pointer lifetime is greater than the current stack frame */
+        &*e
+    };
+    let error_str: String = match e {
+        DatabaseError::IsReadOnly => format!("cannot write to read-only database"),
+        DatabaseError::IOError(e) => format!("I/O Error: {}", e),
+        DatabaseError::FileCorrupted(s) => format!("File corrupted, run repair: {}", &s),
+    };
+    let c_error = /* copy error_str to an allocated buffer with a NUL character at the end */;
+    c_error
 }
 ```
 
@@ -66,9 +66,9 @@ pub extern "C" fn db_error_description(error: *const DatabaseError) -> *mut libc
 
 ```rust
 struct ParseError {
-	expected: char,
-	line: u32,
-	char: u16
+    expected: char,
+    line: u32,
+    char: u16
 }
 
 impl ParseError { /* ... */ }
@@ -76,16 +76,16 @@ impl ParseError { /* ... */ }
 /* Create a second version which is exposed as a C structure */
 #[repr(C)]
 pub struct parse_error {
-	pub expected: char,
-	pub line: u32,
-	pub char: u16
+    pub expected: char,
+    pub line: u32,
+    pub ch: u16
 }
 
 impl From<ParseError> for parse_error {
-	from(e: ParseError) -> parse_error {
-		let ParseError { expected, line, char } = e;
-		parse_error { expected, line, char }
-	}
+    from(e: ParseError) -> parse_error {
+        let ParseError { expected, line, ch } = e;
+        parse_error { expected, line, ch }
+    }
 }
 ```
 
