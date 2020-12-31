@@ -100,7 +100,7 @@ exclusively, the original copy of the data structure cannot be re-used. On the
 other hand if a node is not changed, reusing it is very efficient.
 
 If we were to operate on borrowed references, the original data structure can be
-reused, however, a node must be cloned even not changed, which can be
+reused; however, a node must be cloned even if unchanged, which can be
 expensive.
 
 Using a reference counted pointer gives the best of both worlds - we can reuse
