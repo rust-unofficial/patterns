@@ -6,11 +6,11 @@ Design patterns are very language-specific - what is a pattern in one language m
 
 If overused, design patterns can add unnecessary complexity to programs. However, they are a great way to share intermediate and advanced level knowledge about a programming language.
 
-# Design patterns in Rust
+## Design patterns in Rust
 
 Rust has many very unique features. These features give us great benefit by removing whole classes of problems. For more about this, read why [Rust rocks](/rust_rocks.md)! Some of them are also patterns that are _unique_ to Rust.
 
-# YAGNI
+## YAGNI
 
 If you're not familiar with it, YAGNI is an acronym that stands for `You Aren't Going to Need It`. It's an important software design principle to apply as you write code.
 
