@@ -2,7 +2,7 @@
 
 ## Description
 
-When designing FFAPIs (Foreign Function APIs) in Rust which are exposed to other languages, there are some important design principles which are contrary to normal Rust API design:
+When designing APIs in Rust which are exposed to other languages, there are some important design principles which are contrary to normal Rust API design:
 
 1. All Encapsulated types should be *owned* by Rust, *managed* by the user, and *opaque*.
 1. All Transactional data types should be *owned* by the user, and *transparent*.
