@@ -1,4 +1,4 @@
-# Using coercion for arguments
+# Use coercion for arguments
 
 ## Description
 

@@ -10,6 +10,7 @@ language.
 
 ### Idioms
 
+* [`Use coercion for arguments`](idioms/coercion-arguments.md)
 * [Constructor](idioms/ctor.md)
 * [Concatenating strings with `format!`](idioms/concat-format.md)
 * [Privacy for extensibility](idioms/priv-extend.md)
@@ -27,8 +28,7 @@ language.
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
-* [`&String` vs `&str`](idioms/str-vs-string.md)
-* [`Use coercion for arguments`](idioms/coercion-arguments.md)
+
 
 ### Design patterns
 
