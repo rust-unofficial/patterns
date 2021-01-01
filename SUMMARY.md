@@ -2,6 +2,7 @@
 
 - [Introduction](./intro.md)
 - [Idioms](./idioms/README.md)
+    - [Use coercion for arguments](./idioms/coercion-arguments.md)
     - [Concatenating Strings with `format!`](./idioms/concat-format.md)
     - [Constructor](./idioms/ctor.md)
     - [The `Default` Trait](./idioms/default.md)
