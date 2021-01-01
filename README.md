@@ -78,3 +78,20 @@ We suggest leaving a comment on the [issue tracker](https://github.com/rust-unof
 so that other people don't start working on the same topic.
 
 Correction and elaboration PRs are very welcome.
+
+## Building with mdbook
+
+This book is built with [mdbook](https://rust-lang.github.io/mdBook/). You can install it by running `cargo install mdbook`.
+
+If you want to build it locally you can run one of these two commands in the root directory of the repository:
+
+- `mdbook build`
+
+  Builds static html pages as output and place them in the `/book` directory by default.
+
+- `mdbook serve`
+
+  Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
+  to be sure) and reloads the browser when a change occurs.
+  
+  

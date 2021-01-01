@@ -1,0 +1,20 @@
+[book]
+title = "Rust Design Patterns"
+authors = ["the rust-unofficial authors"]
+description = "A catalogue of Rust design patterns, anti-patterns and idioms"
+language = "en"
+multilingual = false
+src = "."
+
+[build]
+create-missing = false
+
+[rust]
+edition = "2018"
+
+[output.html]
+default-theme = "rust"
+git-repository-url = "https://github.com/rust-unofficial/patterns"
+git-repository-icon = "fa-github"
+
+# [output.linkcheck]  # enable the "mdbook-linkcheck" renderer, disabled due to gh-actions

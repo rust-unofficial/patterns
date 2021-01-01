@@ -1,0 +1,26 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+
+  test:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Read .env
+        id: mdbook-version
+        run: |
+          . ./.env
+          echo "::set-output name=MDBOOK_VERSION::${MDBOOK_VERSION}"
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v1
+        with:
+          mdbook-version: '${{ steps.mdbook-version.outputs.MDBOOK_VERSION }}'
+
+      - run: mdbook build
