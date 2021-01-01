@@ -40,7 +40,7 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [RAII guards](patterns/RAII.md)
 * [Newtype](patterns/newtype.md)
 * FFI usage
-  - [Object-Based APIs](patterns/ffi-exports.md)
+  - [Object-Based APIs](patterns/ffi-export.md)
   - [Type Consolidation into Wrappers](patterns/ffi-wrappers.md)
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
