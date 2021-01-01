@@ -3,11 +3,8 @@
 ## Design patterns
 When developing programs, we have to solve many problems. A program can be viewed as a solution to a problem. It can also be viewed as a collection of solutions to many different problems. All of these solutions work together to solve a bigger problem.
 
-What are design patterns? What are idioms? Anti-patterns.
-
 ## Design patterns in Rust
 
-Why Rust is a bit special - functional elements, type system - borrow checker
 There are many problems that share the same form. While the details are different, since they have the same form they can be solved using the same methods.
 
 [Design patterns](patterns/README.md) are methods to solve common problems when writing software.
