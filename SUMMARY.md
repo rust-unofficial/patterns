@@ -36,6 +36,7 @@
   - [Visitor](./patterns/visitor.md)
 
 - [Anti-patterns](./anti_patterns/index.md)
+  - [catch_unwind for exceptions](./anti_patterns/catch_panic.md)
   - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
   - [Deref Polymorphism](./anti_patterns/deref.md)
 
