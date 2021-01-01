@@ -2,7 +2,11 @@
 
 ## Description
 
-Usings a target of a deref coericion can increase the flexibility of your code when you are deciding which argument type to use for a function argument.  For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`, or even `&T` as opposed to a `&Box<T>`.  Not only that, you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as can be illustrated in each of the previous examples.  For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.  We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked.  And finally, using deref targets for a function can increase the number of viable inputs for your function which may increase its utility.
+Using a target of a deref coericion can increase the flexibility of your code when you are deciding which argument type to use for a function argument which may increase its utility as it increases the number of viable inputs for this function.
+For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`, or even `&T` as opposed to a `&Box<T>`. 
+Not only that, you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as can be illustrated in each of the previous examples. 
+For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
+We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked. 
 
 ## Example
 
@@ -57,7 +61,7 @@ This example fails because a `&str` type will not coerce to a `&String` type.  W
 fn three_vowels(word: &str) -> bool {
 ```
 
-then the both of the previous examples will compile and print the same output.
+then both of the previous examples will compile and print the same output.
 
 
 ``` bash
