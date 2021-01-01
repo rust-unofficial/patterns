@@ -23,6 +23,10 @@ language.
 * [`Default` trait](idioms/default.md)
 * [Pass variables to closure](idioms/pass-var-to-closure.md)
 * [`mem::replace(_)` to avoid needless clones](idioms/mem-replace.md)
+* [Temporary mutability](idioms/temporary-mutability.md)
+* [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
+* TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
+* [Easy doc initialization](idioms/rustdoc-init.md)
 
 ### Design patterns
 
@@ -32,14 +36,16 @@ language.
 * TODO iterators (to safely avoid bounds checks)
 * TODO closures and lifetimes (coupling to lifetime)
 * TODO platform-specific sub-modules (https://github.com/rust-lang/rfcs/blob/master/text/0517-io-os-reform.md#platform-specific-opt-in)
-* [Entry API](patterns/entry.md)
+* TODO Module organisation (by looking at examples such as Rusts `libstd`, and how it integrated into the Rusts source code, lessons can be learned about ergonomic project management and API design. Closely assosciated with platform-specific sub-modules)
+* [Entry API](patterns/entry.md) (TODO Currently just a boilerplate)
 * [Visitor](patterns/visitor.md)
 * [Fold](patterns/fold.md)
 * [Prefer small crates](patterns/small-crates.md)
+* [Contain unsafety in small modules](patterns/unsafe-mods.md)
 * TODO extension traits
 * TODO destructor bombs (ensure linear typing dynamically, e.g., https://github.com/Munksgaard/session-types/commit/0f25ccb7c3bc9f65fa8eaf538233e8fe344a189a)
 * TODO convertible to Foo trait for more generic generics (e.g., http://static.rust-lang.org/doc/master/std/fs/struct.File.html#method.open)
-* [Late bound bounds](patterns/late-bounds.md)
+* [Late bound bounds](patterns/late-bounds.md) (Currently just a boilerplate)
 * TODO 'shadow' borrowed version of struct - e.g., double buffering, Niko's parser generator
 * TODO composition of structs to please the borrow checker
 * TODO `Error` traits and `Result` forwarding
@@ -72,3 +78,20 @@ We suggest leaving a comment on the [issue tracker](https://github.com/rust-unof
 so that other people don't start working on the same topic.
 
 Correction and elaboration PRs are very welcome.
+
+## Building with mdbook
+
+This book is built with [mdbook](https://rust-lang.github.io/mdBook/). You can install it by running `cargo install mdbook`.
+
+If you want to build it locally you can run one of these two commands in the root directory of the repository:
+
+- `mdbook build`
+
+  Builds static html pages as output and place them in the `/book` directory by default.
+
+- `mdbook serve`
+
+  Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
+  to be sure) and reloads the browser when a change occurs.
+  
+  

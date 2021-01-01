@@ -36,6 +36,12 @@ struct MyConfiguration {
 impl MyConfiguration {
     // add setters here
 }
+
+fn main() {
+    // construct a new instance with default values
+    let mut conf = MyConfiguration::default();
+    // do somthing with conf here
+}
 ```
 
 ## See also
