@@ -255,7 +255,7 @@ nodes are accepted by the <code>fold_*</code> methods.</p>
 exclusively, the original copy of the data structure cannot be re-used. On the
 other hand if a node is not changed, reusing it is very efficient.</p>
 <p>If we were to operate on borrowed references, the original data structure can be
-reused, however, if a node is unchanged it must be cloned, which can be
+reused; however, a node must be cloned even if unchanged, which can be
 expensive.</p>
 <p>Using a reference counted pointer gives the best of both worlds - we can reuse
 the original data structure and we don't need to clone unchanged nodes. However,
