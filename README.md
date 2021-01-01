@@ -10,7 +10,7 @@ language.
 
 ### Idioms
 
-* [Use coercion for arguments](idioms/coercion-arguments.md)
+* [Use borrowed types for arguments](idioms/coercion-arguments.md)
 * [Constructor](idioms/ctor.md)
 * [Concatenating strings with `format!`](idioms/concat-format.md)
 * [Privacy for extensibility](idioms/priv-extend.md)

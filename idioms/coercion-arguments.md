@@ -1,8 +1,8 @@
-# Use coercion for arguments
+# Use borrowed types for arguments
 
 ## Description
 
-Using a target of a deref coericion can increase the flexibility of your code when you are deciding which argument type to use for a function argument which may increase its utility as it increases the number of viable inputs for this function.
+Using a target of a deref coercion can increase the flexibility of your code when you are deciding which argument type to use for a function argument which may increase its utility as it increases the number of viable inputs for this function.
 For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`, or even `&T` as opposed to a `&Box<T>`. 
 Not only that, you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as can be illustrated in each of the previous examples. 
 For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
