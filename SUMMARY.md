@@ -30,3 +30,5 @@
 - [Anti-patterns](./anti_patterns/README.md)
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
     - [Deref Polymorphism](./anti_patterns/deref.md)
+
+- [Additional Materials](./additional_materials.md)
