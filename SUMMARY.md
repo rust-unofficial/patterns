@@ -1,6 +1,7 @@
 # Summary
 
 - [Introduction](./intro.md)
+    - [Rust rocks](./rust_rocks.md)
 - [Idioms](./idioms/README.md)
     - [Concatenating Strings with `format!`](./idioms/concat-format.md)
     - [Constructor](./idioms/ctor.md)
@@ -30,3 +31,7 @@
 - [Anti-patterns](./anti_patterns/README.md)
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
     - [Deref Polymorphism](./anti_patterns/deref.md)
+
+- [Refactoring](./refactoring/README.md)
+
+- [Functional Programming](./functional/README.md)
