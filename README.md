@@ -3,6 +3,10 @@
 An open source repository of design patterns and idioms in the Rust programming
 language.
 
+## Design Patterns Book
+
+There is also a mdBook that you can find [here](https://rust-unofficial.github.io/patterns/).
+
 
 ## Contents
 
@@ -27,6 +31,7 @@ language.
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
+
 
 ### Design patterns
 
@@ -53,7 +58,6 @@ language.
 * [Compose structs together for better borrowing](patterns/compose-structs.md)
 
 
-
 ### Anti-patterns
 
 * TODO thread + catch_panic for exceptions
@@ -64,6 +68,17 @@ language.
 * TODO taking an enum rather than having multiple functions
 * TODO `unwrap()`ing every `Result` instead of forwarding it
 * [`#[deny(warnings)]`](anti_patterns/deny-warnings.md)
+
+
+### Functional programming
+* TODO currying
+* TODO higher-order functions
+* TODO collections
+
+
+### Refactoring
+* TODO refactoring from `unwrap` to `Result`
+* TODO refactoring from `enum` to `Option`
 
 
 ## Contributing
