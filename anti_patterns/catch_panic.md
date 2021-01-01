@@ -1,8 +1,8 @@
-# panic::catch_unwind for exceptions
+# catch_unwind for exceptions
 
 ## Description
 
-This antipattern arises when the method for catching (`panic::catch_unwind`) an
+This anti-pattern arises when the method for catching (`panic::catch_unwind`) an
 unexpected problem (implementation bug) is used to handle an expected problem,
 such as a missing file.
 
