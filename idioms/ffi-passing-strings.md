@@ -1,4 +1,4 @@
-# Passing Strings to FFI
+# Passing Strings
 
 ## Description
 

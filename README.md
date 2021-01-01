@@ -28,8 +28,8 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * FFI usage
   - [Idiomatic Errors](idioms/ffi-errors.md)
-  - [Accepting FFI Strings](idioms/ffi-accepting-strings.md)
-  - [Passing Strings to FFI](idioms/ffi-passing-strings.md)
+  - [Accepting Strings](idioms/ffi-accepting-strings.md)
+  - [Passing Strings](idioms/ffi-passing-strings.md)
   - TODO More Items (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
 

@@ -1,4 +1,4 @@
-# Accepting Strings via FFI
+# Accepting Strings
 
 ## Description
 
