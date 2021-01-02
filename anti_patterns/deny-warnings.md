@@ -55,7 +55,7 @@ without requiring a change to the code.
 Alternatively, we can specify the lints that we want to `deny` in the code.
 Here is a list of warning lints that is (hopefully) safe to deny:
 
-```rust
+```rust,ignore
 #[deny(bad-style,
        const-err,
        dead-code,
@@ -84,7 +84,7 @@ Here is a list of warning lints that is (hopefully) safe to deny:
 
 In addition, the following `allow`ed lints may be a good idea to `deny`:
 
-```rust
+```rust,ignore
 #[deny(missing-debug-implementations,
        missing-docs,
        trivial-casts,
