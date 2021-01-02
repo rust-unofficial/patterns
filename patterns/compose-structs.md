@@ -31,10 +31,11 @@ fn foo(a: &mut A) -> &u32 { &a.f2 }
 fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
 
 fn baz(a: &mut A) {
-    // x causes a to be borrowed for the rest of the function.
+    // The later usage of x causes a to be borrowed for the rest of the function.
     let x = foo(a);
     // Borrow check error
     let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    println!("{}", x);
 }
 ```
 
@@ -63,6 +64,7 @@ fn baz(a: &mut A) {
     let x = foo(&mut a.b);
     // Now it's OK!
     let y = bar(&mut a.c);
+    println!("{}", x);
 }
 ```
 
