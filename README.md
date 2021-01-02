@@ -72,7 +72,7 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 You are missing content in this repository that can be helpful for others and you are eager to explain it?
 Awesome! We are always happy about new contributions (e.g. elaboration or corrections on certain topics) to this project.
 
-We suggest reading our [Contribution guide](./CONTRIBUTION.md) to get more information on how it works.
+We suggest reading our [Contribution guide](./CONTRIBUTING.md) to get more information on how it works.
 
 
 ## Building with mdbook
