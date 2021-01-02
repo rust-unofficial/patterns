@@ -1,7 +1,7 @@
 # Rust Design Patterns
 
-An open source repository of design patterns and idioms in the Rust programming
-language.
+An open source book about design patterns and idioms in the Rust programming
+language that you can read [here](https://rust-unofficial.github.io/patterns/).
 
 
 ## Contents
@@ -14,7 +14,7 @@ language.
 * [Concatenating strings with `format!`](idioms/concat-format.md)
 * [Privacy for extensibility](idioms/priv-extend.md)
 * TODO stability for extensibility
-* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/master/src/lib.rs#L1400)
+* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/v0.9.6/src/lib.rs#L1400)
 * [Collections are smart pointers](idioms/deref.md)
 * TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
 * [Finalisation in destructors](idioms/dtor-finally.md)
@@ -27,6 +27,7 @@ language.
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
+
 
 ### Design patterns
 
@@ -51,7 +52,6 @@ language.
 * TODO `Error` traits and `Result` forwarding
 * TODO graphs
 * [Compose structs together for better borrowing](patterns/compose-structs.md)
-
 
 
 ### Anti-patterns
@@ -93,5 +93,3 @@ If you want to build it locally you can run one of these two commands in the roo
 
   Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
   to be sure) and reloads the browser when a change occurs.
-  
-  

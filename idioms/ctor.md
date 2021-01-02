@@ -8,7 +8,7 @@ is to use a static `new` method to create an object.
 
 ## Example
 
-```rust
+```rust,ignore
 // A Rust vector, see liballoc/vec.rs
 pub struct Vec<T> {
     buf: RawVec<T>,

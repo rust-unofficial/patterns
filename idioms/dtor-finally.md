@@ -9,7 +9,7 @@ be used to run code that must be run before exit.
 
 ## Example
 
-```rust
+```rust,ignore
 fn bar() -> Result<(), ()> {
     // These don't need to be defined inside the function.
     struct Foo;

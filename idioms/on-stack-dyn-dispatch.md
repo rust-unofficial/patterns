@@ -9,7 +9,9 @@ below:
 
 ## Example
 
-```rust
+```rust,ignore
+std::io::File;
+
 // These must live longer than `readable`, and thus are declared first:
 let (mut stdin_read, mut file_read);
 
@@ -46,7 +48,7 @@ whole code that follows to work with both `File` or `Stdin`, with all the
 
 The code needs more moving parts than the `Box`-based version:
 
-```rust
+```rust,ignore
 // We still need to ascribe the type for dynamic dispatch.
 let readable: Box<dyn io::Read> = if arg == "-" {
     Box::new(io::stdin())
