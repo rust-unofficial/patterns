@@ -32,6 +32,6 @@
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
     - [Deref Polymorphism](./anti_patterns/deref.md)
 
-- [Refactoring](./refactoring/README.md)
+- [Refactoring]()
 
 - [Functional Programming](./functional/README.md)
