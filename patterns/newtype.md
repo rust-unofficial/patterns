@@ -1,5 +1,7 @@
 # Newtype
 
+Rust has strong static types. This can be very different than what you are used to if you are coming from a loosely-typed language. Don't worry, though. Once you get used to them, you'll find the types actually make your life easier. Why? Because you are making implicit assumptions explicit.
+
 ## Description
 
 Use a tuple struct with a single field to make an opaque wrapper for a type.
