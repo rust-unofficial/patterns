@@ -34,7 +34,7 @@ impl Bar {
     //..
 }
 
-fn baz() {
+fn main() {
     let b = Bar::new(...);
 
     // Foo and Bar are type incompatible, the following do not type check.

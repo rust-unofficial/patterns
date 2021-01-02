@@ -18,7 +18,7 @@ mod a {
     }
 }
 
-fn baz(s: a::S) {
+fn main(s: a::S) {
     // Because S::bar is private, it cannot be named here and we must use `..`
     // in the pattern.
     let a::S { foo: _, ..} = s;
