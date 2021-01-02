@@ -33,3 +33,5 @@
     - [Deref Polymorphism](./anti_patterns/deref.md)
 
 - [Functional Programming](./functional/README.md)
+
+- [Additional Resources](./additional_resources.md)
