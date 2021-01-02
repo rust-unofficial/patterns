@@ -8,6 +8,7 @@ language.
 
 [Introduction](intro.md)
 
+
 ### Idioms
 
 * [Constructor](idioms/ctor.md)
@@ -27,6 +28,7 @@ language.
 * [On-Stack Dynamic Dispatch](idioms/on-stack-dyn-dispatch.md)
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
+
 
 ### Design patterns
 
@@ -53,7 +55,6 @@ language.
 * [Compose structs together for better borrowing](patterns/compose-structs.md)
 
 
-
 ### Anti-patterns
 
 * TODO thread + catch_panic for exceptions
@@ -68,16 +69,11 @@ language.
 
 ## Contributing
 
-Contributions are very welcome!
+You are missing content in this repository that can be helpful for others and you are eager to explain it?
+Awesome! We are always happy about new contributions (e.g. elaboration or corrections on certain topics) to this project.
 
-You should start with [the template](template.md). Copy it into the appropriate
-directory, edit it, and submit a PR. You might not want every section, and you
-might want to add extra sections.
+We suggest reading our [Contribution guide](./CONTRIBUTION.md) to get more information on how it works.
 
-We suggest leaving a comment on the [issue tracker](https://github.com/rust-unofficial/patterns/issues)
-so that other people don't start working on the same topic.
-
-Correction and elaboration PRs are very welcome.
 
 ## Building with mdbook
 
@@ -93,5 +89,9 @@ If you want to build it locally you can run one of these two commands in the roo
 
   Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
   to be sure) and reloads the browser when a change occurs.
-  
+
+
+## License
+
+This content of this repository is licensed under **MPL-2.0**; see [LICENSE](./LICENSE).
   
