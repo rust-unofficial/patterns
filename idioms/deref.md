@@ -8,16 +8,19 @@ and borrowed views of data.
 
 ## Example
 
-```rust
+```rust,ignore
+use std::ops::Deref;
+
 struct Vec<T> {
-    ...
+    data: T,
+    //..
 }
 
 impl<T> Deref for Vec<T> {
     type Target = [T];
 
     fn deref(&self) -> &[T] {
-        ...
+        //..
     }
 }
 ```

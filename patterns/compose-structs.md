@@ -20,7 +20,7 @@ pattern often reveals smaller units of functionality.
 Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:
 
-```rust
+```rust,ignore
 struct A {
     f1: u32,
     f2: u32,
@@ -30,7 +30,7 @@ struct A {
 fn foo(a: &mut A) -> &u32 { &a.f2 }
 fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
 
-fn main(a: &mut A) {
+fn baz(a: &mut A) {
     // x causes a to be borrowed for the rest of the function.
     let x = foo(a);
     // Borrow check error
@@ -59,7 +59,7 @@ struct C {
 fn foo(b: &mut B) -> &u32 { &b.f2 }
 fn bar(c: &mut C) -> u32 { c.f1 + c.f3 }
 
-fn main(a: &mut A) {
+fn baz(a: &mut A) {
     let x = foo(&mut a.b);
     // Now it's OK!
     let y = bar(&mut a.c);
