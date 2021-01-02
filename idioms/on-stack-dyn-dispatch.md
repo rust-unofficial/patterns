@@ -16,7 +16,7 @@ std::io::File;
 let (mut stdin_read, mut file_read);
 
 // We need to ascribe the type to get dynamic dispatch.
-let readable: &mut dyn io::Read = if arg == '-' {
+let readable: &mut dyn io::Read = if arg == "-" {
     stdin_read = io::stdin();
     &mut stdin_read
 } else {
