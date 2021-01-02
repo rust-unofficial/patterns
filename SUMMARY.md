@@ -1,7 +1,7 @@
 # Summary
 
 - [Introduction](./intro.md)
-    - [Rust rocks](./rust_rocks.md)
+
 - [Idioms](./idioms/README.md)
     - [Concatenating Strings with `format!`](./idioms/concat-format.md)
     - [Constructor](./idioms/ctor.md)
