@@ -40,14 +40,14 @@ Whoa! This is really different! What's going on here? Remember that with declara
 Here, we are composing functions of addition (this closure: `|a, b| a + b)`) with a range from 1 to 10. The `0` is the starting point, so `a` is `0` at first. `b` is the first element of the range, `1`. `0 + 1 = 1` is the result. So now we `fold` again, with `a = 1`, `b = 2` and so `1 + 2 = 3` is the next result. This process continues until we get to the last element in the range, `10`.
 
 | `a` | `b` | result |
-| --- | --- | --- |
-| 0 | 1 | 1 |
-| 1 | 2 | 3 |
-| 3 | 3 | 6 |
-| 6 | 4 | 10 |
-| 10 | 5 | 15 |
-| 15 | 6 | 21 |
-| 21 | 7 | 28 |
-| 28 | 8 | 36 |
-| 36 | 9 | 45 |
-| 45 | 10 | 55 |
+| --- | --- | ------ |
+| 0   | 1   | 1      |
+| 1   | 2   | 3      |
+| 3   | 3   | 6      |
+| 6   | 4   | 10     |
+| 10  | 5   | 15     |
+| 15  | 6   | 21     |
+| 21  | 7   | 28     |
+| 28  | 8   | 36     |
+| 36  | 9   | 45     |
+| 45  | 10  | 55     |
