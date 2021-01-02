@@ -14,7 +14,7 @@ language.
 * [Concatenating strings with `format!`](idioms/concat-format.md)
 * [Privacy for extensibility](idioms/priv-extend.md)
 * TODO stability for extensibility
-* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/master/src/lib.rs#L1400)
+* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/v0.9.6/src/lib.rs#L1400)
 * [Collections are smart pointers](idioms/deref.md)
 * TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
 * [Finalisation in destructors](idioms/dtor-finally.md)
