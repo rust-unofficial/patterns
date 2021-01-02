@@ -66,17 +66,6 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [`#[deny(warnings)]`](anti_patterns/deny-warnings.md)
 
 
-### Functional programming
-* TODO currying
-* TODO higher-order functions
-* TODO collections
-
-
-### Refactoring
-* TODO refactoring from `unwrap` to `Result`
-* TODO refactoring from `enum` to `Option`
-
-
 ## Contributing
 
 Contributions are very welcome!
