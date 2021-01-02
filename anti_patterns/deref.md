@@ -49,7 +49,7 @@ impl Deref for Bar {
     }
 }
 
-fn baz() {
+fn main() {
     let b = Bar { Foo {} };
     b.m();
 }
