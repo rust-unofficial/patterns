@@ -11,7 +11,8 @@ There are many problems that share the same form. Due to the fact that Rust is n
 
 [Anti-patterns](anti_patterns/README.md) are methods to solve these same common problems. 
 
-However, while design patterns give us benefits, anti-patterns create more problems. There are some problems that we don't need to solve because [Rust rocks](rust_rocks.md)! 
+However, while design patterns give us benefits, anti-patterns create more problems.
+Although there are some problems that we don't need to solve because Rust rocks! 
 
 [Idioms](idioms/README.md) are guidelines to follow when coding. They are social norms of the community. 
 You can break them, but if you do you should have a good reason for it. 
