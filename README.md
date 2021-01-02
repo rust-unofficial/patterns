@@ -1,7 +1,7 @@
 # Rust Design Patterns
 
-An open source repository of design patterns and idioms in the Rust programming
-language.
+An open source book about design patterns and idioms in the Rust programming
+language that you can read [here](https://rust-unofficial.github.io/patterns/).
 
 
 ## Contents
@@ -28,6 +28,7 @@ language.
 * TODO FFI usage (By being mindful of how to provide Rust libraries, and make use of existing libraries across the FFI, you can get more out of benefits Rust can bring)
 * [Easy doc initialization](idioms/rustdoc-init.md)
 
+
 ### Design patterns
 
 * [Builder](patterns/builder.md)
@@ -51,7 +52,6 @@ language.
 * TODO `Error` traits and `Result` forwarding
 * TODO graphs
 * [Compose structs together for better borrowing](patterns/compose-structs.md)
-
 
 
 ### Anti-patterns
