@@ -93,5 +93,3 @@ If you want to build it locally you can run one of these two commands in the roo
 
   Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
   to be sure) and reloads the browser when a change occurs.
-  
-  
