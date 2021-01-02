@@ -34,4 +34,4 @@
 
 - [Functional Programming](./functional/README.md)
 
-- [Additional Materials](./additional_materials.md)
+- [Additional Resources](./additional_resources.md)
