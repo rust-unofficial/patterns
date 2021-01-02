@@ -19,7 +19,6 @@
 - [Design Patterns](./patterns/README.md)
     - [Builder](./patterns/builder.md)
     - [Compose Structs](./patterns/compose-structs.md)
-    - [Entry API](./patterns/entry.md)
     - [Fold](./patterns/fold.md)
     - [Late Bound Bounds](./patterns/late-bounds.md)
     - [Newtype](./patterns/newtype.md)
