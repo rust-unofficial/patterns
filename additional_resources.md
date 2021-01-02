@@ -1,4 +1,4 @@
-# Additional materials
+# Additional resources
 
 A collection of complementary helpful content
 
