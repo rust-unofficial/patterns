@@ -7,15 +7,15 @@ When developing programs, we have to solve many problems. A program can be viewe
 
 There are many problems that share the same form. Due to the fact that Rust is not object-oriented design patterns vary with respect to other object-oriented programming languages. While the details are different, since they have the same form they can be solved using the same fundamental methods. 
 
-[Design patterns](patterns/README.md) are methods to solve common problems when writing software.
+[Design patterns](./patterns/README.md) are methods to solve common problems when writing software.
 
-[Anti-patterns](anti_patterns/README.md) are methods to solve these same common problems. 
+[Anti-patterns](./anti_patterns/README.md) are methods to solve these same common problems. 
 
 However, while design patterns give us benefits, anti-patterns create more problems.
 
-[Idioms](idioms/README.md) are guidelines to follow when coding. They are social norms of the community. 
+[Idioms](./idioms/README.md) are guidelines to follow when coding. They are social norms of the community. 
 You can break them, but if you do you should have a good reason for it. 
 
-[Refactoring](refactoring/README.md) is the process by which you convert code that works, but is hard to understand, into code that works and is easy to understand.
+[Refactoring](./refactoring/README.md) is the process by which you convert code that works, but is hard to understand, into code that works and is easy to understand.
 
 TODO: Mention why Rust is a bit special - functional elements, type system, borrow checker
