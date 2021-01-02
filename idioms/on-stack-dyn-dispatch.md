@@ -9,8 +9,12 @@ below:
 
 ## Example
 
-```rust,ignore
-std::io::File;
+```rust
+use std::io;
+use std::fs;
+
+# fn main() -> Result<(), Box<dyn std::error::Error>> {
+# let arg = "-";
 
 // These must live longer than `readable`, and thus are declared first:
 let (mut stdin_read, mut file_read);
@@ -25,6 +29,9 @@ let readable: &mut dyn io::Read = if arg == "-" {
 };
 
 // Read from `readable` here.
+
+# Ok(())
+# }
 ```
 
 ## Motivation
