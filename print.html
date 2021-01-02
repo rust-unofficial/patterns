@@ -221,10 +221,7 @@ string has been pre-allocated to the expected size).</p>
 <p>Rust does not have constructors as a language construct. Instead, the convention
 is to use a static <code>new</code> method to create an object.</p>
 <h2><a class="header" href="#example-1" id="example-1">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// A Rust vector, see liballoc/vec.rs
+<pre><code class="language-rust ignore">// A Rust vector, see liballoc/vec.rs
 pub struct Vec&lt;T&gt; {
     buf: RawVec&lt;T&gt;,
     len: usize,
@@ -244,8 +241,7 @@ impl&lt;T&gt; Vec&lt;T&gt; {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <p>The <a href="idioms/../patterns/builder.html">builder pattern</a> for constructing objects where there are multiple
 configurations. </p>
@@ -264,7 +260,7 @@ types implement <code>Default</code>, the more useful it becomes.</p>
 <code>default()</code> method does not. There can even be multiple constructors with
 different names, but there can only be one <code>Default</code> implementation per type.</p>
 <h2><a class="header" href="#example-2" id="example-2">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">// note that we can simply auto-derive Default here.
+<pre><code class="language-rust ignore">// note that we can simply auto-derive Default here.
 #[derive(Default)]
 struct MyConfiguration {
     // Option defaults to None
@@ -286,7 +282,7 @@ fn main() {
     let mut conf = MyConfiguration::default();
     // do somthing with conf here
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#see-also-1" id="see-also-1">See also</a></h2>
 <ul>
 <li>The <a href="idioms/ctor.html">constructor</a> idiom is another way to generate instances that may or may
@@ -300,22 +296,21 @@ not be &quot;default&quot;</li>
 <p>Use the <code>Deref</code> trait to treat collections like smart pointers, offering owning
 and borrowed views of data.</p>
 <h2><a class="header" href="#example-3" id="example-3">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Vec&lt;T&gt; {
-    ...
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Vec&lt;T&gt; {
+    data: T,
+    //..
 }
 
 impl&lt;T&gt; Deref for Vec&lt;T&gt; {
     type Target = [T];
 
     fn deref(&amp;self) -&gt; &amp;[T] {
-        ...
+        //..
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>A <code>Vec&lt;T&gt;</code> is an owning collection of <code>T</code>s, a slice (<code>&amp;[T]</code>) is a borrowed
 collection of <code>T</code>s. Implementing <code>Deref</code> for <code>Vec</code> allows implicit dereferencing
 from <code>&amp;Vec&lt;T&gt;</code> to <code>&amp;[T]</code> and includes the relationship in auto-derefencing
@@ -360,10 +355,7 @@ slicing syntax. The target will be the borrowed view.</p>
 executed no matter how a function is exited. Instead an object's destructor can
 be used to run code that must be run before exit.</p>
 <h2><a class="header" href="#example-4" id="example-4">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn bar() -&gt; Result&lt;(), ()&gt; {
+<pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
     // These don't need to be defined inside the function.
     struct Foo;
 
@@ -381,8 +373,7 @@ be used to run code that must be run before exit.</p>
     // Normal return.
     Ok(())
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation-1" id="motivation-1">Motivation</a></h2>
 <p>If a function has multiple return points, then executing code on exit becomes
 difficult and repetitive (and thus bug-prone). This is especially the case where
@@ -529,10 +520,9 @@ to declare multiple variables to bind differently-typed objects. To extend the
 lifetime as necessary, we can use deferred conditional initialization, as seen
 below:</p>
 <h2><a class="header" href="#example-6" id="example-6">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// These must live longer than `readable`, and thus are declared first:
+<pre><code class="language-rust ignore">std::io::File;
+
+// These must live longer than `readable`, and thus are declared first:
 let (mut stdin_read, mut file_read);
 
 // We need to ascribe the type to get dynamic dispatch.
@@ -545,8 +535,7 @@ let readable: &amp;mut dyn io::Read = if arg == '-' {
 };
 
 // Read from `readable` here.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation-3" id="motivation-3">Motivation</a></h2>
 <p>Rust monomorphises code by default. This means a copy of the code will be
 generated for each type it is used with and optimized independently. While this
@@ -561,18 +550,14 @@ initialize something we won't use later, nor do we need to monomorphize the
 whole code that follows to work with both <code>File</code> or <code>Stdin</code>, with all the</p>
 <h2><a class="header" href="#disadvantages-4" id="disadvantages-4">Disadvantages</a></h2>
 <p>The code needs more moving parts than the <code>Box</code>-based version:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// We still need to ascribe the type for dynamic dispatch.
+<pre><code class="language-rust ignore">// We still need to ascribe the type for dynamic dispatch.
 let readable: Box&lt;dyn io::Read&gt; = if arg == &quot;-&quot; {
     Box::new(io::stdin())
 } else {
     Box::new(fs::File::open(arg)?)
 };
 // Read from `readable` here.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#discussion-3" id="discussion-3">Discussion</a></h2>
 <p>Rust newcomers will usually learn that Rust requires all variables to be
 initialized <em>before use</em>, so it's easy to overlook the fact that <em>unused</em>
@@ -653,7 +638,9 @@ give it copy of some data, pass it by reference, or perform some other transform
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let num1 = Rc::new(1);
+</span>use std::rc::Rc;
+
+let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);
 let closure = {
@@ -670,7 +657,9 @@ let closure = {
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let num1 = Rc::new(1);
+</span>use std::rc::Rc;
+
+let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);
 
@@ -692,7 +681,7 @@ and they will be dropped immediately even if they are not consumed by closure.</
 <p>Use a private field to ensure that a struct is extensible without breaking
 stability guarantees.</p>
 <h2><a class="header" href="#example-8" id="example-8">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">mod a {
+<pre><code class="language-rust ignore">mod a {
     // Public struct.
     pub struct S {
         pub foo: i32,
@@ -707,7 +696,7 @@ fn main(s: a::S) {
     let a::S { foo: _, ..} = s;
 }
 
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#discussion-4" id="discussion-4">Discussion</a></h2>
 <p>Adding a field to a struct is a mostly backwards compatible change. However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern. The client could name some of the fields and use <code>..</code> in the pattern, in which case adding another field is backwards compatible. Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.</p>
 <p>The downside of this approach is that you might need to add an otherwise unneeded field to the struct. You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to the field name to avoid the unused field warning.</p>
@@ -720,10 +709,7 @@ function which takes the struct as an argument.</p>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
 Each of these methods should have examples. </p>
 <p>For example:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Connection {
+<pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
 }
@@ -749,14 +735,10 @@ impl Connection {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#example-9" id="example-9">Example</a></h2>
 <p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just create a wrapping dummy function which takes them as arguments:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Connection {
+<pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
 }
@@ -775,8 +757,7 @@ impl Connection {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not actually run while testing because it is inside of a function which is never invoked.</p>
 <h2><a class="header" href="#advantages-6" id="advantages-6">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>
@@ -795,29 +776,21 @@ and never modified. The intention can be made explicit by redefining the mutable
 <h2><a class="header" href="#example-10" id="example-10">Example</a></h2>
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let data = {
+<pre><code class="language-rust ignore">let data = {
 	let mut data = get_vec();
 	data.sort();
 	data
 };
 
 // Here `data` is immutable.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>Using variable rebinding:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let mut data = get_vec();
+<pre><code class="language-rust ignore">let mut data = get_vec();
 data.sort();
 let data = data;
 
 // Here `data` is immutable.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#advantages-7" id="advantages-7">Advantages</a></h2>
 <p>Compiler ensures that you don't accidentally mutate data after some point.</p>
 <h2><a class="header" href="#disadvantages-7" id="disadvantages-7">Disadvantages</a></h2>
@@ -841,17 +814,19 @@ Design patterns are very language-specific - what is a pattern in one language m
 <h2><a class="header" href="#description-12" id="description-12">Description</a></h2>
 <p>Construct an object with calls to a builder helper. </p>
 <h2><a class="header" href="#example-11" id="example-11">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Foo {
+<pre><code class="language-rust ignore">struct Foo {
     // Lots of complicated fields.
 }
 
 struct FooBuilder {
     // Probably lots of optional fields.
-    ...
+    //..
 }
 
 impl FooBuilder {
-    fn new(...) -&gt; FooBuilder {
+    fn new(
+        //..
+    ) -&gt; FooBuilder {
         // Set the minimally required fields of Foo.
     }
 
@@ -875,7 +850,7 @@ fn main() {
     let f = FooBuilder::new().named(&quot;Bar&quot;).with_attribute(...).finish();
 }
 
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation-5" id="motivation-5">Motivation</a></h2>
 <p>Useful when you would otherwise require many different constructors or where
 construction has side effects.</p>
@@ -901,7 +876,7 @@ of naming is not used.</p>
 (and more efficient) to take and return the builder as a mutable reference. The
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like</p>
-<pre><code>let mut fb = FooBuilder::new();
+<pre><code class="language-rust ignore">let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
 let f = fb.finish();
@@ -926,7 +901,7 @@ pattern often reveals smaller units of functionality.</p>
 <h2><a class="header" href="#example-12" id="example-12">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct A {
+<pre><code class="language-rust ignore">struct A {
     f1: u32,
     f2: u32,
     f3: u32,
@@ -935,16 +910,19 @@ use a struct:</p>
 fn foo(a: &amp;mut A) -&gt; &amp;u32 { &amp;a.f2 }
 fn bar(a: &amp;mut A) -&gt; u32 { a.f1 + a.f3 }
 
-fn main(a: &amp;mut A) {
+fn baz(a: &amp;mut A) {
     // x causes a to be borrowed for the rest of the function.
     let x = foo(a);
     // Borrow check error
     let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
 }
-</code></pre></pre>
+</code></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">// A is now composed of two structs - B and C.
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// A is now composed of two structs - B and C.
 struct A {
     b: B,
     c: C,
@@ -961,12 +939,13 @@ struct C {
 fn foo(b: &amp;mut B) -&gt; &amp;u32 { &amp;b.f2 }
 fn bar(c: &amp;mut C) -&gt; u32 { c.f1 + c.f3 }
 
-fn main(a: &amp;mut A) {
+fn baz(a: &amp;mut A) {
     let x = foo(&amp;mut a.b);
     // Now it's OK!
     let y = bar(&amp;mut a.c);
 }
-</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#motivation-6" id="motivation-6">Motivation</a></h2>
 <p>Why and where you should use the pattern</p>
 <h2><a class="header" href="#advantages-9" id="advantages-9">Advantages</a></h2>
@@ -1017,10 +996,7 @@ thus creating a whole new collection.</p>
 in the Rust compiler, although it appears to me to be more like a map than a
 fold in the usual sense. See the discussion below for more details.</p>
 <h2><a class="header" href="#example-14" id="example-14">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The data we will fold, a simple AST.
+<pre><code class="language-rust ignore">// The data we will fold, a simple AST.
 mod ast {
     pub enum Stmt {
         Expr(Box&lt;Expr&gt;),
@@ -1068,8 +1044,7 @@ impl Folder for Renamer {
     }
     // Use the default methods for the other nodes.
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>The result of running the <code>Renamer</code> on an AST is a new AST identical to the old
 one, but with every name changed to <code>foo</code>. A real life folder might have some
 state preserved between nodes in the struct itself.</p>
@@ -1145,14 +1120,14 @@ languages.</p>
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
 <h2><a class="header" href="#example-16" id="example-16">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">// Some type, not necessarily in the same module or even crate.
+<pre><code class="language-rust ignore">// Some type, not necessarily in the same module or even crate.
 struct Foo {
-    ...
+    //..
 }
 
 impl Foo {
     // These functions are not present on Bar.
-    ...
+    //..
 }
 
 // The newtype.
@@ -1160,11 +1135,15 @@ pub struct Bar(Foo);
 
 impl Bar {
     // Constructor.
-    pub fn new(...) -&gt; Bar {
-        ...
+    pub fn new(
+        //..
+    ) -&gt; Bar {
+    
+        //..
+    
     }
 
-    ...
+    //..
 }
 
 fn main() {
@@ -1174,7 +1153,7 @@ fn main() {
     // let f: Foo = b;
     // let b: Bar = Foo { ... };
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation-10" id="motivation-10">Motivation</a></h2>
 <p>The primary motivation for newtypes is abstraction. It allows you to share
 implementation details between types while precisely controlling the interface.
@@ -1203,12 +1182,8 @@ most common uses, but they can be used for other reasons:</p>
 <li>making a type with copy semantics have move semantics,</li>
 <li>abstraction by providing a more concrete type and thus hiding internal types, e.g.,</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub struct Foo(Bar&lt;T1, T2&gt;);
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);
+</code></pre>
 <p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
 <h2><a class="header" href="#see-also-11" id="see-also-11">See also</a></h2>
 <p><a href="https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html">Newtypes in the style guide</a>.</p>
@@ -1224,24 +1199,31 @@ on the type system to ensure that access is always mediated by the guard object.
 <h2><a class="header" href="#example-17" id="example-17">Example</a></h2>
 <p>Mutex guards are the classic example of this pattern from the std library (this
 is a simplified version of the real implementation):</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Mutex&lt;T&gt; {
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Foo {}
+
+struct Mutex&lt;T&gt; {
     // We keep a reference to our data: T here.
-    ...
+    //..
 }
 
 struct MutexGuard&lt;'a, T: 'a&gt; {
     data: &amp;'a T,
-    ...
+    //..
 }
 
 // Locking the mutex is explicit.
 impl&lt;T&gt; Mutex&lt;T&gt; {
     fn lock(&amp;self) -&gt; MutexGuard&lt;T&gt; {
         // Lock the underlying OS mutex.
-        ...
+        //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { data: self, ... }
+        MutexGuard { 
+            data: self, 
+            //.. 
+        }
     }
 }
 
@@ -1249,7 +1231,7 @@ impl&lt;T&gt; Mutex&lt;T&gt; {
 impl&lt;'a, T&gt; Drop for MutexGuard&lt;'a, T&gt; {
     fn drop(&amp;mut self) {
         // Unlock the underlying OS mutex.
-        ...
+        //..
     }
 }
 
@@ -1262,7 +1244,7 @@ impl&lt;'a, T&gt; Deref for MutexGuard&lt;'a, T&gt; {
     }
 }
 
-fn main(x: Mutex&lt;Foo&gt;) {
+fn baz(x: Mutex&lt;Foo&gt;) {
     let xx = x.lock();
     xx.foo(); // foo is a method on Foo.
     // The borrow checker ensures we can't store a reference to the underlying
@@ -1270,7 +1252,7 @@ fn main(x: Mutex&lt;Foo&gt;) {
 
     // x is unlocked when we exit this function and xx's destructor is executed.
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation-11" id="motivation-11">Motivation</a></h2>
 <p>Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
@@ -1289,12 +1271,10 @@ references. Rust ensures that the guard cannot outlive the underlying resource
 and that references to the resource mediated by the guard cannot outlive the
 guard. To see how this works it is helpful to examine the signature of <code>deref</code>
 without lifetime elision:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn deref&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a T { ... }
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-rust ignore">fn deref&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a T {
+    //..
+}
+</code></pre>
 <p>The returned reference to the resource has the same lifetime as <code>self</code> (<code>'a</code>).
 The borrow checker therefore ensures that the lifetime of the reference to <code>T</code>
 is shorter than the lifetime of <code>self</code>.</p>
@@ -1362,10 +1342,7 @@ behaviour).</p>
 <p>Furthermore, the visitor pattern allows separating the traversal of
 a collection of objects from the operations performed on each object.</p>
 <h2><a class="header" href="#example-18" id="example-18">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// The data we will visit
+<pre><code class="language-rust ignore">// The data we will visit
 mod ast {
     pub enum Stmt {
         Expr(Expr),
@@ -1416,8 +1393,7 @@ impl Visitor&lt;i64&gt; for Interpreter {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>One could implement further visitors, for example a type checker, without having
 to modify the AST data.</p>
 <h2><a class="header" href="#motivation-12" id="motivation-12">Motivation</a></h2>
@@ -1431,10 +1407,7 @@ example). In that case it is possible to factor out the traversal code and share
 it between algorithms (and also to provide noop default methods). In Rust, the
 common way to do this is to provide <code>walk_*</code> functions for each datum. For
 example,</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub fn walk_expr(visitor: &amp;mut Visitor, e: &amp;Expr) {
+<pre><code class="language-rust ignore">pub fn walk_expr(visitor: &amp;mut Visitor, e: &amp;Expr) {
     match *e {
         Expr::IntLit(_) =&gt; {},
         Expr::Add(ref lhs, ref rhs) =&gt; {
@@ -1447,8 +1420,7 @@ example,</p>
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>In other languages (e.g., Java) it is common for data to have an <code>accept</code> method
 which performs the same duty.</p>
 <h2><a class="header" href="#see-also-15" id="see-also-15">See also</a></h2>
@@ -1502,10 +1474,7 @@ Travis, but remember that this may break the build when something changes)
 without requiring a change to the code.</p>
 <p>Alternatively, we can specify the lints that we want to <code>deny</code> in the code.
 Here is a list of warning lints that is (hopefully) safe to deny:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[deny(bad-style,
+<pre><code class="language-rust ignore">#[deny(bad-style,
        const-err,
        dead-code,
        extra-requirement-in-impl,
@@ -1529,13 +1498,9 @@ Here is a list of warning lints that is (hopefully) safe to deny:</p>
        unused-comparisons,
        unused-parens,
        while-true)]
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>In addition, the following <code>allow</code>ed lints may be a good idea to <code>deny</code>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[deny(missing-debug-implementations,
+<pre><code class="language-rust ignore">#[deny(missing-debug-implementations,
        missing-docs,
        trivial-casts,
        trivial-numeric-casts,
@@ -1543,8 +1508,7 @@ Here is a list of warning lints that is (hopefully) safe to deny:</p>
        unused-import-braces,
        unused-qualifications,
        unused-results)]
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>Some may also want to add <code>missing-copy-implementations</code> to their list.</p>
 <p>Note that we explicitly did not add the <code>deprecated</code> lint, as it is fairly
 certain that there will be more deprecated APIs in the future.</p>
@@ -1574,10 +1538,15 @@ public static void main(String[] args) {
 }
 </code></pre>
 <p>We can use the deref polymorphism anti-pattern to do so:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Foo {}
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Foo {}
 
 impl Foo {
-    fn m(&amp;self) { ... }
+    fn m(&amp;self) { 
+        //.. 
+    }
+
 }
 
 struct Bar {
@@ -1595,7 +1564,7 @@ fn main() {
     let b = Bar { Foo {} };
     b.m();
 }
-</code></pre></pre>
+</code></pre>
 <p>There is no struct inheritance in Rust. Instead we use composition and include
 an instance of <code>Foo</code> in <code>Bar</code> (since the field is a value, it is stored inline,
 so if there were fields, they would have the same layout in memory as the Java
@@ -1609,16 +1578,12 @@ dereferencing, it means that the method call will search for methods on <code>Fo
 well as <code>Bar</code>.</p>
 <h2><a class="header" href="#advantages-17" id="advantages-17">Advantages</a></h2>
 <p>You save a little boilerplate, e.g.,</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>impl Bar {
+<pre><code class="language-rust ignore">impl Bar {
     fn m(&amp;self) { 
         self.f.m()
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#disadvantages-15" id="disadvantages-15">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
 code will not expect this to happen. That's because we are abusing the <code>Deref</code>

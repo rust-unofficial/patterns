@@ -172,10 +172,7 @@
 <p>Rust does not have constructors as a language construct. Instead, the convention
 is to use a static <code>new</code> method to create an object.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// A Rust vector, see liballoc/vec.rs
+<pre><code class="language-rust ignore">// A Rust vector, see liballoc/vec.rs
 pub struct Vec&lt;T&gt; {
     buf: RawVec&lt;T&gt;,
     len: usize,
@@ -195,8 +192,7 @@ impl&lt;T&gt; Vec&lt;T&gt; {
         }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <p>The <a href="../patterns/builder.html">builder pattern</a> for constructing objects where there are multiple
 configurations. </p>

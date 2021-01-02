@@ -174,10 +174,9 @@ to declare multiple variables to bind differently-typed objects. To extend the
 lifetime as necessary, we can use deferred conditional initialization, as seen
 below:</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// These must live longer than `readable`, and thus are declared first:
+<pre><code class="language-rust ignore">std::io::File;
+
+// These must live longer than `readable`, and thus are declared first:
 let (mut stdin_read, mut file_read);
 
 // We need to ascribe the type to get dynamic dispatch.
@@ -190,8 +189,7 @@ let readable: &amp;mut dyn io::Read = if arg == '-' {
 };
 
 // Read from `readable` here.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Rust monomorphises code by default. This means a copy of the code will be
 generated for each type it is used with and optimized independently. While this
@@ -206,18 +204,14 @@ initialize something we won't use later, nor do we need to monomorphize the
 whole code that follows to work with both <code>File</code> or <code>Stdin</code>, with all the</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>The code needs more moving parts than the <code>Box</code>-based version:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>// We still need to ascribe the type for dynamic dispatch.
+<pre><code class="language-rust ignore">// We still need to ascribe the type for dynamic dispatch.
 let readable: Box&lt;dyn io::Read&gt; = if arg == &quot;-&quot; {
     Box::new(io::stdin())
 } else {
     Box::new(fs::File::open(arg)?)
 };
 // Read from `readable` here.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
 <p>Rust newcomers will usually learn that Rust requires all variables to be
 initialized <em>before use</em>, so it's easy to overlook the fact that <em>unused</em>

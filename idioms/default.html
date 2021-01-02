@@ -182,7 +182,7 @@ types implement <code>Default</code>, the more useful it becomes.</p>
 <code>default()</code> method does not. There can even be multiple constructors with
 different names, but there can only be one <code>Default</code> implementation per type.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">// note that we can simply auto-derive Default here.
+<pre><code class="language-rust ignore">// note that we can simply auto-derive Default here.
 #[derive(Default)]
 struct MyConfiguration {
     // Option defaults to None
@@ -204,7 +204,7 @@ fn main() {
     let mut conf = MyConfiguration::default();
     // do somthing with conf here
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
 <li>The <a href="ctor.html">constructor</a> idiom is another way to generate instances that may or may

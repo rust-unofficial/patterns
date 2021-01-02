@@ -172,7 +172,7 @@
 <p>Use a private field to ensure that a struct is extensible without breaking
 stability guarantees.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">mod a {
+<pre><code class="language-rust ignore">mod a {
     // Public struct.
     pub struct S {
         pub foo: i32,
@@ -187,7 +187,7 @@ fn main(s: a::S) {
     let a::S { foo: _, ..} = s;
 }
 
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
 <p>Adding a field to a struct is a mostly backwards compatible change. However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern. The client could name some of the fields and use <code>..</code> in the pattern, in which case adding another field is backwards compatible. Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.</p>
 <p>The downside of this approach is that you might need to add an otherwise unneeded field to the struct. You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to the field name to avoid the unused field warning.</p>

@@ -175,29 +175,21 @@ and never modified. The intention can be made explicit by redefining the mutable
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let data = {
+<pre><code class="language-rust ignore">let data = {
 	let mut data = get_vec();
 	data.sort();
 	data
 };
 
 // Here `data` is immutable.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>Using variable rebinding:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>let mut data = get_vec();
+<pre><code class="language-rust ignore">let mut data = get_vec();
 data.sort();
 let data = data;
 
 // Here `data` is immutable.
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>Compiler ensures that you don't accidentally mutate data after some point.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>

@@ -171,17 +171,19 @@
 <h2><a class="header" href="#description" id="description">Description</a></h2>
 <p>Construct an object with calls to a builder helper. </p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Foo {
+<pre><code class="language-rust ignore">struct Foo {
     // Lots of complicated fields.
 }
 
 struct FooBuilder {
     // Probably lots of optional fields.
-    ...
+    //..
 }
 
 impl FooBuilder {
-    fn new(...) -&gt; FooBuilder {
+    fn new(
+        //..
+    ) -&gt; FooBuilder {
         // Set the minimally required fields of Foo.
     }
 
@@ -205,7 +207,7 @@ fn main() {
     let f = FooBuilder::new().named(&quot;Bar&quot;).with_attribute(...).finish();
 }
 
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Useful when you would otherwise require many different constructors or where
 construction has side effects.</p>
@@ -231,7 +233,7 @@ of naming is not used.</p>
 (and more efficient) to take and return the builder as a mutable reference. The
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like</p>
-<pre><code>let mut fb = FooBuilder::new();
+<pre><code class="language-rust ignore">let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
 let f = fb.finish();

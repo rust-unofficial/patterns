@@ -178,7 +178,9 @@ give it copy of some data, pass it by reference, or perform some other transform
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let num1 = Rc::new(1);
+</span>use std::rc::Rc;
+
+let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);
 let closure = {
@@ -195,7 +197,9 @@ let closure = {
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
-</span>let num1 = Rc::new(1);
+</span>use std::rc::Rc;
+
+let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);
 

@@ -181,7 +181,7 @@ pattern often reveals smaller units of functionality.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct A {
+<pre><code class="language-rust ignore">struct A {
     f1: u32,
     f2: u32,
     f3: u32,
@@ -190,16 +190,19 @@ use a struct:</p>
 fn foo(a: &amp;mut A) -&gt; &amp;u32 { &amp;a.f2 }
 fn bar(a: &amp;mut A) -&gt; u32 { a.f1 + a.f3 }
 
-fn main(a: &amp;mut A) {
+fn baz(a: &amp;mut A) {
     // x causes a to be borrowed for the rest of the function.
     let x = foo(a);
     // Borrow check error
     let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
 }
-</code></pre></pre>
+</code></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">// A is now composed of two structs - B and C.
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>// A is now composed of two structs - B and C.
 struct A {
     b: B,
     c: C,
@@ -216,12 +219,13 @@ struct C {
 fn foo(b: &amp;mut B) -&gt; &amp;u32 { &amp;b.f2 }
 fn bar(c: &amp;mut C) -&gt; u32 { c.f1 + c.f3 }
 
-fn main(a: &amp;mut A) {
+fn baz(a: &amp;mut A) {
     let x = foo(&amp;mut a.b);
     // Now it's OK!
     let y = bar(&amp;mut a.c);
 }
-</code></pre></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Why and where you should use the pattern</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>

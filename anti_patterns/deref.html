@@ -186,10 +186,15 @@ public static void main(String[] args) {
 }
 </code></pre>
 <p>We can use the deref polymorphism anti-pattern to do so:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Foo {}
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Foo {}
 
 impl Foo {
-    fn m(&amp;self) { ... }
+    fn m(&amp;self) { 
+        //.. 
+    }
+
 }
 
 struct Bar {
@@ -207,7 +212,7 @@ fn main() {
     let b = Bar { Foo {} };
     b.m();
 }
-</code></pre></pre>
+</code></pre>
 <p>There is no struct inheritance in Rust. Instead we use composition and include
 an instance of <code>Foo</code> in <code>Bar</code> (since the field is a value, it is stored inline,
 so if there were fields, they would have the same layout in memory as the Java
@@ -221,16 +226,12 @@ dereferencing, it means that the method call will search for methods on <code>Fo
 well as <code>Bar</code>.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>You save a little boilerplate, e.g.,</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>impl Bar {
+<pre><code class="language-rust ignore">impl Bar {
     fn m(&amp;self) { 
         self.f.m()
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
 code will not expect this to happen. That's because we are abusing the <code>Deref</code>

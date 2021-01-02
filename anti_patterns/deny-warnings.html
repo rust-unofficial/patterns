@@ -208,10 +208,7 @@ Travis, but remember that this may break the build when something changes)
 without requiring a change to the code.</p>
 <p>Alternatively, we can specify the lints that we want to <code>deny</code> in the code.
 Here is a list of warning lints that is (hopefully) safe to deny:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[deny(bad-style,
+<pre><code class="language-rust ignore">#[deny(bad-style,
        const-err,
        dead-code,
        extra-requirement-in-impl,
@@ -235,13 +232,9 @@ Here is a list of warning lints that is (hopefully) safe to deny:</p>
        unused-comparisons,
        unused-parens,
        while-true)]
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>In addition, the following <code>allow</code>ed lints may be a good idea to <code>deny</code>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>#[deny(missing-debug-implementations,
+<pre><code class="language-rust ignore">#[deny(missing-debug-implementations,
        missing-docs,
        trivial-casts,
        trivial-numeric-casts,
@@ -249,8 +242,7 @@ Here is a list of warning lints that is (hopefully) safe to deny:</p>
        unused-import-braces,
        unused-qualifications,
        unused-results)]
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>Some may also want to add <code>missing-copy-implementations</code> to their list.</p>
 <p>Note that we explicitly did not add the <code>deprecated</code> lint, as it is fairly
 certain that there will be more deprecated APIs in the future.</p>

@@ -177,24 +177,31 @@ on the type system to ensure that access is always mediated by the guard object.
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>Mutex guards are the classic example of this pattern from the std library (this
 is a simplified version of the real implementation):</p>
-<pre><pre class="playground"><code class="language-rust edition2018">struct Mutex&lt;T&gt; {
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Foo {}
+
+struct Mutex&lt;T&gt; {
     // We keep a reference to our data: T here.
-    ...
+    //..
 }
 
 struct MutexGuard&lt;'a, T: 'a&gt; {
     data: &amp;'a T,
-    ...
+    //..
 }
 
 // Locking the mutex is explicit.
 impl&lt;T&gt; Mutex&lt;T&gt; {
     fn lock(&amp;self) -&gt; MutexGuard&lt;T&gt; {
         // Lock the underlying OS mutex.
-        ...
+        //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { data: self, ... }
+        MutexGuard { 
+            data: self, 
+            //.. 
+        }
     }
 }
 
@@ -202,7 +209,7 @@ impl&lt;T&gt; Mutex&lt;T&gt; {
 impl&lt;'a, T&gt; Drop for MutexGuard&lt;'a, T&gt; {
     fn drop(&amp;mut self) {
         // Unlock the underlying OS mutex.
-        ...
+        //..
     }
 }
 
@@ -215,7 +222,7 @@ impl&lt;'a, T&gt; Deref for MutexGuard&lt;'a, T&gt; {
     }
 }
 
-fn main(x: Mutex&lt;Foo&gt;) {
+fn baz(x: Mutex&lt;Foo&gt;) {
     let xx = x.lock();
     xx.foo(); // foo is a method on Foo.
     // The borrow checker ensures we can't store a reference to the underlying
@@ -223,7 +230,7 @@ fn main(x: Mutex&lt;Foo&gt;) {
 
     // x is unlocked when we exit this function and xx's destructor is executed.
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
@@ -242,12 +249,10 @@ references. Rust ensures that the guard cannot outlive the underlying resource
 and that references to the resource mediated by the guard cannot outlive the
 guard. To see how this works it is helpful to examine the signature of <code>deref</code>
 without lifetime elision:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn deref&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a T { ... }
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-rust ignore">fn deref&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a T {
+    //..
+}
+</code></pre>
 <p>The returned reference to the resource has the same lifetime as <code>self</code> (<code>'a</code>).
 The borrow checker therefore ensures that the lifetime of the reference to <code>T</code>
 is shorter than the lifetime of <code>self</code>.</p>

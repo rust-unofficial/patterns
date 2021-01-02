@@ -173,10 +173,7 @@
 executed no matter how a function is exited. Instead an object's destructor can
 be used to run code that must be run before exit.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>fn bar() -&gt; Result&lt;(), ()&gt; {
+<pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
     // These don't need to be defined inside the function.
     struct Foo;
 
@@ -194,8 +191,7 @@ be used to run code that must be run before exit.</p>
     // Normal return.
     Ok(())
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>If a function has multiple return points, then executing code on exit becomes
 difficult and repetitive (and thus bug-prone). This is especially the case where

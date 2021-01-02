@@ -175,10 +175,7 @@ function which takes the struct as an argument.</p>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
 Each of these methods should have examples. </p>
 <p>For example:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Connection {
+<pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
 }
@@ -204,14 +201,10 @@ impl Connection {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just create a wrapping dummy function which takes them as arguments:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Connection {
+<pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
 }
@@ -230,8 +223,7 @@ impl Connection {
         // ...
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not actually run while testing because it is inside of a function which is never invoked.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>

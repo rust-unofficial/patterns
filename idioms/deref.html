@@ -172,22 +172,21 @@
 <p>Use the <code>Deref</code> trait to treat collections like smart pointers, offering owning
 and borrowed views of data.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>struct Vec&lt;T&gt; {
-    ...
+<pre><code class="language-rust ignore">use std::ops::Deref;
+
+struct Vec&lt;T&gt; {
+    data: T,
+    //..
 }
 
 impl&lt;T&gt; Deref for Vec&lt;T&gt; {
     type Target = [T];
 
     fn deref(&amp;self) -&gt; &amp;[T] {
-        ...
+        //..
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+</code></pre>
 <p>A <code>Vec&lt;T&gt;</code> is an owning collection of <code>T</code>s, a slice (<code>&amp;[T]</code>) is a borrowed
 collection of <code>T</code>s. Implementing <code>Deref</code> for <code>Vec</code> allows implicit dereferencing
 from <code>&amp;Vec&lt;T&gt;</code> to <code>&amp;[T]</code> and includes the relationship in auto-derefencing

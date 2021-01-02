@@ -174,14 +174,14 @@
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">// Some type, not necessarily in the same module or even crate.
+<pre><code class="language-rust ignore">// Some type, not necessarily in the same module or even crate.
 struct Foo {
-    ...
+    //..
 }
 
 impl Foo {
     // These functions are not present on Bar.
-    ...
+    //..
 }
 
 // The newtype.
@@ -189,11 +189,15 @@ pub struct Bar(Foo);
 
 impl Bar {
     // Constructor.
-    pub fn new(...) -&gt; Bar {
-        ...
+    pub fn new(
+        //..
+    ) -&gt; Bar {
+    
+        //..
+    
     }
 
-    ...
+    //..
 }
 
 fn main() {
@@ -203,7 +207,7 @@ fn main() {
     // let f: Foo = b;
     // let b: Bar = Foo { ... };
 }
-</code></pre></pre>
+</code></pre>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>The primary motivation for newtypes is abstraction. It allows you to share
 implementation details between types while precisely controlling the interface.
@@ -232,12 +236,8 @@ most common uses, but they can be used for other reasons:</p>
 <li>making a type with copy semantics have move semantics,</li>
 <li>abstraction by providing a more concrete type and thus hiding internal types, e.g.,</li>
 </ul>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
-</span><span class="boring">fn main() {
-</span>pub struct Foo(Bar&lt;T1, T2&gt;);
-<span class="boring">}
-</span></code></pre></pre>
+<pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);
+</code></pre>
 <p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <p><a href="https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html">Newtypes in the style guide</a>.</p>
