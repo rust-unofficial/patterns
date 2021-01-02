@@ -8,7 +8,7 @@ stability guarantees.
 
 ## Example
 
-```rust
+```rust,ignore
 mod a {
     // Public struct.
     pub struct S {
@@ -18,7 +18,7 @@ mod a {
     }
 }
 
-fn main(s: a::S) {
+fn baz(s: a::S) {
     // Because S::bar is private, it cannot be named here and we must use `..`
     // in the pattern.
     let a::S { foo: _, ..} = s;

@@ -19,7 +19,7 @@ different names, but there can only be one `Default` implementation per type.
 
 ## Example
 
-```rust
+```rust,ignore
 // note that we can simply auto-derive Default here.
 #[derive(Default)]
 struct MyConfiguration {
@@ -37,7 +37,7 @@ impl MyConfiguration {
     // add setters here
 }
 
-fn main() {
+fn baz() {
     // construct a new instance with default values
     let mut conf = MyConfiguration::default();
     // do somthing with conf here

@@ -7,18 +7,20 @@ Construct an object with calls to a builder helper.
 
 ## Example
 
-```rust
+```rust,ignore
 struct Foo {
     // Lots of complicated fields.
 }
 
 struct FooBuilder {
     // Probably lots of optional fields.
-    ...
+    //..
 }
 
 impl FooBuilder {
-    fn new(...) -> FooBuilder {
+    fn new(
+        //..
+    ) -> FooBuilder {
         // Set the minimally required fields of Foo.
     }
 
@@ -38,7 +40,7 @@ impl FooBuilder {
     }
 }
 
-fn main() {
+fn baz() {
     let f = FooBuilder::new().named("Bar").with_attribute(...).finish();
 }
 
@@ -85,7 +87,7 @@ The example takes and returns the builder by value. It is often more ergonomic
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like
 
-```
+```rust,ignore
 let mut fb = FooBuilder::new();
 fb.a();
 fb.b();

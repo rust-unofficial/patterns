@@ -7,15 +7,15 @@ This creates a new type, rather than an alias to a type (`type` items).
 
 ## Example
 
-```rust
+```rust,ignore
 // Some type, not necessarily in the same module or even crate.
 struct Foo {
-    ...
+    //..
 }
 
 impl Foo {
     // These functions are not present on Bar.
-    ...
+    //..
 }
 
 // The newtype.
@@ -23,14 +23,18 @@ pub struct Bar(Foo);
 
 impl Bar {
     // Constructor.
-    pub fn new(...) -> Bar {
-        ...
+    pub fn new(
+        //..
+    ) -> Bar {
+    
+        //..
+    
     }
 
-    ...
+    //..
 }
 
-fn main() {
+fn baz() {
     let b = Bar::new(...);
 
     // Foo and Bar are type incompatible, the following do not type check.
@@ -80,7 +84,7 @@ most common uses, but they can be used for other reasons:
 * making a type with copy semantics have move semantics,
 * abstraction by providing a more concrete type and thus hiding internal types, e.g.,
 
-```rust
+```rust,ignore
 pub struct Foo(Bar<T1, T2>);
 ```
 

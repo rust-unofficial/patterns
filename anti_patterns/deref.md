@@ -26,11 +26,16 @@ public static void main(String[] args) {
 
 We can use the deref polymorphism anti-pattern to do so:
 
-```rust
+```rust,ignore
+use std::ops::Deref;
+
 struct Foo {}
 
 impl Foo {
-    fn m(&self) { ... }
+    fn m(&self) { 
+        //.. 
+    }
+
 }
 
 struct Bar {
@@ -44,7 +49,7 @@ impl Deref for Bar {
     }
 }
 
-fn main() {
+fn baz() {
     let b = Bar { Foo {} };
     b.m();
 }
@@ -68,7 +73,7 @@ well as `Bar`.
 
 You save a little boilerplate, e.g.,
 
-```rust
+```rust,ignore
 impl Bar {
     fn m(&self) { 
         self.f.m()
