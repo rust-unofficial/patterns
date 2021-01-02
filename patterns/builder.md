@@ -40,7 +40,7 @@ impl FooBuilder {
     }
 }
 
-fn baz() {
+fn main() {
     let f = FooBuilder::new().named("Bar").with_attribute(...).finish();
 }
 
