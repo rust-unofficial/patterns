@@ -1,11 +1,7 @@
 # Rust Design Patterns
 
-An open source repository of design patterns and idioms in the Rust programming
-language.
-
-## Design Patterns Book
-
-There is also a mdBook that you can find [here](https://rust-unofficial.github.io/patterns/).
+An open source book about design patterns and idioms in the Rust programming
+language that you can read [here](https://rust-unofficial.github.io/patterns/).
 
 
 ## Contents
