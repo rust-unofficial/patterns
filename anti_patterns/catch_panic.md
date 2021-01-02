@@ -2,7 +2,7 @@
 
 ## Description
 
-This anti-pattern arises when the method for catching (`panic::catch_unwind`) an
+This anti-pattern arises when the method for catching ([panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)) an
 unexpected problem (implementation bug) is used to handle an expected problem,
 such as a missing file.
 
