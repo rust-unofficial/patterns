@@ -14,7 +14,7 @@ Say, vector must be sorted before usage.
 
 Using nested block:
 
-```rust
+```rust,ignore
 let data = {
 	let mut data = get_vec();
 	data.sort();
@@ -26,7 +26,7 @@ let data = {
 
 Using variable rebinding:
 
-```rust
+```rust,ignore
 let mut data = get_vec();
 data.sort();
 let data = data;

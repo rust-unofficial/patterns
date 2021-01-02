@@ -8,7 +8,7 @@ stability guarantees.
 
 ## Example
 
-```rust
+```rust,ignore
 mod a {
     // Public struct.
     pub struct S {

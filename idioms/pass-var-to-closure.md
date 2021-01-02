@@ -14,6 +14,8 @@ Use variable rebinding in separate scope for that.
 Use
 
 ```rust
+use std::rc::Rc;
+
 let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);
@@ -30,6 +32,8 @@ let closure = {
 instead of
 
 ```rust
+use std::rc::Rc;
+
 let num1 = Rc::new(1);
 let num2 = Rc::new(2);
 let num3 = Rc::new(3);

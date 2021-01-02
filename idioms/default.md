@@ -19,7 +19,7 @@ different names, but there can only be one `Default` implementation per type.
 
 ## Example
 
-```rust
+```rust,ignore
 // note that we can simply auto-derive Default here.
 #[derive(Default)]
 struct MyConfiguration {
