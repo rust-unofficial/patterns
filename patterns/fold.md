@@ -11,7 +11,7 @@ fold in the usual sense. See the discussion below for more details.
 
 ## Example
 
-```rust
+```rust,ignore
 // The data we will fold, a simple AST.
 mod ast {
     pub enum Stmt {
@@ -100,7 +100,7 @@ exclusively, the original copy of the data structure cannot be re-used. On the
 other hand if a node is not changed, reusing it is very efficient.
 
 If we were to operate on borrowed references, the original data structure can be
-reused, however, if a node is unchanged it must be cloned, which can be
+reused; however, a node must be cloned even if unchanged, which can be
 expensive.
 
 Using a reference counted pointer gives the best of both worlds - we can reuse

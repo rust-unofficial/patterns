@@ -36,7 +36,10 @@ All this conspires to potentially break the build whenever something changes.
 
 Furthermore, crates that supply additional lints (e.g. [rust-clippy]) can no
 longer be used unless the annotation is removed. This is mitigated with
-[--cap-lints].
+[--cap-lints]. The `--cap-lints=warn` command line argument, turns all `deny`
+lint errors into warnings. But be aware that `forbid` lints are stronger than
+`deny` hence the 'forbid' level cannot be overridden to be anything lower than
+an error. As a result `forbid` lints will still stop compilation.
 
 ## Alternatives
 
@@ -45,7 +48,7 @@ setting from the code, and second, we can name the lints we want to deny
 explicitly.
 
 The following command line will build with all warnings set to `deny`:
- 
+
 ```RUSTFLAGS="-D warnings" cargo build```
 
 This can be done by any individual developer (or be set in a CI tool like
@@ -55,7 +58,7 @@ without requiring a change to the code.
 Alternatively, we can specify the lints that we want to `deny` in the code.
 Here is a list of warning lints that is (hopefully) safe to deny:
 
-```rust
+```rust,ignore
 #[deny(bad-style,
        const-err,
        dead-code,
@@ -84,7 +87,7 @@ Here is a list of warning lints that is (hopefully) safe to deny:
 
 In addition, the following `allow`ed lints may be a good idea to `deny`:
 
-```rust
+```rust,ignore
 #[deny(missing-debug-implementations,
        missing-docs,
        trivial-casts,

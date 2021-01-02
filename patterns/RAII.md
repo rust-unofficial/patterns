@@ -13,25 +13,32 @@ on the type system to ensure that access is always mediated by the guard object.
 Mutex guards are the classic example of this pattern from the std library (this
 is a simplified version of the real implementation):
 
-```rust
+```rust,ignore
+use std::ops::Deref;
+
+struct Foo {}
+
 struct Mutex<T> {
     // We keep a reference to our data: T here.
-    ...
+    //..
 }
 
 struct MutexGuard<'a, T: 'a> {
     data: &'a T,
-    ...
+    //..
 }
 
 // Locking the mutex is explicit.
 impl<T> Mutex<T> {
     fn lock(&self) -> MutexGuard<T> {
         // Lock the underlying OS mutex.
-        ...
+        //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { data: self, ... }
+        MutexGuard { 
+            data: self, 
+            //.. 
+        }
     }
 }
 
@@ -39,7 +46,7 @@ impl<T> Mutex<T> {
 impl<'a, T> Drop for MutexGuard<'a, T> {
     fn drop(&mut self) {
         // Unlock the underlying OS mutex.
-        ...
+        //..
     }
 }
 
@@ -52,7 +59,7 @@ impl<'a, T> Deref for MutexGuard<'a, T> {
     }
 }
 
-fn main(x: Mutex<Foo>) {
+fn baz(x: Mutex<Foo>) {
     let xx = x.lock();
     xx.foo(); // foo is a method on Foo.
     // The borrow checker ensures we can't store a reference to the underlying
@@ -90,8 +97,10 @@ and that references to the resource mediated by the guard cannot outlive the
 guard. To see how this works it is helpful to examine the signature of `deref`
 without lifetime elision:
 
-```rust
-fn deref<'a>(&'a self) -> &'a T { ... }
+```rust,ignore
+fn deref<'a>(&'a self) -> &'a T {
+    //..
+}
 ```
 
 The returned reference to the resource has the same lifetime as `self` (`'a`).
