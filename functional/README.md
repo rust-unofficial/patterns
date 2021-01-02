@@ -15,17 +15,17 @@ println!("{}", sum);
 With imperative programs, we have to play compiler to see what is happening. Here, we start with a `sum` of `0`. Next, we iterate through the range from 1 to 10. Each time through the loop, we add the corresponding value in the range. Then we print it out.
 
 | `i` | `sum` |
-| --- | --- |
-| 1 | 1 |
-| 2 | 3 |
-| 3 | 6 |
-| 4 | 10 |
-| 5 | 15 |
-| 6 | 21 |
-| 7 | 28 |
-| 8 | 36 |
-| 9 | 45 |
-| 10 | 55 |
+| --- | ----- |
+| 1   | 1     |
+| 2   | 3     |
+| 3   | 6     |
+| 4   | 10    |
+| 5   | 15    |
+| 6   | 21    |
+| 7   | 28    |
+| 8   | 36    |
+| 9   | 45    |
+| 10  | 55    |
 
 This is how most of us start out programming. We learn that a program is a set of steps.
 
