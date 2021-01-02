@@ -14,7 +14,7 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 * [Concatenating strings with `format!`](idioms/concat-format.md)
 * [Privacy for extensibility](idioms/priv-extend.md)
 * TODO stability for extensibility
-* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/master/src/lib.rs#L1400)
+* TODO trait to separate visibility of methods from visibility of data (https://github.com/sfackler/rust-postgres/blob/v0.9.6/src/lib.rs#L1400)
 * [Collections are smart pointers](idioms/deref.md)
 * TODO leak amplification ("Vec::drain sets the Vec's len to 0 prematurely so that mem::forgetting Drain "only" mem::forgets more stuff. instead of exposing uninitialized memory or having to update the len on every iteration")
 * [Finalisation in destructors](idioms/dtor-finally.md)
@@ -93,5 +93,3 @@ If you want to build it locally you can run one of these two commands in the roo
 
   Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output 
   to be sure) and reloads the browser when a change occurs.
-  
-  
