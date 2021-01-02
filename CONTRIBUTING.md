@@ -24,9 +24,13 @@ and understand the thought process behind it. So we can encourage people to use 
 
 We encourage you to write idiomatic Rust code that builds in the [playground](https://play.rust-lang.org/).
 
+If you use links to blogposts or in general content that is not to be sure existing in a few years please take a snapshot
+with the [Wayback Machine](https://web.archive.org/) and use the link to that snapshot in your article.
+
 Don't forget to add your new article to the `SUMMARY.md` to let it be rendered to the book.
 
-Please make `Draft Pull requests` early so we can follow your progress and can give feedback early (see the following section). 
+Please make `Draft Pull requests` early so we can follow your progress and can give early feedback (see the following section). 
+
 
 
 ## Creating a Pull Request
