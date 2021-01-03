@@ -145,7 +145,7 @@ fn main() {
 }
 ```
 
-## Getting rid of trait objects
+### Getting rid of trait objects
 
 In the first example we defined the `Report` as
 
