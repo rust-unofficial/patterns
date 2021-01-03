@@ -12,7 +12,7 @@ Suppose we are working on a project whose purpose is periodically read big data,
 
 ```rust
 // This trait must be implemented by different formats
-pub trait Generator {
+pub trait Formatter {
   fn run(&self, report: &Report);
 }
 
@@ -24,7 +24,7 @@ mod vendor1 {
 
   pub struct Json;
 
-  impl Generator for Json {
+  impl Formatter for Json {
     fn run(&self, report: &Report) {
       print!("[");
       for (key, val) in report.keys.iter().zip(report.values.iter()) {
@@ -41,7 +41,7 @@ mod vendor2 {
 
   pub struct Text;
 
-  impl Generator for Text {
+  impl Formatter for Text {
     fn run(&self, report: &Report) {
       for (key, val) in report.keys.iter().zip(report.values.iter()) {
         println!("{} {}", key, val);
@@ -65,17 +65,17 @@ pub struct Report {
   pub keys:   Vec<String>,
   pub values: Vec<i32>,
   // User must provide an object which implements Generator trait
-  generator: Box<dyn Generator>
+  formatter: Box<dyn Formatter>
 }
 
 impl Report {
-  pub fn generate(&self) {
-    self.generator.run(&self);
+  pub fn format(&self) {
+    self.formatter.run(&self);
   }
 
-  pub fn new(generator: Box<dyn Generator>) -> Self {
+  pub fn new(formatter: Box<dyn Formatter>) -> Self {
     let (keys, values) = Self::data_from_db();
-    Report{ keys, values, generator }
+    Report{ keys, values, formatter }
   }
 
   fn data_from_db() -> (Vec<String>, Vec<i32>) {
@@ -90,12 +90,12 @@ fn main() {
   let text_report = Report::new(Box::new(vendor2::Text));
 
   println!("JSON format:");
-  json_report.generate();
+  json_report.format();
   
   println!("\n");
 
   println!("Plain text format:");
-  text_report.generate();
+  text_report.format();
 }
 
 ```
@@ -149,7 +149,7 @@ fn main() {
 
 In the first example we defined the `Report` as
 
-```rust
+```rust,ignore
 pub struct Report {
   pub keys:   Vec<String>,
   pub values: Vec<i32>,
