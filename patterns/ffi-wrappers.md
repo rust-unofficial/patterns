@@ -22,7 +22,7 @@ To understand this, let us look at a classic example of an API to export: iterat
 
 If the iterator implements `nth()` efficiently, then it is possible to make it ephemeral to each function call:
 
-```rust
+```rust,ignore
 struct MySetWrapper {
     myset: MySet,
     iter_next: usize,
@@ -64,11 +64,12 @@ Suffice it to say, this is *incredibly* difficult. Here is an illustration of ju
 
 A first version of `MySetWrapper` would look like this:
 
-```rust
+```rust,ignore
 struct MySetWrapper {
     myset: MySet,
     iter_next: usize,
-    iterator: Option<NonNullKeysIter<'static>>, // created from a transmuted Box<KeysIter + 'self>
+    // created from a transmuted Box<KeysIter + 'self>
+    iterator: Option<NonNull<KeysIter<'static>>>,
 }
 ```
 
@@ -78,7 +79,7 @@ Consider that the `MySet` in the wrapper could be manipulated by other functions
 
 A simple implementation of `myset_store` would be:
 
-```rust
+```rust,ignore
 pub fn myset_store(myset: *mut MySetWrapper, key: datum, value: datum) -> libc::c_int {
     /* DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM. */
     let myset: &mut MySet = unsafe { // SAFETY: whoops, UB occurs in here!
