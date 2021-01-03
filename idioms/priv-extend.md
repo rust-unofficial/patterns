@@ -6,6 +6,7 @@ Use `#[non_exhaustive]` on `struct`, `enum` and `enum` variant definitions to en
 stability guarantees.
 
 For extensive documentation on all the places `#[non_exhaustive]` can be used, see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
+
 ## Example
 
 ```rust,ignore
