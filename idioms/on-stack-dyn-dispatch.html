@@ -201,7 +201,7 @@ for it.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>We do not need to allocate anything on the heap. Neither do we need to
 initialize something we won't use later, nor do we need to monomorphize the
-whole code that follows to work with both <code>File</code> or <code>Stdin</code>, with all the</p>
+whole code that follows to work with both <code>File</code> or <code>Stdin</code>.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>The code needs more moving parts than the <code>Box</code>-based version:</p>
 <pre><code class="language-rust ignore">// We still need to ascribe the type for dynamic dispatch.
