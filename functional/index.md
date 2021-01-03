@@ -16,16 +16,16 @@ With imperative programs, we have to play compiler to see what is happening. Her
 
 | `i` | `sum` |
 | --- | ----- |
-| 1   | 1     |
-| 2   | 3     |
-| 3   | 6     |
-| 4   | 10    |
-| 5   | 15    |
-| 6   | 21    |
-| 7   | 28    |
-| 8   | 36    |
-| 9   | 45    |
-| 10  | 55    |
+|   1 |     1 |
+|   2 |     3 |
+|   3 |     6 |
+|   4 |    10 |
+|   5 |    15 |
+|   6 |    21 |
+|   7 |    28 |
+|   8 |    36 |
+|   9 |    45 |
+|  10 |    55 |
 
 This is how most of us start out programming. We learn that a program is a set of steps.
 
@@ -41,13 +41,13 @@ Here, we are composing functions of addition (this closure: `|a, b| a + b)`) wit
 
 | `a` | `b` | result |
 | --- | --- | ------ |
-| 0   | 1   | 1      |
-| 1   | 2   | 3      |
-| 3   | 3   | 6      |
-| 6   | 4   | 10     |
-| 10  | 5   | 15     |
-| 15  | 6   | 21     |
-| 21  | 7   | 28     |
-| 28  | 8   | 36     |
-| 36  | 9   | 45     |
-| 45  | 10  | 55     |
+|   0 |   1 |      1 |
+|   1 |   2 |      3 |
+|   3 |   3 |      6 |
+|   6 |   4 |     10 |
+|  10 |   5 |     15 |
+|  15 |   6 |     21 |
+|  21 |   7 |     28 |
+|  28 |   8 |     36 |
+|  36 |   9 |     45 |
+|  45 |  10 |     55 |
