@@ -44,7 +44,7 @@ impl MyConfiguration {
 fn main() {
     // construct a new instance with default values
     let mut conf = MyConfiguration::default();
-    // do somthing with conf here
+    // do something with conf here
     conf.check = true;
     eprintln!("conf = {:#?}", conf);
 }
