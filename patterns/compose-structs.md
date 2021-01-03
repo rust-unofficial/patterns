@@ -69,7 +69,7 @@ fn baz(a: &mut A) {
 
 ## Motivation
 
-Why and where you should use the pattern
+TODO Why and where you should use the pattern
 
 
 ## Advantages
