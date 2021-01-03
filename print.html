@@ -900,7 +900,10 @@ pattern often reveals smaller units of functionality.</p>
 <h2><a class="header" href="#example-12" id="example-12">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
-<pre><code class="language-rust ignore">struct A {
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>struct A {
     f1: u32,
     f2: u32,
     f3: u32,
@@ -910,12 +913,14 @@ fn foo(a: &amp;mut A) -&gt; &amp;u32 { &amp;a.f2 }
 fn bar(a: &amp;mut A) -&gt; u32 { a.f1 + a.f3 }
 
 fn baz(a: &amp;mut A) {
-    // x causes a to be borrowed for the rest of the function.
+    // The later usage of x causes a to be borrowed for the rest of the function.
     let x = foo(a);
-    // Borrow check error
-    let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    // Borrow checker error:
+    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    println!(&quot;{}&quot;, x);
 }
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -942,6 +947,7 @@ fn baz(a: &amp;mut A) {
     let x = foo(&amp;mut a.b);
     // Now it's OK!
     let y = bar(&amp;mut a.c);
+    println!(&quot;{}&quot;, x);
 }
 <span class="boring">}
 </span></code></pre></pre>
