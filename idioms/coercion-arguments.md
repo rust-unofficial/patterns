@@ -16,7 +16,7 @@ We don't need to own the string to determine this so we will take a reference.
 
 The code might look something like this:
 
-```rust, ignore
+```rust
 fn three_vowels(word: &String) -> bool {
     let mut vowel_count = 0;
     for c in word.chars() {
@@ -32,31 +32,18 @@ fn three_vowels(word: &String) -> bool {
     }
     false
 }
-```
 
-This example works fine, as shown here:
-
-```rust
 fn main() {
     let ferris = "Ferris".to_string();
     let curious = "Curious".to_string();
     println!("{}: {}", ferris, three_vowels(&ferris));
     println!("{}: {}", curious, three_vowels(&curious));
+
+    // Using a `&String` type in our arguent we will find the following example fails:
+    // println!("Ferris: {}", three_vowels("Ferris"));
+    // println!("Curious: {}", three_vowels("Curious"));
+
 }
-```
-
-which prints
-
-```bash
-Ferris: false
-Curious: true
-```
-
-However, by using a `&String` type in our arguent we will find the following example fails:
-
-```rust
-println!("Ferris: {}", three_vowels("Ferris"));
-println!("Curious: {}", three_vowels("Curious"));
 ```
 
 This example fails because a `&str` type will not coerce to a `&String` type. 
@@ -77,12 +64,29 @@ Curious: true
 But wait, that's not all! There is more to this story. 
 It's likely that you may say to yourself: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"`).
 Even ignoring this special example, you may still find that using `&str` will give you more flexibility than using a `&String`.
+
 Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.
 We probably should make use of the function we have already defined and simply feed in each word from the sentence.
 
 An example of this could look like this:
 
 ```rust
+fn three_vowels(word: &str) -> bool {
+    let mut vowel_count = 0;
+    for c in word.chars() {
+        match c {
+            'a' | 'e' | 'i' | 'o' | 'u' => {
+                vowel_count += 1;
+                if vowel_count >= 3 {
+                    return true
+                }
+            }
+            _ => vowel_count = 0
+        }
+    }
+    false
+}
+
 fn main() {
     let sentence_string = 
         "Once upon a time, there was a friendly curious crab named Ferris".to_string();
@@ -105,4 +109,4 @@ This is because string slices are a `&str` and not a `&String` which would requi
 
 ## See also
 
-For more discussion on how to handle `String` and `&str` see [this blog series](http://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman J. Radtke III.
+For more discussion on how to handle `String` and `&str` see [this blog series (2015)](https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman J. Radtke III.
