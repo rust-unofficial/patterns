@@ -1,9 +1,9 @@
-name: Check Markdown links
+name: Check Markdown links Periodically
 
 on:
-  push:
-    branches: [master]
-  pull_request:
+  schedule:
+  # Run everyday at 0:00 AM
+  - cron: "0 0 * * *"
 
 jobs:
   markdown-link-check:
