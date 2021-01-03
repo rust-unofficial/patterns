@@ -92,13 +92,13 @@ borrow checker makes this work naturally. This approach has the advantage that
 one can write code like
 
 ```rust
-let mut fb = Builder::new();
+let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
 let f = fb.build();
 ```
 
-as well as the `Builder::new().a().b().build()` style.
+as well as the `FooBuilder::new().a().b().build()` style.
 
 ## See also
 
