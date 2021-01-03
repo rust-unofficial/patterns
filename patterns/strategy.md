@@ -19,7 +19,7 @@ pub trait Generator {
 // STRATEGIES:
 
 // Implementation for Json format
-mod Vendor1 {
+mod vendor1 {
   use super::*;
 
   pub struct Json;
@@ -36,7 +36,7 @@ mod Vendor1 {
 }
 
 // Implementation for Plain Text format
-mod Vendor2 {
+mod vendor2 {
   use super::*;
 
   pub struct Text;
@@ -86,8 +86,8 @@ impl Report {
 }
 
 fn main() {
-  let json_report = Report::new(Box::new(Vendor1::Json));
-  let text_report = Report::new(Box::new(Vendor2::Text));
+  let json_report = Report::new(Box::new(vendor1::Json));
+  let text_report = Report::new(Box::new(vendor2::Text));
 
   println!("JSON format:");
   json_report.generate();
