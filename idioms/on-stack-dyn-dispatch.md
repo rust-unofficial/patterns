@@ -42,7 +42,7 @@ for it.
 
 We do not need to allocate anything on the heap. Neither do we need to
 initialize something we won't use later, nor do we need to monomorphize the
-whole code that follows to work with both `File` or `Stdin`, with all the
+whole code that follows to work with both `File` or `Stdin`.
 
 ## Disadvantages
 
