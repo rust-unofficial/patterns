@@ -154,7 +154,7 @@ pub struct Report {
   pub keys:   Vec<String>,
   pub values: Vec<i32>,
   // User must provide an object which implements Generator trait
-  generator: Box<dyn Generator>
+  formatter: Box<dyn Formatter>
 }
 ```
 
