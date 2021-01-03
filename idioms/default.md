@@ -19,9 +19,7 @@ different names, but there can only be one `Default` implementation per type.
 
 ## Example
 
-```rust,ignore
-// note that we can simply auto-derive Default here.
-#[derive(Default)]
+```rust
 use std::{path::PathBuf, time::Duration};
 
 // note that we can simply auto-derive Default here.
