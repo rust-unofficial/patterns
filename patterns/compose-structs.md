@@ -20,7 +20,7 @@ pattern often reveals smaller units of functionality.
 Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:
 
-```rust,ignore
+```rust
 struct A {
     f1: u32,
     f2: u32,
@@ -31,10 +31,11 @@ fn foo(a: &mut A) -> &u32 { &a.f2 }
 fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
 
 fn baz(a: &mut A) {
-    // x causes a to be borrowed for the rest of the function.
+    // The later usage of x causes a to be borrowed for the rest of the function.
     let x = foo(a);
-    // Borrow check error
-    let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    // Borrow checker error:
+    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    println!("{}", x);
 }
 ```
 
@@ -63,13 +64,14 @@ fn baz(a: &mut A) {
     let x = foo(&mut a.b);
     // Now it's OK!
     let y = bar(&mut a.c);
+    println!("{}", x);
 }
 ```
 
 
 ## Motivation
 
-Why and where you should use the pattern
+TODO Why and where you should use the pattern
 
 
 ## Advantages

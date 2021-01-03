@@ -20,7 +20,6 @@
     - [Builder](./patterns/builder.md)
     - [Compose Structs](./patterns/compose-structs.md)
     - [Fold](./patterns/fold.md)
-    - [Late Bound Bounds](./patterns/late-bounds.md)
     - [Newtype](./patterns/newtype.md)
     - [RAII Guards](./patterns/RAII.md)
     - [Prefer Small Crates](./patterns/small-crates.md)
