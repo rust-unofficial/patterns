@@ -91,7 +91,7 @@ The example takes and returns the builder by value. It is often more ergonomic
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like
 
-```rust
+```rust,ignore
 let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
