@@ -3,14 +3,16 @@
 ## Description
 
 Using a target of a deref coercion can increase the flexibility of your code when you are deciding which argument type to use for a function argument which may increase its utility as it increases the number of viable inputs for this function.
-For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`, or even `&T` as opposed to a `&Box<T>`. 
-Not only that, you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as it will be illustrated in the following examples. 
-For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
+
+For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`.  This is not limited to slice-able or fat pointer types. In fact you should always prefer using the __borrowed type__ over __borrowing the owned type__, e.g., `&T` to `&Box<T>`.
+
+Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as it will be illustrated in the following examples. For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
 We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked. 
 
 ## Example
 
-For this example, we will illustrate some differences for using `&String` as a function argument versus using a `&str`, but the ideas easily apply to using `&Vec<T>` versus using a `&[T]`, or even using a `&T` versus a `&Box<T>`. 
+For this example, we will illustrate some differences for using `&String` as a function argument versus using a `&str`, but the ideas apply as well to using `&Vec<T>` versus using a `&[T]` or using a `&T` versus a `&Box<T>`.
+
 Consider an example where we wish to determine if a word contains three consecutive vowels.
 We don't need to own the string to determine this so we will take a reference.
 
