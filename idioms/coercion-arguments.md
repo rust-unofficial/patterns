@@ -42,22 +42,24 @@ fn main() {
     println!("{}: {}", ferris, three_vowels(&ferris));
     println!("{}: {}", curious, three_vowels(&curious));
 
-    // Using a `&String` type in our arguent we will find the following example fails:
+    // Using a `&String` type in our argument we will find the following example fails:
     // println!("Ferris: {}", three_vowels("Ferris"));
     // println!("Curious: {}", three_vowels("Curious"));
 
 }
 ```
 
-This example fails because a `&str` type will not coerce to a `&String` type. 
-We can fix this by simply modifying the type for our argument. For instance, if we change our function declaration to:
+This works fine because we are passing a `&String` type as a parameter.
+If we comment in the last two lines this example fails because a `&str` type will not coerce to a `&String` type. 
+We can fix this by simply modifying the type for our argument. 
+
+For instance, if we change our function declaration to:
 
 ```rust, ignore
 fn three_vowels(word: &str) -> bool {
 ```
 
-then both of the previous examples will compile and print the same output.
-
+then both versions will compile and print the same output.
 
 ```bash
 Ferris: false
