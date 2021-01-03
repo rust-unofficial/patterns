@@ -167,14 +167,14 @@ struct Context {
   pub values: Vec<i32>
 }
 
-trait Generator {
+trait Formatter {
   fn run(&self, context: &Context);
 }
 
 struct Report;
 
 impl Report {
-  fn generate<T: Generator>(g: T) {
+  fn generate<T: Formatter>(g: T) {
     //perform backend operations which should not bother caller...
     //fetch data from database
     let keys = vec!["one".to_string(), "two".to_string()];
@@ -186,7 +186,7 @@ impl Report {
 
 
 struct Text;
-impl Generator for Text {
+impl Formatter for Text {
   fn run(&self, context: &Context) {
     for (key, val) in context.keys.iter().zip(context.values.iter()) {
       println!("{} {}", key, val);
@@ -195,7 +195,7 @@ impl Generator for Text {
 }
 
 struct Json;
-impl Generator for Json {
+impl Formatter for Json {
   fn run(&self, context: &Context) {
     print!("[");
     for (key, val) in context.keys.iter().zip(context.values.iter()) {
