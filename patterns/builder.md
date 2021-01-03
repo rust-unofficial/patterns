@@ -2,48 +2,52 @@
 
 ## Description
 
-Construct an object with calls to a builder helper. 
-
+Construct an object with calls to a builder helper.
 
 ## Example
 
-```rust,ignore
-struct Foo {
+```rust
+#[derive(Debug, PartialEq)]
+pub struct Foo {
     // Lots of complicated fields.
+    bar: String,
 }
 
-struct FooBuilder {
+pub struct FooBuilder {
     // Probably lots of optional fields.
-    //..
+    bar: String,
 }
 
 impl FooBuilder {
-    fn new(
-        //..
-    ) -> FooBuilder {
+    pub fn new(/* ... */) -> FooBuilder {
         // Set the minimally required fields of Foo.
+        FooBuilder {
+            bar: String::from("X"),
+        }
     }
 
-    fn named(mut self, name: &str) -> FooBuilder {
+    pub fn name(mut self, bar: String) -> FooBuilder {
         // Set the name on the builder itself, and return the builder by value.
+        self.bar = bar;
+        self
     }
-
-    // More methods that take `mut self` and return `FooBuilder` setting up
-    // various aspects of a Foo.
-    ...
 
     // If we can get away with not consuming the Builder here, that is an
-    // advantage. It means we can use the builder as a template for constructing
-    // many Foos.
-    fn finish(&self) -> Foo {
+    // advantage. It means we can use the FooBuilder as a template for constructing many Foos.
+    pub fn build(self) -> Foo {
         // Create a Foo from the FooBuilder, applying all settings in FooBuilder to Foo.
+        Foo { bar: self.bar }
     }
 }
 
-fn main() {
-    let f = FooBuilder::new().named("Bar").with_attribute(...).finish();
+#[test]
+fn builder_test() {
+    let foo = Foo {
+        bar: String::from("Y"),
+    };
+    let foo_from_builder: Foo = FooBuilder::new().name(String::from("Y")).build();
+    assert_eq!(foo, foo_from_builder);
 }
-
 ```
 
 
@@ -91,10 +95,10 @@ one can write code like
 let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
-let f = fb.finish();
+let f = fb.build();
 ```
 
-as well as the `FooBuilder::new().a().b().finish()` style.
+as well as the `FooBuilder::new().a().b().build()` style.
 
 ## See also
 
