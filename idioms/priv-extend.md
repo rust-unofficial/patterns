@@ -2,8 +2,7 @@
 
 ## Description
 
-Use `#[non_exhaustive]` on `struct`, `enum` and `enum` variant definitions to ensure that a struct is extensible without breaking
-stability guarantees.
+Use `#[non_exhaustive]` on `struct`s, `enum`s, and `enum` variants to allow evolution without breaking backwards compatibility.
 
 For extensive documentation on all the places `#[non_exhaustive]` can be used, see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
 
