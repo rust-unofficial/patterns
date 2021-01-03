@@ -17,19 +17,20 @@ The best practice is simple: use `CString` in such a way as to minimize unsafe c
 
 ## Code Example
 
-```rust
+```rust,ignore
 extern "C" {
-    unsafe "C" fn seterr(message: *const libc::c_char);
-    unsafe "C" fn geterr(buffer: *mut libc::c_char, size: libc::c_int) -> libc::c_int;
+    fn seterr(message: *const libc::c_char);
+    fn geterr(buffer: *mut libc::c_char, size: libc::c_int) -> libc::c_int;
 }
 
-fn report_error_to_ffi<S: Into<String>>(err: S) -> Result<(), Error>{
-    let c_err = std::ffi::CString::new(err.into()?);
+fn report_error_to_ffi<S: Into<String>>(err: S) -> Result<(), std::ffi::NulError>{
+    let c_err = std::ffi::CString::new(err.into())?;
     unsafe {
         // SAFETY: calling an FFI whose documentation says the pointer is const, so no modification
         // should occur
         seterr(c_err.as_ptr());
     }
+    Ok(())
     // The lifetime of c_err continues until here
 }
 
@@ -41,7 +42,7 @@ fn get_error_from_ffi() -> Result<String, std::ffi::IntoStringError> {
         let written: usize = geterr(buffer.as_mut_ptr(), 1023).into();
         buffer.truncate(written + 1);
     }
-    CString::new(buffer).unwrap().into_string()
+    std::ffi::CString::new(buffer).unwrap().into_string()
 }
 ```
 
@@ -54,12 +55,13 @@ The example is is written to ensure that:
 
 A common mistake (so common it's in the documentation) is to not use the variable in the first block:
 
-```rust
-fn report_error<S: Into<String>>(err: S) -> Result<(), Error> {
+```rust,ignore
+fn report_error<S: Into<String>>(err: S) -> Result<(), std::ffi::NulError> {
     unsafe {
         // SAFETY: whoops, this contains a dangling pointer!
-        seterr(std::ffi::CString::new(err.into()?).as_ptr());
+        seterr(std::ffi::CString::new(err.into())?.as_ptr());
     }
+    Ok(())
 }
 ```
 
