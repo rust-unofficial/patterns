@@ -81,7 +81,7 @@ Rust is well known for its iterators. When implementing one, the programmer make
 
 Here is how iteration would be done in Rust for `DBM`:
 
-```rust
+```rust,ignore
 struct Dbm { ... }
 
 impl Dbm {
@@ -99,7 +99,7 @@ impl<'it> Iterator for DbmKeysIter<'it> { ... }
 
 This is clean, idiomatic, and safe. thanks to Rust's guarantees. However, consider what a straightforward API translation would look like:
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn dbm_iter_new(owner: *const Dbm) -> *mut DbmKeysIter {
     /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
@@ -158,7 +158,7 @@ None of this can be avoided by Rust. From its perspective, it put those objects 
 
 The programmer must read and understand the API documentation. While some consider that par for the course in C, a good API design can mitigate this risk. The POSIX API for `DBM` did this by *consolidating the ownership* of the iterator with its parent:
 
-```
+```C
 datum   dbm_firstkey(DBM *);
 datum   dbm_nextkey(DBM *);
 ```
