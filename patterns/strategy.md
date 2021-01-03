@@ -175,7 +175,7 @@ struct Report;
 
 impl Report {
   fn generate<T: Generator>(g: T) {
-    //perform backend operations which should bother caller...
+    //perform backend operations which should not bother caller...
     //fetch data from database
     let keys = vec!["one".to_string(), "two".to_string()];
     let values =  vec![1, 2];
