@@ -1,8 +1,11 @@
 # Newtype
 
-Rust has strong static types. This can be very different than what you are used to if you are coming from a loosely-typed language. Don't worry, though. Once you get used to them, you'll find the types actually make your life easier. Why? Because you are making implicit assumptions explicit.
+What if in some cases we want a type to behave similar to another type but
+still different? What if we want to enforce some behavior at compile time
+which using only type aliases is not enough? For example, have a custom
+`Display` implementation for `String` for security reasons (password).
 
-A really convenient application of the Rust type system is the Newtype pattern.
+We could use the newtype pattern to provide type safety and encapsulation.
 
 ## Description
 
@@ -97,6 +100,7 @@ Here, `Bar` might be some public, generic type and `T1` and `T2` are some intern
 
 ## See also
 
+- [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
 - [Newtypes in the style guide](https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html)
 - [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
 - [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
