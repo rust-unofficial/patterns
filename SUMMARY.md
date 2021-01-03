@@ -2,7 +2,7 @@
 
 - [Introduction](./intro.md)
 
-- [Idioms](./idioms/README.md)
+- [Idioms](./idioms/index.md)
     - [Use borrowed types for arguments](./idioms/coercion-arguments.md)
     - [Concatenating Strings with `format!`](./idioms/concat-format.md)
     - [Constructor](./idioms/ctor.md)
@@ -17,21 +17,20 @@
     - [Easy doc initialization](./idioms/rustdoc-init.md)
     - [Temporary mutability](./idioms/temporary-mutability.md)
 
-- [Design Patterns](./patterns/README.md)
+- [Design Patterns](./patterns/index.md)
     - [Builder](./patterns/builder.md)
     - [Compose Structs](./patterns/compose-structs.md)
     - [Fold](./patterns/fold.md)
-    - [Late Bound Bounds](./patterns/late-bounds.md)
     - [Newtype](./patterns/newtype.md)
     - [RAII Guards](./patterns/RAII.md)
     - [Prefer Small Crates](./patterns/small-crates.md)
     - [Contain unsafety in small modules](./patterns/unsafe-mods.md)
     - [Visitor](./patterns/visitor.md)
 
-- [Anti-patterns](./anti_patterns/README.md)
+- [Anti-patterns](./anti_patterns/index.md)
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
     - [Deref Polymorphism](./anti_patterns/deref.md)
 
-- [Functional Programming](./functional/README.md)
+- [Functional Programming](./functional/index.md)
 
 - [Additional Resources](./additional_resources.md)
