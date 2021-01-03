@@ -2,7 +2,8 @@
 
 ## Description
 
-Using a target of a deref coercion can increase the flexibility of your code when you are deciding which argument type to use for a function argument which may increase its utility as it increases the number of viable inputs for this function.
+Using a target of a deref coercion can increase the flexibility of your code when you are deciding which argument type to use for a function argument.
+In this way, the function will accept more input types.
 
 For example; using `&str` instead of a `&String`, or `&[T]` in preference of `&Vec<T>`.  This is not limited to slice-able or fat pointer types. In fact you should always prefer using the __borrowed type__ over __borrowing the owned type__, e.g., `&T` to `&Box<T>`.
 
