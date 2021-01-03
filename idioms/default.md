@@ -44,7 +44,7 @@ fn main() {
     let mut conf = MyConfiguration::default();
     // do something with conf here
     conf.check = true;
-    eprintln!("conf = {:#?}", conf);
+    println!("conf = {:#?}", conf);
 }
 ```
 
