@@ -19,7 +19,7 @@ pub struct FooBuilder {
 }
 
 impl FooBuilder {
-    pub fn new() -> FooBuilder {
+    pub fn new(/* ... */) -> FooBuilder {
         // Set the minimally required fields of Foo.
         FooBuilder {
             bar: String::from("X"),
@@ -91,7 +91,7 @@ The example takes and returns the builder by value. It is often more ergonomic
 borrow checker makes this work naturally. This approach has the advantage that
 one can write code like
 
-```
+```rust
 let mut fb = Builder::new();
 fb.a();
 fb.b();

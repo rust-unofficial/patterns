@@ -11,7 +11,7 @@ Each of these methods should have examples.
 
 For example:
 
-```rust
+```rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -43,7 +43,7 @@ impl Connection {
 ## Example
 Instead of typing all of this boiler plate to create an `Connection` and `Request` it is easier to just create a wrapping dummy function which takes them as arguments:
 
-```rust
+```rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,

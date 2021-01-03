@@ -11,7 +11,7 @@ fold in the usual sense. See the discussion below for more details.
 
 ## Example
 
-```rust
+```rust,ignore
 // The data we will fold, a simple AST.
 mod ast {
     pub enum Stmt {

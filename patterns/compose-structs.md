@@ -30,11 +30,12 @@ struct A {
 fn foo(a: &mut A) -> &u32 { &a.f2 }
 fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
 
-fn main(a: &mut A) {
-    // x causes a to be borrowed for the rest of the function.
+fn baz(a: &mut A) {
+    // The later usage of x causes a to be borrowed for the rest of the function.
     let x = foo(a);
-    // Borrow check error
-    let y = bar(a); //~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    // Borrow checker error:
+    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    println!("{}", x);
 }
 ```
 
@@ -59,17 +60,18 @@ struct C {
 fn foo(b: &mut B) -> &u32 { &b.f2 }
 fn bar(c: &mut C) -> u32 { c.f1 + c.f3 }
 
-fn main(a: &mut A) {
+fn baz(a: &mut A) {
     let x = foo(&mut a.b);
     // Now it's OK!
     let y = bar(&mut a.c);
+    println!("{}", x);
 }
 ```
 
 
 ## Motivation
 
-Why and where you should use the pattern
+TODO Why and where you should use the pattern
 
 
 ## Advantages

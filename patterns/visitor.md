@@ -13,7 +13,7 @@ a collection of objects from the operations performed on each object.
 
 ## Example
 
-```rust
+```rust,ignore
 // The data we will visit
 mod ast {
     pub enum Stmt {
@@ -87,7 +87,7 @@ it between algorithms (and also to provide noop default methods). In Rust, the
 common way to do this is to provide `walk_*` functions for each datum. For
 example,
 
-```rust
+```rust,ignore
 pub fn walk_expr(visitor: &mut Visitor, e: &Expr) {
     match *e {
         Expr::IntLit(_) => {},
