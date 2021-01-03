@@ -1619,17 +1619,17 @@ println!(&quot;{}&quot;, sum);
 <span class="boring">}
 </span></code></pre></pre>
 <p>With imperative programs, we have to play compiler to see what is happening. Here, we start with a <code>sum</code> of <code>0</code>. Next, we iterate through the range from 1 to 10. Each time through the loop, we add the corresponding value in the range. Then we print it out.</p>
-<table><thead><tr><th><code>i</code></th><th><code>sum</code></th></tr></thead><tbody>
-<tr><td>1</td><td>1</td></tr>
-<tr><td>2</td><td>3</td></tr>
-<tr><td>3</td><td>6</td></tr>
-<tr><td>4</td><td>10</td></tr>
-<tr><td>5</td><td>15</td></tr>
-<tr><td>6</td><td>21</td></tr>
-<tr><td>7</td><td>28</td></tr>
-<tr><td>8</td><td>36</td></tr>
-<tr><td>9</td><td>45</td></tr>
-<tr><td>10</td><td>55</td></tr>
+<table><thead><tr><th align="center"><code>i</code></th><th align="center"><code>sum</code></th></tr></thead><tbody>
+<tr><td align="center">1</td><td align="center">1</td></tr>
+<tr><td align="center">2</td><td align="center">3</td></tr>
+<tr><td align="center">3</td><td align="center">6</td></tr>
+<tr><td align="center">4</td><td align="center">10</td></tr>
+<tr><td align="center">5</td><td align="center">15</td></tr>
+<tr><td align="center">6</td><td align="center">21</td></tr>
+<tr><td align="center">7</td><td align="center">28</td></tr>
+<tr><td align="center">8</td><td align="center">36</td></tr>
+<tr><td align="center">9</td><td align="center">45</td></tr>
+<tr><td align="center">10</td><td align="center">55</td></tr>
 </tbody></table>
 <p>This is how most of us start out programming. We learn that a program is a set of steps.</p>
 <h2><a class="header" href="#declarative" id="declarative">Declarative</a></h2>
@@ -1641,17 +1641,17 @@ println!(&quot;{}&quot;, sum);
 </span></code></pre></pre>
 <p>Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it. <code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions. The name is a convention from Haskell.</p>
 <p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b)</code>) with a range from 1 to 10. The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first. <code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result. So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result. This process continues until we get to the last element in the range, <code>10</code>.</p>
-<table><thead><tr><th><code>a</code></th><th><code>b</code></th><th>result</th></tr></thead><tbody>
-<tr><td>0</td><td>1</td><td>1</td></tr>
-<tr><td>1</td><td>2</td><td>3</td></tr>
-<tr><td>3</td><td>3</td><td>6</td></tr>
-<tr><td>6</td><td>4</td><td>10</td></tr>
-<tr><td>10</td><td>5</td><td>15</td></tr>
-<tr><td>15</td><td>6</td><td>21</td></tr>
-<tr><td>21</td><td>7</td><td>28</td></tr>
-<tr><td>28</td><td>8</td><td>36</td></tr>
-<tr><td>36</td><td>9</td><td>45</td></tr>
-<tr><td>45</td><td>10</td><td>55</td></tr>
+<table><thead><tr><th align="center"><code>a</code></th><th align="center"><code>b</code></th><th align="center">result</th></tr></thead><tbody>
+<tr><td align="center">0</td><td align="center">1</td><td align="center">1</td></tr>
+<tr><td align="center">1</td><td align="center">2</td><td align="center">3</td></tr>
+<tr><td align="center">3</td><td align="center">3</td><td align="center">6</td></tr>
+<tr><td align="center">6</td><td align="center">4</td><td align="center">10</td></tr>
+<tr><td align="center">10</td><td align="center">5</td><td align="center">15</td></tr>
+<tr><td align="center">15</td><td align="center">6</td><td align="center">21</td></tr>
+<tr><td align="center">21</td><td align="center">7</td><td align="center">28</td></tr>
+<tr><td align="center">28</td><td align="center">8</td><td align="center">36</td></tr>
+<tr><td align="center">36</td><td align="center">9</td><td align="center">45</td></tr>
+<tr><td align="center">45</td><td align="center">10</td><td align="center">55</td></tr>
 </tbody></table>
 <h1><a class="header" href="#additional-resources" id="additional-resources">Additional resources</a></h1>
 <p>A collection of complementary helpful content</p>
