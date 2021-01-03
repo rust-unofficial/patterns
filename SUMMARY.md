@@ -25,6 +25,7 @@
     - [Prefer Small Crates](./patterns/small-crates.md)
     - [Contain unsafety in small modules](./patterns/unsafe-mods.md)
     - [Visitor](./patterns/visitor.md)
+    - [Strategy](./patterns/strategy.md)
 
 - [Anti-patterns](./anti_patterns/index.md)
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
