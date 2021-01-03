@@ -14,14 +14,14 @@ The best practice is simple: use `CStr` in such a way as to minimize unsafe code
 
 ## Code Example
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
     let level: crate::LogLevel = match level { /* ... */ };
     let msg_str: &str = unsafe {
         // SAFETY: accessing raw pointers expected to live for the call, and creating a shared
         // reference that does not outlive the current stack frame.
-        match std::ffi::CStr::from_ptr(path).to_str() {
+        match std::ffi::CStr::from_ptr(msg).to_str() {
             Ok(s) => s,
             Err(e) => {
                 crate::log_error("FFI string conversion failed");
@@ -41,7 +41,7 @@ The example is is written to ensure that:
 
 Consider an alternative, where the string is actually copied:
 
-```rust
+```rust,ignore
 pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
     /* DO NOT USE THIS CODE. IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG. */
 
@@ -49,7 +49,7 @@ pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
 
     let msg_len = unsafe { /* SAFETY: strlen is what it is, I guess? */ libc::strlen(msg) + 1 };
     let mut msg_data = Vec::with_capacity(msg_len);
-    let msg_cstr: CString = unsafe {
+    let msg_cstr: std::ffi::CString = unsafe {
         // SAFETY: copying from a foreign pointer expected to live for the entire stack frame into 
         // owned memory
         std::ptr::copy_nonoverlapping(msg, msg_data.as_mut(), msg_len + 1);
