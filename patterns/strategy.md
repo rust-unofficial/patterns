@@ -11,7 +11,14 @@ This is why we call it Dependency Inversion.
 
 ## Motivation
 
-Suppose we are working on a project whose purpose is periodically read big data, [wrangle](https://en.wikipedia.org/wiki/Data_wrangling) it, and finally store it in a database as key-value pairs. After the data are stored in database, we need to provide conumers with APIs to query data. However, different consumers may want data in different formats (json, txt, xml, etc), even in new one we have never seen so far. But we don't know in advance in what format consumers would query data. So, every time a request for a new format implementation comes, we have to rebuild our software. We'd also like to change our code as little as possible. Ideally, the wrangling part of our softaware shouldn't change because it has nothing to with data serialization. This is a one scenario where we could apply the Strategy pattern to design our software. We could aslo publish the wrangling part as a library leaving the serialization implementation to library users. The following example explains the idea.
+Suppose we are working on a project whose purpose is periodically read big data, [wrangle](https://en.wikipedia.org/wiki/Data_wrangling) it, and finally store it in a database as key-value pairs.
+After the data are stored in database, we need to provide conumers with APIs to query data.
+However, different consumers may want data in different formats (json, txt, xml, etc), even in new one we have never seen so far. But we don't know in advance in what format consumers would query data.
+So, every time a request for a new format implementation comes, we have to rebuild our software.
+We'd also like to change our code as little as possible.
+Ideally, the wrangling part of our softaware shouldn't change because it has nothing to with data serialization.
+This is a one scenario where we could apply the Strategy pattern to design our software.
+We could aslo publish the wrangling part as a library leaving the serialization implementation to library users. The following example explains the idea.
 
 ## Example
 
