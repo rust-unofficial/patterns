@@ -96,4 +96,4 @@ You are modelling a system that functions as a state machine, and want to ensure
 
 ## See also
 
-http://cliffle.com/blog/rust-typestate/
+  - [The Typestate Pattern in Rust, Cliff L. Biffle (2019)](https://web.archive.org/web/20210103081241/https://cliffle.com/blog/rust-typestate/) 
