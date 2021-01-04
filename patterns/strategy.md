@@ -11,112 +11,77 @@ This is why we call it Dependency Inversion.
 
 ## Motivation
 
-Suppose we are working on a project whose purpose is periodically read big data, [wrangle](https://en.wikipedia.org/wiki/Data_wrangling) it, and finally store it in a database as key-value pairs.
-After the data are stored in database, we need to provide conumers with APIs to query data.
-However, different consumers may want data in different formats (json, txt, xml, etc), even in new one we have never seen so far. But we don't know in advance in what format consumers would query data.
-So, every time a request for a new format implementation comes, we have to rebuild our software.
-We'd also like to change our code as little as possible.
-Ideally, the wrangling part of our softaware shouldn't change because it has nothing to with data serialization.
-This is a one scenario where we could apply the Strategy pattern to design our software.
-We could aslo publish the wrangling part as a library leaving the serialization implementation to library users. The following example explains the idea.
+Imagine we are working on a project that generates reports every month. 
+We need the reports to be generated in different formats, e.g., in `JSON` or `Plain Text` formats. 
+But thing very and we don't know what kind of requiremnt we may get in the future. 
+For example, we may need to generate our report in a completly new format, 
+or just modify the existing format. 
+So, in order to make chages to our existing code base as much as possible 
+while keeping our solution adoptable to such changes, 
+we might exploit Strategy design pattern. 
+Rust has powerful trait system which allows to implement this pattern. 
 
 ## Example
 
+In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`. 
+`Text` and `Json` are our strategy structs. 
+These strategies have to implement `Formatter` trait.
+
 ```rust
-// This trait must be implemented by different formats
-pub trait Formatter {
-    fn run(&self, report: &Report);
-}
 
-// STRATEGIES:
-
-// Implementation for Json format
-mod vendor1 {
-    use super::*;
-    pub struct Json;
-    impl Formatter for Json {
-        fn run(&self, report: &Report) {
-            print!("[");
-            for (key, val) in report.keys.iter().zip(report.values.iter()) {
-                print!("{{ \"{}\":\"{}\"}},", key, val);
-            }
-            println!("\u{8}]");
-        }
-    }
-}
-
-// Implementation for Plain Text format
-mod vendor2 {
-    use super::*;
-
-    pub struct Text;
-
-    impl Formatter for Text {
-        fn run(&self, report: &Report) {
-            for (key, val) in report.keys.iter().zip(report.values.iter()) {
-                println!("{} {}", key, val);
-            }
-        }
-    }
-}
-
-// Report does not implement Generator trait
-// Instead, it provides high level abstraction
-// - vector of Strings: `keys`
-// - vector of integers: `values`
-// - method: `generate`
-//
-// In other words, Report does not depend on format implementation,
-// but format implementations depend on Report (abtraction). This is called
-// Dependency Inversion Principle.
-
-pub struct Report {
+struct Context {
     pub keys: Vec<String>,
     pub values: Vec<i32>,
-    // User must provide an object which implements Generator trait
-    formatter: Box<dyn Formatter>,
 }
 
+trait Formatter {
+    fn run(&self, context: &Context);
+}
+
+struct Report;
+
 impl Report {
-    pub fn format(&self) {
-        self.formatter.run(&self);
-    }
-
-    pub fn new(formatter: Box<dyn Formatter>) -> Self {
-        let (keys, values) = Self::data_from_db();
-        Report {
-            keys,
-            values,
-            formatter,
-        }
-    }
-
-    fn data_from_db() -> (Vec<String>, Vec<i32>) {
+    fn generate<T: Formatter>(g: T) {
+        //perform here backend operations which should not bother caller...
+        //fetch data from database
         let keys = vec!["one".to_string(), "two".to_string()];
         let values = vec![1, 2];
-        (keys, values)
+        // generate
+        g.run(&Context { keys, values });
+    }
+}
+
+struct Text;
+impl Formatter for Text {
+    fn run(&self, context: &Context) {
+        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+            println!("{} {}", key, val);
+        }
+    }
+}
+
+struct Json;
+impl Formatter for Json {
+    fn run(&self, context: &Context) {
+        print!("[");
+        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+            print!("{{ \"{}\":\"{}\"}},", key, val);
+        }
+        println!("\u{8}]");
     }
 }
 
 fn main() {
-    let json_report = Report::new(Box::new(vendor1::Json));
-    let text_report = Report::new(Box::new(vendor2::Text));
-
-    println!("JSON format:");
-    json_report.format();
-
-    println!("\n");
-
-    println!("Plain text format:");
-    text_report.format();
+    Report::generate(Text);
+    Report::generate(Json);
 }
-
 ```
+
 
 ## Advantages
 
-Separation of concerns. In the previous example, Report does not know anything about specific implementations of `Vendor1::Json` and `Vendor2::Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
-The only thing they have to know is context and and a specific trait and method to implement, i.e., `Generator` and `run`. 
+Separation of concerns. In the previous example, Report does not know anything about specific implementations of `Json` and `Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
+The only thing they have to know is context and and a specific trait and method to implement, i.e., `Formatter` and `run`. 
 
 ## Disadvantages
 
@@ -164,75 +129,6 @@ fn main() {
 
   println!("len: {}", val.map(len_strategy).unwrap());
   println!("first bite: {}", val.map(first_byte_strategy).unwrap());
-}
-
-```
-
-### Getting rid of trait objects
-
-In the first example we defined the `Report` as
-
-```rust,ignore
-pub struct Report {
-    pub keys:   Vec<String>,
-    pub values: Vec<i32>,
-    // User must provide an object which implements Generator trait
-    formatter: Box<dyn Formatter>
-}
-
-```
-
-which means we use trait objects and hence dynamic dispatch. However, we can implement the text formatter example using static disptach which is more preferable.
-
-```rust
-struct Context {
-    pub keys: Vec<String>,
-    pub values: Vec<i32>,
-}
-
-trait Formatter {
-    fn run(&self, context: &Context);
-}
-
-struct Report;
-
-impl Report {
-    fn generate<T: Formatter>(g: T) {
-        //perform backend operations which should not bother caller...
-        //fetch data from database
-        let keys = vec!["one".to_string(), "two".to_string()];
-        let values = vec![1, 2];
-        // generate
-        g.run(&Context { keys, values });
-    }
-}
-
-struct Text;
-impl Formatter for Text {
-    fn run(&self, context: &Context) {
-        for (key, val) in context.keys.iter().zip(context.values.iter()) {
-            println!("{} {}", key, val);
-        }
-    }
-}
-
-struct Json;
-impl Formatter for Json {
-    fn run(&self, context: &Context) {
-        print!("[");
-        for (key, val) in context.keys.iter().zip(context.values.iter()) {
-            print!("{{ \"{}\":\"{}\"}},", key, val);
-        }
-        println!("\u{8}]");
-    }
-}
-
-fn main() {
-    println!("JSON format:");
-    Report::generate(Text);
-    println!("\n");
-    println!("Plain text format:");
-    Report::generate(Json);
 }
 
 ```
