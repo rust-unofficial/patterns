@@ -42,7 +42,7 @@ fn main() {
     println!("{}: {}", ferris, three_vowels(&ferris));
     println!("{}: {}", curious, three_vowels(&curious));
 
-    // Using a `&String` type in our argument we will find the following example fails:
+    // This works fine, but the following two lines would fail:
     // println!("Ferris: {}", three_vowels("Ferris"));
     // println!("Curious: {}", three_vowels("Curious"));
 
