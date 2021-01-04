@@ -224,7 +224,7 @@ finaliser should not be moved or returned.</p>
 immediately, rather than when it goes out of scope. The variable name must start
 with <code>_</code> if the variable is only used as a finaliser, otherwise the compiler
 will warn that the finaliser is never used. However, do not call the variable
-<code>_</code> with no suffix - in that case it will be again be destroyed immediately.</p>
+<code>_</code> with no suffix - in that case it will be destroyed immediately.</p>
 <p>In Rust, destructors are run when an object goes out of scope. This happens
 whether we reach the end of block, there is an early return, or the program
 panics. When panicking, Rust unwinds the stack running destructors for each
