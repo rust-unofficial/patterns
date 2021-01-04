@@ -17,7 +17,6 @@ The typestate pattern is an API design pattern that encodes information about an
 This is one example of how to implement the pattern for a simple type that needs to be initialized or otherwise prepared before use 
 (that is, it has two states: (), and Ready). More states and operations may be added to implement a more complex state machine.
 
-See http://cliffle.com/blog/rust-typestate/ for more in-depth examples and techniques.
 
 ```rust
 
