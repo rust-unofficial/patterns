@@ -72,10 +72,7 @@ on Error Handling](https://doc.rust-lang.org/book/error-handling.html) elaborate
 
 ## See also
 
-[The Rust Book: Error Handling](https://doc.rust-lang.org/book/error-handling.html)
-
-[Rust 1.9 announcement, which contains a description of this antipattern](http://blog.rust-lang.org/2016/05/26/Rust-1.9.html)
-
-[Result documentation](http://doc.rust-lang.org/std/result/enum.Result.html)
-
-[panic::catch_unwind documentation](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)
+- [The Rust Book: Error Handling](https://doc.rust-lang.org/book/error-handling.html)
+- [Rust 1.9 announcement, which contains a description of this antipattern](http://blog.rust-lang.org/2016/05/26/Rust-1.9.html)
+- [Result documentation](http://doc.rust-lang.org/std/result/enum.Result.html)
+- [panic::catch_unwind documentation](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)
