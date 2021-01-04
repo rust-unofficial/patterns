@@ -123,7 +123,11 @@ If there are many strategies to choose from then users have to know how strategi
 
 ## Discussion
 
-In the previous example all strategies in a single file. Typically in Rust, each strategy should be implemented in a separate module file. However, we don't need to use traits in order to design this pattern in Rust. The following toy example demonstates the idea of the Strategy pattern using Rust closures
+In the previous example all strategies in a single file.
+Typically in Rust, each strategy should be implemented in a separate module file.
+However, we don't need to use traits in order to design this pattern in Rust.
+
+The following toy example demonstrates the idea of the Strategy pattern using Rust `closures`:
 
 ```rust
 struct Adder;
