@@ -25,89 +25,90 @@ We could aslo publish the wrangling part as a library leaving the serialization 
 ```rust
 // This trait must be implemented by different formats
 pub trait Formatter {
-  fn run(&self, report: &Report);
+    fn run(&self, report: &Report);
 }
 
 // STRATEGIES:
 
 // Implementation for Json format
 mod vendor1 {
-  use super::*;
-
-  pub struct Json;
-
-  impl Formatter for Json {
-    fn run(&self, report: &Report) {
-      print!("[");
-      for (key, val) in report.keys.iter().zip(report.values.iter()) {
-        print!("{{ \"{}\":\"{}\"}},", key, val);
-      }
-      println!("\u{8}]");
+    use super::*;
+    pub struct Json;
+    impl Formatter for Json {
+        fn run(&self, report: &Report) {
+            print!("[");
+            for (key, val) in report.keys.iter().zip(report.values.iter()) {
+                print!("{{ \"{}\":\"{}\"}},", key, val);
+            }
+            println!("\u{8}]");
+        }
     }
-  }
 }
 
 // Implementation for Plain Text format
 mod vendor2 {
-  use super::*;
+    use super::*;
 
-  pub struct Text;
+    pub struct Text;
 
-  impl Formatter for Text {
-    fn run(&self, report: &Report) {
-      for (key, val) in report.keys.iter().zip(report.values.iter()) {
-        println!("{} {}", key, val);
-      }
+    impl Formatter for Text {
+        fn run(&self, report: &Report) {
+            for (key, val) in report.keys.iter().zip(report.values.iter()) {
+                println!("{} {}", key, val);
+            }
+        }
     }
-  }
 }
-
 
 // Report does not implement Generator trait
 // Instead, it provides high level abstraction
 // - vector of Strings: `keys`
 // - vector of integers: `values`
 // - method: `generate`
-// 
+//
 // In other words, Report does not depend on format implementation,
-// but format implementations depend on Report (abtraction). This is called 
-// Dependency Inversion Principle. 
+// but format implementations depend on Report (abtraction). This is called
+// Dependency Inversion Principle.
 
 pub struct Report {
-  pub keys:   Vec<String>,
-  pub values: Vec<i32>,
-  // User must provide an object which implements Generator trait
-  formatter: Box<dyn Formatter>
+    pub keys: Vec<String>,
+    pub values: Vec<i32>,
+    // User must provide an object which implements Generator trait
+    formatter: Box<dyn Formatter>,
 }
 
 impl Report {
-  pub fn format(&self) {
-    self.formatter.run(&self);
-  }
+    pub fn format(&self) {
+        self.formatter.run(&self);
+    }
 
-  pub fn new(formatter: Box<dyn Formatter>) -> Self {
-    let (keys, values) = Self::data_from_db();
-    Report{ keys, values, formatter }
-  }
+    pub fn new(formatter: Box<dyn Formatter>) -> Self {
+        let (keys, values) = Self::data_from_db();
+        Report {
+            keys,
+            values,
+            formatter,
+        }
+    }
 
-  fn data_from_db() -> (Vec<String>, Vec<i32>) {
-    let keys = vec!["one".to_string(), "two".to_string()];
-    let values =  vec![1, 2];
-    (keys, values)
-  }
+    fn data_from_db() -> (Vec<String>, Vec<i32>) {
+        let keys = vec!["one".to_string(), "two".to_string()];
+        let values = vec![1, 2];
+        (keys, values)
+    }
 }
 
 fn main() {
-  let json_report = Report::new(Box::new(vendor1::Json));
-  let text_report = Report::new(Box::new(vendor2::Text));
+    let json_report = Report::new(Box::new(vendor1::Json));
+    let text_report = Report::new(Box::new(vendor2::Text));
 
-  println!("JSON format:");
-  json_report.format();
-  
-  println!("\n");
+    println!("JSON format:");
+    json_report.format();
 
-  println!("Plain text format:");
-  text_report.format();
+    println!("\n");
+
+    println!("Plain text format:");
+    text_report.format();
 }
 
 ```
@@ -132,22 +133,25 @@ The following toy example demonstrates the idea of the Strategy pattern using Ru
 
 ```rust
 struct Adder;
-impl Adder{
-  pub fn add<F>(x: u8, y: u8, f: F) -> u8
-      where F: Fn(u8, u8) -> u8 {
-      f(x,y)
-  }
+impl Adder {
+    pub fn add<F>(x: u8, y: u8, f: F) -> u8
+    where
+        F: Fn(u8, u8) -> u8,
+    {
+        f(x, y)
+    }
 }
 
 fn main() {
-  let arith_adder = |x, y| x + y;
-  let bool_adder = |x, y| if x==1 || y==1 {1} else {0};
-  let custom_adder = |x, y| 2*x + y;
+    let arith_adder = |x, y| x + y;
+    let bool_adder = |x, y| if x == 1 || y == 1 { 1 } else { 0 };
+    let custom_adder = |x, y| 2 * x + y;
 
-  println!("{:?}", Adder::add(4, 5, arith_adder));
-  println!("{:?}", Adder::add(0, 0, bool_adder));
-  println!("{:?}", Adder::add(0, 3, custom_adder));
+    println!("{:?}", Adder::add(4, 5, arith_adder));
+    println!("{:?}", Adder::add(0, 0, bool_adder));
+    println!("{:?}", Adder::add(0, 3, custom_adder));
 }
+
 ```
 
 In fact, Rust already uses this idea for `Options`'s `map` method
@@ -161,6 +165,7 @@ fn main() {
   println!("len: {}", val.map(len_strategy).unwrap());
   println!("first bite: {}", val.map(first_byte_strategy).unwrap());
 }
+
 ```
 
 ### Getting rid of trait objects
@@ -169,67 +174,65 @@ In the first example we defined the `Report` as
 
 ```rust,ignore
 pub struct Report {
-  pub keys:   Vec<String>,
-  pub values: Vec<i32>,
-  // User must provide an object which implements Generator trait
-  formatter: Box<dyn Formatter>
+    pub keys:   Vec<String>,
+    pub values: Vec<i32>,
+    // User must provide an object which implements Generator trait
+    formatter: Box<dyn Formatter>
 }
+
 ```
 
 which means we use trait objects and hence dynamic dispatch. However, we can implement the text formatter example using static disptach which is more preferable.
 
 ```rust
-
 struct Context {
-  pub keys:   Vec<String>,
-  pub values: Vec<i32>
+    pub keys: Vec<String>,
+    pub values: Vec<i32>,
 }
 
 trait Formatter {
-  fn run(&self, context: &Context);
+    fn run(&self, context: &Context);
 }
 
 struct Report;
 
 impl Report {
-  fn generate<T: Formatter>(g: T) {
-    //perform backend operations which should not bother caller...
-    //fetch data from database
-    let keys = vec!["one".to_string(), "two".to_string()];
-    let values =  vec![1, 2];
-    // generate 
-    g.run(&Context{ keys, values });
-  }
+    fn generate<T: Formatter>(g: T) {
+        //perform backend operations which should not bother caller...
+        //fetch data from database
+        let keys = vec!["one".to_string(), "two".to_string()];
+        let values = vec![1, 2];
+        // generate
+        g.run(&Context { keys, values });
+    }
 }
-
 
 struct Text;
 impl Formatter for Text {
-  fn run(&self, context: &Context) {
-    for (key, val) in context.keys.iter().zip(context.values.iter()) {
-      println!("{} {}", key, val);
+    fn run(&self, context: &Context) {
+        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+            println!("{} {}", key, val);
+        }
     }
-  }
 }
 
 struct Json;
 impl Formatter for Json {
-  fn run(&self, context: &Context) {
-    print!("[");
-    for (key, val) in context.keys.iter().zip(context.values.iter()) {
-      print!("{{ \"{}\":\"{}\"}},", key, val);
+    fn run(&self, context: &Context) {
+        print!("[");
+        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+            print!("{{ \"{}\":\"{}\"}},", key, val);
+        }
+        println!("\u{8}]");
     }
-    println!("\u{8}]");
-  }
 }
 
 fn main() {
-  println!("JSON format:");
-  Report::generate(Text);
-  
-  println!("\n");
-
-  println!("Plain text format:");
-  Report::generate(Json);
+    println!("JSON format:");
+    Report::generate(Text);
+    println!("\n");
+    println!("Plain text format:");
+    Report::generate(Json);
 }
+
 ```
