@@ -19,4 +19,4 @@ You can break them, but if you do you should have a good reason for it.
 TODO: Mention why Rust is a bit special - functional elements, type system, borrow checker
 
 ## Participate
-If you are interested in contributing to the Patterns catalogue, check out the [./CONTRIBUTING.md]. 
+If you are interested in contributing to the Patterns catalogue, check out the [contribution guidelines](./CONTRIBUTING.md). 
