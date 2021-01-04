@@ -118,7 +118,8 @@ Separation of concerns. In the previous example, Report does not know anything a
 
 ## Disadvantages
 
-For each strategy there must me implemented at least one module, so number of modules increases with number of strategies. If there are many strategies to choose from then users have to know how strategies differ from one another.
+For each strategy there must me implemented at least one module, so number of modules increases with number of strategies.
+If there are many strategies to choose from then users have to know how strategies differ from one another.
 
 ## Discussion
 
