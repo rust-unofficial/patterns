@@ -92,6 +92,7 @@ You are modelling a system that functions as a state machine, and want to ensure
 
 * It can add some verbosity and complexity to the code.
 * Implementing it for complex structs can be difficult.
+* It can make compiler error messages very hard to understand.
 
 ## See also
 
