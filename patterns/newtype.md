@@ -101,7 +101,6 @@ Here, `Bar` might be some public, generic type and `T1` and `T2` are some intern
 ## See also
 
 - [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
-- [Newtypes in the style guide](https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html)
 - [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
 - [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
 - [derive_more](https://crates.io/crates/derive_more), a crate for deriving many builtin traits on newtypes.
