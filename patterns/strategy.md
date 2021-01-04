@@ -114,7 +114,8 @@ fn main() {
 
 ## Advantages
 
-Separation of concerns. In the previous example, Report does not know anything about specific implementations of `Vendor1::Json` and `Vendor2::Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. The only thing they have to know is context and and a specific trait and method to implement, i.e., `Generator` and `run`. 
+Separation of concerns. In the previous example, Report does not know anything about specific implementations of `Vendor1::Json` and `Vendor2::Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
+The only thing they have to know is context and and a specific trait and method to implement, i.e., `Generator` and `run`. 
 
 ## Disadvantages
 
