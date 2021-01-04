@@ -105,12 +105,8 @@ which is hard to understand and will also lead into runtime borrow checks.
 
 ## See also
 
-https://en.wikipedia.org/wiki/Region-based_memory_management
-
-https://github.com/saschagrunert/indextree
-
-https://doc.rust-lang.org/1.1.0/rustc_data_structures/graph/
-
-https://github.com/bluss/petgraph
-
-https://github.com/danigm/rust-graph-example
+- [Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management)
+- [Module rustc_data_structures::graph](https://doc.rust-lang.org/1.1.0/rustc_data_structures/graph/)
+- [Code example: Arena based tree structure with multithreading support](https://github.com/saschagrunert/indextree)
+- [Code example: Graph data structure library](https://github.com/bluss/petgraph)
+- [Code example: How to implement complex data structure in rust](https://github.com/danigm/rust-graph-example)
