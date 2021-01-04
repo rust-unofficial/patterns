@@ -92,6 +92,9 @@ Region-based memory management is the common method used to deal with graph data
 This avoids to use interior mutability with data structures as follows:
 
 ```
+use std::rc::Rc;
+use std::cell::RefCell;
+
 struct Node<T> {
     previous: Rc<RefCell<Box<Node<T>>>>,
     next: Vec<Rc<RefCell<Box<T>>>>,
