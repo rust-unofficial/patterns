@@ -2,7 +2,6 @@
 
 ## Description
 
-(from http://cliffle.com/blog/rust-typestate/):
 
 The typestate pattern is an API design pattern that encodes information about an object's run-time state in its compile-time type. In particular, an API using the typestate pattern will have:
 
