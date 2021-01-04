@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Use borrowed types for arguments - Rust Design Patterns</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A catalogue of Rust design patterns, anti-patterns and idioms">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../idioms/index.html"><strong aria-hidden="true">2.</strong> Idioms</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../idioms/coercion-arguments.html" class="active"><strong aria-hidden="true">2.1.</strong> Use borrowed types for arguments</a></li><li class="chapter-item expanded "><a href="../idioms/concat-format.html"><strong aria-hidden="true">2.2.</strong> Concatenating Strings with format!</a></li><li class="chapter-item expanded "><a href="../idioms/ctor.html"><strong aria-hidden="true">2.3.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../idioms/default.html"><strong aria-hidden="true">2.4.</strong> The Default Trait</a></li><li class="chapter-item expanded "><a href="../idioms/deref.html"><strong aria-hidden="true">2.5.</strong> Collections Are Smart Pointers</a></li><li class="chapter-item expanded "><a href="../idioms/dtor-finally.html"><strong aria-hidden="true">2.6.</strong> Finalisation in Destructors</a></li><li class="chapter-item expanded "><a href="../idioms/mem-replace.html"><strong aria-hidden="true">2.7.</strong> mem::replace(_)</a></li><li class="chapter-item expanded "><a href="../idioms/on-stack-dyn-dispatch.html"><strong aria-hidden="true">2.8.</strong> On-Stack Dynamic Dispatch</a></li><li class="chapter-item expanded "><a href="../idioms/option-iter.html"><strong aria-hidden="true">2.9.</strong> Iterating over an Option</a></li><li class="chapter-item expanded "><a href="../idioms/pass-var-to-closure.html"><strong aria-hidden="true">2.10.</strong> Pass Variables to Closure</a></li><li class="chapter-item expanded "><a href="../idioms/priv-extend.html"><strong aria-hidden="true">2.11.</strong> Privacy For Extensibility</a></li><li class="chapter-item expanded "><a href="../idioms/rustdoc-init.html"><strong aria-hidden="true">2.12.</strong> Easy doc initialization</a></li><li class="chapter-item expanded "><a href="../idioms/temporary-mutability.html"><strong aria-hidden="true">2.13.</strong> Temporary mutability</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html"><strong aria-hidden="true">3.</strong> Design Patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/builder.html"><strong aria-hidden="true">3.1.</strong> Builder</a></li><li class="chapter-item expanded "><a href="../patterns/compose-structs.html"><strong aria-hidden="true">3.2.</strong> Compose Structs</a></li><li class="chapter-item expanded "><a href="../patterns/fold.html"><strong aria-hidden="true">3.3.</strong> Fold</a></li><li class="chapter-item expanded "><a href="../patterns/newtype.html"><strong aria-hidden="true">3.4.</strong> Newtype</a></li><li class="chapter-item expanded "><a href="../patterns/RAII.html"><strong aria-hidden="true">3.5.</strong> RAII Guards</a></li><li class="chapter-item expanded "><a href="../patterns/small-crates.html"><strong aria-hidden="true">3.6.</strong> Prefer Small Crates</a></li><li class="chapter-item expanded "><a href="../patterns/unsafe-mods.html"><strong aria-hidden="true">3.7.</strong> Contain unsafety in small modules</a></li><li class="chapter-item expanded "><a href="../patterns/visitor.html"><strong aria-hidden="true">3.8.</strong> Visitor</a></li></ol></li><li class="chapter-item expanded "><a href="../anti_patterns/index.html"><strong aria-hidden="true">4.</strong> Anti-patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../anti_patterns/deny-warnings.html"><strong aria-hidden="true">4.1.</strong> #[deny(warnings)]</a></li><li class="chapter-item expanded "><a href="../anti_patterns/deref.html"><strong aria-hidden="true">4.2.</strong> Deref Polymorphism</a></li></ol></li><li class="chapter-item expanded "><a href="../functional/index.html"><strong aria-hidden="true">5.</strong> Functional Programming</a></li><li class="chapter-item expanded "><a href="../additional_resources.html"><strong aria-hidden="true">6.</strong> Additional Resources</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust Design Patterns</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/rust-unofficial/patterns" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#use-borrowed-types-for-arguments" id="use-borrowed-types-for-arguments">Use borrowed types for arguments</a></h1>
+<h2><a class="header" href="#description" id="description">Description</a></h2>
+<p>Using a target of a deref coercion can increase the flexibility of your code when you are deciding which argument type to use for a function argument.
+In this way, the function will accept more input types.</p>
+<p>This is not limited to slice-able or fat pointer types. In fact you should always prefer using the <strong>borrowed type</strong> over <strong>borrowing the owned type</strong>. E.g., <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</code> over <code>&amp;Vec&lt;T&gt;</code>, or <code>&amp;T</code> over <code>&amp;Box&lt;T&gt;</code>.</p>
+<p>Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection. For instance, a <code>String</code> has a layer of indirection, so a <code>&amp;String</code> will have two layers of indrection.
+We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code> coerce to a <code>&amp;str</code> whenever the function is invoked. </p>
+<h2><a class="header" href="#example" id="example">Example</a></h2>
+<p>For this example, we will illustrate some differences for using <code>&amp;String</code> as a function argument versus using a <code>&amp;str</code>, but the ideas apply as well to using <code>&amp;Vec&lt;T&gt;</code> versus using a <code>&amp;[T]</code> or using a <code>&amp;T</code> versus a <code>&amp;Box&lt;T&gt;</code>.</p>
+<p>Consider an example where we wish to determine if a word contains three consecutive vowels.
+We don't need to own the string to determine this, so we will take a reference.</p>
+<p>The code might look something like this:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn three_vowels(word: &amp;String) -&gt; bool {
+    let mut vowel_count = 0;
+    for c in word.chars() {
+        match c {
+            'a' | 'e' | 'i' | 'o' | 'u' =&gt; {
+                vowel_count += 1;
+                if vowel_count &gt;= 3 {
+                    return true
+                }
+            }
+            _ =&gt; vowel_count = 0
+        }
+    }
+    false
+}
+
+fn main() {
+    let ferris = &quot;Ferris&quot;.to_string();
+    let curious = &quot;Curious&quot;.to_string();
+    println!(&quot;{}: {}&quot;, ferris, three_vowels(&amp;ferris));
+    println!(&quot;{}: {}&quot;, curious, three_vowels(&amp;curious));
+
+    // This works fine, but the following two lines would fail:
+    // println!(&quot;Ferris: {}&quot;, three_vowels(&quot;Ferris&quot;));
+    // println!(&quot;Curious: {}&quot;, three_vowels(&quot;Curious&quot;));
+
+}
+</code></pre></pre>
+<p>This works fine because we are passing a <code>&amp;String</code> type as a parameter.
+If we comment in the last two lines this example fails because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type. 
+We can fix this by simply modifying the type for our argument. </p>
+<p>For instance, if we change our function declaration to:</p>
+<pre><code class="language-rust ignore">fn three_vowels(word: &amp;str) -&gt; bool {
+</code></pre>
+<p>then both versions will compile and print the same output.</p>
+<pre><code class="language-bash">Ferris: false
+Curious: true
+</code></pre>
+<p>But wait, that's not all! There is more to this story. 
+It's likely that you may say to yourself: that doesn't matter, I will never be using a <code>&amp;'static str</code> as an input anways (as we did when we used <code>&quot;Ferris&quot;</code>).
+Even ignoring this special example, you may still find that using <code>&amp;str</code> will give you more flexibility than using a <code>&amp;String</code>.</p>
+<p>Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.
+We probably should make use of the function we have already defined and simply feed in each word from the sentence.</p>
+<p>An example of this could look like this:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">fn three_vowels(word: &amp;str) -&gt; bool {
+    let mut vowel_count = 0;
+    for c in word.chars() {
+        match c {
+            'a' | 'e' | 'i' | 'o' | 'u' =&gt; {
+                vowel_count += 1;
+                if vowel_count &gt;= 3 {
+                    return true
+                }
+            }
+            _ =&gt; vowel_count = 0
+        }
+    }
+    false
+}
+
+fn main() {
+    let sentence_string = 
+        &quot;Once upon a time, there was a friendly curious crab named Ferris&quot;.to_string();
+    for word in sentence_string.split(' ') {
+        if three_vowels(word) {
+            println!(&quot;{} has three consecutive vowels!&quot;, word);
+        }
+    }
+}
+</code></pre></pre>
+<p>Running this example using our function declared with an argument type <code>&amp;str</code> will yield</p>
+<pre><code class="language-bash">curious has three consecutive vowels!
+</code></pre>
+<p>However, this example will not run when our function is declared with an argument type <code>&amp;String</code>. 
+This is because string slices are a <code>&amp;str</code> and not a <code>&amp;String</code> which would require an allocation to be converted to <code>&amp;String</code> which is not implicit, whereas converting from <code>String</code> to <code>&amp;str</code> is cheap and implicit.</p>
+<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<ul>
+<li><a href="https://doc.rust-lang.org/reference/type-coercions.html">Rust Language Reference on Type Coercions</a></li>
+<li>For more discussion on how to handle <code>String</code> and <code>&amp;str</code> see <a href="https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html">this blog series (2015)</a> by Herman J. Radtke III.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../idioms/index.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../idioms/concat-format.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../idioms/index.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../idioms/concat-format.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
