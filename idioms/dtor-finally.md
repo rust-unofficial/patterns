@@ -76,7 +76,7 @@ The finaliser must be assigned into a variable, otherwise it will be destroyed
 immediately, rather than when it goes out of scope. The variable name must start
 with `_` if the variable is only used as a finaliser, otherwise the compiler
 will warn that the finaliser is never used. However, do not call the variable
-`_` with no suffix - in that case it will be again be destroyed immediately.
+`_` with no suffix - in that case it will be destroyed immediately.
 
 In Rust, destructors are run when an object goes out of scope. This happens
 whether we reach the end of block, there is an early return, or the program
