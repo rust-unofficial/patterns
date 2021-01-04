@@ -82,7 +82,6 @@ You are modelling a system that functions as a state machine, and want to ensure
 
 ## Advantages
 
-(again, from http://cliffle.com/blog/rust-typestate/)
 
 * It moves certain types of errors from run-time to compile-time, giving programmers faster feedback.
 * It interacts nicely with IDEs, which can avoid suggesting operations that are illegal in a certain state.
