@@ -24,9 +24,9 @@
     - [Newtype](./patterns/newtype.md)
     - [RAII Guards](./patterns/RAII.md)
     - [Prefer Small Crates](./patterns/small-crates.md)
+    - [Typestate/Session Types](./patterns/typestate.md)
     - [Contain unsafety in small modules](./patterns/unsafe-mods.md)
     - [Visitor](./patterns/visitor.md)
-    - [Typestate/Session Types](./patterns/typestate.md)
 
 - [Anti-patterns](./anti_patterns/README.md)
     - [`#[deny(warnings)]`](./anti_patterns/deny-warnings.md)
