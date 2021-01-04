@@ -113,5 +113,5 @@ However, this example will not run when our function is declared with an argumen
 This is because string slices are a `&str` and not a `&String` which would require an allocation to be converted to `&String` which is not implicit, whereas converting from `String` to `&str` is cheap and implicit.
 
 ## See also
-
-For more discussion on how to handle `String` and `&str` see [this blog series (2015)](https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman J. Radtke III.
+- [Rust Language Reference on Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)
+- For more discussion on how to handle `String` and `&str` see [this blog series (2015)](https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman J. Radtke III.
