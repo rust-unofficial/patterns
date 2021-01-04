@@ -7,7 +7,7 @@ not be enough?
 For example, if you want to create a custom `Display` implementation for `String` 
 due to security considerations (e.g. passwords).
 
-We could use the newtype pattern to provide type safety and encapsulation.
+For such cases we could use the `Newtype` pattern to provide __type safety__ and __encapsulation__.
 
 ## Description
 
