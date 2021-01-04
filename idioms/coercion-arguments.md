@@ -7,7 +7,7 @@ In this way, the function will accept more input types.
 
 This is not limited to slice-able or fat pointer types. In fact you should always prefer using the __borrowed type__ over __borrowing the owned type__. E.g., `&str` over `&String`, `&[T]` over `&Vec<T>` or `&T` over `&Box<T>`.
 
-Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection, as it will be illustrated in the following examples. For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
+Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection. For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
 We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked. 
 
 ## Example
