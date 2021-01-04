@@ -1,9 +1,11 @@
 # Newtype
 
-What if in some cases we want a type to behave similar to another type but
-still different? What if we want to enforce some behavior at compile time
-which using only type aliases is not enough? For example, have a custom
-`Display` implementation for `String` for security reasons (password).
+What if in some cases we want a type to behave similar to another type or 
+enforce some behaviour at compile time where using only type aliases would 
+not be enough? 
+
+For example, if you want to create a custom `Display` implementation for `String` 
+due to security considerations (e.g. passwords).
 
 We could use the newtype pattern to provide type safety and encapsulation.
 
