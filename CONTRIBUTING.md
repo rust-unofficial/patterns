@@ -10,12 +10,10 @@ We are collecting Rust patterns in this book so people can learn the tradeoffs b
 
 If you want to be part of this effort here are some ways you can participate:
 
-
 ## Discussion board
 
 If you have a question or an idea regarding certain content but you want to have feedback of fellow community members
 and you think it may not be appropriate to file an issue open a discussion in our [discussion board](https://github.com/rust-unofficial/patterns/discussions).
-
 
 ## Writing a new article
 
@@ -42,7 +40,6 @@ Don't forget to add your new article to the `SUMMARY.md` to let it be rendered t
 
 Please make `Draft Pull requests` early so we can follow your progress and can give early feedback (see the following section).
 
-
 ## Creating a Pull Request
 
 "Release early and often!" also applies to pull requests!
@@ -51,7 +48,6 @@ Once your article has some visible work, create a `[WIP]` draft pull request and
 Early reviews of the community are not meant as an offense but to give feedback.
 
 A good principle: "Work together, share ideas, teach others."
-
 
 ### Test the book locally before submitting
 
