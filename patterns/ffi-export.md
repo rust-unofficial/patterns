@@ -115,7 +115,7 @@ pub extern "C" fn dbm_iter_del(*mut DbmKeysIter) {
 
 This API loses a key piece of information: the lifetime of the iterator must not exceed the lifetime of the `Dbm` object that owns it. A user of the library could use it in a way which causes the iterator to outlive the data it is iterating on, resulting in reading uninitialized memory.
 
-For the C programmers out there, spot the bug:
+This example written in C contains a bug that will be explained afterwards:
 
 ```C
 int count_key_sizes(DBM *db) {
