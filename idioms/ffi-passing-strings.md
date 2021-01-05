@@ -50,7 +50,7 @@ fn get_error_from_ffi() -> Result<String, std::ffi::IntoStringError> {
 
 ## Advantages
 
-The example is is written to ensure that:
+The example is written in a way to ensure that:
 1. The `unsafe` block is as small as possible.
 2. The `CString` lives long enough.
 3. Errors with typecasts are always propagated when possible.
