@@ -28,18 +28,17 @@ These strategies have to implement the `Formatter` trait.
 ```rust
 use std::collections::HashMap;
 use std::fmt::Write as FmtWrite;
-use std::{error, result};
-type Result = result::Result<String, Box<dyn error::Error>>;
+use std::error;
 type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn run(&self, data: &Data) -> Result;
+    fn run(&self, data: &Data) -> Result<String, Box<dyn error::Error>>;
 }
 
 struct Report;
 
 impl Report {
-    fn generate<T: Formatter>(g: T) -> Result {
+    fn generate<T: Formatter>(g: T) -> Result<String, Box<dyn error::Error>> {
         // backend operations...
         let mut data = HashMap::new();
         data.insert("one".to_string(), 1);
@@ -51,7 +50,7 @@ impl Report {
 
 struct Text;
 impl Formatter for Text {
-    fn run(&self, data: &Data) -> Result {
+    fn run(&self, data: &Data) -> Result<String, Box<dyn error::Error>> {
         let mut s = String::new();
 
         for (key, val) in data {
@@ -63,7 +62,7 @@ impl Formatter for Text {
 
 struct Json;
 impl Formatter for Json {
-    fn run(&self, data: &Data) -> Result {
+    fn run(&self, data: &Data) -> Result<String, Box<dyn error::Error>> {
         let mut s = String::from("[");
 
         for (key, val) in data {
@@ -90,9 +89,11 @@ fn main() {
 
 ## Advantages
 
-Separation of concerns. In the previous example, Report does not know anything about
-specific implementations of `Json` and `Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
-The only thing they have to know is context and and a specific trait and method to implement, i.e., `Formatter` and `run`.
+Separation of concerns. In the previous example, Report does not know anything about specific
+implementations of `Json` and `Text`, whereas the output implementations does not care about how data is
+preprocessed, stored, and fetched.
+The only thing they have to know is context and and a specific trait and method to implement,
+i.e,`Formatter` and `run`.
 
 ## Disadvantages
 
