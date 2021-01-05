@@ -151,7 +151,9 @@ This bug is a classic. Here's what happens when the iterator returns the end-of-
 3. The if statement is true, so the database is closed. There should be a break statement here.
 4. The loop condition executes again, causing a `next` call on the closed object.
 
-The worst part about this bug? If the Rust implementation was careful, this code will work most of the time! If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly return an error, resulting in the iterator returning a -1. But occasionally, it will be cause a segmentation fault, or even worse nonsensical memory corruption!
+The worst part about this bug? If the Rust implementation was careful, this code will work most of the time!
+If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly return an error, resulting in the iterator returning a `-1` indicating an error.
+But occasionally, it will cause a segmentation fault, or even worse nonsensical memory corruption!
 
 None of this can be avoided by Rust. From its perspective, it put those objects on its heap, returned pointers to them, and gave up control of their lifetimes. The C code simply must "play nice".
 
