@@ -4,6 +4,11 @@ Writing FFI code is an entire course in itself. However, there are several idiom
 
 This section contains idioms that may be useful when doing FFI.
 
-## 1. [Idiomatic Errors](./ffi-errors.md)
+## 1. [Idiomatic Errors](./ffi-errors.md) 
+error handling with integer codes and sentinel return values (such as NULL pointers)
+
 ## 2. [Accepting Strings](./ffi-accepting-strings.md)
+allows accepting strings with minimal unsafe code
+
 ## 3. [Passing Strings](./ffi-passing-strings.md)
+
