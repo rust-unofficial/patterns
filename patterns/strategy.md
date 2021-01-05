@@ -93,7 +93,7 @@ fn main() {
 Separation of concerns. In the previous example, `Report` does not know anything about specific
 implementations of `Json` and `Text`, whereas the output implementations does not care about how data is
 preprocessed, stored, and fetched.
-The only thing they have to know is context and and a specific trait and method to implement,
+The only thing they have to know is context and a specific trait and method to implement,
 i.e,`Formatter` and `run`.
 
 ## Disadvantages
