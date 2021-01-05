@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This book is a catalogue of Rust programming techniques, (anti-)patterns, and idioms and other explanations.
+This book is a catalogue of Rust programming techniques, (anti-)patterns, idioms and other explanations.
 It is a compilation of collective (sometimes implicit) knowledge or experience that was created with collaborative effort.
 
 These contained information are __no rules__, they should be understood as guidelines.
