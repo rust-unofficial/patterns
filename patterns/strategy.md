@@ -157,5 +157,4 @@ fn main() {
     assert_eq!(4, val.map(len_strategy).unwrap());
     assert_eq!(82, val.map(first_byte_strategy).unwrap());
 }
-
 ```
