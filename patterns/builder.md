@@ -50,12 +50,10 @@ fn builder_test() {
 }
 ```
 
-
 ## Motivation
 
 Useful when you would otherwise require many different constructors or where
 construction has side effects.
-
 
 ## Advantages
 
@@ -65,12 +63,10 @@ Prevents proliferation of constructors
 
 Can be used for one-liner initialisation as well as more complex construction.
 
-
 ## Disadvantages
 
 More complex than creating a struct object directly, or a simple constructor
 function.
-
 
 ## Discussion
 

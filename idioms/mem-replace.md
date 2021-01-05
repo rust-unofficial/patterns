@@ -22,15 +22,15 @@ fn a_to_b(e: &mut MyEnum) {
 
     // we mutably borrow `e` here. This precludes us from changing it directly
     // as in `*e = ...`, because the borrow checker won't allow it. Therefore
-    // the assignment to `e` must be outside the `if let` clause. 
+    // the assignment to `e` must be outside the `if let` clause.
     *e = if let MyEnum::A { ref mut name, x: 0 } = *e {
-    
+
         // this takes out our `name` and put in an empty String instead
         // (note that empty strings don't allocate).
-        // Then, construct the new enum variant (which will 
+        // Then, construct the new enum variant (which will
         // be assigned to `*e`, because it is the result of the `if let` expression).
         MyEnum::B { name: mem::replace(name, String::new()) }
-        
+
     // In all other cases, we return immediately, thus skipping the assignment
     } else { return }
 }
@@ -84,7 +84,6 @@ Note, however, that if we are using an `Option` and want to replace its
 value with a `None`, `Option`’s `take()` method provides a shorter and
 more idiomatic alternative.
 
-
 ## Advantages
 
 Look ma, no allocation! Also you may feel like Indiana Jones while doing it.
@@ -106,7 +105,6 @@ later.
 However, in Rust, we have to do a little more work to do this. An owned value
 may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.
-
 
 ## See also
 

@@ -5,7 +5,6 @@
 Use the `Deref` trait to treat collections like smart pointers, offering owning
 and borrowed views of data.
 
-
 ## Example
 
 ```rust,ignore
@@ -40,7 +39,6 @@ must account for these semantics properly in order to give a good user
 experience. When implementing a data structure which owns its data, offering a
 borrowed view of that data allows for more flexible APIs.
 
-
 ## Advantages
 
 Most methods can be implemented only for the borrowed view, they are then
@@ -48,13 +46,11 @@ implicitly available for the owning view.
 
 Gives clients a choice between borrowing or taking ownership of data.
 
-
 ## Disadvantages
 
 Methods and traits only available via dereferencing are not taken into account
 when bounds checking, so generic programming with data structures using this
 pattern can get complex (see the `Borrow` and `AsRef` traits, etc.).
-
 
 ## Discussion
 
@@ -75,7 +71,6 @@ implement `Deref<Target=Bar<T>>` where `Bar` is a dynamically sized type and
 
 Commonly, ordered collections will implement `Index` for `Range`s to provide
 slicing syntax. The target will be the borrowed view.
-
 
 ## See also
 

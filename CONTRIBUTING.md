@@ -1,25 +1,35 @@
 # Contributing
 
+## Introduction
+
+This book is a catalogue of Rust programming techniques, (anti-)patterns, idioms and other explanations.
+It is a compilation of collective (sometimes implicit) knowledge as well as experiences that have emerged through collaborative work.
+
+The patterns described here are __not rules__, but should be taken as guidelines for writing idiomatic code in Rust.
+We are collecting Rust patterns in this book so people can learn the tradeoffs between Rust idioms and use them properly in their own code.
+
+If you want to be part of this effort here are some ways you can participate:
+
 ## Discussion board
 
-If you have a question or an idea regarding certain content but you want to have feedback of fellow community members 
+If you have a question or an idea regarding certain content but you want to have feedback of fellow community members
 and you think it may not be appropriate to file an issue open a discussion in our [discussion board](https://github.com/rust-unofficial/patterns/discussions).
 
 ## Writing a new article
 
-Before writing a new article please check our [issues](https://github.com/rust-unofficial/patterns/issues) and 
+Before writing a new article please check our [issues](https://github.com/rust-unofficial/patterns/issues) and
 the [Pull Requests](https://github.com/rust-unofficial/patterns/pulls) if there are existing issues or someone
 is working on that topic.
 
 If you don't find an issue regarding your topic and you are sure it is not more feasible to open a thread in the [discussion board](https://github.com/rust-unofficial/patterns/discussions)
 please open a new issue, so we can discuss about the ideas and future content of the article together and maybe
-give some feedback/input on it. 
+give some feedback/input on it.
 
 When writing a new article it's recommended to copy the [pattern template](https://github.com/rust-unofficial/patterns/blob/master/template.md) into the
 appropriate directory and start editing it. You may not want to fill out every section and remove it or you might want to add extra sections.
 
 Consider writing your article in a way that has a low barrier of entry so also [Rustlings](https://github.com/rust-lang/rustlings) can follow
-and understand the thought process behind it. So we can encourage people to use these patterns early on. 
+and understand the thought process behind it. So we can encourage people to use these patterns early on.
 
 We encourage you to write idiomatic Rust code that builds in the [playground](https://play.rust-lang.org/).
 
@@ -35,7 +45,7 @@ Please make `Draft Pull requests` early so we can follow your progress and can g
 "Release early and often!" also applies to pull requests!
 
 Once your article has some visible work, create a `[WIP]` draft pull request and give it a description of what you did or want to do.
-Early reviews of the community are not meant as an offense but to give feedback. 
+Early reviews of the community are not meant as an offense but to give feedback.
 
 A good principle: "Work together, share ideas, teach others."
 
