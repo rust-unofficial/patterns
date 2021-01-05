@@ -5,7 +5,6 @@
 Use a private field to ensure that a struct is extensible without breaking
 stability guarantees.
 
-
 ## Example
 
 ```rust,ignore

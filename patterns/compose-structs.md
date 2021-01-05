@@ -14,7 +14,6 @@ behaviour.
 This will often lead to a better design in other ways: applying this design
 pattern often reveals smaller units of functionality.
 
-
 ## Example
 
 Here is a contrived example of where the borrow checker foils us in our plan to
@@ -68,18 +67,15 @@ fn baz(a: &mut A) {
 }
 ```
 
-
 ## Motivation
 
 TODO Why and where you should use the pattern
-
 
 ## Advantages
 
 Lets you work around limitations in the borrow checker.
 
 Often produces a better design.
-
 
 ## Disadvantages
 
@@ -88,7 +84,6 @@ Leads to more verbose code.
 Sometimes, the smaller structs are not good abstractions, and so we end up with
 a worse design. That is probably a 'code smell', indicating that the program
 should be refactored in some way.
-
 
 ## Discussion
 

@@ -7,7 +7,6 @@ mutable `String`, or using its `+` operator. However, it is often more
 convenient to use `format!`, especially where there is a mix of literal and
 non-literal strings.
 
-
 ## Example
 
 ```rust
@@ -22,7 +21,6 @@ fn say_hello(name: &str) -> String {
     format!("Hello {}!", name)
 }
 ```
-
 
 ## Advantages
 
