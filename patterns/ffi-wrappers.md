@@ -54,7 +54,7 @@ This makes APIs safer to use, avoiding issues with lifetimes between types. See 
 
 Often, wrapping types is quite difficult, and sometimes a Rust API compromise would make things easier.
 
-As an example, consider an iterator which does not efficiently implement `nth()`. It would definitely be worth putting in special logic to make the object handle iteration internally, or to support a different access pattern efficiently that only the FFAPI will use.
+As an example, consider an iterator which does not efficiently implement `nth()`. It would definitely be worth putting in special logic to make the object handle iteration internally, or to support a different access pattern efficiently that only the Foreign Function API will use.
 
 ### Trying to Wrap Iterators (and Failing)
 
