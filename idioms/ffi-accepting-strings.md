@@ -27,7 +27,7 @@ pub mod unsafe_module {
         let level: crate::LogLevel = match level { /* ... */ };
 
         let msg_str: &str = unsafe {
-            // SAFETY: accessing raw pointers expected to live for the call, 
+            // SAFETY: accessing raw pointers expected to live for the call,
             // and creating a shared reference that does not outlive the current
             // stack frame.
             match std::ffi::CStr::from_ptr(msg).to_str() {
