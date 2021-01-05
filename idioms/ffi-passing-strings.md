@@ -52,8 +52,8 @@ fn get_error_from_ffi() -> Result<String, std::ffi::IntoStringError> {
 
 The example is is written to ensure that:
 1. The `unsafe` block is as small as possible.
-1. The `CString` lives long enough.
-1. Errors with typecasts are always propagated when possible.
+2. The `CString` lives long enough.
+3. Errors with typecasts are always propagated when possible.
 
 A common mistake (so common it's in the documentation) is to not use the variable in the first block:
 
