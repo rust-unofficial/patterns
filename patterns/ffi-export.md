@@ -29,7 +29,7 @@ The Object-Based API design allows for writing shims that have good memory safet
 
 The POSIX standard defines the API to access an on-file database, known as [DBM](https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h). It is an excellent example of an "object-based" API.
 
-Here is the definition in C, which hopefully should be easy to read for those involved in FFI. While the commentary below should help explaining it for those who miss the subtleties.
+Here is the definition in C, which hopefully should be easy to read for those involved in FFI. The commentary below should help explaining it for those who miss the subtleties.
 
 ```C
 struct DBM;
@@ -152,8 +152,8 @@ This bug is a classic. Here's what happens when the iterator returns the end-of-
 4. The loop condition executes again, causing a `next` call on the closed object.
 
 The worst part about this bug? If the Rust implementation was careful, this code will work most of the time!
-If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly return an error, resulting in the iterator returning a `-1` indicating an error.
-But occasionally, it will cause a segmentation fault, or even worse nonsensical memory corruption!
+If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly fail, resulting in the iterator returning a `-1` indicating an error.
+But occasionally, it will cause a segmentation fault, or even worse, nonsensical memory corruption!
 
 None of this can be avoided by Rust. From its perspective, it put those objects on its heap, returned pointers to them, and gave up control of their lifetimes. The C code simply must "play nice".
 
