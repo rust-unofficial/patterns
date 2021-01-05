@@ -16,11 +16,12 @@ The lowest risk API is the "consolidated wrapper", where all possible interactio
 
 To understand this, let us look at a classic example of an API to export: iteration through a collection. 
 
-The API looks like this:
+That API looks like this:
 
-1. The iterator is wrapped with the collection, and is initialized with `first_key`.
+1. The iterator is initialized with `first_key`.
 2. Each call to `next_key` will advance the iterator.
 3. Calls to `next_key` if the iterator is at the end will do nothing.
+4. As noted above, the iterator is "wrapped into" the collection (unlike the native Rust API).
 
 If the iterator implements `nth()` efficiently, then it is possible to make it ephemeral to each function call:
 
@@ -60,7 +61,7 @@ As an example, consider an iterator which does not efficiently implement `nth()`
 
 ### Trying to Wrap Iterators (and Failing)
 
-To wrap iteration into the API correctly, the wrapper would need to do what a C version of the code would do: erase the lifetime of the iterator, and manage it manually.
+To wrap any type of iterator into the API correctly, the wrapper would need to do what a C version of the code would do: erase the lifetime of the iterator, and manage it manually.
 
 Suffice it to say, this is *incredibly* difficult. Here is an illustration of just *one* pitfall.
 
