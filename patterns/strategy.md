@@ -40,8 +40,7 @@ struct Report;
 
 impl Report {
     fn generate<T: Formatter>(g: T) -> Result {
-        //perform here backend operations which should not bother caller...
-        //fetch data from database
+        // backend operations...
         let keys = vec!["one".to_string(), "two".to_string()];
         let values = vec![1, 2];
         // generate report
