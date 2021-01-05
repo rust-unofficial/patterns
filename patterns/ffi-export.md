@@ -170,7 +170,9 @@ Thus, all of the lifetimes were bound together, and such unsafety was prevented.
 
 However, this design choice also has a number of drawbacks, which should be considered as well.
 
-First, the API itself becomes less expressive. With POSIX DBM, there is only one iterator per object, and every call changes its state. This is much more restrictive than iterators in almost any language, even though it is safe. Perhaps with other related objects, whose lifetimes are less heirarchical, this limitation is more of a cost than the safety.
+First, the API itself becomes less expressive. With POSIX DBM, there is only one iterator per object, and every call changes its state. 
+This is much more restrictive than iterators in almost any language, even though it is safe. 
+Perhaps with other related objects, whose lifetimes are less hierarchical, this limitation is more of a cost than the safety.
 
 Second, depending on the relationships of the API's parts, significant design effort may be involved. Many of the easier design points have other patterns associated with them:
 
