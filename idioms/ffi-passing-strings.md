@@ -13,7 +13,9 @@ When passing strings to FFI functions, there are four principles that should be 
 
 Rust has built-in support for C-style strings with its `CString` and `CStr` types. However, there are different approaches one can take with strings that are being sent to a foreign function call from a Rust function.
 
-The best practice is simple: use `CString` in such a way as to minimize unsafe code. However, a secondary caveat is that *the object must live long enough*, meaning the lifetime should be maximized. In addition, the documentation explains that "round-tripping" a `CString` after modification is UB, so additional work is necessary in that case.
+The best practice is simple: use `CString` in such a way as to minimize `unsafe` code. 
+However, a secondary caveat is that *the object must live long enough*, meaning the lifetime should be maximized.
+In addition, the documentation explains that "round-tripping" a `CString` after modification is UB, so additional work is necessary in that case.
 
 ## Code Example
 
