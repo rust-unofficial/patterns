@@ -260,7 +260,7 @@ We probably should make use of the function we have already defined and simply f
 }
 
 fn main() {
-    let sentence_string = 
+    let sentence_string =
         &quot;Once upon a time, there was a friendly curious crab named Ferris&quot;.to_string();
     for word in sentence_string.split(' ') {
         if three_vowels(word) {
@@ -535,15 +535,15 @@ fn a_to_b(e: &amp;mut MyEnum) {
 
     // we mutably borrow `e` here. This precludes us from changing it directly
     // as in `*e = ...`, because the borrow checker won't allow it. Therefore
-    // the assignment to `e` must be outside the `if let` clause. 
+    // the assignment to `e` must be outside the `if let` clause.
     *e = if let MyEnum::A { ref mut name, x: 0 } = *e {
-    
+
         // this takes out our `name` and put in an empty String instead
         // (note that empty strings don't allocate).
-        // Then, construct the new enum variant (which will 
+        // Then, construct the new enum variant (which will
         // be assigned to `*e`, because it is the result of the `if let` expression).
         MyEnum::B { name: mem::replace(name, String::new()) }
-        
+
     // In all other cases, we return immediately, thus skipping the assignment
     } else { return }
 }
@@ -831,7 +831,7 @@ impl Connection {
     fn send_request(&amp;self, request: Request) -&gt; Result&lt;Status, SendErr&gt; {
         // ...
     }
-        
+
     /// Oh no, all that boilerplate needs to be repeated here!
     fn check_status(&amp;self) -&gt; Status {
         // ...
@@ -852,7 +852,7 @@ impl Connection {
     /// ```
     /// # fn call_send(connection: Connection, request: Request) {
     /// let response = connection.send_request();
-    /// assert!(response.is_ok()); 
+    /// assert!(response.is_ok());
     /// # }
     /// ```
     fn send_request(&amp;self, request: Request) {
@@ -1212,9 +1212,9 @@ impl Bar {
     pub fn new(
         //..
     ) -&gt; Bar {
-    
+
         //..
-    
+
     }
 
     //..
@@ -1298,9 +1298,9 @@ impl&lt;T&gt; Mutex&lt;T&gt; {
         //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { 
-            data: self, 
-            //.. 
+        MutexGuard {
+            data: self,
+            //..
         }
     }
 }
@@ -1624,8 +1624,8 @@ public static void main(String[] args) {
 struct Foo {}
 
 impl Foo {
-    fn m(&amp;self) { 
-        //.. 
+    fn m(&amp;self) {
+        //..
     }
 
 }
@@ -1660,7 +1660,7 @@ well as <code>Bar</code>.</p>
 <h2><a class="header" href="#advantages-15" id="advantages-15">Advantages</a></h2>
 <p>You save a little boilerplate, e.g.,</p>
 <pre><code class="language-rust ignore">impl Bar {
-    fn m(&amp;self) { 
+    fn m(&amp;self) {
         self.f.m()
     }
 }

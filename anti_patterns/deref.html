@@ -191,8 +191,8 @@ public static void main(String[] args) {
 struct Foo {}
 
 impl Foo {
-    fn m(&amp;self) { 
-        //.. 
+    fn m(&amp;self) {
+        //..
     }
 
 }
@@ -227,7 +227,7 @@ well as <code>Bar</code>.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>You save a little boilerplate, e.g.,</p>
 <pre><code class="language-rust ignore">impl Bar {
-    fn m(&amp;self) { 
+    fn m(&amp;self) {
         self.f.m()
     }
 }
