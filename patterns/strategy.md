@@ -23,7 +23,7 @@ or just modify one of the existing formats.
 
 In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`
 `Text` and `Json` are our strategy structs.
-These strategies have to implement `Formatter` trait.
+These strategies have to implement the `Formatter` trait.
 
 ```rust
 use std::collections::HashMap;
