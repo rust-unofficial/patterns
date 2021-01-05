@@ -169,11 +169,11 @@
                     <main>
                         <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a 
+<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
 function which takes the struct as an argument.</p>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
-Each of these methods should have examples. </p>
+Each of these methods should have examples.</p>
 <p>For example:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
@@ -231,7 +231,7 @@ impl Connection {
 <p>As example is in a function, the code will not be tested. (Though it still will checked to make sure it compiles when running a <code>cargo test</code>)
 So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
-<p>If assertions are not required this pattern works well. </p>
+<p>If assertions are not required this pattern works well.</p>
 <p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated with <code>#[doc(hidden)]</code> (so that users won't see it).
 Then this method can be called inside of rustdoc because it is part of the crate's public API.</p>
 

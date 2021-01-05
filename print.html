@@ -173,12 +173,12 @@
 <h2><a class="header" href="#design-patterns" id="design-patterns">Design patterns</a></h2>
 <p>When developing programs, we have to solve many problems. A program can be viewed as a solution to a problem. It can also be viewed as a collection of solutions to many different problems. All of these solutions work together to solve a bigger problem.</p>
 <h2><a class="header" href="#design-patterns-in-rust" id="design-patterns-in-rust">Design patterns in Rust</a></h2>
-<p>There are many problems that share the same form. Due to the fact that Rust is not object-oriented design patterns vary with respect to other object-oriented programming languages. While the details are different, since they have the same form they can be solved using the same fundamental methods. </p>
+<p>There are many problems that share the same form. Due to the fact that Rust is not object-oriented design patterns vary with respect to other object-oriented programming languages. While the details are different, since they have the same form they can be solved using the same fundamental methods.</p>
 <p><a href="./patterns/index.html">Design patterns</a> are methods to solve common problems when writing software.</p>
-<p><a href="./anti_patterns/index.html">Anti-patterns</a> are methods to solve these same common problems. </p>
+<p><a href="./anti_patterns/index.html">Anti-patterns</a> are methods to solve these same common problems.</p>
 <p>However, while design patterns give us benefits, anti-patterns create more problems.</p>
-<p><a href="./idioms/index.html">Idioms</a> are guidelines to follow when coding. They are social norms of the community. 
-You can break them, but if you do you should have a good reason for it. </p>
+<p><a href="./idioms/index.html">Idioms</a> are guidelines to follow when coding. They are social norms of the community.
+You can break them, but if you do you should have a good reason for it.</p>
 <p>TODO: Mention why Rust is a bit special - functional elements, type system, borrow checker</p>
 <h1><a class="header" href="#idioms" id="idioms">Idioms</a></h1>
 <p><a href="https://en.wikipedia.org/wiki/Programming_idiom">Idioms</a> are commonly used styles and patterns largely agreed upon by a community. They are guidelines. Writing idiomatic code allows other developers to understand what is happening because they are familiar with the form that it has.</p>
@@ -193,7 +193,7 @@ You can break them, but if you do you should have a good reason for it. </p>
 In this way, the function will accept more input types.</p>
 <p>This is not limited to slice-able or fat pointer types. In fact you should always prefer using the <strong>borrowed type</strong> over <strong>borrowing the owned type</strong>. E.g., <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</code> over <code>&amp;Vec&lt;T&gt;</code>, or <code>&amp;T</code> over <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection. For instance, a <code>String</code> has a layer of indirection, so a <code>&amp;String</code> will have two layers of indrection.
-We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code> coerce to a <code>&amp;str</code> whenever the function is invoked. </p>
+We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code> coerce to a <code>&amp;str</code> whenever the function is invoked.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>For this example, we will illustrate some differences for using <code>&amp;String</code> as a function argument versus using a <code>&amp;str</code>, but the ideas apply as well to using <code>&amp;Vec&lt;T&gt;</code> versus using a <code>&amp;[T]</code> or using a <code>&amp;T</code> versus a <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Consider an example where we wish to determine if a word contains three consecutive vowels.
@@ -228,8 +228,8 @@ fn main() {
 }
 </code></pre></pre>
 <p>This works fine because we are passing a <code>&amp;String</code> type as a parameter.
-If we comment in the last two lines this example fails because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type. 
-We can fix this by simply modifying the type for our argument. </p>
+If we comment in the last two lines this example fails because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type.
+We can fix this by simply modifying the type for our argument.</p>
 <p>For instance, if we change our function declaration to:</p>
 <pre><code class="language-rust ignore">fn three_vowels(word: &amp;str) -&gt; bool {
 </code></pre>
@@ -237,7 +237,7 @@ We can fix this by simply modifying the type for our argument. </p>
 <pre><code class="language-bash">Ferris: false
 Curious: true
 </code></pre>
-<p>But wait, that's not all! There is more to this story. 
+<p>But wait, that's not all! There is more to this story.
 It's likely that you may say to yourself: that doesn't matter, I will never be using a <code>&amp;'static str</code> as an input anways (as we did when we used <code>&quot;Ferris&quot;</code>).
 Even ignoring this special example, you may still find that using <code>&amp;str</code> will give you more flexibility than using a <code>&amp;String</code>.</p>
 <p>Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.
@@ -272,7 +272,7 @@ fn main() {
 <p>Running this example using our function declared with an argument type <code>&amp;str</code> will yield</p>
 <pre><code class="language-bash">curious has three consecutive vowels!
 </code></pre>
-<p>However, this example will not run when our function is declared with an argument type <code>&amp;String</code>. 
+<p>However, this example will not run when our function is declared with an argument type <code>&amp;String</code>.
 This is because string slices are a <code>&amp;str</code> and not a <code>&amp;String</code> which would require an allocation to be converted to <code>&amp;String</code> which is not implicit, whereas converting from <code>String</code> to <code>&amp;str</code> is cheap and implicit.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
@@ -335,7 +335,7 @@ impl&lt;T&gt; Vec&lt;T&gt; {
 </code></pre>
 <h2><a class="header" href="#see-also-1" id="see-also-1">See also</a></h2>
 <p>The <a href="idioms/../patterns/builder.html">builder pattern</a> for constructing objects where there are multiple
-configurations. </p>
+configurations.</p>
 <h1><a class="header" href="#the-default-trait" id="the-default-trait">The <code>Default</code> Trait</a></h1>
 <h2><a class="header" href="#description-3" id="description-3">Description</a></h2>
 <p>Many types in Rust have a <a href="idioms/ctor.html">constructor</a>. However, this is <em>specific</em> to the
@@ -675,7 +675,7 @@ of type <code>Stdin</code>, <code>file</code> is of type <code>File</code> and <
 </ul>
 <h2><a class="header" href="#see-also-6" id="see-also-6">See also</a></h2>
 <ul>
-<li><a href="idioms/dtor-finally.html">Finalisation in destructors</a> and 
+<li><a href="idioms/dtor-finally.html">Finalisation in destructors</a> and
 <a href="idioms/../patterns/RAII.html">RAII guards</a> can benefit from tight control over lifetimes.</li>
 <li>For conditionally filled <code>Option&lt;&amp;T&gt;</code>s of (mutable) references, one can
 initialize an <code>Option&lt;T&gt;</code> directly and use its <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref"><code>.as_ref()</code></a> method to get an
@@ -805,11 +805,11 @@ fn main(s: a::S) {
 <p>If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible. The problem there is exhaustive match expressions. A private variant would force clients to have a <code>_</code> wildcard pattern.</p>
 <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description-11" id="description-11">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a 
+<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
 function which takes the struct as an argument.</p>
 <h2><a class="header" href="#motivation-4" id="motivation-4">Motivation</a></h2>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
-Each of these methods should have examples. </p>
+Each of these methods should have examples.</p>
 <p>For example:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
@@ -867,7 +867,7 @@ impl Connection {
 <p>As example is in a function, the code will not be tested. (Though it still will checked to make sure it compiles when running a <code>cargo test</code>)
 So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion-5" id="discussion-5">Discussion</a></h2>
-<p>If assertions are not required this pattern works well. </p>
+<p>If assertions are not required this pattern works well.</p>
 <p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated with <code>#[doc(hidden)]</code> (so that users won't see it).
 Then this method can be called inside of rustdoc because it is part of the crate's public API.</p>
 <h1><a class="header" href="#temporary-mutability" id="temporary-mutability">Temporary mutability</a></h1>
@@ -899,7 +899,7 @@ let data = data;
 <p>Nested block requires additional indentation of block body.
 One more line to return data from block or redefine variable.</p>
 <h1><a class="header" href="#design-patterns-1" id="design-patterns-1">Design Patterns</a></h1>
-<p><a href="https://en.wikipedia.org/wiki/Software_design_pattern">Design patterns</a> are &quot;general reusable solutions to a commonly occurring problem within a given context in software design&quot;. 
+<p><a href="https://en.wikipedia.org/wiki/Software_design_pattern">Design patterns</a> are &quot;general reusable solutions to a commonly occurring problem within a given context in software design&quot;.
 Design patterns are a great way to describe some of the culture and 'tribal knowledge' of programming in a language.
 Design patterns are very language-specific - what is a pattern in one language may be unnecessary in another due to a language feature, or impossible to express due to a missing feature.</p>
 <p>If overused, design patterns can add unnecessary complexity to programs. However, they are a great way to share intermediate and advanced level knowledge about a programming language.</p>
@@ -1184,10 +1184,10 @@ concept of walking a data structure performing an operation on each node.
 However, the visitor does not create a new data structure nor consume the old
 one.</p>
 <h1><a class="header" href="#newtype" id="newtype">Newtype</a></h1>
-<p>What if in some cases we want a type to behave similar to another type or 
-enforce some behaviour at compile time where using only type aliases would 
-not be enough? </p>
-<p>For example, if we want to create a custom <code>Display</code> implementation for <code>String</code> 
+<p>What if in some cases we want a type to behave similar to another type or
+enforce some behaviour at compile time where using only type aliases would
+not be enough?</p>
+<p>For example, if we want to create a custom <code>Display</code> implementation for <code>String</code>
 due to security considerations (e.g. passwords).</p>
 <p>For such cases we could use the <code>Newtype</code> pattern to provide <strong>type safety</strong> and <strong>encapsulation</strong>.</p>
 <h2><a class="header" href="#description-16" id="description-16">Description</a></h2>
@@ -1507,7 +1507,7 @@ which performs the same duty.</p>
 <p>The <a href="patterns/fold.html">fold</a> pattern is similar to visitor but produces a new version of
 the visited data structure.</p>
 <h1><a class="header" href="#anti-patterns" id="anti-patterns">Anti-patterns</a></h1>
-<p>An <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a> is a solution to a &quot;recurring problem that is usually ineffective and risks being highly counterproductive&quot;. 
+<p>An <a href="https://en.wikipedia.org/wiki/Anti-pattern">anti-pattern</a> is a solution to a &quot;recurring problem that is usually ineffective and risks being highly counterproductive&quot;.
 Just as valuable as knowing how to solve a problem, is knowing how <em>not</em> to solve it.
 Anti-patterns give us great counter-examples to consider relative to design patterns.
 Anti-patterns are not confined to code. For example, a process can be an anti-pattern, too.</p>

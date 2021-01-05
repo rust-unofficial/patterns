@@ -173,7 +173,7 @@
 In this way, the function will accept more input types.</p>
 <p>This is not limited to slice-able or fat pointer types. In fact you should always prefer using the <strong>borrowed type</strong> over <strong>borrowing the owned type</strong>. E.g., <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</code> over <code>&amp;Vec&lt;T&gt;</code>, or <code>&amp;T</code> over <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection. For instance, a <code>String</code> has a layer of indirection, so a <code>&amp;String</code> will have two layers of indrection.
-We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code> coerce to a <code>&amp;str</code> whenever the function is invoked. </p>
+We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code> coerce to a <code>&amp;str</code> whenever the function is invoked.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>For this example, we will illustrate some differences for using <code>&amp;String</code> as a function argument versus using a <code>&amp;str</code>, but the ideas apply as well to using <code>&amp;Vec&lt;T&gt;</code> versus using a <code>&amp;[T]</code> or using a <code>&amp;T</code> versus a <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Consider an example where we wish to determine if a word contains three consecutive vowels.
@@ -208,8 +208,8 @@ fn main() {
 }
 </code></pre></pre>
 <p>This works fine because we are passing a <code>&amp;String</code> type as a parameter.
-If we comment in the last two lines this example fails because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type. 
-We can fix this by simply modifying the type for our argument. </p>
+If we comment in the last two lines this example fails because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type.
+We can fix this by simply modifying the type for our argument.</p>
 <p>For instance, if we change our function declaration to:</p>
 <pre><code class="language-rust ignore">fn three_vowels(word: &amp;str) -&gt; bool {
 </code></pre>
@@ -217,7 +217,7 @@ We can fix this by simply modifying the type for our argument. </p>
 <pre><code class="language-bash">Ferris: false
 Curious: true
 </code></pre>
-<p>But wait, that's not all! There is more to this story. 
+<p>But wait, that's not all! There is more to this story.
 It's likely that you may say to yourself: that doesn't matter, I will never be using a <code>&amp;'static str</code> as an input anways (as we did when we used <code>&quot;Ferris&quot;</code>).
 Even ignoring this special example, you may still find that using <code>&amp;str</code> will give you more flexibility than using a <code>&amp;String</code>.</p>
 <p>Let's now take an example where someone gives us a sentence, and we want to determine if any of the words in the sentence has a word that contains three consecutive vowels.
@@ -252,7 +252,7 @@ fn main() {
 <p>Running this example using our function declared with an argument type <code>&amp;str</code> will yield</p>
 <pre><code class="language-bash">curious has three consecutive vowels!
 </code></pre>
-<p>However, this example will not run when our function is declared with an argument type <code>&amp;String</code>. 
+<p>However, this example will not run when our function is declared with an argument type <code>&amp;String</code>.
 This is because string slices are a <code>&amp;str</code> and not a <code>&amp;String</code> which would require an allocation to be converted to <code>&amp;String</code> which is not implicit, whereas converting from <code>String</code> to <code>&amp;str</code> is cheap and implicit.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
