@@ -54,7 +54,7 @@ It is completely opaque to the user, who cannot create a `DBM` themselves since 
 
 This means all `DBM`s are "owned" by the library in a Rust sense. The internal state of unknown size is kept in memory controlled by the library, not the user. The user can only manage its life cycle with `open` and `close`, and perform operations on it with the other functions.
 
-The `datum` type was called a "transactional" type above. It is designed to facilitate the exchange of information between the library and it user.
+The `datum` type was called a "transactional" type above. It is designed to facilitate the exchange of information between the library and its user.
 
 The database is designed to store "unstructured data", with no pre-defined length or meaning. As a result, the `datum` is the C equivalent of a Rust slice: a bunch of bytes, and a count of how many there are. The main difference is that there is no type information, which is what `void` indicates.
 
