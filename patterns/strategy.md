@@ -86,7 +86,6 @@ fn main() {
     assert!(s.contains(r#"{"one":"1"}"#));
     assert!(s.contains(r#"{"two":"2"}"#));
 }
-
 ```
 
 ## Advantages
