@@ -104,7 +104,12 @@ If there are many strategies to choose from then users have to know how strategi
 ## Discussion
 
 In the previous example all strategies in a single file.
-Typically in Rust, each strategy should be implemented in a separate module file.
+Ways of providing different strategies includes:
+
+- All in one file (as shown in this example, similar to being separated as modules)
+- Separated as modules, E.g. `formatter::json` module, `formatter::text` module
+- Use compiler feature flags, E.g. `json` feature, `text` feature 
+- Separated as crates, E.g. `json` crate, `text` crate
 However, we don't need to use traits in order to design this pattern in Rust.
 
 The following toy example demonstrates the idea of the Strategy pattern using Rust `closures`:
