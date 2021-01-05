@@ -6,7 +6,7 @@ We can use [design patterns](../patterns/index.md) to [DRY] up code and generali
 
 > Shortcuts make for long days.
 
-We can also use [idioms](../idioms/index.md) to structure our code in a way that is understandable. 
+We can also use [idioms](../idioms/index.md) to structure our code in a way that is understandable.
 
 ## Tests
 
