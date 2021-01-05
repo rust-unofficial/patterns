@@ -98,7 +98,7 @@ i.e,`Formatter` and `run`.
 
 ## Disadvantages
 
-For each strategy there must me implemented at least one module, so number of modules
+For each strategy there must be implemented at least one module, so number of modules
 increases with number of strategies.
 If there are many strategies to choose from then users have to know how strategies differ
 from one another.
