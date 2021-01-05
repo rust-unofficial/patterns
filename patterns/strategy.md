@@ -49,8 +49,7 @@ impl Report {
 struct Text;
 impl Formatter for Text {
     fn run(&self, data: &Data) -> String {
-        data
-            .iter()
+        data.iter()
             .map(|(key, val)| format!("{} {}\n", key, val))
             .collect()
     }
