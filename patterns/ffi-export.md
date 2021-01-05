@@ -66,7 +66,6 @@ The answer for best memory safety is, "the user". But in cases such as retrievin
 
 This may all seem speculative, but this is what a pointer means in C. It means the same thing as Rust: "user defined lifetime." The user of the library needs to read the documentation in order to use it correctly. That said, there are some decisions that have fewer or greater consequences if users do it wrong. Minimizing those is what this best practice is about, and the key is to *transfer ownership of everything that is transparent*.
 
-[1] https://www.mankier.com/0p/ndbm.h
 
 ## Advantages
 
