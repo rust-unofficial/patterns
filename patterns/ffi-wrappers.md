@@ -14,7 +14,9 @@ The lowest risk API is the "consolidated wrapper", where all possible interactio
 
 ## Code Example
 
-To understand this, let us look at a classic example of an API to export: iteration through a collection. The API looks like this:
+To understand this, let us look at a classic example of an API to export: iteration through a collection. 
+
+The API looks like this:
 
 1. The iterator is wrapped with the collection, and is initialized with `first_key`.
 2. Each call to `next_key` will advance the iterator.
