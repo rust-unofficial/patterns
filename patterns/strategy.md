@@ -13,14 +13,9 @@ This is why we call it Dependency Inversion.
 
 Imagine we are working on a project that generates reports every month. 
 We need the reports to be generated in different formats (strategies), e.g., in `JSON` or `Plain Text` formats. 
-But thing very and we don't know what kind of requiremnt we may get in the future. 
+But things very and we don't know what kind of requiremnt we may get in the future. 
 For example, we may need to generate our report in a completly new format, 
 or just modify the existing format. 
-So, in order to make chages to our existing code base as much as possible 
-while keeping our solution adoptable to such changes, 
-we might exploit Strategy design pattern. 
-Rust has powerful trait system which allows to implement this pattern. 
-
 ## Example
 
 In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`. 
