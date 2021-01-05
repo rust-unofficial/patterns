@@ -37,7 +37,7 @@ pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
 
 The example is is written to ensure that:
 1. The `unsafe` block is as small as possible.
-1. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
+2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
 
 Consider an alternative, where the string is actually copied:
 
