@@ -23,7 +23,7 @@ Rust code must trust the memory safety of the foreign language beyond a certain 
 
 For example, if a pointer provenance is wrong, that may be a segfault due to invalid memory access. But if it is manipulated by unsafe code, it could become full-blown heap corruption.
 
-The Object-Based API design allows for writing shims that have good memory safety characteristics, and a clean boundary of what is safe and what is not.
+The Object-Based API design allows for writing shims that have good memory safety characteristics, and a clean boundary of what is safe and what is `unsafe`.
 
 ## Code Example
 
