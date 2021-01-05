@@ -82,17 +82,27 @@ Consider that the `MySet` in the wrapper could be manipulated by other functions
 A simple implementation of `myset_store` would be:
 
 ```rust,ignore
-pub fn myset_store(myset: *mut MySetWrapper, key: datum, value: datum) -> libc::c_int {
-    /* DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM. */
-    let myset: &mut MySet = unsafe { // SAFETY: whoops, UB occurs in here!
-        &mut (*myset).myset
-    };
+pub mod unsafe_module {
 
-    /* ...check and cast key and value data... */
+    // other module content
 
-    match myset.store(casted_key, casted_value) {
-        Ok(_) => 0,
-        Err(e) => e.into()
+    pub fn myset_store(
+        myset: *mut MySetWrapper,
+        key: datum, 
+        value: datum) -> libc::c_int {
+
+        /* DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM. */
+        
+        let myset: &mut MySet = unsafe { // SAFETY: whoops, UB occurs in here!
+            &mut (*myset).myset
+        };
+
+        /* ...check and cast key and value data... */
+
+        match myset.store(casted_key, casted_value) {
+            Ok(_) => 0,
+            Err(e) => e.into()
+        }
     }
 }
 ```
