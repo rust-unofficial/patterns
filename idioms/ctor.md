@@ -5,7 +5,6 @@
 Rust does not have constructors as a language construct. Instead, the convention
 is to use a static `new` method to create an object.
 
-
 ## Example
 
 ```rust,ignore
@@ -34,4 +33,4 @@ impl<T> Vec<T> {
 ## See also
 
 The [builder pattern](../patterns/builder.md) for constructing objects where there are multiple
-configurations. 
+configurations.

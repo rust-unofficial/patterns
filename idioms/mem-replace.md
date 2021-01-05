@@ -84,7 +84,6 @@ Note, however, that if we are using an `Option` and want to replace its
 value with a `None`, `Option`’s `take()` method provides a shorter and
 more idiomatic alternative.
 
-
 ## Advantages
 
 Look ma, no allocation! Also you may feel like Indiana Jones while doing it.
@@ -106,7 +105,6 @@ later.
 However, in Rust, we have to do a little more work to do this. An owned value
 may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.
-
 
 ## See also
 

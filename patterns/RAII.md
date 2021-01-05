@@ -69,19 +69,16 @@ fn baz(x: Mutex<Foo>) {
 }
 ```
 
-
 ## Motivation
 
 Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
 this pattern can be used to prevent such errors.
 
-
 ## Advantages
 
 Prevents errors where a resource is not finalised and where a resource is used
 after finalisation.
-
 
 ## Discussion
 
@@ -110,8 +107,6 @@ is shorter than the lifetime of `self`.
 Note that implementing `Deref` is not a core part of this pattern, it only makes
 using the guard object more ergonomic. Implementing a `get` method on the guard
 works just as well.
-
-
 
 ## See also
 
