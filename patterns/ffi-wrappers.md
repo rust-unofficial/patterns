@@ -103,6 +103,6 @@ Some may ask: how can C do this more efficiently? The answer is, it cheats. Rust
 In exchange, it is common to see code that is declared in the manual as "not thread safe" under some or all circumstances.
 In fact, [The GNU C library has an entire lexicon dedicated to concurrent behavior!](https://manpages.debian.org/buster/manpages/attributes.7.en.html)
 
-Rust would rather make everything memory safe all the time, for both safety and optimizations that C code cannot attain. Being denied access to certain shortcuts is the price Rust programmers pay.
+Rust would rather make everything memory safe all the time, for both safety and optimizations that C code cannot attain. Being denied access to certain shortcuts is the price Rust programmers need to pay.
 
 <a name="UB-note">1</a>: For the C programmers out there scratching their heads, the iterator need not be read *during* this code cause the UB. The exclusivity rule also enables compiler optimizations which may cause inconsistent observations by the iterator's shared reference (e.g. stack spills or out-of-order execution). These observations may happen *any time after* the mutable reference is created.
