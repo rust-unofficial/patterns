@@ -4,8 +4,6 @@ Writing FFI code is an entire course in itself. However, there are several idiom
 
 This section contains design patterns that may be useful when doing FFI.
 
-## 1. [Object-Based APIs](./ffi-export.md)
-Object-Based API design that has good memory safety characteristics, and a clean boundary of what is safe and what is unsafe
+1. [Object-Based API](./ffi-export.md) design that has good memory safety characteristics, and a clean boundary of what is safe and what is unsafe
 
-## 2. [Type Consolidation into Wrappers](./ffi-wrappers.md)
-group multiple Rust types together into an opaque "object"
+2. [Type Consolidation into Wrappers](./ffi-wrappers.md) - group multiple Rust types together into an opaque "object"
