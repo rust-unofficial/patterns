@@ -35,9 +35,9 @@ impl<T> Mutex<T> {
         //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { 
-            data: self, 
-            //.. 
+        MutexGuard {
+            data: self,
+            //..
         }
     }
 }
@@ -69,19 +69,16 @@ fn baz(x: Mutex<Foo>) {
 }
 ```
 
-
 ## Motivation
 
 Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
 this pattern can be used to prevent such errors.
 
-
 ## Advantages
 
 Prevents errors where a resource is not finalised and where a resource is used
 after finalisation.
-
 
 ## Discussion
 
@@ -111,8 +108,6 @@ Note that implementing `Deref` is not a core part of this pattern, it only makes
 using the guard object more ergonomic. Implementing a `get` method on the guard
 works just as well.
 
-
-
 ## See also
 
 [Finalisation in destructors idiom](../idioms/dtor-finally.md)
@@ -120,7 +115,7 @@ works just as well.
 RAII is a common pattern in C++: [cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
 [wikipedia][wikipedia].
 
-[wikipedia]:	https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
+[wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 
 [Style guide entry](https://doc.rust-lang.org/1.0.0/style/ownership/raii.html)
 (currently just a placeholder).
