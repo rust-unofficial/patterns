@@ -119,7 +119,7 @@ pub mod unsafe_module {
 
 If the iterator exists when this function is called, we have violated one of Rust's aliasing rules.
 According to Rust, the mutable reference in this block must have *exclusive* access to the object.
-If the iterator simply exists, it's not exclusive, so we have `undefined behaviour`! <sup>[1](#UB-footnote)</sup>
+If the iterator simply exists, it's not exclusive, so we have `undefined behaviour`! [^1]
 
 To avoid this, we must have a way of ensuring that mutable reference really is exclusive.
 That basically means clearing out the iterator's shared reference while it exists, and then reconstructing it.
@@ -133,4 +133,6 @@ In fact, [The GNU C library has an entire lexicon dedicated to concurrent behavi
 Rust would rather make everything memory safe all the time, for both safety and optimizations that C code cannot attain.
 Being denied access to certain shortcuts is the price Rust programmers need to pay.
 
-<a name="UB-footnote">1</a>: For the C programmers out there scratching their heads, the iterator need not be read *during* this code cause the UB. The exclusivity rule also enables compiler optimizations which may cause inconsistent observations by the iterator's shared reference (e.g. stack spills or reordering instructions for efficiency). These observations may happen *any time after* the mutable reference is created.
+[^1]: For the C programmers out there scratching their heads, the iterator need not be read *during* this code cause the UB.
+    The exclusivity rule also enables compiler optimizations which may cause inconsistent observations by the iterator's shared reference (e.g. stack spills or reordering instructions for efficiency).
+    These observations may happen *any time after* the mutable reference is created.
