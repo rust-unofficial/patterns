@@ -105,7 +105,7 @@ from one another.
 
 ## Discussion
 
-In the previous example all strategies in a single file.
+In the previous example all strategies are implemented in a single file.
 Ways of providing different strategies includes:
 
 - All in one file (as shown in this example, similar to being separated as modules)
