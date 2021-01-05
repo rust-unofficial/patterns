@@ -21,8 +21,8 @@ or just modify one of the existing formats.
 
 ## Example
 
-In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`
-`Text` and `Json` are our strategy structs.
+In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`,
+while `Text` and `Json` are our strategy structs.
 These strategies have to implement the `Formatter` trait.
 
 ```rust
