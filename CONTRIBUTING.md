@@ -3,7 +3,7 @@
 ## Introduction
 
 This book is a catalogue of Rust programming techniques, (anti-)patterns, idioms and other explanations.
-It is a compilation of collective (sometimes implicit) knowledge or experience that was created with collaborative effort.
+It is a compilation of collective (sometimes implicit) knowledge as well as experiences that have emerged through collaborative work.
 
 The patterns described here are __not rules__, but should be taken as guidelines for writing idiomatic code in Rust.
 We are collecting Rust patterns in this book so people can learn the tradeoffs between Rust idioms and use them properly in their own code.
