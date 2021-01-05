@@ -8,9 +8,11 @@ When accepting strings via FFI through pointers, there are two principles that s
 
 ## Motivation
 
-Rust has built-in support for C-style strings with its `CString` and `CStr` types. However, there are different approaches one can take with strings that are being accepted from a foreign caller of a Rust function.
+Rust has built-in support for C-style strings with its `CString` and `CStr` types.
+However, there are different approaches one can take with strings that are being accepted from a foreign caller of a Rust function.
 
-The best practice is simple: use `CStr` in such a way as to minimize unsafe code, and create a borrowed slice. If an owned String is needed, call `to_string()` on the string slice.
+The best practice is simple: use `CStr` in such a way as to minimize unsafe code, and create a borrowed slice.
+If an owned String is needed, call `to_string()` on the string slice.
 
 ## Code Example
 

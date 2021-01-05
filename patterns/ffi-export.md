@@ -11,7 +11,8 @@ When designing APIs in Rust which are exposed to other languages, there are some
 
 ## Motivation
 
-Rust has built-in FFI support to other languages. It does this by providing a way for crate authors to provide C-compatible APIs through different ABIs (though that is unimportant to this practice).
+Rust has built-in FFI support to other languages.
+It does this by providing a way for crate authors to provide C-compatible APIs through different ABIs (though that is unimportant to this practice).
 
 Well-designed Rust FFI follows C API design principles, while compromising the design in Rust as little as possible. There are three goals with any foreign API:
 
@@ -19,9 +20,11 @@ Well-designed Rust FFI follows C API design principles, while compromising the d
 2. Avoid the API dictating internal unsafety on the Rust side as much as possible.
 3. Keep the potential for memory unsafety and Rust `undefined behaviour` as small as possible.
 
-Rust code must trust the memory safety of the foreign language beyond a certain point. However, every bit of `unsafe` code on the Rust side is an opportunity for bugs, or to exacerbate `undefined behaviour`.
+Rust code must trust the memory safety of the foreign language beyond a certain point. 
+However, every bit of `unsafe` code on the Rust side is an opportunity for bugs, or to exacerbate `undefined behaviour`.
 
-For example, if a pointer provenance is wrong, that may be a segfault due to invalid memory access. But if it is manipulated by unsafe code, it could become full-blown heap corruption.
+For example, if a pointer provenance is wrong, that may be a segfault due to invalid memory access.
+But if it is manipulated by unsafe code, it could become full-blown heap corruption.
 
 The Object-Based API design allows for writing shims that have good memory safety characteristics, and a clean boundary of what is safe and what is `unsafe`.
 
@@ -49,23 +52,38 @@ int     dbm_store(DBM *, datum, datum, int);
 
 This API defines two types: `DBM` and `datum`.
 
-The `DBM` type was called an "encapsulated" type above. It is designed to contain internal state, and acts as an entry point for the library's behavior.
+The `DBM` type was called an "encapsulated" type above.
+It is designed to contain internal state, and acts as an entry point for the library's behavior.
 
-It is completely opaque to the user, who cannot create a `DBM` themselves since they don't know its size or layout. Instead, they must call `dbm_open`, and that only gives them *a pointer to one*.
+It is completely opaque to the user, who cannot create a `DBM` themselves since they don't know its size or layout.
+Instead, they must call `dbm_open`, and that only gives them *a pointer to one*.
 
-This means all `DBM`s are "owned" by the library in a Rust sense. The internal state of unknown size is kept in memory controlled by the library, not the user. The user can only manage its life cycle with `open` and `close`, and perform operations on it with the other functions.
+This means all `DBM`s are "owned" by the library in a Rust sense. The internal state of unknown size is kept in memory controlled by the library, not the user.
+The user can only manage its life cycle with `open` and `close`, and perform operations on it with the other functions.
 
 The `datum` type was called a "transactional" type above. It is designed to facilitate the exchange of information between the library and its user.
 
-The database is designed to store "unstructured data", with no pre-defined length or meaning. As a result, the `datum` is the C equivalent of a Rust slice: a bunch of bytes, and a count of how many there are. The main difference is that there is no type information, which is what `void` indicates.
+The database is designed to store "unstructured data", with no pre-defined length or meaning.
+As a result, the `datum` is the C equivalent of a Rust slice: a bunch of bytes, and a count of how many there are.
+The main difference is that there is no type information, which is what `void` indicates.
 
-Keep in mind that this header is written from the library's point of view. The user likely has some type they are using, which has a known size. But the library does not care, and by the rules of C casting, any type behind a pointer can be cast to `void`. So that is what that means.
+Keep in mind that this header is written from the library's point of view.
+The user likely has some type they are using, which has a known size.
+But the library does not care, and by the rules of C casting, any type behind a pointer can be cast to `void`.
 
-As noted earlier, this type is *transparent* to the user. But also, this type is *owned* by the user. This has subtle ramifications, due to that pointer inside it. The question is, who owns the memory that pointer points to?
+As noted earlier, this type is *transparent* to the user. But also, this type is *owned* by the user.
+This has subtle ramifications, due to that pointer inside it.
+The question is, who owns the memory that pointer points to?
 
-The answer for best memory safety is, "the user". But in cases such as retrieving a value, the user does not know how to allocate it correctly (since they don't know how long the value is). In this case, the library code is expected to use the heap that the user has access to -- such as the C library `malloc` and `free` -- and then *transfer ownership* in the Rust sense.
+The answer for best memory safety is, "the user".
+But in cases such as retrieving a value, the user does not know how to allocate it correctly (since they don't know how long the value is).
+In this case, the library code is expected to use the heap that the user has access to -- such as the C library `malloc` and `free` -- and then *transfer ownership* in the Rust sense.
 
-This may all seem speculative, but this is what a pointer means in C. It means the same thing as Rust: "user defined lifetime." The user of the library needs to read the documentation in order to use it correctly. That said, there are some decisions that have fewer or greater consequences if users do it wrong. Minimizing those is what this best practice is about, and the key is to *transfer ownership of everything that is transparent*.
+This may all seem speculative, but this is what a pointer means in C.
+It means the same thing as Rust: "user defined lifetime."
+The user of the library needs to read the documentation in order to use it correctly.
+That said, there are some decisions that have fewer or greater consequences if users do it wrong.
+Minimizing those is what this best practice is about, and the key is to *transfer ownership of everything that is transparent*.
 
 
 ## Advantages
@@ -75,9 +93,11 @@ This minimizes the number of memory safety guarantees the user must uphold to a 
 2. Do not call any function on a pointer after close (use after free).
 3. The `dptr` on any `datum` must be `NULL`, or point to a valid slice of memory at the advertised length.
 
-In addition, it avoids a lot of pointer provenance issues. To understand why, let us consider an alternative in some depth: key iteration.
+In addition, it avoids a lot of pointer provenance issues.
+To understand why, let us consider an alternative in some depth: key iteration.
 
-Rust is well known for its iterators. When implementing one, the programmer makes a separate type with a bounded lifetime to its owner, and implements the `Iterator` trait.
+Rust is well known for its iterators.
+When implementing one, the programmer makes a separate type with a bounded lifetime to its owner, and implements the `Iterator` trait.
 
 Here is how iteration would be done in Rust for `DBM`:
 
@@ -97,7 +117,8 @@ struct DbmKeysIter<'it> {
 impl<'it> Iterator for DbmKeysIter<'it> { ... }
 ```
 
-This is clean, idiomatic, and safe. thanks to Rust's guarantees. However, consider what a straightforward API translation would look like:
+This is clean, idiomatic, and safe. thanks to Rust's guarantees.
+However, consider what a straightforward API translation would look like:
 
 ```rust,ignore
 #[no_mangle]
@@ -114,7 +135,8 @@ pub extern "C" fn dbm_iter_del(*mut DbmKeysIter) {
 }
 ```    
 
-This API loses a key piece of information: the lifetime of the iterator must not exceed the lifetime of the `Dbm` object that owns it. A user of the library could use it in a way which causes the iterator to outlive the data it is iterating on, resulting in reading uninitialized memory.
+This API loses a key piece of information: the lifetime of the iterator must not exceed the lifetime of the `Dbm` object that owns it.
+A user of the library could use it in a way which causes the iterator to outlive the data it is iterating on, resulting in reading uninitialized memory.
 
 This example written in C contains a bug that will be explained afterwards:
 
@@ -152,13 +174,17 @@ This bug is a classic. Here's what happens when the iterator returns the end-of-
 3. The if statement is true, so the database is closed. There should be a break statement here.
 4. The loop condition executes again, causing a `next` call on the closed object.
 
-The worst part about this bug? If the Rust implementation was careful, this code will work most of the time!
+The worst part about this bug?
+If the Rust implementation was careful, this code will work most of the time!
 If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly fail, resulting in the iterator returning a `-1` indicating an error.
 But occasionally, it will cause a segmentation fault, or even worse, nonsensical memory corruption!
 
-None of this can be avoided by Rust. From its perspective, it put those objects on its heap, returned pointers to them, and gave up control of their lifetimes. The C code simply must "play nice".
+None of this can be avoided by Rust.
+From its perspective, it put those objects on its heap, returned pointers to them, and gave up control of their lifetimes. The C code simply must "play nice".
 
-The programmer must read and understand the API documentation. While some consider that par for the course in C, a good API design can mitigate this risk. The POSIX API for `DBM` did this by *consolidating the ownership* of the iterator with its parent:
+The programmer must read and understand the API documentation.
+While some consider that par for the course in C, a good API design can mitigate this risk.
+The POSIX API for `DBM` did this by *consolidating the ownership* of the iterator with its parent:
 
 ```C
 datum   dbm_firstkey(DBM *);
@@ -171,14 +197,17 @@ Thus, all of the lifetimes were bound together, and such unsafety was prevented.
 
 However, this design choice also has a number of drawbacks, which should be considered as well.
 
-First, the API itself becomes less expressive. With POSIX DBM, there is only one iterator per object, and every call changes its state. 
+First, the API itself becomes less expressive.
+With POSIX DBM, there is only one iterator per object, and every call changes its state. 
 This is much more restrictive than iterators in almost any language, even though it is safe. 
 Perhaps with other related objects, whose lifetimes are less hierarchical, this limitation is more of a cost than the safety.
 
-Second, depending on the relationships of the API's parts, significant design effort may be involved. Many of the easier design points have other patterns associated with them:
+Second, depending on the relationships of the API's parts, significant design effort may be involved.
+Many of the easier design points have other patterns associated with them:
 
 - [Wrapper Type Consolidation](./ffi-wrappers.md) groups multiple Rust types together into an opaque "object"
 * [FFI Error Passing](../idioms/ffi-errors.md) explains error handling with integer codes and sentinel return values (such as `NULL` pointers)
 * [Accepting Foreign Strings](../idioms/ffi-accepting-strings.md) allows accepting strings with minimal unsafe code, and is easier to get right than [Passing Strings to FFI](../idioms/ffi-passing-strings.md)
 
-However, not every API can be done this way. It is up to the best judgement of the programmer as to who their audience is.
+However, not every API can be done this way.
+It is up to the best judgement of the programmer as to who their audience is.

@@ -2,7 +2,8 @@
 
 ## Description
 
-In foreign languages like C, errors are represented by return codes. However, Rust's type system allows much more rich error information to be captured a propogated through a full type.
+In foreign languages like C, errors are represented by return codes.
+However, Rust's type system allows much more rich error information to be captured a propogated through a full type.
 
 This best practice shows different kinds of error codes, and how to expose them in a usable way:
 1. Flat Enums should be converted to integers and returned as codes.
