@@ -5,7 +5,7 @@ However, there are several idioms here that can act as pointers, and avoid traps
 
 This section contains idioms that may be useful when doing FFI.
 
-1. [Idiomatic Errors](./ffi-errors.md) - Error handling with integer codes and sentinel return values (such as NULL pointers)
+1. [Idiomatic Errors](./ffi-errors.md) - Error handling with integer codes and sentinel return values (such as `NULL` pointers)
 
 2. [Accepting Strings](./ffi-accepting-strings.md) with minimal unsafe code
 
