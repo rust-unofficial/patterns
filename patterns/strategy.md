@@ -12,7 +12,7 @@ This is why we call it Dependency Inversion.
 ## Motivation
 
 Imagine we are working on a project that generates reports every month. 
-We need the reports to be generated in different formats, e.g., in `JSON` or `Plain Text` formats. 
+We need the reports to be generated in different formats (strategies), e.g., in `JSON` or `Plain Text` formats. 
 But thing very and we don't know what kind of requiremnt we may get in the future. 
 For example, we may need to generate our report in a completly new format, 
 or just modify the existing format. 
