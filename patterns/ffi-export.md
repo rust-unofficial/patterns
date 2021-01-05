@@ -29,7 +29,8 @@ The Object-Based API design allows for writing shims that have good memory safet
 
 The POSIX standard defines the API to access an on-file database, known as [DBM](https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h). It is an excellent example of an "object-based" API.
 
-Here is the definition in C, which hopefully should be easy to read for those involved in FFI. The commentary below should help explaining it for those who miss the subtleties.
+Here is the definition in C, which hopefully should be easy to read for those involved in FFI.
+The commentary below should help explaining it for those who miss the subtleties.
 
 ```C
 struct DBM;
@@ -176,7 +177,7 @@ Perhaps with other related objects, whose lifetimes are less hierarchical, this 
 
 Second, depending on the relationships of the API's parts, significant design effort may be involved. Many of the easier design points have other patterns associated with them:
 
-* [Wrapper Type Consolidation](./ffi-wrappers.md) groups multiple Rust types together into an opaque "object"
+- [Wrapper Type Consolidation](./ffi-wrappers.md) groups multiple Rust types together into an opaque "object"
 * [FFI Error Passing](../idioms/ffi-errors.md) explains error handling with integer codes and sentinel return values (such as `NULL` pointers)
 * [Accepting Foreign Strings](../idioms/ffi-accepting-strings.md) allows accepting strings with minimal unsafe code, and is easier to get right than [Passing Strings to FFI](../idioms/ffi-passing-strings.md)
 

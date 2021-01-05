@@ -95,11 +95,14 @@ This code in inferior to the original in two respects:
 1. There is much more `unsafe` code, and more importantly, more invariants it must uphold.
 2. Due to the extensive arithmetic required, there is a bug in this version that cases Rust `undefined behaviour`.
 
-The bug here is a simple mistake in pointer arithmetic: the string was copied, all `msg_len` bytes of it. However, the NUL terminator at the end was not.
+The bug here is a simple mistake in pointer arithmetic: the string was copied, all `msg_len` bytes of it.
+However, the `NUL` terminator at the end was not.
 
-The Vector then had its size *set* to the length of the *zero padded string* -- rather than *resized* to it, which could have added a zero at the end. As a result, the last byte in the Vector is uninitialized memory. When the `CString` is created at the bottom of the block, its read of the Vector will cause `undefined behaviour`!
+The Vector then had its size *set* to the length of the *zero padded string* -- rather than *resized* to it, which could have added a zero at the end. As a result, the last byte in the Vector is uninitialized memory.
+When the `CString` is created at the bottom of the block, its read of the Vector will cause `undefined behaviour`!
 
-Like many such issues, this would be difficult issue to track down. Sometimes it would panic because the string was not UTF-8, sometimes it would put a weird character at the end of the string, sometimes it would just completely crash.
+Like many such issues, this would be difficult issue to track down.
+Sometimes it would panic because the string was not `UTF-8`, sometimes it would put a weird character at the end of the string, sometimes it would just completely crash.
 
 ## Disadvantages
 

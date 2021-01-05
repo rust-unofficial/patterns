@@ -108,7 +108,9 @@ pub mod unsafe_module {
 }
 ```
 
-If the iterator exists when this function is called, we have violated one of Rust's aliasing rules. According to Rust, the mutable reference in this block must have *exclusive* access to the object. If the iterator simply exists, it's not exclusive, so we have `undefined behaviour`! <sup>[1](#UB-footnote)</sup>
+If the iterator exists when this function is called, we have violated one of Rust's aliasing rules.
+According to Rust, the mutable reference in this block must have *exclusive* access to the object.
+If the iterator simply exists, it's not exclusive, so we have `undefined behaviour`! <sup>[1](#UB-footnote)</sup>
 
 To avoid this, we must have a way of ensuring that mutable reference really is exclusive. That basically means clearing out the iterator's shared reference while it exists, and then reconstructing it. In most cases, that will still be less efficient than the C version.
 
