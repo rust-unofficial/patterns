@@ -73,7 +73,7 @@ struct MySetWrapper {
 }
 ```
 
-With `transmute` being used to extend a lifetime, and a pointer to hide it, it's ugly already. But it gets even worse: *any other operation can cause Rust UB*.
+With `transmute` being used to extend a lifetime, and a pointer to hide it, it's ugly already. But it gets even worse: *any other operation can cause Rust `undefined behaviour`*.
 
 Consider that the `MySet` in the wrapper could be manipulated by other functions during iteration, such as storing a new value to the key it was iterating over. The API doesn't discourage this, and in fact some similar C libraries expect it.
 
