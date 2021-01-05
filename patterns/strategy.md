@@ -13,7 +13,8 @@ This is why we call it "Dependency Inversion".
 ## Motivation
 
 Imagine we are working on a project that generates reports every month.
-We need the reports to be generated in different formats (strategies), e.g., in `JSON` or `Plain Text` formats. 
+We need the reports to be generated in different formats (strategies), e.g.,
+in `JSON` or `Plain Text` formats.
 But things very and we don't know what kind of requirement we may get in the future.
 For example, we may need to generate our report in a completly new format,
 or just modify the existing format.
@@ -87,9 +88,11 @@ fn main() {
 }
 
 ```
+
 ## Advantages
 
-Separation of concerns. In the previous example, Report does not know anything about specific implementations of `Json` and `Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
+Separation of concerns. In the previous example, Report does not know anything about
+specific implementations of `Json` and `Text`, whereas the output implementations does not care about how data is preprocessed, stored, and fetched. 
 The only thing they have to know is context and and a specific trait and method to implement, i.e., `Formatter` and `run`.
 
 ## Disadvantages
