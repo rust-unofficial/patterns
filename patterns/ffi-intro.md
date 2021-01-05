@@ -1,4 +1,4 @@
-# FFI Idioms
+# FFI Patterns
 
 Writing FFI code is an entire course in itself. However, there are several idioms here that can act a pointers, and avoid traps for inexperienced users of unsafe Rust.
 
