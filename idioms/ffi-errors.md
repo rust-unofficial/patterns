@@ -30,8 +30,7 @@ impl From<DatabaseError> for libc::c_int {
 ### Structured Enums
 
 ```rust,ignore
-pub mod unsafe_module {
-
+pub mod errors {
     enum DatabaseError {
         IsReadOnly,
         IOError(std::io::Error),
@@ -47,8 +46,10 @@ pub mod unsafe_module {
             }
         }
     }
+}
 
-    // other module content
+pub mod c_api {
+    use super::errors::DatabaseError;
 
     #[no_mangle]
     pub extern "C" fn db_error_description(
