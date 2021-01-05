@@ -24,7 +24,7 @@ The API looks like this:
 
 If the iterator implements `nth()` efficiently, then it is possible to make it ephemeral to each function call:
 
-```rust,ignore
+```rust
 struct MySetWrapper {
     myset: MySet,
     iter_next: usize,
