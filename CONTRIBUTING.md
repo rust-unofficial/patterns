@@ -5,7 +5,7 @@
 This book is a catalogue of Rust programming techniques, (anti-)patterns, idioms and other explanations.
 It is a compilation of collective (sometimes implicit) knowledge or experience that was created with collaborative effort.
 
-These contained information are __no rules__, they should be understood as guidelines.
+The patterns described here are __not rules__, but should be taken as guidelines for writing idiomatic code in Rust.
 We are collecting these information so people can form a balanced view on certain aspects.
 
 If you want to be part of this effort here are some ways you can participate:
