@@ -206,8 +206,8 @@ Second, depending on the relationships of the API's parts, significant design ef
 Many of the easier design points have other patterns associated with them:
 
 - [Wrapper Type Consolidation](./ffi-wrappers.md) groups multiple Rust types together into an opaque "object"
-* [FFI Error Passing](../idioms/ffi-errors.md) explains error handling with integer codes and sentinel return values (such as `NULL` pointers)
-* [Accepting Foreign Strings](../idioms/ffi-accepting-strings.md) allows accepting strings with minimal unsafe code, and is easier to get right than [Passing Strings to FFI](../idioms/ffi-passing-strings.md)
+- [FFI Error Passing](../idioms/ffi-errors.md) explains error handling with integer codes and sentinel return values (such as `NULL` pointers)
+- [Accepting Foreign Strings](../idioms/ffi-accepting-strings.md) allows accepting strings with minimal unsafe code, and is easier to get right than [Passing Strings to FFI](../idioms/ffi-passing-strings.md)
 
 However, not every API can be done this way.
 It is up to the best judgement of the programmer as to who their audience is.
