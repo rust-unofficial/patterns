@@ -71,7 +71,7 @@ pub mod unsafe_module {
             std::ptr::copy_nonoverlapping(msg, msg_data.as_mut(), msg_len + 1);
 
             // SAFETY: setting vector length to copied size, 
-            // so always ininitialized
+            // so always uninitialized
             msg_data.set_len(msg_len + 1);
 
             std::ffi::CString::from_vec_with_nul(msg_data).unwrap()
