@@ -56,6 +56,6 @@ code examples are correct.
 
 ### Important Note
 
-Please **don't force push** your branch to keep commit history and make it easier of us to see changes between reviews.
+Please **don't force push** your branch to keep commit history and make it easier for us to see changes between reviews.
 
 Make sure to `Allow edits of maintainers` (under the text box) in the PR so people can actually collaborate on things or fix smaller issues themselves.
