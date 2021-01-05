@@ -73,7 +73,7 @@ pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
 This code in inferior to the original in two respects:
 
 1. There is much more `unsafe` code, and more importantly, more invariants it must uphold.
-2. Due to the extensive arithmetic required, there is a bug in this version that cases Rust UB.
+2. Due to the extensive arithmetic required, there is a bug in this version that cases Rust `undefined behaviour`.
 
 ## Disadvantages
 
