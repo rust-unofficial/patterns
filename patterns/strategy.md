@@ -129,7 +129,13 @@ impl Adder {
 
 fn main() {
     let arith_adder = |x, y| x + y;
-    let bool_adder = |x, y| if x == 1 || y == 1 { 1 } else { 0 };
+    let bool_adder = |x, y| {
+        if x == 1 || y == 1 {
+            1
+        } else {
+            0
+        }
+    };
     let custom_adder = |x, y| 2 * x + y;
 
     assert_eq!(9, Adder::add(4, 5, arith_adder));
