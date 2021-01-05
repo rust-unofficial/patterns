@@ -19,7 +19,7 @@ Well-designed Rust FFI follows C API design principles, while compromising the d
 1. Avoid the API dictating internal unsafety on the Rust side as much as possible.
 1. Keep the potential for memory unsafety and Rust `undefined behaviour` as small as possible.
 
-Rust code must trust the memory safety of the foreign language beyond a certain point. However, every bit of `unsafe` code on the Rust side is an opportunity for bugs, or to exacerbate UB.
+Rust code must trust the memory safety of the foreign language beyond a certain point. However, every bit of `unsafe` code on the Rust side is an opportunity for bugs, or to exacerbate `undefined behaviour`.
 
 For example, if a pointer provenance is wrong, that may be a segfault due to invalid memory access. But if it is manipulated by unsafe code, it could become full-blown heap corruption.
 
