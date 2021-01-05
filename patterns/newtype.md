@@ -4,7 +4,7 @@ What if in some cases we want a type to behave similar to another type or
 enforce some behaviour at compile time where using only type aliases would 
 not be enough? 
 
-For example, if you want to create a custom `Display` implementation for `String` 
+For example, if we want to create a custom `Display` implementation for `String` 
 due to security considerations (e.g. passwords).
 
 For such cases we could use the `Newtype` pattern to provide __type safety__ and __encapsulation__.
