@@ -7,7 +7,7 @@ When passing strings to FFI functions, there are four principles that should be 
 1. Make the lifetime of owned strings as long as possible.
 1. Minimize `unsafe` code during the conversion.
 1. If the C code can modify the string data, use `Vec` instead of `CString`.
-1. Unless the FFAPI requires it, the ownership of the string should not transfer to the callee.
+1. Unless the Foreign Function API requires it, the ownership of the string should not transfer to the callee.
 
 ## Motivation
 
