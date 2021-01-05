@@ -6,6 +6,7 @@ In foreign languages like C, errors are represented by return codes.
 However, Rust's type system allows much more rich error information to be captured a propogated through a full type.
 
 This best practice shows different kinds of error codes, and how to expose them in a usable way:
+
 1. Flat Enums should be converted to integers and returned as codes.
 2. Structured Enums should be converted to an integer code with a string error message for detail.
 3. Custom Error Types should become "transparent", with a C representation.
@@ -91,7 +92,7 @@ pub mod c_api {
 
             malloc as *mut libc::c_char
         };
-        
+
         c_error
     }
 }

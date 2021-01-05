@@ -14,7 +14,7 @@ When passing strings to FFI functions, there are four principles that should be 
 Rust has built-in support for C-style strings with its `CString` and `CStr` types.
 However, there are different approaches one can take with strings that are being sent to a foreign function call from a Rust function.
 
-The best practice is simple: use `CString` in such a way as to minimize `unsafe` code. 
+The best practice is simple: use `CString` in such a way as to minimize `unsafe` code.
 However, a secondary caveat is that *the object must live long enough*, meaning the lifetime should be maximized.
 In addition, the documentation explains that "round-tripping" a `CString` after modification is UB, so additional work is necessary in that case.
 
@@ -63,6 +63,7 @@ pub mod unsafe_module {
 ## Advantages
 
 The example is written in a way to ensure that:
+
 1. The `unsafe` block is as small as possible.
 2. The `CString` lives long enough.
 3. Errors with typecasts are always propagated when possible.
@@ -86,7 +87,7 @@ pub mod unsafe_module {
 
 This code will result in a dangling pointer, because the lifetime of the `CString` is not extended by the pointer creation, unlike if a reference were created.
 
-Another issue frequently raised is that the initialization of a 1k vector of zeroes is "slow". 
+Another issue frequently raised is that the initialization of a 1k vector of zeroes is "slow".
 However, recent versions of Rust actually optimize that particular macro to a call to `zmalloc`, meaning it is as fast as the operating system's ability to return zeroed memory (which is quite fast).
 
 ## Disadvantages

@@ -3,6 +3,7 @@
 ## Description
 
 When accepting strings via FFI through pointers, there are two principles that should be followed:
+
 1. Keep foreign strings "borrowed", rather than copying them directly.
 2. Minimize `unsafe` code during the conversion.
 
@@ -46,6 +47,7 @@ pub mod unsafe_module {
 ## Advantages
 
 The example is is written to ensure that:
+
 1. The `unsafe` block is as small as possible.
 2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
 
@@ -68,7 +70,7 @@ pub mod unsafe_module {
         let mut msg_data = Vec::with_capacity(msg_len + 1);
 
         let msg_cstr: std::ffi::CString = unsafe {
-            // SAFETY: copying from a foreign pointer expected to live 
+            // SAFETY: copying from a foreign pointer expected to live
             // for the entire stack frame into owned memory
             std::ptr::copy_nonoverlapping(msg, msg_data.as_mut(), msg_len);
 

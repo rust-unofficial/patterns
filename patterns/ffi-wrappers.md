@@ -17,7 +17,7 @@ The lowest risk API is the "consolidated wrapper", where all possible interactio
 
 ## Code Example
 
-To understand this, let us look at a classic example of an API to export: iteration through a collection. 
+To understand this, let us look at a classic example of an API to export: iteration through a collection.
 
 That API looks like this:
 
@@ -98,11 +98,11 @@ pub mod unsafe_module {
 
     pub fn myset_store(
         myset: *mut MySetWrapper,
-        key: datum, 
+        key: datum,
         value: datum) -> libc::c_int {
 
         /* DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM. */
-        
+
         let myset: &mut MySet = unsafe { // SAFETY: whoops, UB occurs in here!
             &mut (*myset).myset
         };
