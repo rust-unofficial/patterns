@@ -8,7 +8,7 @@ It is a compilation of collective (sometimes implicit) knowledge or experience t
 These contained information are __no rules__, they should be understood as guidelines.
 We are collecting these information so people can form a balanced view on certain aspects.
 
-If you want to be part of that effort this is how you can participate:
+If you want to be part of this effort here are some ways you can participate:
 
 
 ## Discussion board
