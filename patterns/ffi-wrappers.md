@@ -4,7 +4,7 @@
 
 This pattern is designed to allow gracefully handling multiple related types, while minimizing the surface area for memory unsafety.
 
-One of the cornerstones of Rust's aliasing rules is lifetimes. This ensures many patterns of access between types can be memory safe, including against data races.
+One of the cornerstones of Rust's aliasing rules is lifetimes. This ensures that many patterns of access between types can be memory safe, data race safety included.
 
 However, when Rust types are exported to other languages, they are usually transformed into pointers. In Rust, a pointer means "the user manages the lifetime of the pointee." It is their responsibility to avoid memory unsafety.
 
