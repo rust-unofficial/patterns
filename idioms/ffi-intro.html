@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Prefer Small Crates - Rust Design Patterns</title>
+        <title>Foreign function interface usage - Rust Design Patterns</title>
         
         
 
@@ -95,7 +95,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../idioms/index.html"><strong aria-hidden="true">2.</strong> Idioms</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../idioms/coercion-arguments.html"><strong aria-hidden="true">2.1.</strong> Use borrowed types for arguments</a></li><li class="chapter-item expanded "><a href="../idioms/concat-format.html"><strong aria-hidden="true">2.2.</strong> Concatenating Strings with format!</a></li><li class="chapter-item expanded "><a href="../idioms/ctor.html"><strong aria-hidden="true">2.3.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../idioms/default.html"><strong aria-hidden="true">2.4.</strong> The Default Trait</a></li><li class="chapter-item expanded "><a href="../idioms/deref.html"><strong aria-hidden="true">2.5.</strong> Collections Are Smart Pointers</a></li><li class="chapter-item expanded "><a href="../idioms/dtor-finally.html"><strong aria-hidden="true">2.6.</strong> Finalisation in Destructors</a></li><li class="chapter-item expanded "><a href="../idioms/mem-replace.html"><strong aria-hidden="true">2.7.</strong> mem::replace(_)</a></li><li class="chapter-item expanded "><a href="../idioms/on-stack-dyn-dispatch.html"><strong aria-hidden="true">2.8.</strong> On-Stack Dynamic Dispatch</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-intro.html"><strong aria-hidden="true">2.9.</strong> Foreign function interface usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../idioms/ffi-errors.html"><strong aria-hidden="true">2.9.1.</strong> Idiomatic Errors</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-accepting-strings.html"><strong aria-hidden="true">2.9.2.</strong> Accepting Strings</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-passing-strings.html"><strong aria-hidden="true">2.9.3.</strong> Passing Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../idioms/option-iter.html"><strong aria-hidden="true">2.10.</strong> Iterating over an Option</a></li><li class="chapter-item expanded "><a href="../idioms/pass-var-to-closure.html"><strong aria-hidden="true">2.11.</strong> Pass Variables to Closure</a></li><li class="chapter-item expanded "><a href="../idioms/priv-extend.html"><strong aria-hidden="true">2.12.</strong> Privacy For Extensibility</a></li><li class="chapter-item expanded "><a href="../idioms/rustdoc-init.html"><strong aria-hidden="true">2.13.</strong> Easy doc initialization</a></li><li class="chapter-item expanded "><a href="../idioms/temporary-mutability.html"><strong aria-hidden="true">2.14.</strong> Temporary mutability</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html"><strong aria-hidden="true">3.</strong> Design Patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/builder.html"><strong aria-hidden="true">3.1.</strong> Builder</a></li><li class="chapter-item expanded "><a href="../patterns/compose-structs.html"><strong aria-hidden="true">3.2.</strong> Compose Structs</a></li><li class="chapter-item expanded "><a href="../patterns/entry.html"><strong aria-hidden="true">3.3.</strong> Entry API</a></li><li class="chapter-item expanded "><a href="../patterns/ffi-intro.html"><strong aria-hidden="true">3.4.</strong> Foreign function interface usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/ffi-export.html"><strong aria-hidden="true">3.4.1.</strong> Object-Based APIs</a></li><li class="chapter-item expanded "><a href="../patterns/ffi-wrappers.html"><strong aria-hidden="true">3.4.2.</strong> Type Consolidation into Wrappers</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/fold.html"><strong aria-hidden="true">3.5.</strong> Fold</a></li><li class="chapter-item expanded "><a href="../patterns/newtype.html"><strong aria-hidden="true">3.6.</strong> Newtype</a></li><li class="chapter-item expanded "><a href="../patterns/RAII.html"><strong aria-hidden="true">3.7.</strong> RAII Guards</a></li><li class="chapter-item expanded "><a href="../patterns/small-crates.html" class="active"><strong aria-hidden="true">3.8.</strong> Prefer Small Crates</a></li><li class="chapter-item expanded "><a href="../patterns/unsafe-mods.html"><strong aria-hidden="true">3.9.</strong> Contain unsafety in small modules</a></li><li class="chapter-item expanded "><a href="../patterns/visitor.html"><strong aria-hidden="true">3.10.</strong> Visitor</a></li></ol></li><li class="chapter-item expanded "><a href="../anti_patterns/index.html"><strong aria-hidden="true">4.</strong> Anti-patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../anti_patterns/deny-warnings.html"><strong aria-hidden="true">4.1.</strong> #[deny(warnings)]</a></li><li class="chapter-item expanded "><a href="../anti_patterns/deref.html"><strong aria-hidden="true">4.2.</strong> Deref Polymorphism</a></li></ol></li><li class="chapter-item expanded "><a href="../functional/index.html"><strong aria-hidden="true">5.</strong> Functional Programming</a></li><li class="chapter-item expanded "><a href="../additional_resources.html"><strong aria-hidden="true">6.</strong> Additional Resources</a></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../idioms/index.html"><strong aria-hidden="true">2.</strong> Idioms</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../idioms/coercion-arguments.html"><strong aria-hidden="true">2.1.</strong> Use borrowed types for arguments</a></li><li class="chapter-item expanded "><a href="../idioms/concat-format.html"><strong aria-hidden="true">2.2.</strong> Concatenating Strings with format!</a></li><li class="chapter-item expanded "><a href="../idioms/ctor.html"><strong aria-hidden="true">2.3.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../idioms/default.html"><strong aria-hidden="true">2.4.</strong> The Default Trait</a></li><li class="chapter-item expanded "><a href="../idioms/deref.html"><strong aria-hidden="true">2.5.</strong> Collections Are Smart Pointers</a></li><li class="chapter-item expanded "><a href="../idioms/dtor-finally.html"><strong aria-hidden="true">2.6.</strong> Finalisation in Destructors</a></li><li class="chapter-item expanded "><a href="../idioms/mem-replace.html"><strong aria-hidden="true">2.7.</strong> mem::replace(_)</a></li><li class="chapter-item expanded "><a href="../idioms/on-stack-dyn-dispatch.html"><strong aria-hidden="true">2.8.</strong> On-Stack Dynamic Dispatch</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-intro.html" class="active"><strong aria-hidden="true">2.9.</strong> Foreign function interface usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../idioms/ffi-errors.html"><strong aria-hidden="true">2.9.1.</strong> Idiomatic Errors</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-accepting-strings.html"><strong aria-hidden="true">2.9.2.</strong> Accepting Strings</a></li><li class="chapter-item expanded "><a href="../idioms/ffi-passing-strings.html"><strong aria-hidden="true">2.9.3.</strong> Passing Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../idioms/option-iter.html"><strong aria-hidden="true">2.10.</strong> Iterating over an Option</a></li><li class="chapter-item expanded "><a href="../idioms/pass-var-to-closure.html"><strong aria-hidden="true">2.11.</strong> Pass Variables to Closure</a></li><li class="chapter-item expanded "><a href="../idioms/priv-extend.html"><strong aria-hidden="true">2.12.</strong> Privacy For Extensibility</a></li><li class="chapter-item expanded "><a href="../idioms/rustdoc-init.html"><strong aria-hidden="true">2.13.</strong> Easy doc initialization</a></li><li class="chapter-item expanded "><a href="../idioms/temporary-mutability.html"><strong aria-hidden="true">2.14.</strong> Temporary mutability</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/index.html"><strong aria-hidden="true">3.</strong> Design Patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/builder.html"><strong aria-hidden="true">3.1.</strong> Builder</a></li><li class="chapter-item expanded "><a href="../patterns/compose-structs.html"><strong aria-hidden="true">3.2.</strong> Compose Structs</a></li><li class="chapter-item expanded "><a href="../patterns/entry.html"><strong aria-hidden="true">3.3.</strong> Entry API</a></li><li class="chapter-item expanded "><a href="../patterns/ffi-intro.html"><strong aria-hidden="true">3.4.</strong> Foreign function interface usage</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../patterns/ffi-export.html"><strong aria-hidden="true">3.4.1.</strong> Object-Based APIs</a></li><li class="chapter-item expanded "><a href="../patterns/ffi-wrappers.html"><strong aria-hidden="true">3.4.2.</strong> Type Consolidation into Wrappers</a></li></ol></li><li class="chapter-item expanded "><a href="../patterns/fold.html"><strong aria-hidden="true">3.5.</strong> Fold</a></li><li class="chapter-item expanded "><a href="../patterns/newtype.html"><strong aria-hidden="true">3.6.</strong> Newtype</a></li><li class="chapter-item expanded "><a href="../patterns/RAII.html"><strong aria-hidden="true">3.7.</strong> RAII Guards</a></li><li class="chapter-item expanded "><a href="../patterns/small-crates.html"><strong aria-hidden="true">3.8.</strong> Prefer Small Crates</a></li><li class="chapter-item expanded "><a href="../patterns/unsafe-mods.html"><strong aria-hidden="true">3.9.</strong> Contain unsafety in small modules</a></li><li class="chapter-item expanded "><a href="../patterns/visitor.html"><strong aria-hidden="true">3.10.</strong> Visitor</a></li></ol></li><li class="chapter-item expanded "><a href="../anti_patterns/index.html"><strong aria-hidden="true">4.</strong> Anti-patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../anti_patterns/deny-warnings.html"><strong aria-hidden="true">4.1.</strong> #[deny(warnings)]</a></li><li class="chapter-item expanded "><a href="../anti_patterns/deref.html"><strong aria-hidden="true">4.2.</strong> Deref Polymorphism</a></li></ol></li><li class="chapter-item expanded "><a href="../functional/index.html"><strong aria-hidden="true">5.</strong> Functional Programming</a></li><li class="chapter-item expanded "><a href="../additional_resources.html"><strong aria-hidden="true">6.</strong> Additional Resources</a></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -167,43 +167,34 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#prefer-small-crates" id="prefer-small-crates">Prefer small crates</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>Prefer small crates that do one thing well.</p>
-<p>Cargo and crates.io make it easy to add third-party libraries, much more so than in say C or C++. Moreover, since packages on crates.io cannot be edited or removed after publication, any build that works now should continue to work in the future. We should take advantage of this tooling, and use smaller, more fine-grained dependencies.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
-<ul>
-<li>Small crates are easier to understand, and encourage more modular code.</li>
-<li>Crates allow for re-using code between projects. For example, the <code>url</code> crate was developed as part of the Servo browser engine, but has since found wide use outside the project.</li>
-<li>Since the compilation unit of Rust is the crate, splitting a project into multiple crates can allow more of the code to be built in parallel.</li>
-</ul>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
-<ul>
-<li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting versions of a crate at the same time. For example, the <code>url</code> crate has both versions 1.0 and 0.5. Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types, an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
-<li>Packages on crates.io are not curated. A crate may be poorly written, have unhelpful documentation, or be outright malicious.</li>
-<li>Two small crates may be less optimized than one large one, since the compiler does not perform link-time optimization (LTO) by default.</li>
-</ul>
-<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
-<p>The <a href="https://crates.io/crates/ref_slice"><code>ref_slice</code></a> crate provides functions for converting <code>&amp;T</code> to <code>&amp;[T]</code>.</p>
-<p>The <a href="https://crates.io/crates/url"><code>url</code></a> crate provides tools for working with URLs.</p>
-<p>The <a href="https://crates.io/crates/num_cpus"><code>num_cpus</code></a> crate provides a function to query the number of CPUs on a machine.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
-<ul>
-<li><a href="https://crates.io/">crates.io: The Rust community crate host</a></li>
-</ul>
+                        <h1><a class="header" href="#ffi-idioms" id="ffi-idioms">FFI Idioms</a></h1>
+<p>Writing FFI code is an entire course in itself.
+However, there are several idioms here that can act as pointers, and avoid traps for inexperienced users of <code>unsafe</code> Rust.</p>
+<p>This section contains idioms that may be useful when doing FFI.</p>
+<ol>
+<li>
+<p><a href="./ffi-errors.html">Idiomatic Errors</a> - Error handling with integer codes and sentinel return values (such as <code>NULL</code> pointers)</p>
+</li>
+<li>
+<p><a href="./ffi-accepting-strings.html">Accepting Strings</a> with minimal unsafe code</p>
+</li>
+<li>
+<p><a href="./ffi-passing-strings.html">Passing Strings</a> to FFI functions</p>
+</li>
+</ol>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                         
-                            <a rel="prev" href="../patterns/RAII.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../idioms/on-stack-dyn-dispatch.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
                         
 
                         
-                            <a rel="next" href="../patterns/unsafe-mods.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../idioms/ffi-errors.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
                         
@@ -215,13 +206,13 @@
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                 
-                    <a rel="prev" href="../patterns/RAII.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../idioms/on-stack-dyn-dispatch.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
                 
 
                 
-                    <a rel="next" href="../patterns/unsafe-mods.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../idioms/ffi-errors.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
                 
