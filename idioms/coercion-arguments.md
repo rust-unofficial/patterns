@@ -8,7 +8,7 @@ In this way, the function will accept more input types.
 This is not limited to slice-able or fat pointer types. In fact you should always prefer using the __borrowed type__ over __borrowing the owned type__. E.g., `&str` over `&String`, `&[T]` over `&Vec<T>`, or `&T` over `&Box<T>`.
 
 Using borrowed types you can avoid layers of indirection for those instances where the owned type already provides a layer of indirection. For instance, a `String` has a layer of indirection, so a `&String` will have two layers of indrection.
-We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked. 
+We can avoid this by using `&str` instead, and letting `&String` coerce to a `&str` whenever the function is invoked.
 
 ## Example
 
@@ -50,8 +50,8 @@ fn main() {
 ```
 
 This works fine because we are passing a `&String` type as a parameter.
-If we comment in the last two lines this example fails because a `&str` type will not coerce to a `&String` type. 
-We can fix this by simply modifying the type for our argument. 
+If we comment in the last two lines this example fails because a `&str` type will not coerce to a `&String` type.
+We can fix this by simply modifying the type for our argument.
 
 For instance, if we change our function declaration to:
 
@@ -66,7 +66,7 @@ Ferris: false
 Curious: true
 ```
 
-But wait, that's not all! There is more to this story. 
+But wait, that's not all! There is more to this story.
 It's likely that you may say to yourself: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"`).
 Even ignoring this special example, you may still find that using `&str` will give you more flexibility than using a `&String`.
 
@@ -93,7 +93,7 @@ fn three_vowels(word: &str) -> bool {
 }
 
 fn main() {
-    let sentence_string = 
+    let sentence_string =
         "Once upon a time, there was a friendly curious crab named Ferris".to_string();
     for word in sentence_string.split(' ') {
         if three_vowels(word) {
@@ -109,9 +109,10 @@ Running this example using our function declared with an argument type `&str` wi
 curious has three consecutive vowels!
 ```
 
-However, this example will not run when our function is declared with an argument type `&String`. 
+However, this example will not run when our function is declared with an argument type `&String`.
 This is because string slices are a `&str` and not a `&String` which would require an allocation to be converted to `&String` which is not implicit, whereas converting from `String` to `&str` is cheap and implicit.
 
 ## See also
+
 - [Rust Language Reference on Type Coercions](https://doc.rust-lang.org/reference/type-coercions.html)
 - For more discussion on how to handle `String` and `&str` see [this blog series (2015)](https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman J. Radtke III.
