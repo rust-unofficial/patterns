@@ -31,8 +31,8 @@ use std::ops::Deref;
 struct Foo {}
 
 impl Foo {
-    fn m(&self) { 
-        //.. 
+    fn m(&self) {
+        //..
     }
 
 }
@@ -73,7 +73,7 @@ You save a little boilerplate, e.g.,
 
 ```rust,ignore
 impl Bar {
-    fn m(&self) { 
+    fn m(&self) {
         self.f.m()
     }
 }

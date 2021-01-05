@@ -33,7 +33,7 @@ impl Connection {
     fn send_request(&self, request: Request) -> Result<Status, SendErr> {
         // ...
     }
-        
+
     /// Oh no, all that boilerplate needs to be repeated here!
     fn check_status(&self) -> Status {
         // ...
@@ -58,7 +58,7 @@ impl Connection {
     /// ```
     /// # fn call_send(connection: Connection, request: Request) {
     /// let response = connection.send_request();
-    /// assert!(response.is_ok()); 
+    /// assert!(response.is_ok());
     /// # }
     /// ```
     fn send_request(&self, request: Request) {

@@ -35,9 +35,9 @@ impl<T> Mutex<T> {
         //..
 
         // MutexGuard keeps a reference to self
-        MutexGuard { 
-            data: self, 
-            //.. 
+        MutexGuard {
+            data: self,
+            //..
         }
     }
 }
