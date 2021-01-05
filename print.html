@@ -1184,8 +1184,12 @@ concept of walking a data structure performing an operation on each node.
 However, the visitor does not create a new data structure nor consume the old
 one.</p>
 <h1><a class="header" href="#newtype" id="newtype">Newtype</a></h1>
-<p>Rust has strong static types. This can be very different than what you are used to if you are coming from a loosely-typed language. Don't worry, though. Once you get used to them, you'll find the types actually make your life easier. Why? Because you are making implicit assumptions explicit.</p>
-<p>A really convenient application of the Rust type system is the Newtype pattern.</p>
+<p>What if in some cases we want a type to behave similar to another type or 
+enforce some behaviour at compile time where using only type aliases would 
+not be enough? </p>
+<p>For example, if we want to create a custom <code>Display</code> implementation for <code>String</code> 
+due to security considerations (e.g. passwords).</p>
+<p>For such cases we could use the <code>Newtype</code> pattern to provide <strong>type safety</strong> and <strong>encapsulation</strong>.</p>
 <h2><a class="header" href="#description-16" id="description-16">Description</a></h2>
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
@@ -1257,7 +1261,7 @@ most common uses, but they can be used for other reasons:</p>
 <p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
 <h2><a class="header" href="#see-also-10" id="see-also-10">See also</a></h2>
 <ul>
-<li><a href="https://doc.rust-lang.org/1.0.0/style/features/types/newtype.html">Newtypes in the style guide</a></li>
+<li><a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction">Advanced Types in the book</a></li>
 <li><a href="https://wiki.haskell.org/Newtype">Newtypes in Haskell</a></li>
 <li><a href="https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases">Type aliases</a></li>
 <li><a href="https://crates.io/crates/derive_more">derive_more</a>, a crate for deriving many builtin traits on newtypes.</li>
