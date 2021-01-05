@@ -28,7 +28,6 @@ In this example our invariants (or abstractions) are `Context`, `Formatter`, and
 These strategies have to implement `Formatter` trait.
 
 ```rust
-
 use std::fmt::Write as FmtWrite;
 use std::{error, result};
 type Result = result::Result<String, Box<dyn error::Error>>;
@@ -76,7 +75,7 @@ impl Formatter for Json {
             if s.len() > 1 {
                 write!(&mut s, ",")?;
             }
-            write!(&mut s, "{{ \"{}\":\"{}\"}}", key, val)?;
+            write!(&mut s, "{{\"{}\":\"{}\"}}", key, val)?;
         }
         write!(&mut s, "]")?;
         Ok(s)
@@ -90,7 +89,7 @@ fn main() {
     );
 
     assert_eq!(
-        String::from(r#"[{ "one":"1"},{ "two":"2"}]"#),
+        String::from(r#"[{"one":"1"},{"two":"2"}]"#),
         Report::generate(Json).unwrap()
     );
 }
@@ -146,7 +145,7 @@ fn main() {
     let val = Some("Rust");
     let len_strategy = |s: &str| s.len();
     let first_byte_strategy = |s: &str| s.bytes().next().unwrap();
-    
+
     assert_eq!(4, val.map(len_strategy).unwrap());
     assert_eq!(82, val.map(first_byte_strategy).unwrap());
 }
