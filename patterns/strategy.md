@@ -27,7 +27,7 @@ These strategies have to implement the `Formatter` trait.
 
 ```rust
 use std::collections::HashMap;
-use std::fmt::Write as FmtWrite;
+use std::fmt::Write;
 use std::error::Error;
 type Data = HashMap<String, u32>;
 
