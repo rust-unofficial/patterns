@@ -29,52 +29,72 @@ These strategies have to implement `Formatter` trait.
 
 ```rust
 
+use std::fmt::Write as FmtWrite;
+use std::{error, result};
+type Result = result::Result<String, Box<dyn error::Error>>;
+
 struct Context {
     pub keys: Vec<String>,
     pub values: Vec<i32>,
 }
 
 trait Formatter {
-    fn run(&self, context: &Context);
+    fn run(&self, context: &Context) -> Result;
 }
 
 struct Report;
 
 impl Report {
-    fn generate<T: Formatter>(g: T) {
+    fn generate<T: Formatter>(g: T) -> Result {
         //perform here backend operations which should not bother caller...
         //fetch data from database
         let keys = vec!["one".to_string(), "two".to_string()];
         let values = vec![1, 2];
-        // generate
-        g.run(&Context { keys, values });
+        // generate report
+        g.run(&Context { keys, values })
     }
 }
 
 struct Text;
 impl Formatter for Text {
-    fn run(&self, context: &Context) {
+    fn run(&self, context: &Context) -> Result {
+        let mut s = String::new();
+
         for (key, val) in context.keys.iter().zip(context.values.iter()) {
-            println!("{} {}", key, val);
+            write!(&mut s, "{} {}\n", key, val)?;
         }
+        Ok(s)
     }
 }
 
 struct Json;
 impl Formatter for Json {
-    fn run(&self, context: &Context) {
-        print!("[");
+    fn run(&self, context: &Context) -> Result {
+        let mut s = String::from("[");
+
         for (key, val) in context.keys.iter().zip(context.values.iter()) {
-            print!("{{ \"{}\":\"{}\"}},", key, val);
+            if s.len() > 1 {
+                write!(&mut s, ",")?;
+            }
+            write!(&mut s, "{{ \"{}\":\"{}\"}}", key, val)?;
         }
-        println!("\u{8}]");
+        write!(&mut s, "]")?;
+        Ok(s)
     }
 }
 
 fn main() {
-    Report::generate(Text);
-    Report::generate(Json);
+    assert_eq!(
+        String::from("one 1\ntwo 2\n"),
+        Report::generate(Text).unwrap()
+    );
+
+    assert_eq!(
+        String::from(r#"[{ "one":"1"},{ "two":"2"}]"#),
+        Report::generate(Json).unwrap()
+    );
 }
+
 ```
 
 
@@ -112,9 +132,9 @@ fn main() {
     let bool_adder = |x, y| if x == 1 || y == 1 { 1 } else { 0 };
     let custom_adder = |x, y| 2 * x + y;
 
-    println!("{:?}", Adder::add(4, 5, arith_adder));
-    println!("{:?}", Adder::add(0, 0, bool_adder));
-    println!("{:?}", Adder::add(0, 3, custom_adder));
+    assert_eq!(9, Adder::add(4, 5, arith_adder));
+    assert_eq!(0, Adder::add(0, 0, bool_adder));
+    assert_eq!(5, Adder::add(1, 3, custom_adder));
 }
 
 ```
@@ -123,12 +143,12 @@ In fact, Rust already uses this idea for `Options`'s `map` method
 
 ```rust
 fn main() {
-  let val = Some("Rust");
-  let len_strategy = |s: &str| s.len();
-  let first_byte_strategy = |s: &str| s.bytes().next().unwrap();
-
-  println!("len: {}", val.map(len_strategy).unwrap());
-  println!("first bite: {}", val.map(first_byte_strategy).unwrap());
+    let val = Some("Rust");
+    let len_strategy = |s: &str| s.len();
+    let first_byte_strategy = |s: &str| s.bytes().next().unwrap();
+    
+    assert_eq!(4, val.map(len_strategy).unwrap());
+    assert_eq!(82, val.map(first_byte_strategy).unwrap());
 }
 
 ```
