@@ -148,9 +148,9 @@ int count_key_sizes(DBM *db) {
 This bug is a classic. Here's what happens when the iterator returns the end-of-iteration marker:
 
 1. The loop condition sets `l` to zero, and enters the loop because `0 >= 0`.
-1. The length is incremented, in this case by zero.
-1. The if statement is true, so the database is closed. There should be a break statement here.
-1. The loop condition executes again, causing a `next` call on the closed object.
+2. The length is incremented, in this case by zero.
+3. The if statement is true, so the database is closed. There should be a break statement here.
+4. The loop condition executes again, causing a `next` call on the closed object.
 
 The worst part about this bug? If the Rust implementation was careful, this code will work most of the time! If the memory for the `Dbm` object is not immediately reused, an internal check will almost certainly return an error, resulting in the iterator returning a -1. But occasionally, it will be cause a segmentation fault, or even worse nonsensical memory corruption!
 
