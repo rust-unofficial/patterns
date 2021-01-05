@@ -51,11 +51,11 @@ This book is built with [mdbook](https://rust-lang.github.io/mdBook/). You can i
 
 If you want to build it locally you can run one of these two commands in the root directory of the repository:
 
-* `mdbook build`
+- `mdbook build`
 
   Builds static html pages as output and place them in the `/book` directory by default.
 
-* `mdbook serve`
+- `mdbook serve`
 
   Serves the book at `http://localhost:3000` (port is changeable, take a look at the terminal output
   to be sure) and reloads the browser when a change occurs.
