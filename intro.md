@@ -1,5 +1,9 @@
 # Introduction
 
+## Participation
+
+If you are interested in contributing to the Patterns catalogue, check out the [contribution guidelines](./CONTRIBUTING.md).
+
 ## Design patterns
 
 When developing programs, we have to solve many problems. A program can be viewed as a solution to a problem. It can also be viewed as a collection of solutions to many different problems. All of these solutions work together to solve a bigger problem.
