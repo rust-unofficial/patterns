@@ -55,7 +55,7 @@ impl Connection {
     /// # Example
     /// ```
     /// # fn call_send(connection: Connection, request: Request) {
-    /// let response = connection.send_request();
+    /// let response = connection.send_request(request);
     /// assert!(response.is_ok()); 
     /// # }
     /// ```
