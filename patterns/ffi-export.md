@@ -13,7 +13,7 @@ When designing APIs in Rust which are exposed to other languages, there are some
 
 Rust has built-in FFI support to other languages. It does this by providing a way for crate authors to provide C-compatible APIs through different ABIs (though that is unimportant to this practice).
 
-Well-designed Rust FFI follows C API design principles, while compromising the design in Rust as little ass possible. There are three goals with any foreign API:
+Well-designed Rust FFI follows C API design principles, while compromising the design in Rust as little as possible. There are three goals with any foreign API:
 
 1. Make it easy to use in the target language.
 1. Avoid the API dictating internal unsafety on the Rust side as much as possible.
