@@ -95,7 +95,7 @@ pub fn myset_store(myset: *mut MySetWrapper, key: datum, value: datum) -> libc::
 }
 ```
 
-If the iterator exists when this function is called, we have violated one of Rust's aliasing rules. According to Rust, the mutable reference in this block must have *exclusive* access to the object. If the iterator simply exists, it's not exclusive, so we have UB![1](#UB-footnote)
+If the iterator exists when this function is called, we have violated one of Rust's aliasing rules. According to Rust, the mutable reference in this block must have *exclusive* access to the object. If the iterator simply exists, it's not exclusive, so we have `undefined behaviour`![1](#UB-footnote)
 
 To avoid this, we must have a way of ensuring that mutable reference really is exclusive. That basically means clearing out the iterator's shared reference while it exists, and then reconstructing it. In most cases, that will still be less efficient than the C version.
 
