@@ -8,7 +8,7 @@ The basic idea behind the Strategy pattern is that, given an algorithm solving a
 
 In this way, a client using the algorithm may choose a specific implementation, while the general algorithm workflow remains the same.
 In other words, the abstract specification of the class does not depend on the specific implementation of the derived class, but specific implementation must adhere to the abstract specification.
-This is why we call it Dependency Inversion.
+This is why we call it "Dependency Inversion".
 
 ## Motivation
 
