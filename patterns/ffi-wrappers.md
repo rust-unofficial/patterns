@@ -46,7 +46,7 @@ impl MySetWrapper {
 }
 ```
 
-As a result, the wrapper is simple and contains no unsafe code.
+As a result, the wrapper is simple and contains no `unsafe` code.
 
 ## Advantages
 
