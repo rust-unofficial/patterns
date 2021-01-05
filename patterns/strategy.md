@@ -14,7 +14,7 @@ This is why we call it Dependency Inversion.
 
 Imagine we are working on a project that generates reports every month. 
 We need the reports to be generated in different formats (strategies), e.g., in `JSON` or `Plain Text` formats. 
-But things very and we don't know what kind of requiremnt we may get in the future. 
+But things very and we don't know what kind of requirement we may get in the future. 
 For example, we may need to generate our report in a completly new format, 
 or just modify the existing format. 
 ## Example
@@ -111,6 +111,7 @@ Ways of providing different strategies includes:
 - Separated as modules, E.g. `formatter::json` module, `formatter::text` module
 - Use compiler feature flags, E.g. `json` feature, `text` feature 
 - Separated as crates, E.g. `json` crate, `text` crate
+
 However, we don't need to use traits in order to design this pattern in Rust.
 
 The following toy example demonstrates the idea of the Strategy pattern using Rust `closures`:
