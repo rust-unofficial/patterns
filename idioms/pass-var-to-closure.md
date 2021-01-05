@@ -8,7 +8,6 @@ give it copy of some data, pass it by reference, or perform some other transform
 
 Use variable rebinding in separate scope for that.
 
-
 ## Example
 
 Use
@@ -45,7 +44,6 @@ let closure = move || {
 };
 ```
 
-
 ## Advantages
 
 Copied data are grouped together with closure definition, so their purpose is more clear
@@ -53,8 +51,6 @@ and they will be dropped immediately even if they are not consumed by closure.
 
 Closure uses same variable names as surrounding code whether data are copied or moved.
 
-
 ## Disadvantages
 
 Additional indentation of closure body.
-

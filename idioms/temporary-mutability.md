@@ -7,7 +7,6 @@ and never modified. The intention can be made explicit by redefining the mutable
 
 It can be done either by processing data within nested block or by redefining variable.
 
-
 ## Example
 
 Say, vector must be sorted before usage.
@@ -34,14 +33,11 @@ let data = data;
 // Here `data` is immutable.
 ```
 
-
 ## Advantages
 
 Compiler ensures that you don't accidentally mutate data after some point.
-
 
 ## Disadvantages
 
 Nested block requires additional indentation of block body.
 One more line to return data from block or redefine variable.
-

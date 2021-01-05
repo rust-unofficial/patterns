@@ -70,7 +70,6 @@ A folder can also be defined to map one data structure to a different (but
 usually similar) data structure. For example, we could fold an AST into a HIR
 tree (HIR stands for high-level intermediate representation).
 
-
 ## Motivation
 
 It is common to want to map a data structure by performing some operation on
@@ -82,7 +81,6 @@ appropriate.
 
 Like the visitor pattern, the fold pattern allows us to separate traversal of a
 data structure from the operations performed to each node.
-
 
 ## Discussion
 
@@ -107,7 +105,6 @@ Using a reference counted pointer gives the best of both worlds - we can reuse
 the original data structure and we don't need to clone unchanged nodes. However,
 they are less ergonomic to use and mean that the data structures cannot be
 mutable.
-
 
 ## See also
 

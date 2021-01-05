@@ -50,12 +50,10 @@ fn builder_test() {
 }
 ```
 
-
 ## Motivation
 
 Useful when you would otherwise require many different constructors or where
 construction has side effects.
-
 
 ## Advantages
 
@@ -65,12 +63,10 @@ Prevents proliferation of constructors
 
 Can be used for one-liner initialisation as well as more complex construction.
 
-
 ## Disadvantages
 
 More complex than creating a struct object directly, or a simple constructor
 function.
-
 
 ## Discussion
 
@@ -102,10 +98,8 @@ as well as the `FooBuilder::new().a().b().build()` style.
 
 ## See also
 
-[Description in the style guide](https://doc.rust-lang.org/1.0.0/style/ownership/builders.html)
-
-[derive_builder](https://crates.io/crates/derive_builder), a crate for automatically implementing this pattern while avoiding the boilerplate.
-
-[Constructor pattern](../idioms/ctor.md) for when construction is simpler.
-
-[Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
+- [Description in the style guide](https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)
+- [derive_builder](https://crates.io/crates/derive_builder), a crate for automatically implementing this pattern while avoiding the boilerplate.
+- [Constructor pattern](../idioms/ctor.md) for when construction is simpler.
+- [Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
+- [Builders enable construction of complex values (C-BUILDER)](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder) from the Rust API guidelines

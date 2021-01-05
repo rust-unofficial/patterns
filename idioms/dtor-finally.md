@@ -6,7 +6,6 @@ Rust does not provide the equivalent to `finally` blocks - code that will be
 executed no matter how a function is exited. Instead an object's destructor can
 be used to run code that must be run before exit.
 
-
 ## Example
 
 ```rust,ignore
@@ -30,7 +29,6 @@ fn bar() -> Result<(), ()> {
 }
 ```
 
-
 ## Motivation
 
 If a function has multiple return points, then executing code on exit becomes
@@ -41,12 +39,10 @@ an exception handling mechanism, but unlike Java (which has `finally`), there is
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.
 
-
 ## Advantages
 
 Code in destructors will (nearly) always be run - copes with panics, early
 returns, etc.
-
 
 ## Disadvantages
 
@@ -62,7 +58,6 @@ debugging tricky.
 
 Requiring an object and `Drop` impl just for finalisation is heavy on boilerplate.
 
-
 ## Discussion
 
 There is some subtlety about how exactly to store the object used as a
@@ -76,7 +71,7 @@ The finaliser must be assigned into a variable, otherwise it will be destroyed
 immediately, rather than when it goes out of scope. The variable name must start
 with `_` if the variable is only used as a finaliser, otherwise the compiler
 will warn that the finaliser is never used. However, do not call the variable
-`_` with no suffix - in that case it will be again be destroyed immediately.
+`_` with no suffix - in that case it will be destroyed immediately.
 
 In Rust, destructors are run when an object goes out of scope. This happens
 whether we reach the end of block, there is an early return, or the program
@@ -89,7 +84,6 @@ aborts the thread immediately, without running further destructors. This means
 that desctructors are not absolutely guaranteed to run. It also means that you
 must take extra care in your destructors not to panic, since it could leave
 resources in an unexpected state.
-
 
 ## See also
 
