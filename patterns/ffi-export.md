@@ -70,9 +70,9 @@ This may all seem speculative, but this is what a pointer means in C. It means t
 ## Advantages
 
 This minimizes the number of memory safety guarantees the user must uphold to a relatively small number:
-1. Do not call any function with a pointer not return by `dbm_open` (invalid access or corruption).
-1. Do not call any function on a pointer after close (use after free).
-1. The `dptr` on any `datum` must be NULL, or point to a valid slice of memory at the advertised length.
+1. Do not call any function with a pointer not returned by `dbm_open` (invalid access or corruption).
+2. Do not call any function on a pointer after close (use after free).
+3. The `dptr` on any `datum` must be `NULL`, or point to a valid slice of memory at the advertised length.
 
 In addition, it avoids a lot of pointer provenance issues. To understand why, let us consider an alternative in some depth: key iteration.
 
