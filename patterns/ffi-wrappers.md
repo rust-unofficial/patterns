@@ -99,7 +99,9 @@ If the iterator exists when this function is called, we have violated one of Rus
 
 To avoid this, we must have a way of ensuring that mutable reference really is exclusive. That basically means clearing out the iterator's shared reference while it exists, and then reconstructing it. In most cases, that will still be less efficient than the C version.
 
-Some may ask: how can C do this more efficiently? The answer is, it cheats. Rust's aliasing rules are the problem, and C simply ignores them for its pointers. In exchange, it is common to see code that is declared in the manual as "not thread safe" under some or all circumstances. In fact, [The GNU C library has an entire lexicon dedicated to concurrent behavior!](https://manpages.debian.org/buster/manpages/attributes.7.en.html)
+Some may ask: how can C do this more efficiently? The answer is, it cheats. Rust's aliasing rules are the problem, and C simply ignores them for its pointers.
+In exchange, it is common to see code that is declared in the manual as "not thread safe" under some or all circumstances.
+In fact, [The GNU C library has an entire lexicon dedicated to concurrent behavior!](https://manpages.debian.org/buster/manpages/attributes.7.en.html)
 
 Rust would rather make everything memory safe all the time, for both safety and optimizations that C code cannot attain. Being denied access to certain shortcuts is the price Rust programmers pay.
 
