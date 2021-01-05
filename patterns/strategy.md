@@ -16,7 +16,8 @@ Imagine we are working on a project that generates reports every month.
 We need the reports to be generated in different formats (strategies), e.g., in `JSON` or `Plain Text` formats. 
 But things very and we don't know what kind of requirement we may get in the future. 
 For example, we may need to generate our report in a completly new format, 
-or just modify the existing format. 
+or just modify the existing format.
+
 ## Example
 
 In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`. 
