@@ -24,17 +24,14 @@ In this example our invariants (or abstractions) are `Context`, `Formatter`, and
 These strategies have to implement `Formatter` trait.
 
 ```rust
+use std::collections::HashMap;
 use std::fmt::Write as FmtWrite;
 use std::{error, result};
 type Result = result::Result<String, Box<dyn error::Error>>;
-
-struct Context {
-    pub keys: Vec<String>,
-    pub values: Vec<i32>,
-}
+type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn run(&self, context: &Context) -> Result;
+    fn run(&self, data: &Data) -> Result;
 }
 
 struct Report;
@@ -42,19 +39,20 @@ struct Report;
 impl Report {
     fn generate<T: Formatter>(g: T) -> Result {
         // backend operations...
-        let keys = vec!["one".to_string(), "two".to_string()];
-        let values = vec![1, 2];
+        let mut data = HashMap::new();
+        data.insert("one".to_string(), 1);
+        data.insert("two".to_string(), 2);
         // generate report
-        g.run(&Context { keys, values })
+        g.run(&data)
     }
 }
 
 struct Text;
 impl Formatter for Text {
-    fn run(&self, context: &Context) -> Result {
+    fn run(&self, data: &Data) -> Result {
         let mut s = String::new();
 
-        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+        for (key, val) in data {
             write!(&mut s, "{} {}\n", key, val)?;
         }
         Ok(s)
@@ -63,10 +61,10 @@ impl Formatter for Text {
 
 struct Json;
 impl Formatter for Json {
-    fn run(&self, context: &Context) -> Result {
+    fn run(&self, data: &Data) -> Result {
         let mut s = String::from("[");
 
-        for (key, val) in context.keys.iter().zip(context.values.iter()) {
+        for (key, val) in data {
             if s.len() > 1 {
                 write!(&mut s, ",")?;
             }
@@ -78,15 +76,13 @@ impl Formatter for Json {
 }
 
 fn main() {
-    assert_eq!(
-        String::from("one 1\ntwo 2\n"),
-        Report::generate(Text).unwrap()
-    );
+    let s = Report::generate(Text).unwrap();
+    assert!(s.contains("one 1"));
+    assert!(s.contains("two 2"));
 
-    assert_eq!(
-        String::from(r#"[{"one":"1"},{"two":"2"}]"#),
-        Report::generate(Json).unwrap()
-    );
+    let s = Report::generate(Json).unwrap();
+    assert!(s.contains(r#"{"one":"1"}"#));
+    assert!(s.contains(r#"{"two":"2"}"#));
 }
 
 ```
