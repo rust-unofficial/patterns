@@ -27,7 +27,7 @@ The Object-Based API design allows for writing shims that have good memory safet
 
 ## Code Example
 
-The POSIX standard defines the API to access an on-file database, known as DBM [1]. It is an excellent example of an "object-based" API.
+The POSIX standard defines the API to access an on-file database, known as [DBM](https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h). It is an excellent example of an "object-based" API.
 
 Here is the definition in C, which hopefully should be easy to read for those involved in FFI. Commentary below should help explain it for those who miss the subtleties.
 
