@@ -5,9 +5,9 @@
 When designing APIs in Rust which are exposed to other languages, there are some important design principles which are contrary to normal Rust API design:
 
 1. All Encapsulated types should be *owned* by Rust, *managed* by the user, and *opaque*.
-1. All Transactional data types should be *owned* by the user, and *transparent*.
-1. All library behavior should be functions acting upon Encapsulated types.
-1. All library behavior should be encapsulated into types not based on structure, but *provenance/lifetime*.
+2. All Transactional data types should be *owned* by the user, and *transparent*.
+3. All library behavior should be functions acting upon Encapsulated types.
+4. All library behavior should be encapsulated into types not based on structure, but *provenance/lifetime*.
 
 ## Motivation
 
