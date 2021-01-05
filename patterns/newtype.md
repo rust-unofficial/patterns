@@ -35,9 +35,9 @@ impl Bar {
     pub fn new(
         //..
     ) -> Bar {
-    
+
         //..
-    
+
     }
 
     //..
