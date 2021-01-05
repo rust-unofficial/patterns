@@ -4,7 +4,6 @@
 
 A short, prose description of the pattern.
 
-
 ## Example
 
 ```rust
@@ -12,26 +11,21 @@ A short, prose description of the pattern.
 // liberally.
 ```
 
-
 ## Motivation
 
 Why and where you should use the pattern
-
 
 ## Advantages
 
 Good things about this pattern.
 
-
 ## Disadvantages
 
 Bad things about this pattern. Possible contraindications.
 
-
 ## Discussion
 
 TODO vs insert_or_update etc.
-
 
 ## See also
 

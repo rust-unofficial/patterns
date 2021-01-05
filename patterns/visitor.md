@@ -10,7 +10,6 @@ behaviour).
 Furthermore, the visitor pattern allows separating the traversal of
 a collection of objects from the operations performed on each object.
 
-
 ## Example
 
 ```rust,ignore
@@ -70,14 +69,12 @@ impl Visitor<i64> for Interpreter {
 One could implement further visitors, for example a type checker, without having
 to modify the AST data.
 
-
 ## Motivation
 
 The visitor pattern is useful anywhere that you want to apply an algorithm to
 heterogeneous data. If data is homogeneous, you can use an iterator-like pattern.
 Using a visitor object (rather than a functional approach) allows the visitor to
 be stateful and thus communicate information between nodes.
-
 
 ## Discussion
 
