@@ -54,7 +54,8 @@ impl Formatter for Text {
         let mut s = String::new();
 
         for (key, val) in data {
-            write!(&mut s, "{} {}\n", key, val)?;
+            let entry = format!("{} {}\n", key, val);
+            s.push_str(&entry);
         }
         Ok(s)
     }
