@@ -41,6 +41,6 @@
 
 - [Functional Programming](./functional/index.md)
 
-- [Design principles](./design-principles.md)
-
 - [Additional Resources](./additional_resources.md)
+
+  - [Design principles](./design-principles.md)
