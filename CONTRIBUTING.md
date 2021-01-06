@@ -47,7 +47,8 @@ code examples are correct.
 
 ### Markdown lint
 
-To make sure the files comply with our Markdown style we use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli). To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.
+To make sure the files comply with our Markdown style we use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli). 
+To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.
 
 - Install:
 
