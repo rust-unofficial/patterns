@@ -1184,7 +1184,8 @@ Making at least one of the struct's fields private forces clients to use the lat
 You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to the field name to avoid the unused field warning.</p>
 <p>If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible.
 The problem there is exhaustive match expressions.
-A private variant would force clients to have a <code>_</code> wildcard pattern.</p>
+A private variant would force clients to have a <code>_</code> wildcard pattern.
+A common way to implement this instead is using the <a href="https://doc.rust-lang.org/reference/attributes/type_system.html">#[non_exhaustive]</a> attribute.</p>
 <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description-14" id="description-14">Description</a></h2>
 <p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
