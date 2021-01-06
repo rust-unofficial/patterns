@@ -86,9 +86,9 @@ the wrapper type.
 Newtypes are very common in Rust code. Abstraction or representing units are the
 most common uses, but they can be used for other reasons:
 
-* restricting functionality (reduce the functions exposed or traits implemented),
-* making a type with copy semantics have move semantics,
-* abstraction by providing a more concrete type and thus hiding internal types, e.g.,
+- restricting functionality (reduce the functions exposed or traits implemented),
+- making a type with copy semantics have move semantics,
+- abstraction by providing a more concrete type and thus hiding internal types, e.g.,
 
 ```rust,ignore
 pub struct Foo(Bar<T1, T2>);
@@ -98,8 +98,8 @@ Here, `Bar` might be some public, generic type and `T1` and `T2` are some intern
 
 ## See also
 
-* [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
-* [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
-* [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
-* [derive_more](https://crates.io/crates/derive_more), a crate for deriving many builtin traits on newtypes.
-* [The Newtype Pattern In Rust](https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
+- [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
+- [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
+- [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
+- [derive_more](https://crates.io/crates/derive_more), a crate for deriving many builtin traits on newtypes.
+- [The Newtype Pattern In Rust](https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
