@@ -49,10 +49,28 @@ Early reviews of the community are not meant as an offense but to give feedback.
 
 A good principle: "Work together, share ideas, teach others."
 
-### Test the book locally before submitting
+## Test the book locally before submitting
 
 Before submitting the PR launch the commands `mdbook build` to make sure that the book builds and `mdbook test` to make sure that
 code examples are correct.
+
+### Markdown lint
+
+We use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli) to check we write correct markdown files.
+
+- Install:
+
+  ```sh
+  npm install -g markdownlint-cli
+  ```
+
+- Check all markdown files:
+  - unix: `markdownlint '**/*.md'`
+  - windows: `markdownlint **/*.md`
+
+- Automatically fix basic errors:
+  - unix: `markdownlint -f '**/*.md'`
+  - windows: `markdownlint -f **/*.md`
 
 ### Important Note
 
