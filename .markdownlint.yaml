@@ -1,5 +1,14 @@
+# See https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 ---
+MD003:
+  style: atx
 MD010:
   code_blocks: false
 MD013:
   line_length: 300
+MD035:
+  style: ---
+MD046:
+  style: fenced
+MD048:
+  style: backtick
