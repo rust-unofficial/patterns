@@ -17,9 +17,13 @@ and you think it may not be appropriate to file an issue open a discussion in ou
 
 ## Writing a new article
 
-Before writing a new article please check our [issues](https://github.com/rust-unofficial/patterns/issues) and
-the [Pull Requests](https://github.com/rust-unofficial/patterns/pulls) if there are existing issues or someone
-is working on that topic.
+Before writing a new article please check:
+
+- the [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116),
+- in general the other [issues](https://github.com/rust-unofficial/patterns/issues),
+- and the [Pull Requests](https://github.com/rust-unofficial/patterns/pulls)
+
+if there are existing issues or someone is already working on that topic.
 
 If you don't find an issue regarding your topic and you are sure it is not more feasible to open a thread in the [discussion board](https://github.com/rust-unofficial/patterns/discussions)
 please open a new issue, so we can discuss about the ideas and future content of the article together and maybe
