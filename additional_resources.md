@@ -49,23 +49,23 @@ software designers should define formal, precise and verifiable interface specif
 
 bundling of data with the methods that operate on that data, or the restricting of direct access to some of an object's components. Encapsulation is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
 
-### [Linguistic-Modular-Units]()
+### Linguistic-Modular-Units
 
 “Modules must correspond to syntactic units in the language used.” - Bertrand Meyer: Object Oriented Software Construction
 
-### [Self-Documentation]()
+### Self-Documentation
 
 “The designer of a module should strive to make all information about the module part of the module itself.” - Bertrand Meyer: Object Oriented Software Construction
 
-### [Uniform-Access]()
+### Uniform-Access
 
 “All services offered by a module should be available through a uniform notation, which does not betray whether they are implemented through storage or through computation.” - Bertrand Meyer: Object Oriented Software Construction
 
-### [Single-Choice]()
+### Single-Choice
 
 “Whenever a software system must support a set of alternatives, one and only one module in the system should know their exhaustive list.” - Bertrand Meyer: Object Oriented Software Construction
 
-### [Persistence-Closure]()
+### Persistence-Closure
 
 “Whenever a storage mechanism stores an object, it must store with it the dependents of that object. Whenever a retrieval mechanism retrieves a previously stored object, it must also retrieve any dependent of that object that has not yet been retrieved.” - Bertrand Meyer: Object Oriented Software Construction
 
