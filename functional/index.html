@@ -168,7 +168,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#functional-usage-of-rust" id="functional-usage-of-rust">Functional Usage of Rust</a></h1>
-<p>Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe <strong>how</strong> to do something, whereas declarative programs describe <strong>what</strong> to do. Let's sum the numbers from 1 to 10 to show this.</p>
+<p>Rust is an imperative language, but it follows many functional programming paradigms.
+One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking.
+Imperative programs describe <strong>how</strong> to do something, whereas declarative programs describe <strong>what</strong> to do.
+Let's sum the numbers from 1 to 10 to show this.</p>
 <h2><a class="header" href="#imperative" id="imperative">Imperative</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -180,7 +183,11 @@ for i in 1..11 {
 println!(&quot;{}&quot;, sum);
 <span class="boring">}
 </span></code></pre></pre>
-<p>With imperative programs, we have to play compiler to see what is happening. Here, we start with a <code>sum</code> of <code>0</code>. Next, we iterate through the range from 1 to 10. Each time through the loop, we add the corresponding value in the range. Then we print it out.</p>
+<p>With imperative programs, we have to play compiler to see what is happening.
+Here, we start with a <code>sum</code> of <code>0</code>.
+Next, we iterate through the range from 1 to 10.
+Each time through the loop, we add the corresponding value in the range.
+Then we print it out.</p>
 <table><thead><tr><th align="center"><code>i</code></th><th align="center"><code>sum</code></th></tr></thead><tbody>
 <tr><td align="center">1</td><td align="center">1</td></tr>
 <tr><td align="center">2</td><td align="center">3</td></tr>
@@ -201,8 +208,13 @@ println!(&quot;{}&quot;, sum);
 </span>println!(&quot;{}&quot;, (1..11).fold(0, |a, b| a + b));
 <span class="boring">}
 </span></code></pre></pre>
-<p>Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it. <code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions. The name is a convention from Haskell.</p>
-<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b)</code>) with a range from 1 to 10. The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first. <code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result. So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result. This process continues until we get to the last element in the range, <code>10</code>.</p>
+<p>Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it.
+<code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions. The name is a convention from Haskell.</p>
+<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b)</code>) with a range from 1 to 10.
+The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first.
+<code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result.
+So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result.
+This process continues until we get to the last element in the range, <code>10</code>.</p>
 <table><thead><tr><th align="center"><code>a</code></th><th align="center"><code>b</code></th><th align="center">result</th></tr></thead><tbody>
 <tr><td align="center">0</td><td align="center">1</td><td align="center">1</td></tr>
 <tr><td align="center">1</td><td align="center">2</td><td align="center">3</td></tr>

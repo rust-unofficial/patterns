@@ -1176,9 +1176,15 @@ fn main(s: a::S) {
 
 </code></pre>
 <h2><a class="header" href="#discussion-4" id="discussion-4">Discussion</a></h2>
-<p>Adding a field to a struct is a mostly backwards compatible change. However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern. The client could name some of the fields and use <code>..</code> in the pattern, in which case adding another field is backwards compatible. Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.</p>
-<p>The downside of this approach is that you might need to add an otherwise unneeded field to the struct. You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to the field name to avoid the unused field warning.</p>
-<p>If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible. The problem there is exhaustive match expressions. A private variant would force clients to have a <code>_</code> wildcard pattern.</p>
+<p>Adding a field to a struct is a mostly backwards compatible change.
+However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern.
+The client could name some of the fields and use <code>..</code> in the pattern, in which case adding another field is backwards compatible.
+Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.</p>
+<p>The downside of this approach is that you might need to add an otherwise unneeded field to the struct.
+You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to the field name to avoid the unused field warning.</p>
+<p>If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible.
+The problem there is exhaustive match expressions.
+A private variant would force clients to have a <code>_</code> wildcard pattern.</p>
 <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description-14" id="description-14">Description</a></h2>
 <p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
@@ -2063,16 +2069,21 @@ works just as well.</p>
 <h1><a class="header" href="#prefer-small-crates" id="prefer-small-crates">Prefer small crates</a></h1>
 <h2><a class="header" href="#description-24" id="description-24">Description</a></h2>
 <p>Prefer small crates that do one thing well.</p>
-<p>Cargo and crates.io make it easy to add third-party libraries, much more so than in say C or C++. Moreover, since packages on crates.io cannot be edited or removed after publication, any build that works now should continue to work in the future. We should take advantage of this tooling, and use smaller, more fine-grained dependencies.</p>
+<p>Cargo and crates.io make it easy to add third-party libraries, much more so than in say C or C++.
+Moreover, since packages on crates.io cannot be edited or removed after publication, any build that works now should continue to work in the future.
+We should take advantage of this tooling, and use smaller, more fine-grained dependencies.</p>
 <h2><a class="header" href="#advantages-18" id="advantages-18">Advantages</a></h2>
 <ul>
 <li>Small crates are easier to understand, and encourage more modular code.</li>
-<li>Crates allow for re-using code between projects. For example, the <code>url</code> crate was developed as part of the Servo browser engine, but has since found wide use outside the project.</li>
+<li>Crates allow for re-using code between projects.
+For example, the <code>url</code> crate was developed as part of the Servo browser engine, but has since found wide use outside the project.</li>
 <li>Since the compilation unit of Rust is the crate, splitting a project into multiple crates can allow more of the code to be built in parallel.</li>
 </ul>
 <h2><a class="header" href="#disadvantages-17" id="disadvantages-17">Disadvantages</a></h2>
 <ul>
-<li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting versions of a crate at the same time. For example, the <code>url</code> crate has both versions 1.0 and 0.5. Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types, an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
+<li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting versions of a crate at the same time.
+For example, the <code>url</code> crate has both versions 1.0 and 0.5.
+Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types, an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
 <li>Packages on crates.io are not curated. A crate may be poorly written, have unhelpful documentation, or be outright malicious.</li>
 <li>Two small crates may be less optimized than one large one, since the compiler does not perform link-time optimization (LTO) by default.</li>
 </ul>
@@ -2086,7 +2097,10 @@ works just as well.</p>
 </ul>
 <h1><a class="header" href="#contain-unsafety-in-small-modules" id="contain-unsafety-in-small-modules">Contain unsafety in small modules</a></h1>
 <h2><a class="header" href="#description-25" id="description-25">Description</a></h2>
-<p>If you have <code>unsafe</code> code, create the smallest possible module that can uphold the needed invariants to build a minimal safe interface upon the unsafety. Embed this into a larger module that contains only safe code and presents an ergonomic interface. Note that the outer module can contain unsafe functions and methods that call directly into the unsafe code. Users may use this to gain speed benefits.</p>
+<p>If you have <code>unsafe</code> code, create the smallest possible module that can uphold the needed invariants to build a minimal safe interface upon the unsafety.
+Embed this into a larger module that contains only safe code and presents an ergonomic interface.
+Note that the outer module can contain unsafe functions and methods that call directly into the unsafe code.
+Users may use this to gain speed benefits.</p>
 <h2><a class="header" href="#advantages-19" id="advantages-19">Advantages</a></h2>
 <ul>
 <li>This restricts the unsafe code that must be audited</li>
@@ -2100,7 +2114,9 @@ works just as well.</p>
 <h2><a class="header" href="#examples-2" id="examples-2">Examples</a></h2>
 <ul>
 <li>The <a href="https://docs.rs/toolshed"><code>toolshed</code></a> crate contains its unsafe operations in submodules, presenting a safe interface to users.</li>
-<li><code>std</code>s <code>String</code> class is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant that the contents must be valid UTF-8. The operations on <code>String</code> ensure this behavior. However, users have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case the onus is on them to guarantee the validity of the contents.</li>
+<li><code>std</code>s <code>String</code> class is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant that the contents must be valid UTF-8.
+The operations on <code>String</code> ensure this behavior.
+However, users have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case the onus is on them to guarantee the validity of the contents.</li>
 </ul>
 <h2><a class="header" href="#see-also-14" id="see-also-14">See also</a></h2>
 <ul>
@@ -2397,7 +2413,10 @@ conversion between arbitrary types.</p>
 <p><a href="anti_patterns/../idioms/deref.html">Collections are smart pointers idiom</a>.</p>
 <p><a href="https://doc.rust-lang.org/std/ops/trait.Deref.html">Documentation for <code>Deref</code> trait</a>.</p>
 <h1><a class="header" href="#functional-usage-of-rust" id="functional-usage-of-rust">Functional Usage of Rust</a></h1>
-<p>Rust is an imperative language, but it follows many functional programming paradigms. One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking. Imperative programs describe <strong>how</strong> to do something, whereas declarative programs describe <strong>what</strong> to do. Let's sum the numbers from 1 to 10 to show this.</p>
+<p>Rust is an imperative language, but it follows many functional programming paradigms.
+One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking.
+Imperative programs describe <strong>how</strong> to do something, whereas declarative programs describe <strong>what</strong> to do.
+Let's sum the numbers from 1 to 10 to show this.</p>
 <h2><a class="header" href="#imperative" id="imperative">Imperative</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -2409,7 +2428,11 @@ for i in 1..11 {
 println!(&quot;{}&quot;, sum);
 <span class="boring">}
 </span></code></pre></pre>
-<p>With imperative programs, we have to play compiler to see what is happening. Here, we start with a <code>sum</code> of <code>0</code>. Next, we iterate through the range from 1 to 10. Each time through the loop, we add the corresponding value in the range. Then we print it out.</p>
+<p>With imperative programs, we have to play compiler to see what is happening.
+Here, we start with a <code>sum</code> of <code>0</code>.
+Next, we iterate through the range from 1 to 10.
+Each time through the loop, we add the corresponding value in the range.
+Then we print it out.</p>
 <table><thead><tr><th align="center"><code>i</code></th><th align="center"><code>sum</code></th></tr></thead><tbody>
 <tr><td align="center">1</td><td align="center">1</td></tr>
 <tr><td align="center">2</td><td align="center">3</td></tr>
@@ -2430,8 +2453,13 @@ println!(&quot;{}&quot;, sum);
 </span>println!(&quot;{}&quot;, (1..11).fold(0, |a, b| a + b));
 <span class="boring">}
 </span></code></pre></pre>
-<p>Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it. <code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions. The name is a convention from Haskell.</p>
-<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b)</code>) with a range from 1 to 10. The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first. <code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result. So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result. This process continues until we get to the last element in the range, <code>10</code>.</p>
+<p>Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it.
+<code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions. The name is a convention from Haskell.</p>
+<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b)</code>) with a range from 1 to 10.
+The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first.
+<code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result.
+So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result.
+This process continues until we get to the last element in the range, <code>10</code>.</p>
 <table><thead><tr><th align="center"><code>a</code></th><th align="center"><code>b</code></th><th align="center">result</th></tr></thead><tbody>
 <tr><td align="center">0</td><td align="center">1</td><td align="center">1</td></tr>
 <tr><td align="center">1</td><td align="center">2</td><td align="center">3</td></tr>

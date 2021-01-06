@@ -169,7 +169,10 @@
                     <main>
                         <h1><a class="header" href="#contain-unsafety-in-small-modules" id="contain-unsafety-in-small-modules">Contain unsafety in small modules</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>If you have <code>unsafe</code> code, create the smallest possible module that can uphold the needed invariants to build a minimal safe interface upon the unsafety. Embed this into a larger module that contains only safe code and presents an ergonomic interface. Note that the outer module can contain unsafe functions and methods that call directly into the unsafe code. Users may use this to gain speed benefits.</p>
+<p>If you have <code>unsafe</code> code, create the smallest possible module that can uphold the needed invariants to build a minimal safe interface upon the unsafety.
+Embed this into a larger module that contains only safe code and presents an ergonomic interface.
+Note that the outer module can contain unsafe functions and methods that call directly into the unsafe code.
+Users may use this to gain speed benefits.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <ul>
 <li>This restricts the unsafe code that must be audited</li>
@@ -183,7 +186,9 @@
 <h2><a class="header" href="#examples" id="examples">Examples</a></h2>
 <ul>
 <li>The <a href="https://docs.rs/toolshed"><code>toolshed</code></a> crate contains its unsafe operations in submodules, presenting a safe interface to users.</li>
-<li><code>std</code>s <code>String</code> class is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant that the contents must be valid UTF-8. The operations on <code>String</code> ensure this behavior. However, users have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case the onus is on them to guarantee the validity of the contents.</li>
+<li><code>std</code>s <code>String</code> class is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant that the contents must be valid UTF-8.
+The operations on <code>String</code> ensure this behavior.
+However, users have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case the onus is on them to guarantee the validity of the contents.</li>
 </ul>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
