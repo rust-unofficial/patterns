@@ -49,6 +49,14 @@ software designers should define formal, precise and verifiable interface specif
 
 bundling of data with the methods that operate on that data, or the restricting of direct access to some of an object's components. Encapsulation is used to hide the values or state of a structured data object inside a class, preventing unauthorized parties' direct access to them.
 
+### [Command-Query-Separation(CQS)](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation)
+
+“Functions should not produce abstract side effects...only commands (procedures) will be permitted to produce side effects.” - Bertrand Meyer: Object Oriented Software Construction
+
+### [Principle of least astonishment (POLA)](https://en.wikipedia.org/wiki/Principle_of_least_astonishment)
+
+a component of a system should behave in a way that most users will expect it to behave. The behavior should not astonish or surprise users
+
 ### Linguistic-Modular-Units
 
 “Modules must correspond to syntactic units in the language used.” - Bertrand Meyer: Object Oriented Software Construction
@@ -68,11 +76,3 @@ bundling of data with the methods that operate on that data, or the restricting 
 ### Persistence-Closure
 
 “Whenever a storage mechanism stores an object, it must store with it the dependents of that object. Whenever a retrieval mechanism retrieves a previously stored object, it must also retrieve any dependent of that object that has not yet been retrieved.” - Bertrand Meyer: Object Oriented Software Construction
-
-### [Command-Query-Separation(CQS)](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation)
-
-“Functions should not produce abstract side effects...only commands (procedures) will be permitted to produce side effects.” - Bertrand Meyer: Object Oriented Software Construction
-
-### [Principle of least astonishment (POLA)](https://en.wikipedia.org/wiki/Principle_of_least_astonishment)
-
-a component of a system should behave in a way that most users will expect it to behave. The behavior should not astonish or surprise users
