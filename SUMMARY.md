@@ -40,6 +40,7 @@
   - [Deref Polymorphism](./anti_patterns/deref.md)
 
 - [Functional Programming](./functional/index.md)
+  - [Declarative vs Imperative](./functional/declarative.md)
 
 - [Additional Resources](./additional_resources.md)
 
