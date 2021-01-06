@@ -15,9 +15,9 @@ Using nested block:
 
 ```rust,ignore
 let data = {
-	let mut data = get_vec();
-	data.sort();
-	data
+    let mut data = get_vec();
+    data.sort();
+    data
 };
 
 // Here `data` is immutable.
