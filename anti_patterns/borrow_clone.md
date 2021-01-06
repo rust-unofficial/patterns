@@ -15,7 +15,7 @@ error by cloning the variable.
 let mut x = 5;
 
 // Borrow `x` -- but clone it first
-let y = &mut (x.clone()); 
+let y = &mut (x.clone());
 
 // perform some action on the borrow to prevent rust from optimizing this
 //out of existence
