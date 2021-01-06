@@ -176,9 +176,9 @@ and never modified. The intention can be made explicit by redefining the mutable
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
 <pre><code class="language-rust ignore">let data = {
-	let mut data = get_vec();
-	data.sort();
-	data
+    let mut data = get_vec();
+    data.sort();
+    data
 };
 
 // Here `data` is immutable.

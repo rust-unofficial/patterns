@@ -1144,7 +1144,7 @@ let num3 = Rc::new(3);
 let num2_cloned = num2.clone();
 let num3_borrowed = num3.as_ref();
 let closure = move || {
-	*num1 + *num2_cloned + *num3_borrowed;
+    *num1 + *num2_cloned + *num3_borrowed;
 };
 <span class="boring">}
 </span></code></pre></pre>
@@ -1255,9 +1255,9 @@ and never modified. The intention can be made explicit by redefining the mutable
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
 <pre><code class="language-rust ignore">let data = {
-	let mut data = get_vec();
-	data.sort();
-	data
+    let mut data = get_vec();
+    data.sort();
+    data
 };
 
 // Here `data` is immutable.
@@ -2404,7 +2404,7 @@ conversion between arbitrary types.</p>
 </span><span class="boring">fn main() {
 </span>let mut sum = 0;
 for i in 1..11 {
-	sum += i;
+    sum += i;
 }
 println!(&quot;{}&quot;, sum);
 <span class="boring">}
