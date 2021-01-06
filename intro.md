@@ -2,7 +2,8 @@
 
 ## Participation
 
-If you are interested in contributing to the Patterns catalogue, check out the [contribution guidelines](./CONTRIBUTING.md).
+If you are interested in contributing to the Patterns catalogue, check out the
+[contribution guidelines](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md).
 
 ## Design patterns
 
