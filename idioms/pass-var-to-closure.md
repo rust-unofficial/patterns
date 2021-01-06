@@ -40,7 +40,7 @@ let num3 = Rc::new(3);
 let num2_cloned = num2.clone();
 let num3_borrowed = num3.as_ref();
 let closure = move || {
-	*num1 + *num2_cloned + *num3_borrowed;
+    *num1 + *num2_cloned + *num3_borrowed;
 };
 ```
 

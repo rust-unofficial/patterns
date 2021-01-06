@@ -27,8 +27,15 @@ fn main(s: a::S) {
 
 ## Discussion
 
-Adding a field to a struct is a mostly backwards compatible change. However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern. The client could name some of the fields and use `..` in the pattern, in which case adding another field is backwards compatible. Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.
+Adding a field to a struct is a mostly backwards compatible change.
+However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern.
+The client could name some of the fields and use `..` in the pattern, in which case adding another field is backwards compatible.
+Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.
 
-The downside of this approach is that you might need to add an otherwise unneeded field to the struct. You can use the `()` type so that there is no runtime overhead and prepend `_` to the field name to avoid the unused field warning.
+The downside of this approach is that you might need to add an otherwise unneeded field to the struct.
+You can use the `()` type so that there is no runtime overhead and prepend `_` to the field name to avoid the unused field warning.
 
-If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible. The problem there is exhaustive match expressions. A private variant would force clients to have a `_` wildcard pattern. A common way to implement this instead is using the [#[non_exhaustive]](https://doc.rust-lang.org/reference/attributes/type_system.html) attribute.
+If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible.
+The problem there is exhaustive match expressions.
+A private variant would force clients to have a `_` wildcard pattern.
+A common way to implement this instead is using the [#[non_exhaustive]](https://doc.rust-lang.org/reference/attributes/type_system.html) attribute.
