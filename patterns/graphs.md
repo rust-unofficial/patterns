@@ -4,10 +4,10 @@
 
 Implement idiomatic graph data structures (tree, forest, graph...) that are dynamically modifiable during runtime.
 
-
 ## Example
 
 A simple graph structure:
+
 ```rust
 struct Graph<T> {
     // The graph contains only a Vec of nodes.
@@ -25,6 +25,7 @@ struct Node<T> {
 ```
 
 A more advanced example: a forest
+
 ```rust
 // A node of the graph.
 pub struct Node<T> {
@@ -71,11 +72,9 @@ impl<T> Arena<T> {
 }
 ```
 
-
 ## Motivation
 
 This pattern should be used when we need data structures that can be modified during runtime.
-
 
 ## Advantages
 
@@ -85,13 +84,12 @@ This pattern should be used when we need data structures that can be modified du
 - Every element within the arena has the same lifetime.
 - Multi processing is possible given that parts of a vector can be shared across threads safely.
 
-
 ## Discussion
 
 Region-based memory management is the common method used to deal with graph data structures in Rust.
 This avoids to use interior mutability with data structures as follows:
 
-```
+```rust
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -104,7 +102,6 @@ struct Node<T> {
 ```
 
 which is hard to understand and will also lead into runtime borrow checks.
-
 
 ## See also
 
