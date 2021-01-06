@@ -62,4 +62,3 @@ This process continues until we get to the last element in the range, `10`.
 |  28 |   8 |     36 |
 |  36 |   9 |     45 |
 |  45 |  10 |     55 |
-
