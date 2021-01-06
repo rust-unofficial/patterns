@@ -4,10 +4,9 @@
 
 The borrow checker prevents Rust users from developing otherwise unsafe code by
 ensuring that either: only one mutable reference exists, or potentially many but
-all immutable references exist. If the code written does not hold true to these 
+all immutable references exist. If the code written does not hold true to these
 conditions, this anti-pattern arises when the developer resolves the compiler
 error by cloning the variable.
-
 
 ## Example
 
@@ -28,7 +27,6 @@ let y = &mut (x.clone());
 println!("{}", x);
 ```
 
-
 ## Motivation
 
 It is tempting, particularly for beginners, to use this pattern to resolve
@@ -48,8 +46,7 @@ that's a good indication this anti-pattern may be in use.
 If an unnecessary clone is suspected, The Rust Book's chapter on Ownership
 should be understood fully before assessing whether the clone is required or not.
 
-
 ## See also
 
 [The Rust Book: Ownership, which describes how the borrow checker behaves](https://doc.rust-lang.org/book/ownership.html)
-[Rc<T> documentation, which handles .clone() intelligently](http://doc.rust-lang.org/std/rc/)
+[`Rc<T>` documentation, which handles .clone() intelligently](http://doc.rust-lang.org/std/rc/)
