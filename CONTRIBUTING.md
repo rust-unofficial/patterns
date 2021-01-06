@@ -17,9 +17,11 @@ and you think it may not be appropriate to file an issue open a discussion in ou
 
 ## Writing a new article
 
-Before writing a new article please check our [issues](https://github.com/rust-unofficial/patterns/issues) and
-the [Pull Requests](https://github.com/rust-unofficial/patterns/pulls) if there are existing issues or someone
-is working on that topic.
+Before writing a new article please check in one of the following resources if there is an existing discussion or if someone is already working on that topic:
+
+- [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116),
+- [All issues](https://github.com/rust-unofficial/patterns/issues),
+- [Pull Requests](https://github.com/rust-unofficial/patterns/pulls)
 
 If you don't find an issue regarding your topic and you are sure it is not more feasible to open a thread in the [discussion board](https://github.com/rust-unofficial/patterns/discussions)
 please open a new issue, so we can discuss about the ideas and future content of the article together and maybe
@@ -40,6 +42,30 @@ Don't forget to add your new article to the `SUMMARY.md` to let it be rendered t
 
 Please make `Draft Pull requests` early so we can follow your progress and can give early feedback (see the following section).
 
+## Check the article locally
+
+Before submitting the PR launch the commands `mdbook build` to make sure that the book builds and `mdbook test` to make sure that
+code examples are correct.
+
+### Markdown lint
+
+To make sure the files comply with our Markdown style we use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
+To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.
+
+- Install:
+
+  ```sh
+  npm install -g markdownlint-cli
+  ```
+
+- Check all markdown files:
+  - unix: `markdownlint '**/*.md'`
+  - windows: `markdownlint **/*.md`
+
+- Automatically fix basic errors:
+  - unix: `markdownlint -f '**/*.md'`
+  - windows: `markdownlint -f **/*.md`
+
 ## Creating a Pull Request
 
 "Release early and often!" also applies to pull requests!
@@ -49,13 +75,8 @@ Early reviews of the community are not meant as an offense but to give feedback.
 
 A good principle: "Work together, share ideas, teach others."
 
-### Test the book locally before submitting
-
-Before submitting the PR launch the commands `mdbook build` to make sure that the book builds and `mdbook test` to make sure that
-code examples are correct.
-
 ### Important Note
 
-Please **don't force push** your branch to keep commit history and make it easier of us to see changes between reviews.
+Please **don't force push** commits in your branch, in order to keep commit history and make it easier for us to see changes between reviews.
 
 Make sure to `Allow edits of maintainers` (under the text box) in the PR so people can actually collaborate on things or fix smaller issues themselves.
