@@ -63,7 +63,7 @@ TODO:
 explain why unwinding is bad
 other disadvantages of panic::catch_unwind
 
-+ "The example could be improved by adding a function and which panics and catching the panic
+- "The example could be improved by adding a function and which panics and catching the panic
 in the caller, then matching the Result. Describing the example you could show how by returning
 a Result, the Result-ness of the function is described in the signature."
 
