@@ -27,7 +27,6 @@ fn main() {
 }
 ```
 
-
 ## Motivation
 
 In rust, there are two ways an operation can fail: An expected problem, like a
@@ -45,6 +44,7 @@ valid response if the route for that request (as in: logic outside of the web se
 implementor's control) is producing a panic.
 
 ## Disadvantages
+
 ​
 `panic::catch_unwind` may not catch all panics in Rust. A panic in Rust is not always
 implemented via unwinding, but can be implemented by aborting the process as well.
@@ -62,6 +62,7 @@ TODO:
 ?-operator to propagate errors
 explain why unwinding is bad
 other disadvantages of panic::catch_unwind
+
 + "The example could be improved by adding a function and which panics and catching the panic
 in the caller, then matching the Result. Describing the example you could show how by returning
 a Result, the Result-ness of the function is described in the signature."
