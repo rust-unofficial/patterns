@@ -42,7 +42,7 @@ jobs:
 
       - run: mdbook test
 
-  lint:
+  markdown-lint:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
