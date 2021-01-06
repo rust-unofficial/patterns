@@ -208,14 +208,38 @@ and understand the thought process behind it. So we can encourage people to use 
 with the <a href="https://web.archive.org/">Wayback Machine</a> and use the link to that snapshot in your article.</p>
 <p>Don't forget to add your new article to the <code>SUMMARY.md</code> to let it be rendered to the book.</p>
 <p>Please make <code>Draft Pull requests</code> early so we can follow your progress and can give early feedback (see the following section).</p>
+<h2><a class="header" href="#check-the-article-locally" id="check-the-article-locally">Check the article locally</a></h2>
+<p>Before submitting the PR launch the commands <code>mdbook build</code> to make sure that the book builds and <code>mdbook test</code> to make sure that
+code examples are correct.</p>
+<h3><a class="header" href="#markdown-lint" id="markdown-lint">Markdown lint</a></h3>
+<p>To make sure the files comply with our Markdown style we use <a href="https://github.com/igorshubovych/markdownlint-cli">markdownlint-cli</a>.
+To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.</p>
+<ul>
+<li>
+<p>Install:</p>
+<pre><code class="language-sh">npm install -g markdownlint-cli
+</code></pre>
+</li>
+<li>
+<p>Check all markdown files:</p>
+<ul>
+<li>unix: <code>markdownlint '**/*.md'</code></li>
+<li>windows: <code>markdownlint **/*.md</code></li>
+</ul>
+</li>
+<li>
+<p>Automatically fix basic errors:</p>
+<ul>
+<li>unix: <code>markdownlint -f '**/*.md'</code></li>
+<li>windows: <code>markdownlint -f **/*.md</code></li>
+</ul>
+</li>
+</ul>
 <h2><a class="header" href="#creating-a-pull-request" id="creating-a-pull-request">Creating a Pull Request</a></h2>
 <p>&quot;Release early and often!&quot; also applies to pull requests!</p>
 <p>Once your article has some visible work, create a <code>[WIP]</code> draft pull request and give it a description of what you did or want to do.
 Early reviews of the community are not meant as an offense but to give feedback.</p>
 <p>A good principle: &quot;Work together, share ideas, teach others.&quot;</p>
-<h3><a class="header" href="#test-the-book-locally-before-submitting" id="test-the-book-locally-before-submitting">Test the book locally before submitting</a></h3>
-<p>Before submitting the PR launch the commands <code>mdbook build</code> to make sure that the book builds and <code>mdbook test</code> to make sure that
-code examples are correct.</p>
 <h3><a class="header" href="#important-note" id="important-note">Important Note</a></h3>
 <p>Please <strong>don't force push</strong> commits in your branch, in order to keep commit history and make it easier for us to see changes between reviews.</p>
 <p>Make sure to <code>Allow edits of maintainers</code> (under the text box) in the PR so people can actually collaborate on things or fix smaller issues themselves.</p>
