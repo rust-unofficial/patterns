@@ -86,9 +86,9 @@ the wrapper type.
 Newtypes are very common in Rust code. Abstraction or representing units are the
 most common uses, but they can be used for other reasons:
 
-* restricting functionality (reduce the functions exposed or traits implemented),
-* making a type with copy semantics have move semantics,
-* abstraction by providing a more concrete type and thus hiding internal types, e.g.,
+- restricting functionality (reduce the functions exposed or traits implemented),
+- making a type with copy semantics have move semantics,
+- abstraction by providing a more concrete type and thus hiding internal types, e.g.,
 
 ```rust,ignore
 pub struct Foo(Bar<T1, T2>);
