@@ -38,3 +38,4 @@ You can use the `()` type so that there is no runtime overhead and prepend `_` t
 If Rust allowed private variants of enums, we could use the same trick to make adding a variant to an enum backwards compatible.
 The problem there is exhaustive match expressions.
 A private variant would force clients to have a `_` wildcard pattern.
+A common way to implement this instead is using the [#[non_exhaustive]](https://doc.rust-lang.org/reference/attributes/type_system.html) attribute.
