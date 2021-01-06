@@ -7,7 +7,7 @@ Rust is an imperative language, but it follows many functional programming parad
 ```rust
 let mut sum = 0;
 for i in 1..11 {
-	sum += i;
+    sum += i;
 }
 println!("{}", sum);
 ```
