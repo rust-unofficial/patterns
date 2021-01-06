@@ -5,7 +5,6 @@
 Abuse the `Deref` trait to emulate inheritance between structs, and thus reuse
 methods.
 
-
 ## Example
 
 Sometimes we want to emulate the following common pattern from OO languages such
@@ -32,8 +31,8 @@ use std::ops::Deref;
 struct Foo {}
 
 impl Foo {
-    fn m(&self) { 
-        //.. 
+    fn m(&self) {
+        //..
     }
 
 }
@@ -68,19 +67,17 @@ have two unrelated types. However, since the dot operator does implicit
 dereferencing, it means that the method call will search for methods on `Foo` as
 well as `Bar`.
 
-
 ## Advantages
 
 You save a little boilerplate, e.g.,
 
 ```rust,ignore
 impl Bar {
-    fn m(&self) { 
+    fn m(&self) {
         self.f.m()
     }
 }
 ```
-
 
 ## Disadvantages
 
@@ -103,7 +100,6 @@ interfaces, class-based privacy, or other inheritance-related features. So, it
 gives an experience that will be subtly surprising to programmers used to Java
 inheritance, etc.
 
-
 ## Discussion
 
 There is no one good alternative. Depending on the exact circumstances it might
@@ -124,7 +120,6 @@ favouring explicit conversions between types. Automatic dereferencing in the dot
 operator is a case where the ergonomics strongly favour an implicit mechanism,
 but the intention is that this is limited to degrees of indirection, not
 conversion between arbitrary types.
-
 
 ## See also
 
