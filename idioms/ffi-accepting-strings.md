@@ -5,15 +5,27 @@
 When accepting strings via FFI through pointers, there are two principles that should be followed:
 
 1. Keep foreign strings "borrowed", rather than copying them directly.
-2. Minimize `unsafe` code during the conversion.
+2. Minimize the amount of complexity and `unsafe` code involved in converting
+   from a C-style string to native Rust strings
 
 ## Motivation
 
-Rust has built-in support for C-style strings with its `CString` and `CStr` types.
-However, there are different approaches one can take with strings that are being accepted from a foreign caller of a Rust function.
+The strings used in C have different behaviours to those used in Rust, namely:
 
-The best practice is simple: use `CStr` in such a way as to minimize unsafe code, and create a borrowed slice.
-If an owned String is needed, call `to_string()` on the string slice.
+- C strings are null-terminated while Rust strings store their length
+- C strings can contain any arbitrary non-zero byte while Rust strings must be
+  UTF-8
+- C strings are accessed and manipulated using `unsafe` pointer operations
+  while interactions with Rust strings go through safe methods
+
+The Rust standard library comes with C equivalents of Rust's `String` and `&str`
+called `CString` and `&CStr`.
+
+By using `CString` and `&CStr` we avoid a lot of the complexity and `unsafe`
+code involved in converting between C strings and Rust strings.
+
+The `&CStr` type also allows us to work with borrowed data, meaning passing
+strings between Rust and C is a zero-cost operation.
 
 ## Code Example
 
