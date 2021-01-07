@@ -28,7 +28,8 @@ fn main(s: a::S) {
 ## Discussion
 
 Adding a field to a struct is a mostly backwards compatible change.
-However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct and adding a new one would break that pattern.
+However, if a client uses a pattern to deconstruct a struct instance, they might name all the fields in the struct
+and adding a new one would break that pattern.
 The client could name some of the fields and use `..` in the pattern, in which case adding another field is backwards compatible.
 Making at least one of the struct's fields private forces clients to use the latter form of patterns, ensuring that the struct is future-proof.
 
