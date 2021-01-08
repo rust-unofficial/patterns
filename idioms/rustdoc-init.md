@@ -43,7 +43,8 @@ impl Connection {
 
 ## Example
 
-Instead of typing all of this boiler plate to create an `Connection` and `Request` it is easier to just create a wrapping dummy function which takes them as arguments:
+Instead of typing all of this boiler plate to create an `Connection` and `Request` it is easier to just
+create a wrapping dummy function which takes them as arguments:
 
 ```rust,ignore
 struct Connection {
@@ -67,7 +68,8 @@ impl Connection {
 }
 ```
 
-**Note** in the above example the line `assert!(response.is_ok());` will not actually run while testing because it is inside of a function which is never invoked.
+**Note** in the above example the line `assert!(response.is_ok());` will not actually run while testing
+because it is inside of a function which is never invoked.
 
 ## Advantages
 
@@ -82,5 +84,6 @@ So this pattern is most useful when need `no_run`. With this, you do not need to
 
 If assertions are not required this pattern works well.
 
-If they are, an alternative can be to create a public method to create a dummy instance which is annotated with `#[doc(hidden)]` (so that users won't see it).
+If they are, an alternative can be to create a public method to create a dummy instance which is annotated
+with `#[doc(hidden)]` (so that users won't see it).
 Then this method can be called inside of rustdoc because it is part of the crate's public API.

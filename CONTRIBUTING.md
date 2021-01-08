@@ -17,7 +17,8 @@ and you think it may not be appropriate to file an issue open a discussion in ou
 
 ## Writing a new article
 
-Before writing a new article please check in one of the following resources if there is an existing discussion or if someone is already working on that topic:
+Before writing a new article please check in one of the following resources if there is
+an existing discussion or if someone is already working on that topic:
 
 - [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116),
 - [All issues](https://github.com/rust-unofficial/patterns/issues),
@@ -50,7 +51,8 @@ code examples are correct.
 ### Markdown lint
 
 To make sure the files comply with our Markdown style we use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
-To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.
+To spare you some manual work to get through the CI test you can use the following commands to automatically fix
+most of the emerging problems when writing Markdown files.
 
 - Install:
 

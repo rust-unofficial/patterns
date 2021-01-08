@@ -85,10 +85,12 @@ pub mod unsafe_module {
 }
 ```
 
-This code will result in a dangling pointer, because the lifetime of the `CString` is not extended by the pointer creation, unlike if a reference were created.
+This code will result in a dangling pointer, because the lifetime of the `CString` is not extended
+by the pointer creation, unlike if a reference were created.
 
 Another issue frequently raised is that the initialization of a 1k vector of zeroes is "slow".
-However, recent versions of Rust actually optimize that particular macro to a call to `zmalloc`, meaning it is as fast as the operating system's ability to return zeroed memory (which is quite fast).
+However, recent versions of Rust actually optimize that particular macro to a call to `zmalloc`,
+meaning it is as fast as the operating system's ability to return zeroed memory (which is quite fast).
 
 ## Disadvantages
 
