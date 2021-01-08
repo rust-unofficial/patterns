@@ -184,7 +184,8 @@ For example, the <code>url</code> crate was developed as part of the Servo brows
 <ul>
 <li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting versions of a crate at the same time.
 For example, the <code>url</code> crate has both versions 1.0 and 0.5.
-Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types, an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
+Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types,
+an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
 <li>Packages on crates.io are not curated. A crate may be poorly written, have unhelpful documentation, or be outright malicious.</li>
 <li>Two small crates may be less optimized than one large one, since the compiler does not perform link-time optimization (LTO) by default.</li>
 </ul>

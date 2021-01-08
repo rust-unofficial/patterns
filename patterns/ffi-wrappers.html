@@ -176,7 +176,8 @@ This ensures that many patterns of access between types can be memory safe, data
 In Rust, a pointer means &quot;the user manages the lifetime of the pointee.&quot; It is their responsibility to avoid memory unsafety.</p>
 <p>Some level of trust in the user code is thus required, notably around use-after-free which Rust can do nothing about.
 However, some API designs place higher burdens than others on the code written in the other language.</p>
-<p>The lowest risk API is the &quot;consolidated wrapper&quot;, where all possible interactions with an object are folded into a &quot;wrapper type&quot;, while keeping the Rust API clean.</p>
+<p>The lowest risk API is the &quot;consolidated wrapper&quot;, where all possible interactions with an object
+are folded into a &quot;wrapper type&quot;, while keeping the Rust API clean.</p>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
 <p>To understand this, let us look at a classic example of an API to export: iteration through a collection.</p>
 <p>That API looks like this:</p>
@@ -214,9 +215,11 @@ See <a href="./ffi-export.html">Object-Based APIs</a> for more on the advantages
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>Often, wrapping types is quite difficult, and sometimes a Rust API compromise would make things easier.</p>
 <p>As an example, consider an iterator which does not efficiently implement <code>nth()</code>.
-It would definitely be worth putting in special logic to make the object handle iteration internally, or to support a different access pattern efficiently that only the Foreign Function API will use.</p>
+It would definitely be worth putting in special logic to make the object handle iteration internally,
+or to support a different access pattern efficiently that only the Foreign Function API will use.</p>
 <h3><a class="header" href="#trying-to-wrap-iterators-and-failing" id="trying-to-wrap-iterators-and-failing">Trying to Wrap Iterators (and Failing)</a></h3>
-<p>To wrap any type of iterator into the API correctly, the wrapper would need to do what a C version of the code would do: erase the lifetime of the iterator, and manage it manually.</p>
+<p>To wrap any type of iterator into the API correctly, the wrapper would need to do what a C version of
+the code would do: erase the lifetime of the iterator, and manage it manually.</p>
 <p>Suffice it to say, this is <em>incredibly</em> difficult.</p>
 <p>Here is an illustration of just <em>one</em> pitfall.</p>
 <p>A first version of <code>MySetWrapper</code> would look like this:</p>
@@ -229,7 +232,8 @@ It would definitely be worth putting in special logic to make the object handle 
 </code></pre>
 <p>With <code>transmute</code> being used to extend a lifetime, and a pointer to hide it, it's ugly already.
 But it gets even worse: <em>any other operation can cause Rust <code>undefined behaviour</code></em>.</p>
-<p>Consider that the <code>MySet</code> in the wrapper could be manipulated by other functions during iteration, such as storing a new value to the key it was iterating over.
+<p>Consider that the <code>MySet</code> in the wrapper could be manipulated by other functions during iteration,
+such as storing a new value to the key it was iterating over.
 The API doesn't discourage this, and in fact some similar C libraries expect it.</p>
 <p>A simple implementation of <code>myset_store</code> would be:</p>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
@@ -270,7 +274,8 @@ In fact, <a href="https://manpages.debian.org/buster/manpages/attributes.7.en.ht
 Being denied access to certain shortcuts is the price Rust programmers need to pay.</p>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
 <p>For the C programmers out there scratching their heads, the iterator need not be read <em>during</em> this code cause the UB.
-The exclusivity rule also enables compiler optimizations which may cause inconsistent observations by the iterator's shared reference (e.g. stack spills or reordering instructions for efficiency).
+The exclusivity rule also enables compiler optimizations which may cause inconsistent observations by the iterator's
+shared reference (e.g. stack spills or reordering instructions for efficiency).
 These observations may happen <em>any time after</em> the mutable reference is created.</p>
 </div>
 

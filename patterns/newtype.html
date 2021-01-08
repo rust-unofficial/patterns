@@ -242,7 +242,9 @@ most common uses, but they can be used for other reasons:</p>
 </ul>
 <pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);
 </code></pre>
-<p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
+<p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types.
+Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're
+really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction">Advanced Types in the book</a></li>

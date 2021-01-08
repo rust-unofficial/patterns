@@ -258,10 +258,13 @@ If an owned String is needed, call <code>to_string()</code> on the string slice.
 </ol>
 <p>The bug here is a simple mistake in pointer arithmetic: the string was copied, all <code>msg_len</code> bytes of it.
 However, the <code>NUL</code> terminator at the end was not.</p>
-<p>The Vector then had its size <em>set</em> to the length of the <em>zero padded string</em> -- rather than <em>resized</em> to it, which could have added a zero at the end. As a result, the last byte in the Vector is uninitialized memory.
+<p>The Vector then had its size <em>set</em> to the length of the <em>zero padded string</em> --
+rather than <em>resized</em> to it, which could have added a zero at the end.
+As a result, the last byte in the Vector is uninitialized memory.
 When the <code>CString</code> is created at the bottom of the block, its read of the Vector will cause <code>undefined behaviour</code>!</p>
 <p>Like many such issues, this would be difficult issue to track down.
-Sometimes it would panic because the string was not <code>UTF-8</code>, sometimes it would put a weird character at the end of the string, sometimes it would just completely crash.</p>
+Sometimes it would panic because the string was not <code>UTF-8</code>, sometimes it would put a weird character at the end of the string,
+sometimes it would just completely crash.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>None?</p>
 

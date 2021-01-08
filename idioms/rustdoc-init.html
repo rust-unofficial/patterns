@@ -203,7 +203,8 @@ impl Connection {
 }
 </code></pre>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just create a wrapping dummy function which takes them as arguments:</p>
+<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just
+create a wrapping dummy function which takes them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
@@ -224,7 +225,8 @@ impl Connection {
     }
 }
 </code></pre>
-<p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not actually run while testing because it is inside of a function which is never invoked.</p>
+<p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not actually run while testing
+because it is inside of a function which is never invoked.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
@@ -232,7 +234,8 @@ impl Connection {
 So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
 <p>If assertions are not required this pattern works well.</p>
-<p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated with <code>#[doc(hidden)]</code> (so that users won't see it).
+<p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated
+with <code>#[doc(hidden)]</code> (so that users won't see it).
 Then this method can be called inside of rustdoc because it is part of the crate's public API.</p>
 
                     </main>
