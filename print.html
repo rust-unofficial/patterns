@@ -532,7 +532,7 @@ object in each stack frame. So, destructors get called even if the panic happens
 in a function being called.</p>
 <p>If a destructor panics while unwinding, there is no good action to take, so Rust
 aborts the thread immediately, without running further destructors. This means
-that desctructors are not absolutely guaranteed to run. It also means that you
+that destructors are not absolutely guaranteed to run. It also means that you
 must take extra care in your destructors not to panic, since it could leave
 resources in an unexpected state.</p>
 <h2><a class="header" href="#see-also-4" id="see-also-4">See also</a></h2>
