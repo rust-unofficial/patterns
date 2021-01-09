@@ -81,7 +81,7 @@ in a function being called.
 
 If a destructor panics while unwinding, there is no good action to take, so Rust
 aborts the thread immediately, without running further destructors. This means
-that desctructors are not absolutely guaranteed to run. It also means that you
+that destructors are not absolutely guaranteed to run. It also means that you
 must take extra care in your destructors not to panic, since it could leave
 resources in an unexpected state.
 
