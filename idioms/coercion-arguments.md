@@ -71,7 +71,7 @@ Curious: true
 ```
 
 But wait, that's not all! There is more to this story.
-It's likely that you may say to yourself: that doesn't matter, I will never be using a `&'static str` as an input anways (as we did when we used `"Ferris"`).
+It's likely that you may say to yourself: that doesn't matter, I will never be using a `&'static str` as an input anyways (as we did when we used `"Ferris"`).
 Even ignoring this special example, you may still find that using `&str` will give you more flexibility than using a `&String`.
 
 Let's now take an example where someone gives us a sentence, and we want to determine if any of the words
