@@ -160,6 +160,7 @@ fn main() {
     assert_eq!(82, val.map(first_byte_strategy).unwrap());
 }
 ```
+
 ## See also
 
 [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
