@@ -1,7 +1,6 @@
 # Summary
 
 - [Introduction](./intro.md)
-- [Contributing](./CONTRIBUTING.md)
 - [Idioms](./idioms/index.md)
   - [Use borrowed types for arguments](./idioms/coercion-arguments.md)
   - [Concatenating Strings with `format!`](./idioms/concat-format.md)
@@ -42,6 +41,5 @@
 
 - [Functional Programming](./functional/index.md)
 
-- [Additional Resources](./additional_resources.md)
-
-  - [Design principles](./design-principles.md)
+- [Additional Resources](./additional_resources/index.md)
+  - [Design principles](./additional_resources/design-principles.md)
