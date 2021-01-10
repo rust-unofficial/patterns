@@ -163,6 +163,6 @@ fn main() {
 
 ## See also
 
-[Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
-
-[Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection)
+- [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
+- [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection)<!-- markdown-link-check-disable -->
+- [Policy Based Design](https://en.wikipedia.org/wiki/Modern_C%2B%2B_Design#Policy-based_design)<!-- markdown-link-check-enable -->
