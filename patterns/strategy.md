@@ -64,17 +64,19 @@ struct Json;
 impl Formatter for Json {
     fn run(&self, data: &Data) -> String {
         let mut s = String::from("[");
-        let mut entry;
-
-        for (key, val) in data {
-            if s.len() > 1 {
-                s.push(',');
-            }
-            entry = format!("{{\"{}\":\"{}\"}}", key, val);
+        let mut iter = data.into_iter();
+                            
+        if let Some((key, val)) = data.next() {
+            let entry = format!(r#"{"{}":"{}"}"#, key, val);
             s.push_str(&entry);
+            while let Some((key, val)) = data.next() {
+                s.push(',');   
+                let entry = format!(r#"{"{}":"{}"}"#, key, val);
+                s.push_str(&entry);
+            }
         }
         s.push(']');
-        return s;
+        s
     }
 }
 
