@@ -113,7 +113,7 @@ Ways of providing different strategies includes:
 - Use compiler feature flags, E.g. `json` feature, `text` feature
 - Separated as crates, E.g. `json` crate, `text` crate
 
-The Serde crate is a good example of the `Strategy` pattern in action. `Serde` allows [full customization](https://serde.rs/custom-serialization.html)
+Serde crate is a good example of the `Strategy` pattern in action. Serde allows [full customization](https://serde.rs/custom-serialization.html)
 of the serialization behavior by manually implementing `Serialize` and `Deserialize` traits for our type.
 
 However, we don't need to use traits in order to design this pattern in Rust.
