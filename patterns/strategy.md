@@ -154,7 +154,7 @@ fn main() {
 
 ```
 
-In fact, Rust already uses this idea for `Options`'s `map` method
+In fact, Rust already uses this idea for `Options`'s `map` method:
 
 ```rust
 fn main() {
