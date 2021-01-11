@@ -8,7 +8,7 @@ It also allows to decouple software modules through [Dependency Inversion](https
 
 The basic idea behind the Strategy pattern is that, given an algorithm solving a particular problem,
 we define only the skeleton of the algorithm at an abstract level and
-we delegate the specific algorithm’s implementation (or some of its parts) to another class or method.
+we separate the specific algorithm’s implementation into different parts.
 
 In this way, a client using the algorithm may choose a specific implementation, while the general algorithm workflow remains the same.
 In other words, the abstract specification of the class does not depend on the specific implementation of the derived class,
