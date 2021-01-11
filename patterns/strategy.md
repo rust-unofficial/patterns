@@ -35,35 +35,36 @@ use std::collections::HashMap;
 type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn format(&self, data: &Data) -> String;
+    fn format(&self, data: &Data, s: &mut String);
 }
 
 struct Report;
 
 impl Report {
-    fn generate<T: Formatter>(g: T) -> String {
+    fn generate<T: Formatter>(g: T, s: &mut String) {
         // backend operations...
         let mut data = HashMap::new();
         data.insert("one".to_string(), 1);
         data.insert("two".to_string(), 2);
         // generate report
-        g.format(&data)
+        g.format(&data, s);
     }
 }
 
 struct Text;
 impl Formatter for Text {
-    fn format(&self, data: &Data) -> String {
-        data.iter()
+    fn format(&self, data: &Data, s: &mut String) {
+        *s = data
+            .iter()
             .map(|(key, val)| format!("{} {}\n", key, val))
-            .collect()
+            .collect();
     }
 }
 
 struct Json;
 impl Formatter for Json {
-    fn format(&self, data: &Data) -> String {
-        let mut s = String::from("[");
+    fn format(&self, data: &Data, s: &mut String) {
+        *s = String::from("[");
         let mut iter = data.into_iter();
         if let Some((key, val)) = iter.next() {
             let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
@@ -75,16 +76,16 @@ impl Formatter for Json {
             }
         }
         s.push(']');
-        s
     }
 }
 
 fn main() {
-    let s = Report::generate(Text);
+    let mut s = String::from("");
+    Report::generate(Text, &mut s);
     assert!(s.contains("one 1"));
     assert!(s.contains("two 2"));
 
-    let s = Report::generate(Json);
+    Report::generate(Json, &mut s);
     assert!(s.contains(r#"{"one":"1"}"#));
     assert!(s.contains(r#"{"two":"2"}"#));
 }
