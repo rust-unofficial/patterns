@@ -35,7 +35,7 @@ use std::collections::HashMap;
 type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn run(&self, data: &Data) -> String;
+    fn format(&self, data: &Data) -> String;
 }
 
 struct Report;
@@ -47,13 +47,13 @@ impl Report {
         data.insert("one".to_string(), 1);
         data.insert("two".to_string(), 2);
         // generate report
-        g.run(&data)
+        g.format(&data)
     }
 }
 
 struct Text;
 impl Formatter for Text {
-    fn run(&self, data: &Data) -> String {
+    fn format(&self, data: &Data) -> String {
         data.iter()
             .map(|(key, val)| format!("{} {}\n", key, val))
             .collect()
@@ -62,16 +62,15 @@ impl Formatter for Text {
 
 struct Json;
 impl Formatter for Json {
-    fn run(&self, data: &Data) -> String {
+    fn format(&self, data: &Data) -> String {
         let mut s = String::from("[");
         let mut iter = data.into_iter();
-                            
-        if let Some((key, val)) = data.next() {
-            let entry = format!(r#"{"{}":"{}"}"#, key, val);
+        if let Some((key, val)) = iter.next() {
+            let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
             s.push_str(&entry);
-            while let Some((key, val)) = data.next() {
-                s.push(',');   
-                let entry = format!(r#"{"{}":"{}"}"#, key, val);
+            while let Some((key, val)) = iter.next() {
+                s.push(',');
+                let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
                 s.push_str(&entry);
             }
         }
