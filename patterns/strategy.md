@@ -5,6 +5,7 @@
 The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 is a technique that enables separation of concerns in object-oriented software design.
 It also allows to decouple software modules through [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
+
 The basic idea behind the Strategy pattern is that, given an algorithm solving a particular problem,
 we define only the skeleton of the algorithm at an abstract level and
 we delegate the specific algorithm’s implementation (or some of its parts) to another class or method.
