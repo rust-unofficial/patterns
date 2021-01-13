@@ -43,6 +43,14 @@ Don't forget to add your new article to the `SUMMARY.md` to let it be rendered t
 
 Please make `Draft Pull requests` early so we can follow your progress and can give early feedback (see the following section).
 
+## Style guide
+
+- Follow the book [style guide](https://github.com/rust-lang/book/blob/master/style-guide.md).
+- Follow [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text). TL;DR:
+  - Use American English
+  - Use full types name. For example `Option<T>` instead of `Option`
+  - Prefer line comments (`//`) over block comments (`/* */`)
+
 ## Check the article locally
 
 Before submitting the PR launch the commands `mdbook build` to make sure that the book builds and `mdbook test` to make sure that
