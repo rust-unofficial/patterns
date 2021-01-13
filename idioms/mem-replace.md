@@ -80,6 +80,10 @@ and returning the previous value. For `String`, the default value is an empty
 `String`, which does not need to allocate. As a result, we get the original
 `name` *as an owned value*. We can then wrap this in another enum.
 
+`mem::replace` is very similar, but allows us to specify what to
+replace the value with. An equivalent to our `mem::take` line would be
+`mem::replace(name, String::new())`.
+
 Note, however, that if we are using an `Option` and want to replace its
 value with a `None`, `Option`’s `take()` method provides a shorter and
 more idiomatic alternative.
