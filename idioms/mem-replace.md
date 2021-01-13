@@ -99,7 +99,7 @@ borrow checker. The compiler may fail to optimize away the double store,
 resulting in reduced performance as opposed to what you'd do in unsafe
 languages.
 
-The type you are taking needs to implement the `Default` trait.
+The type you are taking needs to implement the [`Default` trait](./default.md).
 However, if the type you're working with doesn't implement this, you
 can instead use `mem::replace`.
 
