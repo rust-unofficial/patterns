@@ -1,4 +1,4 @@
-# `mem::replace` to keep owned values in changed enums
+# `mem::take` to keep owned values in changed enums
 
 ## Description
 
@@ -29,7 +29,7 @@ fn a_to_b(e: &mut MyEnum) {
         // (note that empty strings don't allocate).
         // Then, construct the new enum variant (which will
         // be assigned to `*e`, because it is the result of the `if let` expression).
-        MyEnum::B { name: mem::replace(name, String::new()) }
+        MyEnum::B { name: mem::take(name) }
 
     // In all other cases, we return immediately, thus skipping the assignment
     } else { return }
@@ -53,8 +53,8 @@ fn swizzle(e: &mut MultiVariateEnum) {
     *e = match *e {
         // Ownership rules do not allow taking `name` by value, but we cannot
         // take the value out of a mutable reference, unless we replace it:
-        A { ref mut name } => B { name: mem::replace(name, String::new()) },
-        B { ref mut name } => A { name: mem::replace(name, String::new()) },
+        A { ref mut name } => B { name: mem::take(name) },
+        B { ref mut name } => A { name: mem::take(name) },
         C => D,
         D => C
     }
@@ -75,10 +75,10 @@ into our `MyEnum::B`, but that would be an instance of the [Clone to satisfy
 the borrow checker] antipattern. Anyway, we can avoid the extra allocation by
 changing `e` with only a mutable borrow.
 
-`mem::replace` lets us swap out the value, replacing it with something else. In
-this case, we put in an empty `String`, which does not need to allocate. As a
-result, we get the original `name` *as an owned value*. We can then wrap this in
-another enum.
+`mem::take` lets us swap out the value, replacing it with it's default value,
+and returning the previous value. For `String`, the default value is an empty
+`String`, which does not need to allocate. As a result, we get the original
+`name` *as an owned value*. We can then wrap this in another enum.
 
 Note, however, that if we are using an `Option` and want to replace its
 value with a `None`, `Option`’s `take()` method provides a shorter and
