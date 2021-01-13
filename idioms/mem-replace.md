@@ -38,7 +38,7 @@ fn a_to_b(e: &mut MyEnum) {
 
 This also works with more variants:
 
-```Rust
+```rust
 use std::mem;
 
 enum MultiVariateEnum {
@@ -49,7 +49,7 @@ enum MultiVariateEnum {
 }
 
 fn swizzle(e: &mut MultiVariateEnum) {
-    use self::MultiVariateEnum::*;
+    use MultiVariateEnum::*;
     *e = match *e {
         // Ownership rules do not allow taking `name` by value, but we cannot
         // take the value out of a mutable reference, unless we replace it:
