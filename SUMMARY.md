@@ -8,7 +8,7 @@
   - [The `Default` Trait](./idioms/default.md)
   - [Collections Are Smart Pointers](./idioms/deref.md)
   - [Finalisation in Destructors](./idioms/dtor-finally.md)
-  - [`mem::replace(_)`](./idioms/mem-replace.md)
+  - [`mem::{take(_), replace(_)}`](./idioms/mem-replace.md)
   - [On-Stack Dynamic Dispatch](./idioms/on-stack-dyn-dispatch.md)
   - [Foreign function interface usage](./idioms/ffi-intro.md)
     - [Idiomatic Errors](./idioms/ffi-errors.md)

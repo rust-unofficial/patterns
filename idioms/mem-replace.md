@@ -1,4 +1,4 @@
-# `mem::take` to keep owned values in changed enums
+# `mem::{take(_), replace(_)}` to keep owned values in changed enums
 
 ## Description
 
