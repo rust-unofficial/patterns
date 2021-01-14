@@ -45,6 +45,8 @@ Please make `Draft Pull requests` early so we can follow your progress and can g
 
 ## Style guide
 
+In order to have a consistent style across the book, we suggest to:
+
 - Follow the official Rust book's [style guide](https://github.com/rust-lang/book/blob/master/style-guide.md).
 - Follow [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text). Tl;dr:
   - Prefer full types name. For example `Option<T>` instead of `Option`.
