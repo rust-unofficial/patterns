@@ -46,7 +46,7 @@ Please make `Draft Pull requests` early so we can follow your progress and can g
 ## Style guide
 
 - Follow the official Rust book's [style guide](https://github.com/rust-lang/book/blob/master/style-guide.md).
-- Follow [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text). TL;DR:
+- Follow [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text). Tl;dr:
   - Use American English
   - Use full types name. For example `Option<T>` instead of `Option`
   - Prefer line comments (`//`) over block comments (`/* */`)
