@@ -41,8 +41,10 @@ This is how most of us start out programming. We learn that a program is a set o
 println!("{}", (1..11).fold(0, |a, b| a + b));
 ```
 
-Whoa! This is really different! What's going on here? Remember that with declarative programs we are describing __what__ to do, rather than __how__ to do it.
-`fold` is a function that [composes](https://en.wikipedia.org/wiki/Function_composition) functions. The name is a convention from Haskell.
+Whoa! This is really different! What's going on here?
+Remember that with declarative programs we are describing __what__ to do, rather than __how__ to do it.
+`fold` is a function that [composes](https://en.wikipedia.org/wiki/Function_composition) functions.
+The name is a convention from Haskell.
 
 Here, we are composing functions of addition (this closure: `|a, b| a + b)`) with a range from 1 to 10.
 The `0` is the starting point, so `a` is `0` at first.
