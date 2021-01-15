@@ -19,7 +19,8 @@ We should take advantage of this tooling, and use smaller, more fine-grained dep
 
 * This can lead to "dependency hell", when a project depends on multiple conflicting versions of a crate at the same time.
   For example, the `url` crate has both versions 1.0 and 0.5.
-  Since the `Url` from `url:1.0` and the `Url` from `url:0.5` are different types, an HTTP client that uses `url:0.5` would not accept `Url` values from a web scraper that uses `url:1.0`.
+  Since the `Url` from `url:1.0` and the `Url` from `url:0.5` are different types,
+  an HTTP client that uses `url:0.5` would not accept `Url` values from a web scraper that uses `url:1.0`.
 * Packages on crates.io are not curated. A crate may be poorly written, have unhelpful documentation, or be outright malicious.
 * Two small crates may be less optimized than one large one, since the compiler does not perform link-time optimization (LTO) by default.
 

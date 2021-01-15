@@ -8,7 +8,8 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 You are missing content in this repository that can be helpful for others and you are eager to explain it?
 Awesome! We are always happy about new contributions (e.g. elaboration or corrections on certain topics) to this project.
 
-You can check the [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116) for all the patterns, anti-patterns, and idioms that could be added.
+You can check the [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116) for all the
+patterns, anti-patterns, and idioms that could be added.
 
 We suggest reading our [Contribution guide](./CONTRIBUTING.md) to get more information on how contributing to this repository works.
 
