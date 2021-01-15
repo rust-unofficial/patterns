@@ -169,8 +169,9 @@
                     <main>
                         <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
-function which takes the struct as an argument.</p>
+<p>If a struct takes significant effort to initialize, when writing docs, it can be
+quicker to wrap your example with a helper function which takes the struct as an
+argument.</p>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
 Each of these methods should have examples.</p>
@@ -203,8 +204,9 @@ impl Connection {
 }
 </code></pre>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
-<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just
-create a wrapping dummy function which takes them as arguments:</p>
+<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and
+<code>Request</code> it is easier to just create a wrapping helper function which takes
+them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
@@ -234,9 +236,10 @@ because it is inside of a function which is never invoked.</p>
 So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
 <p>If assertions are not required this pattern works well.</p>
-<p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated
-with <code>#[doc(hidden)]</code> (so that users won't see it).
-Then this method can be called inside of rustdoc because it is part of the crate's public API.</p>
+<p>If they are, an alternative can be to create a public method to create a helper
+instance which is annotated with <code>#[doc(hidden)]</code> (so that users won't see it).
+Then this method can be called inside of rustdoc because it is part of the
+crate's public API.</p>
 
                     </main>
 

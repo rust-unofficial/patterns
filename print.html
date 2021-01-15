@@ -1167,8 +1167,9 @@ A private variant would force clients to have a <code>_</code> wildcard pattern.
 A common way to implement this instead is using the <a href="https://doc.rust-lang.org/reference/attributes/type_system.html">#[non_exhaustive]</a> attribute.</p>
 <h1><a class="header" href="#easy-doc-initialization" id="easy-doc-initialization">Easy doc initialization</a></h1>
 <h2><a class="header" href="#description-14" id="description-14">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be quicker to wrap your example with a
-function which takes the struct as an argument.</p>
+<p>If a struct takes significant effort to initialize, when writing docs, it can be
+quicker to wrap your example with a helper function which takes the struct as an
+argument.</p>
 <h2><a class="header" href="#motivation-6" id="motivation-6">Motivation</a></h2>
 <p>Sometimes there is a struct with multiple or complicated parameters and several methods.
 Each of these methods should have examples.</p>
@@ -1201,8 +1202,9 @@ impl Connection {
 }
 </code></pre>
 <h2><a class="header" href="#example-10" id="example-10">Example</a></h2>
-<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and <code>Request</code> it is easier to just
-create a wrapping dummy function which takes them as arguments:</p>
+<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and
+<code>Request</code> it is easier to just create a wrapping helper function which takes
+them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
     stream: TcpStream,
@@ -1232,9 +1234,10 @@ because it is inside of a function which is never invoked.</p>
 So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion-5" id="discussion-5">Discussion</a></h2>
 <p>If assertions are not required this pattern works well.</p>
-<p>If they are, an alternative can be to create a public method to create a dummy instance which is annotated
-with <code>#[doc(hidden)]</code> (so that users won't see it).
-Then this method can be called inside of rustdoc because it is part of the crate's public API.</p>
+<p>If they are, an alternative can be to create a public method to create a helper
+instance which is annotated with <code>#[doc(hidden)]</code> (so that users won't see it).
+Then this method can be called inside of rustdoc because it is part of the
+crate's public API.</p>
 <h1><a class="header" href="#temporary-mutability" id="temporary-mutability">Temporary mutability</a></h1>
 <h2><a class="header" href="#description-15" id="description-15">Description</a></h2>
 <p>Often it is necessary to prepare and process some data, but after that data are only inspected
@@ -1264,12 +1267,12 @@ let data = data;
 <p>Nested block requires additional indentation of block body.
 One more line to return data from block or redefine variable.</p>
 <h1><a class="header" href="#design-patterns-1" id="design-patterns-1">Design Patterns</a></h1>
-<p><a href="https://en.wikipedia.org/wiki/Software_design_pattern">Design patterns</a> are &quot;general reusable
-solutions to a commonly occurring problem within a given context in software design&quot;.
-Design patterns are a great way to describe some of the culture and 'tribal knowledge'
-of programming in a language.
-Design patterns are very language-specific - what is a pattern in one language may be
-unnecessary in another due to a language feature, or impossible to express due to a missing feature.</p>
+<p><a href="https://en.wikipedia.org/wiki/Software_design_pattern">Design patterns</a> are
+&quot;general reusable solutions to a commonly occurring problem within a given
+context in software design&quot;. Design patterns are a great way to describe the
+culture of a programming language. Design patterns are very language-specific -
+what is a pattern in one language may be unnecessary in another due to a
+language feature, or impossible to express due to a missing feature.</p>
 <p>If overused, design patterns can add unnecessary complexity to programs.
 However, they are a great way to share intermediate and advanced level knowledge about a programming language.</p>
 <h2><a class="header" href="#design-patterns-in-rust-1" id="design-patterns-in-rust-1">Design patterns in Rust</a></h2>
