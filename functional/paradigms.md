@@ -1,4 +1,4 @@
-# Declarative vs Imperative
+# Programming paradigms
 
 One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking.
 Imperative programs describe __how__ to do something, whereas declarative programs describe __what__ to do.
