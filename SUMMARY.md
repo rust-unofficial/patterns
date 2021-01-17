@@ -40,7 +40,7 @@
   - [Deref Polymorphism](./anti_patterns/deref.md)
 
 - [Functional Programming](./functional/index.md)
-  - [Declarative vs Imperative](./functional/paradigms.md)
+  - [Programming paradigms](./functional/paradigms.md)
 
 - [Additional Resources](./additional_resources/index.md)
   - [Design principles](./additional_resources/design-principles.md)
