@@ -11,7 +11,7 @@
   specification should be able to affect the specification of the class.
 - [Open/Closed Principle (OCP)](https://en.wikipedia.org/wiki/Open%E2%80%93closed_principle):
   "Software entities ... should be open for extension, but closed for modification."
-- [Liscov Substitution Principle (LSP)](https://en.wikipedia.org/wiki/Liskov_substitution_principle):
+- [Liskov Substitution Principle (LSP)](https://en.wikipedia.org/wiki/Liskov_substitution_principle):
   "Objects in a program should be replaceable with instances of their subtypes without altering the correctness
   of that program."
 - [Interface Segregation Principle (ISP)](https://en.wikipedia.org/wiki/Interface_segregation_principle):
