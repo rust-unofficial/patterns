@@ -46,7 +46,7 @@ Remember that with declarative programs we are describing __what__ to do, rather
 `fold` is a function that [composes](https://en.wikipedia.org/wiki/Function_composition) functions.
 The name is a convention from Haskell.
 
-Here, we are composing functions of addition (this closure: `|a, b| a + b)`) with a range from 1 to 10.
+Here, we are composing functions of addition (this closure: `|a, b| a + b`) with a range from 1 to 10.
 The `0` is the starting point, so `a` is `0` at first.
 `b` is the first element of the range, `1`. `0 + 1 = 1` is the result.
 So now we `fold` again, with `a = 1`, `b = 2` and so `1 + 2 = 3` is the next result.
