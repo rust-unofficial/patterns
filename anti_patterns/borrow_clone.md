@@ -31,7 +31,7 @@ println!("{}", x);
 
 It is tempting, particularly for beginners, to use this pattern to resolve
 confusing issues with the borrow checker. However, there are serious
-consequences. Using .clone() causes a copy of the data to be made. Any changes
+consequences. Using `.clone()` causes a copy of the data to be made. Any changes
 between the two are not synchronized -- as if two completely separate variables
 exist.
 
