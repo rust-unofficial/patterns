@@ -94,7 +94,9 @@ most common uses, but they can be used for other reasons:
 pub struct Foo(Bar<T1, T2>);
 ```
 
-Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal types. Users of our module shouldn't know that we implement `Foo` by using a `Bar`, but what we're really hiding here is the types `T1` and `T2`, and how they are used with `Bar`.
+Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal types.
+Users of our module shouldn't know that we implement `Foo` by using a `Bar`, but what we're
+really hiding here is the types `T1` and `T2`, and how they are used with `Bar`.
 
 ## See also
 

@@ -17,7 +17,8 @@ and you think it may not be appropriate to file an issue open a discussion in ou
 
 ## Writing a new article
 
-Before writing a new article please check in one of the following resources if there is an existing discussion or if someone is already working on that topic:
+Before writing a new article please check in one of the following resources if there is
+an existing discussion or if someone is already working on that topic:
 
 - [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116),
 - [All issues](https://github.com/rust-unofficial/patterns/issues),
@@ -42,6 +43,15 @@ Don't forget to add your new article to the `SUMMARY.md` to let it be rendered t
 
 Please make `Draft Pull requests` early so we can follow your progress and can give early feedback (see the following section).
 
+## Style guide
+
+In order to have a consistent style across the book, we suggest to:
+
+- Follow the official Rust book's [style guide](https://github.com/rust-lang/book/blob/master/style-guide.md).
+- Follow [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text). Tl;dr:
+  - Prefer full types name. For example `Option<T>` instead of `Option`.
+  - Prefer line comments (`//`) over block comments (`/* */`) where applicable.
+
 ## Check the article locally
 
 Before submitting the PR launch the commands `mdbook build` to make sure that the book builds and `mdbook test` to make sure that
@@ -50,7 +60,8 @@ code examples are correct.
 ### Markdown lint
 
 To make sure the files comply with our Markdown style we use [markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli).
-To spare you some manual work to get through the CI test you can use the following commands to automatically fix most of the emerging problems when writing Markdown files.
+To spare you some manual work to get through the CI test you can use the following commands to automatically fix
+most of the emerging problems when writing Markdown files.
 
 - Install:
 
