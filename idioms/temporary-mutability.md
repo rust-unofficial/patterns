@@ -2,10 +2,12 @@
 
 ## Description
 
-Often it is necessary to prepare and process some data, but after that data are only inspected
-and never modified. The intention can be made explicit by redefining the mutable variable as immutable.
+Often it is necessary to prepare and process some data, but after that data are
+only inspected and never modified. The intention can be made explicit by redefining
+the mutable variable as immutable.
 
-It can be done either by processing data within nested block or by redefining variable.
+It can be done either by processing data within nested block or by redefining
+variable.
 
 ## Example
 
