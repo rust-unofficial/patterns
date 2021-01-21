@@ -168,9 +168,10 @@
                 <div id="content" class="content">
                     <main>
                         <h1><a class="header" href="#programming-paradigms" id="programming-paradigms">Programming paradigms</a></h1>
-<p>One of the biggest hurdles to understanding functional programs when coming from an imperative background is the shift in thinking.
-Imperative programs describe <strong>how</strong> to do something, whereas declarative programs describe <strong>what</strong> to do.
-Let's sum the numbers from 1 to 10 to show this.</p>
+<p>One of the biggest hurdles to understanding functional programs when coming
+from an imperative background is the shift in thinking. Imperative programs
+describe <strong>how</strong> to do something, whereas declarative programs describe
+<strong>what</strong> to do. Let's sum the numbers from 1 to 10 to show this.</p>
 <h2><a class="header" href="#imperative" id="imperative">Imperative</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -199,7 +200,8 @@ Then we print it out.</p>
 <tr><td align="center">9</td><td align="center">45</td></tr>
 <tr><td align="center">10</td><td align="center">55</td></tr>
 </tbody></table>
-<p>This is how most of us start out programming. We learn that a program is a set of steps.</p>
+<p>This is how most of us start out programming. We learn that a program is a set
+of steps.</p>
 <h2><a class="header" href="#declarative" id="declarative">Declarative</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -208,14 +210,15 @@ Then we print it out.</p>
 <span class="boring">}
 </span></code></pre></pre>
 <p>Whoa! This is really different! What's going on here?
-Remember that with declarative programs we are describing <strong>what</strong> to do, rather than <strong>how</strong> to do it.
-<code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a> functions.
-The name is a convention from Haskell.</p>
-<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b</code>) with a range from 1 to 10.
-The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at first.
-<code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result.
-So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next result.
-This process continues until we get to the last element in the range, <code>10</code>.</p>
+Remember that with declarative programs we are describing <strong>what</strong> to do,
+rather than <strong>how</strong> to do it. <code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a>
+functions. The name is a convention from Haskell.</p>
+<p>Here, we are composing functions of addition (this closure: <code>|a, b| a + b</code>)
+with a range from 1 to 10. The <code>0</code> is the starting point, so <code>a</code> is <code>0</code> at
+first. <code>b</code> is the first element of the range, <code>1</code>. <code>0 + 1 = 1</code> is the result.
+So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next
+result. This process continues until we get to the last element in the range,
+<code>10</code>.</p>
 <table><thead><tr><th align="center"><code>a</code></th><th align="center"><code>b</code></th><th align="center">result</th></tr></thead><tbody>
 <tr><td align="center">0</td><td align="center">1</td><td align="center">1</td></tr>
 <tr><td align="center">1</td><td align="center">2</td><td align="center">3</td></tr>

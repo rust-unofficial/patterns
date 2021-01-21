@@ -170,11 +170,14 @@
                         <h1><a class="header" href="#error-handling-in-ffi" id="error-handling-in-ffi">Error Handling in FFI</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
 <p>In foreign languages like C, errors are represented by return codes.
-However, Rust's type system allows much more rich error information to be captured a propogated through a full type.</p>
-<p>This best practice shows different kinds of error codes, and how to expose them in a usable way:</p>
+However, Rust's type system allows much more rich error information to be
+captured a propogated through a full type.</p>
+<p>This best practice shows different kinds of error codes, and how to expose them
+in a usable way:</p>
 <ol>
 <li>Flat Enums should be converted to integers and returned as codes.</li>
-<li>Structured Enums should be converted to an integer code with a string error message for detail.</li>
+<li>Structured Enums should be converted to an integer code with a string error
+message for detail.</li>
 <li>Custom Error Types should become &quot;transparent&quot;, with a C representation.</li>
 </ol>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
@@ -219,7 +222,7 @@ pub mod c_api {
         ) -&gt; *mut libc::c_char {
 
         let error: &amp;DatabaseError = unsafe {
-            /* SAFETY: pointer lifetime is greater than the current stack frame */
+            // SAFETY: pointer lifetime is greater than the current stack frame
             &amp;*e
         };
 
@@ -282,9 +285,11 @@ impl From&lt;ParseError&gt; for parse_error {
 }
 </code></pre>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
-<p>This ensures that the foreign language has clear access to error information while not compromising the Rust code's API at all.</p>
+<p>This ensures that the foreign language has clear access to error information
+while not compromising the Rust code's API at all.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
-<p>It's a lot of typing, and some types may not be able to be converted easily to C.</p>
+<p>It's a lot of typing, and some types may not be able to be converted easily
+to C.</p>
 
                     </main>
 

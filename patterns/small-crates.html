@@ -170,29 +170,38 @@
                         <h1><a class="header" href="#prefer-small-crates" id="prefer-small-crates">Prefer small crates</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
 <p>Prefer small crates that do one thing well.</p>
-<p>Cargo and crates.io make it easy to add third-party libraries, much more so than in say C or C++.
-Moreover, since packages on crates.io cannot be edited or removed after publication, any build that works now should continue to work in the future.
+<p>Cargo and crates.io make it easy to add third-party libraries, much more so than
+in say C or C++. Moreover, since packages on crates.io cannot be edited or removed
+after publication, any build that works now should continue to work in the future.
 We should take advantage of this tooling, and use smaller, more fine-grained dependencies.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <ul>
 <li>Small crates are easier to understand, and encourage more modular code.</li>
 <li>Crates allow for re-using code between projects.
-For example, the <code>url</code> crate was developed as part of the Servo browser engine, but has since found wide use outside the project.</li>
-<li>Since the compilation unit of Rust is the crate, splitting a project into multiple crates can allow more of the code to be built in parallel.</li>
+For example, the <code>url</code> crate was developed as part of the Servo browser engine,
+but has since found wide use outside the project. * Since the compilation unit
+of Rust is the crate, splitting a project into multiple crates can allow more of
+the code to be built in parallel.</li>
 </ul>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <ul>
-<li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting versions of a crate at the same time.
-For example, the <code>url</code> crate has both versions 1.0 and 0.5.
-Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are different types,
-an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values from a web scraper that uses <code>url:1.0</code>.</li>
-<li>Packages on crates.io are not curated. A crate may be poorly written, have unhelpful documentation, or be outright malicious.</li>
-<li>Two small crates may be less optimized than one large one, since the compiler does not perform link-time optimization (LTO) by default.</li>
+<li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting
+versions of a crate at the same time. For example, the <code>url</code> crate has both versions
+1.0 and 0.5. Since the <code>Url</code> from <code>url:1.0</code> and the <code>Url</code> from <code>url:0.5</code> are
+different types, an HTTP client that uses <code>url:0.5</code> would not accept <code>Url</code> values
+from a web scraper that uses <code>url:1.0</code>.</li>
+<li>Packages on crates.io are not curated. A crate may be poorly written, have
+unhelpful documentation, or be outright malicious.</li>
+<li>Two small crates may be less optimized than one large one, since the compiler
+does not perform link-time optimization (LTO) by default.</li>
 </ul>
 <h2><a class="header" href="#examples" id="examples">Examples</a></h2>
-<p>The <a href="https://crates.io/crates/ref_slice"><code>ref_slice</code></a> crate provides functions for converting <code>&amp;T</code> to <code>&amp;[T]</code>.</p>
-<p>The <a href="https://crates.io/crates/url"><code>url</code></a> crate provides tools for working with URLs.</p>
-<p>The <a href="https://crates.io/crates/num_cpus"><code>num_cpus</code></a> crate provides a function to query the number of CPUs on a machine.</p>
+<p>The <a href="https://crates.io/crates/ref_slice"><code>ref_slice</code></a> crate provides functions
+for converting <code>&amp;T</code> to <code>&amp;[T]</code>.</p>
+<p>The <a href="https://crates.io/crates/url"><code>url</code></a> crate provides tools for working with
+URLs.</p>
+<p>The <a href="https://crates.io/crates/num_cpus"><code>num_cpus</code></a> crate provides a function to
+query the number of CPUs on a machine.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
 <li><a href="https://crates.io/">crates.io: The Rust community crate host</a></li>

@@ -169,10 +169,10 @@
                     <main>
                         <h1><a class="header" href="#raii-with-guards" id="raii-with-guards">RAII with guards</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> stands for &quot;Resource Acquisition is Initialisation&quot; which is a terrible
-name. The essence of the pattern is that resource initialisation is done in the
-constructor of an object and finalisation in the destructor. This pattern is
-extended in Rust by using an RAII object as a guard of some resource and relying
+<p><a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">RAII</a> stands for &quot;Resource Acquisition is Initialisation&quot; which is a
+terrible name. The essence of the pattern is that resource initialisation is done
+in the constructor of an object and finalisation in the destructor. This pattern
+is extended in Rust by using an RAII object as a guard of some resource and relying
 on the type system to ensure that access is always mediated by the guard object.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>Mutex guards are the classic example of this pattern from the std library (this

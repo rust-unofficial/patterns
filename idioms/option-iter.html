@@ -169,10 +169,12 @@
                     <main>
                         <h1><a class="header" href="#iterating-over-an-option" id="iterating-over-an-option">Iterating over an <code>Option</code></a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p><code>Option</code> can be viewed as a container that contains either zero or one elements.
-In particular, it implements the <code>IntoIterator</code> trait, and as such can be used with generic code that needs such a type.</p>
+<p><code>Option</code> can be viewed as a container that contains either zero or one
+elements. In particular, it implements the <code>IntoIterator</code> trait, and as such
+can be used with generic code that needs such a type.</p>
 <h2><a class="header" href="#examples" id="examples">Examples</a></h2>
-<p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>.extend()</code></a>:</p>
+<p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to
+<a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>.extend()</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -187,7 +189,8 @@ if let Some(turing_inner) = turing {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>If you need to tack an <code>Option</code> to the end of an existing iterator, you can pass it to <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>.chain()</code></a>:</p>
+<p>If you need to tack an <code>Option</code> to the end of an existing iterator, you can
+pass it to <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>.chain()</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -199,23 +202,27 @@ for logician in logicians.iter().chain(turing.iter()) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p>Note that if the <code>Option</code> is always <code>Some</code>, then it is more idiomatic to use <a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a>
-on the element instead.</p>
-<p>Also, since <code>Option</code> implements <code>IntoIterator</code>, it's possible to iterate over it using a <code>for</code> loop.
-This is equivalent to matching it with <code>if let Some(..)</code>, and in most cases you should prefer the latter.</p>
+<p>Note that if the <code>Option</code> is always <code>Some</code>, then it is more idiomatic to use
+<a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a> on the
+element instead.</p>
+<p>Also, since <code>Option</code> implements <code>IntoIterator</code>, it's possible to iterate over
+it using a <code>for</code> loop. This is equivalent to matching it with <code>if let Some(..)</code>,
+and in most cases you should prefer the latter.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
 <li>
-<p><a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a> is an iterator which yields exactly one element.
-It's a more readable alternative to <code>Some(foo).into_iter()</code>.</p>
+<p><a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a> is an
+iterator which yields exactly one element. It's a more readable alternative to
+<code>Some(foo).into_iter()</code>.</p>
 </li>
 <li>
-<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map"><code>Iterator::filter_map</code></a> is a version of
-<a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map"><code>Iterator::flat_map</code></a>, specialized to mapping functions which
-return <code>Option</code>.</p>
+<p><a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map"><code>Iterator::filter_map</code></a>
+is a version of <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.flat_map"><code>Iterator::flat_map</code></a>,
+specialized to mapping functions which return <code>Option</code>.</p>
 </li>
 <li>
-<p>The <a href="https://crates.io/crates/ref_slice"><code>ref_slice</code></a> crate provides functions for converting an <code>Option</code> to a zero- or one-element slice.</p>
+<p>The <a href="https://crates.io/crates/ref_slice"><code>ref_slice</code></a> crate provides functions
+for converting an <code>Option</code> to a zero- or one-element slice.</p>
 </li>
 <li>
 <p><a href="https://doc.rust-lang.org/std/option/enum.Option.html">Documentation for <code>Option&lt;T&gt;</code></a></p>

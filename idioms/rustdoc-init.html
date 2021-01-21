@@ -173,8 +173,8 @@
 quicker to wrap your example with a helper function which takes the struct as an
 argument.</p>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
-<p>Sometimes there is a struct with multiple or complicated parameters and several methods.
-Each of these methods should have examples.</p>
+<p>Sometimes there is a struct with multiple or complicated parameters and several
+methods. Each of these methods should have examples.</p>
 <p>For example:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
@@ -227,13 +227,15 @@ impl Connection {
     }
 }
 </code></pre>
-<p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not actually run while testing
-because it is inside of a function which is never invoked.</p>
+<p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not
+actually run while testing because it is inside of a function which is never
+invoked.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
-<p>As example is in a function, the code will not be tested. (Though it still will checked to make sure it compiles when running a <code>cargo test</code>)
-So this pattern is most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
+<p>As example is in a function, the code will not be tested. Though it still will
+checked to make sure it compiles when running a <code>cargo test</code>. So this pattern is
+most useful when need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
 <h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
 <p>If assertions are not required this pattern works well.</p>
 <p>If they are, an alternative can be to create a public method to create a helper

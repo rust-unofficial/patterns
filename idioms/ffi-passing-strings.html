@@ -169,19 +169,24 @@
                     <main>
                         <h1><a class="header" href="#passing-strings" id="passing-strings">Passing Strings</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>When passing strings to FFI functions, there are four principles that should be followed:</p>
+<p>When passing strings to FFI functions, there are four principles that should be
+followed:</p>
 <ol>
 <li>Make the lifetime of owned strings as long as possible.</li>
 <li>Minimize <code>unsafe</code> code during the conversion.</li>
 <li>If the C code can modify the string data, use <code>Vec</code> instead of <code>CString</code>.</li>
-<li>Unless the Foreign Function API requires it, the ownership of the string should not transfer to the callee.</li>
+<li>Unless the Foreign Function API requires it, the ownership of the string
+should not transfer to the callee.</li>
 </ol>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
-<p>Rust has built-in support for C-style strings with its <code>CString</code> and <code>CStr</code> types.
-However, there are different approaches one can take with strings that are being sent to a foreign function call from a Rust function.</p>
-<p>The best practice is simple: use <code>CString</code> in such a way as to minimize <code>unsafe</code> code.
-However, a secondary caveat is that <em>the object must live long enough</em>, meaning the lifetime should be maximized.
-In addition, the documentation explains that &quot;round-tripping&quot; a <code>CString</code> after modification is UB, so additional work is necessary in that case.</p>
+<p>Rust has built-in support for C-style strings with its <code>CString</code> and <code>CStr</code>
+types. However, there are different approaches one can take with strings that
+are being sent to a foreign function call from a Rust function.</p>
+<p>The best practice is simple: use <code>CString</code> in such a way as to minimize
+<code>unsafe</code> code. However, a secondary caveat is that
+<em>the object must live long enough</em>, meaning the lifetime should be maximized.
+In addition, the documentation explains that &quot;round-tripping&quot; a <code>CString</code> after
+modification is UB, so additional work is necessary in that case.</p>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
 
@@ -228,7 +233,8 @@ In addition, the documentation explains that &quot;round-tripping&quot; a <code>
 <li>The <code>CString</code> lives long enough.</li>
 <li>Errors with typecasts are always propagated when possible.</li>
 </ol>
-<p>A common mistake (so common it's in the documentation) is to not use the variable in the first block:</p>
+<p>A common mistake (so common it's in the documentation) is to not use the
+variable in the first block:</p>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
 
     // other module content
@@ -242,11 +248,13 @@ In addition, the documentation explains that &quot;round-tripping&quot; a <code>
     }
 }
 </code></pre>
-<p>This code will result in a dangling pointer, because the lifetime of the <code>CString</code> is not extended
-by the pointer creation, unlike if a reference were created.</p>
-<p>Another issue frequently raised is that the initialization of a 1k vector of zeroes is &quot;slow&quot;.
-However, recent versions of Rust actually optimize that particular macro to a call to <code>zmalloc</code>,
-meaning it is as fast as the operating system's ability to return zeroed memory (which is quite fast).</p>
+<p>This code will result in a dangling pointer, because the lifetime of the
+<code>CString</code> is not extended by the pointer creation, unlike if a reference were
+created.</p>
+<p>Another issue frequently raised is that the initialization of a 1k vector of
+zeroes is &quot;slow&quot;. However, recent versions of Rust actually optimize that
+particular macro to a call to <code>zmalloc</code>, meaning it is as fast as the operating
+system's ability to return zeroed memory (which is quite fast).</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>None?</p>
 

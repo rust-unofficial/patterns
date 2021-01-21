@@ -169,33 +169,42 @@
                     <main>
                         <h1><a class="header" href="#object-based-apis" id="object-based-apis">Object-Based APIs</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>When designing APIs in Rust which are exposed to other languages, there are some important design principles which are contrary to normal Rust API design:</p>
+<p>When designing APIs in Rust which are exposed to other languages, there are some
+important design principles which are contrary to normal Rust API design:</p>
 <ol>
-<li>All Encapsulated types should be <em>owned</em> by Rust, <em>managed</em> by the user, and <em>opaque</em>.</li>
+<li>All Encapsulated types should be <em>owned</em> by Rust, <em>managed</em> by the user,
+and <em>opaque</em>.</li>
 <li>All Transactional data types should be <em>owned</em> by the user, and <em>transparent</em>.</li>
 <li>All library behavior should be functions acting upon Encapsulated types.</li>
-<li>All library behavior should be encapsulated into types not based on structure, but <em>provenance/lifetime</em>.</li>
+<li>All library behavior should be encapsulated into types not based on structure,
+but <em>provenance/lifetime</em>.</li>
 </ol>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
 <p>Rust has built-in FFI support to other languages.
-It does this by providing a way for crate authors to provide C-compatible APIs through different ABIs (though that is unimportant to this practice).</p>
-<p>Well-designed Rust FFI follows C API design principles, while compromising the design in Rust as little as possible.
-There are three goals with any foreign API:</p>
+It does this by providing a way for crate authors to provide C-compatible APIs
+through different ABIs (though that is unimportant to this practice).</p>
+<p>Well-designed Rust FFI follows C API design principles, while compromising the
+design in Rust as little as possible. There are three goals with any foreign API:</p>
 <ol>
 <li>Make it easy to use in the target language.</li>
 <li>Avoid the API dictating internal unsafety on the Rust side as much as possible.</li>
-<li>Keep the potential for memory unsafety and Rust <code>undefined behaviour</code> as small as possible.</li>
+<li>Keep the potential for memory unsafety and Rust <code>undefined behaviour</code> as small
+as possible.</li>
 </ol>
-<p>Rust code must trust the memory safety of the foreign language beyond a certain point.
-However, every bit of <code>unsafe</code> code on the Rust side is an opportunity for bugs, or to exacerbate <code>undefined behaviour</code>.</p>
-<p>For example, if a pointer provenance is wrong, that may be a segfault due to invalid memory access.
-But if it is manipulated by unsafe code, it could become full-blown heap corruption.</p>
-<p>The Object-Based API design allows for writing shims that have good memory safety characteristics, and a clean boundary of what is safe and what is <code>unsafe</code>.</p>
+<p>Rust code must trust the memory safety of the foreign language beyond a certain
+point. However, every bit of <code>unsafe</code> code on the Rust side is an opportunity for
+bugs, or to exacerbate <code>undefined behaviour</code>.</p>
+<p>For example, if a pointer provenance is wrong, that may be a segfault due to
+invalid memory access. But if it is manipulated by unsafe code, it could become
+full-blown heap corruption.</p>
+<p>The Object-Based API design allows for writing shims that have good memory safety
+characteristics, and a clean boundary of what is safe and what is <code>unsafe</code>.</p>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
 <p>The POSIX standard defines the API to access an on-file database, known as <a href="https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h">DBM</a>.
 It is an excellent example of an &quot;object-based&quot; API.</p>
-<p>Here is the definition in C, which hopefully should be easy to read for those involved in FFI.
-The commentary below should help explaining it for those who miss the subtleties.</p>
+<p>Here is the definition in C, which hopefully should be easy to read for those
+involved in FFI. The commentary below should help explaining it for those who
+miss the subtleties.</p>
 <pre><code class="language-C">struct DBM;
 typedef struct { void *dptr, size_t dsize } datum;
 
@@ -211,43 +220,56 @@ int     dbm_store(DBM *, datum, datum, int);
 </code></pre>
 <p>This API defines two types: <code>DBM</code> and <code>datum</code>.</p>
 <p>The <code>DBM</code> type was called an &quot;encapsulated&quot; type above.
-It is designed to contain internal state, and acts as an entry point for the library's behavior.</p>
-<p>It is completely opaque to the user, who cannot create a <code>DBM</code> themselves since they don't know its size or layout.
-Instead, they must call <code>dbm_open</code>, and that only gives them <em>a pointer to one</em>.</p>
+It is designed to contain internal state, and acts as an entry point for the
+library's behavior.</p>
+<p>It is completely opaque to the user, who cannot create a <code>DBM</code> themselves since
+they don't know its size or layout. Instead, they must call <code>dbm_open</code>, and that
+only gives them <em>a pointer to one</em>.</p>
 <p>This means all <code>DBM</code>s are &quot;owned&quot; by the library in a Rust sense.
-The internal state of unknown size is kept in memory controlled by the library, not the user.
-The user can only manage its life cycle with <code>open</code> and <code>close</code>, and perform operations on it with the other functions.</p>
+The internal state of unknown size is kept in memory controlled by the library,
+not the user. The user can only manage its life cycle with <code>open</code> and <code>close</code>,
+and perform operations on it with the other functions.</p>
 <p>The <code>datum</code> type was called a &quot;transactional&quot; type above.
-It is designed to facilitate the exchange of information between the library and its user.</p>
-<p>The database is designed to store &quot;unstructured data&quot;, with no pre-defined length or meaning.
-As a result, the <code>datum</code> is the C equivalent of a Rust slice: a bunch of bytes, and a count of how many there are.
-The main difference is that there is no type information, which is what <code>void</code> indicates.</p>
+It is designed to facilitate the exchange of information between the library and
+its user.</p>
+<p>The database is designed to store &quot;unstructured data&quot;, with no pre-defined length
+or meaning. As a result, the <code>datum</code> is the C equivalent of a Rust slice: a bunch
+of bytes, and a count of how many there are. The main difference is that there is
+no type information, which is what <code>void</code> indicates.</p>
 <p>Keep in mind that this header is written from the library's point of view.
 The user likely has some type they are using, which has a known size.
-But the library does not care, and by the rules of C casting, any type behind a pointer can be cast to <code>void</code>.</p>
-<p>As noted earlier, this type is <em>transparent</em> to the user. But also, this type is <em>owned</em> by the user.
+But the library does not care, and by the rules of C casting, any type behind a
+pointer can be cast to <code>void</code>.</p>
+<p>As noted earlier, this type is <em>transparent</em> to the user. But also, this type is
+<em>owned</em> by the user.
 This has subtle ramifications, due to that pointer inside it.
 The question is, who owns the memory that pointer points to?</p>
 <p>The answer for best memory safety is, &quot;the user&quot;.
-But in cases such as retrieving a value, the user does not know how to allocate it correctly (since they don't know how long the value is).
-In this case, the library code is expected to use the heap that the user has access to --
-such as the C library <code>malloc</code> and <code>free</code> -- and then <em>transfer ownership</em> in the Rust sense.</p>
+But in cases such as retrieving a value, the user does not know how to allocate
+it correctly (since they don't know how long the value is). In this case, the library
+code is expected to use the heap that the user has access to -- such as the C library
+<code>malloc</code> and <code>free</code> -- and then <em>transfer ownership</em> in the Rust sense.</p>
 <p>This may all seem speculative, but this is what a pointer means in C.
 It means the same thing as Rust: &quot;user defined lifetime.&quot;
 The user of the library needs to read the documentation in order to use it correctly.
-That said, there are some decisions that have fewer or greater consequences if users do it wrong.
-Minimizing those is what this best practice is about, and the key is to <em>transfer ownership of everything that is transparent</em>.</p>
+That said, there are some decisions that have fewer or greater consequences if users
+do it wrong. Minimizing those is what this best practice is about, and the key
+is to <em>transfer ownership of everything that is transparent</em>.</p>
 <h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
-<p>This minimizes the number of memory safety guarantees the user must uphold to a relatively small number:</p>
+<p>This minimizes the number of memory safety guarantees the user must uphold to a
+relatively small number:</p>
 <ol>
-<li>Do not call any function with a pointer not returned by <code>dbm_open</code> (invalid access or corruption).</li>
+<li>Do not call any function with a pointer not returned by <code>dbm_open</code> (invalid
+access or corruption).</li>
 <li>Do not call any function on a pointer after close (use after free).</li>
-<li>The <code>dptr</code> on any <code>datum</code> must be <code>NULL</code>, or point to a valid slice of memory at the advertised length.</li>
+<li>The <code>dptr</code> on any <code>datum</code> must be <code>NULL</code>, or point to a valid slice of memory
+at the advertised length.</li>
 </ol>
 <p>In addition, it avoids a lot of pointer provenance issues.
 To understand why, let us consider an alternative in some depth: key iteration.</p>
 <p>Rust is well known for its iterators.
-When implementing one, the programmer makes a separate type with a bounded lifetime to its owner, and implements the <code>Iterator</code> trait.</p>
+When implementing one, the programmer makes a separate type with a bounded lifetime
+to its owner, and implements the <code>Iterator</code> trait.</p>
 <p>Here is how iteration would be done in Rust for <code>DBM</code>:</p>
 <pre><code class="language-rust ignore">struct Dbm { ... }
 
@@ -267,22 +289,27 @@ impl&lt;'it&gt; Iterator for DbmKeysIter&lt;'it&gt; { ... }
 However, consider what a straightforward API translation would look like:</p>
 <pre><code class="language-rust ignore">#[no_mangle]
 pub extern &quot;C&quot; fn dbm_iter_new(owner: *const Dbm) -&gt; *mut DbmKeysIter {
-    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
 }
 #[no_mangle]
-pub extern &quot;C&quot; fn dbm_iter_next(iter: *mut DbmKeysIter, key_out: *const datum) -&gt; libc::c_int {
-    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+pub extern &quot;C&quot; fn dbm_iter_next(
+    iter: *mut DbmKeysIter,
+    key_out: *const datum
+) -&gt; libc::c_int {
+    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
 }
 #[no_mangle]
 pub extern &quot;C&quot; fn dbm_iter_del(*mut DbmKeysIter) {
-    /* THIS API IS A BAD IDEA! For real applications, use object-based design instead. */
+    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
 }
 </code></pre>
-<p>This API loses a key piece of information: the lifetime of the iterator must not exceed the lifetime of the <code>Dbm</code> object that owns it.
-A user of the library could use it in a way which causes the iterator to outlive the data it is iterating on, resulting in reading uninitialized memory.</p>
+<p>This API loses a key piece of information: the lifetime of the iterator must not
+exceed the lifetime of the <code>Dbm</code> object that owns it. A user of the library could
+use it in a way which causes the iterator to outlive the data it is iterating on,
+resulting in reading uninitialized memory.</p>
 <p>This example written in C contains a bug that will be explained afterwards:</p>
 <pre><code class="language-C">int count_key_sizes(DBM *db) {
-    /* DO NOT USE THIS FUNCTION. IT HAS A SUBTLE BUT SERIOUS BUG! */
+    // DO NOT USE THIS FUNCTION. IT HAS A SUBTLE BUT SERIOUS BUG!
     datum key;
     int len = 0;
 
@@ -306,46 +333,56 @@ A user of the library could use it in a way which causes the iterator to outlive
     }
 }
 </code></pre>
-<p>This bug is a classic. Here's what happens when the iterator returns the end-of-iteration marker:</p>
+<p>This bug is a classic. Here's what happens when the iterator returns the
+end-of-iteration marker:</p>
 <ol>
 <li>The loop condition sets <code>l</code> to zero, and enters the loop because <code>0 &gt;= 0</code>.</li>
 <li>The length is incremented, in this case by zero.</li>
-<li>The if statement is true, so the database is closed. There should be a break statement here.</li>
+<li>The if statement is true, so the database is closed. There should be a break
+statement here.</li>
 <li>The loop condition executes again, causing a <code>next</code> call on the closed object.</li>
 </ol>
 <p>The worst part about this bug?
 If the Rust implementation was careful, this code will work most of the time!
-If the memory for the <code>Dbm</code> object is not immediately reused, an internal check will almost certainly fail,
-resulting in the iterator returning a <code>-1</code> indicating an error.
-But occasionally, it will cause a segmentation fault, or even worse, nonsensical memory corruption!</p>
+If the memory for the <code>Dbm</code> object is not immediately reused, an internal check
+will almost certainly fail, resulting in the iterator returning a <code>-1</code> indicating
+an error. But occasionally, it will cause a segmentation fault, or even worse,
+nonsensical memory corruption!</p>
 <p>None of this can be avoided by Rust.
-From its perspective, it put those objects on its heap, returned pointers to them, and gave up control of their lifetimes.
-The C code simply must &quot;play nice&quot;.</p>
+From its perspective, it put those objects on its heap, returned pointers to them,
+and gave up control of their lifetimes. The C code simply must &quot;play nice&quot;.</p>
 <p>The programmer must read and understand the API documentation.
-While some consider that par for the course in C, a good API design can mitigate this risk.
-The POSIX API for <code>DBM</code> did this by <em>consolidating the ownership</em> of the iterator with its parent:</p>
+While some consider that par for the course in C, a good API design can mitigate
+this risk. The POSIX API for <code>DBM</code> did this by <em>consolidating the ownership</em> of
+the iterator with its parent:</p>
 <pre><code class="language-C">datum   dbm_firstkey(DBM *);
 datum   dbm_nextkey(DBM *);
 </code></pre>
 <p>Thus, all of the lifetimes were bound together, and such unsafety was prevented.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
-<p>However, this design choice also has a number of drawbacks, which should be considered as well.</p>
+<p>However, this design choice also has a number of drawbacks, which should be
+considered as well.</p>
 <p>First, the API itself becomes less expressive.
-With POSIX DBM, there is only one iterator per object, and every call changes its state.
-This is much more restrictive than iterators in almost any language, even though it is safe.
-Perhaps with other related objects, whose lifetimes are less hierarchical, this limitation is more of a cost than the safety.</p>
-<p>Second, depending on the relationships of the API's parts, significant design effort may be involved.
-Many of the easier design points have other patterns associated with them:</p>
+With POSIX DBM, there is only one iterator per object, and every call changes
+its state. This is much more restrictive than iterators in almost any language,
+even though it is safe. Perhaps with other related objects, whose lifetimes are
+less hierarchical, this limitation is more of a cost than the safety.</p>
+<p>Second, depending on the relationships of the API's parts, significant design effort
+may be involved. Many of the easier design points have other patterns associated
+with them:</p>
 <ul>
 <li>
-<p><a href="./ffi-wrappers.html">Wrapper Type Consolidation</a> groups multiple Rust types together into an opaque &quot;object&quot;</p>
+<p><a href="./ffi-wrappers.html">Wrapper Type Consolidation</a> groups multiple Rust types together
+into an opaque &quot;object&quot;</p>
 </li>
 <li>
-<p><a href="../idioms/ffi-errors.html">FFI Error Passing</a> explains error handling with integer codes and sentinel return values (such as <code>NULL</code> pointers)</p>
+<p><a href="../idioms/ffi-errors.html">FFI Error Passing</a> explains error handling with integer
+codes and sentinel return values (such as <code>NULL</code> pointers)</p>
 </li>
 <li>
-<p><a href="../idioms/ffi-accepting-strings.html">Accepting Foreign Strings</a> allows accepting strings with minimal unsafe code,
-and is easier to get right than <a href="../idioms/ffi-passing-strings.html">Passing Strings to FFI</a></p>
+<p><a href="../idioms/ffi-accepting-strings.html">Accepting Foreign Strings</a> allows accepting
+strings with minimal unsafe code, and is easier to get right than
+<a href="../idioms/ffi-passing-strings.html">Passing Strings to FFI</a></p>
 </li>
 </ul>
 <p>However, not every API can be done this way.

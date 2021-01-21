@@ -173,7 +173,8 @@ enforce some behaviour at compile time where using only type aliases would
 not be enough?</p>
 <p>For example, if we want to create a custom <code>Display</code> implementation for <code>String</code>
 due to security considerations (e.g. passwords).</p>
-<p>For such cases we could use the <code>Newtype</code> pattern to provide <strong>type safety</strong> and <strong>encapsulation</strong>.</p>
+<p>For such cases we could use the <code>Newtype</code> pattern to provide <strong>type safety</strong>
+and <strong>encapsulation</strong>.</p>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
@@ -238,19 +239,22 @@ most common uses, but they can be used for other reasons:</p>
 <ul>
 <li>restricting functionality (reduce the functions exposed or traits implemented),</li>
 <li>making a type with copy semantics have move semantics,</li>
-<li>abstraction by providing a more concrete type and thus hiding internal types, e.g.,</li>
+<li>abstraction by providing a more concrete type and thus hiding internal types,
+e.g.,</li>
 </ul>
 <pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);
 </code></pre>
-<p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal types.
-Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>, but what we're
-really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used with <code>Bar</code>.</p>
+<p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal
+types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>,
+but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used
+with <code>Bar</code>.</p>
 <h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction">Advanced Types in the book</a></li>
 <li><a href="https://wiki.haskell.org/Newtype">Newtypes in Haskell</a></li>
 <li><a href="https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases">Type aliases</a></li>
-<li><a href="https://crates.io/crates/derive_more">derive_more</a>, a crate for deriving many builtin traits on newtypes.</li>
+<li><a href="https://crates.io/crates/derive_more">derive_more</a>, a crate for deriving many
+builtin traits on newtypes.</li>
 <li><a href="https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html">The Newtype Pattern In Rust</a></li>
 </ul>
 

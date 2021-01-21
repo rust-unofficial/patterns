@@ -169,16 +169,19 @@
                     <main>
                         <h1><a class="header" href="#accepting-strings" id="accepting-strings">Accepting Strings</a></h1>
 <h2><a class="header" href="#description" id="description">Description</a></h2>
-<p>When accepting strings via FFI through pointers, there are two principles that should be followed:</p>
+<p>When accepting strings via FFI through pointers, there are two principles that
+should be followed:</p>
 <ol>
 <li>Keep foreign strings &quot;borrowed&quot;, rather than copying them directly.</li>
 <li>Minimize <code>unsafe</code> code during the conversion.</li>
 </ol>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
-<p>Rust has built-in support for C-style strings with its <code>CString</code> and <code>CStr</code> types.
-However, there are different approaches one can take with strings that are being accepted from a foreign caller of a Rust function.</p>
-<p>The best practice is simple: use <code>CStr</code> in such a way as to minimize unsafe code, and create a borrowed slice.
-If an owned String is needed, call <code>to_string()</code> on the string slice.</p>
+<p>Rust has built-in support for C-style strings with its <code>CString</code> and <code>CStr</code>
+types. However, there are different approaches one can take with strings that
+are being accepted from a foreign caller of a Rust function.</p>
+<p>The best practice is simple: use <code>CStr</code> in such a way as to minimize unsafe
+code, and create a borrowed slice. If an owned String is needed, call
+<code>to_string()</code> on the string slice.</p>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
 
@@ -209,7 +212,8 @@ If an owned String is needed, call <code>to_string()</code> on the string slice.
 <p>The example is is written to ensure that:</p>
 <ol>
 <li>The <code>unsafe</code> block is as small as possible.</li>
-<li>The pointer with an &quot;untracked&quot; lifetime becomes a &quot;tracked&quot; shared reference</li>
+<li>The pointer with an &quot;untracked&quot; lifetime becomes a &quot;tracked&quot; shared
+reference</li>
 </ol>
 <p>Consider an alternative, where the string is actually copied:</p>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
@@ -217,7 +221,8 @@ If an owned String is needed, call <code>to_string()</code> on the string slice.
     // other module content
 
     pub extern &quot;C&quot; fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
-        /* DO NOT USE THIS CODE. IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG. */
+        // DO NOT USE THIS CODE.
+        // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.
 
         let level: crate::LogLevel = match level { /* ... */ };
 
@@ -253,18 +258,22 @@ If an owned String is needed, call <code>to_string()</code> on the string slice.
 </code></pre>
 <p>This code in inferior to the original in two respects:</p>
 <ol>
-<li>There is much more <code>unsafe</code> code, and more importantly, more invariants it must uphold.</li>
-<li>Due to the extensive arithmetic required, there is a bug in this version that cases Rust <code>undefined behaviour</code>.</li>
+<li>There is much more <code>unsafe</code> code, and more importantly, more invariants it
+must uphold.</li>
+<li>Due to the extensive arithmetic required, there is a bug in this version
+that cases Rust <code>undefined behaviour</code>.</li>
 </ol>
-<p>The bug here is a simple mistake in pointer arithmetic: the string was copied, all <code>msg_len</code> bytes of it.
-However, the <code>NUL</code> terminator at the end was not.</p>
+<p>The bug here is a simple mistake in pointer arithmetic: the string was copied,
+all <code>msg_len</code> bytes of it. However, the <code>NUL</code> terminator at the end was not.</p>
 <p>The Vector then had its size <em>set</em> to the length of the <em>zero padded string</em> --
 rather than <em>resized</em> to it, which could have added a zero at the end.
 As a result, the last byte in the Vector is uninitialized memory.
-When the <code>CString</code> is created at the bottom of the block, its read of the Vector will cause <code>undefined behaviour</code>!</p>
+When the <code>CString</code> is created at the bottom of the block, its read of the
+Vector will cause <code>undefined behaviour</code>!</p>
 <p>Like many such issues, this would be difficult issue to track down.
-Sometimes it would panic because the string was not <code>UTF-8</code>, sometimes it would put a weird character at the end of the string,
-sometimes it would just completely crash.</p>
+Sometimes it would panic because the string was not <code>UTF-8</code>, sometimes it would
+put a weird character at the end of the string, sometimes it would just
+completely crash.</p>
 <h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
 <p>None?</p>
 
