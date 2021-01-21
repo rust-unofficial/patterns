@@ -63,7 +63,7 @@ pub mod unsafe_module {
     // other module content
 
     pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
-        // DO NOT USE THIS CODE. 
+        // DO NOT USE THIS CODE.
         // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.
 
         let level: crate::LogLevel = match level { /* ... */ };
