@@ -34,7 +34,7 @@ fn baz(a: &mut A) {
     let x = foo(a);
     // Borrow checker error:
     // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once
-    // at a time
+                       //          at a time
     println!("{}", x);
 }
 ```
