@@ -6,7 +6,7 @@
 
 ## [SOLID](https://en.wikipedia.org/wiki/SOLID)
 
-- [Single Responsibility Principle (SRP)](https://en.wikipedia.org/wiki/Single-responsibility_princniple):
+- [Single Responsibility Principle (SRP)](https://en.wikipedia.org/wiki/Single-responsibility_principle):
   A class should only have a single responsibility, that is, only changes to
   one part of the software's specification should be able to affect the
   specification of the class.
