@@ -230,7 +230,7 @@ macro_rules! to_asm {
 }
 
 fn main() {
-	let a = 3;
+    let a = 3;
     to_asm!((2 * 3) - 5);
     println!("-------------------");
     to_asm!(2 * (a - 5));
