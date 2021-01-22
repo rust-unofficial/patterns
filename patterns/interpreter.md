@@ -38,7 +38,8 @@ It is simpy an example of using Interpreter pattern.
 
 ## Solution 1
 
-The grammar for a set of espression over `{0,...,9, +,-,*,/,(,)}` is 
+The grammar for a set of espression over `{0,...,9, +,-,*,/,(,)}` is
+
 ```ignore 
 exp -> exp + term
 exp -> exp - term
@@ -49,115 +50,116 @@ term -> factor
 factor -> ( exp )
 factor -> 0 | 1| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
 ```
+
 Our first approach is a standard one, simple implementation of a recursive descent parser. The following code doesn't have `struct` abstraction in order to keep code short. The code panics when expression is syntactically wrong (unbalanced parantheses or missing digit/operator for example ).
 
 ```rust
 fn token(input: &[u8], cur: usize) -> char {
-	if cur < input.len() {
-		input[cur] as char
-	} else {
-		'$' // End of line
-	}
+    if cur < input.len() {
+        input[cur] as char
+    } else {
+        '$' // End of line
+    }
 }
 
 fn single_expr(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-	expr(input, cur, out);
+    expr(input, cur, out);
 
-	let ch = token(input, *cur);
-	if ch != '$' {
-		panic!("Unexpected symbol '{}', at {}", ch, *cur);
-	}
+    let ch = token(input, *cur);
+    if ch != '$' {
+        panic!("Unexpected symbol '{}', at {}", ch, *cur);
+    }
 }
 
 fn expr(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-	term(input, cur, out);
+    term(input, cur, out);
 
-	loop {
-		let ch = token(input, *cur);
-		if ch == '$' || (ch != '+' && ch != '-') {
-			break;
-		} else {
-			*cur += 1;
-			term(input, cur, out);
-			translate(ch, out);
-		}
-	}
+    loop {
+        let ch = token(input, *cur);
+        if ch == '$' || (ch != '+' && ch != '-') {
+            break;
+        } else {
+            *cur += 1;
+            term(input, cur, out);
+            translate(ch, out);
+        }
+    }
 }
 
 fn term(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-	factor(input, cur, out);
+    factor(input, cur, out);
 
-	loop {
-		let ch = token(input, *cur);
-		if ch == '$' || (ch != '*' && ch != '/') {
-			break;
-		} else {
-			*cur += 1;
-			factor(input, cur, out);
-			translate(ch, out);
-		}
-	}
+    loop {
+        let ch = token(input, *cur);
+        if ch == '$' || (ch != '*' && ch != '/') {
+            break;
+        } else {
+            *cur += 1;
+            factor(input, cur, out);
+            translate(ch, out);
+        }
+    }
 }
 
 fn factor(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-	let ch = token(input, *cur);
+    let ch = token(input, *cur);
 
-	if ch.is_digit(10) {
-		out.push(format!("push {}", ch));
-	} else if ch == '(' {
-		*cur += 1;
-		expr(input, cur, out);
+    if ch.is_digit(10) {
+        out.push(format!("push {}", ch));
+    } else if ch == '(' {
+        *cur += 1;
+        expr(input, cur, out);
 
-		let ch = token(input, *cur);
-		if ch != ')' {
-			panic!("Missing ')' at {}", *cur);
-		}
-	} else {
-		panic!("Unexpected symbol '{}', at {}", ch, *cur);
-	}
+        let ch = token(input, *cur);
+        if ch != ')' {
+            panic!("Missing ')' at {}", *cur);
+        }
+    } else {
+        panic!("Unexpected symbol '{}', at {}", ch, *cur);
+    }
 
-	*cur += 1;
+    *cur += 1;
 }
 
 fn translate(ch: char, out: &mut Vec<String>) {
-	out.push(String::from("pop ebx"));
-	out.push(String::from("pop eax"));
-	out.push(format!("{} eax, ebx", to_oper(ch)));
-	out.push(String::from("push eax"));
+    out.push(String::from("pop ebx"));
+    out.push(String::from("pop eax"));
+    out.push(format!("{} eax, ebx", to_oper(ch)));
+    out.push(String::from("push eax"));
 }
 
 fn to_oper(ch: char) -> String {
-	match ch {
-		'+' => return String::from("add"),
-		'-' => return String::from("sub"),
-		'*' => return String::from("mul"),
-		'/' => return String::from("div"),
-		_ => panic!("Invalid operator '{}'", ch),
-	}
+    match ch {
+        '+' => return String::from("add"),
+        '-' => return String::from("sub"),
+        '*' => return String::from("mul"),
+        '/' => return String::from("div"),
+        _ => panic!("Invalid operator '{}'", ch),
+    }
 }
 
 pub fn main() {
-	let mut out = vec![];
-	let mut cur = 0;
-	let exp = b"2/(7-3)";
+    let mut out = vec![];
+    let mut cur = 0;
+    let exp = b"2/(7-3)";
 
-	single_expr(exp, &mut cur, &mut out);
-	assert_eq!(
-		out,
-		vec![
-			"push 2",
-			"push 7",
-			"push 3",
-			"pop ebx",
-			"pop eax",
-			"sub eax, ebx",
-			"push eax",
-			"pop ebx",
-			"pop eax",
-			"div eax, ebx",
-			"push eax",
-		]
-	);
+    single_expr(exp, &mut cur, &mut out);
+    assert_eq!(
+        out,
+        vec![
+            "push 2",
+            "push 7",
+            "push 3",
+            "pop ebx",
+            "pop eax",
+            "sub eax, ebx",
+            "push eax",
+            "pop ebx",
+            "pop eax",
+            "div eax, ebx",
+            "push eax",
+        ]
+    );
 }
 ```
 
@@ -172,58 +174,58 @@ In thithe following example, we have to write `(2 * 3) - 5` instead of `2 * 3 - 
 
 ```rust
 fn print_op(op: &str) {
-	println!("pop ebx");
-	println!("pop eax");
-	println!("{} eax,ebx", op);
-	println!("push eax");
+    println!("pop ebx");
+    println!("pop eax");
+    println!("{} eax,ebx", op);
+    println!("push eax");
 }
 
 macro_rules! term {
-	($x:tt * $($tail:tt)+) => {
-		term!($x);
-		term!($($tail)+);
-		print_op("mul");
-	};
+    ($x:tt * $($tail:tt)+) => {
+        term!($x);
+        term!($($tail)+);
+        print_op("mul");
+    };
 
-	($x:tt / $($tail:tt)+) => {
-		term!($x);
-		term!($($tail)+);
-		print_op("div");
-	};
+    ($x:tt / $($tail:tt)+) => {
+        term!($x);
+        term!($($tail)+);
+        print_op("div");
+    };
 
-	($x:ident) => {
-		println!("push {}", $x);
-	};
-	($x:literal) => {
-		println!("push {}", $x);
-	};
-	(($($x:tt)*)) => {
-		to_asm!($($x)*);
-	};
+    ($x:ident) => {
+        println!("push {}", $x);
+    };
+    ($x:literal) => {
+        println!("push {}", $x);
+    };
+    (($($x:tt)*)) => {
+        to_asm!($($x)*);
+    };
 }
 
 macro_rules! to_asm {
-	($x:tt + $($tail:tt)+) => {
-		to_asm!($x);
-		to_asm!($($tail)+);
-		print_op("add");
-	};
+    ($x:tt + $($tail:tt)+) => {
+        to_asm!($x);
+        to_asm!($($tail)+);
+        print_op("add");
+    };
 
-	($x:tt - $($tail:tt)+) => {
-		to_asm!($x);
-		to_asm!($($tail)+);
-		print_op("sub");
-	};
+    ($x:tt - $($tail:tt)+) => {
+        to_asm!($x);
+        to_asm!($($tail)+);
+        print_op("sub");
+    };
 
-	($($x:tt)*) => {
-		term!($($x)*);
-	};
+    ($($x:tt)*) => {
+        term!($($x)*);
+    };
 }
 
 fn main() {
-	to_asm!((2 * 3) - 5);
-	println!("-------------------");
-	to_asm!(2 * (3 - 5));
+    to_asm!((2 * 3) - 5);
+    println!("-------------------");
+    to_asm!(2 * (3 - 5));
 }
 ```
 
