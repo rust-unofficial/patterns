@@ -54,7 +54,7 @@ factor -> 0 | 1| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
 Our first approach is a standard one, simple implementation of
-a recursive descent parser.The following code
+a recursive descent parser. The following code
 doesn't have `struct` abstraction in order to keep code short.
 The code panics when expression is syntactically wrong
 (unbalanced parantheses or missing digit/operator for example).
