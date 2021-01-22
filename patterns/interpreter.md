@@ -16,7 +16,7 @@ Imagine that our work is translating simple mathematical expressions into
 [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
 (more simple and low level programming language).
 For simplicity, our expressions consists of ten digits `0`,...,`9`,
-four operations `+, -, /, *` and a pair of prenthesis `(, )`.
+four operations `+, -, /, *` and a pair of parenthesis `(, )`.
 For example, experssion `2 + 4` could be translated into
 
 ```ignore
