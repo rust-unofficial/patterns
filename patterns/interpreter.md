@@ -236,6 +236,8 @@ fn main() {
 }
 ```
 
+Output 
+
 ```ignore
 push 2
 push 3
