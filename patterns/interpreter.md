@@ -176,7 +176,7 @@ We simply define rules and leave the rest to Rust's
 interpretation of these rules wich converts a given expression into
 corresponding assembly code.
 However, we have to make compromises on the input syntax
-to make using standard repetitions more tractable.
+to make using standard repetitions of `macro_rules!` more tractable.
 In thithe following example, we have to write `(2 * 3) - 5` instead of `2 * 3 - 5`.
 
 ```rust
@@ -236,7 +236,7 @@ fn main() {
 }
 ```
 
-Output 
+Output
 
 ```ignore
 push 2
