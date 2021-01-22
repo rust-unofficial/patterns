@@ -40,7 +40,7 @@ It is simpy an example of using Interpreter pattern.
 
 ## Solution 1
 
-The grammar for a set of espression over `{0,...,9, +,-,*,/,(,)}` is
+The grammar for a set of espressions over `0,...,9, +,-,*,/,(,)` is
 
 ```ignore
 exp -> exp + term
