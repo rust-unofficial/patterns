@@ -3,10 +3,12 @@
 ## Description
 
 If a problem occurs very often and requires long and repetetive steps to solve it,
-then the problem instances might be epxressed in a simple language and inerpreter object could solve it by
+then the problem instances might be epxressed in a simple
+language and inerpreter object could solve it by
 interprting the sentences written in this simple languge.
 Basically, for any kind of problems we define a domain
-language, then define a grammar for this language and design interpreter solving problem instances.
+language, then define a grammar for this language and
+design interpreter solving problem instances.
 
 ## Motivation
 
@@ -40,7 +42,7 @@ It is simpy an example of using Interpreter pattern.
 
 The grammar for a set of espression over `{0,...,9, +,-,*,/,(,)}` is
 
-```ignore 
+```ignore
 exp -> exp + term
 exp -> exp - term
 exp -> term
@@ -48,10 +50,14 @@ term -> term * factor
 term -> term / factor
 term -> factor
 factor -> ( exp )
-factor -> 0 | 1| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 
+factor -> 0 | 1| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
-Our first approach is a standard one, simple implementation of a recursive descent parser. The following code doesn't have `struct` abstraction in order to keep code short. The code panics when expression is syntactically wrong (unbalanced parantheses or missing digit/operator for example ).
+Our first approach is a standard one, simple implementation of
+a recursive descent parser.The following code
+doesn't have `struct` abstraction in order to keep code short.
+The code panics when expression is syntactically wrong
+(unbalanced parantheses or missing digit/operator for example).
 
 ```rust
 fn token(input: &[u8], cur: usize) -> char {
@@ -169,7 +175,8 @@ The second approach is using Rust's `macro_rules!`.
 We simply define rules and leave the rest to Rust's
 interpretation of these rules wich converts a given expression into
 corresponding assembly code.
-However, we have to make compromises on the input syntax to make using standard repetitions more tractable.
+However, we have to make compromises on the input syntax
+to make using standard repetitions more tractable.
 In thithe following example, we have to write `(2 * 3) - 5` instead of `2 * 3 - 5`.
 
 ```rust
@@ -260,6 +267,3 @@ push eax
 - [Interpreter pattern](https://en.wikipedia.org/wiki/Interpreter_pattern)
 - [macro_rules!](https://doc.rust-lang.org/rust-by-example/macros.html)
 - [Contex free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
-
-
-
