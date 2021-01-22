@@ -35,7 +35,7 @@ x.interpret("7+3*(2-1)", &output);
 ```
 
 We don't claim that output assembly code is exactly what modern compilers generate,
-but it at least comuptes the expression correctly.
+but it at least computes the expression correctly.
 It is simpy an example of using Interpreter pattern.
 
 ## Solution 1
