@@ -12,7 +12,7 @@ design interpreter solving problem instances.
 
 ## Motivation
 
-Imagine thta our work is translating simple mathemtaical expressions into
+Imagine that our work is translating simple mathematical expressions into
 [assembly language](https://en.wikipedia.org/wiki/Assembly_language)
 (more simple and low level programming language).
 For simplicity, our expressions consists of ten digits `0`,...,`9`,
