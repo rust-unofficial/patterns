@@ -5,7 +5,7 @@
 If a problem occurs very often and requires long and repetitive steps to solve it,
 then the problem instances might be expressed in a simple
 language and inerpreter object could solve it by
-interprting the sentences written in this simple languge.
+interpreting the sentences written in this simple language.
 Basically, for any kind of problems we define a domain
 language, then define a grammar for this language and
 design interpreter solving problem instances.
