@@ -2,11 +2,12 @@
 
 ## Description
 
-Often it is necessary to prepare and process some data, but after that data are only inspected
-and never modified. The intention can be made explicit by redefining the mutable variable as immutable.
+Often it is necessary to prepare and process some data, but after that data are
+only inspected and never modified. The intention can be made explicit by redefining
+the mutable variable as immutable.
 
-It can be done either by processing data within nested block or by redefining variable.
-
+It can be done either by processing data within nested block or by redefining
+variable.
 
 ## Example
 
@@ -16,9 +17,9 @@ Using nested block:
 
 ```rust,ignore
 let data = {
-	let mut data = get_vec();
-	data.sort();
-	data
+    let mut data = get_vec();
+    data.sort();
+    data
 };
 
 // Here `data` is immutable.
@@ -34,14 +35,11 @@ let data = data;
 // Here `data` is immutable.
 ```
 
-
 ## Advantages
 
 Compiler ensures that you don't accidentally mutate data after some point.
-
 
 ## Disadvantages
 
 Nested block requires additional indentation of block body.
 One more line to return data from block or redefine variable.
-

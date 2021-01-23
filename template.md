@@ -4,7 +4,6 @@
 
 A short, prose description of the pattern.
 
-
 ## Example
 
 ```rust
@@ -21,28 +20,23 @@ please at least mark your example code with `ignore` as in here:
 // liberally.
 ```
 
-
 ## Motivation
 
 Why and where you should use the pattern
-
 
 ## Advantages
 
 Good things about this pattern.
 
-
 ## Disadvantages
 
 Bad things about this pattern. Possible contraindications.
-
 
 ## Discussion
 
 A deeper discussion about this pattern. You might want to cover how this is done
 in other languages, alternative approaches, why this is particularly nice in
 Rust, etc.
-
 
 ## See also
 
