@@ -110,6 +110,11 @@ stable Rust. See these [blog](http://aturon.github.io/blog/2015/09/18/reuse/)
 [posts](http://smallcultfollowing.com/babysteps/blog/2015/10/08/virtual-structs-part-4-extended-enums-and-thin-traits/)
 and this [RFC issue](https://github.com/rust-lang/rfcs/issues/349) for more details.
 
+Until there is direct support for handling delegation in Rust, you can try some
+crates that help reduce method delegation boilerplate, for example
+[delegate](https://crates.io/crates/delegate) or
+[ambassador](https://crates.io/crates/ambassador).
+
 The `Deref` trait is designed for the implementation of custom pointer types.
 The intention is that it will take a pointer-to-`T` to a `T`, not convert
 between different types. It is a shame that this isn't (probably cannot be)
