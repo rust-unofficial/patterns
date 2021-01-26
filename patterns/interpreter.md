@@ -50,7 +50,7 @@ term -> term * factor
 term -> term / factor
 term -> factor
 factor -> ( exp )
-factor -> 0 | 1| 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+factor -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
 Our first approach is a standard one, simple implementation of
