@@ -27,7 +27,7 @@ add eax, ebx
 
 Our goal is to automate translating into assembly instructions
 using the Interpreter design pattern. In other words, we want simply
-provide the Interpreter with an expressions and get Assembly
+provide the Interpreter with an expression and get Assembly
 language output. For example
 
 ```rust, ignore
