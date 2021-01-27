@@ -51,7 +51,7 @@ Formally a CFG consists of three sets: terminal symbols,
 nonterminal symbols, a start (nonterminal) symbol,
 and production rules.
 
-In the previous we have two terminal symbols `(` and `)`.
+In the previous example we have two terminal symbols `(` and `)`.
 We can define a single nonterminal (at the same time start)
 symbol `S` and priduction rules as
 
