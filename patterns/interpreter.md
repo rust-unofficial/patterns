@@ -62,8 +62,8 @@ symbol `S` and production rules as
 
 ```ignore
 S -> SS
-S ->(S)
-S ->()
+S -> (S)
+S -> ()
 ```
 
 So, in order to generate a string with balanced parentheses we
