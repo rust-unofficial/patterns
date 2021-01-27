@@ -53,7 +53,7 @@ and production rules.
 
 In the previous example we have two terminal symbols `(` and `)`.
 We define a single nonterminal (at the same time the start)
-symbol `S` and priduction rules as
+symbol `S` and production rules as
 
 ```ignore
 S -> SS
