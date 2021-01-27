@@ -106,7 +106,7 @@ For more details please see
 Our first approach is a standard one, simple implementation of
 a recursive descent parser. The following code
 doesn't have `struct` abstraction in order to keep code short.
-The code panics when expression is syntactically wrong
+Furthermore, the code panics when an expression is syntactically wrong
 (unbalanced parentheses or missing digit/operator for example).
 
 ```rust
