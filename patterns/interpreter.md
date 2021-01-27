@@ -44,7 +44,7 @@ These strings usually has some well defined structure.
 For example, strings of all balanced parentheses:
 
 ```ignore
-(), (()), ()(), ()(()),..
+(), (()), ()(), ()(()), ..
 ```
 
 Formally a CFG consists of three sets: terminal symbols,
