@@ -34,9 +34,32 @@ language output. For example
 x.interpret("7+3*(2-1)", &output);
 ```
 
-## Solution 1
+# Context Free Grammars
 
-The grammar for a set of expressions over `0,...,9, +,-,*,/,(,)` is
+Basicaly, a [Context Free Grammar](https://en.wikipedia.org/wiki/Context-free_grammar)(CFG) describes (or defines) all possible strings over some finite set of symbols, formally called alphabet.
+These strings usually has some well defined structure. For example, strings of all balanced parentheses
+```ignore
+(), (()), ()(), ()(()),..
+```
+Formally a CFG consists of three sets: terminal symbols (T), nonterminal symbols (N), a start (nonterminal) symbol, and production rules.
+
+In the previous we have two terminal symbols `(` and `)`. We can define a single nonterminal (at the same time start) symbol `S` and priduction rules as 
+```ignore
+S -> SS
+S ->(S)
+S ->()
+```
+So, in order to generate a string with balanced parentheses we repeatedly apply pruduction rules. For exmaple, to derive `()()` we apply the following rules
+```ignore
+S -> SS -> ()(S) -> ()()
+```
+Next, let's define a context free grammar
+for a set of expressions over `0,...,9, +,-,*,/,(,)`, where
+
+- terminal symbols: `0,...,9, +,-,*,/,(,)`
+- nonterminal symbols: `exp, term, factor`
+- start symbol is `exp`
+- and the following are production rules 
 
 ```ignore
 exp -> exp + term
@@ -48,13 +71,19 @@ term -> factor
 factor -> ( exp )
 factor -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
+In fact this grammar should be further transformed
+depending on what we are going to do with the grammar.
+For example, we might need to remove left recursion.
+For more details please see [Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) (aka Dragon Book).
+
+## Solution 1
 
 Our first approach is a standard one, simple implementation of
 a recursive descent parser. The following code
 doesn't have `struct` abstraction in order to keep code short.
 The code panics when expression is syntactically wrong
 (unbalanced parentheses or missing digit/operator for example).
-
+ 
 ```rust
 fn token(input: &[u8], cur: usize) -> char {
     if cur < input.len() {
