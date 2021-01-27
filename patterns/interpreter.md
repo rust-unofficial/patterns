@@ -38,7 +38,7 @@ x.interpret("7+3*(2-1)", &output);
 
 Basicaly, a
 [Context Free Grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
-(CFG) describes (or defines) all possible strings
+(CFG) defines a set of rules that describe all possible strings
 over some finite set of symbols, formally called alphabet.
 These strings usually has some well defined structure.
 For example, strings of all balanced parentheses
