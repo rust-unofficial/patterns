@@ -73,7 +73,7 @@ for a set of expressions over `0,...,9, +,-,*,/,(,)`, where
 - terminal symbols: `0,...,9, +,-,*,/,(,)`
 - nonterminal symbols: `exp, term, factor`
 - start symbol is `exp`
-- and the following are production rules 
+- and the following are production rules
 
 ```ignore
 exp -> exp + term
