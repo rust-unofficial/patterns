@@ -49,7 +49,7 @@ S -> SS
 S ->(S)
 S ->()
 ```
-So, in order to generate a string with balanced parentheses we repeatedly apply pruduction rules. For exmaple, to derive `()()` we apply the following rules
+So, in order to generate a string with balanced parentheses we repeatedly apply production rules. For exmaple, to derive `()()` we apply the following rules
 ```ignore
 S -> SS -> ()(S) -> ()()
 ```
