@@ -41,7 +41,7 @@ Basicaly, a
 (CFG) defines a set of rules that describe all possible strings
 over some finite set of symbols, formally called alphabet.
 These strings usually has some well defined structure.
-For example, strings of all balanced parentheses
+For example, strings of all balanced parentheses:
 
 ```ignore
 (), (()), ()(), ()(()),..
