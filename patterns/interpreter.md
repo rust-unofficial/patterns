@@ -47,8 +47,8 @@ For example, strings of all balanced parentheses
 (), (()), ()(), ()(()),..
 ```
 
-Formally a CFG consists of three sets: terminal symbols (T),
-nonterminal symbols (N), a start (nonterminal) symbol,
+Formally a CFG consists of three sets: terminal symbols,
+nonterminal symbols, a start (nonterminal) symbol,
 and production rules.
 
 In the previous we have two terminal symbols `(` and `)`.
