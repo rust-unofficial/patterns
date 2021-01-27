@@ -52,7 +52,7 @@ nonterminal symbols, a start (nonterminal) symbol,
 and production rules.
 
 In the previous example we have two terminal symbols `(` and `)`.
-We can define a single nonterminal (at the same time start)
+We define a single nonterminal (at the same time the start)
 symbol `S` and priduction rules as
 
 ```ignore
