@@ -36,6 +36,11 @@ x.interpret("7+3*(2-1)", &output);
 
 ## Context Free Grammars
 
+In order to understand the Interpreter pattern you need to know a little bit
+about formal language theory.
+If you already know what a grammar is feel free to skip this section,
+otherwise fasten your seat belts.
+
 Basicaly, a
 [Context Free Grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
 (CFG) defines a set of rules that describe all possible strings
