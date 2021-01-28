@@ -28,6 +28,7 @@
     - [Object-Based APIs](./patterns/ffi-export.md)
     - [Type Consolidation into Wrappers](./patterns/ffi-wrappers.md)
   - [Fold](./patterns/fold.md)
+  - [Interpreter](./patterns/interpreter.md)
   - [Newtype](./patterns/newtype.md)
   - [RAII Guards](./patterns/RAII.md)
   - [Prefer Small Crates](./patterns/small-crates.md)
