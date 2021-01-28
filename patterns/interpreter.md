@@ -11,28 +11,11 @@ instances.
 
 ## Motivation
 
-Imagine that our work is translating simple mathematical expressions into
-[assembly language](https://en.wikipedia.org/wiki/Assembly_language)
-(more simple and low level programming language).
+Our goal is translate simple mathematical expressions into
+postfix expressions (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
 For simplicity, our expressions consists of ten digits `0`,...,`9`,
-four operations `+, -, /, *` and a pair of parenthesis `(, )`.
-For example, expression `2 + 4` could be translated into
-
-```ignore
-mov eax, 2
-mov ebx, 4
-add eax, ebx
-```
-
-Our goal is to automate translating into assembly instructions using the
-Interpreter design pattern. In other words, we want simply provide the
-Interpreter with an expression and get Assembly language output.
-
-For example:
-
-```rust, ignore
-x.interpret("7+3*(2-1)", &output);
-```
+and two operations `+, -` and a pair of parenthesis.
+For example, expression `2 + 4` could is translated into `2 4 +`.
 
 ## Context Free Grammars
 
@@ -69,11 +52,14 @@ production rules. For example, to derive `()()` we apply the following rules:
 S -> SS -> ()(S) -> ()()
 ```
 
-Next, let's define a context free grammar for a set of expressions over
-`0,...,9, +,-,*,/,(,)`, where
+## Context Free Grammar for our problem
 
-- terminal symbols: `0,...,9, +,-,*,/,(,)`
-- nonterminal symbols: `exp, term, factor`
+Recal that our task is translate infix expressions into postfex ones.
+Let's define a context free grammar for a set of expressions over
+`0,...,9, +,-`, where
+
+- terminal symbols: `0,...,9, +,-`
+- nonterminal symbols: `exp, term`
 - start symbol is `exp`
 - and the following are production rules
 
@@ -81,11 +67,7 @@ Next, let's define a context free grammar for a set of expressions over
 exp -> exp + term
 exp -> exp - term
 exp -> term
-term -> term * factor
-term -> term / factor
-term -> factor
-factor -> ( exp )
-factor -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
 In fact this grammar should be further transformed depending on what we are going
@@ -96,118 +78,61 @@ For more details please see [Compilers:Principles,Techniques, and Tools](https:/
 ## Solution 1
 
 Our first approach is a standard one, simple implementation of a recursive descent
-parser. The following code doesn't have `struct` abstraction in order to keep
-code short. Furthermore, the code panics when an expression is syntactically wrong
-(unbalanced parentheses or missing digit/operator for example).
+parser. The code panics when an expression is syntactically wrong
+(for exmple `2-34` or `2+5-` are wrong according to the grammar definition).
 
 ```rust
-fn token(input: &[u8], index: usize) -> char {
-    if index < input.len() {
-        input[index] as char
-    } else {
-        '$' // End of line
-    }
+struct Interpreter<'a> {
+    it: std::str::Chars<'a>,
 }
-
-fn single_expr(input: &[u8], out: &mut Vec<String>) {
-    let mut index: usize = 0;
-
-    expr(input, &mut index, out);
-
-    let ch = token(input, index);
-    if ch != '$' {
-        panic!("Unexpected symbol '{}', at {}", ch, index);
+impl<'a> Interpreter<'a> {
+    pub fn new(infix: &'a String) -> Self {
+        Self { it: infix.chars() }
     }
-}
 
-fn expr(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
-    term(input, index, out);
+    pub fn interpret(&mut self, out: &mut String) {
+        self.exp(out);
+    }
 
-    loop {
-        let ch = token(input, *index);
-        if ch == '$' || (ch != '+' && ch != '-') {
-            break;
-        } else {
-            *index += 1;
-            term(input, index, out);
-            translate(ch, out);
+    fn next_char(&mut self) -> Option<char> {
+        self.it.next()
+    }
+
+    fn exp(&mut self, out: &mut String) {
+        self.term(out);
+
+        while let Some(op) = self.next_char() {
+            if op == '+' || op == '-' {
+                self.term(out);
+                out.push(op);
+            } else {
+                panic!("Unexpected symbol '{}'", op);
+            }
         }
     }
-}
 
-fn term(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
-    factor(input, index, out);
-
-    loop {
-        let ch = token(input, *index);
-        if ch == '$' || (ch != '*' && ch != '/') {
-            break;
-        } else {
-            *index += 1;
-            factor(input, index, out);
-            translate(ch, out);
+    fn term(&mut self, out: &mut String) {
+        match self.next_char() {
+            Some(ch) if ch.is_digit(10) => out.push(ch),
+            Some(ch) => panic!("Unexpected symbol '{}'", ch),
+            None => panic!("Unexpected end of string"),
         }
-    }
-}
-
-fn factor(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
-    let ch = token(input, *index);
-
-    if ch.is_digit(10) {
-        out.push(format!("push {}", ch));
-    } else if ch == '(' {
-        *index += 1;
-        expr(input, index, out);
-
-        let ch = token(input, *index);
-        if ch != ')' {
-            panic!("Missing ')' at {}", *index);
-        }
-    } else {
-        panic!("Unexpected symbol '{}', at {}", ch, *index);
-    }
-
-    *index += 1;
-}
-
-fn translate(ch: char, out: &mut Vec<String>) {
-    out.push(String::from("pop ebx"));
-    out.push(String::from("pop eax"));
-    out.push(format!("{} eax, ebx", to_oper(ch)));
-    out.push(String::from("push eax"));
-}
-
-fn to_oper(ch: char) -> String {
-    match ch {
-        '+' => return String::from("add"),
-        '-' => return String::from("sub"),
-        '*' => return String::from("mul"),
-        '/' => return String::from("div"),
-        _ => panic!("Invalid operator '{}'", ch),
     }
 }
 
 pub fn main() {
-    let mut out = vec![];
-    let exp = b"2/(7-3)";
+    let mut infix = String::from("2+3");
+    let mut postfix = String::new();
+    let mut intr = Interpreter::new(&infix);
+    intr.interpret(&mut postfix);
+    assert_eq!(postfix, "23+");
 
-    single_expr(exp, &mut out);
-    assert_eq!(
-        out,
-        vec![
-            "push 2",
-            "push 7",
-            "push 3",
-            "pop ebx",
-            "pop eax",
-            "sub eax, ebx",
-            "push eax",
-            "pop ebx",
-            "pop eax",
-            "div eax, ebx",
-            "push eax",
-        ]
-    );
+    infix = String::from("1-2+3-4");
+    postfix = String::new();
+    intr = Interpreter::new(&infix);
+    intr.interpret(&mut postfix);
+
+    assert_eq!(postfix, "12-3+4-");
 }
 ```
 
@@ -215,10 +140,7 @@ pub fn main() {
 
 The second approach is using Rust's `macro_rules!`. We simply define rules and
 leave the rest to Rust's interpretation of these rules wich converts a given
-expression into corresponding assembly code. However, we have to make compromises
-on the input syntax to make using standard repetitions of `macro_rules!` more
-tractable. In the following example, we have to write `(2 * 3) - 5` instead
-of `2 * 3 - 5`.
+expression into corresponding assembly code.
 
 ```rust
 fn print_op(op: &str) {
