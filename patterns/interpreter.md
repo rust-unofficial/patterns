@@ -45,7 +45,7 @@ Basicaly, a
 [Context Free Grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
 (CFG) defines a set of rules that describe all possible strings
 over some finite set of symbols, formally called alphabet.
-These strings usually has some well defined structure.
+These strings usually have some well defined structure.
 For example, strings of all balanced parentheses:
 
 ```ignore
