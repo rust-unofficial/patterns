@@ -52,7 +52,7 @@ For example, strings of all balanced parentheses:
 (), (()), ()(), ()(()), ..
 ```
 
-Formally a CFG consists terminal symbols,
+Formally a CFG consists of terminal symbols,
 nonterminal symbols, a start (nonterminal) symbol,
 and production rules.
 
