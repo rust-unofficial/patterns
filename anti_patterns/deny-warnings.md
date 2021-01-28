@@ -56,28 +56,20 @@ Travis, but remember that this may break the build when something changes)
 without requiring a change to the code.
 
 Alternatively, we can specify the lints that we want to `deny` in the code.
-Here is a list of warning lints that is (hopefully) safe to deny:
+Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.48.0):
 
 ```rust,ignore
 #[deny(bad-style,
        const-err,
        dead-code,
-       extra-requirement-in-impl,
        improper-ctypes,
-       legacy-directory-ownership,
        non-shorthand-field-patterns,
        no-mangle-generic-items,
        overflowing-literals,
        path-statements ,
        patterns-in-fns-without-body,
-       plugin-as-library,
        private-in-public,
-       private-no-mangle-fns,
-       private-no-mangle-statics,
-       raw-pointer-derive,
-       safe-extern-statics,
        unconditional-recursion,
-       unions-with-drop-fields,
        unused,
        unused-allocation,
        unused-comparisons,

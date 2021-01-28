@@ -33,7 +33,8 @@ fn baz(a: &mut A) {
     // The later usage of x causes a to be borrowed for the rest of the function.
     let x = foo(a);
     // Borrow checker error:
-    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once at a time
+    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once
+                       //          at a time
     println!("{}", x);
 }
 ```
