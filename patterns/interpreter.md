@@ -75,7 +75,7 @@ to do with the grammar. For example, we might need to remove left recursion.
 For more details please see [Compilers:Principles,Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools)
 (aka Dragon Book).
 
-## Solution 1
+## Solution
 
 Our first approach is a standard one, simple implementation of a recursive descent
 parser. The code panics when an expression is syntactically wrong
@@ -131,105 +131,11 @@ pub fn main() {
     postfix = String::new();
     intr = Interpreter::new(&infix);
     intr.interpret(&mut postfix);
-
     assert_eq!(postfix, "12-3+4-");
 }
-```
-
-## Solution 2
-
-The second approach is using Rust's `macro_rules!`. We simply define rules and
-leave the rest to Rust's interpretation of these rules wich converts a given
-expression into corresponding assembly code.
-
-```rust
-fn print_op(op: &str) {
-    println!("pop ebx");
-    println!("pop eax");
-    println!("{} eax,ebx", op);
-    println!("push eax");
-}
-
-macro_rules! term {
-    ($x:tt * $($tail:tt)+) => {
-        term!($x);
-        term!($($tail)+);
-        print_op("mul");
-    };
-
-    ($x:tt / $($tail:tt)+) => {
-        term!($x);
-        term!($($tail)+);
-        print_op("div");
-    };
-
-    ($x:ident) => {
-        println!("push {}", $x);
-    };
-    ($x:literal) => {
-        println!("push {}", $x);
-    };
-    (($($x:tt)*)) => {
-        to_asm!($($x)*);
-    };
-}
-
-macro_rules! to_asm {
-    ($x:tt + $($tail:tt)+) => {
-        to_asm!($x);
-        to_asm!($($tail)+);
-        print_op("add");
-    };
-
-    ($x:tt - $($tail:tt)+) => {
-        to_asm!($x);
-        to_asm!($($tail)+);
-        print_op("sub");
-    };
-
-    ($($x:tt)*) => {
-        term!($($x)*);
-    };
-}
-
-fn main() {
-    let a = 3;
-    to_asm!((2 * 3) - 5);
-    println!("-------------------");
-    to_asm!(2 * (a - 5));
-}
-```
-
-Output
-
-```ignore
-push 2
-push 3
-pop ebx
-pop eax
-mul eax,ebx
-push eax
-push 5
-pop ebx
-pop eax
-sub eax,ebx
-push eax
--------------------
-push 2
-push 3
-push 5
-pop ebx
-pop eax
-sub eax,ebx
-push eax
-pop ebx
-pop eax
-mul eax,ebx
-push eax
 ```
 
 ## See also
 
 - [Interpreter pattern](https://en.wikipedia.org/wiki/Interpreter_pattern)
-- [macro_rules!](https://doc.rust-lang.org/rust-by-example/macros.html)
 - [Contex free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
