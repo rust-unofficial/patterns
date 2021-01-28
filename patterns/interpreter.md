@@ -110,71 +110,73 @@ Furthermore, the code panics when an expression is syntactically wrong
 (unbalanced parentheses or missing digit/operator for example).
 
 ```rust
-fn token(input: &[u8], cur: usize) -> char {
-    if cur < input.len() {
-        input[cur] as char
+fn token(input: &[u8], index: usize) -> char {
+    if index < input.len() {
+        input[index] as char
     } else {
         '$' // End of line
     }
 }
 
-fn single_expr(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-    expr(input, cur, out);
+fn single_expr(input: &[u8], out: &mut Vec<String>) {
+    let mut index: usize = 0;
 
-    let ch = token(input, *cur);
+    expr(input, &mut index, out);
+
+    let ch = token(input, index);
     if ch != '$' {
-        panic!("Unexpected symbol '{}', at {}", ch, *cur);
+        panic!("Unexpected symbol '{}', at {}", ch, index);
     }
 }
 
-fn expr(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-    term(input, cur, out);
+fn expr(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
+    term(input, index, out);
 
     loop {
-        let ch = token(input, *cur);
+        let ch = token(input, *index);
         if ch == '$' || (ch != '+' && ch != '-') {
             break;
         } else {
-            *cur += 1;
-            term(input, cur, out);
+            *index += 1;
+            term(input, index, out);
             translate(ch, out);
         }
     }
 }
 
-fn term(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-    factor(input, cur, out);
+fn term(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
+    factor(input, index, out);
 
     loop {
-        let ch = token(input, *cur);
+        let ch = token(input, *index);
         if ch == '$' || (ch != '*' && ch != '/') {
             break;
         } else {
-            *cur += 1;
-            factor(input, cur, out);
+            *index += 1;
+            factor(input, index, out);
             translate(ch, out);
         }
     }
 }
 
-fn factor(input: &[u8], cur: &mut usize, out: &mut Vec<String>) {
-    let ch = token(input, *cur);
+fn factor(input: &[u8], index: &mut usize, out: &mut Vec<String>) {
+    let ch = token(input, *index);
 
     if ch.is_digit(10) {
         out.push(format!("push {}", ch));
     } else if ch == '(' {
-        *cur += 1;
-        expr(input, cur, out);
+        *index += 1;
+        expr(input, index, out);
 
-        let ch = token(input, *cur);
+        let ch = token(input, *index);
         if ch != ')' {
-            panic!("Missing ')' at {}", *cur);
+            panic!("Missing ')' at {}", *index);
         }
     } else {
-        panic!("Unexpected symbol '{}', at {}", ch, *cur);
+        panic!("Unexpected symbol '{}', at {}", ch, *index);
     }
 
-    *cur += 1;
+    *index += 1;
 }
 
 fn translate(ch: char, out: &mut Vec<String>) {
@@ -196,10 +198,9 @@ fn to_oper(ch: char) -> String {
 
 pub fn main() {
     let mut out = vec![];
-    let mut cur = 0;
     let exp = b"2/(7-3)";
 
-    single_expr(exp, &mut cur, &mut out);
+    single_expr(exp, &mut out);
     assert_eq!(
         out,
         vec![
