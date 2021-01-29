@@ -82,7 +82,7 @@ is syntactically wrong (for exmple `2-34` or `2+5-` are wrong according to the
 grammar definition).
 
 ```rust
-struct Interpreter<'a> {
+pub struct Interpreter<'a> {
     it: std::str::Chars<'a>,
 }
 
