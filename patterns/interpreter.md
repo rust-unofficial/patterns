@@ -77,7 +77,7 @@ For more details please see [Compilers:Principles,Techniques, and Tools](https:/
 
 ## Solution
 
-Our first approach is a standard one, simple implementation of a recursive descent
+We simply implement of a recursive descent
 parser. The code panics when an expression is syntactically wrong
 (for exmple `2-34` or `2+5-` are wrong according to the grammar definition).
 
