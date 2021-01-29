@@ -54,7 +54,7 @@ S -> SS -> ()(S) -> ()()
 
 ## Context Free Grammar for our problem
 
-Recal that our task is translate infix expressions into postfex ones.
+Recal that our task is translate infix expressions into postfix ones.
 Let's define a context free grammar for a set of expressions over
 `0,...,9, +,-`, where
 
