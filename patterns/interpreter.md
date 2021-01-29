@@ -13,9 +13,8 @@ instances.
 
 Our goal is translate simple mathematical expressions into
 postfix expressions (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
-For simplicity, our expressions consists of ten digits `0`,...,`9`
-and two operations `+, -`.
-For example, the expression `2 + 4` is translated into `2 4 +`.
+For simplicity, our expressions consists of ten digits `0`,...,`9` and two
+operations `+, -`. For example, the expression `2 + 4` is translated into `2 4  +`.
 
 ## Context Free Grammars
 
@@ -54,9 +53,9 @@ S -> SS -> ()(S) -> ()()
 
 ## Context Free Grammar for our problem
 
-Recal that our task is translate infix expressions into postfix ones.
-Let's define a context free grammar for a set of infix expressions over
-`0,...,9, +,-`, where
+Recall that our task is translate infix expressions into postfix ones. Let's
+define a context free grammar for a set of infix expressions over `0,...,9, +,-`,
+where:
 
 - terminal symbols: `0,...,9, +,-`
 - nonterminal symbols: `exp, term`
@@ -77,15 +76,17 @@ For more details please see [Compilers:Principles,Techniques, and Tools](https:/
 
 ## Solution
 
-We simply implement a recursive descent
-parser. The code panics when an expression is syntactically wrong
-(for exmple `2-34` or `2+5-` are wrong according to the grammar definition).
+We simply implement a recursive descent parser. The code panics when an expression
+is syntactically wrong (for exmple `2-34` or `2+5-` are wrong according to the
+grammar definition).
 
 ```rust
 struct Interpreter<'a> {
     it: std::str::Chars<'a>,
 }
+
 impl<'a> Interpreter<'a> {
+
     pub fn new(infix: &'a String) -> Self {
         Self { it: infix.chars() }
     }
