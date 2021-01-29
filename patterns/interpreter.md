@@ -147,7 +147,6 @@ functions/classes/structs solving these problem instances.
 Rust language has `macro_rules!` that allows to define special
 syntax and rules how to expand this syntax into source code.
 
-
 In the following example we create a simple `macro_rules!` that computes
 [Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
 of `n` dimensional vectors. Writing `norm!(x,1,2)` might
@@ -157,13 +156,13 @@ and calling a function computing the length.
 
 ```rust
 macro_rules! norm {
-	($($element:expr),*) => {
-		{
-			let mut n = 0.0;
-			$(
-				n += ($element as f64)*($element as f64);
-			)*
-			n.sqrt()
+    ($($element:expr),*) => {
+        {
+            let mut n = 0.0;
+            $(
+                n += ($element as f64)*($element as f64);
+            )*
+            n.sqrt()
 		}
 	};
 }
