@@ -73,7 +73,7 @@ term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
 In fact this grammar should be further transformed depending on what we are going
-to do with the grammar. For example, we might need to remove left recursion.
+to do with it. For example, we might need to remove left recursion.
 For more details please see [Compilers:Principles,Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools)
 (aka Dragon Book).
 
