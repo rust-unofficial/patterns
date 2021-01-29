@@ -151,7 +151,7 @@ is about design grammars for formal languages and implementation
 of parsers for these grammars. In fact, this pattern is about expressing
 problem instances in a more specific way and implementing
 functions/classes/structs solving these problem instances.
-Rust language has `macro_rules!` that allows to define special
+Rust language has `macro_rules!` that allow to define special
 syntax and rules how to expand this syntax into source code.
 
 In the following example we create a simple `macro_rules!` that computes
