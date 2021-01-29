@@ -130,7 +130,7 @@ pub fn main() {
     assert_eq!(postfix, "23+");
 
     infix = String::from("1-2+3-4");
-    postfix = String::new();
+    postfix.clear();
     intr = Interpreter::new(&infix);
     intr.interpret(&mut postfix);
     assert_eq!(postfix, "12-3+4-");
