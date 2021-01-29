@@ -17,7 +17,8 @@ Basically, for any kind of problems we define:
 Our goal is to translate simple mathematical expressions into
 postfix expressions (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
 For simplicity, our expressions consist of ten digits `0`, ..., `9` and two
-operations `+`, `-`. For example, the expression `2 + 4` is translated into `2 4  +`.
+operations `+`, `-`. For example,
+the expression `2 + 4` is translated into `2 4  +`.
 
 ## Context Free Grammars
 
@@ -57,7 +58,8 @@ S -> SS -> ()(S) -> ()()
 ## Context Free Grammar for our problem
 
 Recall that our task is translate infix expressions into postfix ones. Let's
-define a context free grammar for a set of infix expressions over `0`, ..., `9`, `+`, and `-`,
+define a context free grammar for a set of infix expressions
+over `0`, ..., `9`, `+`, and `-`,
 where:
 
 - terminal symbols: `0`, ..., `9`, `+`, `-`
@@ -74,7 +76,9 @@ term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 
 In fact this grammar should be further transformed depending on what we are going
 to do with it. For example, we might need to remove left recursion.
-For more details please see [Compilers: Principles, Techniques, and Tools](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools)
+For more details please see
+[Compilers: Principles,Techniques, and Tools
+](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools)
 (aka Dragon Book).
 
 ## Solution
