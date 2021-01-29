@@ -14,7 +14,7 @@ Basically, for any kind of problems we define:
 
 ## Motivation
 
-Our goal is translate simple mathematical expressions into
+Our goal is to translate simple mathematical expressions into
 postfix expressions (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
 For simplicity, our expressions consists of ten digits `0`,...,`9` and two
 operations `+, -`. For example, the expression `2 + 4` is translated into `2 4  +`.
