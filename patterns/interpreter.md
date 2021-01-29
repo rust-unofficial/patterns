@@ -22,8 +22,8 @@ In order to understand the Interpreter pattern you need to know a little bit
 about formal language theory. If you already know what a grammar is feel free
 to skip this section, otherwise fasten your seat belts.
 
-Basicaly, a [Context Free Grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
-(CFG) defines a set of rules that describe all possible strings over some finite
+Basicaly, a [Context Free Grammar (CFG)](https://en.wikipedia.org/wiki/Context-free_grammar)
+defines a set of rules that describe all possible strings over some finite
 set of symbols, formally called alphabet. These strings usually have some well
 defined structure. For example, strings of all balanced parentheses:
 
@@ -31,11 +31,11 @@ defined structure. For example, strings of all balanced parentheses:
 (), (()), ()(), ()(()), ..
 ```
 
-Formally a CFG consists of terminal symbols, nonterminal symbols, a start (nonterminal)
-symbol, and production rules.
+Formally a CFG consists of terminal symbols, non-terminal symbols, a start
+(non-terminal) symbol, and production rules.
 
 In the previous example we have two terminal symbols `(` and `)`. We define a
-single nonterminal (at the same time the start) symbol `S` and production rules
+single non-terminal (at the same time the start) symbol `S` and production rules
 as:
 
 ```ignore
@@ -58,7 +58,7 @@ define a context free grammar for a set of infix expressions over `0,...,9, +,-`
 where:
 
 - terminal symbols: `0,...,9, +,-`
-- nonterminal symbols: `exp, term`
+- non-terminal symbols: `exp, term`
 - start symbol is `exp`
 - and the following are production rules
 
