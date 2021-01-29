@@ -139,9 +139,48 @@ pub fn main() {
 
 ## Discussion
 
-WIP
+There may be a wrong perception that the Interpreter design pattern
+is about design grammars for formal languages and implementation
+of parsers for these grammars. In fact, this pattern is about expressing
+problem instances in a more specific way and implementing
+functions/classes/structs solving these problem instances.
+Rust language has `macro_rules!` that allows to define special
+syntax and rules how to expand this syntax into source code.
+
+
+In the following example we create a simple `macro_rules!` that computes
+[Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
+of `n` dimensional vectors. Writing `norm!(x,1,2)` might
+be easier to express and more efficient
+than packing `x,1,2` into a `Vec`
+and calling a function computing the length.
+
+```rust
+macro_rules! norm {
+	($($element:expr),*) => {
+		{
+			let mut n = 0.0;
+			$(
+				n += ($element as f64)*($element as f64);
+			)*
+			n.sqrt()
+		}
+	};
+}
+
+fn main() {
+    let x = -3f64;
+    let y = 4f64;
+
+    assert_eq!(3f64, norm!(x));
+    assert_eq!(5f64, norm!(x, y));
+    assert_eq!(0f64, norm!(0, 0, 0)); 
+    assert_eq!(1f64, norm!(0.5, -0.5, 0.5, -0.5));
+}
+```
 
 ## See also
 
 - [Interpreter pattern](https://en.wikipedia.org/wiki/Interpreter_pattern)
 - [Context free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
+- [macro_rules!](https://doc.rust-lang.org/rust-by-example/macros.html)
