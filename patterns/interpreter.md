@@ -163,8 +163,8 @@ macro_rules! norm {
                 n += ($element as f64)*($element as f64);
             )*
             n.sqrt()
-		}
-	};
+        }
+    };
 }
 
 fn main() {
