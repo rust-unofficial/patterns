@@ -6,6 +6,7 @@ If a problem occurs very often and requires long and repetitive steps to solve
 it, then the problem instances might be expressed in a simple language and an
 interpreter object could solve it by interpreting the sentences written in this
 simple language.
+
 Basically, for any kind of problems we define:
 
 - a [domain specific language](https://en.wikipedia.org/wiki/Domain-specific_language),
@@ -58,9 +59,8 @@ S -> SS -> ()(S) -> ()()
 ## Context Free Grammar for our problem
 
 Recall that our task is translate infix expressions into postfix ones. Let's
-define a context free grammar for a set of infix expressions
-over `0`, ..., `9`, `+`, and `-`,
-where:
+define a context free grammar for a set of infix expressions over `0`, ...,
+`9`, `+`, and `-`, where:
 
 - terminal symbols: `0`, ..., `9`, `+`, `-`
 - non-terminal symbols: `exp`, `term`
@@ -75,18 +75,16 @@ term -> 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 ```
 
 In fact this grammar should be further transformed depending on what we are going
-to do with it. For example, we might need to remove left recursion.
-For more details please see
-[Compilers: Principles,Techniques, and Tools
+to do with it. For example, we might need to remove left recursion. For more
+details please see [Compilers: Principles,Techniques, and Tools
 ](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools)
 (aka Dragon Book).
 
 ## Solution
 
-We simply implement a recursive descent parser.
-For simplicity's sake, the code panics when an expression
-is syntactically wrong (for example `2-34` or `2+5-` are wrong according to the
-grammar definition).
+We simply implement a recursive descent parser. For simplicity's sake, the code
+panics when an expression is syntactically wrong (for example `2-34` or `2+5-`
+are wrong according to the grammar definition).
 
 ```rust
 pub struct Interpreter<'a> {
@@ -140,20 +138,18 @@ pub fn main() {
 
 ## Discussion
 
-There may be a wrong perception that the Interpreter design pattern
-is about design grammars for formal languages and implementation
-of parsers for these grammars. In fact, this pattern is about expressing
-problem instances in a more specific way and implementing
-functions/classes/structs solving these problem instances.
-Rust language has `macro_rules!` that allow to define special
-syntax and rules on how to expand this syntax into source code.
+There may be a wrong perception that the Interpreter design pattern is about design
+grammars for formal languages and implementation of parsers for these grammars.
+In fact, this pattern is about expressing problem instances in a more specific
+way and implementing functions/classes/structs that solve these problem instances.
+Rust language has `macro_rules!` that allow to define special syntax and rules
+on how to expand this syntax into source code.
 
 In the following example we create a simple `macro_rules!` that computes
-[Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance)
-of `n` dimensional vectors. Writing `norm!(x,1,2)` might
-be easier to express and more efficient
-than packing `x,1,2` into a `Vec`
-and calling a function computing the length.
+[Euclidean length](https://en.wikipedia.org/wiki/Euclidean_distance) of `n`
+dimensional vectors. Writing `norm!(x,1,2)` might be easier to express and more
+efficient than packing `x,1,2` into a `Vec` and calling a function computing
+the length.
 
 ```rust
 macro_rules! norm {
