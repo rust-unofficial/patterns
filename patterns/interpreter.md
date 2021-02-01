@@ -27,7 +27,7 @@ In order to understand the Interpreter pattern you need to know a little bit
 about formal language theory. If you already know what a grammar is feel free
 to skip this section, otherwise fasten your seat belts.
 
-Basicaly, a [Context Free Grammar (CFG)](https://en.wikipedia.org/wiki/Context-free_grammar)
+Basically, a [Context Free Grammar (CFG)](https://en.wikipedia.org/wiki/Context-free_grammar)
 defines a set of rules that describe all possible strings over some finite
 set of symbols, formally called alphabet. These strings usually have some well
 defined structure. For example, strings of all balanced parentheses:
