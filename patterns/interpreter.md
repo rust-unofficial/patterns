@@ -21,44 +21,9 @@ For simplicity, our expressions consist of ten digits `0`, ..., `9` and two
 operations `+`, `-`. For example,
 the expression `2 + 4` is translated into `2 4  +`.
 
-## Context Free Grammars
-
-In order to understand the Interpreter pattern you need to know a little bit
-about formal language theory. If you already know what a grammar is feel free
-to skip this section, otherwise fasten your seat belts.
-
-Basically, a [Context Free Grammar (CFG)](https://en.wikipedia.org/wiki/Context-free_grammar)
-defines a set of rules that describe all possible strings over some finite
-set of symbols, formally called alphabet. These strings usually have some well
-defined structure. For example, strings of all balanced parentheses:
-
-```ignore
-(), (()), ()(), ()(()), ..
-```
-
-Formally a CFG consists of terminal symbols, non-terminal symbols, a start
-(non-terminal) symbol, and production rules.
-
-In the previous example we have two terminal symbols `(` and `)`. We define a
-single non-terminal (at the same time the start) symbol `S` and production rules
-as:
-
-```ignore
-S -> SS
-S -> (S)
-S -> ()
-```
-
-So, in order to generate a string with balanced parentheses we repeatedly apply
-production rules. For example, to derive `()()` we apply the following rules:
-
-```ignore
-S -> SS -> ()(S) -> ()()
-```
-
 ## Context Free Grammar for our problem
 
-Recall that our task is translate infix expressions into postfix ones. Let's
+Our task is translate infix expressions into postfix ones. Let's
 define a context free grammar for a set of infix expressions over `0`, ...,
 `9`, `+`, and `-`, where:
 
