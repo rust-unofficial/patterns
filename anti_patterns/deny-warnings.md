@@ -97,6 +97,7 @@ certain that there will be more deprecated APIs in the future.
 
 ## See also
 
+- [A collection of all clippy lints](https://rust-lang.github.io/rust-clippy/master)
 - [deprecate attribute] documentation
 - Type `rustc -W help` for a list of lints on your system. Also type
 `rustc --help` for a general list of options
