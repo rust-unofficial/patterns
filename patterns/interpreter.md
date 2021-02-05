@@ -10,22 +10,22 @@ simple language.
 Basically, for any kind of problems we define:
 
 - a [domain specific language](https://en.wikipedia.org/wiki/Domain-specific_language),
-- a grammar for this language
+- a grammar for this language,
 - an interpreter that solves the problem instances.
 
 ## Motivation
 
-Our goal is to translate simple mathematical expressions into
-postfix expressions (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
+Our goal is to translate simple mathematical expressions into postfix expressions
+(or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
 For simplicity, our expressions consist of ten digits `0`, ..., `9` and two
-operations `+`, `-`. For example,
-the expression `2 + 4` is translated into `2 4  +`.
+operations `+`, `-`. For example, the expression `2 + 4` is translated into
+`2 4  +`.
 
 ## Context Free Grammar for our problem
 
-Our task is translate infix expressions into postfix ones. Let's
-define a context free grammar for a set of infix expressions over `0`, ...,
-`9`, `+`, and `-`, where:
+Our task is translate infix expressions into postfix ones. Let's define a context
+free grammar for a set of infix expressions over `0`, ..., `9`, `+`, and `-`,
+where:
 
 - terminal symbols: `0`, ..., `9`, `+`, `-`
 - non-terminal symbols: `exp`, `term`
