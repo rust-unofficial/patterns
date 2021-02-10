@@ -42,7 +42,7 @@ pub mod unsafe_module {
 
         unsafe {
             // SAFETY: calling an FFI whose documentation says the pointer is
-            // const, so no modificationshould occur
+            // const, so no modification should occur
             seterr(c_err.as_ptr());
         }
 
