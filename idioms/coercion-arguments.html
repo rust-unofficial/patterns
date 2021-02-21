@@ -179,7 +179,7 @@ Such as <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</cod
 <p>Using borrowed types you can avoid layers of indirection for those instances
 where the owned type already provides a layer of indirection. For instance, a
 <code>String</code> has a layer of indirection, so a <code>&amp;String</code> will have two layers of
-indrection. We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code>
+indirection. We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code>
 coerce to a <code>&amp;str</code> whenever the function is invoked.</p>
 <h2><a class="header" href="#example" id="example">Example</a></h2>
 <p>For this example, we will illustrate some differences for using <code>&amp;String</code> as a
