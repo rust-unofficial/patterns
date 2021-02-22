@@ -38,7 +38,7 @@ pub mod unsafe_module {
     ///
     /// # Safety
     ///
-    /// It is the caller's guarantee to ensure `msg`
+    /// It is the caller's guarantee to ensure `msg`:
     ///
     /// - is not a null pointer
     /// - points to valid, initialized data
