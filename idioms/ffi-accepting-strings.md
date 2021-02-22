@@ -19,9 +19,7 @@ The strings used in C have different behaviours to those used in Rust, namely:
   while interactions with Rust strings go through safe methods
 
 The Rust standard library comes with C equivalents of Rust's `String` and `&str`
-called `CString` and `&CStr`.
-
-By using `CString` and `&CStr` we avoid a lot of the complexity and `unsafe`
+called `CString` and `&CStr`, that allow us to avoid a lot of the complexity and `unsafe`
 code involved in converting between C strings and Rust strings.
 
 The `&CStr` type also allows us to work with borrowed data, meaning passing
