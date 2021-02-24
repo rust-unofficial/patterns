@@ -2,7 +2,8 @@
 
 ## Description
 
-When accepting strings via FFI through pointers, there are two principles that should be followed:
+When accepting strings via FFI through pointers, there are two principles that
+should be followed:
 
 1. Keep foreign strings "borrowed", rather than copying them directly.
 2. Minimize the amount of complexity and `unsafe` code involved in converting
@@ -67,7 +68,8 @@ pub mod unsafe_module {
 The example is is written to ensure that:
 
 1. The `unsafe` block is as small as possible.
-2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
+2. The pointer with an "untracked" lifetime becomes a "tracked" shared
+  reference
 
 Consider an alternative, where the string is actually copied:
 
@@ -77,7 +79,8 @@ pub mod unsafe_module {
     // other module content
 
     pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
-        /* DO NOT USE THIS CODE. IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG. */
+        // DO NOT USE THIS CODE.
+        // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.
 
         let level: crate::LogLevel = match level { /* ... */ };
 
@@ -114,20 +117,24 @@ pub mod unsafe_module {
 
 This code in inferior to the original in two respects:
 
-1. There is much more `unsafe` code, and more importantly, more invariants it must uphold.
-2. Due to the extensive arithmetic required, there is a bug in this version that cases Rust `undefined behaviour`.
+1. There is much more `unsafe` code, and more importantly, more invariants it
+  must uphold.
+2. Due to the extensive arithmetic required, there is a bug in this version
+  that cases Rust `undefined behaviour`.
 
-The bug here is a simple mistake in pointer arithmetic: the string was copied, all `msg_len` bytes of it.
-However, the `NUL` terminator at the end was not.
+The bug here is a simple mistake in pointer arithmetic: the string was copied,
+all `msg_len` bytes of it. However, the `NUL` terminator at the end was not.
 
 The Vector then had its size *set* to the length of the *zero padded string* --
 rather than *resized* to it, which could have added a zero at the end.
 As a result, the last byte in the Vector is uninitialized memory.
-When the `CString` is created at the bottom of the block, its read of the Vector will cause `undefined behaviour`!
+When the `CString` is created at the bottom of the block, its read of the
+Vector will cause `undefined behaviour`!
 
 Like many such issues, this would be difficult issue to track down.
-Sometimes it would panic because the string was not `UTF-8`, sometimes it would put a weird character at the end of the string,
-sometimes it would just completely crash.
+Sometimes it would panic because the string was not `UTF-8`, sometimes it would
+put a weird character at the end of the string, sometimes it would just
+completely crash.
 
 ## Disadvantages
 

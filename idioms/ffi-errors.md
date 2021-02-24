@@ -3,12 +3,15 @@
 ## Description
 
 In foreign languages like C, errors are represented by return codes.
-However, Rust's type system allows much more rich error information to be captured a propogated through a full type.
+However, Rust's type system allows much more rich error information to be
+captured a propogated through a full type.
 
-This best practice shows different kinds of error codes, and how to expose them in a usable way:
+This best practice shows different kinds of error codes, and how to expose them
+in a usable way:
 
 1. Flat Enums should be converted to integers and returned as codes.
-2. Structured Enums should be converted to an integer code with a string error message for detail.
+2. Structured Enums should be converted to an integer code with a string error
+  message for detail.
 3. Custom Error Types should become "transparent", with a C representation.
 
 ## Code Example
@@ -59,7 +62,7 @@ pub mod c_api {
         ) -> *mut libc::c_char {
 
         let error: &DatabaseError = unsafe {
-            /* SAFETY: pointer lifetime is greater than the current stack frame */
+            // SAFETY: pointer lifetime is greater than the current stack frame
             &*e
         };
 
@@ -127,8 +130,10 @@ impl From<ParseError> for parse_error {
 
 ## Advantages
 
-This ensures that the foreign language has clear access to error information while not compromising the Rust code's API at all.
+This ensures that the foreign language has clear access to error information
+while not compromising the Rust code's API at all.
 
 ## Disadvantages
 
-It's a lot of typing, and some types may not be able to be converted easily to C.
+It's a lot of typing, and some types may not be able to be converted easily
+to C.

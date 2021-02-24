@@ -123,6 +123,7 @@ conversion between arbitrary types.
 
 ## See also
 
-[Collections are smart pointers idiom](../idioms/deref.md).
-
-[Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
+- [Collections are smart pointers idiom](../idioms/deref.md).
+- Delegation crates for less boilerplate like [delegate](https://crates.io/crates/delegate)
+  or [ambassador](https://crates.io/crates/ambassador)
+- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
