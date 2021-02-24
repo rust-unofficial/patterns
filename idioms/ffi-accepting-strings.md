@@ -50,11 +50,10 @@ pub mod unsafe_module {
         // SAFETY: The caller has already guaranteed this is okay (see the
         // `# Safety` section of the doc-comment).
         let msg_str: &str = match std::ffi::CStr::from_ptr(msg).to_str() {
-                Ok(s) => s,
-                Err(e) => {
-                    crate::log_error("FFI string conversion failed");
-                    return;
-                }
+            Ok(s) => s,
+            Err(e) => {
+                crate::log_error("FFI string conversion failed");
+                return;
             }
         };
 
