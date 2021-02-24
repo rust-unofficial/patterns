@@ -7,7 +7,7 @@ should be followed:
 
 1. Keep foreign strings "borrowed", rather than copying them directly.
 2. Minimize the amount of complexity and `unsafe` code involved in converting
-   from a C-style string to native Rust strings
+   from a C-style string to native Rust strings.
 
 ## Motivation
 
