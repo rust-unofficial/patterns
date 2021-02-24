@@ -173,34 +173,52 @@
 should be followed:</p>
 <ol>
 <li>Keep foreign strings &quot;borrowed&quot;, rather than copying them directly.</li>
-<li>Minimize <code>unsafe</code> code during the conversion.</li>
+<li>Minimize the amount of complexity and <code>unsafe</code> code involved in converting
+from a C-style string to native Rust strings.</li>
 </ol>
 <h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
-<p>Rust has built-in support for C-style strings with its <code>CString</code> and <code>CStr</code>
-types. However, there are different approaches one can take with strings that
-are being accepted from a foreign caller of a Rust function.</p>
-<p>The best practice is simple: use <code>CStr</code> in such a way as to minimize unsafe
-code, and create a borrowed slice. If an owned String is needed, call
-<code>to_string()</code> on the string slice.</p>
+<p>The strings used in C have different behaviours to those used in Rust, namely:</p>
+<ul>
+<li>C strings are null-terminated while Rust strings store their length</li>
+<li>C strings can contain any arbitrary non-zero byte while Rust strings must be
+UTF-8</li>
+<li>C strings are accessed and manipulated using <code>unsafe</code> pointer operations
+while interactions with Rust strings go through safe methods</li>
+</ul>
+<p>The Rust standard library comes with C equivalents of Rust's <code>String</code> and <code>&amp;str</code>
+called <code>CString</code> and <code>&amp;CStr</code>, that allow us to avoid a lot of the complexity
+and <code>unsafe</code> code involved in converting between C strings and Rust strings.</p>
+<p>The <code>&amp;CStr</code> type also allows us to work with borrowed data, meaning passing
+strings between Rust and C is a zero-cost operation.</p>
 <h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
 <pre><code class="language-rust ignore">pub mod unsafe_module {
 
     // other module content
 
+    /// Log a message at the specified level.
+    ///
+    /// # Safety
+    ///
+    /// It is the caller's guarantee to ensure `msg`:
+    ///
+    /// - is not a null pointer
+    /// - points to valid, initialized data
+    /// - points to memory ending in a null byte
+    /// - won't be mutated for the duration of this function call
     #[no_mangle]
-    pub extern &quot;C&quot; fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
+    pub unsafe extern &quot;C&quot; fn mylib_log(
+        msg: *const libc::c_char,
+        level: libc::c_int
+    ) {
         let level: crate::LogLevel = match level { /* ... */ };
 
-        let msg_str: &amp;str = unsafe {
-            // SAFETY: accessing raw pointers expected to live for the call,
-            // and creating a shared reference that does not outlive the current
-            // stack frame.
-            match std::ffi::CStr::from_ptr(msg).to_str() {
-                Ok(s) =&gt; s,
-                Err(e) =&gt; {
-                    crate::log_error(&quot;FFI string conversion failed&quot;);
-                    return;
-                }
+        // SAFETY: The caller has already guaranteed this is okay (see the
+        // `# Safety` section of the doc-comment).
+        let msg_str: &amp;str = match std::ffi::CStr::from_ptr(msg).to_str() {
+            Ok(s) =&gt; s,
+            Err(e) =&gt; {
+                crate::log_error(&quot;FFI string conversion failed&quot;);
+                return;
             }
         };
 
