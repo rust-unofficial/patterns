@@ -1,0 +1,246 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js rust">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Creational - Rust Design Patterns</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="A catalogue of Rust design patterns, anti-patterns and idioms">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../../favicon.png">
+        
+        <link rel="stylesheet" href="../../css/variables.css">
+        <link rel="stylesheet" href="../../css/general.css">
+        <link rel="stylesheet" href="../../css/chrome.css">
+        
+        <link rel="stylesheet" href="../../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../../highlight.css">
+        <link rel="stylesheet" href="../../tomorrow-night.css">
+        <link rel="stylesheet" href="../../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../../intro.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li class="chapter-item expanded "><a href="../../idioms/index.html"><strong aria-hidden="true">2.</strong> Idioms</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../idioms/coercion-arguments.html"><strong aria-hidden="true">2.1.</strong> Use borrowed types for arguments</a></li><li class="chapter-item expanded "><a href="../../idioms/concat-format.html"><strong aria-hidden="true">2.2.</strong> Concatenating Strings with format!</a></li><li class="chapter-item expanded "><a href="../../idioms/ctor.html"><strong aria-hidden="true">2.3.</strong> Constructor</a></li><li class="chapter-item expanded "><a href="../../idioms/default.html"><strong aria-hidden="true">2.4.</strong> The Default Trait</a></li><li class="chapter-item expanded "><a href="../../idioms/deref.html"><strong aria-hidden="true">2.5.</strong> Collections Are Smart Pointers</a></li><li class="chapter-item expanded "><a href="../../idioms/dtor-finally.html"><strong aria-hidden="true">2.6.</strong> Finalisation in Destructors</a></li><li class="chapter-item expanded "><a href="../../idioms/mem-replace.html"><strong aria-hidden="true">2.7.</strong> mem::{take(), replace()}</a></li><li class="chapter-item expanded "><a href="../../idioms/on-stack-dyn-dispatch.html"><strong aria-hidden="true">2.8.</strong> On-Stack Dynamic Dispatch</a></li><li class="chapter-item expanded "><a href="../../idioms/ffi/intro.html"><strong aria-hidden="true">2.9.</strong> Foreign function interface (FFI)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../idioms/ffi/errors.html"><strong aria-hidden="true">2.9.1.</strong> Idiomatic Errors</a></li><li class="chapter-item expanded "><a href="../../idioms/ffi/accepting-strings.html"><strong aria-hidden="true">2.9.2.</strong> Accepting Strings</a></li><li class="chapter-item expanded "><a href="../../idioms/ffi/passing-strings.html"><strong aria-hidden="true">2.9.3.</strong> Passing Strings</a></li></ol></li><li class="chapter-item expanded "><a href="../../idioms/option-iter.html"><strong aria-hidden="true">2.10.</strong> Iterating over an Option</a></li><li class="chapter-item expanded "><a href="../../idioms/pass-var-to-closure.html"><strong aria-hidden="true">2.11.</strong> Pass Variables to Closure</a></li><li class="chapter-item expanded "><a href="../../idioms/priv-extend.html"><strong aria-hidden="true">2.12.</strong> Privacy For Extensibility</a></li><li class="chapter-item expanded "><a href="../../idioms/rustdoc-init.html"><strong aria-hidden="true">2.13.</strong> Easy doc initialization</a></li><li class="chapter-item expanded "><a href="../../idioms/temporary-mutability.html"><strong aria-hidden="true">2.14.</strong> Temporary mutability</a></li></ol></li><li class="chapter-item expanded "><a href="../../patterns/index.html"><strong aria-hidden="true">3.</strong> Design Patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../patterns/behavioural/intro.html"><strong aria-hidden="true">3.1.</strong> Behavioural</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../patterns/behavioural/interpreter.html"><strong aria-hidden="true">3.1.1.</strong> Interpreter</a></li><li class="chapter-item expanded "><a href="../../patterns/behavioural/newtype.html"><strong aria-hidden="true">3.1.2.</strong> Newtype</a></li><li class="chapter-item expanded "><a href="../../patterns/behavioural/RAII.html"><strong aria-hidden="true">3.1.3.</strong> RAII Guards</a></li><li class="chapter-item expanded "><a href="../../patterns/behavioural/strategy.html"><strong aria-hidden="true">3.1.4.</strong> Strategy</a></li><li class="chapter-item expanded "><a href="../../patterns/behavioural/visitor.html"><strong aria-hidden="true">3.1.5.</strong> Visitor</a></li></ol></li><li class="chapter-item expanded "><a href="../../patterns/creational/intro.html" class="active"><strong aria-hidden="true">3.2.</strong> Creational</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../patterns/creational/builder.html"><strong aria-hidden="true">3.2.1.</strong> Builder</a></li><li class="chapter-item expanded "><a href="../../patterns/creational/fold.html"><strong aria-hidden="true">3.2.2.</strong> Fold</a></li></ol></li><li class="chapter-item expanded "><a href="../../patterns/structural/intro.html"><strong aria-hidden="true">3.3.</strong> Structural</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../patterns/structural/compose-structs.html"><strong aria-hidden="true">3.3.1.</strong> Compose Structs</a></li><li class="chapter-item expanded "><a href="../../patterns/structural/small-crates.html"><strong aria-hidden="true">3.3.2.</strong> Prefer Small Crates</a></li><li class="chapter-item expanded "><a href="../../patterns/structural/unsafe-mods.html"><strong aria-hidden="true">3.3.3.</strong> Contain unsafety in small modules</a></li></ol></li><li class="chapter-item expanded "><a href="../../patterns/ffi/intro.html"><strong aria-hidden="true">3.4.</strong> Foreign function interface (FFI)</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../patterns/ffi/export.html"><strong aria-hidden="true">3.4.1.</strong> Object-Based APIs</a></li><li class="chapter-item expanded "><a href="../../patterns/ffi/wrappers.html"><strong aria-hidden="true">3.4.2.</strong> Type Consolidation into Wrappers</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../../anti_patterns/index.html"><strong aria-hidden="true">4.</strong> Anti-patterns</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../anti_patterns/deny-warnings.html"><strong aria-hidden="true">4.1.</strong> #[deny(warnings)]</a></li><li class="chapter-item expanded "><a href="../../anti_patterns/deref.html"><strong aria-hidden="true">4.2.</strong> Deref Polymorphism</a></li></ol></li><li class="chapter-item expanded "><a href="../../functional/index.html"><strong aria-hidden="true">5.</strong> Functional Programming</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../functional/paradigms.html"><strong aria-hidden="true">5.1.</strong> Programming paradigms</a></li></ol></li><li class="chapter-item expanded "><a href="../../additional_resources/index.html"><strong aria-hidden="true">6.</strong> Additional Resources</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../../additional_resources/design-principles.html"><strong aria-hidden="true">6.1.</strong> Design principles</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Rust Design Patterns</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/rust-unofficial/patterns" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#creational-patterns" id="creational-patterns">Creational Patterns</a></h1>
+<p>From <a href="https://en.wikipedia.org/wiki/Creational_pattern">Wikipedia</a>:</p>
+<blockquote>
+<p>Design patterns that deal with object creation mechanisms, trying to create objects
+in a manner suitable to the situation. The basic form of object creation could
+result in design problems or in added complexity to the design. Creational design
+patterns solve this problem by somehow controlling this object creation.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../../patterns/behavioural/visitor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../../patterns/creational/builder.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../../patterns/behavioural/visitor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../../patterns/creational/builder.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
