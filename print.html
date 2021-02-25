@@ -2421,15 +2421,17 @@ format, or just modify one of the existing formats.</p>
 and <code>Report</code>, while <code>Text</code> and <code>Json</code> are our strategy structs. These strategies
 have to implement the <code>Formatter</code> trait.</p>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::collections::HashMap;
+
 type Data = HashMap&lt;String, u32&gt;;
 
 trait Formatter {
-    fn format(&amp;self, data: &amp;Data, s: &amp;mut String);
+    fn format(&amp;self, data: &amp;Data, buf: &amp;mut String);
 }
 
 struct Report;
 
 impl Report {
+    // Write should be used but we kept it as String to ignore error handling
     fn generate&lt;T: Formatter&gt;(g: T, s: &amp;mut String) {
         // backend operations...
         let mut data = HashMap::new();
@@ -2442,29 +2444,25 @@ impl Report {
 
 struct Text;
 impl Formatter for Text {
-    fn format(&amp;self, data: &amp;Data, s: &amp;mut String) {
-        *s = data
-            .iter()
-            .map(|(key, val)| format!(&quot;{} {}\n&quot;, key, val))
-            .collect();
+    fn format(&amp;self, data: &amp;Data, buf: &amp;mut String) {
+        for (k, v) in data {
+            let entry = format!(&quot;{} {}\n&quot;, k, v);
+            buf.push_str(&amp;entry);
+        }
     }
 }
 
 struct Json;
 impl Formatter for Json {
-    fn format(&amp;self, data: &amp;Data, s: &amp;mut String) {
-        *s = String::from(&quot;[&quot;);
-        let mut iter = data.into_iter();
-        if let Some((key, val)) = iter.next() {
-            let entry = format!(r#&quot;{{&quot;{}&quot;:&quot;{}&quot;}}&quot;#, key, val);
-            s.push_str(&amp;entry);
-            while let Some((key, val)) = iter.next() {
-                s.push(',');
-                let entry = format!(r#&quot;{{&quot;{}&quot;:&quot;{}&quot;}}&quot;#, key, val);
-                s.push_str(&amp;entry);
-            }
+    fn format(&amp;self, data: &amp;Data, buf: &amp;mut String) {
+        buf.push('[');
+        for (k, v) in data.into_iter() {
+            let entry = format!(r#&quot;{{&quot;{}&quot;:&quot;{}&quot;}}&quot;#, k, v);
+            buf.push_str(&amp;entry);
+            buf.push(',');
         }
-        s.push(']');
+        buf.pop(); // remove extra , at the end
+        buf.push(']');
     }
 }
 
@@ -2474,6 +2472,7 @@ fn main() {
     assert!(s.contains(&quot;one 1&quot;));
     assert!(s.contains(&quot;two 2&quot;));
 
+    s.clear(); // reuse the same buffer
     Report::generate(Json, &amp;mut s);
     assert!(s.contains(r#&quot;{&quot;one&quot;:&quot;1&quot;}&quot;#));
     assert!(s.contains(r#&quot;{&quot;two&quot;:&quot;2&quot;}&quot;#));
