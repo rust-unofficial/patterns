@@ -4,7 +4,7 @@
 
 If you have `unsafe` code, create the smallest possible module that can uphold
 the needed invariants to build a minimal safe interface upon the unsafety. Embed
-this into a larger module that contains only safe code and presents an ergonomi
+this into a larger module that contains only safe code and presents an ergonomic
 interface. Note that the outer module can contain unsafe functions and methods
 that call directly into the unsafe code. Users may use this to gain speed benefits.
 

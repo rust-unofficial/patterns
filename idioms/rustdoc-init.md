@@ -80,9 +80,9 @@ This is much more concise and avoids repetitive code in examples.
 
 ## Disadvantages
 
-As example is in a function, the code will not be tested. Though it still will
+As example is in a function, the code will not be tested. Though it will still be
 checked to make sure it compiles when running a `cargo test`. So this pattern is
-most useful when need `no_run`. With this, you do not need to add `no_run`.
+most useful when you need `no_run`. With this, you do not need to add `no_run`.
 
 ## Discussion
 
