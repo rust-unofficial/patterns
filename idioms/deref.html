@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#collections-are-smart-pointers" id="collections-are-smart-pointers">Collections are smart pointers</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="collections-are-smart-pointers"><a class="header" href="#collections-are-smart-pointers">Collections are smart pointers</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Use the <code>Deref</code> trait to treat collections like smart pointers, offering owning
 and borrowed views of data.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">use std::ops::Deref;
 
 struct Vec&lt;T&gt; {
@@ -193,20 +193,20 @@ from <code>&amp;Vec&lt;T&gt;</code> to <code>&amp;[T]</code> and includes the re
 searches. Most methods you might expect to be implemented for <code>Vec</code>s are instead
 implemented for slices.</p>
 <p>See also <code>String</code> and <code>&amp;str</code>.</p>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Ownership and borrowing are key aspects of the Rust language. Data structures
 must account for these semantics properly in order to give a good user
 experience. When implementing a data structure which owns its data, offering a
 borrowed view of that data allows for more flexible APIs.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Most methods can be implemented only for the borrowed view, they are then
 implicitly available for the owning view.</p>
 <p>Gives clients a choice between borrowing or taking ownership of data.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>Methods and traits only available via dereferencing are not taken into account
 when bounds checking, so generic programming with data structures using this
 pattern can get complex (see the <code>Borrow</code> and <code>AsRef</code> traits, etc.).</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>Smart pointers and collections are analogous: a smart pointer points to a single
 object, whereas a collection points to many objects. From the point of view of
 the type system there is little difference between the two. A collection owns
@@ -222,7 +222,7 @@ implement <code>Deref&lt;Target=Bar&lt;T&gt;&gt;</code> where <code>Bar</code> i
 <code>&amp;Bar&lt;T&gt;</code> is a borrowed view of the data in <code>Foo&lt;T&gt;</code>.</p>
 <p>Commonly, ordered collections will implement <code>Index</code> for <code>Range</code>s to provide
 slicing syntax. The target will be the borrowed view.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p><a href="../anti_patterns/deref.html">Deref polymorphism anti-pattern</a>.</p>
 <p><a href="https://doc.rust-lang.org/std/ops/trait.Deref.html">Documentation for <code>Deref</code> trait</a>.</p>
 

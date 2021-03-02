@@ -167,13 +167,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#on-stack-dynamic-dispatch" id="on-stack-dynamic-dispatch">On-Stack Dynamic Dispatch</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="on-stack-dynamic-dispatch"><a class="header" href="#on-stack-dynamic-dispatch">On-Stack Dynamic Dispatch</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>We can dynamically dispatch over multiple values, however, to do so, we need
 to declare multiple variables to bind differently-typed objects. To extend the
 lifetime as necessary, we can use deferred conditional initialization, as seen
 below:</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::io;
 use std::fs;
 
@@ -197,7 +197,7 @@ let readable: &amp;mut dyn io::Read = if arg == &quot;-&quot; {
 <span class="boring">Ok(())
 </span><span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Rust monomorphises code by default. This means a copy of the code will be
 generated for each type it is used with and optimized independently. While this
 allows for very fast code on the hot path, it also bloats the code in places
@@ -205,11 +205,11 @@ where performance is not of the essence, thus costing compile time and cache
 usage.</p>
 <p>Luckily, Rust allows us to use dynamic dispatch, but we have to explicitly ask
 for it.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>We do not need to allocate anything on the heap. Neither do we need to
 initialize something we won't use later, nor do we need to monomorphize the
 whole code that follows to work with both <code>File</code> or <code>Stdin</code>.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>The code needs more moving parts than the <code>Box</code>-based version:</p>
 <pre><code class="language-rust ignore">// We still need to ascribe the type for dynamic dispatch.
 let readable: Box&lt;dyn io::Read&gt; = if arg == &quot;-&quot; {
@@ -219,7 +219,7 @@ let readable: Box&lt;dyn io::Read&gt; = if arg == &quot;-&quot; {
 };
 // Read from `readable` here.
 </code></pre>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>Rust newcomers will usually learn that Rust requires all variables to be
 initialized <em>before use</em>, so it's easy to overlook the fact that <em>unused</em>
 variables may well be uninitialized. Rust works quite hard to ensure that this
@@ -232,7 +232,7 @@ scope.</p>
 of type <code>Stdin</code>, <code>file</code> is of type <code>File</code> and <code>readable</code> is of type <code>&amp;mut dyn Read</code></li>
 <li>Each borrowed value outlives all the references borrowed from it</li>
 </ul>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="dtor-finally.html">Finalisation in destructors</a> and
 <a href="../patterns/RAII.html">RAII guards</a> can benefit from tight control over lifetimes.</li>

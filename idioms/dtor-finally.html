@@ -167,12 +167,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#finalisation-in-destructors" id="finalisation-in-destructors">Finalisation in destructors</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="finalisation-in-destructors"><a class="header" href="#finalisation-in-destructors">Finalisation in destructors</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Rust does not provide the equivalent to <code>finally</code> blocks - code that will be
 executed no matter how a function is exited. Instead an object's destructor can
 be used to run code that must be run before exit.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
     // These don't need to be defined inside the function.
     struct Foo;
@@ -192,7 +192,7 @@ be used to run code that must be run before exit.</p>
     Ok(())
 }
 </code></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>If a function has multiple return points, then executing code on exit becomes
 difficult and repetitive (and thus bug-prone). This is especially the case where
 return is implicit due to a macro. A common case is the <code>?</code> operator which
@@ -200,10 +200,10 @@ returns if the result is an <code>Err</code>, but continues if it is <code>Ok</c
 an exception handling mechanism, but unlike Java (which has <code>finally</code>), there is
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Code in destructors will (nearly) always be run - copes with panics, early
 returns, etc.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>It is not guaranteed that destructors will run. For example, if there is an
 infinite loop in a function or if running a function crashes before exit.
 Destructors are also not run in the case of a panic in an already panicking
@@ -213,7 +213,7 @@ absolutely essential that finalisation happens.</p>
 gives no clear indication of destructors to be run on exit. This can make
 debugging tricky.</p>
 <p>Requiring an object and <code>Drop</code> impl just for finalisation is heavy on boilerplate.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>There is some subtlety about how exactly to store the object used as a
 finaliser. It must be kept alive until the end of the function and must then be
 destroyed. The object must always be a value or uniquely owned pointer (e.g.,
@@ -235,7 +235,7 @@ aborts the thread immediately, without running further destructors. This means
 that destructors are not absolutely guaranteed to run. It also means that you
 must take extra care in your destructors not to panic, since it could leave
 resources in an unexpected state.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p><a href="../patterns/RAII.html">RAII</a>.</p>
 
                     </main>

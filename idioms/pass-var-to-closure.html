@@ -167,14 +167,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#pass-variables-to-closure" id="pass-variables-to-closure">Pass variables to closure</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="pass-variables-to-closure"><a class="header" href="#pass-variables-to-closure">Pass variables to closure</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>By default, closures capture their environment by borrowing. Or you can use
 <code>move</code>-closure to move whole environment. However, often you want to move just
 some variables to closure, give it copy of some data, pass it by reference, or
 perform some other transformation.</p>
 <p>Use variable rebinding in separate scope for that.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>Use</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -211,13 +211,13 @@ let closure = move || {
 };
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Copied data are grouped together with closure definition, so their purpose is
 more clear and they will be dropped immediately even if they are not consumed
 by closure.</p>
 <p>Closure uses same variable names as surrounding code whether data are copied or
 moved.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>Additional indentation of closure body.</p>
 
                     </main>

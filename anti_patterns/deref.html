@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#deref-polymorphism" id="deref-polymorphism"><code>Deref</code> polymorphism</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="deref-polymorphism"><a class="header" href="#deref-polymorphism"><code>Deref</code> polymorphism</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Abuse the <code>Deref</code> trait to emulate inheritance between structs, and thus reuse
 methods.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>Sometimes we want to emulate the following common pattern from OO languages such
 as Java:</p>
 <pre><code class="language-java">class Foo {
@@ -224,7 +224,7 @@ pretty weird. Dereferencing usually gives a <code>T</code> from a reference to <
 have two unrelated types. However, since the dot operator does implicit
 dereferencing, it means that the method call will search for methods on <code>Foo</code> as
 well as <code>Bar</code>.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>You save a little boilerplate, e.g.,</p>
 <pre><code class="language-rust ignore">impl Bar {
     fn m(&amp;self) {
@@ -232,7 +232,7 @@ well as <code>Bar</code>.</p>
     }
 }
 </code></pre>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
 code will not expect this to happen. That's because we are abusing the <code>Deref</code>
 trait rather than using it as intended (and documented, etc.). It's also because
@@ -248,7 +248,7 @@ pattern it will be the 'class' where the method is defined.</p>
 interfaces, class-based privacy, or other inheritance-related features. So, it
 gives an experience that will be subtly surprising to programmers used to Java
 inheritance, etc.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>There is no one good alternative. Depending on the exact circumstances it might
 be better to re-implement using traits or to write out the facade methods to
 dispatch to <code>Foo</code> manually. We do intend to add a mechanism for inheritance
@@ -265,7 +265,7 @@ favouring explicit conversions between types. Automatic dereferencing in the dot
 operator is a case where the ergonomics strongly favour an implicit mechanism,
 but the intention is that this is limited to degrees of indirection, not
 conversion between arbitrary types.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="../idioms/deref.html">Collections are smart pointers idiom</a>.</li>
 <li>Delegation crates for less boilerplate like <a href="https://crates.io/crates/delegate">delegate</a>

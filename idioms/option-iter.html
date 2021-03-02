@@ -167,12 +167,12 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#iterating-over-an-option" id="iterating-over-an-option">Iterating over an <code>Option</code></a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="iterating-over-an-option"><a class="header" href="#iterating-over-an-option">Iterating over an <code>Option</code></a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p><code>Option</code> can be viewed as a container that contains either zero or one
 elements. In particular, it implements the <code>IntoIterator</code> trait, and as such
 can be used with generic code that needs such a type.</p>
-<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to
 <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>.extend()</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -208,7 +208,7 @@ element instead.</p>
 <p>Also, since <code>Option</code> implements <code>IntoIterator</code>, it's possible to iterate over
 it using a <code>for</code> loop. This is equivalent to matching it with <code>if let Some(..)</code>,
 and in most cases you should prefer the latter.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li>
 <p><a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a> is an

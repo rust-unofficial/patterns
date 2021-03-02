@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#interpreter" id="interpreter">Interpreter</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="interpreter"><a class="header" href="#interpreter">Interpreter</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>If a problem occurs very often and requires long and repetitive steps to solve
 it, then the problem instances might be expressed in a simple language and an
 interpreter object could solve it by interpreting the sentences written in this
@@ -179,13 +179,13 @@ simple language.</p>
 <li>a grammar for this language,</li>
 <li>an interpreter that solves the problem instances.</li>
 </ul>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Our goal is to translate simple mathematical expressions into postfix expressions
 (or <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a>)
 For simplicity, our expressions consist of ten digits <code>0</code>, ..., <code>9</code> and two
 operations <code>+</code>, <code>-</code>. For example, the expression <code>2 + 4</code> is translated into
 <code>2 4  +</code>.</p>
-<h2><a class="header" href="#context-free-grammar-for-our-problem" id="context-free-grammar-for-our-problem">Context Free Grammar for our problem</a></h2>
+<h2 id="context-free-grammar-for-our-problem"><a class="header" href="#context-free-grammar-for-our-problem">Context Free Grammar for our problem</a></h2>
 <p>Our task is translate infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over <code>0</code>, ..., <code>9</code>, <code>+</code>, and <code>-</code>,
 where:</p>
@@ -205,7 +205,7 @@ to do with it. For example, we might need to remove left recursion. For more
 details please see <a href="https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools">Compilers: Principles,Techniques, and Tools
 </a>
 (aka Dragon Book).</p>
-<h2><a class="header" href="#solution" id="solution">Solution</a></h2>
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
 <p>We simply implement a recursive descent parser. For simplicity's sake, the code
 panics when an expression is syntactically wrong (for example <code>2-34</code> or <code>2+5-</code>
 are wrong according to the grammar definition).</p>
@@ -257,7 +257,7 @@ pub fn main() {
     assert_eq!(postfix, &quot;12-3+4-&quot;);
 }
 </code></pre></pre>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>There may be a wrong perception that the Interpreter design pattern is about design
 grammars for formal languages and implementation of parsers for these grammars.
 In fact, this pattern is about expressing problem instances in a more specific
@@ -291,7 +291,7 @@ fn main() {
     assert_eq!(1f64, norm!(0.5, -0.5, 0.5, -0.5));
 }
 </code></pre></pre>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Interpreter_pattern">Interpreter pattern</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context free grammar</a></li>

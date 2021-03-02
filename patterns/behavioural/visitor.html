@@ -167,15 +167,15 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#visitor" id="visitor">Visitor</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="visitor"><a class="header" href="#visitor">Visitor</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>A visitor encapsulates an algorithm that operates over a heterogeneous
 collection of objects. It allows multiple different algorithms to be written
 over the same data without having to modify the data (or their primary
 behaviour).</p>
 <p>Furthermore, the visitor pattern allows separating the traversal of
 a collection of objects from the operations performed on each object.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">// The data we will visit
 mod ast {
     pub enum Stmt {
@@ -230,12 +230,12 @@ impl Visitor&lt;i64&gt; for Interpreter {
 </code></pre>
 <p>One could implement further visitors, for example a type checker, without having
 to modify the AST data.</p>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>The visitor pattern is useful anywhere that you want to apply an algorithm to
 heterogeneous data. If data is homogeneous, you can use an iterator-like pattern.
 Using a visitor object (rather than a functional approach) allows the visitor to
 be stateful and thus communicate information between nodes.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>It is common for the <code>visit_*</code> methods to return void (as opposed to in the
 example). In that case it is possible to factor out the traversal code and share
 it between algorithms (and also to provide noop default methods). In Rust, the
@@ -257,7 +257,7 @@ example,</p>
 </code></pre>
 <p>In other languages (e.g., Java) it is common for data to have an <code>accept</code> method
 which performs the same duty.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p>The visitor pattern is a common pattern in most OO languages.</p>
 <p><a href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia article</a></p>
 <p>The <a href="fold.html">fold</a> pattern is similar to visitor but produces a new version of

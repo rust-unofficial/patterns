@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#error-handling-in-ffi" id="error-handling-in-ffi">Error Handling in FFI</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="error-handling-in-ffi"><a class="header" href="#error-handling-in-ffi">Error Handling in FFI</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>In foreign languages like C, errors are represented by return codes.
 However, Rust's type system allows much more rich error information to be
 captured a propogated through a full type.</p>
@@ -180,8 +180,8 @@ in a usable way:</p>
 message for detail.</li>
 <li>Custom Error Types should become &quot;transparent&quot;, with a C representation.</li>
 </ol>
-<h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
-<h3><a class="header" href="#flat-enums" id="flat-enums">Flat Enums</a></h3>
+<h2 id="code-example"><a class="header" href="#code-example">Code Example</a></h2>
+<h3 id="flat-enums"><a class="header" href="#flat-enums">Flat Enums</a></h3>
 <pre><code class="language-rust ignore">enum DatabaseError {
     IsReadOnly = 1, // user attempted a write operation
     IOError = 2, // user should read the C errno() for what it was
@@ -194,7 +194,7 @@ impl From&lt;DatabaseError&gt; for libc::c_int {
     }
 }
 </code></pre>
-<h3><a class="header" href="#structured-enums" id="structured-enums">Structured Enums</a></h3>
+<h3 id="structured-enums"><a class="header" href="#structured-enums">Structured Enums</a></h3>
 <pre><code class="language-rust ignore">pub mod errors {
     enum DatabaseError {
         IsReadOnly,
@@ -260,7 +260,7 @@ pub mod c_api {
     }
 }
 </code></pre>
-<h3><a class="header" href="#custom-error-types" id="custom-error-types">Custom Error Types</a></h3>
+<h3 id="custom-error-types"><a class="header" href="#custom-error-types">Custom Error Types</a></h3>
 <pre><code class="language-rust ignore">struct ParseError {
     expected: char,
     line: u32,
@@ -284,10 +284,10 @@ impl From&lt;ParseError&gt; for parse_error {
     }
 }
 </code></pre>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>This ensures that the foreign language has clear access to error information
 while not compromising the Rust code's API at all.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>It's a lot of typing, and some types may not be able to be converted easily
 to C.</p>
 

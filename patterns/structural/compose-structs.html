@@ -167,9 +167,9 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#compose-structs-together-for-better-borrowing" id="compose-structs-together-for-better-borrowing">Compose structs together for better borrowing</a></h1>
+                        <h1 id="compose-structs-together-for-better-borrowing"><a class="header" href="#compose-structs-together-for-better-borrowing">Compose structs together for better borrowing</a></h1>
 <p>TODO - this is not a very snappy name</p>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Sometimes a large struct will cause issues with the borrow checker - although
 fields can be borrowed independently, sometimes the whole struct ends up being
 used at once, preventing other uses. A solution might be to decompose the struct
@@ -178,7 +178,7 @@ struct. Then each struct can be borrowed separately and have more flexible
 behaviour.</p>
 <p>This will often lead to a better design in other ways: applying this design
 pattern often reveals smaller units of functionality.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -233,17 +233,17 @@ fn baz(a: &amp;mut A) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>TODO Why and where you should use the pattern</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Lets you work around limitations in the borrow checker.</p>
 <p>Often produces a better design.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>Leads to more verbose code.</p>
 <p>Sometimes, the smaller structs are not good abstractions, and so we end up with
 a worse design. That is probably a 'code smell', indicating that the program
 should be refactored in some way.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>This pattern is not required in languages that don't have a borrow checker, so
 in that sense is unique to Rust. However, making smaller units of functionality
 often leads to cleaner code: a widely acknowledged principle of software

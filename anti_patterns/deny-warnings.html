@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#denywarnings" id="denywarnings"><code>#![deny(warnings)]</code></a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="denywarnings"><a class="header" href="#denywarnings"><code>#![deny(warnings)]</code></a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>A well-intentioned crate author wants to ensure their code builds without
 warnings. So they annotate their crate root with the following:</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span>#![deny(warnings)]
@@ -180,9 +180,9 @@ warnings. So they annotate their crate root with the following:</p>
 </span>// All is well.
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>It is short and will stop the build if anything is amiss.</p>
-<h2><a class="header" href="#drawbacks" id="drawbacks">Drawbacks</a></h2>
+<h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
 <p>By disallowing the compiler to build with warnings, a crate author opts out of
 Rust's famed stability. Sometimes new features or old misfeatures need a change
 in how things are done, thus lints are written that <code>warn</code> for a certain grace
@@ -200,7 +200,7 @@ longer be used unless the annotation is removed. This is mitigated with
 lint errors into warnings. But be aware that <code>forbid</code> lints are stronger than
 <code>deny</code> hence the 'forbid' level cannot be overridden to be anything lower than
 an error. As a result <code>forbid</code> lints will still stop compilation.</p>
-<h2><a class="header" href="#alternatives" id="alternatives">Alternatives</a></h2>
+<h2 id="alternatives"><a class="header" href="#alternatives">Alternatives</a></h2>
 <p>There are two ways of tackling this problem: First, we can decouple the build
 setting from the code, and second, we can name the lints we want to deny
 explicitly.</p>
@@ -241,7 +241,7 @@ Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.
 <p>Some may also want to add <code>missing-copy-implementations</code> to their list.</p>
 <p>Note that we explicitly did not add the <code>deprecated</code> lint, as it is fairly
 certain that there will be more deprecated APIs in the future.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://rust-lang.github.io/rust-clippy/master">A collection of all clippy lints</a></li>
 <li><a href="https://doc.rust-lang.org/reference/attributes.html#deprecation">deprecate attribute</a> documentation</li>

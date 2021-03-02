@@ -167,11 +167,11 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#privacy-for-extensibility" id="privacy-for-extensibility">Privacy for extensibility</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="privacy-for-extensibility"><a class="header" href="#privacy-for-extensibility">Privacy for extensibility</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Use a private field to ensure that a struct is extensible without breaking
 stability guarantees.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">mod a {
     // Public struct.
     pub struct S {
@@ -188,7 +188,7 @@ fn main(s: a::S) {
 }
 
 </code></pre>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>Adding a field to a struct is a mostly backwards compatible change.
 However, if a client uses a pattern to deconstruct a struct instance, they
 might name all the fields in the struct and adding a new one would break that

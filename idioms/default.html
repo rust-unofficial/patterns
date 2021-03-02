@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#the-default-trait" id="the-default-trait">The <code>Default</code> Trait</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="the-default-trait"><a class="header" href="#the-default-trait">The <code>Default</code> Trait</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Many types in Rust have a <a href="ctor.html">constructor</a>. However, this is <em>specific</em> to the
 type; Rust cannot abstract over &quot;everything that has a <code>new()</code> method&quot;. To
 allow this, the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait was conceived, which can be used with
@@ -181,7 +181,7 @@ types implement <code>Default</code>, the more useful it becomes.</p>
 <p>On the other hand, constructors can take multiple arguments, while the
 <code>default()</code> method does not. There can even be multiple constructors with
 different names, but there can only be one <code>Default</code> implementation per type.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::{path::PathBuf, time::Duration};
 
 // note that we can simply auto-derive Default here.
@@ -209,7 +209,7 @@ fn main() {
     println!(&quot;conf = {:#?}&quot;, conf);
 }
 </code></pre></pre>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li>The <a href="ctor.html">constructor</a> idiom is another way to generate instances that may or may
 not be &quot;default&quot;</li>

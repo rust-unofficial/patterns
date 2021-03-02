@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#object-based-apis" id="object-based-apis">Object-Based APIs</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="object-based-apis"><a class="header" href="#object-based-apis">Object-Based APIs</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>When designing APIs in Rust which are exposed to other languages, there are some
 important design principles which are contrary to normal Rust API design:</p>
 <ol>
@@ -179,7 +179,7 @@ and <em>opaque</em>.</li>
 <li>All library behavior should be encapsulated into types not based on structure,
 but <em>provenance/lifetime</em>.</li>
 </ol>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Rust has built-in FFI support to other languages.
 It does this by providing a way for crate authors to provide C-compatible APIs
 through different ABIs (though that is unimportant to this practice).</p>
@@ -199,7 +199,7 @@ invalid memory access. But if it is manipulated by unsafe code, it could become
 full-blown heap corruption.</p>
 <p>The Object-Based API design allows for writing shims that have good memory safety
 characteristics, and a clean boundary of what is safe and what is <code>unsafe</code>.</p>
-<h2><a class="header" href="#code-example" id="code-example">Code Example</a></h2>
+<h2 id="code-example"><a class="header" href="#code-example">Code Example</a></h2>
 <p>The POSIX standard defines the API to access an on-file database, known as <a href="https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h">DBM</a>.
 It is an excellent example of an &quot;object-based&quot; API.</p>
 <p>Here is the definition in C, which hopefully should be easy to read for those
@@ -255,7 +255,7 @@ The user of the library needs to read the documentation in order to use it corre
 That said, there are some decisions that have fewer or greater consequences if users
 do it wrong. Minimizing those is what this best practice is about, and the key
 is to <em>transfer ownership of everything that is transparent</em>.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>This minimizes the number of memory safety guarantees the user must uphold to a
 relatively small number:</p>
 <ol>
@@ -359,7 +359,7 @@ the iterator with its parent:</p>
 datum   dbm_nextkey(DBM *);
 </code></pre>
 <p>Thus, all of the lifetimes were bound together, and such unsafety was prevented.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>However, this design choice also has a number of drawbacks, which should be
 considered as well.</p>
 <p>First, the API itself becomes less expressive.

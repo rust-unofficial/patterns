@@ -167,25 +167,25 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#contain-unsafety-in-small-modules" id="contain-unsafety-in-small-modules">Contain unsafety in small modules</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="contain-unsafety-in-small-modules"><a class="header" href="#contain-unsafety-in-small-modules">Contain unsafety in small modules</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>If you have <code>unsafe</code> code, create the smallest possible module that can uphold
 the needed invariants to build a minimal safe interface upon the unsafety. Embed
 this into a larger module that contains only safe code and presents an ergonomic
 interface. Note that the outer module can contain unsafe functions and methods
 that call directly into the unsafe code. Users may use this to gain speed benefits.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <ul>
 <li>This restricts the unsafe code that must be audited</li>
 <li>Writing the outer module is much easier, since you can count on the guarantees
 of the inner module</li>
 </ul>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <ul>
 <li>Sometimes, it may be hard to find a suitable interface.</li>
 <li>The abstraction may introduce inefficiencies.</li>
 </ul>
-<h2><a class="header" href="#examples" id="examples">Examples</a></h2>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <ul>
 <li>The <a href="https://docs.rs/toolshed"><code>toolshed</code></a> crate contains its unsafe operations
 in submodules, presenting a safe interface to users. * <code>std</code>s <code>String</code> class
@@ -194,7 +194,7 @@ valid UTF-8. The operations on <code>String</code> ensure this behavior. However
 have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case
 the onus is on them to guarantee the validity of the contents.</li>
 </ul>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://www.ralfj.de/blog/2018/08/22/two-kinds-of-invariants.html">Ralf Jung's Blog about invariants in unsafe code</a></li>
 </ul>

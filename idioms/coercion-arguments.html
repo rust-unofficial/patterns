@@ -167,8 +167,8 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#use-borrowed-types-for-arguments" id="use-borrowed-types-for-arguments">Use borrowed types for arguments</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="use-borrowed-types-for-arguments"><a class="header" href="#use-borrowed-types-for-arguments">Use borrowed types for arguments</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Using a target of a deref coercion can increase the flexibility of your code
 when you are deciding which argument type to use for a function argument.
 In this way, the function will accept more input types.</p>
@@ -181,7 +181,7 @@ where the owned type already provides a layer of indirection. For instance, a
 <code>String</code> has a layer of indirection, so a <code>&amp;String</code> will have two layers of
 indirection. We can avoid this by using <code>&amp;str</code> instead, and letting <code>&amp;String</code>
 coerce to a <code>&amp;str</code> whenever the function is invoked.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>For this example, we will illustrate some differences for using <code>&amp;String</code> as a
 function argument versus using a <code>&amp;str</code>, but the ideas apply as well to using
 <code>&amp;Vec&lt;T&gt;</code> versus using a <code>&amp;[T]</code> or using a <code>&amp;T</code> versus a <code>&amp;Box&lt;T&gt;</code>.</p>
@@ -273,7 +273,7 @@ will yield</p>
 argument type <code>&amp;String</code>. This is because string slices are a <code>&amp;str</code> and not a
 <code>&amp;String</code> which would require an allocation to be converted to <code>&amp;String</code> which
 is not implicit, whereas converting from <code>String</code> to <code>&amp;str</code> is cheap and implicit.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/reference/type-coercions.html">Rust Language Reference on Type Coercions</a></li>
 <li>For more discussion on how to handle <code>String</code> and <code>&amp;str</code> see

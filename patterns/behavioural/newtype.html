@@ -167,7 +167,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#newtype" id="newtype">Newtype</a></h1>
+                        <h1 id="newtype"><a class="header" href="#newtype">Newtype</a></h1>
 <p>What if in some cases we want a type to behave similar to another type or
 enforce some behaviour at compile time where using only type aliases would
 not be enough?</p>
@@ -175,10 +175,10 @@ not be enough?</p>
 due to security considerations (e.g. passwords).</p>
 <p>For such cases we could use the <code>Newtype</code> pattern to provide <strong>type safety</strong>
 and <strong>encapsulation</strong>.</p>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">// Some type, not necessarily in the same module or even crate.
 struct Foo {
     //..
@@ -213,27 +213,27 @@ fn main() {
     // let b: Bar = Foo { ... };
 }
 </code></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>The primary motivation for newtypes is abstraction. It allows you to share
 implementation details between types while precisely controlling the interface.
 By using a newtype rather than exposing the implementation type as part of an
 API, it allows you to change implementation backwards compatibly.</p>
 <p>Newtypes can be used for distinguishing units, e.g., wrapping <code>f64</code> to give
 distinguishable <code>Miles</code> and <code>Kms</code>.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>The wrapped and wrapper types are not type compatible (as opposed to using
 <code>type</code>), so users of the newtype will never 'confuse' the wrapped and wrapper
 types.</p>
 <p>Newtypes are a zero-cost abstraction - there is no runtime overhead.</p>
 <p>The privacy system ensures that users cannot access the wrapped type (if the
 field is private, which it is by default).</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>The downside of newtypes (especially compared with type aliases), is that there
 is no special language support. This means there can be <em>a lot</em> of boilerplate.
 You need a 'pass through' method for every method you want to expose on the
 wrapped type, and an impl for every trait you want to also be implemented for
 the wrapper type.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>Newtypes are very common in Rust code. Abstraction or representing units are the
 most common uses, but they can be used for other reasons:</p>
 <ul>
@@ -248,7 +248,7 @@ e.g.,</li>
 types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>,
 but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used
 with <code>Bar</code>.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction">Advanced Types in the book</a></li>
 <li><a href="https://wiki.haskell.org/Newtype">Newtypes in Haskell</a></li>

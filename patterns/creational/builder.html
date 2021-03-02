@@ -167,10 +167,10 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#builder" id="builder">Builder</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="builder"><a class="header" href="#builder">Builder</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Construct an object with calls to a builder helper.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -219,17 +219,17 @@ fn builder_test() {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Useful when you would otherwise require many different constructors or where
 construction has side effects.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Separates methods for building from other methods.</p>
 <p>Prevents proliferation of constructors</p>
 <p>Can be used for one-liner initialisation as well as more complex construction.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>More complex than creating a struct object directly, or a simple constructor
 function.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>This pattern is seen more frequently in Rust (and for simpler objects) than in
 many other languages because Rust lacks overloading. Since you can only have a
 single method with a given name, having multiple constructors is less nice in
@@ -250,7 +250,7 @@ fb.b();
 let f = fb.build();
 </code></pre>
 <p>as well as the <code>FooBuilder::new().a().b().build()</code> style.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <ul>
 <li><a href="https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html">Description in the style guide</a></li>
 <li><a href="https://crates.io/crates/derive_builder">derive_builder</a>, a crate for automatically

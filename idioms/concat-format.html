@@ -167,13 +167,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#concatenating-strings-with-format" id="concatenating-strings-with-format">Concatenating strings with <code>format!</code></a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="concatenating-strings-with-format"><a class="header" href="#concatenating-strings-with-format">Concatenating strings with <code>format!</code></a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>It is possible to build up strings using the <code>push</code> and <code>push_str</code> methods on a
 mutable <code>String</code>, or using its <code>+</code> operator. However, it is often more
 convenient to use <code>format!</code>, especially where there is a mix of literal and
 non-literal strings.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -189,9 +189,9 @@ non-literal strings.</p>
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Using <code>format!</code> is usually the most succinct and readable way to combine strings.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>It is usually not the most efficient way to combine strings - a series of <code>push</code>
 operations on a mutable string is usually the most efficient (especially if the
 string has been pre-allocated to the expected size).</p>

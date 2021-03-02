@@ -167,13 +167,13 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#memtake_-replace_-to-keep-owned-values-in-changed-enums" id="memtake_-replace_-to-keep-owned-values-in-changed-enums"><code>mem::{take(_), replace(_)}</code> to keep owned values in changed enums</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="memtake_-replace_-to-keep-owned-values-in-changed-enums"><a class="header" href="#memtake_-replace_-to-keep-owned-values-in-changed-enums"><code>mem::{take(_), replace(_)}</code> to keep owned values in changed enums</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Say we have a <code>&amp;mut MyEnum</code> which has (at least) two variants,
 <code>A { name: String, x: u8 }</code> and <code>B { name: String }</code>. Now we want to change
 <code>MyEnum::A</code> to a <code>B</code> if <code>x</code> is zero, while keeping <code>MyEnum::B</code> intact.</p>
 <p>We can do this without cloning the <code>name</code>.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -228,7 +228,7 @@ fn swizzle(e: &amp;mut MultiVariateEnum) {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>When working with enums, we may want to change an enum value in place, perhaps
 to another variant. This is usually done in two phases to keep the borrow
 checker happy. In the first phase, we observe the existing value and look at
@@ -249,9 +249,9 @@ replace the value with. An equivalent to our <code>mem::take</code> line would b
 <p>Note, however, that if we are using an <code>Option</code> and want to replace its
 value with a <code>None</code>, <code>Option</code>’s <code>take()</code> method provides a shorter and
 more idiomatic alternative.</p>
-<h2><a class="header" href="#advantages" id="advantages">Advantages</a></h2>
+<h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Look ma, no allocation! Also you may feel like Indiana Jones while doing it.</p>
-<h2><a class="header" href="#disadvantages" id="disadvantages">Disadvantages</a></h2>
+<h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>This gets a bit wordy. Getting it wrong repeatedly will make you hate the
 borrow checker. The compiler may fail to optimize away the double store,
 resulting in reduced performance as opposed to what you'd do in unsafe
@@ -259,7 +259,7 @@ languages.</p>
 <p>Furthermore, the type you are taking needs to implement the <a href="./default.html"><code>Default</code>
 trait</a>. However, if the type you're working with doesn't
 implement this, you can instead use <code>mem::replace</code>.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>This pattern is only of interest in Rust. In GC'd languages, you'd take the
 reference to the value by default (and the GC would keep track of refs), and in
 other low-level languages like C you'd simply alias the pointer and fix things
@@ -267,7 +267,7 @@ later.</p>
 <p>However, in Rust, we have to do a little more work to do this. An owned value
 may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p>This gets rid of the [Clone to satisfy the borrow checker] antipattern in a
 specific case.</p>
 <p>[Clone to satisfy the borrow checker](TODO: Hinges on PR #23)</p>

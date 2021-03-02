@@ -167,14 +167,14 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1><a class="header" href="#fold" id="fold">Fold</a></h1>
-<h2><a class="header" href="#description" id="description">Description</a></h2>
+                        <h1 id="fold"><a class="header" href="#fold">Fold</a></h1>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Run an algorithm over each item in a collection of data to create a new item,
 thus creating a whole new collection.</p>
 <p>The etymology here is unclear to me. The terms 'fold' and 'folder' are used
 in the Rust compiler, although it appears to me to be more like a map than a
 fold in the usual sense. See the discussion below for more details.</p>
-<h2><a class="header" href="#example" id="example">Example</a></h2>
+<h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">// The data we will fold, a simple AST.
 mod ast {
     pub enum Stmt {
@@ -230,7 +230,7 @@ state preserved between nodes in the struct itself.</p>
 <p>A folder can also be defined to map one data structure to a different (but
 usually similar) data structure. For example, we could fold an AST into a HIR
 tree (HIR stands for high-level intermediate representation).</p>
-<h2><a class="header" href="#motivation" id="motivation">Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>It is common to want to map a data structure by performing some operation on
 each node in the structure. For simple operations on simple data structures,
 this can be done using <code>Iterator::map</code>. For more complex operations, perhaps
@@ -239,7 +239,7 @@ over the data structure is non-trivial, using the fold pattern is more
 appropriate.</p>
 <p>Like the visitor pattern, the fold pattern allows us to separate traversal of a
 data structure from the operations performed to each node.</p>
-<h2><a class="header" href="#discussion" id="discussion">Discussion</a></h2>
+<h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>Mapping data structures in this fashion is common in functional languages. In OO
 languages, it would be more common to mutate the data structure in place. The
 'functional' approach is common in Rust, mostly due to the preference for
@@ -257,7 +257,7 @@ expensive.</p>
 the original data structure and we don't need to clone unchanged nodes. However,
 they are less ergonomic to use and mean that the data structures cannot be
 mutable.</p>
-<h2><a class="header" href="#see-also" id="see-also">See also</a></h2>
+<h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p>Iterators have a <code>fold</code> method, however this folds a data structure into a
 value, rather than into a new data structure. An iterator's <code>map</code> is more like
 this fold pattern.</p>
