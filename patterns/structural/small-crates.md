@@ -14,7 +14,8 @@ We should take advantage of this tooling, and use smaller, more fine-grained dep
 * Small crates are easier to understand, and encourage more modular code.
 * Crates allow for re-using code between projects.
   For example, the `url` crate was developed as part of the Servo browser engine,
-  but has since found wide use outside the project. * Since the compilation unit
+  but has since found wide use outside the project.
+* Since the compilation unit
   of Rust is the crate, splitting a project into multiple crates can allow more of
   the code to be built in parallel.
 
