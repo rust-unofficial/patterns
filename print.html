@@ -2782,7 +2782,7 @@ public static void main(String[] args) {
 }
 </code></pre>
 <p>We can use the deref polymorphism anti-pattern to do so:</p>
-<pre><code class="language-rust ignore">use std::ops::Deref;
+<pre><pre class="playground"><code class="language-rust edition2018">use std::ops::Deref;
 
 struct Foo {}
 
@@ -2790,11 +2790,10 @@ impl Foo {
     fn m(&amp;self) {
         //..
     }
-
 }
 
 struct Bar {
-    f: Foo
+    f: Foo,
 }
 
 impl Deref for Bar {
@@ -2805,10 +2804,10 @@ impl Deref for Bar {
 }
 
 fn main() {
-    let b = Bar { Foo {} };
+    let b = Bar { f: Foo {} };
     b.m();
 }
-</code></pre>
+</code></pre></pre>
 <p>There is no struct inheritance in Rust. Instead we use composition and include
 an instance of <code>Foo</code> in <code>Bar</code> (since the field is a value, it is stored inline,
 so if there were fields, they would have the same layout in memory as the Java
