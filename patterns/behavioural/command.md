@@ -206,3 +206,15 @@ fn main() {
     assert_eq!(vec!["remove field", "drop table"], schema.rollback());
 }
 ```
+
+## Discussion
+If our commands are small and may be defined
+as functions or passed as a closure then the
+second approach might be preferable since it
+does not exploit dynamic dispatch.
+But if our command is a whole struct with a bunch
+of functions and variables defined as seperate module
+then the first approach would be more suitable.
+As an example, the first approach is used in
+the [`actix`](https://actix.rs/) when we register handler function
+for routes.
