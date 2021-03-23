@@ -95,3 +95,60 @@ fn main() {
     assert_eq!(vec!["remove field", "drop table"], schema.rollback());
 }
 ```
+
+## Second approach. Using function pointers
+
+We could follow another solution by
+creating each individual command as
+a different function and store function pointers
+to invoke these function later at different time.
+Since function pointers implement all three traits
+`Fn`, `FnMut`, and `FnOnce` we could pass and stores
+closures instead of function pointers.
+
+```rust
+type FnPtr<'a> = fn() -> &'a str;
+struct Command<'a> {
+    execute: FnPtr<'a>,
+    rollback: FnPtr<'a>,
+}
+
+struct Schema<'a> {
+    commands: Vec<Box<Command<'a>>>,
+}
+
+impl<'a> Schema<'a> {
+    fn new() -> Self {
+        Self { commands: vec![] }
+    }
+    fn add_migration(&mut self, execute: FnPtr<'a>, rollback: FnPtr<'a>) {
+        self.commands.push(Box::new(Command { execute, rollback }));
+    }
+    fn execute(&self) -> Vec<&str> {
+        self.commands.iter().map(|cmd| (cmd.execute)()).collect()
+    }
+    fn rollback(&self) -> Vec<&str> {
+        self.commands
+            .iter()
+            .rev()
+            .map(|cmd| (cmd.rollback)())
+            .collect()
+    }
+}
+
+fn add_field() -> &'static str {
+    "add field"
+}
+
+fn remove_field() -> &'static str {
+    "remove field"
+}
+
+fn main() {
+    let mut schema = Schema::new();
+    schema.add_migration(|| "create table", || "drop table");
+    schema.add_migration(add_field, remove_field);
+    assert_eq!(vec!["create table", "add field"], schema.execute());
+    assert_eq!(vec!["remove field", "drop table"], schema.rollback());
+}
+```
