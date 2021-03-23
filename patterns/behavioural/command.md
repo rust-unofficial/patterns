@@ -208,6 +208,7 @@ fn main() {
 ```
 
 ## Discussion
+
 If our commands are small and may be defined
 as functions or passed as a closure then the
 second approach might be preferable since it
@@ -218,3 +219,8 @@ then the first approach would be more suitable.
 As an example, the first approach is used in
 the [`actix`](https://actix.rs/) when we register handler function
 for routes.
+
+## See also
+
+- [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
+- [A powerful, pragmatic, and extremely fast web framework for Rust](https://actix.rs/)
