@@ -26,7 +26,7 @@ operation then each command is executed in the defined order,
 and when the user invokes the rollback operation
 then each undo operation is invoked in reverse order.
 
-## First approach. Using trait objects.
+## First approach. Using trait objects
 
 We define a common trait which encapsulates our command
 with two operations `execute` and `rollback`. All command
