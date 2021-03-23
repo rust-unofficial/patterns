@@ -63,7 +63,7 @@ As a result, the wrapper is simple and contains no `unsafe` code.
 ## Advantages
 
 This makes APIs safer to use, avoiding issues with lifetimes between types.
-See [Object-Based APIs](./ffi-export.md) for more on the advantages and pitfalls
+See [Object-Based APIs](./export.md) for more on the advantages and pitfalls
 this avoids.
 
 ## Disadvantages

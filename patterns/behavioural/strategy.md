@@ -33,15 +33,17 @@ have to implement the `Formatter` trait.
 
 ```rust
 use std::collections::HashMap;
+
 type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn format(&self, data: &Data, s: &mut String);
+    fn format(&self, data: &Data, buf: &mut String);
 }
 
 struct Report;
 
 impl Report {
+    // Write should be used but we kept it as String to ignore error handling
     fn generate<T: Formatter>(g: T, s: &mut String) {
         // backend operations...
         let mut data = HashMap::new();
@@ -54,29 +56,25 @@ impl Report {
 
 struct Text;
 impl Formatter for Text {
-    fn format(&self, data: &Data, s: &mut String) {
-        *s = data
-            .iter()
-            .map(|(key, val)| format!("{} {}\n", key, val))
-            .collect();
+    fn format(&self, data: &Data, buf: &mut String) {
+        for (k, v) in data {
+            let entry = format!("{} {}\n", k, v);
+            buf.push_str(&entry);
+        }
     }
 }
 
 struct Json;
 impl Formatter for Json {
-    fn format(&self, data: &Data, s: &mut String) {
-        *s = String::from("[");
-        let mut iter = data.into_iter();
-        if let Some((key, val)) = iter.next() {
-            let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
-            s.push_str(&entry);
-            while let Some((key, val)) = iter.next() {
-                s.push(',');
-                let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
-                s.push_str(&entry);
-            }
+    fn format(&self, data: &Data, buf: &mut String) {
+        buf.push('[');
+        for (k, v) in data.into_iter() {
+            let entry = format!(r#"{{"{}":"{}"}}"#, k, v);
+            buf.push_str(&entry);
+            buf.push(',');
         }
-        s.push(']');
+        buf.pop(); // remove extra , at the end
+        buf.push(']');
     }
 }
 
@@ -86,6 +84,7 @@ fn main() {
     assert!(s.contains("one 1"));
     assert!(s.contains("two 2"));
 
+    s.clear(); // reuse the same buffer
     Report::generate(Json, &mut s);
     assert!(s.contains(r#"{"one":"1"}"#));
     assert!(s.contains(r#"{"two":"2"}"#));
