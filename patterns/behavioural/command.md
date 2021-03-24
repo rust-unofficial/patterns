@@ -153,7 +153,7 @@ fn main() {
 }
 ```
 
-## Third approach. Using `Fn` trait object
+## Third approach. Using `Fn` trait objects
 
 Finally, instead of defining a common command
 trait we simply store each command implementing
