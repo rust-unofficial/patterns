@@ -7,7 +7,7 @@ encapsulated as objects.
 We want these actions or commands to be
 executed or invoked in some order later at different time.
 These commands may also be triggered as a result
-of some event. For example when a user pushes a button
+of some event. For example, when a user pushes a button,
 or on arrival of a data packet.
 In addition, these commands might be be undoable.
 For example, operations of the editor.
