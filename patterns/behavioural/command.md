@@ -101,7 +101,7 @@ fn main() {
 We could follow another solution by
 creating each individual command as
 a different function and store function pointers
-to invoke these function later at different time.
+to invoke these functions later at a different time.
 Since function pointers implement all three traits
 `Fn`, `FnMut`, and `FnOnce` we could as well pass and store
 closures instead of function pointers.
