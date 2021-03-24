@@ -20,7 +20,7 @@ This may come in useful for operations of an editor.
 We might want to store logs of executed commands
 so that we could reapply the changes later if the system crashes.
 
-# Example
+## Example
 
 Define two database operations
 `create table` and `add field`.
