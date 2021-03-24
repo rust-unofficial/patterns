@@ -217,7 +217,7 @@ But if our command is a whole struct with a bunch
 of functions and variables defined as seperate module
 then the first approach would be more suitable.
 As an example, the first approach is used in
-the [`actix`](https://actix.rs/) when we register handler function
+[`actix`](https://actix.rs/) when it registers a handler function
 for routes.
 
 ## See also
