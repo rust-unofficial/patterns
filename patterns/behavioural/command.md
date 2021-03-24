@@ -2,6 +2,12 @@
 
 ## Description
 
+The basic idea of the Command pattern is separate
+out actions into its own objects and pass them
+as parameters.
+
+## Motivation
+
 Suppose we have a sequence of actions or transactions
 encapsulated as objects.
 We want these actions or commands to be
@@ -14,7 +20,7 @@ This may come in useful for operations of an editor.
 We might want to store logs of executed commands
 so that we could reapply the changes later if the system crashes.
 
-## Motivation
+# Example
 
 Define two database operations
 `create table` and `add field`.
