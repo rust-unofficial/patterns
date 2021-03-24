@@ -19,7 +19,7 @@ so that we could reapply the changes later if system crashes.
 Define two database operations
 `create table` and `add field`.
 Each of these operations is a command
-which knows how undo the command, e.g.,
+which knows how to undo the command, e.g.,
 `drop table` and `remove field`.
 When a user invokes a database migration
 operation then each command is executed in the defined order,
