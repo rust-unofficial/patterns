@@ -223,4 +223,3 @@ for routes.
 ## See also
 
 - [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
-- [A powerful, pragmatic, and extremely fast web framework for Rust](https://actix.rs/)
