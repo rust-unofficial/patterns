@@ -157,7 +157,7 @@ fn main() {
 
 Finally, instead of defining a common command
 trait we simply store each command implementing
-`Fn` trait separately in vectors.
+the `Fn` trait separately in vectors.
 
 ```rust
 type Migration<'a> = Box<dyn Fn() -> &'a str>;
