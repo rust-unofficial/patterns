@@ -30,7 +30,7 @@ then each undo operation is invoked in reverse order.
 
 We define a common trait which encapsulates our command
 with two operations `execute` and `rollback`. All command
-`structs` must implements this trait.
+`structs` must implement this trait.
 
 ```rust
 pub trait Migration {
