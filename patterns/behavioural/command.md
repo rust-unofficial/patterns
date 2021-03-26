@@ -2,7 +2,7 @@
 
 ## Description
 
-The basic idea of the Command pattern is separate
+The basic idea of the Command pattern is to separate
 out actions into its own objects and pass them
 as parameters.
 
