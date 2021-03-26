@@ -221,7 +221,7 @@ second approach might be preferable since it
 does not exploit dynamic dispatch.
 But if our command is a whole struct with a bunch
 of functions and variables defined as seperate module
-then the first approach would be more suitable.
+then using trait objects would be more suitable.
 As an example, the first approach is used in
 [`actix`](https://actix.rs/) when it registers a handler function
 for routes.
