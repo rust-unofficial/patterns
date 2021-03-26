@@ -30,7 +30,7 @@ which knows how to undo the command, e.g.,
 When a user invokes a database migration
 operation then each command is executed in the defined order,
 and when the user invokes the rollback operation
-then each undo operation is invoked in reverse order.
+then the whole set of commands is invoked in reverse order.
 
 ## Approach: Using trait objects
 
