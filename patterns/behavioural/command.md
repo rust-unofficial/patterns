@@ -229,3 +229,5 @@ for routes.
 ## See also
 
 - [Command pattern](https://en.wikipedia.org/wiki/Command_pattern)
+
+- [Another example for the `command` pattern](https://web.archive.org/web/20210223131236/https://chercher.tech/rust/command-design-pattern-rust)
