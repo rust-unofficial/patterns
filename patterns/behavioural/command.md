@@ -102,7 +102,7 @@ fn main() {
 }
 ```
 
-## Second approach. Using function pointers
+## Approach: Using function pointers
 
 We could follow another solution by
 creating each individual command as
