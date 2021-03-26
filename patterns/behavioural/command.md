@@ -222,8 +222,8 @@ does not exploit dynamic dispatch.
 But if our command is a whole struct with a bunch
 of functions and variables defined as seperate module
 then using trait objects would be more suitable.
-As an example, the first approach is used in
-[`actix`](https://actix.rs/) when it registers a handler function
+A case of application can be found in [`actix`](https://actix.rs/),
+which uses trait objects when it registers a handler function
 for routes.
 
 ## See also
