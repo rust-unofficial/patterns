@@ -162,7 +162,7 @@ fn main() {
 ## Approach: Using `Fn` trait objects
 
 Finally, instead of defining a common command
-trait we simply store each command implementing
+trait we could store each command implementing
 the `Fn` trait separately in vectors.
 
 ```rust
