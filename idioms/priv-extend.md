@@ -73,4 +73,3 @@ Finally, #[non_exhaustive] can be applied to enum variants. A `#[non_exhaustive]
 `#[non_exhaustive]` can make your code much less ergonomic to use, especially when forced to handle unknown enum variants. It should only be used when these sorts of evolutions are required **without** incrementing the major version.
 
 When `#[non_exhaustive]` is applied to `enum`s, it forces clients to handle a wildcard variant. If there is no sensible action to take in this case, this may lead to brittle code. If a client decides to `panic!()` in this scenario, it may have been better to expose this error at compile time.
-
