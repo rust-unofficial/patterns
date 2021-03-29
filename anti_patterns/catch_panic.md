@@ -81,3 +81,4 @@ further on this.
 - [Rust 1.9 announcement, which contains a description of this anti-pattern](http://blog.rust-lang.org/2016/05/26/Rust-1.9.html)
 - [Result documentation](http://doc.rust-lang.org/std/result/enum.Result.html)
 - [panic::catch_unwind documentation](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)
+- [Example for exception safety](https://doc.rust-lang.org/nomicon/exception-safety.html#vecpush_all)
