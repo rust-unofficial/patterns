@@ -21,7 +21,7 @@ with your library, but is not a general purpose tool.
 
 `#[non_exhaustive]` forces clients to handle the "Something else" case; there is
 rarely a sensible action to take in this scenario. This leads to awkward code and
-code paths that only executed in extremely rare circumstances.
+code paths that are only executed in extremely rare circumstances.
 
 ## Example
 
