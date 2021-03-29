@@ -22,6 +22,7 @@
 
 - [Design Patterns](./patterns/index.md)
   - [Behavioural](./patterns/behavioural/intro.md)
+    - [Command](./patterns/behavioural/command.md)
     - [Interpreter](./patterns/behavioural/interpreter.md)
     - [Newtype](./patterns/behavioural/newtype.md)
     - [RAII Guards](./patterns/behavioural/RAII.md)
