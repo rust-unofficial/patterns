@@ -2,8 +2,8 @@
 
 ## Description
 
-Rust does not have constructors as a language construct. Instead, the convention
-is to use a static `new` method to create an object.
+Rust does not have constructors as a language construct. Instead, the
+convention is to use a static `new` method to create an object.
 
 ## Example
 
@@ -32,5 +32,5 @@ impl<T> Vec<T> {
 
 ## See also
 
-The [builder pattern](../patterns/builder.md) for constructing objects where there are multiple
-configurations.
+The [builder pattern](../patterns/builder.md) for constructing objects where
+there are multiple configurations.

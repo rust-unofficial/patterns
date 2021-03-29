@@ -7,7 +7,8 @@ not be enough?
 For example, if we want to create a custom `Display` implementation for `String`
 due to security considerations (e.g. passwords).
 
-For such cases we could use the `Newtype` pattern to provide __type safety__ and __encapsulation__.
+For such cases we could use the `Newtype` pattern to provide __type safety__
+and __encapsulation__.
 
 ## Description
 
@@ -88,18 +89,23 @@ most common uses, but they can be used for other reasons:
 
 - restricting functionality (reduce the functions exposed or traits implemented),
 - making a type with copy semantics have move semantics,
-- abstraction by providing a more concrete type and thus hiding internal types, e.g.,
+- abstraction by providing a more concrete type and thus hiding internal types,
+  e.g.,
 
 ```rust,ignore
 pub struct Foo(Bar<T1, T2>);
 ```
 
-Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal types. Users of our module shouldn't know that we implement `Foo` by using a `Bar`, but what we're really hiding here is the types `T1` and `T2`, and how they are used with `Bar`.
+Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal
+types. Users of our module shouldn't know that we implement `Foo` by using a `Bar`,
+but what we're really hiding here is the types `T1` and `T2`, and how they are used
+with `Bar`.
 
 ## See also
 
 - [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
 - [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
 - [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
-- [derive_more](https://crates.io/crates/derive_more), a crate for deriving many builtin traits on newtypes.
+- [derive_more](https://crates.io/crates/derive_more), a crate for deriving many
+  builtin traits on newtypes.
 - [The Newtype Pattern In Rust](https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)

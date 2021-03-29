@@ -25,7 +25,7 @@ public static void main(String[] args) {
 
 We can use the deref polymorphism anti-pattern to do so:
 
-```rust,ignore
+```rust
 use std::ops::Deref;
 
 struct Foo {}
@@ -34,11 +34,10 @@ impl Foo {
     fn m(&self) {
         //..
     }
-
 }
 
 struct Bar {
-    f: Foo
+    f: Foo,
 }
 
 impl Deref for Bar {
@@ -49,7 +48,7 @@ impl Deref for Bar {
 }
 
 fn main() {
-    let b = Bar { Foo {} };
+    let b = Bar { f: Foo {} };
     b.m();
 }
 ```
@@ -123,6 +122,7 @@ conversion between arbitrary types.
 
 ## See also
 
-[Collections are smart pointers idiom](../idioms/deref.md).
-
-[Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
+- [Collections are smart pointers idiom](../idioms/deref.md).
+- Delegation crates for less boilerplate like [delegate](https://crates.io/crates/delegate)
+  or [ambassador](https://crates.io/crates/ambassador)
+- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
