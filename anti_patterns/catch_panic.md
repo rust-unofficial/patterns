@@ -38,10 +38,11 @@ this should not happen.
 
 ## Advantages
 
-There are scenarios where using `panic::catch_unwind` is the correct choice,
-e.g. a web server implementation wants to save an unwinding thread in order to
-send a valid response if the route for that request (as in: logic outside of the
-web server implementor's control) is producing a panic.
+When code is split between multiple threads, or wants to create an `isolation boundary`,
+`panic::catch_unwind` is the correct choice. For example, a web server implementation
+wants to save an unwinding thread in order to send a valid response if the route
+for that request (as in: logic outside of the web server implementor's control)
+is producing a panic.
 
 ## Disadvantages
 
