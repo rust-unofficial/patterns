@@ -48,7 +48,16 @@ In general, clones should be deliberate, with full understanding of the
 consequences. If a clone is used to make a borrow checker error disappear,
 that's a good indication this anti-pattern may be in use.
 
-If an unnecessary clone is suspected, The Rust Book's chapter on Ownership
+Even though `.clone()` is an indication of a bad pattern, sometimes
+**it is fine to write inefficient code**, in cases such as when:
+
+- the developer is still new to ownership
+- the code doesn't have great speed or memory constraints
+  (like hackathon projects or prototypes)
+- satisfying the borrow checker is really complicated and you prefer to
+  optimize readability over performance
+
+If an unnecessary clone is suspected, The [Rust Book's chapter on Ownership](https://doc.rust-lang.org/book/ownership.html)
 should be understood fully before assessing whether the clone is required or not.
 
 Also be sure to always run `cargo clippy` in your project, which will detect some
@@ -58,5 +67,5 @@ cases in which `.clone()` is not necessary, like [1](https://rust-lang.github.io
 
 ## See also
 
-[The Rust Book: Ownership, which describes how the borrow checker behaves](https://doc.rust-lang.org/book/ownership.html)
-[`Rc<T>` documentation, which handles .clone() intelligently](http://doc.rust-lang.org/std/rc/)
+- [`Rc<T>` documentation, which handles .clone() intelligently](http://doc.rust-lang.org/std/rc/)
+- [`Arc<T>` documentation, a thread-safe reference-counting pointer](https://doc.rust-lang.org/std/sync/struct.Arc.html/)
