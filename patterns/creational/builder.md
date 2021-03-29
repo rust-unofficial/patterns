@@ -114,4 +114,3 @@ as well as the `FooBuilder::new().a().b().build()` style.
 - [Constructor pattern](../../idioms/ctor.md) for when construction is simpler.
 - [Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
 - [Construction of complex values](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)
-- [Motivation to add `builder` functions struct to the struct](https://matklad.github.io/2020/08/12/who-builds-the-builder.html)
