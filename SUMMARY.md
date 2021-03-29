@@ -19,6 +19,7 @@
   - [Privacy For Extensibility](./idioms/priv-extend.md)
   - [Easy doc initialization](./idioms/rustdoc-init.md)
   - [Temporary mutability](./idioms/temporary-mutability.md)
+  - [Fallible closure](./idioms/fallible-closure.md)
 
 - [Design Patterns](./patterns/index.md)
   - [Behavioural](./patterns/behavioural/intro.md)
