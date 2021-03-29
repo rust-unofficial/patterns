@@ -29,4 +29,5 @@ solved using the same fundamental methods:
   They are social norms of the community.
   You can break them, but if you do you should have a good reason for it.
 
-TODO: Mention why Rust is a bit special - functional elements, type system, borrow checker
+TODO: Mention why Rust is a bit special - functional elements, type system,
+borrow checker

@@ -6,13 +6,14 @@ The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 is a technique that enables separation of concerns.
 It also allows to decouple software modules through [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
 
-The basic idea behind the Strategy pattern is that, given an algorithm solving a particular problem,
-we define only the skeleton of the algorithm at an abstract level and
-we separate the specific algorithm’s implementation into different parts.
+The basic idea behind the Strategy pattern is that, given an algorithm solving
+a particular problem, we define only the skeleton of the algorithm at an abstract
+level and we separate the specific algorithm’s implementation into different parts.
 
-In this way, a client using the algorithm may choose a specific implementation, while the general algorithm workflow remains the same.
-In other words, the abstract specification of the class does not depend on the specific implementation of the derived class,
-but specific implementation must adhere to the abstract specification.
+In this way, a client using the algorithm may choose a specific implementation,
+while the general algorithm workflow remains the same. In other words, the abstract
+specification of the class does not depend on the specific implementation of the
+derived class, but specific implementation must adhere to the abstract specification.
 This is why we call it "Dependency Inversion".
 
 ## Motivation
@@ -20,27 +21,29 @@ This is why we call it "Dependency Inversion".
 Imagine we are working on a project that generates reports every month.
 We need the reports to be generated in different formats (strategies), e.g.,
 in `JSON` or `Plain Text` formats.
-But things vary over time and we don't know what kind of requirement we may get in the future.
-For example, we may need to generate our report in a completly new format,
-or just modify one of the existing formats.
+But things vary over time and we don't know what kind of requirement we may get
+in the future. For example, we may need to generate our report in a completly new
+format, or just modify one of the existing formats.
 
 ## Example
 
-In this example our invariants (or abstractions) are `Context`, `Formatter`, and `Report`,
-while `Text` and `Json` are our strategy structs.
-These strategies have to implement the `Formatter` trait.
+In this example our invariants (or abstractions) are `Context`, `Formatter`,
+and `Report`, while `Text` and `Json` are our strategy structs. These strategies
+have to implement the `Formatter` trait.
 
 ```rust
 use std::collections::HashMap;
+
 type Data = HashMap<String, u32>;
 
 trait Formatter {
-    fn format(&self, data: &Data, s: &mut String);
+    fn format(&self, data: &Data, buf: &mut String);
 }
 
 struct Report;
 
 impl Report {
+    // Write should be used but we kept it as String to ignore error handling
     fn generate<T: Formatter>(g: T, s: &mut String) {
         // backend operations...
         let mut data = HashMap::new();
@@ -53,29 +56,25 @@ impl Report {
 
 struct Text;
 impl Formatter for Text {
-    fn format(&self, data: &Data, s: &mut String) {
-        *s = data
-            .iter()
-            .map(|(key, val)| format!("{} {}\n", key, val))
-            .collect();
+    fn format(&self, data: &Data, buf: &mut String) {
+        for (k, v) in data {
+            let entry = format!("{} {}\n", k, v);
+            buf.push_str(&entry);
+        }
     }
 }
 
 struct Json;
 impl Formatter for Json {
-    fn format(&self, data: &Data, s: &mut String) {
-        *s = String::from("[");
-        let mut iter = data.into_iter();
-        if let Some((key, val)) = iter.next() {
-            let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
-            s.push_str(&entry);
-            while let Some((key, val)) = iter.next() {
-                s.push(',');
-                let entry = format!(r#"{{"{}":"{}"}}"#, key, val);
-                s.push_str(&entry);
-            }
+    fn format(&self, data: &Data, buf: &mut String) {
+        buf.push('[');
+        for (k, v) in data.into_iter() {
+            let entry = format!(r#"{{"{}":"{}"}}"#, k, v);
+            buf.push_str(&entry);
+            buf.push(',');
         }
-        s.push(']');
+        buf.pop(); // remove extra , at the end
+        buf.push(']');
     }
 }
 
@@ -85,6 +84,7 @@ fn main() {
     assert!(s.contains("one 1"));
     assert!(s.contains("two 2"));
 
+    s.clear(); // reuse the same buffer
     Report::generate(Json, &mut s);
     assert!(s.contains(r#"{"one":"1"}"#));
     assert!(s.contains(r#"{"two":"2"}"#));
@@ -93,18 +93,17 @@ fn main() {
 
 ## Advantages
 
-The main advantage is separation of concerns. For example, in this case `Report` does not know anything about specific
-implementations of `Json` and `Text`, whereas the output implementations does not care about how data is
-preprocessed, stored, and fetched.
-The only thing they have to know is context and a specific trait and method to implement,
-i.e,`Formatter` and `run`.
+The main advantage is separation of concerns. For example, in this case `Report`
+does not know anything about specific implementations of `Json` and `Text`,
+whereas the output implementations does not care about how data is preprocessed,
+stored, and fetched. The only thing they have to know is context and a specific
+trait and method to implement, i.e,`Formatter` and `run`.
 
 ## Disadvantages
 
 For each strategy there must be implemented at least one module, so number of modules
-increases with number of strategies.
-If there are many strategies to choose from then users have to know how strategies differ
-from one another.
+increases with number of strategies. If there are many strategies to choose from
+then users have to know how strategies differ from one another.
 
 ## Discussion
 
@@ -116,10 +115,12 @@ Ways of providing different strategies includes:
 - Use compiler feature flags, E.g. `json` feature, `text` feature
 - Separated as crates, E.g. `json` crate, `text` crate
 
-Serde crate is a good example of the `Strategy` pattern in action. Serde allows [full customization](https://serde.rs/custom-serialization.html)
-of the serialization behavior by manually implementing `Serialize` and `Deserialize` traits for our type.
-For example, we could easily swap `serde_json` with `serde_cbor` since they expose similar methods.
-Having this makes the helper crate `serde_transcode` much more useful and ergonomic.
+Serde crate is a good example of the `Strategy` pattern in action. Serde allows
+[full customization](https://serde.rs/custom-serialization.html) of the serialization
+behavior by manually implementing `Serialize` and `Deserialize` traits for our
+type. For example, we could easily swap `serde_json` with `serde_cbor` since they
+expose similar methods. Having this makes the helper crate `serde_transcode` much
+more useful and ergonomic.
 
 However, we don't need to use traits in order to design this pattern in Rust.
 

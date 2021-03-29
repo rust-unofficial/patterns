@@ -13,6 +13,14 @@ pub struct Foo {
     bar: String,
 }
 
+impl Foo {
+    // This method will help users to discover the builder
+    pub fn builder() -> FooBuilder {
+        FooBuilder::default()
+    }
+}
+
+#[derive(Default)]
 pub struct FooBuilder {
     // Probably lots of optional fields.
     bar: String,
@@ -33,9 +41,11 @@ impl FooBuilder {
     }
 
     // If we can get away with not consuming the Builder here, that is an
-    // advantage. It means we can use the FooBuilder as a template for constructing many Foos.
+    // advantage. It means we can use the FooBuilder as a template for constructing
+    // many Foos.
     pub fn build(self) -> Foo {
-        // Create a Foo from the FooBuilder, applying all settings in FooBuilder to Foo.
+        // Create a Foo from the FooBuilder, applying all settings in FooBuilder
+        // to Foo.
         Foo { bar: self.bar }
     }
 }
@@ -99,7 +109,8 @@ as well as the `FooBuilder::new().a().b().build()` style.
 ## See also
 
 - [Description in the style guide](https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)
-- [derive_builder](https://crates.io/crates/derive_builder), a crate for automatically implementing this pattern while avoiding the boilerplate.
-- [Constructor pattern](../idioms/ctor.md) for when construction is simpler.
+- [derive_builder](https://crates.io/crates/derive_builder), a crate for automatically
+  implementing this pattern while avoiding the boilerplate.
+- [Constructor pattern](../../idioms/ctor.md) for when construction is simpler.
 - [Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
 - [Construction of complex values](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)

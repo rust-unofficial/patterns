@@ -8,8 +8,8 @@ argument.
 
 ## Motivation
 
-Sometimes there is a struct with multiple or complicated parameters and several methods.
-Each of these methods should have examples.
+Sometimes there is a struct with multiple or complicated parameters and several
+methods. Each of these methods should have examples.
 
 For example:
 
@@ -70,8 +70,9 @@ impl Connection {
 }
 ```
 
-**Note** in the above example the line `assert!(response.is_ok());` will not actually run while testing
-because it is inside of a function which is never invoked.
+**Note** in the above example the line `assert!(response.is_ok());` will not
+actually run while testing because it is inside of a function which is never
+invoked.
 
 ## Advantages
 
@@ -79,8 +80,9 @@ This is much more concise and avoids repetitive code in examples.
 
 ## Disadvantages
 
-As example is in a function, the code will not be tested. (Though it still will checked to make sure it compiles when running a `cargo test`)
-So this pattern is most useful when need `no_run`. With this, you do not need to add `no_run`.
+As example is in a function, the code will not be tested. Though it will still be
+checked to make sure it compiles when running a `cargo test`. So this pattern is
+most useful when you need `no_run`. With this, you do not need to add `no_run`.
 
 ## Discussion
 
