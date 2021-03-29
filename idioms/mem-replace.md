@@ -116,7 +116,5 @@ like Indiana Jones, replacing the artifact with a bag of sand.
 
 ## See also
 
-This gets rid of the [Clone to satisfy the borrow checker] antipattern in a
-specific case.
-
-[Clone to satisfy the borrow checker](TODO: Hinges on PR #23)
+This gets rid of the [Clone to satisfy the borrow checker](../anti_patterns/borrow_clone.md)
+antipattern in a specific case.
