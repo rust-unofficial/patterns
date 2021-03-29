@@ -32,5 +32,4 @@ infallible context.
 
 This is hiding failure states from the consumer of the API.
 
-
 [`?`]: https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator
