@@ -1967,6 +1967,14 @@ pub struct Foo {
     bar: String,
 }
 
+impl Foo {
+    // This method will help users to discover the builder
+    pub fn builder() -&gt; FooBuilder {
+        FooBuilder::default()
+    }
+}
+
+#[derive(Default)]
 pub struct FooBuilder {
     // Probably lots of optional fields.
     bar: String,
@@ -2042,7 +2050,7 @@ let f = fb.build();
 <li><a href="https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html">Description in the style guide</a></li>
 <li><a href="https://crates.io/crates/derive_builder">derive_builder</a>, a crate for automatically
 implementing this pattern while avoiding the boilerplate.</li>
-<li><a href="patterns/creational/../idioms/ctor.html">Constructor pattern</a> for when construction is simpler.</li>
+<li><a href="patterns/creational/../../idioms/ctor.html">Constructor pattern</a> for when construction is simpler.</li>
 <li><a href="https://en.wikipedia.org/wiki/Builder_pattern">Builder pattern (wikipedia)</a></li>
 <li><a href="https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder">Construction of complex values</a></li>
 </ul>
