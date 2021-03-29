@@ -2,41 +2,31 @@
 
 ## Description
 
-The basic idea of the Command pattern is to separate
-out actions into its own objects and pass them
-as parameters.
+The basic idea of the Command pattern is to separate out actions into its own
+objects and pass them as parameters.
 
 ## Motivation
 
-Suppose we have a sequence of actions or transactions
-encapsulated as objects.
-We want these actions or commands to be
-executed or invoked in some order later at different time.
-These commands may also be triggered as a result
-of some event. For example, when a user pushes a button,
-or on arrival of a data packet.
-In addition, these commands might be be undoable.
-This may come in useful for operations of an editor.
-We might want to store logs of executed commands
-so that we could reapply the changes later if the system crashes.
+Suppose we have a sequence of actions or transactions encapsulated as objects.
+We want these actions or commands to be executed or invoked in some order later
+at different time. These commands may also be triggered as a result of some event.
+For example, when a user pushes a button, or on arrival of a data packet.
+In addition, these commands might be be undoable. This may come in useful for
+operations of an editor. We might want to store logs of executed commands so that
+we could reapply the changes later if the system crashes.
 
 ## Example
 
-Define two database operations
-`create table` and `add field`.
-Each of these operations is a command
-which knows how to undo the command, e.g.,
-`drop table` and `remove field`.
-When a user invokes a database migration
-operation then each command is executed in the defined order,
-and when the user invokes the rollback operation
-then the whole set of commands is invoked in reverse order.
+Define two database operations `create table` and `add field`. Each of these
+operations is a command which knows how to undo the command, e.g., `drop table`
+and `remove field`. When a user invokes a database migration operation then each
+command is executed in the defined order, and when the user invokes the rollback
+operation then the whole set of commands is invoked in reverse order.
 
 ## Approach: Using trait objects
 
-We define a common trait which encapsulates our command
-with two operations `execute` and `rollback`. All command
-`structs` must implement this trait.
+We define a common trait which encapsulates our command with two operations
+`execute` and `rollback`. All command `structs` must implement this trait.
 
 ```rust
 pub trait Migration {
@@ -104,13 +94,11 @@ fn main() {
 
 ## Approach: Using function pointers
 
-We could follow another solution by
-creating each individual command as
-a different function and store function pointers
-to invoke these functions later at a different time.
-Since function pointers implement all three traits
-`Fn`, `FnMut`, and `FnOnce` we could as well pass and store
-closures instead of function pointers.
+We could follow another solution by creating each individual command as
+a different function and store function pointers to invoke these functions later
+at a different time. Since function pointers implement all three traits `Fn`,
+`FnMut`, and `FnOnce` we could as well pass and store closures instead of
+function pointers.
 
 ```rust
 type FnPtr<'a> = fn() -> &'a str;
@@ -161,9 +149,8 @@ fn main() {
 
 ## Approach: Using `Fn` trait objects
 
-Finally, instead of defining a common command
-trait we could store each command implementing
-the `Fn` trait separately in vectors.
+Finally, instead of defining a common command trait we could store
+each command implementing the `Fn` trait separately in vectors.
 
 ```rust
 type Migration<'a> = Box<dyn Fn() -> &'a str>;
@@ -215,16 +202,12 @@ fn main() {
 
 ## Discussion
 
-If our commands are small and may be defined
-as functions or passed as a closure then using
-function pointers might be preferable since it
-does not exploit dynamic dispatch.
-But if our command is a whole struct with a bunch
-of functions and variables defined as seperate module
-then using trait objects would be more suitable.
-A case of application can be found in [`actix`](https://actix.rs/),
-which uses trait objects when it registers a handler function
-for routes.
+If our commands are small and may be defined as functions or passed as a closure
+then using function pointers might be preferable since it does not exploit
+dynamic dispatch. But if our command is a whole struct with a bunch of functions
+and variables defined as seperate module then using trait objects would be
+more suitable. A case of application can be found in [`actix`](https://actix.rs/),
+which uses trait objects when it registers a handler function for routes.
 
 ## See also
 
