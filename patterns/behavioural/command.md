@@ -116,7 +116,7 @@ impl<'a> Schema<'a> {
         Self { commands: vec![] }
     }
     fn add_migration(&mut self, execute: FnPtr<'a>, rollback: FnPtr<'a>) {
-        self.commands.push(Box::new(Command { execute, rollback }));
+        self.commands.push(Command { execute, rollback });
     }
     fn execute(&self) -> Vec<&str> {
         self.commands.iter().map(|cmd| (cmd.execute)()).collect()
