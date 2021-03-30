@@ -11,7 +11,7 @@ Suppose we have a sequence of actions or transactions encapsulated as objects.
 We want these actions or commands to be executed or invoked in some order later
 at different time. These commands may also be triggered as a result of some event.
 For example, when a user pushes a button, or on arrival of a data packet.
-In addition, these commands might be be undoable. This may come in useful for
+In addition, these commands might be undoable. This may come in useful for
 operations of an editor. We might want to store logs of executed commands so that
 we could reapply the changes later if the system crashes.
 
