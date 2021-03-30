@@ -101,27 +101,27 @@ at a different time. Since function pointers implement all three traits `Fn`,
 function pointers.
 
 ```rust
-type FnPtr<'a> = fn() -> &'a str;
-struct Command<'a> {
-    execute: FnPtr<'a>,
-    rollback: FnPtr<'a>,
+type FnPtr = fn() -> String;
+struct Command {
+    execute: FnPtr,
+    rollback: FnPtr,
 }
 
-struct Schema<'a> {
-    commands: Vec<Box<Command<'a>>>,
+struct Schema {
+    commands: Vec<Command>,
 }
 
-impl<'a> Schema<'a> {
+impl Schema {
     fn new() -> Self {
         Self { commands: vec![] }
     }
-    fn add_migration(&mut self, execute: FnPtr<'a>, rollback: FnPtr<'a>) {
-        self.commands.push(Box::new(Command { execute, rollback }));
+    fn add_migration(&mut self, execute: FnPtr, rollback: FnPtr) {
+        self.commands.push(Command { execute, rollback });
     }
-    fn execute(&self) -> Vec<&str> {
+    fn execute(&self) -> Vec<String> {
         self.commands.iter().map(|cmd| (cmd.execute)()).collect()
     }
-    fn rollback(&self) -> Vec<&str> {
+    fn rollback(&self) -> Vec<String> {
         self.commands
             .iter()
             .rev()
@@ -130,17 +130,17 @@ impl<'a> Schema<'a> {
     }
 }
 
-fn add_field() -> &'static str {
-    "add field"
+fn add_field() -> String {
+    "add field".to_string()
 }
 
-fn remove_field() -> &'static str {
-    "remove field"
+fn remove_field() -> String {
+    "remove field".to_string()
 }
 
 fn main() {
     let mut schema = Schema::new();
-    schema.add_migration(|| "create table", || "drop table");
+    schema.add_migration(|| "create table".to_string(), || "drop table".to_string());
     schema.add_migration(add_field, remove_field);
     assert_eq!(vec!["create table", "add field"], schema.execute());
     assert_eq!(vec!["remove field", "drop table"], schema.rollback());
