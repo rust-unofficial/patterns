@@ -73,7 +73,7 @@ impl Schema {
     fn rollback(&self) -> Vec<&str> {
         self.commands
             .iter()
-            .rev()
+            .rev() // reverse iterator's direction
             .map(|cmd| cmd.rollback())
             .collect()
     }
