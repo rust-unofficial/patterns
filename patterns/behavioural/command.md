@@ -108,7 +108,7 @@ struct Command<'a> {
 }
 
 struct Schema<'a> {
-    commands: Vec<Box<Command<'a>>>,
+    commands: Vec<Command<'a>>,
 }
 
 impl<'a> Schema<'a> {
