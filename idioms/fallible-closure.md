@@ -21,7 +21,7 @@ fn file_stem(path: &Path) -> &str {
 ## Motivation
 
 You may sometimes want to use the [`?`] operator inside an infallible function,
-in those case a closure inside your function could be the simple solution.
+in those cases a closure inside your function could be the simple solution.
 
 ## Advantages
 
