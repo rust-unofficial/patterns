@@ -25,7 +25,7 @@ code paths that are only executed in extremely rare circumstances.
 
 ## Example
 
-```rust,ignore
+```rust
 mod a {
     // Public struct.
     #[non_exhaustive]
