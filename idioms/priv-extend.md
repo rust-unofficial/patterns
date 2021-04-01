@@ -63,6 +63,8 @@ fn main(s: a::S) {
 }
 ```
 
+## Alternative approach for structs
+
 `#[non_exhaustive]` only works across crate boundaries. Within a crate, the
 private field method may be used.
 
