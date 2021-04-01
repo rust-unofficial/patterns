@@ -86,8 +86,6 @@ even if all the fields are public. This may be helpful, but it's worth consideri
 if you _want_ an additional field to be found by clients as a compiler error rather
 than something that may be silently undiscovered.
 
-`#[non_exhaustive]` when applied to `enum`s forces clients to handle a wildcard variant.
-
 Finally, #[non_exhaustive] can be applied to enum variants. A `#[non_exhaustive]`
 variant behaves in the same way as a `#[non_exhaustive]` struct.
 
