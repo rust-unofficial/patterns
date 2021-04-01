@@ -64,7 +64,7 @@ fn main(s: a::S) {
 ```
 
 `#[non_exhaustive]` only works across crate boundaries. Within a crate, the
-private field method may be used:
+private field method may be used.
 
 For `struct`s, an alternative approach exists: By adding a private field to a
 struct, the struct cannot be instantiated or matched against.
