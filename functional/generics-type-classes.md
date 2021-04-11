@@ -204,21 +204,23 @@ Second, it makes the `impl` blocks easier to read, because they are broken down
 by state. Methods common to all states are typed once in one block, and methods
 unique to one state are in a separate block.
 
-Both of these mean there is less code and it is better organized.
+Both of these mean there are fewer lines of code and it is better organized.
 
 ## Disadvantages
 
-This increases code size. Hopefully the compiler will be more intelligent about
-the way monomorphization is implemented in the future.
+This current increases the size of the binary, due to the way monomorphization
+is implemented in the compiler. Hopefully the implementation will be able to
+improve in the future.
 
 ## Alternatives
 
-If a type seems to need a "split API" due to construction or partial
+* If a type seems to need a "split API" due to construction or partial
 initialization, consider the
 [Builder Pattern](../patterns/creational/builder.md) instead.
 
-If the API between types does not change -- only the behavior does -- then the
-[Strategy Pattern](../patterns/behavioural/strategy.md) is better used instead.
+* If the API between types does not change -- only the behavior does -- then
+the [Strategy Pattern](../patterns/behavioural/strategy.md) is better used
+instead.
 
 ## See also
 
