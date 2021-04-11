@@ -123,26 +123,32 @@ mod bootp {
 mod proto_trait {
     use std::path::{Path, PathBuf};
     use super::{bootp, nfs};
+
     pub(crate) trait ProtoKind {
         type AuthInfo;
         fn auth_info(&self) -> Self::AuthInfo;
     }
+
     pub struct Nfs {
         auth: nfs::AuthInfo,
         mount_point: PathBuf,
     }
+
     impl Nfs {
         pub(crate) fn mount_point(&self) -> &Path {
             &self.mount_point
         }
     }
+
     impl ProtoKind for Nfs {
         type AuthInfo = nfs::AuthInfo;
         fn auth_info(&self) -> Self::AuthInfo {
             self.auth.clone()
         }
     }
+
     pub struct Bootp(); // no additional metadata
+
     impl ProtoKind for Bootp {
         type AuthInfo = bootp::AuthInfo;
         fn auth_info(&self) -> Self::AuthInfo {
