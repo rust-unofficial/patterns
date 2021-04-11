@@ -249,7 +249,6 @@ It is also used by several popular crates to allow API flexibility:
 [^1]: See: [impl From\<CString\> for Vec\<u8\>](
 https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801)
 
-
 [^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
 https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
 
