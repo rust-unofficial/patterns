@@ -127,16 +127,19 @@ mod proto_trait {
         type AuthInfo;
         fn auth_info(&self) -> Self::AuthInfo;
     }
-    pub struct Nfs(nfs::AuthInfo, PathBuf); // the mount point metadata
+    pub struct Nfs {
+        auth: nfs::AuthInfo,
+        mount_point: PathBuf,
+    }
     impl Nfs {
         pub(crate) fn mount_point(&self) -> &Path {
-            &self.1
+            &self.mount_point
         }
     }
     impl ProtoKind for Nfs {
         type AuthInfo = nfs::AuthInfo;
         fn auth_info(&self) -> Self::AuthInfo {
-            self.0.clone()
+            self.auth.clone()
         }
     }
     pub struct Bootp(); // no additional metadata
