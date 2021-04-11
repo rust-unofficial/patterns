@@ -54,8 +54,8 @@ something like this:
 ```rust,ignore
 
 enum AuthInfo {
-	Nfs(crate::nfs::AuthInfo),
-	Bootp(crate::bootp::AuthInfo),
+    Nfs(crate::nfs::AuthInfo),
+    Bootp(crate::bootp::AuthInfo),
 }
 
 struct FileDownloadRequest {
