@@ -10,15 +10,15 @@ of Rust's compile time guarantees.
 
 A key part of this idea is the way generic types work. In C++ and Java, for
 example, generic types are a meta-programming construct for the compiler.
-`Vec<int>` and `Vec<char>` in C++ are just two different copies of the same
-boilerplate code for a `Vec` type (known as a `template`)  with two
+`vector<int>` and `vector<char>` in C++ are just two different copies of the
+same boilerplate code for a `Vec` type (known as a `template`)  with two
 different types filled in.
 
-In Rust, a generic type parameter creates what is known in functional
-languages as a "type class constraint", and each different parameter filled in
-by an end user *actually changes the type*. In other words, `Vec<usize>` and
-`Vec<char>` *are two different types*, which are recognized as distinct by all
-parts of the type system.
+In Rust, a generic type parameter creates what is known in functional languages
+as a "type class constraint", and each different parameter filled in by an end
+user *actually changes the type*. In other words, `Vec<isize>` and `Vec<char>`
+*are two different types*, which are recognized as distinct by all parts of the
+type system.
 
 This is called **monomorphization**, where different types are created from
 **polymorphic** code.  This special behavior requires `impl` blocks to specify
@@ -34,8 +34,6 @@ where new members can be added to objects willy-nilly by any constructor.
 Unlike those languages, however, all of Rust's additional methods can be type
 checked when they are used, because their generics are statically defined. That
 makes them more usable while remaining safe.
-
-An example follows.
 
 ## Example
 
@@ -54,9 +52,15 @@ and a file name to retrieve.  A straightforward implementation would look
 something like this:
 
 ```rust,ignore
+
+enum AuthInfo {
+	Nfs(crate::nfs::AuthInfo),
+	Bootp(crate::bootp::AuthInfo),
+}
+
 struct FileDownloadRequest {
     file_name: PathBuf,
-    authentication: Either<crate::nfs::AuthInfo, crate::bootp::AuthInfo>,
+    authentication: AuthInfo,
 }
 ```
 
@@ -74,7 +78,7 @@ Here is how getting an NFS mount point would look:
 ```rust,ignore
 struct FileDownloadRequest {
     file_name: PathBuf,
-    authentication: Either<crate::nfs::AuthInfo, crate::bootp::AuthInfo>,
+    authentication: AuthInfo,
     mount_point: Option<PathBuf>,
 }
 
@@ -89,7 +93,7 @@ impl FileDownloadRequest {
 }
 ```
 
-Every caller of `get_mount point` must check for `None` and write code to handle
+Every caller of `mount point()` must check for `None` and write code to handle
 it. This is true even if they know only NFS requests are ever used in a given
 code path!
 
