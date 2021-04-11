@@ -93,7 +93,7 @@ impl FileDownloadRequest {
 }
 ```
 
-Every caller of `mount point()` must check for `None` and write code to handle
+Every caller of `mount_point()` must check for `None` and write code to handle
 it. This is true even if they know only NFS requests are ever used in a given
 code path!
 
