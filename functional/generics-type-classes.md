@@ -204,7 +204,7 @@ Second, it makes the `impl` blocks easier to read, because they are broken down
 by state. Methods common to all states are typed once in one block, and methods
 unique to one state are in a separate block.
 
-Both of these mean there are fewer lines of code and it is better organized.
+Both of these mean there are fewer lines of code, and they are better organized.
 
 ## Disadvantages
 
