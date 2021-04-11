@@ -176,6 +176,10 @@ impl FileDownloadRequest<Nfs> {
         self.protocol.mount_point()
     }
 }
+
+fn main() {
+    // your code here
+}
 ```
 
 With this approach, if the user were to make a mistake and use the wrong
