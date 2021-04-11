@@ -246,25 +246,25 @@ It is also used by several popular crates to allow API flexibility:
   internal state or invariant -- is implemented in Rust using the same basic
   concept, and a slightly different techinque. [^6]
 
-[^1] See: [impl From\<CString\> for Vec\<u8\>](
+[^1]: See: [impl From\<CString\> for Vec\<u8\>](
 https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801)
 
 
-[^2] See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
+[^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
 https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
 
-[^3] See: [impl\<'_\> ToString for Cow\<'_, str>](
+[^3]: See: [impl\<'_\> ToString for Cow\<'_, str>](
 https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
 
-[^4] Example:
+[^4]: Example:
 [https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html](
 https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html)
 
-[^5] See:
+[^5]: See:
 [https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html](
 https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html)
 
-[^6] See:
+[^6]: See:
 [The Case for the Type State Pattern](
 https://web.archive.org/web/20210325065112/https://www.novatec-gmbh.de/en/blog/the-case-for-the-typestate-pattern-the-typestate-pattern-itself/)
 and
