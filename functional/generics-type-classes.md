@@ -11,7 +11,7 @@ of Rust's compile time guarantees.
 A key part of this idea is the way generic types work. In C++ and Java, for
 example, generic types are a meta-programming construct for the compiler.
 `vector<int>` and `vector<char>` in C++ are just two different copies of the
-same boilerplate code for a `Vec` type (known as a `template`)  with two
+same boilerplate code for a `vector` type (known as a `template`)  with two
 different types filled in.
 
 In Rust, a generic type parameter creates what is known in functional languages
