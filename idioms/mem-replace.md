@@ -23,7 +23,7 @@ fn a_to_b(e: &mut MyEnum) {
         // this takes out our `name` and put in an empty String instead
         // (note that empty strings don't allocate).
         // Then, construct the new enum variant (which will
-        // be assigned to `*e`
+        // be assigned to `*e`).
         *e = MyEnum::B { name: mem::take(name) }
     }
 }
