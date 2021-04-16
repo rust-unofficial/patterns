@@ -221,7 +221,7 @@ Both of these mean there are fewer lines of code, and they are better organized.
 
 ## Disadvantages
 
-This current increases the size of the binary, due to the way monomorphization
+This currently increases the size of the binary, due to the way monomorphization
 is implemented in the compiler. Hopefully the implementation will be able to
 improve in the future.
 
