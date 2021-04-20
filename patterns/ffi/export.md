@@ -249,12 +249,12 @@ with them:
 - [Wrapper Type Consolidation](./wrappers.md) groups multiple Rust types together
   into an opaque "object"
 
-- [FFI Error Passing](../idioms/ffi/errors.md) explains error handling with integer
+- [FFI Error Passing](../../idioms/ffi/errors.md) explains error handling with integer
   codes and sentinel return values (such as `NULL` pointers)
 
-- [Accepting Foreign Strings](../idioms/ffi/accepting-strings.md) allows accepting
+- [Accepting Foreign Strings](../../idioms/ffi/accepting-strings.md) allows accepting
   strings with minimal unsafe code, and is easier to get right than
-  [Passing Strings to FFI](../idioms/ffi/passing-strings.md)
+  [Passing Strings to FFI](../../idioms/ffi/passing-strings.md)
 
 However, not every API can be done this way.
 It is up to the best judgement of the programmer as to who their audience is.
