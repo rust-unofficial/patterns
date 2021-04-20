@@ -87,4 +87,4 @@ resources in an unexpected state.
 
 ## See also
 
-[RAII](../patterns/RAII.md).
+[RAII guards](../patterns/behavioural/RAII.md).
