@@ -380,8 +380,8 @@ impl&lt;T&gt; Vec&lt;T&gt; {
 }
 </code></pre>
 <h2 id="see-also-1"><a class="header" href="#see-also-1">See also</a></h2>
-<p>The <a href="idioms/../patterns/builder.html">builder pattern</a> for constructing objects where
-there are multiple configurations.</p>
+<p>The <a href="idioms/../patterns/creational/builder.html">builder pattern</a> for constructing objects
+where there are multiple configurations.</p>
 <h1 id="the-default-trait"><a class="header" href="#the-default-trait">The <code>Default</code> Trait</a></h1>
 <h2 id="description-3"><a class="header" href="#description-3">Description</a></h2>
 <p>Many types in Rust have a <a href="idioms/ctor.html">constructor</a>. However, this is <em>specific</em> to the
@@ -559,7 +559,7 @@ that destructors are not absolutely guaranteed to run. It also means that you
 must take extra care in your destructors not to panic, since it could leave
 resources in an unexpected state.</p>
 <h2 id="see-also-4"><a class="header" href="#see-also-4">See also</a></h2>
-<p><a href="idioms/../patterns/RAII.html">RAII</a>.</p>
+<p><a href="idioms/../patterns/behavioural/RAII.html">RAII guards</a>.</p>
 <h1 id="memtake_-replace_-to-keep-owned-values-in-changed-enums"><a class="header" href="#memtake_-replace_-to-keep-owned-values-in-changed-enums"><code>mem::{take(_), replace(_)}</code> to keep owned values in changed enums</a></h1>
 <h2 id="description-6"><a class="header" href="#description-6">Description</a></h2>
 <p>Say we have a <code>&amp;mut MyEnum</code> which has (at least) two variants,
@@ -724,7 +724,8 @@ of type <code>Stdin</code>, <code>file</code> is of type <code>File</code> and <
 <h2 id="see-also-6"><a class="header" href="#see-also-6">See also</a></h2>
 <ul>
 <li><a href="idioms/dtor-finally.html">Finalisation in destructors</a> and
-<a href="idioms/../patterns/RAII.html">RAII guards</a> can benefit from tight control over lifetimes.</li>
+<a href="idioms/../patterns/behavioural/RAII.html">RAII guards</a> can benefit from tight control over
+lifetimes.</li>
 <li>For conditionally filled <code>Option&lt;&amp;T&gt;</code>s of (mutable) references, one can
 initialize an <code>Option&lt;T&gt;</code> directly and use its <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref"><code>.as_ref()</code></a> method to get an
 optional reference.</li>
