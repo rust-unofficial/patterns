@@ -32,5 +32,5 @@ impl<T> Vec<T> {
 
 ## See also
 
-The [builder pattern](../patterns/builder.md) for constructing objects where
+The [builder pattern](../patterns/creational/builder.md) for constructing objects where
 there are multiple configurations.
