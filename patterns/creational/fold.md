@@ -116,7 +116,7 @@ In other languages, fold is usually used in the sense of Rust's iterators,
 rather than this pattern. Some functional languages have powerful constructs for
 performing flexible maps over data structures.
 
-The [visitor](visitor.md) pattern is closely related to fold. They share the
-concept of walking a data structure performing an operation on each node.
-However, the visitor does not create a new data structure nor consume the old
-one.
+The [visitor](../behavioural/visitor.md) pattern is closely related to fold.
+They share the concept of walking a data structure performing an operation on
+each node. However, the visitor does not create a new data structure nor consume
+the old one.
