@@ -622,9 +622,9 @@ its parts to decide what to do next. In the second phase we may conditionally
 change the value (as in the example above).</p>
 <p>The borrow checker won't allow us to take out <code>name</code> of the enum (because
 <em>something</em> must be there. We could of course <code>.clone()</code> name and put the clone
-into our <code>MyEnum::B</code>, but that would be an instance of the [Clone to satisfy
-the borrow checker] antipattern. Anyway, we can avoid the extra allocation by
-changing <code>e</code> with only a mutable borrow.</p>
+into our <code>MyEnum::B</code>, but that would be an instance of the <a href="idioms/../anti_patterns/borrow_clone.html">Clone to satisfy
+the borrow checker</a> antipattern. Anyway, we
+can avoid the extra allocation by changing <code>e</code> with only a mutable borrow.</p>
 <p><code>mem::take</code> lets us swap out the value, replacing it with it's default value,
 and returning the previous value. For <code>String</code>, the default value is an empty
 <code>String</code>, which does not need to allocate. As a result, we get the original
@@ -1889,7 +1889,7 @@ is shorter than the lifetime of <code>self</code>.</p>
 using the guard object more ergonomic. Implementing a <code>get</code> method on the guard
 works just as well.</p>
 <h2 id="see-also-11"><a class="header" href="#see-also-11">See also</a></h2>
-<p><a href="patterns/behavioural/../idioms/dtor-finally.html">Finalisation in destructors idiom</a></p>
+<p><a href="patterns/behavioural/../../idioms/dtor-finally.html">Finalisation in destructors idiom</a></p>
 <p>RAII is a common pattern in C++: <a href="http://en.cppreference.com/w/cpp/language/raii">cppreference.com</a>,
 <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">wikipedia</a>.</p>
 <p><a href="https://doc.rust-lang.org/1.0.0/style/ownership/raii.html">Style guide entry</a>
@@ -2141,8 +2141,8 @@ which performs the same duty.</p>
 <h2 id="see-also-13"><a class="header" href="#see-also-13">See also</a></h2>
 <p>The visitor pattern is a common pattern in most OO languages.</p>
 <p><a href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia article</a></p>
-<p>The <a href="patterns/behavioural/fold.html">fold</a> pattern is similar to visitor but produces a new version of
-the visited data structure.</p>
+<p>The <a href="patterns/behavioural/../creational/fold.html">fold</a> pattern is similar to visitor but produces
+a new version of the visited data structure.</p>
 <h1 id="creational-patterns"><a class="header" href="#creational-patterns">Creational Patterns</a></h1>
 <p>From <a href="https://en.wikipedia.org/wiki/Creational_pattern">Wikipedia</a>:</p>
 <blockquote>
@@ -2348,10 +2348,10 @@ this fold pattern.</p>
 <p>In other languages, fold is usually used in the sense of Rust's iterators,
 rather than this pattern. Some functional languages have powerful constructs for
 performing flexible maps over data structures.</p>
-<p>The <a href="patterns/creational/visitor.html">visitor</a> pattern is closely related to fold. They share the
-concept of walking a data structure performing an operation on each node.
-However, the visitor does not create a new data structure nor consume the old
-one.</p>
+<p>The <a href="patterns/creational/../behavioural/visitor.html">visitor</a> pattern is closely related to fold.
+They share the concept of walking a data structure performing an operation on
+each node. However, the visitor does not create a new data structure nor consume
+the old one.</p>
 <h1 id="structural-patterns"><a class="header" href="#structural-patterns">Structural Patterns</a></h1>
 <p>From <a href="https://en.wikipedia.org/wiki/Structural_pattern">Wikipedia</a>:</p>
 <blockquote>
@@ -2738,13 +2738,13 @@ with them:</p>
 into an opaque &quot;object&quot;</p>
 </li>
 <li>
-<p><a href="patterns/ffi/../idioms/ffi/errors.html">FFI Error Passing</a> explains error handling with integer
+<p><a href="patterns/ffi/../../idioms/ffi/errors.html">FFI Error Passing</a> explains error handling with integer
 codes and sentinel return values (such as <code>NULL</code> pointers)</p>
 </li>
 <li>
-<p><a href="patterns/ffi/../idioms/ffi/accepting-strings.html">Accepting Foreign Strings</a> allows accepting
+<p><a href="patterns/ffi/../../idioms/ffi/accepting-strings.html">Accepting Foreign Strings</a> allows accepting
 strings with minimal unsafe code, and is easier to get right than
-<a href="patterns/ffi/../idioms/ffi/passing-strings.html">Passing Strings to FFI</a></p>
+<a href="patterns/ffi/../../idioms/ffi/passing-strings.html">Passing Strings to FFI</a></p>
 </li>
 </ul>
 <p>However, not every API can be done this way.
