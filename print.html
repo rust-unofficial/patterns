@@ -442,7 +442,7 @@ and borrowed views of data.</p>
 <pre><code class="language-rust ignore">use std::ops::Deref;
 
 struct Vec&lt;T&gt; {
-    data: T,
+    data: RawVec&lt;T&gt;,
     //..
 }
 
