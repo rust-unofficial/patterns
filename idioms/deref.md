@@ -11,7 +11,7 @@ and borrowed views of data.
 use std::ops::Deref;
 
 struct Vec<T> {
-    data: T,
+    data: RawVec<T>,
     //..
 }
 
