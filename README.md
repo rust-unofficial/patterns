@@ -35,4 +35,4 @@ directory of the repository:
 
 ## License
 
-This content of this repository is licensed under **MPL-2.0**; see [LICENSE](./LICENSE).
+The content of this repository is licensed under **MPL-2.0**; see [LICENSE](./LICENSE).
