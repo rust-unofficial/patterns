@@ -402,7 +402,7 @@ different names, but there can only be one <code>Default</code> implementation p
 <pre><pre class="playground"><code class="language-rust edition2018">use std::{path::PathBuf, time::Duration};
 
 // note that we can simply auto-derive Default here.
-#[derive(Default, Debug)]
+#[derive(Default, Debug, PartialEq)]
 struct MyConfiguration {
     // Option defaults to None
     output: Option&lt;PathBuf&gt;,
@@ -424,6 +424,13 @@ fn main() {
     // do something with conf here
     conf.check = true;
     println!(&quot;conf = {:#?}&quot;, conf);
+        
+    // partial initalization with default values, creates the same instance
+    let conf1 = MyConfiguration {
+        check: true,
+        ..Default::default()
+    };
+    assert_eq!(conf, conf1);
 }
 </code></pre></pre>
 <h2 id="see-also-2"><a class="header" href="#see-also-2">See also</a></h2>
