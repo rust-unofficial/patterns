@@ -84,8 +84,7 @@ Even ignoring this special example, you may still find that using `&str` will
 give you more flexibility than using a `&String`.
 
 Let's now take an example where someone gives us a sentence, and we want to
-determine if any of the words in the sentence has a word that contains three
-consecutive vowels.
+determine if any of the words in the sentence contains three consecutive vowels.
 We probably should make use of the function we have already defined and simply
 feed in each word from the sentence.
 
