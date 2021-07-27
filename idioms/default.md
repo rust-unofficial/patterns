@@ -23,7 +23,7 @@ different names, but there can only be one `Default` implementation per type.
 use std::{path::PathBuf, time::Duration};
 
 // note that we can simply auto-derive Default here.
-#[derive(Default, Debug)]
+#[derive(Default, Debug, PartialEq)]
 struct MyConfiguration {
     // Option defaults to None
     output: Option<PathBuf>,
@@ -45,6 +45,13 @@ fn main() {
     // do something with conf here
     conf.check = true;
     println!("conf = {:#?}", conf);
+        
+    // partial initalization with default values, creates the same instance
+    let conf1 = MyConfiguration {
+        check: true,
+        ..Default::default()
+    };
+    assert_eq!(conf, conf1);
 }
 ```
 
