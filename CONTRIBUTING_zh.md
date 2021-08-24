@@ -1,26 +1,24 @@
-# Contributing
+# 贡献
 
-## Introduction
+## 简介
 
-This book is a catalogue of Rust programming techniques, (anti-)patterns,
-idioms and other explanations. It is a compilation of collective (sometimes
-implicit) knowledge as well as experiences that have emerged through
-collaborative work.
+[习语]: https://en.wikipedia.org/wiki/Programming_idiom
 
-The patterns described here are __not rules__, but should be taken as
-guidelines for writing idiomatic code in Rust. We are collecting Rust patterns
-in this book so people can learn the tradeoffs between Rust idioms and use them
-properly in their own code.
+这本书是Rust编程技术，(反)模式，[习语] 以及其他表示的目录。
 
-If you want to be part of this effort here are some ways you can participate:
+这本书介绍的模式**并不是规则**，但可以被视为编写地道的Rust代码的指引。
+我们会整理这本书中 Rust 模式，以便学习者掌握Rust习语的权衡，并且在他们的代码中正确地使用。
 
-## Discussion board
+如果你想要加入我们，这里有一些方式。
 
-If you have a question or an idea regarding certain content, but you want to
-have feedback of fellow community members, and you think it may not be
-appropriate to file an issue open a discussion in our [discussion board](https://github.com/rust-unofficial/patterns/discussions).
+## 讨论区
 
-## Writing a new article
+[讨论区]: https://github.com/rust-unofficial/patterns/discussions
+
+如果你有关于某些内容的问题或想法，而你想要得到社区的反馈，
+并且认为不适合提出issue，你可以在我们的[讨论区]提出讨论。
+
+## 撰写新文章
 
 Before writing a new article please check in one of the following resources if
 there is an existing discussion or if someone is already working on that topic:
@@ -29,14 +27,14 @@ there is an existing discussion or if someone is already working on that topic:
 - [All issues](https://github.com/rust-unofficial/patterns/issues),
 - [Pull Requests](https://github.com/rust-unofficial/patterns/pulls)
 
-If you don't find an issue regarding your topic and you are sure it is not more
+If you don't find an issue regarding your topic, and you are sure it is not more
 feasible to open a thread in the [discussion board](https://github.com/rust-unofficial/patterns/discussions)
-please open a new issue, so we can discuss about the ideas and future content
+please open a new issue, so we can discuss the ideas and future content
 of the article together and maybe give some feedback/input on it.
 
 When writing a new article it's recommended to copy the [pattern template](https://github.com/rust-unofficial/patterns/blob/master/template.md)
 into the appropriate directory and start editing it. You may not want to fill
-out every section and remove it or you might want to add extra sections.
+out every section and remove it, or you might want to add extra sections.
 
 Consider writing your article in a way that has a low barrier of entry so also
 [Rustlings](https://github.com/rust-lang/rustlings) can follow and understand
@@ -53,7 +51,7 @@ in your article.
 Don't forget to add your new article to the `SUMMARY.md` to let it be rendered
 to the book.
 
-Please make `Draft Pull requests` early so we can follow your progress and can
+Please make `Draft Pull requests` early, so we can follow your progress and can
 give early feedback (see the following section).
 
 ## Style guide

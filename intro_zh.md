@@ -1,9 +1,8 @@
-# Introduction
+# 简介
 
-## Participation
+## 加入我们
 
-If you are interested in contributing to this book, check out the
-[contribution guidelines](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md).
+如果你想要参与这本书，请看[贡献指引](CONTRIBUTING_zh.md).
 
 ## Design patterns
 

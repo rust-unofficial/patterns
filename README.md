@@ -1,11 +1,17 @@
-# Rust Design Patterns
+# Rust设计模式
 
-An open source book about design patterns and idioms in the Rust programming
-language that you can read [here](https://rust-unofficial.github.io/patterns/).
+[在线阅读地址]: https://rust-unofficial.github.io/patterns/
+[DeepL]: https://deepl.com
 
-## Contributing
+一本开源的关于Rust设计模式与习语的书，您可以在[这里][在线阅读地址]阅读。
 
-You are missing content in this repository that can be helpful for others and
+本书使用了[DeepL]进行翻译，然后人工润色。感谢DeepL的优质翻译服务！
+
+感谢《Rust Design Pattern》这本优秀的书！
+
+## 贡献
+
+You are missing content in this repository that can be helpful for others, and
 you are eager to explain it? Awesome! We are always happy about new contributions
 (e.g. elaboration or corrections on certain topics) to this project.
 
