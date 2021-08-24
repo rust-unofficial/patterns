@@ -1,6 +1,6 @@
 # Summary
 
-- [Introduction](./intro.md)
+- [简介](./intro_zh.md)
 - [Idioms](./idioms/index.md)
   - [Use borrowed types for arguments](./idioms/coercion-arguments.md)
   - [Concatenating Strings with `format!`](./idioms/concat-format.md)
