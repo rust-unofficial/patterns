@@ -30,7 +30,7 @@ However, this allows the attachment of not only additional behavior to
 particular members of a type class, but extra behavior as well.
 
 The nearest equivalent is the runtime polymorphism in Javascript and Python,
-where new members can be added to object willy-nilly by any constructor.
+where new members can be added to objects willy-nilly by any constructor.
 Unlike those languages, however, all of Rust's additional methods can be type
 checked when they are used, because their generics are statically defined. That
 makes them more usable while remaining safe.
