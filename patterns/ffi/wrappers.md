@@ -10,7 +10,7 @@ This ensures that many patterns of access between types can be memory safe,
 data race safety included.
 
 However, when Rust types are exported to other languages, they are usually transformed
-into pointers. In Rust, a pointer means "the user manages the lifetime of the pointee."
+into pointers. In Rust, a pointer means "the user manages the lifetime of the pointer."
 It is their responsibility to avoid memory unsafety.
 
 Some level of trust in the user code is thus required, notably around use-after-free

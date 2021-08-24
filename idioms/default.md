@@ -46,7 +46,7 @@ fn main() {
     conf.check = true;
     println!("conf = {:#?}", conf);
         
-    // partial initalization with default values, creates the same instance
+    // partial initialization with default values, creates the same instance
     let conf1 = MyConfiguration {
         check: true,
         ..Default::default()

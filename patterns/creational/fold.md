@@ -102,7 +102,7 @@ reused; however, a node must be cloned even if unchanged, which can be
 expensive.
 
 Using a reference counted pointer gives the best of both worlds - we can reuse
-the original data structure and we don't need to clone unchanged nodes. However,
+the original data structure, and we don't need to clone unchanged nodes. However,
 they are less ergonomic to use and mean that the data structures cannot be
 mutable.
 

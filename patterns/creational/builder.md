@@ -62,7 +62,7 @@ fn builder_test() {
 
 ## Motivation
 
-Useful when you would otherwise require many different constructors or where
+Useful when you would otherwise require many constructors or where
 construction has side effects.
 
 ## Advantages

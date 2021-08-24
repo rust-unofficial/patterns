@@ -48,7 +48,7 @@ let closure = move || {
 ## Advantages
 
 Copied data are grouped together with closure definition, so their purpose is
-more clear and they will be dropped immediately even if they are not consumed
+more clear, and they will be dropped immediately even if they are not consumed
 by closure.
 
 Closure uses same variable names as surrounding code whether data are copied or
