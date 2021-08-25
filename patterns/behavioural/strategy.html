@@ -176,7 +176,7 @@ is a technique that enables separation of concerns.
 It also allows to decouple software modules through <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion</a>.</p>
 <p>The basic idea behind the Strategy pattern is that, given an algorithm solving
 a particular problem, we define only the skeleton of the algorithm at an abstract
-level and we separate the specific algorithm’s implementation into different parts.</p>
+level, and we separate the specific algorithm’s implementation into different parts.</p>
 <p>In this way, a client using the algorithm may choose a specific implementation,
 while the general algorithm workflow remains the same. In other words, the abstract
 specification of the class does not depend on the specific implementation of the
@@ -186,7 +186,7 @@ This is why we call it &quot;Dependency Inversion&quot;.</p>
 <p>Imagine we are working on a project that generates reports every month.
 We need the reports to be generated in different formats (strategies), e.g.,
 in <code>JSON</code> or <code>Plain Text</code> formats.
-But things vary over time and we don't know what kind of requirement we may get
+But things vary over time, and we don't know what kind of requirement we may get
 in the future. For example, we may need to generate our report in a completly new
 format, or just modify one of the existing formats.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>

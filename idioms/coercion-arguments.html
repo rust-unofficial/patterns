@@ -175,7 +175,7 @@
 when you are deciding which argument type to use for a function argument.
 In this way, the function will accept more input types.</p>
 <p>This is not limited to slice-able or fat pointer types.
-In fact you should always prefer using the <strong>borrowed type</strong> over
+In fact, you should always prefer using the <strong>borrowed type</strong> over
 <strong>borrowing the owned type</strong>.
 Such as <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</code> over <code>&amp;Vec&lt;T&gt;</code>, or <code>&amp;T</code> over <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Using borrowed types you can avoid layers of indirection for those instances

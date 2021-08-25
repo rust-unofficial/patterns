@@ -216,7 +216,7 @@ its data if the only way to access each datum is via the collection and the
 collection is responsible for deleting the data (even in cases of shared
 ownership, some kind of borrowed view may be appropriate). If a collection owns
 its data, it is usually useful to provide a view of the data as borrowed so that
-it can be multiply referenced.</p>
+it can be multiplied referenced.</p>
 <p>Most smart pointers (e.g., <code>Foo&lt;T&gt;</code>) implement <code>Deref&lt;Target=T&gt;</code>. However,
 collections will usually dereference to a custom type. <code>[T]</code> and <code>str</code> have some
 language support, but in the general case, this is not necessary. <code>Foo&lt;T&gt;</code> can

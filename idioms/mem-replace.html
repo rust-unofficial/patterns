@@ -230,9 +230,9 @@ checker happy. In the first phase, we observe the existing value and look at
 its parts to decide what to do next. In the second phase we may conditionally
 change the value (as in the example above).</p>
 <p>The borrow checker won't allow us to take out <code>name</code> of the enum (because
-<em>something</em> must be there. We could of course <code>.clone()</code> name and put the clone
+<em>something</em> must be there.) We could of course <code>.clone()</code> name and put the clone
 into our <code>MyEnum::B</code>, but that would be an instance of the <a href="../anti_patterns/borrow_clone.html">Clone to satisfy
-the borrow checker</a> antipattern. Anyway, we
+the borrow checker</a> anti-pattern. Anyway, we
 can avoid the extra allocation by changing <code>e</code> with only a mutable borrow.</p>
 <p><code>mem::take</code> lets us swap out the value, replacing it with it's default value,
 and returning the previous value. For <code>String</code>, the default value is an empty
@@ -264,7 +264,7 @@ may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.</p>
 <h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
 <p>This gets rid of the <a href="../anti_patterns/borrow_clone.html">Clone to satisfy the borrow checker</a>
-antipattern in a specific case.</p>
+anti-pattern in a specific case.</p>
 
                     </main>
 

@@ -205,7 +205,7 @@ characteristics, and a clean boundary of what is safe and what is <code>unsafe</
 <p>The POSIX standard defines the API to access an on-file database, known as <a href="https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h">DBM</a>.
 It is an excellent example of an &quot;object-based&quot; API.</p>
 <p>Here is the definition in C, which hopefully should be easy to read for those
-involved in FFI. The commentary below should help explaining it for those who
+involved in FFI. The commentary below should help explain it for those who
 miss the subtleties.</p>
 <pre><code class="language-C">struct DBM;
 typedef struct { void *dptr, size_t dsize } datum;
@@ -255,7 +255,7 @@ code is expected to use the heap that the user has access to -- such as the C li
 It means the same thing as Rust: &quot;user defined lifetime.&quot;
 The user of the library needs to read the documentation in order to use it correctly.
 That said, there are some decisions that have fewer or greater consequences if users
-do it wrong. Minimizing those is what this best practice is about, and the key
+do it wrong. Minimizing those are what this best practice is about, and the key
 is to <em>transfer ownership of everything that is transparent</em>.</p>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>This minimizes the number of memory safety guarantees the user must uphold to a
@@ -360,7 +360,7 @@ the iterator with its parent:</p>
 <pre><code class="language-C">datum   dbm_firstkey(DBM *);
 datum   dbm_nextkey(DBM *);
 </code></pre>
-<p>Thus, all of the lifetimes were bound together, and such unsafety was prevented.</p>
+<p>Thus, all the lifetimes were bound together, and such unsafety was prevented.</p>
 <h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>However, this design choice also has a number of drawbacks, which should be
 considered as well.</p>

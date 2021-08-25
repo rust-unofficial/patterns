@@ -172,7 +172,7 @@
                         <h1 id="finalisation-in-destructors"><a class="header" href="#finalisation-in-destructors">Finalisation in destructors</a></h1>
 <h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Rust does not provide the equivalent to <code>finally</code> blocks - code that will be
-executed no matter how a function is exited. Instead an object's destructor can
+executed no matter how a function is exited. Instead, an object's destructor can
 be used to run code that must be run before exit.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
@@ -203,13 +203,13 @@ an exception handling mechanism, but unlike Java (which has <code>finally</code>
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.</p>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
-<p>Code in destructors will (nearly) always be run - copes with panics, early
+<p>Code in destructors will (nearly) be always run - copes with panics, early
 returns, etc.</p>
 <h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>It is not guaranteed that destructors will run. For example, if there is an
 infinite loop in a function or if running a function crashes before exit.
 Destructors are also not run in the case of a panic in an already panicking
-thread. Therefore destructors cannot be relied on as finalisers where it is
+thread. Therefore, destructors cannot be relied on as finalizers where it is
 absolutely essential that finalisation happens.</p>
 <p>This pattern introduces some hard to notice, implicit code. Reading a function
 gives no clear indication of destructors to be run on exit. This can make
@@ -217,15 +217,15 @@ debugging tricky.</p>
 <p>Requiring an object and <code>Drop</code> impl just for finalisation is heavy on boilerplate.</p>
 <h2 id="discussion"><a class="header" href="#discussion">Discussion</a></h2>
 <p>There is some subtlety about how exactly to store the object used as a
-finaliser. It must be kept alive until the end of the function and must then be
+finalizer. It must be kept alive until the end of the function and must then be
 destroyed. The object must always be a value or uniquely owned pointer (e.g.,
-<code>Box&lt;Foo&gt;</code>). If a shared pointer (such as <code>Rc</code>) is used, then the finaliser can
+<code>Box&lt;Foo&gt;</code>). If a shared pointer (such as <code>Rc</code>) is used, then the finalizer can
 be kept alive beyond the lifetime of the function. For similar reasons, the
-finaliser should not be moved or returned.</p>
-<p>The finaliser must be assigned into a variable, otherwise it will be destroyed
+finalizer should not be moved or returned.</p>
+<p>The finalizer must be assigned into a variable, otherwise it will be destroyed
 immediately, rather than when it goes out of scope. The variable name must start
-with <code>_</code> if the variable is only used as a finaliser, otherwise the compiler
-will warn that the finaliser is never used. However, do not call the variable
+with <code>_</code> if the variable is only used as a finalizer, otherwise the compiler
+will warn that the finalizer is never used. However, do not call the variable
 <code>_</code> with no suffix - in that case it will be destroyed immediately.</p>
 <p>In Rust, destructors are run when an object goes out of scope. This happens
 whether we reach the end of block, there is an early return, or the program

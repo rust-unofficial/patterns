@@ -178,7 +178,7 @@
 <h2 id="design-patterns"><a class="header" href="#design-patterns">Design patterns</a></h2>
 <p>When developing programs, we have to solve many problems.
 A program can be viewed as a solution to a problem.
-It can also be viewed as a collection of solutions to many different problems.
+It can also be viewed as a collection of solutions to many problems.
 All of these solutions work together to solve a bigger problem.</p>
 <h2 id="design-patterns-in-rust"><a class="header" href="#design-patterns-in-rust">Design patterns in Rust</a></h2>
 <p>There are many problems that share the same form.
@@ -220,7 +220,7 @@ goal in design, and unnecessary complexity should be avoided&quot;.</p>
 when you are deciding which argument type to use for a function argument.
 In this way, the function will accept more input types.</p>
 <p>This is not limited to slice-able or fat pointer types.
-In fact you should always prefer using the <strong>borrowed type</strong> over
+In fact, you should always prefer using the <strong>borrowed type</strong> over
 <strong>borrowing the owned type</strong>.
 Such as <code>&amp;str</code> over <code>&amp;String</code>, <code>&amp;[T]</code> over <code>&amp;Vec&lt;T&gt;</code>, or <code>&amp;T</code> over <code>&amp;Box&lt;T&gt;</code>.</p>
 <p>Using borrowed types you can avoid layers of indirection for those instances
@@ -424,7 +424,7 @@ fn main() {
     conf.check = true;
     println!(&quot;conf = {:#?}&quot;, conf);
         
-    // partial initalization with default values, creates the same instance
+    // partial initialization with default values, creates the same instance
     let conf1 = MyConfiguration {
         check: true,
         ..Default::default()
@@ -487,7 +487,7 @@ its data if the only way to access each datum is via the collection and the
 collection is responsible for deleting the data (even in cases of shared
 ownership, some kind of borrowed view may be appropriate). If a collection owns
 its data, it is usually useful to provide a view of the data as borrowed so that
-it can be multiply referenced.</p>
+it can be multiplied referenced.</p>
 <p>Most smart pointers (e.g., <code>Foo&lt;T&gt;</code>) implement <code>Deref&lt;Target=T&gt;</code>. However,
 collections will usually dereference to a custom type. <code>[T]</code> and <code>str</code> have some
 language support, but in the general case, this is not necessary. <code>Foo&lt;T&gt;</code> can
@@ -501,7 +501,7 @@ slicing syntax. The target will be the borrowed view.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="finalisation-in-destructors"><a class="header" href="#finalisation-in-destructors">Finalisation in destructors</a></h1>
 <h2 id="description-5"><a class="header" href="#description-5">Description</a></h2>
 <p>Rust does not provide the equivalent to <code>finally</code> blocks - code that will be
-executed no matter how a function is exited. Instead an object's destructor can
+executed no matter how a function is exited. Instead, an object's destructor can
 be used to run code that must be run before exit.</p>
 <h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
 <pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
@@ -532,13 +532,13 @@ an exception handling mechanism, but unlike Java (which has <code>finally</code>
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.</p>
 <h2 id="advantages-2"><a class="header" href="#advantages-2">Advantages</a></h2>
-<p>Code in destructors will (nearly) always be run - copes with panics, early
+<p>Code in destructors will (nearly) be always run - copes with panics, early
 returns, etc.</p>
 <h2 id="disadvantages-2"><a class="header" href="#disadvantages-2">Disadvantages</a></h2>
 <p>It is not guaranteed that destructors will run. For example, if there is an
 infinite loop in a function or if running a function crashes before exit.
 Destructors are also not run in the case of a panic in an already panicking
-thread. Therefore destructors cannot be relied on as finalisers where it is
+thread. Therefore, destructors cannot be relied on as finalizers where it is
 absolutely essential that finalisation happens.</p>
 <p>This pattern introduces some hard to notice, implicit code. Reading a function
 gives no clear indication of destructors to be run on exit. This can make
@@ -546,15 +546,15 @@ debugging tricky.</p>
 <p>Requiring an object and <code>Drop</code> impl just for finalisation is heavy on boilerplate.</p>
 <h2 id="discussion-1"><a class="header" href="#discussion-1">Discussion</a></h2>
 <p>There is some subtlety about how exactly to store the object used as a
-finaliser. It must be kept alive until the end of the function and must then be
+finalizer. It must be kept alive until the end of the function and must then be
 destroyed. The object must always be a value or uniquely owned pointer (e.g.,
-<code>Box&lt;Foo&gt;</code>). If a shared pointer (such as <code>Rc</code>) is used, then the finaliser can
+<code>Box&lt;Foo&gt;</code>). If a shared pointer (such as <code>Rc</code>) is used, then the finalizer can
 be kept alive beyond the lifetime of the function. For similar reasons, the
-finaliser should not be moved or returned.</p>
-<p>The finaliser must be assigned into a variable, otherwise it will be destroyed
+finalizer should not be moved or returned.</p>
+<p>The finalizer must be assigned into a variable, otherwise it will be destroyed
 immediately, rather than when it goes out of scope. The variable name must start
-with <code>_</code> if the variable is only used as a finaliser, otherwise the compiler
-will warn that the finaliser is never used. However, do not call the variable
+with <code>_</code> if the variable is only used as a finalizer, otherwise the compiler
+will warn that the finalizer is never used. However, do not call the variable
 <code>_</code> with no suffix - in that case it will be destroyed immediately.</p>
 <p>In Rust, destructors are run when an object goes out of scope. This happens
 whether we reach the end of block, there is an early return, or the program
@@ -629,9 +629,9 @@ checker happy. In the first phase, we observe the existing value and look at
 its parts to decide what to do next. In the second phase we may conditionally
 change the value (as in the example above).</p>
 <p>The borrow checker won't allow us to take out <code>name</code> of the enum (because
-<em>something</em> must be there. We could of course <code>.clone()</code> name and put the clone
+<em>something</em> must be there.) We could of course <code>.clone()</code> name and put the clone
 into our <code>MyEnum::B</code>, but that would be an instance of the <a href="idioms/../anti_patterns/borrow_clone.html">Clone to satisfy
-the borrow checker</a> antipattern. Anyway, we
+the borrow checker</a> anti-pattern. Anyway, we
 can avoid the extra allocation by changing <code>e</code> with only a mutable borrow.</p>
 <p><code>mem::take</code> lets us swap out the value, replacing it with it's default value,
 and returning the previous value. For <code>String</code>, the default value is an empty
@@ -663,7 +663,7 @@ may only have one owner, so to take it out, we need to put something back in –
 like Indiana Jones, replacing the artifact with a bag of sand.</p>
 <h2 id="see-also-5"><a class="header" href="#see-also-5">See also</a></h2>
 <p>This gets rid of the <a href="idioms/../anti_patterns/borrow_clone.html">Clone to satisfy the borrow checker</a>
-antipattern in a specific case.</p>
+anti-pattern in a specific case.</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="on-stack-dynamic-dispatch"><a class="header" href="#on-stack-dynamic-dispatch">On-Stack Dynamic Dispatch</a></h1>
 <h2 id="description-7"><a class="header" href="#description-7">Description</a></h2>
 <p>We can dynamically dispatch over multiple values, however, to do so, we need
@@ -1098,7 +1098,7 @@ system's ability to return zeroed memory (which is quite fast).</p>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="iterating-over-an-option"><a class="header" href="#iterating-over-an-option">Iterating over an <code>Option</code></a></h1>
 <h2 id="description-11"><a class="header" href="#description-11">Description</a></h2>
 <p><code>Option</code> can be viewed as a container that contains either zero or one
-elements. In particular, it implements the <code>IntoIterator</code> trait, and as such
+element. In particular, it implements the <code>IntoIterator</code> trait, and as such
 can be used with generic code that needs such a type.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to
@@ -1202,7 +1202,7 @@ let closure = move || {
 </span></code></pre></pre>
 <h2 id="advantages-8"><a class="header" href="#advantages-8">Advantages</a></h2>
 <p>Copied data are grouped together with closure definition, so their purpose is
-more clear and they will be dropped immediately even if they are not consumed
+more clear, and they will be dropped immediately even if they are not consumed
 by closure.</p>
 <p>Closure uses same variable names as surrounding code whether data are copied or
 moved.</p>
@@ -1233,7 +1233,7 @@ fn main(s: a::S) {
 <p>Adding a field to a struct is a mostly backwards compatible change.
 However, if a client uses a pattern to deconstruct a struct instance, they
 might name all the fields in the struct and adding a new one would break that
-pattern. The client could name some of the fields and use <code>..</code> in the pattern,
+pattern. The client could name some fields and use <code>..</code> in the pattern,
 in which case adding another field is backwards compatible. Making at least one
 of the struct's fields private forces clients to use the latter form of patterns,
 ensuring that the struct is future-proof.</p>
@@ -1282,7 +1282,7 @@ impl Connection {
 }
 </code></pre>
 <h2 id="example-10"><a class="header" href="#example-10">Example</a></h2>
-<p>Instead of typing all of this boiler plate to create an <code>Connection</code> and
+<p>Instead of typing all of this boilerplate to create an <code>Connection</code> and
 <code>Request</code> it is easier to just create a wrapping helper function which takes
 them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
@@ -1306,7 +1306,7 @@ impl Connection {
 }
 </code></pre>
 <p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not
-actually run while testing because it is inside of a function which is never
+actually run while testing because it is inside a function which is never
 invoked.</p>
 <h2 id="advantages-9"><a class="header" href="#advantages-9">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>
@@ -1361,7 +1361,7 @@ language feature, or impossible to express due to a missing feature.</p>
 However, they are a great way to share intermediate and advanced level knowledge
 about a programming language.</p>
 <h2 id="design-patterns-in-rust-1"><a class="header" href="#design-patterns-in-rust-1">Design patterns in Rust</a></h2>
-<p>Rust has many very unique features. These features give us great benefit by removing
+<p>Rust has many unique features. These features give us great benefit by removing
 whole classes of problems. Some of them are also patterns that are <em>unique</em> to Rust.</p>
 <h2 id="yagni"><a class="header" href="#yagni">YAGNI</a></h2>
 <p>If you're not familiar with it, YAGNI is an acronym that stands for
@@ -1567,7 +1567,7 @@ fn main() {
 <p>If our commands are small and may be defined as functions or passed as a closure
 then using function pointers might be preferable since it does not exploit
 dynamic dispatch. But if our command is a whole struct with a bunch of functions
-and variables defined as seperate module then using trait objects would be
+and variables defined as seperated module then using trait objects would be
 more suitable. A case of application can be found in <a href="https://actix.rs/"><code>actix</code></a>,
 which uses trait objects when it registers a handler function for routes.
 In case of using <code>Fn</code> trait objects we can create and use commands in the same
@@ -1603,7 +1603,7 @@ For simplicity, our expressions consist of ten digits <code>0</code>, ..., <code
 operations <code>+</code>, <code>-</code>. For example, the expression <code>2 + 4</code> is translated into
 <code>2 4  +</code>.</p>
 <h2 id="context-free-grammar-for-our-problem"><a class="header" href="#context-free-grammar-for-our-problem">Context Free Grammar for our problem</a></h2>
-<p>Our task is translate infix expressions into postfix ones. Let's define a context
+<p>Our task is translated infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over <code>0</code>, ..., <code>9</code>, <code>+</code>, and <code>-</code>,
 where:</p>
 <ul>
@@ -1716,7 +1716,7 @@ fn main() {
 </ul>
 <div id="chapter_begin" style="break-before: page; page-break-before: always;"></div><h1 id="newtype"><a class="header" href="#newtype">Newtype</a></h1>
 <p>What if in some cases we want a type to behave similar to another type or
-enforce some behaviour at compile time where using only type aliases would
+enforce some behaviour at compile time when using only type aliases would
 not be enough?</p>
 <p>For example, if we want to create a custom <code>Display</code> implementation for <code>String</code>
 due to security considerations (e.g. passwords).</p>
@@ -1909,7 +1909,7 @@ is a technique that enables separation of concerns.
 It also allows to decouple software modules through <a href="https://en.wikipedia.org/wiki/Dependency_inversion_principle">Dependency Inversion</a>.</p>
 <p>The basic idea behind the Strategy pattern is that, given an algorithm solving
 a particular problem, we define only the skeleton of the algorithm at an abstract
-level and we separate the specific algorithm’s implementation into different parts.</p>
+level, and we separate the specific algorithm’s implementation into different parts.</p>
 <p>In this way, a client using the algorithm may choose a specific implementation,
 while the general algorithm workflow remains the same. In other words, the abstract
 specification of the class does not depend on the specific implementation of the
@@ -1919,7 +1919,7 @@ This is why we call it &quot;Dependency Inversion&quot;.</p>
 <p>Imagine we are working on a project that generates reports every month.
 We need the reports to be generated in different formats (strategies), e.g.,
 in <code>JSON</code> or <code>Plain Text</code> formats.
-But things vary over time and we don't know what kind of requirement we may get
+But things vary over time, and we don't know what kind of requirement we may get
 in the future. For example, we may need to generate our report in a completly new
 format, or just modify one of the existing formats.</p>
 <h2 id="example-15"><a class="header" href="#example-15">Example</a></h2>
@@ -2220,7 +2220,7 @@ fn builder_test() {
 <span class="boring">}
 </span></code></pre></pre>
 <h2 id="motivation-13"><a class="header" href="#motivation-13">Motivation</a></h2>
-<p>Useful when you would otherwise require many different constructors or where
+<p>Useful when you would otherwise require many constructors or where
 construction has side effects.</p>
 <h2 id="advantages-14"><a class="header" href="#advantages-14">Advantages</a></h2>
 <p>Separates methods for building from other methods.</p>
@@ -2346,7 +2346,7 @@ other hand if a node is not changed, reusing it is very efficient.</p>
 reused; however, a node must be cloned even if unchanged, which can be
 expensive.</p>
 <p>Using a reference counted pointer gives the best of both worlds - we can reuse
-the original data structure and we don't need to clone unchanged nodes. However,
+the original data structure, and we don't need to clone unchanged nodes. However,
 they are less ergonomic to use and mean that the data structures cannot be
 mutable.</p>
 <h2 id="see-also-15"><a class="header" href="#see-also-15">See also</a></h2>
@@ -2573,7 +2573,7 @@ characteristics, and a clean boundary of what is safe and what is <code>unsafe</
 <p>The POSIX standard defines the API to access an on-file database, known as <a href="https://web.archive.org/web/20210105035602/https://www.mankier.com/0p/ndbm.h">DBM</a>.
 It is an excellent example of an &quot;object-based&quot; API.</p>
 <p>Here is the definition in C, which hopefully should be easy to read for those
-involved in FFI. The commentary below should help explaining it for those who
+involved in FFI. The commentary below should help explain it for those who
 miss the subtleties.</p>
 <pre><code class="language-C">struct DBM;
 typedef struct { void *dptr, size_t dsize } datum;
@@ -2623,7 +2623,7 @@ code is expected to use the heap that the user has access to -- such as the C li
 It means the same thing as Rust: &quot;user defined lifetime.&quot;
 The user of the library needs to read the documentation in order to use it correctly.
 That said, there are some decisions that have fewer or greater consequences if users
-do it wrong. Minimizing those is what this best practice is about, and the key
+do it wrong. Minimizing those are what this best practice is about, and the key
 is to <em>transfer ownership of everything that is transparent</em>.</p>
 <h2 id="advantages-18"><a class="header" href="#advantages-18">Advantages</a></h2>
 <p>This minimizes the number of memory safety guarantees the user must uphold to a
@@ -2728,7 +2728,7 @@ the iterator with its parent:</p>
 <pre><code class="language-C">datum   dbm_firstkey(DBM *);
 datum   dbm_nextkey(DBM *);
 </code></pre>
-<p>Thus, all of the lifetimes were bound together, and such unsafety was prevented.</p>
+<p>Thus, all the lifetimes were bound together, and such unsafety was prevented.</p>
 <h2 id="disadvantages-17"><a class="header" href="#disadvantages-17">Disadvantages</a></h2>
 <p>However, this design choice also has a number of drawbacks, which should be
 considered as well.</p>
@@ -2943,7 +2943,7 @@ that's a good indication this anti-pattern may be in use.</p>
 <li>the developer is still new to ownership</li>
 <li>the code doesn't have great speed or memory constraints
 (like hackathon projects or prototypes)</li>
-<li>satisfying the borrow checker is really complicated and you prefer to
+<li>satisfying the borrow checker is really complicated, and you prefer to
 optimize readability over performance</li>
 </ul>
 <p>If an unnecessary clone is suspected, The <a href="https://doc.rust-lang.org/book/ownership.html">Rust Book's chapter on Ownership</a>
@@ -3240,7 +3240,7 @@ type system.</p>
 <strong>polymorphic</strong> code.  This special behavior requires <code>impl</code> blocks to specify
 generic parameters: different values for the generic type cause different types,
 and different types can have different <code>impl</code> blocks.</p>
-<p>In object oriented languages, classes can inherit behavior from their parents.
+<p>In object-oriented languages, classes can inherit behavior from their parents.
 However, this allows the attachment of not only additional behavior to
 particular members of a type class, but extra behavior as well.</p>
 <p>The nearest equivalent is the runtime polymorphism in Javascript and Python,
@@ -3450,7 +3450,7 @@ methods apply to any connector. <sup class="footnote-reference"><a href="#5">5</
 <li>
 <p>The &quot;type state&quot; pattern -- where an object gains and loses API based on an
 internal state or invariant -- is implemented in Rust using the same basic
-concept, and a slightly different techinque. <sup class="footnote-reference"><a href="#6">6</a></sup></p>
+concept, and a slightly different technique. <sup class="footnote-reference"><a href="#6">6</a></sup></p>
 </li>
 </ul>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
@@ -3535,30 +3535,30 @@ unauthorized parties' direct access to them.</p>
 <h2 id="a-hrefhttpsenwikipediaorgwikicommande28093query_separationcommand-query-separationcqsa"><a class="header" href="#a-hrefhttpsenwikipediaorgwikicommande28093query_separationcommand-query-separationcqsa"><a href="https://en.wikipedia.org/wiki/Command%E2%80%93query_separation">Command-Query-Separation(CQS)</a></a></h2>
 <p>“Functions should not produce abstract side effects...only commands
 (procedures) will be permitted to produce side effects.” - Bertrand Meyer:
-Object Oriented Software Construction</p>
+Object-Oriented Software Construction</p>
 <h2 id="a-hrefhttpsenwikipediaorgwikiprinciple_of_least_astonishmentprinciple-of-least-astonishment-polaa"><a class="header" href="#a-hrefhttpsenwikipediaorgwikiprinciple_of_least_astonishmentprinciple-of-least-astonishment-polaa"><a href="https://en.wikipedia.org/wiki/Principle_of_least_astonishment">Principle of least astonishment (POLA)</a></a></h2>
 <p>a component of a system should behave in a way that most users will expect it
 to behave. The behavior should not astonish or surprise users</p>
 <h2 id="linguistic-modular-units"><a class="header" href="#linguistic-modular-units">Linguistic-Modular-Units</a></h2>
 <p>“Modules must correspond to syntactic units in the language used.” - Bertrand
-Meyer: Object Oriented Software Construction</p>
+Meyer: Object-Oriented Software Construction</p>
 <h2 id="self-documentation"><a class="header" href="#self-documentation">Self-Documentation</a></h2>
 <p>“The designer of a module should strive to make all information about the
-module part of the module itself.” - Bertrand Meyer: Object Oriented Software
+module part of the module itself.” - Bertrand Meyer: Object-Oriented Software
 Construction</p>
 <h2 id="uniform-access"><a class="header" href="#uniform-access">Uniform-Access</a></h2>
 <p>“All services offered by a module should be available through a uniform
 notation, which does not betray whether they are implemented through storage or
-through computation.” - Bertrand Meyer: Object Oriented Software Construction</p>
+through computation.” - Bertrand Meyer: Object-Oriented Software Construction</p>
 <h2 id="single-choice"><a class="header" href="#single-choice">Single-Choice</a></h2>
 <p>“Whenever a software system must support a set of alternatives, one and only
 one module in the system should know their exhaustive list.” - Bertrand Meyer:
-Object Oriented Software Construction</p>
+Object-Oriented Software Construction</p>
 <h2 id="persistence-closure"><a class="header" href="#persistence-closure">Persistence-Closure</a></h2>
 <p>“Whenever a storage mechanism stores an object, it must store with it the
 dependents of that object. Whenever a retrieval mechanism retrieves a
 previously stored object, it must also retrieve any dependent of that object
-that has not yet been retrieved.” - Bertrand Meyer: Object Oriented Software
+that has not yet been retrieved.” - Bertrand Meyer: Object-Oriented Software
 Construction</p>
 
                     </main>
