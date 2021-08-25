@@ -7,7 +7,7 @@ when you are deciding which argument type to use for a function argument.
 In this way, the function will accept more input types.
 
 This is not limited to slice-able or fat pointer types.
-In fact you should always prefer using the __borrowed type__ over
+In fact, you should always prefer using the __borrowed type__ over
 __borrowing the owned type__.
 Such as `&str` over `&String`, `&[T]` over `&Vec<T>`, or `&T` over `&Box<T>`.
 

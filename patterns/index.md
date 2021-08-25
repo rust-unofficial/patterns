@@ -13,7 +13,7 @@ about a programming language.
 
 ## Design patterns in Rust
 
-Rust has many very unique features. These features give us great benefit by removing
+Rust has many unique features. These features give us great benefit by removing
 whole classes of problems. Some of them are also patterns that are _unique_ to Rust.
 
 ## YAGNI

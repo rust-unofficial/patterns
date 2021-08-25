@@ -3,7 +3,7 @@
 ## Description
 
 Rust does not provide the equivalent to `finally` blocks - code that will be
-executed no matter how a function is exited. Instead an object's destructor can
+executed no matter how a function is exited. Instead, an object's destructor can
 be used to run code that must be run before exit.
 
 ## Example
@@ -41,7 +41,7 @@ Panicking will also exit a function early.
 
 ## Advantages
 
-Code in destructors will (nearly) always be run - copes with panics, early
+Code in destructors will (nearly) be always run - copes with panics, early
 returns, etc.
 
 ## Disadvantages
@@ -49,7 +49,7 @@ returns, etc.
 It is not guaranteed that destructors will run. For example, if there is an
 infinite loop in a function or if running a function crashes before exit.
 Destructors are also not run in the case of a panic in an already panicking
-thread. Therefore destructors cannot be relied on as finalisers where it is
+thread. Therefore, destructors cannot be relied on as finalizers where it is
 absolutely essential that finalisation happens.
 
 This pattern introduces some hard to notice, implicit code. Reading a function
@@ -61,16 +61,16 @@ Requiring an object and `Drop` impl just for finalisation is heavy on boilerplat
 ## Discussion
 
 There is some subtlety about how exactly to store the object used as a
-finaliser. It must be kept alive until the end of the function and must then be
+finalizer. It must be kept alive until the end of the function and must then be
 destroyed. The object must always be a value or uniquely owned pointer (e.g.,
-`Box<Foo>`). If a shared pointer (such as `Rc`) is used, then the finaliser can
+`Box<Foo>`). If a shared pointer (such as `Rc`) is used, then the finalizer can
 be kept alive beyond the lifetime of the function. For similar reasons, the
-finaliser should not be moved or returned.
+finalizer should not be moved or returned.
 
-The finaliser must be assigned into a variable, otherwise it will be destroyed
+The finalizer must be assigned into a variable, otherwise it will be destroyed
 immediately, rather than when it goes out of scope. The variable name must start
-with `_` if the variable is only used as a finaliser, otherwise the compiler
-will warn that the finaliser is never used. However, do not call the variable
+with `_` if the variable is only used as a finalizer, otherwise the compiler
+will warn that the finalizer is never used. However, do not call the variable
 `_` with no suffix - in that case it will be destroyed immediately.
 
 In Rust, destructors are run when an object goes out of scope. This happens

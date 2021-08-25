@@ -3,7 +3,7 @@
 ## Description
 
 `Option` can be viewed as a container that contains either zero or one
-elements. In particular, it implements the `IntoIterator` trait, and as such
+element. In particular, it implements the `IntoIterator` trait, and as such
 can be used with generic code that needs such a type.
 
 ## Examples

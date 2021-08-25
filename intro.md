@@ -9,7 +9,7 @@ If you are interested in contributing to this book, check out the
 
 When developing programs, we have to solve many problems.
 A program can be viewed as a solution to a problem.
-It can also be viewed as a collection of solutions to many different problems.
+It can also be viewed as a collection of solutions to many problems.
 All of these solutions work together to solve a bigger problem.
 
 ## Design patterns in Rust

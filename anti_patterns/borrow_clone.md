@@ -54,7 +54,7 @@ Even though `.clone()` is an indication of a bad pattern, sometimes
 - the developer is still new to ownership
 - the code doesn't have great speed or memory constraints
   (like hackathon projects or prototypes)
-- satisfying the borrow checker is really complicated and you prefer to
+- satisfying the borrow checker is really complicated, and you prefer to
   optimize readability over performance
 
 If an unnecessary clone is suspected, The [Rust Book's chapter on Ownership](https://doc.rust-lang.org/book/ownership.html)

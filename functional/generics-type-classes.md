@@ -25,7 +25,7 @@ This is called **monomorphization**, where different types are created from
 generic parameters: different values for the generic type cause different types,
 and different types can have different `impl` blocks.
 
-In object oriented languages, classes can inherit behavior from their parents.
+In object-oriented languages, classes can inherit behavior from their parents.
 However, this allows the attachment of not only additional behavior to
 particular members of a type class, but extra behavior as well.
 
@@ -259,7 +259,7 @@ It is also used by several popular crates to allow API flexibility:
 
 * The "type state" pattern -- where an object gains and loses API based on an
   internal state or invariant -- is implemented in Rust using the same basic
-  concept, and a slightly different techinque. [^6]
+  concept, and a slightly different technique. [^6]
 
 [^1]: See: [impl From\<CString\> for Vec\<u8\>](
 https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801)
