@@ -15,3 +15,4 @@ jobs:
         use-verbose-mode: 'yes'
         use-quiet-mode: 'yes'
         config-file: '.github/workflows/url-check-config.json'
+        base-branch: 'main'
