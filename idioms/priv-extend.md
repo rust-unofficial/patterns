@@ -10,7 +10,8 @@ compatibility. Rust offers two solutions:
 For extensive documentation on all the places `#[non_exhaustive]` can be used,
 see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
 
-- For `struct`s only, you may add a private field to struct
+- You may add a private field to a struct to prevent it from being directly
+instantiated or matched against
 
 ## Warning
 
