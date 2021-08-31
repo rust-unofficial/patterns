@@ -51,15 +51,15 @@ fn main(s: a::S) {
     
     let some_enum = a::AdmitMoreVariants::VariantA;
     match some_enum {
-        a::AdmitMoreVariants::VariantA => println!("it's an A");
-        a::AdmitMoreVariants::VariantB => println!("it's a b");
+        a::AdmitMoreVariants::VariantA => println!("it's an A"),
+        a::AdmitMoreVariants::VariantB => println!("it's a b"),
 
         // .. required because this variant is non-exhaustive as well
-        a::AdmitMoreVariants::VariantC { a, .. } => println!("it's a c");
+        a::AdmitMoreVariants::VariantC { a, .. } => println!("it's a c"),
 
         // The wildcard match is required because more variants may be
         // added in the future
-        _ => println1("it's a new variant");
+        _ => println1("it's a new variant")
     }
 }
 ```
