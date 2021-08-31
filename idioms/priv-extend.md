@@ -43,8 +43,7 @@ mod a {
     }
 }
 
-// Main function in another crate
-fn main(s: a::S) {
+fn print_matched_variants(s: a::S) {
     // Because S is `#[non_exhaustive]`, it cannot be named here and
     // we must use `..` in the pattern.
     let a::S { foo: _, ..} = s;
@@ -59,7 +58,7 @@ fn main(s: a::S) {
 
         // The wildcard match is required because more variants may be
         // added in the future
-        _ => println1("it's a new variant")
+        _ => println("it's a new variant")
     }
 }
 ```
