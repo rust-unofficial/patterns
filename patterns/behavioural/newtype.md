@@ -1,7 +1,7 @@
 # Newtype
 
 What if in some cases we want a type to behave similar to another type or
-enforce some behaviour at compile time where using only type aliases would
+enforce some behaviour at compile time when using only type aliases would
 not be enough?
 
 For example, if we want to create a custom `Display` implementation for `String`

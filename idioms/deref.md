@@ -11,7 +11,7 @@ and borrowed views of data.
 use std::ops::Deref;
 
 struct Vec<T> {
-    data: T,
+    data: RawVec<T>,
     //..
 }
 
@@ -61,7 +61,7 @@ its data if the only way to access each datum is via the collection and the
 collection is responsible for deleting the data (even in cases of shared
 ownership, some kind of borrowed view may be appropriate). If a collection owns
 its data, it is usually useful to provide a view of the data as borrowed so that
-it can be multiply referenced.
+it can be multiplied referenced.
 
 Most smart pointers (e.g., `Foo<T>`) implement `Deref<Target=T>`. However,
 collections will usually dereference to a custom type. `[T]` and `str` have some

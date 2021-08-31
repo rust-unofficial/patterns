@@ -43,7 +43,7 @@ The POSIX standard defines the API to access an on-file database, known as [DBM]
 It is an excellent example of an "object-based" API.
 
 Here is the definition in C, which hopefully should be easy to read for those
-involved in FFI. The commentary below should help explaining it for those who
+involved in FFI. The commentary below should help explain it for those who
 miss the subtleties.
 
 ```C
@@ -105,7 +105,7 @@ This may all seem speculative, but this is what a pointer means in C.
 It means the same thing as Rust: "user defined lifetime."
 The user of the library needs to read the documentation in order to use it correctly.
 That said, there are some decisions that have fewer or greater consequences if users
-do it wrong. Minimizing those is what this best practice is about, and the key
+do it wrong. Minimizing those are what this best practice is about, and the key
 is to *transfer ownership of everything that is transparent*.
 
 ## Advantages
@@ -229,7 +229,7 @@ datum   dbm_firstkey(DBM *);
 datum   dbm_nextkey(DBM *);
 ```
 
-Thus, all of the lifetimes were bound together, and such unsafety was prevented.
+Thus, all the lifetimes were bound together, and such unsafety was prevented.
 
 ## Disadvantages
 
@@ -249,12 +249,12 @@ with them:
 - [Wrapper Type Consolidation](./wrappers.md) groups multiple Rust types together
   into an opaque "object"
 
-- [FFI Error Passing](../idioms/ffi/errors.md) explains error handling with integer
+- [FFI Error Passing](../../idioms/ffi/errors.md) explains error handling with integer
   codes and sentinel return values (such as `NULL` pointers)
 
-- [Accepting Foreign Strings](../idioms/ffi/accepting-strings.md) allows accepting
+- [Accepting Foreign Strings](../../idioms/ffi/accepting-strings.md) allows accepting
   strings with minimal unsafe code, and is easier to get right than
-  [Passing Strings to FFI](../idioms/ffi/passing-strings.md)
+  [Passing Strings to FFI](../../idioms/ffi/passing-strings.md)
 
 However, not every API can be done this way.
 It is up to the best judgement of the programmer as to who their audience is.

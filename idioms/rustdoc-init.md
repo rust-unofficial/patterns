@@ -44,7 +44,7 @@ impl Connection {
 
 ## Example
 
-Instead of typing all of this boiler plate to create an `Connection` and
+Instead of typing all of this boilerplate to create an `Connection` and
 `Request` it is easier to just create a wrapping helper function which takes
 them as arguments:
 
@@ -71,7 +71,7 @@ impl Connection {
 ```
 
 **Note** in the above example the line `assert!(response.is_ok());` will not
-actually run while testing because it is inside of a function which is never
+actually run while testing because it is inside a function which is never
 invoked.
 
 ## Advantages

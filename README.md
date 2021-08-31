@@ -5,7 +5,7 @@ language that you can read [here](https://rust-unofficial.github.io/patterns/).
 
 ## Contributing
 
-You are missing content in this repository that can be helpful for others and
+You are missing content in this repository that can be helpful for others, and
 you are eager to explain it? Awesome! We are always happy about new contributions
 (e.g. elaboration or corrections on certain topics) to this project.
 
@@ -35,4 +35,4 @@ directory of the repository:
 
 ## License
 
-This content of this repository is licensed under **MPL-2.0**; see [LICENSE](./LICENSE).
+The content of this repository is licensed under **MPL-2.0**; see [LICENSE](./LICENSE).

@@ -23,7 +23,7 @@ operations `+`, `-`. For example, the expression `2 + 4` is translated into
 
 ## Context Free Grammar for our problem
 
-Our task is translate infix expressions into postfix ones. Let's define a context
+Our task is translated infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over `0`, ..., `9`, `+`, and `-`,
 where:
 

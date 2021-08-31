@@ -2,7 +2,7 @@ name: Check Markdown links
 
 on:
   push:
-    branches: [master]
+    branches: [main]
   pull_request:
 
 jobs:
@@ -16,3 +16,4 @@ jobs:
         use-quiet-mode: 'yes'
         config-file: '.github/workflows/url-check-config.json'
         check-modified-files-only: 'yes'
+        base-branch: 'main'

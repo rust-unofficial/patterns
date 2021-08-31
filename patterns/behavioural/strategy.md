@@ -8,7 +8,7 @@ It also allows to decouple software modules through [Dependency Inversion](https
 
 The basic idea behind the Strategy pattern is that, given an algorithm solving
 a particular problem, we define only the skeleton of the algorithm at an abstract
-level and we separate the specific algorithm’s implementation into different parts.
+level, and we separate the specific algorithm’s implementation into different parts.
 
 In this way, a client using the algorithm may choose a specific implementation,
 while the general algorithm workflow remains the same. In other words, the abstract
@@ -21,7 +21,7 @@ This is why we call it "Dependency Inversion".
 Imagine we are working on a project that generates reports every month.
 We need the reports to be generated in different formats (strategies), e.g.,
 in `JSON` or `Plain Text` formats.
-But things vary over time and we don't know what kind of requirement we may get
+But things vary over time, and we don't know what kind of requirement we may get
 in the future. For example, we may need to generate our report in a completly new
 format, or just modify one of the existing formats.
 

@@ -46,6 +46,7 @@
 
 - [Functional Programming](./functional/index.md)
   - [Programming paradigms](./functional/paradigms.md)
+  - [Generics as Type Classes](./functional/generics-type-classes.md)
 
 - [Additional Resources](./additional_resources/index.md)
   - [Design principles](./additional_resources/design-principles.md)
