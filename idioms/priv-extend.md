@@ -63,20 +63,29 @@ fn main(s: a::S) {
 }
 ```
 
-## Alternative approach for structs
+## Alternative: `Private fields` for structs
 
 `#[non_exhaustive]` only works across crate boundaries. Within a crate, the
 private field method may be used.
 
-For `struct`s, an alternative approach exists: By adding a private field to a
-struct, the struct cannot be instantiated or matched against.
+Adding a field to a struct is a mostly backwards compatible change.
+However, if a client uses a pattern to deconstruct a struct instance, they
+might name all the fields in the struct and adding a new one would break that
+pattern. The client could name some of the fields and use `..` in the pattern,
+in which case adding another field is backwards compatible. Making at least one
+of the struct's fields private forces clients to use the latter form of patterns,
+ensuring that the struct is future-proof.
+
+The downside of this approach is that you might need to add an otherwise unneeded
+field to the struct. You can use the `()` type so that there is no runtime overhead
+and prepend `_` to the field name to avoid the unused field warning.
 
 ```rust
 pub struct S {
     pub a: i32,
     // Because `b` is private, you cannot match on `S` without using `..` and `S`
-    //  cannot be directly instantiated
-    b: ()
+    //  cannot be directly instantiated or matched against
+    _b: ()
 }
 ```
 
@@ -101,3 +110,7 @@ When `#[non_exhaustive]` is applied to `enum`s, it forces clients to handle a
 wildcard variant. If there is no sensible action to take in this case, this may
 lead to brittle code. If a client decides to `panic!()` in this scenario, it may
 have been better to expose this error at compile time.
+
+## See also
+
+- [RFC introducing #[non_exhaustive] attribute for enums and structs](https://github.com/rust-lang/rfcs/blob/master/text/2008-non-exhaustive.md)
