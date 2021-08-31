@@ -58,7 +58,7 @@ fn print_matched_variants(s: a::S) {
 
         // The wildcard match is required because more variants may be
         // added in the future
-        _ => println("it's a new variant")
+        _ => println!("it's a new variant")
     }
 }
 ```
