@@ -1,26 +1,27 @@
-# `#[non_exhaustive]` & private fields for extensibility
+# `#[non_exhaustive]` and private fields for extensibility
 
 ## Description
 
 A small set of scenarios exist where a library author may want to add public
 fields to a public struct or new variants to an enum without breaking backwards
-compatibility. Rust offers two solutions:
+compatibility.
+Rust offers two solutions to this problem:
 
 - Use `#[non_exhaustive]` on `struct`s, `enum`s, and `enum` variants.
-For extensive documentation on all the places `#[non_exhaustive]` can be used,
-see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
+  For extensive documentation on all the places where `#[non_exhaustive]` can be used,
+  see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
 
 - You may add a private field to a struct to prevent it from being directly
 instantiated or matched against
 
 ## Warning
 
-Use this deliberately and with caution: Incrementing the major version when adding
+Use this deliberately and with caution: incrementing the major version when adding
 fields or variants is often a better option. `#[non_exhaustive]` may be appropriate
 in scenarios where you're modeling an external resource that may change out-of-sync
 with your library, but is not a general purpose tool.
 
-`#[non_exhaustive]` forces clients to handle the "Something else" case; there is
+In fact, `#[non_exhaustive]` forces clients to handle the "Something else" case; there is
 rarely a sensible action to take in this scenario. This leads to awkward code and
 code paths that are only executed in extremely rare circumstances.
 
@@ -91,7 +92,7 @@ pub struct S {
 
 ## Discussion
 
-On `struct`s `#[non_exhaustive]` allows adding additional fields in a backwards
+On `struct`s, `#[non_exhaustive]` allows adding additional fields in a backwards
 compatible way. It will also prevent clients from using the struct constructor,
 even if all the fields are public. This may be helpful, but it's worth considering
 if you _want_ an additional field to be found by clients as a compiler error rather
