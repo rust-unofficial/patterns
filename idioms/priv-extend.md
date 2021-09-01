@@ -9,8 +9,8 @@ compatibility.
 Rust offers two solutions to this problem:
 
 - Use `#[non_exhaustive]` on `struct`s, `enum`s, and `enum` variants.
-  For extensive documentation on all the places where `#[non_exhaustive]` can be used,
-  see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
+  For extensive documentation on all the places where `#[non_exhaustive]` can be
+  used, see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
 
 - You may add a private field to a struct to prevent it from being directly
   instantiated or matched against (see Alternative)
@@ -114,8 +114,8 @@ If there is no sensible action to take in this case, this may lead to awkward
 code and code paths that are only executed in extremely rare circumstances.
 If a client decides to `panic!()` in this scenario, it may have been better to
 expose this error at compile time.
-In fact, `#[non_exhaustive]` forces clients to handle the "Something else" case;
-there is rarely a sensible action to take in this scenario. 
+In fact, `#[non_exhaustive]` forces clients to handle the "Something else"
+case; there is rarely a sensible action to take in this scenario. 
 
 ## See also
 
