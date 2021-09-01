@@ -1184,43 +1184,121 @@ by closure.</p>
 moved.</p>
 <h2 id="disadvantages-8"><a class="header" href="#disadvantages-8">Disadvantages</a></h2>
 <p>Additional indentation of closure body.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="privacy-for-extensibility"><a class="header" href="#privacy-for-extensibility">Privacy for extensibility</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="non_exhaustive-and-private-fields-for-extensibility"><a class="header" href="#non_exhaustive-and-private-fields-for-extensibility"><code>#[non_exhaustive]</code> and private fields for extensibility</a></h1>
 <h2 id="description-13"><a class="header" href="#description-13">Description</a></h2>
-<p>Use a private field to ensure that a struct is extensible without breaking
-stability guarantees.</p>
+<p>A small set of scenarios exist where a library author may want to add public
+fields to a public struct or new variants to an enum without breaking backwards
+compatibility.</p>
+<p>Rust offers two solutions to this problem:</p>
+<ul>
+<li>
+<p>Use <code>#[non_exhaustive]</code> on <code>struct</code>s, <code>enum</code>s, and <code>enum</code> variants.
+For extensive documentation on all the places where <code>#[non_exhaustive]</code> can be
+used, see <a href="https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute">the docs</a>.</p>
+</li>
+<li>
+<p>You may add a private field to a struct to prevent it from being directly
+instantiated or matched against (see Alternative)</p>
+</li>
+</ul>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
-<pre><code class="language-rust ignore">mod a {
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>mod a {
     // Public struct.
+    #[non_exhaustive]
     pub struct S {
         pub foo: i32,
-        // Private field.
-        bar: i32,
+    }
+    
+    #[non_exhaustive]
+    pub enum AdmitMoreVariants {
+        VariantA,
+        VariantB,
+        #[non_exhaustive]
+        VariantC { a: String }
     }
 }
 
-fn main(s: a::S) {
-    // Because S::bar is private, it cannot be named here and we must use `..`
-    // in the pattern.
+fn print_matched_variants(s: a::S) {
+    // Because S is `#[non_exhaustive]`, it cannot be named here and
+    // we must use `..` in the pattern.
     let a::S { foo: _, ..} = s;
-}
+    
+    let some_enum = a::AdmitMoreVariants::VariantA;
+    match some_enum {
+        a::AdmitMoreVariants::VariantA =&gt; println!(&quot;it's an A&quot;),
+        a::AdmitMoreVariants::VariantB =&gt; println!(&quot;it's a b&quot;),
 
-</code></pre>
-<h2 id="discussion-4"><a class="header" href="#discussion-4">Discussion</a></h2>
+        // .. required because this variant is non-exhaustive as well
+        a::AdmitMoreVariants::VariantC { a, .. } =&gt; println!(&quot;it's a c&quot;),
+
+        // The wildcard match is required because more variants may be
+        // added in the future
+        _ =&gt; println!(&quot;it's a new variant&quot;)
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="alternative-private-fields-for-structs"><a class="header" href="#alternative-private-fields-for-structs">Alternative: <code>Private fields</code> for structs</a></h2>
+<p><code>#[non_exhaustive]</code> only works across crate boundaries.
+Within a crate, the private field method may be used.</p>
 <p>Adding a field to a struct is a mostly backwards compatible change.
 However, if a client uses a pattern to deconstruct a struct instance, they
 might name all the fields in the struct and adding a new one would break that
-pattern. The client could name some fields and use <code>..</code> in the pattern,
-in which case adding another field is backwards compatible. Making at least one
-of the struct's fields private forces clients to use the latter form of patterns,
-ensuring that the struct is future-proof.</p>
+pattern.
+The client could name some fields and use <code>..</code> in the pattern, in which case adding
+another field is backwards compatible.
+Making at least one of the struct's fields private forces clients to use the latter
+form of patterns, ensuring that the struct is future-proof.</p>
 <p>The downside of this approach is that you might need to add an otherwise unneeded
-field to the struct. You can use the <code>()</code> type so that there is no runtime overhead
-and prepend <code>_</code> to the field name to avoid the unused field warning.</p>
-<p>If Rust allowed private variants of enums, we could use the same trick to make
-adding a variant to an enum backwards compatible. The problem there is exhaustive
-match expressions. A private variant would force clients to have a <code>_</code> wildcard
-pattern. A common way to implement this instead is using the <a href="https://doc.rust-lang.org/reference/attributes/type_system.html"><code>#[non_exhaustive]</code></a>
-attribute.</p>
+field to the struct.
+You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to
+the field name to avoid the unused field warning.</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>pub struct S {
+    pub a: i32,
+    // Because `b` is private, you cannot match on `S` without using `..` and `S`
+    //  cannot be directly instantiated or matched against
+    _b: ()
+}
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="discussion-4"><a class="header" href="#discussion-4">Discussion</a></h2>
+<p>On <code>struct</code>s, <code>#[non_exhaustive]</code> allows adding additional fields in a backwards
+compatible way.
+It will also prevent clients from using the struct constructor, even if all the
+fields are public.
+This may be helpful, but it's worth considering if you <em>want</em> an additional field
+to be found by clients as a compiler error rather than something that may be silently
+undiscovered.</p>
+<p><code>#[non_exhaustive]</code> can be applied to enum variants as well.
+A <code>#[non_exhaustive]</code> variant behaves in the same way as a <code>#[non_exhaustive]</code> struct.</p>
+<p>Use this deliberately and with caution: incrementing the major version when adding
+fields or variants is often a better option.
+<code>#[non_exhaustive]</code> may be appropriate in scenarios where you're modeling an external
+resource that may change out-of-sync with your library, but is not a general purpose
+tool.</p>
+<h3 id="disadvantages-9"><a class="header" href="#disadvantages-9">Disadvantages</a></h3>
+<p><code>#[non_exhaustive]</code> can make your code much less ergonomic to use, especially when
+forced to handle unknown enum variants.
+It should only be used when these sorts of evolutions are required <strong>without</strong>
+incrementing the major version.</p>
+<p>When <code>#[non_exhaustive]</code> is applied to <code>enum</code>s, it forces clients to handle a
+wildcard variant.
+If there is no sensible action to take in this case, this may lead to awkward
+code and code paths that are only executed in extremely rare circumstances.
+If a client decides to <code>panic!()</code> in this scenario, it may have been better to
+expose this error at compile time.
+In fact, <code>#[non_exhaustive]</code> forces clients to handle the &quot;Something else&quot; case;
+there is rarely a sensible action to take in this scenario.</p>
+<h2 id="see-also-8"><a class="header" href="#see-also-8">See also</a></h2>
+<ul>
+<li><a href="https://github.com/rust-lang/rfcs/blob/master/text/2008-non-exhaustive.md">RFC introducing #[non_exhaustive] attribute for enums and structs</a></li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="easy-doc-initialization"><a class="header" href="#easy-doc-initialization">Easy doc initialization</a></h1>
 <h2 id="description-14"><a class="header" href="#description-14">Description</a></h2>
 <p>If a struct takes significant effort to initialize, when writing docs, it can be
@@ -1286,7 +1364,7 @@ actually run while testing because it is inside a function which is never
 invoked.</p>
 <h2 id="advantages-9"><a class="header" href="#advantages-9">Advantages</a></h2>
 <p>This is much more concise and avoids repetitive code in examples.</p>
-<h2 id="disadvantages-9"><a class="header" href="#disadvantages-9">Disadvantages</a></h2>
+<h2 id="disadvantages-10"><a class="header" href="#disadvantages-10">Disadvantages</a></h2>
 <p>As example is in a function, the code will not be tested. Though it will still be
 checked to make sure it compiles when running a <code>cargo test</code>. So this pattern is
 most useful when you need <code>no_run</code>. With this, you do not need to add <code>no_run</code>.</p>
@@ -1323,7 +1401,7 @@ let data = data;
 </code></pre>
 <h2 id="advantages-10"><a class="header" href="#advantages-10">Advantages</a></h2>
 <p>Compiler ensures that you don't accidentally mutate data after some point.</p>
-<h2 id="disadvantages-10"><a class="header" href="#disadvantages-10">Disadvantages</a></h2>
+<h2 id="disadvantages-11"><a class="header" href="#disadvantages-11">Disadvantages</a></h2>
 <p>Nested block requires additional indentation of block body.
 One more line to return data from block or redefine variable.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="design-patterns-1"><a class="header" href="#design-patterns-1">Design Patterns</a></h1>
@@ -1551,7 +1629,7 @@ way as we used in case of function pointers.</p>
 <p>As performance, there is always a trade-off between performance and code
 simplicity and organisation. Static dispatch gives faster performance, while
 dynamic dispatch provides flexibility when we structure our application.</p>
-<h2 id="see-also-8"><a class="header" href="#see-also-8">See also</a></h2>
+<h2 id="see-also-9"><a class="header" href="#see-also-9">See also</a></h2>
 <ul>
 <li>
 <p><a href="https://en.wikipedia.org/wiki/Command_pattern">Command pattern</a></p>
@@ -1684,7 +1762,7 @@ fn main() {
     assert_eq!(1f64, norm!(0.5, -0.5, 0.5, -0.5));
 }
 </code></pre></pre>
-<h2 id="see-also-9"><a class="header" href="#see-also-9">See also</a></h2>
+<h2 id="see-also-10"><a class="header" href="#see-also-10">See also</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Interpreter_pattern">Interpreter pattern</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context free grammar</a></li>
@@ -1750,7 +1828,7 @@ types.</p>
 <p>Newtypes are a zero-cost abstraction - there is no runtime overhead.</p>
 <p>The privacy system ensures that users cannot access the wrapped type (if the
 field is private, which it is by default).</p>
-<h2 id="disadvantages-11"><a class="header" href="#disadvantages-11">Disadvantages</a></h2>
+<h2 id="disadvantages-12"><a class="header" href="#disadvantages-12">Disadvantages</a></h2>
 <p>The downside of newtypes (especially compared with type aliases), is that there
 is no special language support. This means there can be <em>a lot</em> of boilerplate.
 You need a 'pass through' method for every method you want to expose on the
@@ -1771,7 +1849,7 @@ e.g.,</li>
 types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>,
 but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used
 with <code>Bar</code>.</p>
-<h2 id="see-also-10"><a class="header" href="#see-also-10">See also</a></h2>
+<h2 id="see-also-11"><a class="header" href="#see-also-11">See also</a></h2>
 <ul>
 <li><a href="https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction">Advanced Types in the book</a></li>
 <li><a href="https://wiki.haskell.org/Newtype">Newtypes in Haskell</a></li>
@@ -1872,7 +1950,7 @@ is shorter than the lifetime of <code>self</code>.</p>
 <p>Note that implementing <code>Deref</code> is not a core part of this pattern, it only makes
 using the guard object more ergonomic. Implementing a <code>get</code> method on the guard
 works just as well.</p>
-<h2 id="see-also-11"><a class="header" href="#see-also-11">See also</a></h2>
+<h2 id="see-also-12"><a class="header" href="#see-also-12">See also</a></h2>
 <p><a href="patterns/behavioural/../../idioms/dtor-finally.html">Finalisation in destructors idiom</a></p>
 <p>RAII is a common pattern in C++: <a href="http://en.cppreference.com/w/cpp/language/raii">cppreference.com</a>,
 <a href="https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization">wikipedia</a>.</p>
@@ -1966,7 +2044,7 @@ does not know anything about specific implementations of <code>Json</code> and <
 whereas the output implementations does not care about how data is preprocessed,
 stored, and fetched. The only thing they have to know is context and a specific
 trait and method to implement, i.e,<code>Formatter</code> and <code>run</code>.</p>
-<h2 id="disadvantages-12"><a class="header" href="#disadvantages-12">Disadvantages</a></h2>
+<h2 id="disadvantages-13"><a class="header" href="#disadvantages-13">Disadvantages</a></h2>
 <p>For each strategy there must be implemented at least one module, so number of modules
 increases with number of strategies. If there are many strategies to choose from
 then users have to know how strategies differ from one another.</p>
@@ -2026,7 +2104,7 @@ fn main() {
     assert_eq!(82, val.map(first_byte_strategy).unwrap());
 }
 </code></pre></pre>
-<h2 id="see-also-12"><a class="header" href="#see-also-12">See also</a></h2>
+<h2 id="see-also-13"><a class="header" href="#see-also-13">See also</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Dependency_injection">Dependency Injection</a></li>
@@ -2122,7 +2200,7 @@ example,</p>
 </code></pre>
 <p>In other languages (e.g., Java) it is common for data to have an <code>accept</code> method
 which performs the same duty.</p>
-<h2 id="see-also-13"><a class="header" href="#see-also-13">See also</a></h2>
+<h2 id="see-also-14"><a class="header" href="#see-also-14">See also</a></h2>
 <p>The visitor pattern is a common pattern in most OO languages.</p>
 <p><a href="https://en.wikipedia.org/wiki/Visitor_pattern">Wikipedia article</a></p>
 <p>The <a href="patterns/behavioural/../creational/fold.html">fold</a> pattern is similar to visitor but produces
@@ -2202,7 +2280,7 @@ construction has side effects.</p>
 <p>Separates methods for building from other methods.</p>
 <p>Prevents proliferation of constructors</p>
 <p>Can be used for one-liner initialisation as well as more complex construction.</p>
-<h2 id="disadvantages-13"><a class="header" href="#disadvantages-13">Disadvantages</a></h2>
+<h2 id="disadvantages-14"><a class="header" href="#disadvantages-14">Disadvantages</a></h2>
 <p>More complex than creating a struct object directly, or a simple constructor
 function.</p>
 <h2 id="discussion-12"><a class="header" href="#discussion-12">Discussion</a></h2>
@@ -2226,7 +2304,7 @@ fb.b();
 let f = fb.build();
 </code></pre>
 <p>as well as the <code>FooBuilder::new().a().b().build()</code> style.</p>
-<h2 id="see-also-14"><a class="header" href="#see-also-14">See also</a></h2>
+<h2 id="see-also-15"><a class="header" href="#see-also-15">See also</a></h2>
 <ul>
 <li><a href="https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html">Description in the style guide</a></li>
 <li><a href="https://crates.io/crates/derive_builder">derive_builder</a>, a crate for automatically
@@ -2325,7 +2403,7 @@ expensive.</p>
 the original data structure, and we don't need to clone unchanged nodes. However,
 they are less ergonomic to use and mean that the data structures cannot be
 mutable.</p>
-<h2 id="see-also-15"><a class="header" href="#see-also-15">See also</a></h2>
+<h2 id="see-also-16"><a class="header" href="#see-also-16">See also</a></h2>
 <p>Iterators have a <code>fold</code> method, however this folds a data structure into a
 value, rather than into a new data structure. An iterator's <code>map</code> is more like
 this fold pattern.</p>
@@ -2413,7 +2491,7 @@ fn baz(a: &amp;mut A) {
 <h2 id="advantages-15"><a class="header" href="#advantages-15">Advantages</a></h2>
 <p>Lets you work around limitations in the borrow checker.</p>
 <p>Often produces a better design.</p>
-<h2 id="disadvantages-14"><a class="header" href="#disadvantages-14">Disadvantages</a></h2>
+<h2 id="disadvantages-15"><a class="header" href="#disadvantages-15">Disadvantages</a></h2>
 <p>Leads to more verbose code.</p>
 <p>Sometimes, the smaller structs are not good abstractions, and so we end up with
 a worse design. That is probably a 'code smell', indicating that the program
@@ -2444,7 +2522,7 @@ but has since found wide use outside the project.</li>
 of Rust is the crate, splitting a project into multiple crates can allow more of
 the code to be built in parallel.</li>
 </ul>
-<h2 id="disadvantages-15"><a class="header" href="#disadvantages-15">Disadvantages</a></h2>
+<h2 id="disadvantages-16"><a class="header" href="#disadvantages-16">Disadvantages</a></h2>
 <ul>
 <li>This can lead to &quot;dependency hell&quot;, when a project depends on multiple conflicting
 versions of a crate at the same time. For example, the <code>url</code> crate has both versions
@@ -2463,7 +2541,7 @@ for converting <code>&amp;T</code> to <code>&amp;[T]</code>.</p>
 URLs.</p>
 <p>The <a href="https://crates.io/crates/num_cpus"><code>num_cpus</code></a> crate provides a function to
 query the number of CPUs on a machine.</p>
-<h2 id="see-also-16"><a class="header" href="#see-also-16">See also</a></h2>
+<h2 id="see-also-17"><a class="header" href="#see-also-17">See also</a></h2>
 <ul>
 <li><a href="https://crates.io/">crates.io: The Rust community crate host</a></li>
 </ul>
@@ -2480,7 +2558,7 @@ that call directly into the unsafe code. Users may use this to gain speed benefi
 <li>Writing the outer module is much easier, since you can count on the guarantees
 of the inner module</li>
 </ul>
-<h2 id="disadvantages-16"><a class="header" href="#disadvantages-16">Disadvantages</a></h2>
+<h2 id="disadvantages-17"><a class="header" href="#disadvantages-17">Disadvantages</a></h2>
 <ul>
 <li>Sometimes, it may be hard to find a suitable interface.</li>
 <li>The abstraction may introduce inefficiencies.</li>
@@ -2494,7 +2572,7 @@ valid UTF-8. The operations on <code>String</code> ensure this behavior. However
 have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case
 the onus is on them to guarantee the validity of the contents.</li>
 </ul>
-<h2 id="see-also-17"><a class="header" href="#see-also-17">See also</a></h2>
+<h2 id="see-also-18"><a class="header" href="#see-also-18">See also</a></h2>
 <ul>
 <li><a href="https://www.ralfj.de/blog/2018/08/22/two-kinds-of-invariants.html">Ralf Jung's Blog about invariants in unsafe code</a></li>
 </ul>
@@ -2705,7 +2783,7 @@ the iterator with its parent:</p>
 datum   dbm_nextkey(DBM *);
 </code></pre>
 <p>Thus, all the lifetimes were bound together, and such unsafety was prevented.</p>
-<h2 id="disadvantages-17"><a class="header" href="#disadvantages-17">Disadvantages</a></h2>
+<h2 id="disadvantages-18"><a class="header" href="#disadvantages-18">Disadvantages</a></h2>
 <p>However, this design choice also has a number of drawbacks, which should be
 considered as well.</p>
 <p>First, the API itself becomes less expressive.
@@ -2786,7 +2864,7 @@ impl MySetWrapper {
 <p>This makes APIs safer to use, avoiding issues with lifetimes between types.
 See <a href="patterns/ffi/./export.html">Object-Based APIs</a> for more on the advantages and pitfalls
 this avoids.</p>
-<h2 id="disadvantages-18"><a class="header" href="#disadvantages-18">Disadvantages</a></h2>
+<h2 id="disadvantages-19"><a class="header" href="#disadvantages-19">Disadvantages</a></h2>
 <p>Often, wrapping types is quite difficult, and sometimes a Rust API compromise
 would make things easier.</p>
 <p>As an example, consider an iterator which does not efficiently implement <code>nth()</code>.
@@ -2928,7 +3006,7 @@ should be understood fully before assessing whether the clone is required or not
 cases in which <code>.clone()</code> is not necessary, like <a href="https://rust-lang.github.io/rust-clippy/master/index.html#redundant_clone">1</a>,
 <a href="https://rust-lang.github.io/rust-clippy/master/index.html#clone_on_copy">2</a>,
 <a href="https://rust-lang.github.io/rust-clippy/master/index.html#map_clone">3</a> or <a href="https://rust-lang.github.io/rust-clippy/master/index.html#clone_double_ref">4</a>.</p>
-<h2 id="see-also-18"><a class="header" href="#see-also-18">See also</a></h2>
+<h2 id="see-also-19"><a class="header" href="#see-also-19">See also</a></h2>
 <ul>
 <li><a href="anti_patterns/../idioms/mem-replace.html"><code>mem::{take(_), replace(_)}</code> to keep owned values in changed enums</a></li>
 <li><a href="http://doc.rust-lang.org/std/rc/"><code>Rc&lt;T&gt;</code> documentation, which handles .clone() intelligently</a></li>
@@ -3009,7 +3087,7 @@ Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.
 <p>Some may also want to add <code>missing-copy-implementations</code> to their list.</p>
 <p>Note that we explicitly did not add the <code>deprecated</code> lint, as it is fairly
 certain that there will be more deprecated APIs in the future.</p>
-<h2 id="see-also-19"><a class="header" href="#see-also-19">See also</a></h2>
+<h2 id="see-also-20"><a class="header" href="#see-also-20">See also</a></h2>
 <ul>
 <li><a href="https://rust-lang.github.io/rust-clippy/master">A collection of all clippy lints</a></li>
 <li><a href="https://doc.rust-lang.org/reference/attributes.html#deprecation">deprecate attribute</a> documentation</li>
@@ -3081,7 +3159,7 @@ well as <code>Bar</code>.</p>
     }
 }
 </code></pre>
-<h2 id="disadvantages-19"><a class="header" href="#disadvantages-19">Disadvantages</a></h2>
+<h2 id="disadvantages-20"><a class="header" href="#disadvantages-20">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
 code will not expect this to happen. That's because we are abusing the <code>Deref</code>
 trait rather than using it as intended (and documented, etc.). It's also because
@@ -3114,7 +3192,7 @@ favouring explicit conversions between types. Automatic dereferencing in the dot
 operator is a case where the ergonomics strongly favour an implicit mechanism,
 but the intention is that this is limited to degrees of indirection, not
 conversion between arbitrary types.</p>
-<h2 id="see-also-20"><a class="header" href="#see-also-20">See also</a></h2>
+<h2 id="see-also-21"><a class="header" href="#see-also-21">See also</a></h2>
 <ul>
 <li><a href="anti_patterns/../idioms/deref.html">Collections are smart pointers idiom</a>.</li>
 <li>Delegation crates for less boilerplate like <a href="https://crates.io/crates/delegate">delegate</a>
@@ -3383,7 +3461,7 @@ By making the non-shared fields generic, they are implemented once.</p>
 by state. Methods common to all states are typed once in one block, and methods
 unique to one state are in a separate block.</p>
 <p>Both of these mean there are fewer lines of code, and they are better organized.</p>
-<h2 id="disadvantages-20"><a class="header" href="#disadvantages-20">Disadvantages</a></h2>
+<h2 id="disadvantages-21"><a class="header" href="#disadvantages-21">Disadvantages</a></h2>
 <p>This currently increases the size of the binary, due to the way monomorphization
 is implemented in the compiler. Hopefully the implementation will be able to
 improve in the future.</p>
@@ -3400,7 +3478,7 @@ the <a href="functional/../patterns/behavioural/strategy.html">Strategy Pattern<
 instead.</p>
 </li>
 </ul>
-<h2 id="see-also-21"><a class="header" href="#see-also-21">See also</a></h2>
+<h2 id="see-also-22"><a class="header" href="#see-also-22">See also</a></h2>
 <p>This pattern is used throughout the standard library:</p>
 <ul>
 <li><code>Vec&lt;u8&gt;</code> can be cast from a String, unlike every other type of <code>Vec&lt;T&gt;</code>.<sup class="footnote-reference"><a href="#1">1</a></sup></li>
