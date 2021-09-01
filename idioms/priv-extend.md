@@ -114,8 +114,8 @@ If there is no sensible action to take in this case, this may lead to awkward
 code and code paths that are only executed in extremely rare circumstances.
 If a client decides to `panic!()` in this scenario, it may have been better to
 expose this error at compile time.
-In fact, `#[non_exhaustive]` forces clients to handle the "Something else"
-case; there is rarely a sensible action to take in this scenario. 
+In fact, `#[non_exhaustive]` forces clients to handle the "Something else" case;
+there is rarely a sensible action to take in this scenario.
 
 ## See also
 
