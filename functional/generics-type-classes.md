@@ -267,7 +267,7 @@ https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801)
 [^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
 https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
 
-[^3]: See: [impl\<'_\> ToString for Cow\<'_, str>](
+[^3]: See: [impl\<'\_\> ToString for Cow\<'\_, str>](
 https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
 
 [^4]: Example:
