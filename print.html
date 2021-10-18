@@ -3043,9 +3043,7 @@ before there was none.</p>
 <p>Furthermore, crates that supply additional lints (e.g. <a href="https://github.com/Manishearth/rust-clippy">rust-clippy</a>) can no
 longer be used unless the annotation is removed. This is mitigated with
 <a href="https://doc.rust-lang.org/rustc/lints/levels.html#capping-lints">--cap-lints</a>. The <code>--cap-lints=warn</code> command line argument, turns all <code>deny</code>
-lint errors into warnings. But be aware that <code>forbid</code> lints are stronger than
-<code>deny</code> hence the 'forbid' level cannot be overridden to be anything lower than
-an error. As a result <code>forbid</code> lints will still stop compilation.</p>
+lint errors into warnings.</p>
 <h2 id="alternatives"><a class="header" href="#alternatives">Alternatives</a></h2>
 <p>There are two ways of tackling this problem: First, we can decouple the build
 setting from the code, and second, we can name the lints we want to deny
