@@ -19,6 +19,8 @@ pub struct Second {
 }
 
 impl Second {
+    // Constructs a new instance of [`Second`].
+    // Note this is an associated function - no self.
     pub fn new(value: u64) -> Self {
         Self { value }
     }
