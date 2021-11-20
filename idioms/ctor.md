@@ -3,7 +3,7 @@
 ## Description
 
 Rust does not have constructors as a language construct. Instead, the
-convention is to use an associated `new` function to create an object:
+convention is to use an [associated function][] `new` to create an object:
 
 ```rust
 /// Time in seconds.
@@ -68,7 +68,7 @@ pub struct Second {
 ```
 
 **Note:** When implementing `Default` for a type, it is neither required nor
-recommended to also provide an associated `new` function without arguments.
+recommended to also provide an associated function `new` without arguments.
 
 **Hint:** The advantage of implementing or deriving `Default` is that your type
 can now be used where a `Default` implementation is required, most prominently,
@@ -82,5 +82,6 @@ any of the [`*or_default` functions in the standard library][std-or-default].
 - The [builder pattern](../patterns/creational/builder.md) for constructing
   objects where there are multiple configurations.
 
+[associated function]: https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions
 [std-default]: https://doc.rust-lang.org/stable/std/default/trait.Default.html
 [std-or-default]: https://doc.rust-lang.org/stable/std/?search=or_default
