@@ -37,9 +37,7 @@ All this conspires to potentially break the build whenever something changes.
 Furthermore, crates that supply additional lints (e.g. [rust-clippy]) can no
 longer be used unless the annotation is removed. This is mitigated with
 [--cap-lints]. The `--cap-lints=warn` command line argument, turns all `deny`
-lint errors into warnings. But be aware that `forbid` lints are stronger than
-`deny` hence the 'forbid' level cannot be overridden to be anything lower than
-an error. As a result `forbid` lints will still stop compilation.
+lint errors into warnings.
 
 ## Alternatives
 
