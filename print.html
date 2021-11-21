@@ -333,32 +333,109 @@ string has been pre-allocated to the expected size).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="constructors"><a class="header" href="#constructors">Constructors</a></h1>
 <h2 id="description-2"><a class="header" href="#description-2">Description</a></h2>
 <p>Rust does not have constructors as a language construct. Instead, the
-convention is to use a static <code>new</code> method to create an object.</p>
-<h2 id="example-2"><a class="header" href="#example-2">Example</a></h2>
-<pre><code class="language-rust ignore">// A Rust vector, see liballoc/vec.rs
-pub struct Vec&lt;T&gt; {
-    buf: RawVec&lt;T&gt;,
-    len: usize,
+convention is to use an <a href="https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions">associated function</a> <code>new</code> to create an object:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::new(42);
+/// assert_eq!(42, s.value());
+/// ```
+pub struct Second {
+    value: u64
 }
 
-impl&lt;T&gt; Vec&lt;T&gt; {
-    // Constructs a new, empty `Vec&lt;T&gt;`.
-    // Note this is a static method - no self.
-    // This constructor doesn't take any arguments, but some might in order to
-    // properly initialise an object
-    pub fn new() -&gt; Vec&lt;T&gt; {
-        // Create a new Vec with fields properly initialised.
-        Vec {
-            // Note that here we are calling RawVec's constructor.
-            buf: RawVec::new(),
-            len: 0,
-        }
+impl Second {
+    // Constructs a new instance of [`Second`].
+    // Note this is an associated function - no self.
+    pub fn new(value: u64) -&gt; Self {
+        Self { value }
+    }
+
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
     }
 }
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="default-constructors"><a class="header" href="#default-constructors">Default Constructors</a></h2>
+<p>Rust supports default constructors with the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::default();
+/// assert_eq!(0, s.value());
+/// ```
+pub struct Second {
+    value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
+    }
+}
+
+impl Default for Second {
+    fn default() -&gt; Self {
+        Self { value: 0 }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Default</code> can also be derived if all types of all fields implement <code>Default</code>,
+like they do with <code>Second</code>:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::default();
+/// assert_eq!(0, s.value());
+/// ```
+#[derive(Default)]
+pub struct Second {
+    value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note:</strong> When implementing <code>Default</code> for a type, it is neither required nor
+recommended to also provide an associated function <code>new</code> without arguments.</p>
+<p><strong>Hint:</strong> The advantage of implementing or deriving <code>Default</code> is that your type
+can now be used where a <code>Default</code> implementation is required, most prominently,
+any of the <a href="https://doc.rust-lang.org/stable/std/?search=or_default"><code>*or_default</code> functions in the standard library</a>.</p>
 <h2 id="see-also-1"><a class="header" href="#see-also-1">See also</a></h2>
-<p>The <a href="idioms/../patterns/creational/builder.html">builder pattern</a> for constructing objects
-where there are multiple configurations.</p>
+<ul>
+<li>
+<p>The <a href="idioms/default.html">default idiom</a> for a more in-depth description of the
+<code>Default</code> trait.</p>
+</li>
+<li>
+<p>The <a href="idioms/../patterns/creational/builder.html">builder pattern</a> for constructing
+objects where there are multiple configurations.</p>
+</li>
+</ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-default-trait"><a class="header" href="#the-default-trait">The <code>Default</code> Trait</a></h1>
 <h2 id="description-3"><a class="header" href="#description-3">Description</a></h2>
 <p>Many types in Rust have a <a href="idioms/ctor.html">constructor</a>. However, this is <em>specific</em> to the
@@ -373,7 +450,7 @@ types implement <code>Default</code>, the more useful it becomes.</p>
 <p>On the other hand, constructors can take multiple arguments, while the
 <code>default()</code> method does not. There can even be multiple constructors with
 different names, but there can only be one <code>Default</code> implementation per type.</p>
-<h2 id="example-3"><a class="header" href="#example-3">Example</a></h2>
+<h2 id="example-2"><a class="header" href="#example-2">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::{path::PathBuf, time::Duration};
 
 // note that we can simply auto-derive Default here.
@@ -420,7 +497,7 @@ not be &quot;default&quot;</li>
 <h2 id="description-4"><a class="header" href="#description-4">Description</a></h2>
 <p>Use the <code>Deref</code> trait to treat collections like smart pointers, offering owning
 and borrowed views of data.</p>
-<h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
+<h2 id="example-3"><a class="header" href="#example-3">Example</a></h2>
 <pre><code class="language-rust ignore">use std::ops::Deref;
 
 struct Vec&lt;T&gt; {
@@ -479,7 +556,7 @@ slicing syntax. The target will be the borrowed view.</p>
 <p>Rust does not provide the equivalent to <code>finally</code> blocks - code that will be
 executed no matter how a function is exited. Instead, an object's destructor can
 be used to run code that must be run before exit.</p>
-<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
+<h2 id="example-4"><a class="header" href="#example-4">Example</a></h2>
 <pre><code class="language-rust ignore">fn bar() -&gt; Result&lt;(), ()&gt; {
     // These don't need to be defined inside the function.
     struct Foo;
@@ -550,7 +627,7 @@ resources in an unexpected state.</p>
 <code>A { name: String, x: u8 }</code> and <code>B { name: String }</code>. Now we want to change
 <code>MyEnum::A</code> to a <code>B</code> if <code>x</code> is zero, while keeping <code>MyEnum::B</code> intact.</p>
 <p>We can do this without cloning the <code>name</code>.</p>
-<h2 id="example-6"><a class="header" href="#example-6">Example</a></h2>
+<h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -646,7 +723,7 @@ anti-pattern in a specific case.</p>
 to declare multiple variables to bind differently-typed objects. To extend the
 lifetime as necessary, we can use deferred conditional initialization, as seen
 below:</p>
-<h2 id="example-7"><a class="header" href="#example-7">Example</a></h2>
+<h2 id="example-6"><a class="header" href="#example-6">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">use std::io;
 use std::fs;
 
@@ -1139,7 +1216,7 @@ for converting an <code>Option</code> to a zero- or one-element slice.</p>
 some variables to closure, give it copy of some data, pass it by reference, or
 perform some other transformation.</p>
 <p>Use variable rebinding in separate scope for that.</p>
-<h2 id="example-8"><a class="header" href="#example-8">Example</a></h2>
+<h2 id="example-7"><a class="header" href="#example-7">Example</a></h2>
 <p>Use</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
@@ -1201,7 +1278,7 @@ used, see <a href="https://doc.rust-lang.org/reference/attributes/type_system.ht
 instantiated or matched against (see Alternative)</p>
 </li>
 </ul>
-<h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
+<h2 id="example-8"><a class="header" href="#example-8">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1335,7 +1412,7 @@ impl Connection {
     }
 }
 </code></pre>
-<h2 id="example-10"><a class="header" href="#example-10">Example</a></h2>
+<h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <p>Instead of typing all of this boilerplate to create an <code>Connection</code> and
 <code>Request</code> it is easier to just create a wrapping helper function which takes
 them as arguments:</p>
@@ -1381,7 +1458,7 @@ only inspected and never modified. The intention can be made explicit by redefin
 the mutable variable as immutable.</p>
 <p>It can be done either by processing data within nested block or by redefining
 variable.</p>
-<h2 id="example-11"><a class="header" href="#example-11">Example</a></h2>
+<h2 id="example-10"><a class="header" href="#example-10">Example</a></h2>
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
 <pre><code class="language-rust ignore">let data = {
@@ -1446,7 +1523,7 @@ For example, when a user pushes a button, or on arrival of a data packet.
 In addition, these commands might be undoable. This may come in useful for
 operations of an editor. We might want to store logs of executed commands so that
 we could reapply the changes later if the system crashes.</p>
-<h2 id="example-12"><a class="header" href="#example-12">Example</a></h2>
+<h2 id="example-11"><a class="header" href="#example-11">Example</a></h2>
 <p>Define two database operations <code>create table</code> and <code>add field</code>. Each of these
 operations is a command which knows how to undo the command, e.g., <code>drop table</code>
 and <code>remove field</code>. When a user invokes a database migration operation then each
@@ -1779,7 +1856,7 @@ and <strong>encapsulation</strong>.</p>
 <h2 id="description-18"><a class="header" href="#description-18">Description</a></h2>
 <p>Use a tuple struct with a single field to make an opaque wrapper for a type.
 This creates a new type, rather than an alias to a type (<code>type</code> items).</p>
-<h2 id="example-13"><a class="header" href="#example-13">Example</a></h2>
+<h2 id="example-12"><a class="header" href="#example-12">Example</a></h2>
 <pre><code class="language-rust ignore">// Some type, not necessarily in the same module or even crate.
 struct Foo {
     //..
@@ -1865,7 +1942,7 @@ terrible name. The essence of the pattern is that resource initialisation is don
 in the constructor of an object and finalisation in the destructor. This pattern
 is extended in Rust by using an RAII object as a guard of some resource and relying
 on the type system to ensure that access is always mediated by the guard object.</p>
-<h2 id="example-14"><a class="header" href="#example-14">Example</a></h2>
+<h2 id="example-13"><a class="header" href="#example-13">Example</a></h2>
 <p>Mutex guards are the classic example of this pattern from the std library (this
 is a simplified version of the real implementation):</p>
 <pre><code class="language-rust ignore">use std::ops::Deref;
@@ -1976,7 +2053,7 @@ in <code>JSON</code> or <code>Plain Text</code> formats.
 But things vary over time, and we don't know what kind of requirement we may get
 in the future. For example, we may need to generate our report in a completly new
 format, or just modify one of the existing formats.</p>
-<h2 id="example-15"><a class="header" href="#example-15">Example</a></h2>
+<h2 id="example-14"><a class="header" href="#example-14">Example</a></h2>
 <p>In this example our invariants (or abstractions) are <code>Context</code>, <code>Formatter</code>,
 and <code>Report</code>, while <code>Text</code> and <code>Json</code> are our strategy structs. These strategies
 have to implement the <code>Formatter</code> trait.</p>
@@ -2118,7 +2195,7 @@ over the same data without having to modify the data (or their primary
 behaviour).</p>
 <p>Furthermore, the visitor pattern allows separating the traversal of
 a collection of objects from the operations performed on each object.</p>
-<h2 id="example-16"><a class="header" href="#example-16">Example</a></h2>
+<h2 id="example-15"><a class="header" href="#example-15">Example</a></h2>
 <pre><code class="language-rust ignore">// The data we will visit
 mod ast {
     pub enum Stmt {
@@ -2216,7 +2293,7 @@ patterns solve this problem by somehow controlling this object creation.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="builder"><a class="header" href="#builder">Builder</a></h1>
 <h2 id="description-22"><a class="header" href="#description-22">Description</a></h2>
 <p>Construct an object with calls to a builder helper.</p>
-<h2 id="example-17"><a class="header" href="#example-17">Example</a></h2>
+<h2 id="example-16"><a class="header" href="#example-16">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -2320,7 +2397,7 @@ thus creating a whole new collection.</p>
 <p>The etymology here is unclear to me. The terms 'fold' and 'folder' are used
 in the Rust compiler, although it appears to me to be more like a map than a
 fold in the usual sense. See the discussion below for more details.</p>
-<h2 id="example-18"><a class="header" href="#example-18">Example</a></h2>
+<h2 id="example-17"><a class="header" href="#example-17">Example</a></h2>
 <pre><code class="language-rust ignore">// The data we will fold, a simple AST.
 mod ast {
     pub enum Stmt {
@@ -2431,7 +2508,7 @@ struct. Then each struct can be borrowed separately and have more flexible
 behaviour.</p>
 <p>This will often lead to a better design in other ways: applying this design
 pattern often reveals smaller units of functionality.</p>
-<h2 id="example-19"><a class="header" href="#example-19">Example</a></h2>
+<h2 id="example-18"><a class="header" href="#example-18">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">
@@ -2955,7 +3032,7 @@ ensuring that either: only one mutable reference exists, or potentially many but
 all immutable references exist. If the code written does not hold true to these
 conditions, this anti-pattern arises when the developer resolves the compiler
 error by cloning the variable.</p>
-<h2 id="example-20"><a class="header" href="#example-20">Example</a></h2>
+<h2 id="example-19"><a class="header" href="#example-19">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -3017,7 +3094,7 @@ cases in which <code>.clone()</code> is not necessary, like <a href="https://rus
 <h2 id="description-30"><a class="header" href="#description-30">Description</a></h2>
 <p>A well-intentioned crate author wants to ensure their code builds without
 warnings. So they annotate their crate root with the following:</p>
-<h2 id="example-21"><a class="header" href="#example-21">Example</a></h2>
+<h2 id="example-20"><a class="header" href="#example-20">Example</a></h2>
 <pre><pre class="playground"><code class="language-rust edition2018">
 <span class="boring">#![allow(unused)]
 </span>#![deny(warnings)]
@@ -3097,7 +3174,7 @@ certain that there will be more deprecated APIs in the future.</p>
 <h2 id="description-31"><a class="header" href="#description-31">Description</a></h2>
 <p>Abuse the <code>Deref</code> trait to emulate inheritance between structs, and thus reuse
 methods.</p>
-<h2 id="example-22"><a class="header" href="#example-22">Example</a></h2>
+<h2 id="example-21"><a class="header" href="#example-21">Example</a></h2>
 <p>Sometimes we want to emulate the following common pattern from OO languages such
 as Java:</p>
 <pre><code class="language-java">class Foo {
@@ -3300,7 +3377,7 @@ where new members can be added to objects willy-nilly by any constructor.
 Unlike those languages, however, all of Rust's additional methods can be type
 checked when they are used, because their generics are statically defined. That
 makes them more usable while remaining safe.</p>
-<h2 id="example-23"><a class="header" href="#example-23">Example</a></h2>
+<h2 id="example-22"><a class="header" href="#example-22">Example</a></h2>
 <p>Suppose you are designing a storage server for a series of lab machines.
 Because of the software involved, there are two different protocols you need
 to support: BOOTP (for PXE network boot), and NFS (for remote mount storage).</p>

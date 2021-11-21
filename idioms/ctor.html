@@ -149,32 +149,109 @@
                         <h1 id="constructors"><a class="header" href="#constructors">Constructors</a></h1>
 <h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Rust does not have constructors as a language construct. Instead, the
-convention is to use a static <code>new</code> method to create an object.</p>
-<h2 id="example"><a class="header" href="#example">Example</a></h2>
-<pre><code class="language-rust ignore">// A Rust vector, see liballoc/vec.rs
-pub struct Vec&lt;T&gt; {
-    buf: RawVec&lt;T&gt;,
-    len: usize,
+convention is to use an <a href="https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions">associated function</a> <code>new</code> to create an object:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::new(42);
+/// assert_eq!(42, s.value());
+/// ```
+pub struct Second {
+    value: u64
 }
 
-impl&lt;T&gt; Vec&lt;T&gt; {
-    // Constructs a new, empty `Vec&lt;T&gt;`.
-    // Note this is a static method - no self.
-    // This constructor doesn't take any arguments, but some might in order to
-    // properly initialise an object
-    pub fn new() -&gt; Vec&lt;T&gt; {
-        // Create a new Vec with fields properly initialised.
-        Vec {
-            // Note that here we are calling RawVec's constructor.
-            buf: RawVec::new(),
-            len: 0,
-        }
+impl Second {
+    // Constructs a new instance of [`Second`].
+    // Note this is an associated function - no self.
+    pub fn new(value: u64) -&gt; Self {
+        Self { value }
+    }
+
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
     }
 }
-</code></pre>
+<span class="boring">}
+</span></code></pre></pre>
+<h2 id="default-constructors"><a class="header" href="#default-constructors">Default Constructors</a></h2>
+<p>Rust supports default constructors with the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::default();
+/// assert_eq!(0, s.value());
+/// ```
+pub struct Second {
+    value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
+    }
+}
+
+impl Default for Second {
+    fn default() -&gt; Self {
+        Self { value: 0 }
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><code>Default</code> can also be derived if all types of all fields implement <code>Default</code>,
+like they do with <code>Second</code>:</p>
+<pre><pre class="playground"><code class="language-rust edition2018">
+<span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::default();
+/// assert_eq!(0, s.value());
+/// ```
+#[derive(Default)]
+pub struct Second {
+    value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&amp;self) -&gt; u64 {
+        self.value
+    }
+}
+<span class="boring">}
+</span></code></pre></pre>
+<p><strong>Note:</strong> When implementing <code>Default</code> for a type, it is neither required nor
+recommended to also provide an associated function <code>new</code> without arguments.</p>
+<p><strong>Hint:</strong> The advantage of implementing or deriving <code>Default</code> is that your type
+can now be used where a <code>Default</code> implementation is required, most prominently,
+any of the <a href="https://doc.rust-lang.org/stable/std/?search=or_default"><code>*or_default</code> functions in the standard library</a>.</p>
 <h2 id="see-also"><a class="header" href="#see-also">See also</a></h2>
-<p>The <a href="../patterns/creational/builder.html">builder pattern</a> for constructing objects
-where there are multiple configurations.</p>
+<ul>
+<li>
+<p>The <a href="default.html">default idiom</a> for a more in-depth description of the
+<code>Default</code> trait.</p>
+</li>
+<li>
+<p>The <a href="../patterns/creational/builder.html">builder pattern</a> for constructing
+objects where there are multiple configurations.</p>
+</li>
+</ul>
 
                     </main>
 
