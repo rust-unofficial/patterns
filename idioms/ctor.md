@@ -24,6 +24,11 @@ impl Second {
     pub fn new(value: u64) -> Self {
         Self { value }
     }
+
+    /// Returns the value in seconds.
+    pub fn value(&self) -> u64 {
+        self.value
+    }
 }
 ```
 
@@ -42,6 +47,13 @@ Rust supports default constructors with the [`Default`][std-default] trait:
 /// ```
 pub struct Second {
     value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&self) -> u64 {
+        self.value
+    }
 }
 
 impl Default for Second {
@@ -66,6 +78,13 @@ like they do with `Second`:
 #[derive(Default)]
 pub struct Second {
     value: u64
+}
+
+impl Second {
+    /// Returns the value in seconds.
+    pub fn value(&self) -> u64 {
+        self.value
+    }
 }
 ```
 
