@@ -2643,11 +2643,12 @@ of the inner module</li>
 <h2 id="examples-2"><a class="header" href="#examples-2">Examples</a></h2>
 <ul>
 <li>The <a href="https://docs.rs/toolshed"><code>toolshed</code></a> crate contains its unsafe operations
-in submodules, presenting a safe interface to users. * <code>std</code>s <code>String</code> class
-is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant that the contents must be
-valid UTF-8. The operations on <code>String</code> ensure this behavior. However, users
-have the option of using an <code>unsafe</code> method to create a <code>String</code>, in which case
-the onus is on them to guarantee the validity of the contents.</li>
+in submodules, presenting a safe interface to users.</li>
+<li><code>std</code>'s <code>String</code> class is a wrapper over <code>Vec&lt;u8&gt;</code> with the added invariant
+that the contents must be valid UTF-8. The operations on <code>String</code> ensure this
+behavior.
+However, users have the option of using an <code>unsafe</code> method to create a <code>String</code>,
+in which case the onus is on them to guarantee the validity of the contents.</li>
 </ul>
 <h2 id="see-also-18"><a class="header" href="#see-also-18">See also</a></h2>
 <ul>
