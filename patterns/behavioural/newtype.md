@@ -35,7 +35,7 @@ impl Bar {
     // Constructor.
     pub fn new(
         //..
-    ) -> Bar {
+    ) -> Self {
 
         //..
 
