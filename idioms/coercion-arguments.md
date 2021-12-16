@@ -21,7 +21,7 @@ coerce to a `&str` whenever the function is invoked.
 
 For this example, we will illustrate some differences for using `&String` as a
 function argument versus using a `&str`, but the ideas apply as well to using
-`&Vec<T>` versus using a `&[T]` or using a `&T` versus a `&Box<T>`.
+`&Vec<T>` versus using a `&[T]` or using a `&Box<T>` versus a `&T`.
 
 Consider an example where we wish to determine if a word contains three
 consecutive vowels. We don't need to own the string to determine this, so we
