@@ -1,4 +1,4 @@
-[中文翻译](https://fomalhauthmj.github.io/patterns/)
+[简体中文翻译](https://fomalhauthmj.github.io/patterns/)
 
 # Introduction
 
