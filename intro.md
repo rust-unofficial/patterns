@@ -1,3 +1,5 @@
+[中文翻译](https://fomalhauthmj.github.io/patterns/)
+
 # Introduction
 
 ## Participation
