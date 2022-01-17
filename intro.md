@@ -1,7 +1,5 @@
 # Introduction
 
-[简体中文翻译](https://fomalhauthmj.github.io/patterns/)
-
 ## Participation
 
 If you are interested in contributing to this book, check out the
