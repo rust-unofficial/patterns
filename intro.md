@@ -7,10 +7,14 @@ If you are interested in contributing to this book, check out the
 
 ## Design patterns
 
-When developing programs, we have to solve many problems.
-A program can be viewed as a solution to a problem.
-It can also be viewed as a collection of solutions to many problems.
-All of these solutions work together to solve a bigger problem.
+In software development, we often come across problems that share similarities
+regardless of the environment they appear in. Although the implementation details
+are crucial to solve the task at hand, we may abstract from these particularities to find
+some nugget of valuable practices that have a more general application.
+Design patterns are a collection of reusable tried and tested solutions to recurring
+problems in engineering. They make our software more modular, maintainable, and extensible.
+Moreover, these patterns provide a common language for developers to use, making them
+an excellent tool for effective communication when problem-solving in teams.
 
 ## Design patterns in Rust
 
