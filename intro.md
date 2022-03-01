@@ -7,16 +7,16 @@ If you are interested in contributing to this book, check out the
 
 ## Design patterns
 
-In software development, we often come across problems that share 
-similarities regardless of the environment they appear in. Although the 
-implementation details are crucial to solve the task at hand, we may 
-abstract from these particularities to find the common practices that 
+In software development, we often come across problems that share
+similarities regardless of the environment they appear in. Although the
+implementation details are crucial to solve the task at hand, we may
+abstract from these particularities to find the common practices that
 are generically applicable.
 
-Design patterns are a collection of reusable tried and tested solutions to 
-recurring problems in engineering. They make our software more modular, 
-maintainable, and extensible. Moreover, these patterns provide a common 
-language for developers to use, making them an excellent tool for effective 
+Design patterns are a collection of reusable tried and tested solutions to
+recurring problems in engineering. They make our software more modular,
+maintainable, and extensible. Moreover, these patterns provide a common
+language for developers to use, making them an excellent tool for effective
 communication when problem-solving in teams.
 
 ## Design patterns in Rust
