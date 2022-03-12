@@ -18,9 +18,8 @@ whole classes of problems. Some of them are also patterns that are _unique_ to R
 
 ## YAGNI
 
-If you're not familiar with it, YAGNI is an acronym that stands for
-`You Aren't Going to Need It`. It's a vital software design principle to apply
-as you write code.
+YAGNI is an acronym that stands for `You Aren't Going to Need It`.
+It's a vital software design principle to apply as you write code.
 
 > The best code I ever wrote was code I never wrote.
 
