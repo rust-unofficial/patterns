@@ -24,7 +24,7 @@ communication when problem-solving in teams.
 Rust is not object-oriented, and the combination of all its characteristics,
 such as functional elements, a strong type system, and the borrow checker,
 makes it unique.
-Because of this, rust design patterns vary with respect to other
+Because of this, Rust design patterns vary with respect to other
 traditional object-oriented programming languages.
 That's why we decided to write this book. We hope you enjoy reading it!
 The book is divided in three main chapters:
