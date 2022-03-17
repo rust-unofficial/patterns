@@ -22,7 +22,7 @@ communication when problem-solving in teams.
 ## Design patterns in Rust
 
 Rust is not object-oriented, and the combination of all its characteristics,
-such as functional elements, a strong type system and the borrow checker,
+such as functional elements, a strong type system, and the borrow checker,
 makes it unique.
 Because of this, rust design patterns vary with respect to other
 traditional object-oriented programming languages.
