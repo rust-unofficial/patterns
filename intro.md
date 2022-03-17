@@ -16,25 +16,25 @@ are generically applicable.
 Design patterns are a collection of reusable and tested solutions to
 recurring problems in engineering. They make our software more modular,
 maintainable, and extensible. Moreover, these patterns provide a common
-language for developers to use, making them an excellent tool for effective
+language for developers, making them an excellent tool for effective
 communication when problem-solving in teams.
 
 ## Design patterns in Rust
 
-There are many problems that share the same form.
-Due to the fact that Rust is not object-oriented, design patterns vary with
-respect to other object-oriented programming languages.
-While the details are different, since they have the same form they can be
-solved using the same fundamental methods:
+Rust is not object-oriented, and the combination of all its characteristics,
+such as functional elements, a strong type system, and the borrow checker,
+makes it unique.
+Because of this, Rust design patterns vary with respect to other
+traditional object-oriented programming languages.
+That's why we decided to write this book. We hope you enjoy reading it!
+The book is divided in three main chapters:
 
-- [Design patterns](./patterns/index.md) are methods to solve common problems
-  when writing software.
-- [Anti-patterns](./anti_patterns/index.md) are methods to solve these same
-  common problems. However, while design patterns give us benefits,
+- [Idioms](./idioms/index.md): guidelines to follow when coding.
+  They are the social norms of the community.
+  You should break them only if you have a good reason for it.
+- [Design patterns](./patterns/index.md): methods to solve common problems
+  when coding.
+- [Anti-patterns](./anti_patterns/index.md): methods to solve common problems
+  when coding.
+  However, while design patterns give us benefits,
   anti-patterns create more problems.
-- [Idioms](./idioms/index.md) are guidelines to follow when coding.
-  They are social norms of the community.
-  You can break them, but if you do you should have a good reason for it.
-
-TODO: Mention why Rust is a bit special - functional elements, type system,
-borrow checker
