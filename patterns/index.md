@@ -18,14 +18,11 @@ whole classes of problems. Some of them are also patterns that are _unique_ to R
 
 ## YAGNI
 
-If you're not familiar with it, YAGNI is an acronym that stands for
-`You Aren't Going to Need It`. It's an important software design principle to apply
-as you write code.
+YAGNI is an acronym that stands for `You Aren't Going to Need It`.
+It's a vital software design principle to apply as you write code.
 
 > The best code I ever wrote was code I never wrote.
 
 If we apply YAGNI to design patterns, we see that the features of Rust allow us to
 throw out many patterns. For instance, there is no need for the [strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 in Rust because we can just use [traits](https://doc.rust-lang.org/book/traits.html).
-
-TODO: Maybe include some code to illustrate the traits.
