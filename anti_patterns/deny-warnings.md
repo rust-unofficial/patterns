@@ -57,7 +57,7 @@ Alternatively, we can specify the lints that we want to `deny` in the code.
 Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.48.0):
 
 ```rust,ignore
-#[deny(bad_style,
+#![deny(bad_style,
        const_err,
        dead_code,
        improper_ctypes,
@@ -78,7 +78,7 @@ Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.
 In addition, the following `allow`ed lints may be a good idea to `deny`:
 
 ```rust,ignore
-#[deny(missing_debug_implementations,
+#![deny(missing_debug_implementations,
        missing_docs,
        trivial_casts,
        trivial_numeric_casts,
