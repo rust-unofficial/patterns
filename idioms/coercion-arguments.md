@@ -60,9 +60,9 @@ fn main() {
 ```
 
 This works fine because we are passing a `&String` type as a parameter.
-If we comment in the last two lines this example fails because a `&str` type
-will not coerce to a `&String` type. We can fix this by simply modifying the
-type for our argument.
+If we remove the comments on the last two lines, the example will fail. This
+is because a `&str` type will not coerce to a `&String` type. We can fix this
+by simply modifying the type for our argument.
 
 For instance, if we change our function declaration to:
 
