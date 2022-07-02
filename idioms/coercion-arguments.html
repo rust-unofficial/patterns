@@ -188,9 +188,9 @@ fn main() {
 }
 </code></pre></pre>
 <p>This works fine because we are passing a <code>&amp;String</code> type as a parameter.
-If we comment in the last two lines this example fails because a <code>&amp;str</code> type
-will not coerce to a <code>&amp;String</code> type. We can fix this by simply modifying the
-type for our argument.</p>
+If we remove the comments on the last two lines, the example will fail. This
+is because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type. We can fix this
+by simply modifying the type for our argument.</p>
 <p>For instance, if we change our function declaration to:</p>
 <pre><code class="language-rust  ignore">fn three_vowels(word: &amp;str) -&gt; bool {
 </code></pre>
