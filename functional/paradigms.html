@@ -143,8 +143,7 @@ from an imperative background is the shift in thinking. Imperative programs
 describe <strong>how</strong> to do something, whereas declarative programs describe
 <strong>what</strong> to do. Let's sum the numbers from 1 to 10 to show this.</p>
 <h2 id="imperative"><a class="header" href="#imperative">Imperative</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut sum = 0;
 for i in 1..11 {
@@ -158,7 +157,7 @@ Here, we start with a <code>sum</code> of <code>0</code>.
 Next, we iterate through the range from 1 to 10.
 Each time through the loop, we add the corresponding value in the range.
 Then we print it out.</p>
-<table><thead><tr><th style="text-align: center"><code>i</code></th><th style="text-align: center"><code>sum</code></th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><code>i</code></th><th style="text-align: center"><code>sum</code></th></tr></thead><tbody>
 <tr><td style="text-align: center">1</td><td style="text-align: center">1</td></tr>
 <tr><td style="text-align: center">2</td><td style="text-align: center">3</td></tr>
 <tr><td style="text-align: center">3</td><td style="text-align: center">6</td></tr>
@@ -170,11 +169,11 @@ Then we print it out.</p>
 <tr><td style="text-align: center">9</td><td style="text-align: center">45</td></tr>
 <tr><td style="text-align: center">10</td><td style="text-align: center">55</td></tr>
 </tbody></table>
+</div>
 <p>This is how most of us start out programming. We learn that a program is a set
 of steps.</p>
 <h2 id="declarative"><a class="header" href="#declarative">Declarative</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>println!(&quot;{}&quot;, (1..11).fold(0, |a, b| a + b));
 <span class="boring">}
@@ -189,7 +188,7 @@ first. <code>b</code> is the first element of the range, <code>1</code>. <code>0
 So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next
 result. This process continues until we get to the last element in the range,
 <code>10</code>.</p>
-<table><thead><tr><th style="text-align: center"><code>a</code></th><th style="text-align: center"><code>b</code></th><th style="text-align: center">result</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><code>a</code></th><th style="text-align: center"><code>b</code></th><th style="text-align: center">result</th></tr></thead><tbody>
 <tr><td style="text-align: center">0</td><td style="text-align: center">1</td><td style="text-align: center">1</td></tr>
 <tr><td style="text-align: center">1</td><td style="text-align: center">2</td><td style="text-align: center">3</td></tr>
 <tr><td style="text-align: center">3</td><td style="text-align: center">3</td><td style="text-align: center">6</td></tr>
@@ -201,7 +200,7 @@ result. This process continues until we get to the last element in the range,
 <tr><td style="text-align: center">36</td><td style="text-align: center">9</td><td style="text-align: center">45</td></tr>
 <tr><td style="text-align: center">45</td><td style="text-align: center">10</td><td style="text-align: center">55</td></tr>
 </tbody></table>
-
+</div>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

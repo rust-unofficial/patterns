@@ -141,8 +141,7 @@
 <h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>Rust does not have constructors as a language construct. Instead, the
 convention is to use an <a href="https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions">associated function</a> <code>new</code> to create an object:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///
@@ -172,8 +171,7 @@ impl Second {
 </span></code></pre></pre>
 <h2 id="default-constructors"><a class="header" href="#default-constructors">Default Constructors</a></h2>
 <p>Rust supports default constructors with the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///
@@ -203,8 +201,7 @@ impl Default for Second {
 </span></code></pre></pre>
 <p><code>Default</code> can also be derived if all types of all fields implement <code>Default</code>,
 like they do with <code>Second</code>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///

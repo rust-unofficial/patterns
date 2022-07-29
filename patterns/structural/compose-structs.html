@@ -151,8 +151,7 @@ pattern often reveals smaller units of functionality.</p>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct A {
     f1: u32,
@@ -175,8 +174,7 @@ fn baz(a: &amp;mut A) {
 </span></code></pre></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// A is now composed of two structs - B and C.
 struct A {

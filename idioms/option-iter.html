@@ -145,8 +145,7 @@ can be used with generic code that needs such a type.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to
 <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>.extend()</code></a>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let turing = Some(&quot;Turing&quot;);
 let mut logicians = vec![&quot;Curry&quot;, &quot;Kleene&quot;, &quot;Markov&quot;];
@@ -161,8 +160,7 @@ if let Some(turing_inner) = turing {
 </span></code></pre></pre>
 <p>If you need to tack an <code>Option</code> to the end of an existing iterator, you can
 pass it to <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>.chain()</code></a>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let turing = Some(&quot;Turing&quot;);
 let logicians = vec![&quot;Curry&quot;, &quot;Kleene&quot;, &quot;Markov&quot;];

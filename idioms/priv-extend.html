@@ -155,8 +155,7 @@ instantiated or matched against (see Alternative)</p>
 </li>
 </ul>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>mod a {
     // Public struct.
@@ -209,8 +208,7 @@ form of patterns, ensuring that the struct is future-proof.</p>
 field to the struct.
 You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to
 the field name to avoid the unused field warning.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub struct S {
     pub a: i32,

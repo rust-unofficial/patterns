@@ -313,8 +313,7 @@ mutable <code>String</code>, or using its <code>+</code> operator. However, it i
 convenient to use <code>format!</code>, especially where there is a mix of literal and
 non-literal strings.</p>
 <h2 id="example-1"><a class="header" href="#example-1">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>fn say_hello(name: &amp;str) -&gt; String {
     // We could construct the result string manually.
@@ -338,8 +337,7 @@ string has been pre-allocated to the expected size).</p>
 <h2 id="description-2"><a class="header" href="#description-2">Description</a></h2>
 <p>Rust does not have constructors as a language construct. Instead, the
 convention is to use an <a href="https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions">associated function</a> <code>new</code> to create an object:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///
@@ -369,8 +367,7 @@ impl Second {
 </span></code></pre></pre>
 <h2 id="default-constructors"><a class="header" href="#default-constructors">Default Constructors</a></h2>
 <p>Rust supports default constructors with the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///
@@ -400,8 +397,7 @@ impl Default for Second {
 </span></code></pre></pre>
 <p><code>Default</code> can also be derived if all types of all fields implement <code>Default</code>,
 like they do with <code>Second</code>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>/// Time in seconds.
 ///
@@ -632,8 +628,7 @@ resources in an unexpected state.</p>
 <code>MyEnum::A</code> to a <code>B</code> if <code>x</code> is zero, while keeping <code>MyEnum::B</code> intact.</p>
 <p>We can do this without cloning the <code>name</code>.</p>
 <h2 id="example-5"><a class="header" href="#example-5">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::mem;
 
@@ -654,8 +649,7 @@ fn a_to_b(e: &amp;mut MyEnum) {
 <span class="boring">}
 </span></code></pre></pre>
 <p>This also works with more variants:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::mem;
 
@@ -1160,8 +1154,7 @@ can be used with generic code that needs such a type.</p>
 <h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
 <p>Since <code>Option</code> implements <code>IntoIterator</code>, it can be used as an argument to
 <a href="https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend"><code>.extend()</code></a>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let turing = Some(&quot;Turing&quot;);
 let mut logicians = vec![&quot;Curry&quot;, &quot;Kleene&quot;, &quot;Markov&quot;];
@@ -1176,8 +1169,7 @@ if let Some(turing_inner) = turing {
 </span></code></pre></pre>
 <p>If you need to tack an <code>Option</code> to the end of an existing iterator, you can
 pass it to <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>.chain()</code></a>:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let turing = Some(&quot;Turing&quot;);
 let logicians = vec![&quot;Curry&quot;, &quot;Kleene&quot;, &quot;Markov&quot;];
@@ -1222,8 +1214,7 @@ perform some other transformation.</p>
 <p>Use variable rebinding in separate scope for that.</p>
 <h2 id="example-7"><a class="header" href="#example-7">Example</a></h2>
 <p>Use</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::rc::Rc;
 
@@ -1241,8 +1232,7 @@ let closure = {
 <span class="boring">}
 </span></code></pre></pre>
 <p>instead of</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>use std::rc::Rc;
 
@@ -1283,8 +1273,7 @@ instantiated or matched against (see Alternative)</p>
 </li>
 </ul>
 <h2 id="example-8"><a class="header" href="#example-8">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>mod a {
     // Public struct.
@@ -1337,8 +1326,7 @@ form of patterns, ensuring that the struct is future-proof.</p>
 field to the struct.
 You can use the <code>()</code> type so that there is no runtime overhead and prepend <code>_</code> to
 the field name to avoid the unused field warning.</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>pub struct S {
     pub a: i32,
@@ -2296,8 +2284,7 @@ patterns solve this problem by somehow controlling this object creation.</p>
 <h2 id="description-22"><a class="header" href="#description-22">Description</a></h2>
 <p>Construct an object with calls to a builder helper.</p>
 <h2 id="example-16"><a class="header" href="#example-16">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>#[derive(Debug, PartialEq)]
 pub struct Foo {
@@ -2513,8 +2500,7 @@ pattern often reveals smaller units of functionality.</p>
 <h2 id="example-18"><a class="header" href="#example-18">Example</a></h2>
 <p>Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>struct A {
     f1: u32,
@@ -2537,8 +2523,7 @@ fn baz(a: &amp;mut A) {
 </span></code></pre></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// A is now composed of two structs - B and C.
 struct A {
@@ -3036,8 +3021,7 @@ all immutable references exist. If the code written does not hold true to these
 conditions, this anti-pattern arises when the developer resolves the compiler
 error by cloning the variable.</p>
 <h2 id="example-19"><a class="header" href="#example-19">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>// define any variable
 let mut x = 5;
@@ -3098,8 +3082,7 @@ cases in which <code>.clone()</code> is not necessary, like <a href="https://rus
 <p>A well-intentioned crate author wants to ensure their code builds without
 warnings. So they annotate their crate root with the following:</p>
 <h2 id="example-20"><a class="header" href="#example-20">Example</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span>#![deny(warnings)]
 
 <span class="boring">fn main() {
@@ -3293,8 +3276,7 @@ from an imperative background is the shift in thinking. Imperative programs
 describe <strong>how</strong> to do something, whereas declarative programs describe
 <strong>what</strong> to do. Let's sum the numbers from 1 to 10 to show this.</p>
 <h2 id="imperative"><a class="header" href="#imperative">Imperative</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>let mut sum = 0;
 for i in 1..11 {
@@ -3308,7 +3290,7 @@ Here, we start with a <code>sum</code> of <code>0</code>.
 Next, we iterate through the range from 1 to 10.
 Each time through the loop, we add the corresponding value in the range.
 Then we print it out.</p>
-<table><thead><tr><th style="text-align: center"><code>i</code></th><th style="text-align: center"><code>sum</code></th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><code>i</code></th><th style="text-align: center"><code>sum</code></th></tr></thead><tbody>
 <tr><td style="text-align: center">1</td><td style="text-align: center">1</td></tr>
 <tr><td style="text-align: center">2</td><td style="text-align: center">3</td></tr>
 <tr><td style="text-align: center">3</td><td style="text-align: center">6</td></tr>
@@ -3320,11 +3302,11 @@ Then we print it out.</p>
 <tr><td style="text-align: center">9</td><td style="text-align: center">45</td></tr>
 <tr><td style="text-align: center">10</td><td style="text-align: center">55</td></tr>
 </tbody></table>
+</div>
 <p>This is how most of us start out programming. We learn that a program is a set
 of steps.</p>
 <h2 id="declarative"><a class="header" href="#declarative">Declarative</a></h2>
-<pre><pre class="playground"><code class="language-rust edition2018">
-<span class="boring">#![allow(unused)]
+<pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>println!(&quot;{}&quot;, (1..11).fold(0, |a, b| a + b));
 <span class="boring">}
@@ -3339,7 +3321,7 @@ first. <code>b</code> is the first element of the range, <code>1</code>. <code>0
 So now we <code>fold</code> again, with <code>a = 1</code>, <code>b = 2</code> and so <code>1 + 2 = 3</code> is the next
 result. This process continues until we get to the last element in the range,
 <code>10</code>.</p>
-<table><thead><tr><th style="text-align: center"><code>a</code></th><th style="text-align: center"><code>b</code></th><th style="text-align: center">result</th></tr></thead><tbody>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: center"><code>a</code></th><th style="text-align: center"><code>b</code></th><th style="text-align: center">result</th></tr></thead><tbody>
 <tr><td style="text-align: center">0</td><td style="text-align: center">1</td><td style="text-align: center">1</td></tr>
 <tr><td style="text-align: center">1</td><td style="text-align: center">2</td><td style="text-align: center">3</td></tr>
 <tr><td style="text-align: center">3</td><td style="text-align: center">3</td><td style="text-align: center">6</td></tr>
@@ -3351,7 +3333,7 @@ result. This process continues until we get to the last element in the range,
 <tr><td style="text-align: center">36</td><td style="text-align: center">9</td><td style="text-align: center">45</td></tr>
 <tr><td style="text-align: center">45</td><td style="text-align: center">10</td><td style="text-align: center">55</td></tr>
 </tbody></table>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="generics-as-type-classes"><a class="header" href="#generics-as-type-classes">Generics as Type Classes</a></h1>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="generics-as-type-classes"><a class="header" href="#generics-as-type-classes">Generics as Type Classes</a></h1>
 <h2 id="description-32"><a class="header" href="#description-32">Description</a></h2>
 <p>Rust's type system is designed more like functional languages (like Haskell)
 rather than imperative languages (like Java and C++). As a result, Rust can turn
