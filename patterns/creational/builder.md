@@ -69,7 +69,7 @@ construction has side effects.
 
 Separates methods for building from other methods.
 
-Prevents proliferation of constructors
+Prevents proliferation of constructors.
 
 Can be used for one-liner initialisation as well as more complex construction.
 
@@ -89,8 +89,7 @@ This pattern is often used where the builder object is useful in its own right,
 rather than being just a builder. For example, see
 [`std::process::Command`](https://doc.rust-lang.org/std/process/struct.Command.html)
 is a builder for [`Child`](https://doc.rust-lang.org/std/process/struct.Child.html)
-(a process). In these cases, the `T` and `TBuilder` pattern
-of naming is not used.
+(a process). In these cases, the `T` and `TBuilder` naming pattern is not used.
 
 The example takes and returns the builder by value. It is often more ergonomic
 (and more efficient) to take and return the builder as a mutable reference. The

@@ -9,9 +9,9 @@ simple language.
 
 Basically, for any kind of problems we define:
 
-- a [domain specific language](https://en.wikipedia.org/wiki/Domain-specific_language),
-- a grammar for this language,
-- an interpreter that solves the problem instances.
+- A [domain specific language](https://en.wikipedia.org/wiki/Domain-specific_language),
+- A grammar for this language,
+- An interpreter that solves the problem instances.
 
 ## Motivation
 
@@ -19,18 +19,18 @@ Our goal is to translate simple mathematical expressions into postfix expression
 (or [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation))
 For simplicity, our expressions consist of ten digits `0`, ..., `9` and two
 operations `+`, `-`. For example, the expression `2 + 4` is translated into
-`2 4  +`.
+`2 4 +`.
 
 ## Context Free Grammar for our problem
 
-Our task is translated infix expressions into postfix ones. Let's define a context
+Our task is translating infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over `0`, ..., `9`, `+`, and `-`,
 where:
 
-- terminal symbols: `0`, ..., `9`, `+`, `-`
-- non-terminal symbols: `exp`, `term`
-- start symbol is `exp`
-- and the following are production rules
+- Terminal symbols: `0`, `...`, `9`, `+`, `-`
+- Non-terminal symbols: `exp`, `term`
+- Start symbol is `exp`
+- And the following are production rules
 
 ```ignore
 exp -> exp + term
@@ -107,7 +107,7 @@ There may be a wrong perception that the Interpreter design pattern is about des
 grammars for formal languages and implementation of parsers for these grammars.
 In fact, this pattern is about expressing problem instances in a more specific
 way and implementing functions/classes/structs that solve these problem instances.
-Rust language has `macro_rules!` that allow to define special syntax and rules
+Rust language has `macro_rules!` that allow us to define special syntax and rules
 on how to expand this syntax into source code.
 
 In the following example we create a simple `macro_rules!` that computes
