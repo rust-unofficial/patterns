@@ -171,7 +171,7 @@ an exception handling mechanism, but unlike Java (which has <code>finally</code>
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.</p>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
-<p>Code in destructors will (nearly) be always run - copes with panics, early
+<p>Code in destructors will (nearly) always be run - copes with panics, early
 returns, etc.</p>
 <h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>It is not guaranteed that destructors will run. For example, if there is an

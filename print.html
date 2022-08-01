@@ -585,7 +585,7 @@ an exception handling mechanism, but unlike Java (which has <code>finally</code>
 no way to schedule code to run in both the normal and exceptional cases.
 Panicking will also exit a function early.</p>
 <h2 id="advantages-2"><a class="header" href="#advantages-2">Advantages</a></h2>
-<p>Code in destructors will (nearly) be always run - copes with panics, early
+<p>Code in destructors will (nearly) always be run - copes with panics, early
 returns, etc.</p>
 <h2 id="disadvantages-2"><a class="header" href="#disadvantages-2">Disadvantages</a></h2>
 <p>It is not guaranteed that destructors will run. For example, if there is an
@@ -810,7 +810,7 @@ sentinel return values (such as <code>NULL</code> pointers)</p>
 <h2 id="description-8"><a class="header" href="#description-8">Description</a></h2>
 <p>In foreign languages like C, errors are represented by return codes.
 However, Rust's type system allows much more rich error information to be
-captured a propogated through a full type.</p>
+captured and propogated through a full type.</p>
 <p>This best practice shows different kinds of error codes, and how to expose them
 in a usable way:</p>
 <ol>
@@ -1370,7 +1370,7 @@ there is rarely a sensible action to take in this scenario.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="easy-doc-initialization"><a class="header" href="#easy-doc-initialization">Easy doc initialization</a></h1>
 <h2 id="description-14"><a class="header" href="#description-14">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be
+<p>If a struct takes significant effort to initialize when writing docs, it can be
 quicker to wrap your example with a helper function which takes the struct as an
 argument.</p>
 <h2 id="motivation-6"><a class="header" href="#motivation-6">Motivation</a></h2>
@@ -1405,8 +1405,8 @@ impl Connection {
 }
 </code></pre>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
-<p>Instead of typing all of this boilerplate to create an <code>Connection</code> and
-<code>Request</code> it is easier to just create a wrapping helper function which takes
+<p>Instead of typing all of this boilerplate to create a <code>Connection</code> and
+<code>Request</code>, it is easier to just create a wrapping helper function which takes
 them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,
@@ -1448,8 +1448,8 @@ crate's public API.</p>
 <p>Often it is necessary to prepare and process some data, but after that data are
 only inspected and never modified. The intention can be made explicit by redefining
 the mutable variable as immutable.</p>
-<p>It can be done either by processing data within nested block or by redefining
-variable.</p>
+<p>It can be done either by processing data within a nested block or by redefining
+the variable.</p>
 <h2 id="example-10"><a class="header" href="#example-10">Example</a></h2>
 <p>Say, vector must be sorted before usage.</p>
 <p>Using nested block:</p>
@@ -1713,25 +1713,25 @@ interpreter object could solve it by interpreting the sentences written in this
 simple language.</p>
 <p>Basically, for any kind of problems we define:</p>
 <ul>
-<li>a <a href="https://en.wikipedia.org/wiki/Domain-specific_language">domain specific language</a>,</li>
-<li>a grammar for this language,</li>
-<li>an interpreter that solves the problem instances.</li>
+<li>A <a href="https://en.wikipedia.org/wiki/Domain-specific_language">domain specific language</a>,</li>
+<li>A grammar for this language,</li>
+<li>An interpreter that solves the problem instances.</li>
 </ul>
 <h2 id="motivation-8"><a class="header" href="#motivation-8">Motivation</a></h2>
 <p>Our goal is to translate simple mathematical expressions into postfix expressions
 (or <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a>)
 For simplicity, our expressions consist of ten digits <code>0</code>, ..., <code>9</code> and two
 operations <code>+</code>, <code>-</code>. For example, the expression <code>2 + 4</code> is translated into
-<code>2 4  +</code>.</p>
+<code>2 4 +</code>.</p>
 <h2 id="context-free-grammar-for-our-problem"><a class="header" href="#context-free-grammar-for-our-problem">Context Free Grammar for our problem</a></h2>
-<p>Our task is translated infix expressions into postfix ones. Let's define a context
+<p>Our task is translating infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over <code>0</code>, ..., <code>9</code>, <code>+</code>, and <code>-</code>,
 where:</p>
 <ul>
-<li>terminal symbols: <code>0</code>, ..., <code>9</code>, <code>+</code>, <code>-</code></li>
-<li>non-terminal symbols: <code>exp</code>, <code>term</code></li>
-<li>start symbol is <code>exp</code></li>
-<li>and the following are production rules</li>
+<li>Terminal symbols: <code>0</code>, <code>...</code>, <code>9</code>, <code>+</code>, <code>-</code></li>
+<li>Non-terminal symbols: <code>exp</code>, <code>term</code></li>
+<li>Start symbol is <code>exp</code></li>
+<li>And the following are production rules</li>
 </ul>
 <pre><code class="language-ignore">exp -&gt; exp + term
 exp -&gt; exp - term
@@ -1800,7 +1800,7 @@ pub fn main() {
 grammars for formal languages and implementation of parsers for these grammars.
 In fact, this pattern is about expressing problem instances in a more specific
 way and implementing functions/classes/structs that solve these problem instances.
-Rust language has <code>macro_rules!</code> that allow to define special syntax and rules
+Rust language has <code>macro_rules!</code> that allow us to define special syntax and rules
 on how to expand this syntax into source code.</p>
 <p>In the following example we create a simple <code>macro_rules!</code> that computes
 <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean length</a> of <code>n</code>
@@ -1887,7 +1887,7 @@ implementation details between types while precisely controlling the interface.
 By using a newtype rather than exposing the implementation type as part of an
 API, it allows you to change implementation backwards compatibly.</p>
 <p>Newtypes can be used for distinguishing units, e.g., wrapping <code>f64</code> to give
-distinguishable <code>Miles</code> and <code>Kms</code>.</p>
+distinguishable <code>Miles</code> and <code>Kilometres</code>.</p>
 <h2 id="advantages-11"><a class="header" href="#advantages-11">Advantages</a></h2>
 <p>The wrapped and wrapper types are not type compatible (as opposed to using
 <code>type</code>), so users of the newtype will never 'confuse' the wrapped and wrapper
@@ -2344,7 +2344,7 @@ fn builder_test() {
 construction has side effects.</p>
 <h2 id="advantages-14"><a class="header" href="#advantages-14">Advantages</a></h2>
 <p>Separates methods for building from other methods.</p>
-<p>Prevents proliferation of constructors</p>
+<p>Prevents proliferation of constructors.</p>
 <p>Can be used for one-liner initialisation as well as more complex construction.</p>
 <h2 id="disadvantages-14"><a class="header" href="#disadvantages-14">Disadvantages</a></h2>
 <p>More complex than creating a struct object directly, or a simple constructor
@@ -2358,8 +2358,7 @@ Rust than in C++, Java, or others.</p>
 rather than being just a builder. For example, see
 <a href="https://doc.rust-lang.org/std/process/struct.Command.html"><code>std::process::Command</code></a>
 is a builder for <a href="https://doc.rust-lang.org/std/process/struct.Child.html"><code>Child</code></a>
-(a process). In these cases, the <code>T</code> and <code>TBuilder</code> pattern
-of naming is not used.</p>
+(a process). In these cases, the <code>T</code> and <code>TBuilder</code> naming pattern is not used.</p>
 <p>The example takes and returns the builder by value. It is often more ergonomic
 (and more efficient) to take and return the builder as a mutable reference. The
 borrow checker makes this work naturally. This approach has the advantage that
@@ -3352,14 +3351,14 @@ user <em>actually changes the type</em>. In other words, <code>Vec&lt;isize&gt;<
 type system.</p>
 <p>This is called <strong>monomorphization</strong>, where different types are created from
 <strong>polymorphic</strong> code.  This special behavior requires <code>impl</code> blocks to specify
-generic parameters: different values for the generic type cause different types,
+generic parameters. Different values for the generic type cause different types,
 and different types can have different <code>impl</code> blocks.</p>
 <p>In object-oriented languages, classes can inherit behavior from their parents.
 However, this allows the attachment of not only additional behavior to
 particular members of a type class, but extra behavior as well.</p>
 <p>The nearest equivalent is the runtime polymorphism in Javascript and Python,
 where new members can be added to objects willy-nilly by any constructor.
-Unlike those languages, however, all of Rust's additional methods can be type
+However, unlike those languages, all of Rust's additional methods can be type
 checked when they are used, because their generics are statically defined. That
 makes them more usable while remaining safe.</p>
 <h2 id="example-22"><a class="header" href="#example-22">Example</a></h2>
@@ -3568,7 +3567,7 @@ concept, and a slightly different technique. <sup class="footnote-reference"><a 
 </li>
 </ul>
 <div class="footnote-definition" id="1"><sup class="footnote-definition-label">1</sup>
-<p>See: <a href="https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801">impl From&lt;CString&gt; for Vec&lt;u8&gt;</a></p>
+<p>See: <a href="https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811">impl From&lt;CString&gt; for Vec&lt;u8&gt;</a></p>
 </div>
 <div class="footnote-definition" id="2"><sup class="footnote-definition-label">2</sup>
 <p>See: <a href="https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354">impl&lt;T&gt; From&lt;Vec&lt;T, Global&gt;&gt; for BinaryHeap&lt;T&gt;</a></p>

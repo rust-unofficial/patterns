@@ -145,25 +145,25 @@ interpreter object could solve it by interpreting the sentences written in this
 simple language.</p>
 <p>Basically, for any kind of problems we define:</p>
 <ul>
-<li>a <a href="https://en.wikipedia.org/wiki/Domain-specific_language">domain specific language</a>,</li>
-<li>a grammar for this language,</li>
-<li>an interpreter that solves the problem instances.</li>
+<li>A <a href="https://en.wikipedia.org/wiki/Domain-specific_language">domain specific language</a>,</li>
+<li>A grammar for this language,</li>
+<li>An interpreter that solves the problem instances.</li>
 </ul>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Our goal is to translate simple mathematical expressions into postfix expressions
 (or <a href="https://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish notation</a>)
 For simplicity, our expressions consist of ten digits <code>0</code>, ..., <code>9</code> and two
 operations <code>+</code>, <code>-</code>. For example, the expression <code>2 + 4</code> is translated into
-<code>2 4  +</code>.</p>
+<code>2 4 +</code>.</p>
 <h2 id="context-free-grammar-for-our-problem"><a class="header" href="#context-free-grammar-for-our-problem">Context Free Grammar for our problem</a></h2>
-<p>Our task is translated infix expressions into postfix ones. Let's define a context
+<p>Our task is translating infix expressions into postfix ones. Let's define a context
 free grammar for a set of infix expressions over <code>0</code>, ..., <code>9</code>, <code>+</code>, and <code>-</code>,
 where:</p>
 <ul>
-<li>terminal symbols: <code>0</code>, ..., <code>9</code>, <code>+</code>, <code>-</code></li>
-<li>non-terminal symbols: <code>exp</code>, <code>term</code></li>
-<li>start symbol is <code>exp</code></li>
-<li>and the following are production rules</li>
+<li>Terminal symbols: <code>0</code>, <code>...</code>, <code>9</code>, <code>+</code>, <code>-</code></li>
+<li>Non-terminal symbols: <code>exp</code>, <code>term</code></li>
+<li>Start symbol is <code>exp</code></li>
+<li>And the following are production rules</li>
 </ul>
 <pre><code class="language-ignore">exp -&gt; exp + term
 exp -&gt; exp - term
@@ -232,7 +232,7 @@ pub fn main() {
 grammars for formal languages and implementation of parsers for these grammars.
 In fact, this pattern is about expressing problem instances in a more specific
 way and implementing functions/classes/structs that solve these problem instances.
-Rust language has <code>macro_rules!</code> that allow to define special syntax and rules
+Rust language has <code>macro_rules!</code> that allow us to define special syntax and rules
 on how to expand this syntax into source code.</p>
 <p>In the following example we create a simple <code>macro_rules!</code> that computes
 <a href="https://en.wikipedia.org/wiki/Euclidean_distance">Euclidean length</a> of <code>n</code>

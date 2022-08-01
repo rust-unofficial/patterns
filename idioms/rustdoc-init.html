@@ -139,7 +139,7 @@
                     <main>
                         <h1 id="easy-doc-initialization"><a class="header" href="#easy-doc-initialization">Easy doc initialization</a></h1>
 <h2 id="description"><a class="header" href="#description">Description</a></h2>
-<p>If a struct takes significant effort to initialize, when writing docs, it can be
+<p>If a struct takes significant effort to initialize when writing docs, it can be
 quicker to wrap your example with a helper function which takes the struct as an
 argument.</p>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
@@ -174,8 +174,8 @@ impl Connection {
 }
 </code></pre>
 <h2 id="example"><a class="header" href="#example">Example</a></h2>
-<p>Instead of typing all of this boilerplate to create an <code>Connection</code> and
-<code>Request</code> it is easier to just create a wrapping helper function which takes
+<p>Instead of typing all of this boilerplate to create a <code>Connection</code> and
+<code>Request</code>, it is easier to just create a wrapping helper function which takes
 them as arguments:</p>
 <pre><code class="language-rust ignore">struct Connection {
     name: String,

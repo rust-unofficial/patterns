@@ -189,7 +189,7 @@ implementation details between types while precisely controlling the interface.
 By using a newtype rather than exposing the implementation type as part of an
 API, it allows you to change implementation backwards compatibly.</p>
 <p>Newtypes can be used for distinguishing units, e.g., wrapping <code>f64</code> to give
-distinguishable <code>Miles</code> and <code>Kms</code>.</p>
+distinguishable <code>Miles</code> and <code>Kilometres</code>.</p>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>The wrapped and wrapper types are not type compatible (as opposed to using
 <code>type</code>), so users of the newtype will never 'confuse' the wrapped and wrapper

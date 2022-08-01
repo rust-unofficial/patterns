@@ -201,7 +201,7 @@ fn builder_test() {
 construction has side effects.</p>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Separates methods for building from other methods.</p>
-<p>Prevents proliferation of constructors</p>
+<p>Prevents proliferation of constructors.</p>
 <p>Can be used for one-liner initialisation as well as more complex construction.</p>
 <h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
 <p>More complex than creating a struct object directly, or a simple constructor
@@ -215,8 +215,7 @@ Rust than in C++, Java, or others.</p>
 rather than being just a builder. For example, see
 <a href="https://doc.rust-lang.org/std/process/struct.Command.html"><code>std::process::Command</code></a>
 is a builder for <a href="https://doc.rust-lang.org/std/process/struct.Child.html"><code>Child</code></a>
-(a process). In these cases, the <code>T</code> and <code>TBuilder</code> pattern
-of naming is not used.</p>
+(a process). In these cases, the <code>T</code> and <code>TBuilder</code> naming pattern is not used.</p>
 <p>The example takes and returns the builder by value. It is often more ergonomic
 (and more efficient) to take and return the builder as a mutable reference. The
 borrow checker makes this work naturally. This approach has the advantage that
