@@ -41,7 +41,7 @@ Panicking will also exit a function early.
 
 ## Advantages
 
-Code in destructors will (nearly) be always run - copes with panics, early
+Code in destructors will (nearly) always be run - copes with panics, early
 returns, etc.
 
 ## Disadvantages

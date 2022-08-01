@@ -22,7 +22,7 @@ type system.
 
 This is called **monomorphization**, where different types are created from
 **polymorphic** code.  This special behavior requires `impl` blocks to specify
-generic parameters: different values for the generic type cause different types,
+generic parameters. Different values for the generic type cause different types,
 and different types can have different `impl` blocks.
 
 In object-oriented languages, classes can inherit behavior from their parents.
@@ -31,7 +31,7 @@ particular members of a type class, but extra behavior as well.
 
 The nearest equivalent is the runtime polymorphism in Javascript and Python,
 where new members can be added to objects willy-nilly by any constructor.
-Unlike those languages, however, all of Rust's additional methods can be type
+However, unlike those languages, all of Rust's additional methods can be type
 checked when they are used, because their generics are statically defined. That
 makes them more usable while remaining safe.
 
@@ -262,7 +262,7 @@ It is also used by several popular crates to allow API flexibility:
   concept, and a slightly different technique. [^6]
 
 [^1]: See: [impl From\<CString\> for Vec\<u8\>](
-https://doc.rust-lang.org/stable/src/std/ffi/c_str.rs.html#799-801)
+https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811)
 
 [^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
 https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)

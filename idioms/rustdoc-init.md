@@ -2,7 +2,7 @@
 
 ## Description
 
-If a struct takes significant effort to initialize, when writing docs, it can be
+If a struct takes significant effort to initialize when writing docs, it can be
 quicker to wrap your example with a helper function which takes the struct as an
 argument.
 
@@ -44,8 +44,8 @@ impl Connection {
 
 ## Example
 
-Instead of typing all of this boilerplate to create an `Connection` and
-`Request` it is easier to just create a wrapping helper function which takes
+Instead of typing all of this boilerplate to create a `Connection` and
+`Request`, it is easier to just create a wrapping helper function which takes
 them as arguments:
 
 ```rust,ignore

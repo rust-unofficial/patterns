@@ -61,7 +61,7 @@ By using a newtype rather than exposing the implementation type as part of an
 API, it allows you to change implementation backwards compatibly.
 
 Newtypes can be used for distinguishing units, e.g., wrapping `f64` to give
-distinguishable `Miles` and `Kms`.
+distinguishable `Miles` and `Kilometres`.
 
 ## Advantages
 
