@@ -88,8 +88,11 @@ impl Second {
 }
 ```
 
-**Note:** When implementing `Default` for a type, it is neither required nor
-recommended to also provide an associated function `new` without arguments.
+**Note:** It is common and expected for types to implement both
+`Default` and an empty `new` constructor. `new` is the constructor
+convention in Rust, and users expect it to exist, so if it is
+reasonable for the basic constructor to take no arguments, then it
+should, even if it is functionally identical to default.
 
 **Hint:** The advantage of implementing or deriving `Default` is that your type
 can now be used where a `Default` implementation is required, most prominently,
@@ -103,6 +106,10 @@ any of the [`*or_default` functions in the standard library][std-or-default].
 - The [builder pattern](../patterns/creational/builder.md) for constructing
   objects where there are multiple configurations.
 
+- [API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS] for
+  implementing both, `Default` and `new`. 
+
 [associated function]: https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions
 [std-default]: https://doc.rust-lang.org/stable/std/default/trait.Default.html
 [std-or-default]: https://doc.rust-lang.org/stable/std/?search=or_default
+[API Guidelines/C-COMMON-TRAITS]: https://rust-lang.github.io/api-guidelines/interoperability.html#types-eagerly-implement-common-traits-c-common-traits
