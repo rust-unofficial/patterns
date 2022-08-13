@@ -107,7 +107,7 @@ any of the [`*or_default` functions in the standard library][std-or-default].
   objects where there are multiple configurations.
 
 - [API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS] for
-  implementing both, `Default` and `new`. 
+  implementing both, `Default` and `new`.
 
 [associated function]: https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions
 [std-default]: https://doc.rust-lang.org/stable/std/default/trait.Default.html
