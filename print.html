@@ -420,8 +420,11 @@ impl Second {
 }
 <span class="boring">}
 </span></code></pre></pre>
-<p><strong>Note:</strong> When implementing <code>Default</code> for a type, it is neither required nor
-recommended to also provide an associated function <code>new</code> without arguments.</p>
+<p><strong>Note:</strong> It is common and expected for types to implement both
+<code>Default</code> and an empty <code>new</code> constructor. <code>new</code> is the constructor
+convention in Rust, and users expect it to exist, so if it is
+reasonable for the basic constructor to take no arguments, then it
+should, even if it is functionally identical to default.</p>
 <p><strong>Hint:</strong> The advantage of implementing or deriving <code>Default</code> is that your type
 can now be used where a <code>Default</code> implementation is required, most prominently,
 any of the <a href="https://doc.rust-lang.org/stable/std/?search=or_default"><code>*or_default</code> functions in the standard library</a>.</p>
@@ -434,6 +437,10 @@ any of the <a href="https://doc.rust-lang.org/stable/std/?search=or_default"><co
 <li>
 <p>The <a href="idioms/../patterns/creational/builder.html">builder pattern</a> for constructing
 objects where there are multiple configurations.</p>
+</li>
+<li>
+<p><a href="https://rust-lang.github.io/api-guidelines/interoperability.html#types-eagerly-implement-common-traits-c-common-traits">API Guidelines/C-COMMON-TRAITS</a> for
+implementing both, <code>Default</code> and <code>new</code>.</p>
 </li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="the-default-trait"><a class="header" href="#the-default-trait">The <code>Default</code> Trait</a></h1>
