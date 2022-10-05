@@ -2,7 +2,8 @@
 
 ## Description
 
-Use the `Deref` trait to treat collections like smart pointers, offering owning
+Use the [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)
+trait to treat collections like smart pointers, offering owning
 and borrowed views of data.
 
 ## Example
@@ -24,19 +25,19 @@ impl<T> Deref for Vec<T> {
 }
 ```
 
-A `Vec<T>` is an owning collection of `T`s, a slice (`&[T]`) is a borrowed
+A `Vec<T>` is an owning collection of `T`s, while a slice (`&[T]`) is a borrowed
 collection of `T`s. Implementing `Deref` for `Vec` allows implicit dereferencing
 from `&Vec<T>` to `&[T]` and includes the relationship in auto-derefencing
 searches. Most methods you might expect to be implemented for `Vec`s are instead
 implemented for slices.
 
-See also `String` and `&str`.
+Also `String` and `&str` have a similar relation.
 
 ## Motivation
 
 Ownership and borrowing are key aspects of the Rust language. Data structures
-must account for these semantics properly in order to give a good user
-experience. When implementing a data structure which owns its data, offering a
+must account for these semantics properly to give a good user
+experience. When implementing a data structure that owns its data, offering a
 borrowed view of that data allows for more flexible APIs.
 
 ## Advantages
@@ -56,7 +57,7 @@ pattern can get complex (see the `Borrow` and `AsRef` traits, etc.).
 
 Smart pointers and collections are analogous: a smart pointer points to a single
 object, whereas a collection points to many objects. From the point of view of
-the type system there is little difference between the two. A collection owns
+the type system, there is little difference between the two. A collection owns
 its data if the only way to access each datum is via the collection and the
 collection is responsible for deleting the data (even in cases of shared
 ownership, some kind of borrowed view may be appropriate). If a collection owns
@@ -74,6 +75,5 @@ slicing syntax. The target will be the borrowed view.
 
 ## See also
 
-[Deref polymorphism anti-pattern](../anti_patterns/deref.md).
-
-[Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
+- [Deref polymorphism anti-pattern](../anti_patterns/deref.md).
+- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
