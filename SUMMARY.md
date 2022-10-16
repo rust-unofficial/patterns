@@ -26,7 +26,7 @@
     - [Command](./patterns/behavioural/command.md)
     - [Interpreter](./patterns/behavioural/interpreter.md)
     - [Newtype](./patterns/behavioural/newtype.md)
-    - [RAII Guards](./patterns/behavioural/RAII.md)
+    - [Resource management with OBRM](./patterns/behavioural/OBRM.md)
     - [Strategy](./patterns/behavioural/strategy.md)
     - [Visitor](./patterns/behavioural/visitor.md)
   - [Creational](./patterns/creational/intro.md)
