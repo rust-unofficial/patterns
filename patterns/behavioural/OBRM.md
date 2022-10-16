@@ -97,7 +97,7 @@ after finalisation.
 
 OBRM ensures correctness with implicit behavior, which isn't visible in the source code (one needs to be aware that said object uses OBRM). It also can be difficult to implement for some complex situations. For example resource aquisition and release in bulk, like in performance critical code. Or code which may not fail in some sections - resource aquisition is often fallible.
 
-OBRM interaction with asyncronous code can also [be unexpected][Documentation of tokios Mutex].
+OBRM interaction with asynchronous code can also [be unexpected][Documentation of tokios Mutex].
 
 ## Discussion
 
