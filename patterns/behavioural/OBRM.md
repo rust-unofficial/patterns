@@ -19,7 +19,7 @@ The method releasing the resource is generally referred to as destructor, in Rus
 
 ## Example
 
-OBRM is used to manage memory in Rust, determining when to free the memory. 
+OBRM is used to manage memory in Rust, determining when to free the memory.
 `Box` and `Rc` are classical examples of that.
 But most users will have closer contact with OBRM when managing other aspects.
 
@@ -102,7 +102,7 @@ OBRM interaction with asyncronous code can also [be unexpected][Documentation of
 
 ## Discussion
 
-OBRM is a useful pattern for ensuring resources are properly handled. 
+OBRM is a useful pattern for ensuring resources are properly handled.
 The borrow checker in Rust will statically prevent
 errors stemming from using resources after the resource has been released.
 
@@ -155,14 +155,8 @@ RAII is a common pattern in C++: [cppreference.com](http://en.cppreference.com/w
 
 [wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 
-[Rustnomicon entry]: https://doc.rust-lang.org/nomicon/obrm.html
-
 [Drop::drop]: https://doc.rust-lang.org/std/ops/trait.Drop.html#tymethod.drop
 
 [Documentation of tokios Mutex]: https://docs.rs/tokio/latest/tokio/sync/struct.Mutex.html#which-kind-of-mutex-should-you-use
 
-[The Rule of 5/3/0 in C++]: https://en.cppreference.com/w/cpp/language/rule_of_three
-
-Rustdoc to std::marker::Copy explaining why [Copy forbids implementing Drop]: https://doc.rust-lang.org/std/marker/trait.Copy.html#when-cant-my-type-be-copy
-
-[Discussion of Copy: !Drop (highly theoretical)]: https://stackoverflow.com/a/67645936
+Rustdoc to std::marker::Copy explaining why [Copy forbids implementing Drop]: <https://doc.rust-lang.org/std/marker/trait.Copy.html#when-cant-my-type-be-copy>
