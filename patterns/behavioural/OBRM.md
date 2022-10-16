@@ -1,5 +1,12 @@
 # Resource management with OBRM
 
+<!-- TODO:
+* wayback
+* clear up dtor finally discussion
+* execute and apply lints (contributing.md)
+* check unlinted formatting
+
+ -->
 ## Description
 
 "Ownership Based Resource Management" (OBRM) - also known as ["Resource Acquisition is Initialisation" (RAII)][wikipedia] - is an idom meant to make handling resources easier and less error-prone.
