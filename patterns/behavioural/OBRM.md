@@ -5,7 +5,6 @@
 * clear up dtor finally discussion
 * execute and apply lints (contributing.md)
 * check unlinted formatting
-
  -->
 ## Description
 
@@ -139,6 +138,7 @@ In C++ behavior on a "move" (which is semantically meant to signify passing held
 But after a variable has been "moved out of", it must still be accessable in C++.
 In Rust, a moved-out-of variable can not be used, only reassigned a new value (this is referred to as "destructive move"), and the behavior on a move is not customizable, instead a move simply copies the bytes of the moved-out value into the moved-into variable, and ensures the semantics of a destructive move.
 
+<!-- TODO this should be improved, I find it difficult to separate the creation and management of RAII Objects in the **-constructor - so at declaration time - from the one when using the RAII object. Feedbak welcome. -->
 This massively simplifies creation and management of OBRM Objects compared to C++, where one often has to do a lot more manual management of RAII classes - definition of the `destructor`, the `copy constructor`, the `copy assignment constructor`, the `move constructor` and the `move assignment constructor` all at once -, which is very error prone, and where RAII objects have to have a legal moved-out state, which often makes usage of these classes more problematic.
 For example, `unique_ptr`, the C++ equivalent to `Box`, can contain `nullptr`.
 
