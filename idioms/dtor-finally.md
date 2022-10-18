@@ -1,5 +1,9 @@
 # Finalisation in destructors
 
+<!-- I'm not sure this is idomatic to Rust, usually one would want to handle that in the types used themself. -->
+<!-- doesnt draw comparisons to `defer` in eg golang or ziglang -->
+<!-- Is unneccessarily verbose, IF one would want to do that one could simply define a `Defer` type that holds a closure OR a function pointer that gets executed on drop -->
+<!-- theres also crates that aim to implenent this via macros, I expect they use something like the above or below. -->
 ## Description
 
 Rust does not provide the equivalent to `finally` blocks - code that will be

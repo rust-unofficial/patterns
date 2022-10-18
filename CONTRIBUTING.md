@@ -104,7 +104,7 @@ A good principle: "Work together, share ideas, teach others."
 
 ### Important Note
 
-Please **don't force push** commits in your branch, in order to keep commit
+Please __don't force push__ commits in your branch, in order to keep commit
 history and make it easier for us to see changes between reviews.
 
 Make sure to `Allow edits of maintainers` (under the text box) in the PR so
