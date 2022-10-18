@@ -130,7 +130,7 @@ works just as well.
 When compared with RAII in C++, there are a few significant differences:
 
 * while C++ code often interfaces with C code or code in older styles, which doesn't use RAII. Rust does so much less often and because of a few factors one often just pulls a crate that already has the API encapsulated. So its far less common to implement OBRM yourself
-* C++ doesn't have `Deref` nor a borrow checker, so code using RAII can not archive the same combination of safety and ergonomics
+* C++ doesn't have a borrow checker, so code using RAII can not archive the same combination of safety and ergonomics
 * perhaps most importantly, Rust has different semantics when it comes to moving and copying of values, this will be expanded on below.
 
 C++ has complex rules for copying and moving of values, that Rust managed to simplify while keeping most advantages.
