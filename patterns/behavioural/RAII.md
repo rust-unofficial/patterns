@@ -8,12 +8,12 @@
  -->
 ## Description
 
-"Ownership Based Resource Management" (OBRM) - also known as ["Resource Acquisition is Initialisation" (RAII)][wikipedia] - is an idom meant to make handling resources easier and less error-prone.
+"Ownership Based Resource Management" (OBRM) - also known as ["Resource Acquisition is Initialisation" (RAII)][wikipedia] - is an idiom meant to make handling resources easier and less error-prone.
 
 In essence it means that an object serves as proxy for a resource, to create the object you have to aquire the resource, once that object isn't used anymore - determined by it being unreachable - the resource is released.
 It is said the object guards access to the resource.
 
-This idom is supported by the language as it allows to automatically insert calls to the releasing code in the spots where the object becomes unreachable.
+This idiom is supported by the language as it allows to automatically insert calls to the releasing code in the spots where the object becomes unreachable.
 The method releasing the resource is generally referred to as destructor, in Rust [drop][Drop::drop] serves that role.
 
 ## Example
