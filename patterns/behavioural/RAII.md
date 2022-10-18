@@ -18,7 +18,7 @@ The method releasing the resource is generally referred to as destructor, in Rus
 
 ## Example
 
-OBRM is used to manage memory in Rust, determining when to free the memory.
+OBRM is used to manage heap memory in Rust, determining when to free it.
 `Box` and `Rc` are classical examples of that.
 But most users will have closer contact with OBRM when managing other aspects.
 
@@ -129,7 +129,7 @@ works just as well.
 
 When compared with RAII in C++, there are a few significant differences:
 
-* while C++ code often interfaces with C code or code in older styles, which doesn't use RAII, Rust was designed without the need to interface with such code, so its far less common to implement OBRM yourself
+* while C++ code often interfaces with C code or code in older styles, which doesn't use RAII. Rust does so much less often and because of a few factors one often just pulls a crate that already has the API encapsulated. So its far less common to implement OBRM yourself
 * C++ doesn't have `Deref` nor a borrow checker, so code using RAII can not archive the same combination of safety and ergonomics
 * perhaps most importantly, Rust has different semantics when it comes to moving and copying of values, this will be expanded on below.
 
@@ -140,7 +140,7 @@ In Rust, a moved-out-of variable can not be used, only reassigned a new value (t
 
 <!-- TODO this should be improved, I find it difficult to separate the creation and management of RAII Objects in the **-constructor - so at declaration time - from the one when using the RAII object. Feedbak welcome. -->
 This massively simplifies creation and management of OBRM Objects compared to C++, where one often has to do a lot more manual management of RAII classes - definition of the `destructor`, the `copy constructor`, the `copy assignment constructor`, the `move constructor` and the `move assignment constructor` all at once -, which is very error prone, and where RAII objects have to have a legal moved-out state, which often makes usage of these classes more problematic.
-For example, `unique_ptr`, the C++ equivalent to `Box`, can contain `nullptr`.
+For example, `unique_ptr`, the C++ standard library type that solves similar purposes as `Box`, can contain `nullptr`.
 
 Rust also moves values by default, which can be opted out by explicitly calling `Clone::clone` on each assignment, or on a Type level by implementing `Copy`.
 It is currently forbidden, and that is expected to continue, to implement `Copy` on a Type that implements `Drop` or contains a Type that implements `Drop`.
