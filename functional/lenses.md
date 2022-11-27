@@ -173,12 +173,12 @@ pub struct AccountRecord {
     accounts: Vec<Account>,
 }
 
-// the type of the lense itself, which is currently just a type alias unlike
+// the type of the lens itself, which is currently just a type alias unlike
 // functional languages
 /*
 type LenseFn<T> = dyn FnOnce(&dyn RecordType) -> Option<T>;
 */
-// types that the lense can "view":
+// types that the lens can "view":
 /*
 trait RecordType {
     fn view<T, L>(&self, lens: L) -> T
@@ -225,7 +225,7 @@ fn get_customer_data(
     None
 }
 
-// this is where a lense can be used in a generic way, since "unique ID"
+// this is where a lens can be used in a generic way, since "unique ID"
 // need not be the same kind of ID if they are all u64s
 fn unique_ids<I>(iterator: I) -> HashSet<u64>
     where I: Iterator<Item=Box<dyn Any>>
@@ -353,7 +353,7 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-This is similar to `BalanceChange` earlier. It is acting as a lense over a
+This is similar to `BalanceChange` earlier. It is acting as a lens over a
 generic and unknown type of data.
 Its operation is to support composing a set of uniform data structures from
 that data represented by Serde's `Value` type.
@@ -470,7 +470,7 @@ need procedural macros to create prisms.
   end users (i.e. defining the structs) without needing to undestand the
   details
 - [luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing
-  computer graphics that uses lense API design, including proceducal macros to
+  computer graphics that uses lens API design, including proceducal macros to
   create full prisms for buffers of different pixel types that remain generic
 - [An Article about Lenses in
   Scala](https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
