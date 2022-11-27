@@ -1,8 +1,8 @@
 Lenses
 ===========
 
-This is a pure functional concept that is not frequently used in Rust, because other idioms can achieve the same result. However, they have niche use cases, and exploring the concept may assist with other patterns, such as "visitors" and "callbacks".
-
+This is a pure functional concept that is not frequently used in Rust, because other idioms can achieve the same result.
+However, they have niche use cases, and exploring the concept may assist with understanding other patterns in Rust APIs, such as [visitors](../../patterns/behavioural/visitor.md) and "callbacks".
 In addition, async Rust may be considered somewhat "lens like" in many of the APIs that exist today.
 
 Basic Lenses: Like Rust Traits
@@ -10,7 +10,8 @@ Basic Lenses: Like Rust Traits
 
 A basic lens allows composability similar to Rust traits instead of concrete types.
 
-For example, suppose that there are several JSON forms of user data from different databases. One database contains the data needed to perform credit checks:
+For example, suppose that there are several JSON forms of user data from different databases.
+One database contains the data needed to perform credit checks:
 
 ```json
 { "name": "Jane Doe",
@@ -41,7 +42,8 @@ Another one contains the account information:
 
 Obtaining the customer ID is possible, but each one would need their own implementation of `get_customer_id`.
 
-What if one piece of code wanted to retrieve all customer IDs regardless of data type? The solution in Rust is to make a trait which represents the operation, and implement it for both database API types:
+What if one piece of code wanted to retrieve all customer IDs regardless of data type?
+The solution in Rust is to make a trait which represents the operation, and implement it for both database API types:
 
 ```rust
 use std::collections::HashSet;
@@ -95,7 +97,8 @@ Though it looks very different, this implements the functional concept of a lens
 
 Lenses are a way to allow accessing parts of a data type in an abstract way.[^1] We have a generic operation -- getting a customer ID associated with a record -- that can apply to multiple types, each of which has a different method of "observation" of the desired data.
 
-At first glance, it may seem more like Rust is using "duck typing", the way that dynamic languages would. However, there are significant differences:
+At first glance, it may seem more like Rust is using "duck typing", the way that dynamic languages would.
+However, there are significant differences:
 
 1. Each copy of `CustomerId` lives with the type. In particular, this means they can live in different crates than definition of `CustomerId`, and become extensible beyond the original author's ideas.
 
@@ -103,7 +106,9 @@ At first glance, it may seem more like Rust is using "duck typing", the way that
 
 3. In many functional languages, data structures are immutable. While traits allow mutation of types, the pattern itself makes "deep copying" types with small changes much easier and cheaper if you want to avoid mutation.
 
-Most functional languages take a different approach to this concept, however. They prefer instead to use other features Rust does not have -- a form of partial function construction known as "currying" -- to do it with functions instead. They "partially construct" the function, leaving the type of the object being operated on until the function is constructed, which Rust cannot do.
+Most functional languages take a different approach to this concept, however.
+They prefer instead to use other features Rust does not have -- a form of partial function construction known as "currying" -- to do it with functions instead.
+They "partially construct" the function, leaving the type of the object being operated on until the function is constructed, which Rust cannot do.
 
 This is the nearest thing to a Rust equivalent to the "pure functional way":
 
@@ -199,9 +204,12 @@ While it would be much cleaner if Rust supported more funcitonal traits (a tall 
 Modification with Lenses
 ------------------------
 
-The functional approach need not be restricted to accessing members. More powerful lenses can be created which both set and get data in a structure. This becomes more interesting when examining how these lenses can be composed together.
+The functional approach need not be restricted to accessing members.
+More powerful lenses can be created which both set and get data in a structure.
+This becomes more interesting when examining how these lenses can be composed together.
 
-to begin, consider a new lens trait, this one to update the balance of a bank account. these accounts have different structures for individuals and commercial business customers.
+to begin, consider a new lens trait, this one to update the balance of a bank account.
+these accounts have different structures for individuals and commercial business customers.
 
 ```rust,ignore
 pub struct eur(u64); // 100 = 1 eur
@@ -215,7 +223,8 @@ pub trait balancechange {
 }
 ```
 
-this allows for *composition* between two lenses. it looks very different in haskell, so here is the rust way:
+This allows for *composition* between two lenses.
+It looks very different in haskell, so here is the rust way:
 
 ```rust,ignore
 use chrono::prelude::*;
@@ -249,11 +258,14 @@ The other ways this can be done is with composition functions, such as `map` and
 Prisms: Lenses, but Sum Types
 -----------------------------
 
-A prism is like a lens, but one conceptual level higher. It is a way to make a high-level, trait-like interface apply across different lenses.
+A prism is like a lens, but one conceptual level higher.
+It is a way to make a high-level, trait-like interface apply across different lenses.
 
-While pure functional languages have many more uses, a primary use for this in Rust is to split problems of recursion and types into pieces that can be composed. A good example of this is the traits in Serde.
+While pure functional languages have many more uses, a primary use for this in Rust is to split problems of recursion and types into pieces that can be composed.
+A good example of this is the traits in Serde.
 
-Trying to understand the way Serde works by reading just the API is quite a challenge. Consider the `Deserializer' trait:
+Trying to understand the way Serde works by reading just the API is quite a challenge.
+Consider the `Deserializer' trait:
 
 ```rust,ignore
 pub trait Deserializer<'de>: Sized {
@@ -271,8 +283,9 @@ pub trait Deserializer<'de>: Sized {
 }
 ```
 
-This API is a prism. To understand it better, consider what "light" it is "refracting".
+This API is a prism.
 
+To understand it better, consider what "light" it is "refracting".
 Here is the definition of the `Visitor` type:
 
 ```rust,ignore
@@ -292,6 +305,7 @@ pub trait Visitor<'de>: Sized {
 Thinking back to `BalanceChange` earlier, this trait acts as a lens over a data structure currently being composed.
 
 For example, consider the identity record from earlier but simplified:
+
 ```json
 { "name": "Jane Doe",
   "customer_id": 1048576332,
@@ -311,7 +325,8 @@ In order to parse this record, a `Visitor` would be created that expects a parti
 
 If the wrong call happens, an error is thrown and deserialization fails.
 
-With each new type, a new implementor of the `Visitor` trait is needed. Serde does this clearly and secretly using a derive macro:
+With each new type, a new implementor of the `Visitor` trait is needed.
+Serde does this clearly and secretly using a derive macro:
 
 ```rust,ignore
 use serde::Deserialize;
@@ -323,11 +338,15 @@ struct IdRecord {
 }
 ```
 
-In C++, the equivalent would be to generate a very complex code template, with a lot of compile time logic -- if it's even possible. But in Rust, that macro simply creates the ability to pass it to a `Deserializer`.
+In C++, the equivalent would be to generate a very complex code template, with a lot of compile time logic -- if it's even possible.
+But in Rust, that macro simply creates the ability to pass it to a `Deserializer`.
 
-What is a Deserializer? It is the logic that contains the instructions to parse a data format, such as JSON or CSV. And the way it does so is it creates and operates a `Visitor`.
+What is a Deserializer?
+It is the logic that contains the instructions to parse a data format, such as JSON or CSV.
+The way it does so is it creates and operates a `Visitor`.
 
-A simple example follows of a `Deserializer` that knows how to parse a single 32-bit binary number written out with ASCII 0s and 1s. For a better example, see the Serde documentation.
+A simple example follows of a `Deserializer` that knows how to parse a single 32-bit binary number written out with ASCII 0s and 1s.
+For a better example, see the Serde documentation.
 
 Note how this is composable in many other formats without predicting anything else about their structure.
 
@@ -352,11 +371,13 @@ impl<'de, 'a> serde::Deserializer<'de> for &'a mut BinaryDes<'de> {
 
 ```
 
-The only reason this works is due to a subtlety of the `Deserializer` trait's definition: the output type **is specified by the implementor of `Visitor` it is passed**. This was *not* true in the account example earlier.
+The only reason this works is due to a subtlety of the `Deserializer` trait's definition: the output type **is specified by the implementor of `Visitor` it is passed**.
+This was *not* true in the account example earlier.
 
 This means that a single call -- which drives a `Deserializer` -- will produce different output types depending on what visitor it was given, even though the `Value` type that results is not bound to the `Deserializer` at all!
 
-One might say `Deserializer` is "directly generic" over `Visitor`, and "indirectly generic` over `Value`. That means it is a "sum type" -- where a type is "applied" to it from another type -- and that makes it a prism.
+One might say `Deserializer` is "directly generic" over `Visitor`, and "indirectly generic` over `Value`.
+That means it is a "sum type" -- where a type is "applied" to it from another type -- and that makes it a prism.
 
 Any non-functional language can only achieve this with hacks: code generation, run-time polymorphism, duck typing, or constricting the interface of the output.
 
