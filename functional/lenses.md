@@ -103,7 +103,7 @@ fn unique_ids_set<R: CustomerId>(records: &[R]) -> HashSet<u64> {
 // dynamic polymorphism: iterates over any type, allowing collecting different
 // records together
 fn unique_ids_boxed<I>(iterator: I) -> HashSet<u64>
-	where I: Iterator<Item=Box<dyn CustomerId>>
+    where I: Iterator<Item=Box<dyn CustomerId>>
 {
     iterator.map(|r| r.as_ref().get_customer_id()).collect()
 }
