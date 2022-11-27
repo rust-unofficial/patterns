@@ -1,5 +1,4 @@
-Lenses and Prisms
-===========
+# Lenses and Prisms
 
 This is a pure functional concept that is not frequently used in Rust, because
 other idioms can achieve the same result and more advanced forms are not
@@ -12,8 +11,7 @@ They also have niche use cases.
 In addition, async Rust may be considered somewhat "lens like" in many of the
 APIs that exist today, e.g. `Future`.
 
-Basic Lenses: Like Rust Traits
-------------------------------
+## Basic Lenses: Like Rust Traits
 
 A basic lens allows composability similar to Rust traits instead of concrete types.
 
@@ -224,8 +222,7 @@ fn unique_ids<I>(iterator: I) -> HashSet<u64>
 
 While it would be much cleaner if Rust supported more funcitonal traits (a tall order indeed), hopefully the general idea is clear.
 
-Modification with Lenses
-------------------------
+## Modification with Lenses
 
 The functional approach need not be restricted to accessing members.
 More powerful lenses can be created which both set and get data in a structure.
@@ -282,8 +279,7 @@ fn make_id_deposit<A: BalanceChange + CustomerId>(account: &mut A) {
 The other ways this can be done is with composition functions, such as `map`
 and `and_then` on optional types.
 
-Prisms: Lenses, but Sum Types
------------------------------
+## Prisms: Lenses, but Sum Types
 
 A prism is like a lens, but one conceptual level higher.
 It is a way to make a high-level, trait-like interface apply across different
@@ -430,8 +426,7 @@ output.
 But with Rust's generic-inspired type system, it can be just as flexible as
 functional languages, and solve this problem while remaining statically typed.
 
-See Also
------------
+## See Also
 
 - [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses implementation, with a cleaner interface than these examples
 - [luminance](https://github.com/phaazon/luminance-rs) is a crate that uses lense API design, including proceducal macros to crate full equivalence to the missing generic traits mentioned earlier
