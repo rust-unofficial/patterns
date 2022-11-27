@@ -134,7 +134,7 @@ However, there are significant differences:
    impossible to accidentally change the type in such a way the trait becomes
    "invalid" at runtime.
 1. In many functional languages, data structures are immutable. While Rust's
-   traits allow mutation of types, the lense concept is designed to make deep
+   traits allow mutation of types, the lens concept is designed to make deep
    copying types with small changes much easier. (Deep copies which are often
    optimized differently by the runtime. but that's another story.)
 
@@ -235,7 +235,7 @@ fn unique_ids<I>(iterator: I) -> HashSet<u64>
 }
 ```
 
-While it would be much cleaner if Rust supported more funcitonal traits (a tall
+While it would be much cleaner if Rust supported more functional traits (a tall
 order indeed), hopefully the general idea is clear.
 
 ## Modification with Lenses
@@ -245,25 +245,25 @@ More powerful lenses can be created which both set and get data in a structure.
 This becomes more interesting when examining how these lenses can be composed
 together.
 
-to begin, consider a new lens trait, this one to update the balance of a bank
+To begin, consider a new lens trait, this one to update the balance of a bank
 account.
-these accounts have different structures for individuals and commercial
+These accounts have different structures for individuals and commercial
 business customers.
 
 ```rust,ignore
 pub struct Eur(u64); // 100 = 1 €
 
-// type castings to integers and display functions omitted
+// type casting to integers and display functions omitted
 
-pub trait balancechange {
+pub trait BalanceChange {
     fn balance(&self) -> Eur;
     fn deposit(&mut self, Eur);
     fn withdraw(&mut self, Eur);
 }
 ```
 
-This allows for *composition* between two lenses.
-It looks very different in haskell, so here is the rust way:
+This trait allows *composition* between two lenses.
+It looks very different in Haskell, so here is the Rust way:
 
 ```rust,ignore
 use chrono::prelude::*;
@@ -292,8 +292,11 @@ fn make_id_deposit<A: BalanceChange + CustomerId>(account: &mut A) {
 }
 ```
 
-The other ways this can be done is with composition functions, such as `map`
-and `and_then` on optional types.
+Here the composition is done through the generic `A`, which is defined as types
+with both traits.
+In order to literally compose lens functions, Rust uses `map` and `and_then`
+on `Option<T>` and iterator, which would allow each lens to be called
+sequentially on items.
 
 ## Prisms: Lenses, but Sum Types
 
@@ -308,7 +311,7 @@ A good example of this is the traits in Serde.
 
 Trying to understand the way Serde works by reading just the API is quite a
 challenge.
-Consider the `Deserializer' trait:
+Consider the `Deserializer` trait:
 
 ```rust,ignore
 pub trait Deserializer<'de>: Sized {
@@ -326,9 +329,14 @@ pub trait Deserializer<'de>: Sized {
 }
 ```
 
-This API is a prism.
+Wow, that's a lot of generics on functions, in addition to a type on the trait
+itself!
+Why are they all there?
 
-To understand it better, consider what "light" it is "refracting".
+They are there because this API is a prism: an attempt to make a generic set of
+"lenses" work across a generic set of types for "observation."
+
+To understand it better, consider what each "lense" looks like.
 Here is the definition of the `Visitor` type:
 
 ```rust,ignore
@@ -345,8 +353,13 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-Thinking back to `BalanceChange` earlier, this trait acts as a lens over a data
-structure currently being composed.
+This is similar to `BalanceChange` earlier. It is acting as a lense over a
+generic and unknown type of data.
+Its operation is to support composing a set of uniform data structures from
+that data represented by Serde's `Value` type.
+
+But unlike `BalanceChange` it's a *trait*.
+It's a *family* of lenses.
 
 For example, consider the identity record from earlier but simplified:
 
@@ -356,22 +369,26 @@ For example, consider the identity record from earlier but simplified:
 }
 ```
 
-In order to parse this record, a `Visitor` would be created that expects a
-particular sequence of calls:
+How would the Serde library transform this JSON into `struct CreditRecord`?
 
-1. Begin visiting sequence.
-1. Visit string "name".
-1. Visit unknown string.
-1. Combine into sequence key-value pair.
-1. Visit string "customer_id".
-1. Visit unknown string.
-1. Combine into sequence key-value pair.
-1. End visiting sequence.
+It would create a `Visitor` "lens", which would then try to "observe" expected
+data through a series of calls:
 
-If the wrong call happens, an error is thrown and deserialization fails.
+1. Visit the start of a map (the `{}` in Serde terminology).
+1. Visit a key string called "name".
+1. Visit an unknown string which is the value of the `name` field.
+1. Visit a key string called "customer_id".
+1. Visit an unknown string which is the value of the `customer_id` field.
+1. Expect the end of the map.
+1. Visit complete.
 
-With each new type, a new implementor of the `Visitor` trait is needed.
-Serde does this clearly and secretly using a derive macro:
+If the wrong "observation" happens, an error is thrown and deserialization
+fails.
+
+With each new type, a new implementation of the `Visitor` trait is needed,
+a type to explain what to observe in what order to fill out the struct.
+While Rust does not support generic traits as noted earlier, Serde solves this
+usability problem with a derive procedural macro:
 
 ```rust,ignore
 use serde::Deserialize;
@@ -391,14 +408,12 @@ But in Rust, that macro simply creates the ability to pass it to a
 What is a Deserializer?
 It is the logic that contains the instructions to parse a data format, such as
 JSON or CSV.
-The way it does so is it creates and operates a `Visitor`.
+It is "observed" by the lense, and "refracts" the generic calls into calls that
+are specific to the data format.
 
 A simple example follows of a `Deserializer` that knows how to parse a single
 32-bit binary number written out with ASCII 0s and 1s.
 For a better example, see the Serde documentation.
-
-Note how this is composable in many other formats without predicting anything
-else about their structure.
 
 ```rust,ignore
 struct BinaryDes<'de> {
@@ -421,10 +436,14 @@ impl<'de, 'a> serde::Deserializer<'de> for &'a mut BinaryDes<'de> {
 
 ```
 
-The only reason this works is due to a subtlety of the `Deserializer` trait's
-definition: the output type **is specified by the implementor of `Visitor` it
-is passed**.
-This was *not* true in the account example earlier.
+Note how this is composable in many formats without predicting anything else
+about their structure.
+That is the power of prisms.
+
+Key to this example is to a subtlety of the `Deserializer` trait's definition:
+the output type **is specified by the implementor of `Visitor` it is passed**.
+This was *not* true in the account example earlier, and part of the *family*
+definition that makes it a prism.
 
 This means that a single call -- which drives a `Deserializer` -- will produce
 different output types depending on what visitor it was given, even though the
@@ -435,20 +454,24 @@ One might say `Deserializer` is "directly generic" over `Visitor`, and
 That means it is a "sum type" -- where a type is "applied" to it from another
 type -- and that makes it a prism.
 
-Any non-functional language can only achieve this with hacks: code generation,
+Most non-functional languages achieve this with hacks: code generation,
 run-time polymorphism, duck typing, or constricting the interface of the
 output.
 
-But with Rust's generic-inspired type system, it can be just as flexible as
-functional languages, and solve this problem while remaining statically typed.
+But with Rust's generic-inspired type system, it can get a lot closer to
+functional languages, and maintain static typing -- even though it may also
+need procedural macros to create prisms.
 
 ## See Also
 
 - [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses
   implementation, with a cleaner interface than these examples
-- [luminance](https://github.com/phaazon/luminance-rs) is a crate that uses
-  lense API design, including proceducal macros to crate full equivalence to
-  the missing generic traits mentioned earlier
+- [serde](https://serde.rs) itself, which makes these concepts intuitive for
+  end users (i.e. defining the structs) without needing to undestand the
+  details
+- [luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing
+  computer graphics that uses lense API design, including proceducal macros to
+  create full prisms for buffers of different pixel types that remain generic
 - [An Article about Lenses in
   Scala](https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
   that is very readable even without Scala expertise.
