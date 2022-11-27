@@ -453,4 +453,4 @@ functional languages, and solve this problem while remaining statically typed.
 - [Paper: Profunctor Optics: Modular Data
   Accessors](https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
 
-[^1] https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
+[^1] [https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
