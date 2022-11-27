@@ -1,11 +1,16 @@
 Lenses and Prisms
 ===========
 
-This is a pure functional concept that is not frequently used in Rust, because other idioms can achieve the same result and more advanced forms are not supported.
-Never the less, exploring the concept may be helpful to understand other patterns in Rust APIs, such as [visitors](../../patterns/behavioural/visitor.md) and "callbacks".
+This is a pure functional concept that is not frequently used in Rust, because
+other idioms can achieve the same result and more advanced forms are not
+supported.
+Never the less, exploring the concept may be helpful to understand other
+patterns in Rust APIs, such as
+[visitors](../../patterns/behavioural/visitor.md) and "callbacks".
 They also have niche use cases.
 
-In addition, async Rust may be considered somewhat "lens like" in many of the APIs that exist today, e.g. `Future`.
+In addition, async Rust may be considered somewhat "lens like" in many of the
+APIs that exist today, e.g. `Future`.
 
 Basic Lenses: Like Rust Traits
 ------------------------------
@@ -43,12 +48,16 @@ Another one contains the account information:
 } 
 ```
 
-It would be possible to create a `struct` for each of these types and parse the JSON into it.
-However, each one would need to implement their own version of, for example, `get_customer_id`.
-But what if one piece of code wanted to retrieve all customer IDs regardless of data type?
+It would be possible to create a `struct` for each of these types and parse the
+JSON into it.
+However, each one would need to implement their own version of, for example,
+`get_customer_id`.
+But what if one piece of code wanted to retrieve all customer IDs regardless of
+data type?
 
 The solution in Rust is to make a trait which represents the operation.
-If it is implemented for both `struct`s, then type erasure can make the once piece of code work:
+If it is implemented for both `struct`s, then type erasure can make the once
+piece of code work:
 
 ```rust
 use std::collections::HashSet;
@@ -100,11 +109,15 @@ fn unique_ids_boxed<I>(iterator: I) -> HashSet<u64> where I: Iterator<Item=Box<d
 
 The versions of `unique_ids` shown here implement the *concept* of a lens.
 
-Lenses are a way to allow accessing parts of a data type in an abstract, unified way.[^1]
-Lenses define a generic operation -- in our case, getting a customer ID from a record -- that can apply to multiple types.
-This is so even though each type has a different way to "observe" the desired data.
+Lenses are a way to allow accessing parts of a data type in an abstract,
+unified way.[^1]
+Lenses define a generic operation -- in our case, getting a customer ID from a
+record -- that can apply to multiple types.
+This is so even though each type has a different way to "observe" the desired
+data.
 
-At first glance, it may seem more like Rust is using "duck typing", the way that dynamic languages do.
+At first glance, it may seem more like Rust is using "duck typing", the way
+that dynamic languages do.
 However, there are significant differences:
 
 1. Static type checking is maintained. Only types which "opt-in" to having a customer ID (with an `impl CustomerId` block) can be placed into the iterator or collection. Duck typed languages require this to be a runtime check, which can then go wrong at runtime.
@@ -113,8 +126,11 @@ However, there are significant differences:
 1. In many functional languages, data structures are immutable. While Rust's traits allow mutation of types, the lense concept is designed to make deep copying types with small changes much easier. (Deep copies which are often optimized differently by the runtime. but that's another story.)
 
 Most functional languages take a different approach to this concept, however.
-They prefer instead to use other features Rust does not have -- a form of partial function construction known as "currying" -- to do it with functions instead.
-They "partially construct" the function, leaving the type of the object being operated on until the function is constructed, which Rust cannot do.
+They prefer instead to use other features Rust does not have -- a form of
+partial function construction known as "currying" -- to do it with functions
+instead.
+They "partially construct" the function, leaving the type of the object being
+operated on until the function is constructed, which Rust cannot do.
 
 This is the nearest thing to a Rust equivalent to the "pure functional way":
 
@@ -213,10 +229,13 @@ Modification with Lenses
 
 The functional approach need not be restricted to accessing members.
 More powerful lenses can be created which both set and get data in a structure.
-This becomes more interesting when examining how these lenses can be composed together.
+This becomes more interesting when examining how these lenses can be composed
+together.
 
-to begin, consider a new lens trait, this one to update the balance of a bank account.
-these accounts have different structures for individuals and commercial business customers.
+to begin, consider a new lens trait, this one to update the balance of a bank
+account.
+these accounts have different structures for individuals and commercial
+business customers.
 
 ```rust,ignore
 pub struct Eur(u64); // 100 = 1 €
@@ -260,18 +279,23 @@ fn make_id_deposit<A: BalanceChange + CustomerId>(account: &mut A) {
 }
 ```
 
-The other ways this can be done is with composition functions, such as `map` and `and_then` on optional types.
+The other ways this can be done is with composition functions, such as `map`
+and `and_then` on optional types.
 
 Prisms: Lenses, but Sum Types
 -----------------------------
 
 A prism is like a lens, but one conceptual level higher.
-It is a way to make a high-level, trait-like interface apply across different lenses.
+It is a way to make a high-level, trait-like interface apply across different
+lenses.
 
-While pure functional languages have many more uses, a primary use for this in Rust is to split problems of recursion and types into pieces that can be composed.
+While pure functional languages have many more uses, a primary use for this in
+Rust is to split problems of recursion and types into pieces that can be
+composed.
 A good example of this is the traits in Serde.
 
-Trying to understand the way Serde works by reading just the API is quite a challenge.
+Trying to understand the way Serde works by reading just the API is quite a
+challenge.
 Consider the `Deserializer' trait:
 
 ```rust,ignore
@@ -309,7 +333,8 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-Thinking back to `BalanceChange` earlier, this trait acts as a lens over a data structure currently being composed.
+Thinking back to `BalanceChange` earlier, this trait acts as a lens over a data
+structure currently being composed.
 
 For example, consider the identity record from earlier but simplified:
 
@@ -319,7 +344,8 @@ For example, consider the identity record from earlier but simplified:
 }
 ```
 
-In order to parse this record, a `Visitor` would be created that expects a particular sequence of calls:
+In order to parse this record, a `Visitor` would be created that expects a
+particular sequence of calls:
 
 1. Begin visiting sequence.
 1. Visit string "name".
@@ -345,17 +371,22 @@ struct IdRecord {
 }
 ```
 
-In C++, the equivalent would be to generate a very complex code template, with a lot of compile time logic -- if it's even possible.
-But in Rust, that macro simply creates the ability to pass it to a `Deserializer`.
+In C++, the equivalent would be to generate a very complex code template, with
+a lot of compile time logic -- if it's even possible.
+But in Rust, that macro simply creates the ability to pass it to a
+`Deserializer`.
 
 What is a Deserializer?
-It is the logic that contains the instructions to parse a data format, such as JSON or CSV.
+It is the logic that contains the instructions to parse a data format, such as
+JSON or CSV.
 The way it does so is it creates and operates a `Visitor`.
 
-A simple example follows of a `Deserializer` that knows how to parse a single 32-bit binary number written out with ASCII 0s and 1s.
+A simple example follows of a `Deserializer` that knows how to parse a single
+32-bit binary number written out with ASCII 0s and 1s.
 For a better example, see the Serde documentation.
 
-Note how this is composable in many other formats without predicting anything else about their structure.
+Note how this is composable in many other formats without predicting anything
+else about their structure.
 
 ```rust,ignore
 struct BinaryDes<'de> {
@@ -378,17 +409,26 @@ impl<'de, 'a> serde::Deserializer<'de> for &'a mut BinaryDes<'de> {
 
 ```
 
-The only reason this works is due to a subtlety of the `Deserializer` trait's definition: the output type **is specified by the implementor of `Visitor` it is passed**.
+The only reason this works is due to a subtlety of the `Deserializer` trait's
+definition: the output type **is specified by the implementor of `Visitor` it
+is passed**.
 This was *not* true in the account example earlier.
 
-This means that a single call -- which drives a `Deserializer` -- will produce different output types depending on what visitor it was given, even though the `Value` type that results is not bound to the `Deserializer` at all!
+This means that a single call -- which drives a `Deserializer` -- will produce
+different output types depending on what visitor it was given, even though the
+`Value` type that results is not bound to the `Deserializer` at all!
 
-One might say `Deserializer` is "directly generic" over `Visitor`, and "indirectly generic` over `Value`.
-That means it is a "sum type" -- where a type is "applied" to it from another type -- and that makes it a prism.
+One might say `Deserializer` is "directly generic" over `Visitor`, and
+"indirectly generic` over `Value`.
+That means it is a "sum type" -- where a type is "applied" to it from another
+type -- and that makes it a prism.
 
-Any non-functional language can only achieve this with hacks: code generation, run-time polymorphism, duck typing, or constricting the interface of the output.
+Any non-functional language can only achieve this with hacks: code generation,
+run-time polymorphism, duck typing, or constricting the interface of the
+output.
 
-But with Rust's generic-inspired type system, it can be just as flexible as functional languages, and solve this problem while remaining statically typed.
+But with Rust's generic-inspired type system, it can be just as flexible as
+functional languages, and solve this problem while remaining statically typed.
 
 See Also
 -----------
