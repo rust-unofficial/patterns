@@ -450,7 +450,7 @@ different output types depending on what visitor it was given, even though the
 `Value` type that results is not bound to the `Deserializer` at all!
 
 One might say `Deserializer` is "directly generic" over `Visitor`, and
-"indirectly generic` over `Value`.
+"indirectly generic" over `Value`.
 That means it is a "sum type" -- where a type is "applied" to it from another
 type -- and that makes it a prism.
 
