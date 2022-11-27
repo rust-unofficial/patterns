@@ -1,16 +1,19 @@
-Lenses
+Lenses and Prisms
 ===========
 
-This is a pure functional concept that is not frequently used in Rust, because other idioms can achieve the same result.
-However, they have niche use cases, and exploring the concept may assist with understanding other patterns in Rust APIs, such as [visitors](../../patterns/behavioural/visitor.md) and "callbacks".
-In addition, async Rust may be considered somewhat "lens like" in many of the APIs that exist today.
+This is a pure functional concept that is not frequently used in Rust, because other idioms can achieve the same result and more advanced forms are not supported.
+Never the less, exploring the concept may be helpful to understand other patterns in Rust APIs, such as [visitors](../../patterns/behavioural/visitor.md) and "callbacks".
+They also have niche use cases.
+
+In addition, async Rust may be considered somewhat "lens like" in many of the APIs that exist today, e.g. `Future`.
 
 Basic Lenses: Like Rust Traits
 ------------------------------
 
 A basic lens allows composability similar to Rust traits instead of concrete types.
 
-For example, suppose that there are several JSON forms of user data from different databases.
+For example, suppose a bank contains several JSON formats for customer data.
+This is because they come from different databases or legacy systems.
 One database contains the data needed to perform credit checks:
 
 ```json
@@ -40,10 +43,12 @@ Another one contains the account information:
 } 
 ```
 
-Obtaining the customer ID is possible, but each one would need their own implementation of `get_customer_id`.
+It would be possible to create a `struct` for each of these types and parse the JSON into it.
+However, each one would need to implement their own version of, for example, `get_customer_id`.
+But what if one piece of code wanted to retrieve all customer IDs regardless of data type?
 
-What if one piece of code wanted to retrieve all customer IDs regardless of data type?
-The solution in Rust is to make a trait which represents the operation, and implement it for both database API types:
+The solution in Rust is to make a trait which represents the operation.
+If it is implemented for both `struct`s, then type erasure can make the once piece of code work:
 
 ```rust
 use std::collections::HashSet;
@@ -82,29 +87,30 @@ impl CustomerId for AccountRecord {
     }
 }
 
-// static version: one singular type at a time, but any type with one piece of code
+// static polymorphism: allows one singular type at a time, but a function call with any type
 fn unique_ids_set<R: CustomerId>(records: &[R]) -> HashSet<u64> {
     records.iter().map(|r| r.get_customer_id()).collect()
 }
 
-// dynamic version: any type on a per-record basis, allowing collecting different records together
+// dynamic polymorphism: iterates over any type, allowing collecting different records together
 fn unique_ids_boxed<I>(iterator: I) -> HashSet<u64> where I: Iterator<Item=Box<dyn CustomerId>> {
     iterator.map(|r| r.as_ref().get_customer_id()).collect()
 }
 ```
 
-Though it looks very different, this implements the functional concept of a lens.
+The versions of `unique_ids` shown here implement the *concept* of a lens.
 
-Lenses are a way to allow accessing parts of a data type in an abstract way.[^1] We have a generic operation -- getting a customer ID associated with a record -- that can apply to multiple types, each of which has a different method of "observation" of the desired data.
+Lenses are a way to allow accessing parts of a data type in an abstract, unified way.[^1]
+Lenses define a generic operation -- in our case, getting a customer ID from a record -- that can apply to multiple types.
+This is so even though each type has a different way to "observe" the desired data.
 
-At first glance, it may seem more like Rust is using "duck typing", the way that dynamic languages would.
+At first glance, it may seem more like Rust is using "duck typing", the way that dynamic languages do.
 However, there are significant differences:
 
-1. Each copy of `CustomerId` lives with the type. In particular, this means they can live in different crates than definition of `CustomerId`, and become extensible beyond the original author's ideas.
-
-2. The definition of `CustomerId` is consistent throughout the program. It is impossible to accidentally put an extra parameter on one of the types, which would cause a type error at runtime. That will manifest as a compile time error instead.
-
-3. In many functional languages, data structures are immutable. While traits allow mutation of types, the pattern itself makes "deep copying" types with small changes much easier and cheaper if you want to avoid mutation.
+1. Static type checking is maintained. Only types which "opt-in" to having a customer ID (with an `impl CustomerId` block) can be placed into the iterator or collection. Duck typed languages require this to be a runtime check, which can then go wrong at runtime.
+1. The `impl CustomerId` block lives with the type. This means the type can live in a different crate than definition of `CustomerId` itself, maintaining extensibility.
+1. The definition of `CustomerId` is consistent throughout the program. Unlike some approaches functional languages take (discussed below), it is impossible to accidentally change the type in such a way the trait becomes "invalid" at runtime.
+1. In many functional languages, data structures are immutable. While Rust's traits allow mutation of types, the lense concept is designed to make deep copying types with small changes much easier. (Deep copies which are often optimized differently by the runtime. but that's another story.)
 
 Most functional languages take a different approach to this concept, however.
 They prefer instead to use other features Rust does not have -- a form of partial function construction known as "currying" -- to do it with functions instead.
@@ -195,11 +201,12 @@ fn get_customer_data(
 fn unique_ids<I>(iterator: I) -> HashSet<u64>
     where I: Iterator<Item=Box<dyn Any>>
 {
-    iterator.map(get_customer_data).filter_map(|id| id).collect()
+    // would be: iterator.filter_map(|it| it.view(get_customer_data)).collect()
+    iterator.map(get_customer_data).filter_map(|uniq_id_opt| uniq_id_opt).collect()
 }
 ```
 
-While it would be much cleaner if Rust supported more funcitonal traits (a tall order indeed), hopefully the general idea and advantages over the non-functional approach are clear.
+While it would be much cleaner if Rust supported more funcitonal traits (a tall order indeed), hopefully the general idea is clear.
 
 Modification with Lenses
 ------------------------
@@ -212,14 +219,14 @@ to begin, consider a new lens trait, this one to update the balance of a bank ac
 these accounts have different structures for individuals and commercial business customers.
 
 ```rust,ignore
-pub struct eur(u64); // 100 = 1 eur
+pub struct Eur(u64); // 100 = 1 €
 
-// type castings to integers omitted
+// type castings to integers and display functions omitted
 
 pub trait balancechange {
-    fn balance(&self) -> eur;
-    fn deposit(&mut self, eur);
-    fn withdraw(&mut self, eur);
+    fn balance(&self) -> Eur;
+    fn deposit(&mut self, Eur);
+    fn withdraw(&mut self, Eur);
 }
 ```
 
@@ -387,6 +394,7 @@ See Also
 -----------
 
 - [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses implementation, with a cleaner interface than these examples
+- [luminance](https://github.com/phaazon/luminance-rs) is a crate that uses lense API design, including proceducal macros to crate full equivalence to the missing generic traits mentioned earlier
 - [An Article about Lenses in Scala](
 https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
   that is very readable even without Scala expertise.
