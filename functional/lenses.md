@@ -94,12 +94,14 @@ impl CustomerId for AccountRecord {
     }
 }
 
-// static polymorphism: allows one singular type at a time, but a function call with any type
+// static polymorphism: allows one singular type at a time, but a function call
+// with any type
 fn unique_ids_set<R: CustomerId>(records: &[R]) -> HashSet<u64> {
     records.iter().map(|r| r.get_customer_id()).collect()
 }
 
-// dynamic polymorphism: iterates over any type, allowing collecting different records together
+// dynamic polymorphism: iterates over any type, allowing collecting different
+// records together
 fn unique_ids_boxed<I>(iterator: I) -> HashSet<u64> where I: Iterator<Item=Box<dyn CustomerId>> {
     iterator.map(|r| r.as_ref().get_customer_id()).collect()
 }
@@ -118,10 +120,21 @@ At first glance, it may seem more like Rust is using "duck typing", the way
 that dynamic languages do.
 However, there are significant differences:
 
-1. Static type checking is maintained. Only types which "opt-in" to having a customer ID (with an `impl CustomerId` block) can be placed into the iterator or collection. Duck typed languages require this to be a runtime check, which can then go wrong at runtime.
-1. The `impl CustomerId` block lives with the type. This means the type can live in a different crate than definition of `CustomerId` itself, maintaining extensibility.
-1. The definition of `CustomerId` is consistent throughout the program. Unlike some approaches functional languages take (discussed below), it is impossible to accidentally change the type in such a way the trait becomes "invalid" at runtime.
-1. In many functional languages, data structures are immutable. While Rust's traits allow mutation of types, the lense concept is designed to make deep copying types with small changes much easier. (Deep copies which are often optimized differently by the runtime. but that's another story.)
+1. Static type checking is maintained. Only types which "opt-in" to having a
+   customer ID (with an `impl CustomerId` block) can be placed into the
+   iterator or collection. Duck typed languages require this to be a runtime
+   check, which can then go wrong at runtime.
+1. The `impl CustomerId` block lives with the type. This means the type can
+   live in a different crate than definition of `CustomerId` itself,
+   maintaining extensibility.
+1. The definition of `CustomerId` is consistent throughout the program. Unlike
+   some approaches functional languages take (discussed below), it is
+   impossible to accidentally change the type in such a way the trait becomes
+   "invalid" at runtime.
+1. In many functional languages, data structures are immutable. While Rust's
+   traits allow mutation of types, the lense concept is designed to make deep
+   copying types with small changes much easier. (Deep copies which are often
+   optimized differently by the runtime. but that's another story.)
 
 Most functional languages take a different approach to this concept, however.
 They prefer instead to use other features Rust does not have -- a form of
@@ -220,7 +233,8 @@ fn unique_ids<I>(iterator: I) -> HashSet<u64>
 }
 ```
 
-While it would be much cleaner if Rust supported more funcitonal traits (a tall order indeed), hopefully the general idea is clear.
+While it would be much cleaner if Rust supported more funcitonal traits (a tall
+order indeed), hopefully the general idea is clear.
 
 ## Modification with Lenses
 
@@ -255,9 +269,9 @@ use rand::{RngCore, thread_rng};
 use sha2::{Sha256, Digest};
 
 fn make_id_deposit<A: BalanceChange + CustomerId>(account: &mut A) {
-    // this computes a hash based on the current balance and the account ID, resulting in a pair of
-    // transactions that the customer must use to verify their identity when resetting their pin
-    // via telephone
+    // this computes a hash based on the current balance and the account ID,
+    // resulting in a pair of transactions that the customer must use to verify
+    // their identity when resetting their pin via telephone
 
     let balance = account.balance();
     let id = account.get_customer_id();
@@ -428,11 +442,15 @@ functional languages, and solve this problem while remaining statically typed.
 
 ## See Also
 
-- [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses implementation, with a cleaner interface than these examples
-- [luminance](https://github.com/phaazon/luminance-rs) is a crate that uses lense API design, including proceducal macros to crate full equivalence to the missing generic traits mentioned earlier
-- [An Article about Lenses in Scala](
-https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
+- [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses
+  implementation, with a cleaner interface than these examples
+- [luminance](https://github.com/phaazon/luminance-rs) is a crate that uses
+  lense API design, including proceducal macros to crate full equivalence to
+  the missing generic traits mentioned earlier
+- [An Article about Lenses in
+  Scala](https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
   that is very readable even without Scala expertise.
-- [Paper: Profunctor Optics: Modular Data Accessors](https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
+- [Paper: Profunctor Optics: Modular Data
+  Accessors](https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
 
 [^1] https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial
