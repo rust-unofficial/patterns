@@ -6,7 +6,6 @@
         <title>Rust Design Patterns</title>
         <meta name="robots" content="noindex" />
         <!-- Custom HTML head -->
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="A catalogue of Rust design patterns, anti-patterns and idioms">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
@@ -29,13 +28,13 @@
     </head>
     <body>
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -51,7 +50,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -63,7 +62,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -95,7 +94,7 @@
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
                             <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
@@ -128,7 +127,7 @@
                     </div>
                 </div>
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -242,15 +241,13 @@ fn main() {
     // println!(&quot;Ferris: {}&quot;, three_vowels(&quot;Ferris&quot;));
     // println!(&quot;Curious: {}&quot;, three_vowels(&quot;Curious&quot;));
 
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>This works fine because we are passing a <code>&amp;String</code> type as a parameter.
 If we remove the comments on the last two lines, the example will fail. This
 is because a <code>&amp;str</code> type will not coerce to a <code>&amp;String</code> type. We can fix this
 by simply modifying the type for our argument.</p>
 <p>For instance, if we change our function declaration to:</p>
-<pre><code class="language-rust  ignore">fn three_vowels(word: &amp;str) -&gt; bool {
-</code></pre>
+<pre><code class="language-rust  ignore">fn three_vowels(word: &amp;str) -&gt; bool {</code></pre>
 <p>then both versions will compile and print the same output.</p>
 <pre><code class="language-bash">Ferris: false
 Curious: true
@@ -289,8 +286,7 @@ fn main() {
             println!(&quot;{} has three consecutive vowels!&quot;, word);
         }
     }
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>Running this example using our function declared with an argument type <code>&amp;str</code>
 will yield</p>
 <pre><code class="language-bash">curious has three consecutive vowels!
@@ -325,8 +321,7 @@ non-literal strings.</p>
     // But using format! is better.
     format!(&quot;Hello {}!&quot;, name)
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="advantages"><a class="header" href="#advantages">Advantages</a></h2>
 <p>Using <code>format!</code> is usually the most succinct and readable way to combine strings.</p>
 <h2 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h2>
@@ -363,8 +358,7 @@ impl Second {
         self.value
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="default-constructors"><a class="header" href="#default-constructors">Default Constructors</a></h2>
 <p>Rust supports default constructors with the <a href="https://doc.rust-lang.org/stable/std/default/trait.Default.html"><code>Default</code></a> trait:</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
@@ -393,8 +387,7 @@ impl Default for Second {
         Self { value: 0 }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><code>Default</code> can also be derived if all types of all fields implement <code>Default</code>,
 like they do with <code>Second</code>:</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
@@ -418,8 +411,7 @@ impl Second {
         self.value
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p><strong>Note:</strong> It is common and expected for types to implement both
 <code>Default</code> and an empty <code>new</code> constructor. <code>new</code> is the constructor
 convention in Rust, and users expect it to exist, so if it is
@@ -490,8 +482,7 @@ fn main() {
         ..Default::default()
     };
     assert_eq!(conf, conf1);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="see-also-2"><a class="header" href="#see-also-2">See also</a></h2>
 <ul>
 <li>The <a href="idioms/ctor.html">constructor</a> idiom is another way to generate instances that may or may
@@ -519,8 +510,7 @@ impl&lt;T&gt; Deref for Vec&lt;T&gt; {
     fn deref(&amp;self) -&gt; &amp;[T] {
         //..
     }
-}
-</code></pre>
+}</code></pre>
 <p>A <code>Vec&lt;T&gt;</code> is an owning collection of <code>T</code>s, while a slice (<code>&amp;[T]</code>) is a borrowed
 collection of <code>T</code>s. Implementing <code>Deref</code> for <code>Vec</code> allows implicit dereferencing
 from <code>&amp;Vec&lt;T&gt;</code> to <code>&amp;[T]</code> and includes the relationship in auto-derefencing
@@ -584,8 +574,7 @@ be used to run code that must be run before exit.</p>
     baz()?;
     // Normal return.
     Ok(())
-}
-</code></pre>
+}</code></pre>
 <h2 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h2>
 <p>If a function has multiple return points, then executing code on exit becomes
 difficult and repetitive (and thus bug-prone). This is especially the case where
@@ -656,8 +645,7 @@ fn a_to_b(e: &amp;mut MyEnum) {
         *e = MyEnum::B { name: mem::take(name) }
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>This also works with more variants:</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -681,8 +669,7 @@ fn swizzle(e: &amp;mut MultiVariateEnum) {
         D =&gt; C
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="motivation-2"><a class="header" href="#motivation-2">Motivation</a></h2>
 <p>When working with enums, we may want to change an enum value in place, perhaps
 to another variant. This is usually done in two phases to keep the borrow
@@ -753,8 +740,7 @@ let readable: &amp;mut dyn io::Read = if arg == &quot;-&quot; {
 // Read from `readable` here.
 
 <span class="boring">Ok(())
-</span><span class="boring">}
-</span></code></pre></pre>
+</span><span class="boring">}</span></code></pre></pre>
 <h2 id="motivation-3"><a class="header" href="#motivation-3">Motivation</a></h2>
 <p>Rust monomorphises code by default. This means a copy of the code will be
 generated for each type it is used with and optimized independently. While this
@@ -775,8 +761,7 @@ let readable: Box&lt;dyn io::Read&gt; = if arg == &quot;-&quot; {
 } else {
     Box::new(fs::File::open(arg)?)
 };
-// Read from `readable` here.
-</code></pre>
+// Read from `readable` here.</code></pre>
 <h2 id="discussion-3"><a class="header" href="#discussion-3">Discussion</a></h2>
 <p>Rust newcomers will usually learn that Rust requires all variables to be
 initialized <em>before use</em>, so it's easy to overlook the fact that <em>unused</em>
@@ -841,8 +826,7 @@ impl From&lt;DatabaseError&gt; for libc::c_int {
     fn from(e: DatabaseError) -&gt; libc::c_int {
         (e as i8).into()
     }
-}
-</code></pre>
+}</code></pre>
 <h3 id="structured-enums"><a class="header" href="#structured-enums">Structured Enums</a></h3>
 <pre><code class="language-rust ignore">pub mod errors {
     enum DatabaseError {
@@ -907,8 +891,7 @@ pub mod c_api {
 
         c_error
     }
-}
-</code></pre>
+}</code></pre>
 <h3 id="custom-error-types"><a class="header" href="#custom-error-types">Custom Error Types</a></h3>
 <pre><code class="language-rust ignore">struct ParseError {
     expected: char,
@@ -931,8 +914,7 @@ impl From&lt;ParseError&gt; for parse_error {
         let ParseError { expected, line, ch } = e;
         parse_error { expected, line, ch }
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="advantages-5"><a class="header" href="#advantages-5">Advantages</a></h2>
 <p>This ensures that the foreign language has clear access to error information
 while not compromising the Rust code's API at all.</p>
@@ -996,8 +978,7 @@ strings between Rust and C is a zero-cost operation.</p>
 
         crate::log(msg_str, level);
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="advantages-6"><a class="header" href="#advantages-6">Advantages</a></h2>
 <p>The example is is written to ensure that:</p>
 <ol>
@@ -1044,8 +1025,7 @@ reference</li>
 
         crate::log(&amp;msg_str, level);
     }
-}
-</code></pre>
+}</code></pre>
 <p>This code in inferior to the original in two respects:</p>
 <ol>
 <li>There is much more <code>unsafe</code> code, and more importantly, more invariants it
@@ -1123,8 +1103,7 @@ modification is UB, so additional work is necessary in that case.</p>
 
         std::ffi::CString::new(buffer).unwrap().into_string()
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="advantages-7"><a class="header" href="#advantages-7">Advantages</a></h2>
 <p>The example is written in a way to ensure that:</p>
 <ol>
@@ -1145,8 +1124,7 @@ variable in the first block:</p>
         }
         Ok(())
     }
-}
-</code></pre>
+}</code></pre>
 <p>This code will result in a dangling pointer, because the lifetime of the
 <code>CString</code> is not extended by the pointer creation, unlike if a reference were
 created.</p>
@@ -1175,8 +1153,7 @@ logicians.extend(turing);
 if let Some(turing_inner) = turing {
     logicians.push(turing_inner);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>If you need to tack an <code>Option</code> to the end of an existing iterator, you can
 pass it to <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain"><code>.chain()</code></a>:</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
@@ -1187,8 +1164,7 @@ let logicians = vec![&quot;Curry&quot;, &quot;Kleene&quot;, &quot;Markov&quot;];
 for logician in logicians.iter().chain(turing.iter()) {
     println!(&quot;{} is a logician&quot;, logician);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Note that if the <code>Option</code> is always <code>Some</code>, then it is more idiomatic to use
 <a href="https://doc.rust-lang.org/std/iter/fn.once.html"><code>std::iter::once</code></a> on the
 element instead.</p>
@@ -1239,8 +1215,7 @@ let closure = {
         *num1 + *num2 + *num3;
     }
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>instead of</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
@@ -1255,8 +1230,7 @@ let num3_borrowed = num3.as_ref();
 let closure = move || {
     *num1 + *num2_cloned + *num3_borrowed;
 };
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="advantages-8"><a class="header" href="#advantages-8">Advantages</a></h2>
 <p>Copied data are grouped together with closure definition, so their purpose is
 more clear, and they will be dropped immediately even if they are not consumed
@@ -1319,8 +1293,7 @@ fn print_matched_variants(s: a::S) {
         _ =&gt; println!(&quot;it's a new variant&quot;)
     }
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="alternative-private-fields-for-structs"><a class="header" href="#alternative-private-fields-for-structs">Alternative: <code>Private fields</code> for structs</a></h2>
 <p><code>#[non_exhaustive]</code> only works across crate boundaries.
 Within a crate, the private field method may be used.</p>
@@ -1344,8 +1317,7 @@ the field name to avoid the unused field warning.</p>
     //  cannot be directly instantiated or matched against
     _b: ()
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="discussion-4"><a class="header" href="#discussion-4">Discussion</a></h2>
 <p>On <code>struct</code>s, <code>#[non_exhaustive]</code> allows adding additional fields in a backwards
 compatible way.
@@ -1412,8 +1384,7 @@ impl Connection {
     fn check_status(&amp;self) -&gt; Status {
         // ...
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="example-9"><a class="header" href="#example-9">Example</a></h2>
 <p>Instead of typing all of this boilerplate to create a <code>Connection</code> and
 <code>Request</code>, it is easier to just create a wrapping helper function which takes
@@ -1436,8 +1407,7 @@ impl Connection {
     fn send_request(&amp;self, request: Request) {
         // ...
     }
-}
-</code></pre>
+}</code></pre>
 <p><strong>Note</strong> in the above example the line <code>assert!(response.is_ok());</code> will not
 actually run while testing because it is inside a function which is never
 invoked.</p>
@@ -1469,15 +1439,13 @@ the variable.</p>
     data
 };
 
-// Here `data` is immutable.
-</code></pre>
+// Here `data` is immutable.</code></pre>
 <p>Using variable rebinding:</p>
 <pre><code class="language-rust ignore">let mut data = get_vec();
 data.sort();
 let data = data;
 
-// Here `data` is immutable.
-</code></pre>
+// Here `data` is immutable.</code></pre>
 <h2 id="advantages-10"><a class="header" href="#advantages-10">Advantages</a></h2>
 <p>Compiler ensures that you don't accidentally mutate data after some point.</p>
 <h2 id="disadvantages-11"><a class="header" href="#disadvantages-11">Disadvantages</a></h2>
@@ -1592,8 +1560,7 @@ fn main() {
 
     assert_eq!(vec![&quot;create table&quot;, &quot;add field&quot;], schema.execute());
     assert_eq!(vec![&quot;remove field&quot;, &quot;drop table&quot;], schema.rollback());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="approach-using-function-pointers"><a class="header" href="#approach-using-function-pointers">Approach: Using function pointers</a></h2>
 <p>We could follow another approach by creating each individual command as
 a different function and store function pointers to invoke these functions later
@@ -1643,8 +1610,7 @@ fn main() {
     schema.add_migration(add_field, remove_field);
     assert_eq!(vec![&quot;create table&quot;, &quot;add field&quot;], schema.execute());
     assert_eq!(vec![&quot;remove field&quot;, &quot;drop table&quot;], schema.rollback());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="approach-using-fn-trait-objects"><a class="header" href="#approach-using-fn-trait-objects">Approach: Using <code>Fn</code> trait objects</a></h2>
 <p>Finally, instead of defining a common command trait we could store
 each command implementing the <code>Fn</code> trait separately in vectors.</p>
@@ -1692,8 +1658,7 @@ fn main() {
     schema.add_migration(add_field, remove_field);
     assert_eq!(vec![&quot;create table&quot;, &quot;add field&quot;], schema.execute());
     assert_eq!(vec![&quot;remove field&quot;, &quot;drop table&quot;], schema.rollback());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="discussion-6"><a class="header" href="#discussion-6">Discussion</a></h2>
 <p>If our commands are small and may be defined as functions or passed as a closure
 then using function pointers might be preferable since it does not exploit
@@ -1803,8 +1768,7 @@ pub fn main() {
     postfix.clear();
     intr.interpret(&amp;mut postfix);
     assert_eq!(postfix, &quot;12-3+4-&quot;);
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="discussion-7"><a class="header" href="#discussion-7">Discussion</a></h2>
 <p>There may be a wrong perception that the Interpreter design pattern is about design
 grammars for formal languages and implementation of parsers for these grammars.
@@ -1837,8 +1801,7 @@ fn main() {
     assert_eq!(5f64, norm!(x, y));
     assert_eq!(0f64, norm!(0, 0, 0)); 
     assert_eq!(1f64, norm!(0.5, -0.5, 0.5, -0.5));
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="see-also-10"><a class="header" href="#see-also-10">See also</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Interpreter_pattern">Interpreter pattern</a></li>
@@ -1889,8 +1852,7 @@ fn main() {
     // Foo and Bar are type incompatible, the following do not type check.
     // let f: Foo = b;
     // let b: Bar = Foo { ... };
-}
-</code></pre>
+}</code></pre>
 <h2 id="motivation-9"><a class="header" href="#motivation-9">Motivation</a></h2>
 <p>The primary motivation for newtypes is abstraction. It allows you to share
 implementation details between types while precisely controlling the interface.
@@ -1920,8 +1882,7 @@ most common uses, but they can be used for other reasons:</p>
 <li>abstraction by providing a more concrete type and thus hiding internal types,
 e.g.,</li>
 </ul>
-<pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);
-</code></pre>
+<pre><code class="language-rust ignore">pub struct Foo(Bar&lt;T1, T2&gt;);</code></pre>
 <p>Here, <code>Bar</code> might be some public, generic type and <code>T1</code> and <code>T2</code> are some internal
 types. Users of our module shouldn't know that we implement <code>Foo</code> by using a <code>Bar</code>,
 but what we're really hiding here is the types <code>T1</code> and <code>T2</code>, and how they are used
@@ -1997,8 +1958,7 @@ fn baz(x: Mutex&lt;Foo&gt;) {
     // Foo which will outlive the guard xx.
 
     // x is unlocked when we exit this function and xx's destructor is executed.
-}
-</code></pre>
+}</code></pre>
 <h2 id="motivation-10"><a class="header" href="#motivation-10">Motivation</a></h2>
 <p>Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
@@ -2019,8 +1979,7 @@ guard. To see how this works it is helpful to examine the signature of <code>der
 without lifetime elision:</p>
 <pre><code class="language-rust ignore">fn deref&lt;'a&gt;(&amp;'a self) -&gt; &amp;'a T {
     //..
-}
-</code></pre>
+}</code></pre>
 <p>The returned reference to the resource has the same lifetime as <code>self</code> (<code>'a</code>).
 The borrow checker therefore ensures that the lifetime of the reference to <code>T</code>
 is shorter than the lifetime of <code>self</code>.</p>
@@ -2113,8 +2072,7 @@ fn main() {
     Report::generate(Json, &amp;mut s);
     assert!(s.contains(r#&quot;{&quot;one&quot;:&quot;1&quot;}&quot;#));
     assert!(s.contains(r#&quot;{&quot;two&quot;:&quot;2&quot;}&quot;#));
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="advantages-13"><a class="header" href="#advantages-13">Advantages</a></h2>
 <p>The main advantage is separation of concerns. For example, in this case <code>Report</code>
 does not know anything about specific implementations of <code>Json</code> and <code>Text</code>,
@@ -2168,7 +2126,6 @@ fn main() {
     assert_eq!(0, Adder::add(0, 0, bool_adder));
     assert_eq!(5, Adder::add(1, 3, custom_adder));
 }
-
 </code></pre></pre>
 <p>In fact, Rust already uses this idea for <code>Options</code>'s <code>map</code> method:</p>
 <pre><pre class="playground"><code class="language-rust edition2018">fn main() {
@@ -2179,8 +2136,7 @@ fn main() {
 
     let first_byte_strategy = |s: &amp;str| s.bytes().next().unwrap();
     assert_eq!(82, val.map(first_byte_strategy).unwrap());
-}
-</code></pre></pre>
+}</code></pre></pre>
 <h2 id="see-also-13"><a class="header" href="#see-also-13">See also</a></h2>
 <ul>
 <li><a href="https://en.wikipedia.org/wiki/Strategy_pattern">Strategy Pattern</a></li>
@@ -2246,8 +2202,7 @@ impl Visitor&lt;i64&gt; for Interpreter {
             Expr::Sub(ref lhs, ref rhs) =&gt; self.visit_expr(lhs) - self.visit_expr(rhs),
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>One could implement further visitors, for example a type checker, without having
 to modify the AST data.</p>
 <h2 id="motivation-12"><a class="header" href="#motivation-12">Motivation</a></h2>
@@ -2273,8 +2228,7 @@ example,</p>
             visitor.visit_expr(rhs);
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>In other languages (e.g., Java) it is common for data to have an <code>accept</code> method
 which performs the same duty.</p>
 <h2 id="see-also-14"><a class="header" href="#see-also-14">See also</a></h2>
@@ -2347,8 +2301,7 @@ fn builder_test() {
     let foo_from_builder: Foo = FooBuilder::new().name(String::from(&quot;Y&quot;)).build();
     assert_eq!(foo, foo_from_builder);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="motivation-13"><a class="header" href="#motivation-13">Motivation</a></h2>
 <p>Useful when you would otherwise require many constructors or where
 construction has side effects.</p>
@@ -2376,8 +2329,7 @@ one can write code like</p>
 <pre><code class="language-rust ignore">let mut fb = FooBuilder::new();
 fb.a();
 fb.b();
-let f = fb.build();
-</code></pre>
+let f = fb.build();</code></pre>
 <p>as well as the <code>FooBuilder::new().a().b().build()</code> style.</p>
 <h2 id="see-also-15"><a class="header" href="#see-also-15">See also</a></h2>
 <ul>
@@ -2443,8 +2395,7 @@ impl Folder for Renamer {
         Box::new(Name { value: &quot;foo&quot;.to_owned() })
     }
     // Use the default methods for the other nodes.
-}
-</code></pre>
+}</code></pre>
 <p>The result of running the <code>Renamer</code> on an AST is a new AST identical to the old
 one, but with every name changed to <code>foo</code>. A real life folder might have some
 state preserved between nodes in the struct itself.</p>
@@ -2528,8 +2479,7 @@ fn baz(a: &amp;mut A) {
                        //          at a time
     println!(&quot;{}&quot;, x);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>We can apply this design pattern and refactor <code>A</code> into two smaller structs, thus
 solving the borrow checking issue:</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
@@ -2557,8 +2507,7 @@ fn baz(a: &amp;mut A) {
     let y = bar(&amp;mut a.c);
     println!(&quot;{}&quot;, x);
 }
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="motivation-15"><a class="header" href="#motivation-15">Motivation</a></h2>
 <p>TODO Why and where you should use the pattern</p>
 <h2 id="advantages-15"><a class="header" href="#advantages-15">Advantages</a></h2>
@@ -2781,8 +2730,7 @@ struct DbmKeysIter&lt;'it&gt; {
     owner: &amp;'it Dbm,
 }
 
-impl&lt;'it&gt; Iterator for DbmKeysIter&lt;'it&gt; { ... }
-</code></pre>
+impl&lt;'it&gt; Iterator for DbmKeysIter&lt;'it&gt; { ... }</code></pre>
 <p>This is clean, idiomatic, and safe. thanks to Rust's guarantees.
 However, consider what a straightforward API translation would look like:</p>
 <pre><code class="language-rust ignore">#[no_mangle]
@@ -2799,8 +2747,7 @@ pub extern &quot;C&quot; fn dbm_iter_next(
 #[no_mangle]
 pub extern &quot;C&quot; fn dbm_iter_del(*mut DbmKeysIter) {
     // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
-}
-</code></pre>
+}</code></pre>
 <p>This API loses a key piece of information: the lifetime of the iterator must not
 exceed the lifetime of the <code>Dbm</code> object that owns it. A user of the library could
 use it in a way which causes the iterator to outlive the data it is iterating on,
@@ -2931,8 +2878,7 @@ impl MySetWrapper {
             None
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>As a result, the wrapper is simple and contains no <code>unsafe</code> code.</p>
 <h2 id="advantages-19"><a class="header" href="#advantages-19">Advantages</a></h2>
 <p>This makes APIs safer to use, avoiding issues with lifetimes between types.
@@ -2957,8 +2903,7 @@ and manage it manually.</p>
     iter_next: usize,
     // created from a transmuted Box&lt;KeysIter + 'self&gt;
     iterator: Option&lt;NonNull&lt;KeysIter&lt;'static&gt;&gt;&gt;,
-}
-</code></pre>
+}</code></pre>
 <p>With <code>transmute</code> being used to extend a lifetime, and a pointer to hide it,
 it's ugly already. But it gets even worse: <em>any other operation can cause
 Rust <code>undefined behaviour</code></em>.</p>
@@ -2989,8 +2934,7 @@ libraries expect it.</p>
             Err(e) =&gt; e.into()
         }
     }
-}
-</code></pre>
+}</code></pre>
 <p>If the iterator exists when this function is called, we have violated one of Rust's
 aliasing rules. According to Rust, the mutable reference in this block must have
 <em>exclusive</em> access to the object. If the iterator simply exists, it's not exclusive,
@@ -3046,8 +2990,7 @@ println!(&quot;{}&quot;, x);
 // perform some action on the borrow to prevent rust from optimizing this
 //out of existence
 *y += 1;
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="motivation-17"><a class="header" href="#motivation-17">Motivation</a></h2>
 <p>It is tempting, particularly for beginners, to use this pattern to resolve
 confusing issues with the borrow checker. However, there are serious
@@ -3096,8 +3039,7 @@ warnings. So they annotate their crate root with the following:</p>
 
 <span class="boring">fn main() {
 </span>// All is well.
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <h2 id="advantages-20"><a class="header" href="#advantages-20">Advantages</a></h2>
 <p>It is short and will stop the build if anything is amiss.</p>
 <h2 id="drawbacks"><a class="header" href="#drawbacks">Drawbacks</a></h2>
@@ -3142,8 +3084,7 @@ Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.
        unused_allocation,
        unused_comparisons,
        unused_parens,
-       while_true)]
-</code></pre>
+       while_true)]</code></pre>
 <p>In addition, the following <code>allow</code>ed lints may be a good idea to <code>deny</code>:</p>
 <pre><code class="language-rust ignore">#![deny(missing_debug_implementations,
        missing_docs,
@@ -3152,8 +3093,7 @@ Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.
        unused_extern_crates,
        unused_import_braces,
        unused_qualifications,
-       unused_results)]
-</code></pre>
+       unused_results)]</code></pre>
 <p>Some may also want to add <code>missing-copy-implementations</code> to their list.</p>
 <p>Note that we explicitly did not add the <code>deprecated</code> lint, as it is fairly
 certain that there will be more deprecated APIs in the future.</p>
@@ -3208,8 +3148,7 @@ impl Deref for Bar {
 fn main() {
     let b = Bar { f: Foo {} };
     b.m();
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>There is no struct inheritance in Rust. Instead we use composition and include
 an instance of <code>Foo</code> in <code>Bar</code> (since the field is a value, it is stored inline,
 so if there were fields, they would have the same layout in memory as the Java
@@ -3227,8 +3166,7 @@ well as <code>Bar</code>.</p>
     fn m(&amp;self) {
         self.f.m()
     }
-}
-</code></pre>
+}</code></pre>
 <h2 id="disadvantages-20"><a class="header" href="#disadvantages-20">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
 code will not expect this to happen. That's because we are abusing the <code>Deref</code>
@@ -3292,8 +3230,7 @@ for i in 1..11 {
     sum += i;
 }
 println!(&quot;{}&quot;, sum);
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>With imperative programs, we have to play compiler to see what is happening.
 Here, we start with a <code>sum</code> of <code>0</code>.
 Next, we iterate through the range from 1 to 10.
@@ -3318,8 +3255,7 @@ of steps.</p>
 <pre><pre class="playground"><code class="language-rust edition2018"><span class="boring">#![allow(unused)]
 </span><span class="boring">fn main() {
 </span>println!(&quot;{}&quot;, (1..11).fold(0, |a, b| a + b));
-<span class="boring">}
-</span></code></pre></pre>
+<span class="boring">}</span></code></pre></pre>
 <p>Whoa! This is really different! What's going on here?
 Remember that with declarative programs we are describing <strong>what</strong> to do,
 rather than <strong>how</strong> to do it. <code>fold</code> is a function that <a href="https://en.wikipedia.org/wiki/Function_composition">composes</a>
@@ -3392,8 +3328,7 @@ enum AuthInfo {
 struct FileDownloadRequest {
     file_name: PathBuf,
     authentication: AuthInfo,
-}
-</code></pre>
+}</code></pre>
 <p>This design might work well enough. But now suppose you needed to support
 adding metadata that was <em>protocol specific</em>. For example, with NFS, you
 wanted to determine what their mount point was in order to enforce additional
@@ -3416,8 +3351,7 @@ impl FileDownloadRequest {
     pub fn mount_point(&amp;self) -&gt; Option&lt;&amp;Path&gt; {
         self.mount_point.as_ref()
     }
-}
-</code></pre>
+}</code></pre>
 <p>Every caller of <code>mount_point()</code> must check for <code>None</code> and write code to handle
 it. This is true even if they know only NFS requests are ever used in a given
 code path!</p>
@@ -3505,8 +3439,7 @@ impl FileDownloadRequest&lt;Nfs&gt; {
 
 fn main() {
     // your code here
-}
-</code></pre></pre>
+}</code></pre></pre>
 <p>With this approach, if the user were to make a mistake and use the wrong
 type;</p>
 <pre><code class="language-rust ignore">fn main() {
@@ -3518,8 +3451,7 @@ type;</p>
         }
         // Rest of the code here
     }
-}
-</code></pre>
+}</code></pre>
 <p>They would get a syntax error. The type <code>FileDownloadRequest&lt;Bootp&gt;</code> does not
 implement <code>mount_point()</code>, only the type <code>FileDownloadRequest&lt;Nfs&gt;</code> does. And
 that is created by the NFS module, not the BOOTP module of course!</p>
@@ -3698,18 +3630,18 @@ Construction</p>
 
         </div>
 
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
