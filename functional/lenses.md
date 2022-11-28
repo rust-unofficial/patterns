@@ -5,7 +5,7 @@ other idioms can achieve the same result and more advanced forms are not
 supported.
 Never the less, exploring the concept may be helpful to understand other
 patterns in Rust APIs, such as
-[visitors](../../patterns/behavioural/visitor.md) and "callbacks".
+[visitors](../patterns/behavioural/visitor.md) and "callbacks".
 They also have niche use cases.
 
 In addition, async Rust may be considered somewhat "lens like" in many of the
