@@ -31,7 +31,7 @@ Another one contains the account information:
 
 ```json
 { "primary_customer_id": 1048576332,
-  "accounts"; [
+  "accounts": [
       { "account_id": 2121,
         "account_type: "savings",
         "joint_customer_ids": [],
