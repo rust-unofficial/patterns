@@ -3,7 +3,7 @@
 This is a pure functional concept that is not frequently used in Rust, because
 other idioms can achieve the same result and more advanced forms are not
 supported.
-Never the less, exploring the concept may be helpful to understand other
+Nevertheless, exploring the concept may be helpful to understand other
 patterns in Rust APIs, such as
 [visitors](../patterns/behavioural/visitor.md) and "callbacks".
 They also have niche use cases.
