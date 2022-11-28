@@ -408,6 +408,7 @@ But in Rust, that macro simply creates the ability to pass it to a
 
 What is a Deserializer?
 
+
 It is the logic that contains the instructions to parse a data format, such as
 JSON or CSV.
 It is "observed" by the lens, and "refracts" the generic calls into calls that
