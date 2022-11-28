@@ -1,7 +1,7 @@
 # Lenses and Prisms
 
 This is a pure functional concept that is not frequently used in Rust, because
-other idioms can achieve the same result and more advanced forms are not
+other idioms can achieve the same result, and more advanced forms are not
 supported.
 Nevertheless, exploring the concept may be helpful to understand other
 patterns in Rust APIs, such as
@@ -113,8 +113,8 @@ The versions of `unique_ids` shown here implement the *concept* of a lens.
 
 Lenses are a way to allow accessing parts of a data type in an abstract,
 unified way.[^1]
-Lenses define a generic operation -- in our case, getting a customer ID from a
-record -- that can apply to multiple types.
+Lenses define a generic operation – in our case, getting a customer ID from a
+record – that can apply to multiple types.
 This is so even though each type has a different way to "observe" the desired
 data.
 
@@ -136,11 +136,11 @@ However, there are significant differences:
 1. In many functional languages, data structures are immutable. While Rust's
    traits allow mutation of types, the lens concept is designed to make deep
    copying types with small changes much easier. (Deep copies which are often
-   optimized differently by the runtime. but that's another story.)
+   optimized differently by the runtime. But that's another story.)
 
 Most functional languages take a different approach to this concept, however.
-They prefer instead to use other features Rust does not have -- a form of
-partial function construction known as "currying" -- to do it with functions
+They prefer instead to use other features Rust does not have – a form of
+partial function construction known as "currying" – to do it with functions
 instead.
 They "partially construct" the function, leaving the type of the object being
 operated on until the function is constructed, which Rust cannot do.
@@ -209,7 +209,7 @@ impl AccountRecord {
     }
 }
 
-// an example lense
+// an example lens
 fn get_customer_data(
     item: Box<dyn Any> /* would be &dyn RecordType */
 ) -> Option<u64> {
@@ -241,7 +241,7 @@ order indeed), hopefully the general idea is clear.
 ## Modification with Lenses
 
 The functional approach need not be restricted to accessing members.
-More powerful lenses can be created which both set and get data in a structure.
+More powerful lenses can be created, which both set and get data in a structure.
 This becomes more interesting when examining how these lenses can be composed
 together.
 
@@ -307,10 +307,11 @@ lenses.
 While pure functional languages have many more uses, a primary use for this in
 Rust is to split problems of recursion and types into pieces that can be
 composed.
-A good example of this is the traits in Serde.
+A good example of this is the traits in *Serde*.
 
-Trying to understand the way Serde works by reading just the API is quite a
+Trying to understand the way *Serde* works by reading just the API is quite a
 challenge.
+
 Consider the `Deserializer` trait:
 
 ```rust,ignore
@@ -334,9 +335,9 @@ itself!
 Why are they all there?
 
 They are there because this API is a prism: an attempt to make a generic set of
-"lenses" work across a generic set of types for "observation."
+"lenses" work across a generic set of types for "observation".
 
-To understand it better, consider what each "lense" looks like.
+To understand it better, consider what each "lens" looks like.
 Here is the definition of the `Visitor` type:
 
 ```rust,ignore
@@ -356,7 +357,7 @@ pub trait Visitor<'de>: Sized {
 This is similar to `BalanceChange` earlier. It is acting as a lens over a
 generic and unknown type of data.
 Its operation is to support composing a set of uniform data structures from
-that data represented by Serde's `Value` type.
+that data represented by *Serde*'s `Value` type.
 
 But unlike `BalanceChange` it's a *trait*.
 It's a *family* of lenses.
@@ -369,7 +370,7 @@ For example, consider the identity record from earlier but simplified:
 }
 ```
 
-How would the Serde library transform this JSON into `struct CreditRecord`?
+How would the *Serde* library transform this JSON into `struct CreditRecord`?
 
 It would create a `Visitor` "lens", which would then try to "observe" expected
 data through a series of calls:
@@ -387,7 +388,7 @@ fails.
 
 With each new type, a new implementation of the `Visitor` trait is needed,
 a type to explain what to observe in what order to fill out the struct.
-While Rust does not support generic traits as noted earlier, Serde solves this
+While Rust does not support generic traits as noted earlier, *Serde* solves this
 usability problem with a derive procedural macro:
 
 ```rust,ignore
@@ -401,19 +402,20 @@ struct IdRecord {
 ```
 
 In C++, the equivalent would be to generate a very complex code template, with
-a lot of compile time logic -- if it's even possible.
+a lot of compile time logic – if it's even possible.
 But in Rust, that macro simply creates the ability to pass it to a
 `Deserializer`.
 
 What is a Deserializer?
+
 It is the logic that contains the instructions to parse a data format, such as
 JSON or CSV.
-It is "observed" by the lense, and "refracts" the generic calls into calls that
+It is "observed" by the lens, and "refracts" the generic calls into calls that
 are specific to the data format.
 
 A simple example follows of a `Deserializer` that knows how to parse a single
 32-bit binary number written out with ASCII 0s and 1s.
-For a better example, see the Serde documentation.
+For a better example, see the [*Serde* documentation](https://docs.rs/serde/latest/serde/).
 
 ```rust,ignore
 struct BinaryDes<'de> {
@@ -445,21 +447,21 @@ the output type **is specified by the implementor of `Visitor` it is passed**.
 This was *not* true in the account example earlier, and part of the *family*
 definition that makes it a prism.
 
-This means that a single call -- which drives a `Deserializer` -- will produce
+This means that a single call – which drives a `Deserializer` – will produce
 different output types depending on what visitor it was given, even though the
 `Value` type that results is not bound to the `Deserializer` at all!
 
 One might say `Deserializer` is "directly generic" over `Visitor`, and
 "indirectly generic" over `Value`.
-That means it is a "sum type" -- where a type is "applied" to it from another
-type -- and that makes it a prism.
+That means it is a "sum type" – where a type is "applied" to it from another
+type – and that makes it a prism.
 
 Most non-functional languages achieve this with hacks: code generation,
 run-time polymorphism, duck typing, or constricting the interface of the
 output.
 
 But with Rust's generic-inspired type system, it can get a lot closer to
-functional languages, and maintain static typing -- even though it may also
+functional languages, and maintain static typing – even though it may also
 need procedural macros to create prisms.
 
 ## See Also
