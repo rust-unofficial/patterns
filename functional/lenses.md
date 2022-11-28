@@ -475,9 +475,9 @@ need procedural macros to create prisms.
   computer graphics that uses lens API design, including proceducal macros to
   create full prisms for buffers of different pixel types that remain generic
 - [An Article about Lenses in
-  Scala](https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
+  Scala](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
   that is very readable even without Scala expertise.
 - [Paper: Profunctor Optics: Modular Data
-  Accessors](https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
+  Accessors](https://web.archive.org/web/20220701102832/https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
 
 [^1] [https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial](https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
