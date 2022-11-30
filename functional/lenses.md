@@ -3,7 +3,7 @@
 This is a pure functional concept that is not frequently used in Rust, because
 other idioms can achieve the same result, and more advanced forms are not
 supported.
-Nevertheless, exploring the concept may be helpful to understand other
+Never the less, exploring the concept may be helpful to understand other
 patterns in Rust APIs, such as
 [visitors](../patterns/behavioural/visitor.md) and "callbacks".
 They also have niche use cases.
@@ -189,6 +189,7 @@ trait RecordType {
 }
 */
 // all this is commented out because Rust does not support generics in traits
+// with dynamic dispatch
 // instead we have to implement that same function on the different types
 // but the lenses themselves should still be possible
 trait  RecordType {}
@@ -402,7 +403,7 @@ struct IdRecord {
 ```
 
 In C++, the equivalent would be to generate a very complex code template, with
-a lot of compile time logic – if it's even possible.
+a lot of compile time logic, and would be difficult to read.
 But in Rust, that macro simply creates the ability to pass it to a
 `Deserializer`.
 
