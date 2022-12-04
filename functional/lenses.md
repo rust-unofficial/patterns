@@ -153,7 +153,7 @@ the function.
 This is how most functional languages operate on lenses.
 
 Rather than macros, they achieve this with a technique known as "currying".
- That is, they "partially construct" the function, leaving the type of the
+That is, they "partially construct" the function, leaving the type of the
 final parameter (the value being operated on) unfilled until the function is
 called.
 Thus it can be called with different types dynamically even from one place in the code.
