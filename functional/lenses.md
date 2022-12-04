@@ -1,21 +1,19 @@
 # Lenses and Prisms
 
-This is a pure functional concept that is not frequently used in Rust, because
-other idioms can achieve the same result, and more advanced forms are not
-supported.
+This is a pure functional concept that is not frequently used in Rust.
 Never the less, exploring the concept may be helpful to understand other
-patterns in Rust APIs, such as
-[visitors](../patterns/behavioural/visitor.md) and "callbacks".
+patterns in Rust APIs, such as [visitors](../patterns/behavioural/visitor.md).
 They also have niche use cases.
 
-In addition, async Rust may be considered somewhat "lens like" in many of the
-APIs that exist today, e.g. `Future`.
+## Lenses: Uniform Access Across Types
 
-## Basic Lenses: Like Rust Traits
+A lens is a concept from functional languages that allows accessing parts of a
+data type in an abstract, unified way.[^1]
+In basic concept, it is similar to the way Rust traits work with type erasure,
+but it has a bit more power and flexibility.
 
-A basic lens allows composability similar to Rust traits instead of concrete types.
-
-For example, suppose a bank contains several JSON formats for customer data.
+For a basic example, suppose a bank contains several JSON formats for customer
+data.
 This is because they come from different databases or legacy systems.
 One database contains the data needed to perform credit checks:
 
@@ -30,7 +28,7 @@ One database contains the data needed to perform credit checks:
 Another one contains the account information:
 
 ```json
-{ "primary_customer_id": 1048576332,
+{ "customer_id": 1048576332,
   "accounts": [
       { "account_id": 2121,
         "account_type: "savings",
@@ -46,19 +44,20 @@ Another one contains the account information:
 } 
 ```
 
-It would be possible to create a `struct` for each of these types and parse the
-JSON into it.
-However, each one would need to implement their own version of, for example,
-`get_customer_id`.
-But what if one piece of code wanted to retrieve all customer IDs regardless of
-data type?
+Notice that both types have a customer ID number which corresponds to a person.
+How would a single function handle both records of different types?
 
-The solution in Rust is to make a trait which represents the operation.
-If it is implemented for both `struct`s, then type erasure can make the once
-piece of code work:
+In Rust, a `struct` could represent each of these types, and a trait would have
+a `get_customer_id` function they would implement:
 
 ```rust
 use std::collections::HashSet;
+
+pub struct Account {
+    account_id: u32,
+    account_type: String,
+    // other fields omitted
+}
 
 pub trait CustomerId {
     fn get_customer_id(&self) -> u64;
@@ -69,17 +68,6 @@ pub struct CreditRecord {
     name: String,
     dob: String,
     // other fields omitted
-}
-
-pub struct Account {
-    account_id: u32,
-    account_type: String,
-    // other fields omitted
-}
-
-pub struct AccountRecord {
-    primary_customer_id: u64,
-    accounts: Vec<Account>,
 }
 
 impl CustomerId for CreditRecord {
@@ -88,232 +76,114 @@ impl CustomerId for CreditRecord {
     }
 }
 
+pub struct AccountRecord {
+    customer_id: u64,
+    accounts: Vec<Account>,
+}
+
 impl CustomerId for AccountRecord {
     fn get_customer_id(&self) -> u64 {
-        self.primary_customer_id
+        self.customer_id
     }
 }
 
-// static polymorphism: allows one singular type at a time, but a function call
-// with any type
+// static polymorphism: only one type, but each function call can choose it
 fn unique_ids_set<R: CustomerId>(records: &[R]) -> HashSet<u64> {
     records.iter().map(|r| r.get_customer_id()).collect()
 }
 
-// dynamic polymorphism: iterates over any type, allowing collecting different
-// records together
-fn unique_ids_boxed<I>(iterator: I) -> HashSet<u64>
+// dynamic dispatch: iterates over any type with a customer ID, collecting all
+// values together
+fn unique_ids_iter<I>(iterator: I) -> HashSet<u64>
     where I: Iterator<Item=Box<dyn CustomerId>>
 {
     iterator.map(|r| r.as_ref().get_customer_id()).collect()
 }
 ```
 
-The versions of `unique_ids` shown here implement the *concept* of a lens.
+Lenses, however, allow the code supporting customer ID to be moved from the
+*type* to the *accessor function*.
+Rather than implementing a trait on each type, all matching structures can
+simply be accessed the same way.
 
-Lenses are a way to allow accessing parts of a data type in an abstract,
-unified way.[^1]
-Lenses define a generic operation – in our case, getting a customer ID from a
-record – that can apply to multiple types.
-This is so even though each type has a different way to "observe" the desired
-data.
+While the Rust language itself does not support this (type erasure is the
+preferred solution to this problem), the [lens-rs
+crate](https://github.com/TOETOE55/lens-rs/blob/master/guide.md) allows code
+that feels like this to be written with macros:
 
-At first glance, it may seem more like Rust is using "duck typing", the way
-that dynamic languages do.
-However, there are significant differences:
-
-1. Static type checking is maintained. Only types which "opt-in" to having a
-   customer ID (with an `impl CustomerId` block) can be placed into the
-   iterator or collection. Duck typed languages require this to be a runtime
-   check, which can then go wrong at runtime.
-1. The `impl CustomerId` block lives with the type. This means the type can
-   live in a different crate than definition of `CustomerId` itself,
-   maintaining extensibility.
-1. The definition of `CustomerId` is consistent throughout the program. Unlike
-   some approaches functional languages take (discussed below), it is
-   impossible to accidentally change the type in such a way the trait becomes
-   "invalid" at runtime.
-1. In many functional languages, data structures are immutable. While Rust's
-   traits allow mutation of types, the lens concept is designed to make deep
-   copying types with small changes much easier. (Deep copies which are often
-   optimized differently by the runtime. But that's another story.)
-
-Most functional languages take a different approach to this concept, however.
-They prefer instead to use other features Rust does not have – a form of
-partial function construction known as "currying" – to do it with functions
-instead.
-They "partially construct" the function, leaving the type of the object being
-operated on until the function is constructed, which Rust cannot do.
-
-This is the nearest thing to a Rust equivalent to the "pure functional way":
-
-```rust
-use std::any::Any;
+```rust,ignore
 use std::collections::HashSet;
 
-pub trait CustomerId {
-    fn get_customer_id(&self) -> u64;
-}
+use lens_rs::{optics, Lens, LensRef, Optics};
 
+#[derive(Clone, Debug, Lens /* derive to allow lenses to work */)]
 pub struct CreditRecord {
+    #[optic(ref)] // macro attribute to allow viewing this field
     customer_id: u64,
     name: String,
     dob: String,
     // other fields omitted
 }
 
+#[derive(Clone, Debug)]
 pub struct Account {
     account_id: u32,
     account_type: String,
     // other fields omitted
 }
 
+#[derive(Clone, Debug, Lens)]
 pub struct AccountRecord {
-    primary_customer_id: u64,
+    #[optic(ref)]
+    customer_id: u64,
     accounts: Vec<Account>,
 }
 
-// the type of the lens itself, which is currently just a type alias unlike
-// functional languages
-/*
-type LenseFn<T> = dyn FnOnce(&dyn RecordType) -> Option<T>;
-*/
-// types that the lens can "view":
-/*
-trait RecordType {
-    fn view<T, L>(&self, lens: L) -> T
-        where L: FnOnce(&dyn RecordType) -> Option<T>
-    {
-        (lens)(self)
-    }
-}
-*/
-// all this is commented out because Rust does not support generics in traits
-// with dynamic dispatch
-// instead we have to implement that same function on the different types
-// but the lenses themselves should still be possible
-trait  RecordType {}
-impl RecordType for CreditRecord {}
-impl RecordType for AccountRecord {}
-impl CreditRecord {
-    fn view<T, L>(&self, lens: L) -> Option<T>
-        where L: FnOnce(&CreditRecord) -> Option<T>
-    {
-        (lens)(self)
-    }
-}
-impl AccountRecord {
-    fn view<T, L>(&self, lens: L) -> Option<T>
-        where L: FnOnce(&AccountRecord) -> Option<T>
-    {
-        (lens)(self)
-    }
-}
-
-// an example lens
-fn get_customer_data(
-    item: Box<dyn Any> /* would be &dyn RecordType */
-) -> Option<u64> {
-    // more hacking around no generics in types, focus on the fn signature
-    let item = match item.downcast::<CreditRecord>() {
-        Ok(credit) => return Some(credit.customer_id),
-        Err(bx) => bx
-    };
-    let item = match item.downcast::<AccountRecord>() {
-        Ok(acct) => return Some(acct.primary_customer_id),
-        Err(bx) => bx
-    };
-    None
-}
-
-// this is where a lens can be used in a generic way, since "unique ID"
-// need not be the same kind of ID if they are all u64s
-fn unique_ids<I>(iterator: I) -> HashSet<u64>
-    where I: Iterator<Item=Box<dyn Any>>
+fn unique_ids_lens<T>(iter: impl Iterator<Item = T>) -> HashSet<u64>
+where
+    T: LensRef<Optics![customer_id], u64>, // any type with this field
 {
-    // would be: iterator.filter_map(|it| it.view(get_customer_data)).collect()
-    iterator.map(get_customer_data).filter_map(|uniq_id_opt| uniq_id_opt).collect()
+    iter.map(|r| *r.view_ref(optics!(customer_id))).collect()
 }
 ```
 
-While it would be much cleaner if Rust supported more functional traits (a tall
-order indeed), hopefully the general idea is clear.
+The version of `unique_ids` shown here allows any types to be in the iterator,
+so long as it has an attribute called `customer_id` which can be accessed by
+the function.
+This is how most functional languages operate on lenses.
 
-## Modification with Lenses
+Rather than macros, they achieve this with a technique known as "currying".
+ That is, they "partially construct" the function, leaving the type of the
+final parameter (the value being operated on) unfilled until the function is
+called.
+Thus it can be called with different types dynamically even from one place in the code.
+That is what the `optics!` and `view_ref` in the code above simulates.
 
 The functional approach need not be restricted to accessing members.
-More powerful lenses can be created, which both set and get data in a structure.
-This becomes more interesting when examining how these lenses can be composed
-together.
+More powerful lenses can be created which both set and get data in a
+structure.
+But the concept really becomes interesting when used as a building block for
+composition.
+That is where the concept appears more clearly in Rust.
 
-To begin, consider a new lens trait, this one to update the balance of a bank
-account.
-These accounts have different structures for individuals and commercial
-business customers.
+## Prisms: A Higher-Order form of "Optics"
 
-```rust,ignore
-pub struct Eur(u64); // 100 = 1 €
+A simple function such as `unique_ids` above operates on a single lens.
+A *prism* is a function that operates on a *family* of lenses.
+It is one conceptual level higher, using lenses as a building block, and
+continuing the metaphor, is part of a family of "optics".
+It is the main one that is useful in understanding Rust APIs, so will be the
+focus here.
 
-// type casting to integers and display functions omitted
+The same way that traits allow "lens-like" design with static polymorphism and
+dynamic dispatch, prism-like designs appear in Rust APIs which split problems
+into multiple associated types to be composed.
+A good example of this is the traits in the parsing crate Serde.
 
-pub trait BalanceChange {
-    fn balance(&self) -> Eur;
-    fn deposit(&mut self, Eur);
-    fn withdraw(&mut self, Eur);
-}
-```
-
-This trait allows *composition* between two lenses.
-It looks very different in Haskell, so here is the Rust way:
-
-```rust,ignore
-use chrono::prelude::*;
-use rand::{RngCore, thread_rng};
-use sha2::{Sha256, Digest};
-
-fn make_id_deposit<A: BalanceChange + CustomerId>(account: &mut A) {
-    // this computes a hash based on the current balance and the account ID,
-    // resulting in a pair of transactions that the customer must use to verify
-    // their identity when resetting their pin via telephone
-
-    let balance = account.balance();
-    let id = account.get_customer_id();
-    let date = Utc::now().timestamp() as usize;
-    let secure: u64 = thread_rng().next_u64();
-
-    let mut hasher = Sha256::new();
-    hasher.update(
-        format!("{:?},{},{},{}", balance, id, date, secure).as_bytes());
-    let cents_hash = &hasher.finalize()[0..1];
-
-    // example: 1234 results in deposits of 0.12 and 0.34
-    let cents = i16::from_be_bytes([cents_hash[0], cents_hash[1]]) as u64 % 1000;
-    account.deposit(Eur(cents / 100));
-    account.deposit(Eur(cents % 100));
-}
-```
-
-Here the composition is done through the generic `A`, which is defined as types
-with both traits.
-In order to literally compose lens functions, Rust uses `map` and `and_then`
-on `Option<T>` and iterator, which would allow each lens to be called
-sequentially on items.
-
-## Prisms: Lenses, but Sum Types
-
-A prism is like a lens, but one conceptual level higher.
-It is a way to make a high-level, trait-like interface apply across different
-lenses.
-
-While pure functional languages have many more uses, a primary use for this in
-Rust is to split problems of recursion and types into pieces that can be
-composed.
-A good example of this is the traits in *Serde*.
-
-Trying to understand the way *Serde* works by reading just the API is quite a
-challenge.
-
-Consider the `Deserializer` trait:
+Trying to understand the way Serde works by only reading the API is a
+challenge, especially the first time.
+Consider the `Deserializer` trait, implemented by some type in any library
+which parses a new format:
 
 ```rust,ignore
 pub trait Deserializer<'de>: Sized {
@@ -331,23 +201,26 @@ pub trait Deserializer<'de>: Sized {
 }
 ```
 
-Wow, that's a lot of generics on functions, in addition to a type on the trait
-itself!
-Why are they all there?
+For a trait that's just supposed to parse data from a format and return a
+value, this looks odd.
+Why are all the return types type erased?
 
-They are there because this API is a prism: an attempt to make a generic set of
-"lenses" work across a generic set of types for "observation".
-
-To understand it better, consider what each "lens" looks like.
-Here is the definition of the `Visitor` type:
+To understand, keep the lens concept in mind and look at the definition of
+the `Visitor` type that is passed in generically:
 
 ```rust,ignore
 pub trait Visitor<'de>: Sized {
     type Value;
 
-    fn expecting(&self, formatter: &mut Formatter<'_>) -> Result;
-
     fn visit_bool<E>(self, v: bool) -> Result<Self::Value, E>
+    where
+        E: Error;
+
+    fn visit_u64<E>(self, v: u64) -> Result<Self::Value, E>
+    where
+        E: Error;
+
+    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
     where
         E: Error;
 
@@ -355,13 +228,27 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-This is similar to `BalanceChange` earlier. It is acting as a lens over a
-generic and unknown type of data.
-Its operation is to support composing a set of uniform data structures from
-that data represented by *Serde*'s `Value` type.
+The job of the `Visitor` type is to construct values in the Serde data model,
+which are represented by its associated `Value` type.
 
-But unlike `BalanceChange` it's a *trait*.
-It's a *family* of lenses.
+These values represent parts of the Rust value being deserialized.
+If this fails, it returns an `Error` type -- an error type determined by the
+`Deserializer` when its methods were called.
+
+This highlights that `Deserializer` is similar to `CustomerId` from earlier,
+allowing any format parser which implements it to create `Value`s based on what
+it parsed.
+The `Value` trait is acting like a lens in functional languages.
+
+But unlike the `CustomerId` trait, the return types of `Visitor` methods are
+*generic*, and the concrete `Value` type is *determined by the Visitor itself*.
+
+Instead of acting as one lens, it effectively a family of
+lenses, one for each concrete type of `Visitor`.
+
+The `Deserializer` API is based on having a generic set of "lenses" work across
+a set of other generic types for "observation".
+It is a *prism*.
 
 For example, consider the identity record from earlier but simplified:
 
@@ -371,26 +258,33 @@ For example, consider the identity record from earlier but simplified:
 }
 ```
 
-How would the *Serde* library transform this JSON into `struct CreditRecord`?
+How would the *Serde* library deserialize this JSON into `struct CreditRecord`?
 
-It would create a `Visitor` "lens", which would then try to "observe" expected
-data through a series of calls:
+1. The user would call a library function to deserialize the data. This would
+   create a `Deserializer` based on the JSON format.
+1. Based on the fields in the struct, a `Visitor` would be created (more on
+   that in a moment) which knows how to create each type in a generic data
+   model that was needed to represent it: `u64` and `String`.
+1. The deserializer would make calls to the `Visitor` as it parsed items.
+1. The `Visitor` would indicate if the items found were expected, and if not,
+   raise an error to indicate deserialization has failed.
 
-1. Visit the start of a map (the `{}` in Serde terminology).
-1. Visit a key string called "name".
-1. Visit an unknown string which is the value of the `name` field.
-1. Visit a key string called "customer_id".
-1. Visit an unknown string which is the value of the `customer_id` field.
-1. Expect the end of the map.
-1. Visit complete.
+For our very simple structure above, the expected pattern would be:
 
-If the wrong "observation" happens, an error is thrown and deserialization
-fails.
+1. Visit a map (Serde's equvialent to `HashMap` or JSON's dictionary).
+1. Visit a string key called "name".
+1. Visit a string value, which will go into the `name` field.
+1. Visit a string key called "customer_id".
+1. Visit a string value, which will go into the `customer_id` field.
+1. Visit the end of the map.
 
-With each new type, a new implementation of the `Visitor` trait is needed,
-a type to explain what to observe in what order to fill out the struct.
-While Rust does not support generic traits as noted earlier, *Serde* solves this
-usability problem with a derive procedural macro:
+But what determines which "observation" pattern is expected?
+A functional language would be able to use currying to create reflection of
+each type based on the type itself.
+Rust does not support that, so every single type would need to have its own
+code written based on its fields and their properties.
+
+Serde solves this usability problem with a derive macro:
 
 ```rust,ignore
 use serde::Deserialize;
@@ -402,68 +296,54 @@ struct IdRecord {
 }
 ```
 
-In C++, the equivalent would be to generate a very complex code template, with
-a lot of compile time logic, and would be difficult to read.
-But in Rust, that macro simply creates the ability to pass it to a
-`Deserializer`.
-
-What is a Deserializer?
-
-It is the logic that contains the instructions to parse a data format, such as
-JSON or CSV.
-It is "observed" by the lens, and "refracts" the generic calls into calls that
-are specific to the data format.
-
-A simple example follows of a `Deserializer` that knows how to parse a single
-32-bit binary number written out with ASCII 0s and 1s.
-For a better example, see the [*Serde* documentation](https://docs.rs/serde/latest/serde/).
+That macro simply generates an impl block causing the struct to implement a
+trait called `Deserialize`.
+It is defined this way:
 
 ```rust,ignore
-struct BinaryDes<'de> {
-    input: &'de str,
+pub trait Deserialize<'de>: Sized {
+    fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
+    where
+        D: Deserializer<'de>;
 }
-
-impl<'de, 'a> serde::Deserializer<'de> for &'a mut BinaryDes<'de> {
-    fn deserialize_u32<V>(self, visitor: V) -> Result<V::Value> {
-        let mut n = 0;
-        for ch in self.input.chars() {
-            match ch {
-             '0' => n <<= 1,
-             '1' => n = (n << 1 | 1),
-             _ => return Err(Error::ExpectedU32),
-            }
-        }
-        visitor.visit_u32(n)
-    }
-}
-
 ```
 
-Note how this is composable in many formats without predicting anything else
-about their structure.
-That is the power of prisms.
+This is the function that determines how to create the struct itself.
+Code is generated based on the struct's fields.
+When the parsing library is called -- in our example, a JSON parsing library --
+it creates a `Deserializer` and calls `Type::deserialize` with it as a
+parameter.
 
-Key to this example is to a subtlety of the `Deserializer` trait's definition:
-the output type **is specified by the implementor of `Visitor` it is passed**.
-This was *not* true in the account example earlier, and part of the *family*
-definition that makes it a prism.
+The `deserialize` code will then create a `Visitor` which will have its calls
+"refracted" by the `Deserializer`.
+If everything goes well, eventually that `Visitor` will construct a value
+corresponding to the type being parsed and return it.
 
-This means that a single call – which drives a `Deserializer` – will produce
-different output types depending on what visitor it was given, even though the
-`Value` type that results is not bound to the `Deserializer` at all!
+For a complete example, see the [Serde
+documentation](https://serde.rs/deserialize-struct.html).
 
-One might say `Deserializer` is "directly generic" over `Visitor`, and
-"indirectly generic" over `Value`.
-That means it is a "sum type" – where a type is "applied" to it from another
-type – and that makes it a prism.
 
-Most non-functional languages achieve this with hacks: code generation,
-run-time polymorphism, duck typing, or constricting the interface of the
-output.
+To wrap up, this is the power of Serde:
+1. The structure being parsed is represented by an impl block for `Deserialize`
+1. The input data format (e.g. JSON) is represented by a `Deserializer` called
+   by `Deserialize`
+1. The `Deserializer` acts like a prism which "refracts" lens-like `Visitor`
+   calls which actually build the data value
 
-But with Rust's generic-inspired type system, it can get a lot closer to
-functional languages, and maintain static typing – even though it may also
-need procedural macros to create prisms.
+The result is that types to be deserialized only implement the "top layer" of
+the API, and file formats only need to implement the "bottom layer".
+Each piece can then "just work" with the rest of the ecosystem, since generic
+types will bridge them.
+
+To emphasize, the only reason this model works on any format and any type is
+because the `Deserializer` trait's output type **is specified by the
+implementor of `Visitor` it is passed**, rather than being tied to one specific
+type.
+This was not true in the account example earlier.
+
+Rust's generic-inspired type system can bring it close to these concepts and
+use their power, as shown in this API design.
+But it may also need procedural macros to create bridges for its generics.
 
 ## See Also
 
