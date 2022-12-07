@@ -156,7 +156,8 @@ Rather than macros, they achieve this with a technique known as "currying".
 That is, they "partially construct" the function, leaving the type of the
 final parameter (the value being operated on) unfilled until the function is
 called.
-Thus it can be called with different types dynamically even from one place in the code.
+Thus it can be called with different types dynamically even from one place in
+the code.
 That is what the `optics!` and `view_ref` in the code above simulates.
 
 The functional approach need not be restricted to accessing members.
@@ -322,8 +323,8 @@ corresponding to the type being parsed and return it.
 For a complete example, see the [Serde
 documentation](https://serde.rs/deserialize-struct.html).
 
-
 To wrap up, this is the power of Serde:
+
 1. The structure being parsed is represented by an impl block for `Deserialize`
 1. The input data format (e.g. JSON) is represented by a `Deserializer` called
    by `Deserialize`
