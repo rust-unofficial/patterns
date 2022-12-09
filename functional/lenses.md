@@ -147,7 +147,7 @@ where
 }
 ```
 
-The version of `unique_ids` shown here allows any types to be in the iterator,
+The version of `unique_ids` shown here allows any type to be in the iterator,
 so long as it has an attribute called `customer_id` which can be accessed by
 the function.
 This is how most functional languages operate on lenses.
