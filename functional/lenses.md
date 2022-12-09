@@ -244,7 +244,7 @@ The `Value` trait is acting like a lens in functional languages.
 But unlike the `CustomerId` trait, the return types of `Visitor` methods are
 *generic*, and the concrete `Value` type is *determined by the Visitor itself*.
 
-Instead of acting as one lens, it effectively a family of
+Instead of acting as one lens, it effectively acts as a family of
 lenses, one for each concrete type of `Visitor`.
 
 The `Deserializer` API is based on having a generic set of "lenses" work across
