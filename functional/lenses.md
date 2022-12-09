@@ -41,7 +41,7 @@ Another one contains the account information:
         [...]
       },
   ]
-} 
+}
 ```
 
 Notice that both types have a customer ID number which corresponds to a person.
