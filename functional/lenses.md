@@ -1,18 +1,18 @@
 # Lenses and Prisms
 
 This is a pure functional concept that is not frequently used in Rust.
-Never the less, exploring the concept may be helpful to understand other
+Nevertheless, exploring the concept may be helpful to understand other
 patterns in Rust APIs, such as [visitors](../patterns/behavioural/visitor.md).
 They also have niche use cases.
 
 ## Lenses: Uniform Access Across Types
 
-A lens is a concept from functional languages that allows accessing parts of a
+A lens is a concept from functional progamming languages that allows accessing parts of a
 data type in an abstract, unified way.[^1]
 In basic concept, it is similar to the way Rust traits work with type erasure,
 but it has a bit more power and flexibility.
 
-For a basic example, suppose a bank contains several JSON formats for customer
+For example, suppose a bank contains several JSON formats for customer
 data.
 This is because they come from different databases or legacy systems.
 One database contains the data needed to perform credit checks:
@@ -147,10 +147,10 @@ where
 }
 ```
 
-The version of `unique_ids` shown here allows any type to be in the iterator,
+The version of `unique_ids_lens` shown here allows any type to be in the iterator,
 so long as it has an attribute called `customer_id` which can be accessed by
 the function.
-This is how most functional languages operate on lenses.
+This is how most functional programming languages operate on lenses.
 
 Rather than macros, they achieve this with a technique known as "currying".
 That is, they "partially construct" the function, leaving the type of the
@@ -158,10 +158,10 @@ final parameter (the value being operated on) unfilled until the function is
 called.
 Thus it can be called with different types dynamically even from one place in
 the code.
-That is what the `optics!` and `view_ref` in the code above simulates.
+That is what the `optics!` and `view_ref` in the example above simulates.
 
 The functional approach need not be restricted to accessing members.
-More powerful lenses can be created which both set and get data in a
+More powerful lenses can be created which both *set* and *get* data in a
 structure.
 But the concept really becomes interesting when used as a building block for
 composition.
@@ -169,7 +169,7 @@ That is where the concept appears more clearly in Rust.
 
 ## Prisms: A Higher-Order form of "Optics"
 
-A simple function such as `unique_ids` above operates on a single lens.
+A simple function such as `unique_ids_lens` above operates on a single lens.
 A *prism* is a function that operates on a *family* of lenses.
 It is one conceptual level higher, using lenses as a building block, and
 continuing the metaphor, is part of a family of "optics".
@@ -179,9 +179,9 @@ focus here.
 The same way that traits allow "lens-like" design with static polymorphism and
 dynamic dispatch, prism-like designs appear in Rust APIs which split problems
 into multiple associated types to be composed.
-A good example of this is the traits in the parsing crate Serde.
+A good example of this is the traits in the parsing crate *Serde*.
 
-Trying to understand the way Serde works by only reading the API is a
+Trying to understand the way *Serde* works by only reading the API is a
 challenge, especially the first time.
 Consider the `Deserializer` trait, implemented by some type in any library
 which parses a new format:
@@ -202,11 +202,12 @@ pub trait Deserializer<'de>: Sized {
 }
 ```
 
-For a trait that's just supposed to parse data from a format and return a
+For a trait that is just supposed to parse data from a format and return a
 value, this looks odd.
+
 Why are all the return types type erased?
 
-To understand, keep the lens concept in mind and look at the definition of
+To understand that, we need to keep the lens concept in mind and look at the definition of
 the `Visitor` type that is passed in generically:
 
 ```rust,ignore
@@ -229,17 +230,17 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-The job of the `Visitor` type is to construct values in the Serde data model,
+The job of the `Visitor` type is to construct values in the *Serde* data model,
 which are represented by its associated `Value` type.
 
 These values represent parts of the Rust value being deserialized.
-If this fails, it returns an `Error` type -- an error type determined by the
+If this fails, it returns an `Error` type - an error type determined by the
 `Deserializer` when its methods were called.
 
 This highlights that `Deserializer` is similar to `CustomerId` from earlier,
 allowing any format parser which implements it to create `Value`s based on what
 it parsed.
-The `Value` trait is acting like a lens in functional languages.
+The `Value` trait is acting like a lens in functional programming languages.
 
 But unlike the `CustomerId` trait, the return types of `Visitor` methods are
 *generic*, and the concrete `Value` type is *determined by the Visitor itself*.
@@ -272,7 +273,7 @@ How would the *Serde* library deserialize this JSON into `struct CreditRecord`?
 
 For our very simple structure above, the expected pattern would be:
 
-1. Visit a map (Serde's equvialent to `HashMap` or JSON's dictionary).
+1. Visit a map (*Serde*'s equvialent to `HashMap` or JSON's dictionary).
 1. Visit a string key called "name".
 1. Visit a string value, which will go into the `name` field.
 1. Visit a string key called "customer_id".
@@ -280,12 +281,13 @@ For our very simple structure above, the expected pattern would be:
 1. Visit the end of the map.
 
 But what determines which "observation" pattern is expected?
-A functional language would be able to use currying to create reflection of
+
+A functional programming language would be able to use currying to create reflection of
 each type based on the type itself.
 Rust does not support that, so every single type would need to have its own
 code written based on its fields and their properties.
 
-Serde solves this usability problem with a derive macro:
+*Serde* solves this usability challenge with a derive macro:
 
 ```rust,ignore
 use serde::Deserialize;
@@ -299,6 +301,7 @@ struct IdRecord {
 
 That macro simply generates an impl block causing the struct to implement a
 trait called `Deserialize`.
+
 It is defined this way:
 
 ```rust,ignore
@@ -311,7 +314,7 @@ pub trait Deserialize<'de>: Sized {
 
 This is the function that determines how to create the struct itself.
 Code is generated based on the struct's fields.
-When the parsing library is called -- in our example, a JSON parsing library --
+When the parsing library is called - in our example, a JSON parsing library -
 it creates a `Deserializer` and calls `Type::deserialize` with it as a
 parameter.
 
@@ -320,12 +323,12 @@ The `deserialize` code will then create a `Visitor` which will have its calls
 If everything goes well, eventually that `Visitor` will construct a value
 corresponding to the type being parsed and return it.
 
-For a complete example, see the [Serde
+For a complete example, see the [*Serde*
 documentation](https://serde.rs/deserialize-struct.html).
 
-To wrap up, this is the power of Serde:
+To wrap up, this is the power of *Serde*:
 
-1. The structure being parsed is represented by an impl block for `Deserialize`
+1. The structure being parsed is represented by an `impl` block for `Deserialize`
 1. The input data format (e.g. JSON) is represented by a `Deserializer` called
    by `Deserialize`
 1. The `Deserializer` acts like a prism which "refracts" lens-like `Visitor`
