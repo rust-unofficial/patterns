@@ -7,8 +7,8 @@ They also have niche use cases.
 
 ## Lenses: Uniform Access Across Types
 
-A lens is a concept from functional progamming languages that allows accessing parts of a
-data type in an abstract, unified way.[^1]
+A lens is a concept from functional progamming languages that allows
+accessing parts of a data type in an abstract, unified way.[^1]
 In basic concept, it is similar to the way Rust traits work with type erasure,
 but it has a bit more power and flexibility.
 
@@ -207,8 +207,8 @@ value, this looks odd.
 
 Why are all the return types type erased?
 
-To understand that, we need to keep the lens concept in mind and look at the definition of
-the `Visitor` type that is passed in generically:
+To understand that, we need to keep the lens concept in mind and look at
+the definition of the `Visitor` type that is passed in generically:
 
 ```rust,ignore
 pub trait Visitor<'de>: Sized {
@@ -282,8 +282,8 @@ For our very simple structure above, the expected pattern would be:
 
 But what determines which "observation" pattern is expected?
 
-A functional programming language would be able to use currying to create reflection of
-each type based on the type itself.
+A functional programming language would be able to use currying to create
+reflection of each type based on the type itself.
 Rust does not support that, so every single type would need to have its own
 code written based on its fields and their properties.
 
