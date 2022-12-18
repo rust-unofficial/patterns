@@ -10,7 +10,7 @@ src = "."
 create-missing = false
 
 [rust]
-edition = "2018"
+edition = "2021"
 
 [output.html]
 default-theme = "rust"
