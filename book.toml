@@ -16,5 +16,6 @@ edition = "2018"
 default-theme = "rust"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
 git-repository-icon = "fa-github"
+edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
 
 # [output.linkcheck]  # enable the "mdbook-linkcheck" renderer, disabled due to gh-actions
