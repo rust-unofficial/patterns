@@ -14,6 +14,7 @@ edition = "2018"
 
 [output.html]
 default-theme = "rust"
+site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
