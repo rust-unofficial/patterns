@@ -47,7 +47,7 @@ retry action in case of non-deterministic function. But if the argument
 is always consumed, you are forced to clone it on every call, which
 is not very efficient.
 
-Standard library uses this approach in e.g. `String::from_utf8` method.
+The standard library uses this approach in e.g. `String::from_utf8` method.
 When given a vector that doesn't contain valid UTF-8, a `FromUtf8Error` is returned.
 You can get original vector back using `FromUtf8Error::into_bytes` method.
 
