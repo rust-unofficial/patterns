@@ -2,7 +2,7 @@
 
 ## Description
 
-If fallible method receives consumes argument, return it back inside error.
+If a fallible function consumes an argument, return that argument back inside an error.
 
 ## Example
 
