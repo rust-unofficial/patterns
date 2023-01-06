@@ -43,7 +43,7 @@ fn main() {
 ## Motivation
 
 In case of error you may want to try some alternative way or to
-retry action in case of non-deterministic function. But if argument
+retry action in case of non-deterministic function. But if the argument
 is always consumed, you are forced to clone it on every call, which
 is not very efficient.
 
