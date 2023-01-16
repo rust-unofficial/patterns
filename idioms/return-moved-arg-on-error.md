@@ -1,4 +1,4 @@
-# A succinct name for the pattern
+# Return moved arg on error
 
 ## Description
 
