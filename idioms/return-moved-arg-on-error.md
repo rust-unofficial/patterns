@@ -9,6 +9,7 @@ an error.
 
 ```rust
 pub fn send(value: String) -> Result<(), SendError> {
+    println!("using {value} in a meaningful way");
     // Simulate non-deterministic fallible action.
     use std::time::SystemTime;
     let period = SystemTime::now().duration_since(SystemTime::UNIX_EPOCH).unwrap();
