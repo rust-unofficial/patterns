@@ -3115,7 +3115,7 @@ certain that there will be more deprecated APIs in the future.</p>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="deref-polymorphism"><a class="header" href="#deref-polymorphism"><code>Deref</code> polymorphism</a></h1>
 <h2 id="description-31"><a class="header" href="#description-31">Description</a></h2>
-<p>Abuse the <code>Deref</code> trait to emulate inheritance between structs, and thus reuse
+<p>Misuse the <code>Deref</code> trait to emulate inheritance between structs, and thus reuse
 methods.</p>
 <h2 id="example-21"><a class="header" href="#example-21">Example</a></h2>
 <p>Sometimes we want to emulate the following common pattern from OO languages such
@@ -3177,7 +3177,7 @@ well as <code>Bar</code>.</p>
 }</code></pre>
 <h2 id="disadvantages-20"><a class="header" href="#disadvantages-20">Disadvantages</a></h2>
 <p>Most importantly this is a surprising idiom - future programmers reading this in
-code will not expect this to happen. That's because we are abusing the <code>Deref</code>
+code will not expect this to happen. That's because we are misusing the <code>Deref</code>
 trait rather than using it as intended (and documented, etc.). It's also because
 the mechanism here is completely implicit.</p>
 <p>This pattern does not introduce subtyping between <code>Foo</code> and <code>Bar</code> like
