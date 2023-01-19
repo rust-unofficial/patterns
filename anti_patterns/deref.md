@@ -2,7 +2,7 @@
 
 ## Description
 
-Abuse the `Deref` trait to emulate inheritance between structs, and thus reuse
+Misuse the `Deref` trait to emulate inheritance between structs, and thus reuse
 methods.
 
 ## Example
@@ -81,7 +81,7 @@ impl Bar {
 ## Disadvantages
 
 Most importantly this is a surprising idiom - future programmers reading this in
-code will not expect this to happen. That's because we are abusing the `Deref`
+code will not expect this to happen. That's because we are misusing the `Deref`
 trait rather than using it as intended (and documented, etc.). It's also because
 the mechanism here is completely implicit.
 
