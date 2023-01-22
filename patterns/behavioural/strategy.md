@@ -73,7 +73,7 @@ impl Formatter for Json {
             buf.push_str(&entry);
             buf.push(',');
         }
-        if data.len() > 0 {
+        if !data.is_empty() {
             buf.pop(); // remove extra , at the end
         }
         buf.push(']');
