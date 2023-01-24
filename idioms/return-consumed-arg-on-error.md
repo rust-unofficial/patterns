@@ -1,4 +1,4 @@
-# Return moved arg on error
+# Return consumed argument on error
 
 ## Description
 

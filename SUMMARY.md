@@ -20,7 +20,7 @@
   - [Privacy For Extensibility](./idioms/priv-extend.md)
   - [Easy doc initialization](./idioms/rustdoc-init.md)
   - [Temporary mutability](./idioms/temporary-mutability.md)
-  - [Return moved arg on error](./idioms/return-moved-arg-on-error.md)
+  - [Return consumed arg on error](./idioms/return-consumed-arg-on-error.md)
 
 - [Design Patterns](./patterns/index.md)
   - [Behavioural](./patterns/behavioural/intro.md)
