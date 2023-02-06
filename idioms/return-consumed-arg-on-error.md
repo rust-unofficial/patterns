@@ -2,7 +2,7 @@
 
 ## Description
 
-If a fallible function consumes an argument, return that argument back inside
+If a fallible function consumes (moves) an argument, return that argument back inside
 an error.
 
 ## Example
