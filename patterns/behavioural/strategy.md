@@ -73,7 +73,9 @@ impl Formatter for Json {
             buf.push_str(&entry);
             buf.push(',');
         }
-        buf.pop(); // remove extra , at the end
+        if !data.is_empty() {
+            buf.pop(); // remove extra , at the end
+        }
         buf.push(']');
     }
 }
