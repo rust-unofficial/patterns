@@ -23,14 +23,12 @@ pub fn send(value: String) -> Result<(), SendError> {
 pub struct SendError(String);
 
 fn main() {
-    use std::mem::take;
-
     let mut value = "imagine this is very long string".to_string();
 
     let success = 'send: {
         // Try to send value two times.
         for _ in 0..2 {
-            value = match send(take(&mut value)) {
+            value = match send(value) {
                 Ok(()) => break 'send true,
                 Err(SendError(value)) => value,
             }
