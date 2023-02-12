@@ -1481,17 +1481,17 @@ pub struct SendError(String);
 fn main() {
     let mut value = &quot;imagine this is very long string&quot;.to_string();
 
-    let success = 'send: {
+    let success = 's: {
         // Try to send value two times.
         for _ in 0..2 {
             value = match send(value) {
-                Ok(()) =&gt; break 'send true,
+                Ok(()) =&gt; break 's true,
                 Err(SendError(value)) =&gt; value,
             }
         }
         false
     };
-    
+
     println!(&quot;success: {}&quot;, success);
 }</code></pre></pre>
 <h2 id="motivation-7"><a class="header" href="#motivation-7">Motivation</a></h2>
