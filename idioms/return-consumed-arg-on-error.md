@@ -25,17 +25,17 @@ pub struct SendError(String);
 fn main() {
     let mut value = "imagine this is very long string".to_string();
 
-    let success = 'send: {
+    let success = 's: {
         // Try to send value two times.
         for _ in 0..2 {
             value = match send(value) {
-                Ok(()) => break 'send true,
+                Ok(()) => break 's true,
                 Err(SendError(value)) => value,
             }
         }
         false
     };
-    
+
     println!("success: {}", success);
 }
 ```
