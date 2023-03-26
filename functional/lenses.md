@@ -7,7 +7,7 @@ They also have niche use cases.
 
 ## Lenses: Uniform Access Across Types
 
-A lens is a concept from functional progamming languages that allows
+A lens is a concept from functional programming languages that allows
 accessing parts of a data type in an abstract, unified way.[^1]
 In basic concept, it is similar to the way Rust traits work with type erasure,
 but it has a bit more power and flexibility.
