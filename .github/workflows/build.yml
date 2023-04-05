@@ -111,7 +111,7 @@ jobs:
       - name: Upload ${{ matrix.language }} translation
         uses: actions/upload-artifact@v3
         with:
-          name: comprehensive-rust-${{ matrix.language }}
+          name: rust-design-patterns-${{ matrix.language }}
           path: book/
 
       - name: Test code snippets with ${{ matrix.language }} translation
