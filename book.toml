@@ -8,7 +8,7 @@ src = "src"
 
 [build]
 create-missing = false
-extra-watch-dirs = ["po"]
+extra-watch-dirs = ["po", "third_party"]
 
 [preprocessor.gettext]
 after = ["links"]
