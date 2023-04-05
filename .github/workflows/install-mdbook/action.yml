@@ -26,5 +26,5 @@ runs:
       shell: bash
 
     - name: Install i18n-helpers
-      run: cargo install mdbook-i18n-helpers --locked '${{ steps.mdbook-i8n-helpers-version.outputs.MDBOOK_I8N_HELPERS_VERSION }}'
+      run: cargo install mdbook-i18n-helpers --locked --version '${{ steps.mdbook-i8n-helpers-version.outputs.MDBOOK_I8N_HELPERS_VERSION }}'
       shell: bash
