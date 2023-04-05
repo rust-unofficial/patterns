@@ -19,7 +19,7 @@ concurrency:
 env:
   CARGO_TERM_COLOR: always
   # Update the language picker in index.hbs to link new languages.
-  LANGUAGES: da pt-BR ko
+  LANGUAGES: de
 
 jobs:
   publish:
@@ -30,6 +30,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - name: Setup Rust cache
+        uses: ./.github/workflows/setup-rust-cache
 
       - name: Install mdbook
         uses: ./.github/workflows/install-mdbook
