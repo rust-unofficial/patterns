@@ -63,17 +63,16 @@ its parts to decide what to do next. In the second phase we may conditionally
 change the value (as in the example above).
 
 The borrow checker won't allow us to take out `name` of the enum (because
-*something* must be there.) We could of course `.clone()` name and put the clone
-into our `MyEnum::B`, but that would be an instance of the [Clone to satisfy
-the borrow checker](../anti_patterns/borrow_clone.md) anti-pattern. Anyway, we
+_something_ must be there.) We could of course `.clone()` name and put the clone
+into our `MyEnum::B`, but that would be an instance of the [Clone to satisfy the borrow checker](../anti_patterns/borrow_clone.md) anti-pattern. Anyway, we
 can avoid the extra allocation by changing `e` with only a mutable borrow.
 
 `mem::take` lets us swap out the value, replacing it with it's default value,
 and returning the previous value. For `String`, the default value is an empty
 `String`, which does not need to allocate. As a result, we get the original
-`name` *as an owned value*. We can then wrap this in another enum.
+`name` _as an owned value_. We can then wrap this in another enum.
 
-__NOTE:__ `mem::replace` is very similar, but allows us to specify what to
+**NOTE:** `mem::replace` is very similar, but allows us to specify what to
 replace the value with. An equivalent to our `mem::take` line would be
 `mem::replace(name, String::new())`.
 
@@ -92,8 +91,7 @@ borrow checker. The compiler may fail to optimize away the double store,
 resulting in reduced performance as opposed to what you'd do in unsafe
 languages.
 
-Furthermore, the type you are taking needs to implement the [`Default`
-trait](./default.md). However, if the type you're working with doesn't
+Furthermore, the type you are taking needs to implement the [`Default` trait](./default.md). However, if the type you're working with doesn't
 implement this, you can instead use `mem::replace`.
 
 ## Discussion

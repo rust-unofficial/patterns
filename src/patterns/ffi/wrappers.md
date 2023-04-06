@@ -31,7 +31,7 @@ That API looks like this:
 2. Each call to `next_key` will advance the iterator.
 3. Calls to `next_key` if the iterator is at the end will do nothing.
 4. As noted above, the iterator is "wrapped into" the collection (unlike the native
-  Rust API).
+   Rust API).
 
 If the iterator implements `nth()` efficiently, then it is possible to make it
 ephemeral to each function call:
@@ -82,9 +82,9 @@ To wrap any type of iterator into the API correctly, the wrapper would need to
 do what a C version of the code would do: erase the lifetime of the iterator,
 and manage it manually.
 
-Suffice it to say, this is *incredibly* difficult.
+Suffice it to say, this is _incredibly_ difficult.
 
-Here is an illustration of just *one* pitfall.
+Here is an illustration of just _one_ pitfall.
 
 A first version of `MySetWrapper` would look like this:
 
@@ -98,8 +98,8 @@ struct MySetWrapper {
 ```
 
 With `transmute` being used to extend a lifetime, and a pointer to hide it,
-it's ugly already. But it gets even worse: *any other operation can cause
-Rust `undefined behaviour`*.
+it's ugly already. But it gets even worse: _any other operation can cause
+Rust `undefined behaviour`_.
 
 Consider that the `MySet` in the wrapper could be manipulated by other
 functions during iteration, such as storing a new value to the key it was
@@ -136,7 +136,7 @@ pub mod unsafe_module {
 
 If the iterator exists when this function is called, we have violated one of Rust's
 aliasing rules. According to Rust, the mutable reference in this block must have
-*exclusive* access to the object. If the iterator simply exists, it's not exclusive,
+_exclusive_ access to the object. If the iterator simply exists, it's not exclusive,
 so we have `undefined behaviour`! [^1]
 
 To avoid this, we must have a way of ensuring that mutable reference really is exclusive.
@@ -156,7 +156,7 @@ optimizations that C code cannot attain. Being denied access to certain shortcut
 is the price Rust programmers need to pay.
 
 [^1]: For the C programmers out there scratching their heads, the iterator need
-  not be read *during* this code cause the UB. The exclusivity rule also enables
-  compiler optimizations which may cause inconsistent observations by the iterator's
-  shared reference (e.g. stack spills or reordering instructions for efficiency).
-  These observations may happen *any time after* the mutable reference is created.
+not be read _during_ this code cause the UB. The exclusivity rule also enables
+compiler optimizations which may cause inconsistent observations by the iterator's
+shared reference (e.g. stack spills or reordering instructions for efficiency).
+These observations may happen _any time after_ the mutable reference is created.

@@ -102,13 +102,12 @@ fn unique_ids_iter<I>(iterator: I) -> HashSet<u64>
 ```
 
 Lenses, however, allow the code supporting customer ID to be moved from the
-*type* to the *accessor function*.
+_type_ to the _accessor function_.
 Rather than implementing a trait on each type, all matching structures can
 simply be accessed the same way.
 
 While the Rust language itself does not support this (type erasure is the
-preferred solution to this problem), the [lens-rs
-crate](https://github.com/TOETOE55/lens-rs/blob/master/guide.md) allows code
+preferred solution to this problem), the [lens-rs crate](https://github.com/TOETOE55/lens-rs/blob/master/guide.md) allows code
 that feels like this to be written with macros:
 
 ```rust,ignore
@@ -161,7 +160,7 @@ the code.
 That is what the `optics!` and `view_ref` in the example above simulates.
 
 The functional approach need not be restricted to accessing members.
-More powerful lenses can be created which both *set* and *get* data in a
+More powerful lenses can be created which both _set_ and _get_ data in a
 structure.
 But the concept really becomes interesting when used as a building block for
 composition.
@@ -170,7 +169,7 @@ That is where the concept appears more clearly in Rust.
 ## Prisms: A Higher-Order form of "Optics"
 
 A simple function such as `unique_ids_lens` above operates on a single lens.
-A *prism* is a function that operates on a *family* of lenses.
+A _prism_ is a function that operates on a _family_ of lenses.
 It is one conceptual level higher, using lenses as a building block, and
 continuing the metaphor, is part of a family of "optics".
 It is the main one that is useful in understanding Rust APIs, so will be the
@@ -179,9 +178,9 @@ focus here.
 The same way that traits allow "lens-like" design with static polymorphism and
 dynamic dispatch, prism-like designs appear in Rust APIs which split problems
 into multiple associated types to be composed.
-A good example of this is the traits in the parsing crate *Serde*.
+A good example of this is the traits in the parsing crate _Serde_.
 
-Trying to understand the way *Serde* works by only reading the API is a
+Trying to understand the way _Serde_ works by only reading the API is a
 challenge, especially the first time.
 Consider the `Deserializer` trait, implemented by some type in any library
 which parses a new format:
@@ -230,7 +229,7 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-The job of the `Visitor` type is to construct values in the *Serde* data model,
+The job of the `Visitor` type is to construct values in the _Serde_ data model,
 which are represented by its associated `Value` type.
 
 These values represent parts of the Rust value being deserialized.
@@ -243,14 +242,14 @@ it parsed.
 The `Value` trait is acting like a lens in functional programming languages.
 
 But unlike the `CustomerId` trait, the return types of `Visitor` methods are
-*generic*, and the concrete `Value` type is *determined by the Visitor itself*.
+_generic_, and the concrete `Value` type is _determined by the Visitor itself_.
 
 Instead of acting as one lens, it effectively acts as a family of
 lenses, one for each concrete type of `Visitor`.
 
 The `Deserializer` API is based on having a generic set of "lenses" work across
 a set of other generic types for "observation".
-It is a *prism*.
+It is a _prism_.
 
 For example, consider the identity record from earlier but simplified:
 
@@ -260,7 +259,7 @@ For example, consider the identity record from earlier but simplified:
 }
 ```
 
-How would the *Serde* library deserialize this JSON into `struct CreditRecord`?
+How would the _Serde_ library deserialize this JSON into `struct CreditRecord`?
 
 1. The user would call a library function to deserialize the data. This would
    create a `Deserializer` based on the JSON format.
@@ -273,7 +272,7 @@ How would the *Serde* library deserialize this JSON into `struct CreditRecord`?
 
 For our very simple structure above, the expected pattern would be:
 
-1. Visit a map (*Serde*'s equvialent to `HashMap` or JSON's dictionary).
+1. Visit a map (_Serde_'s equvialent to `HashMap` or JSON's dictionary).
 1. Visit a string key called "name".
 1. Visit a string value, which will go into the `name` field.
 1. Visit a string key called "customer_id".
@@ -287,7 +286,7 @@ reflection of each type based on the type itself.
 Rust does not support that, so every single type would need to have its own
 code written based on its fields and their properties.
 
-*Serde* solves this usability challenge with a derive macro:
+_Serde_ solves this usability challenge with a derive macro:
 
 ```rust,ignore
 use serde::Deserialize;
@@ -323,10 +322,9 @@ The `deserialize` code will then create a `Visitor` which will have its calls
 If everything goes well, eventually that `Visitor` will construct a value
 corresponding to the type being parsed and return it.
 
-For a complete example, see the [*Serde*
-documentation](https://serde.rs/deserialize-struct.html).
+For a complete example, see the [_Serde_ documentation](https://serde.rs/deserialize-struct.html).
 
-To wrap up, this is the power of *Serde*:
+To wrap up, this is the power of _Serde_:
 
 1. The structure being parsed is represented by an `impl` block for `Deserialize`
 1. The input data format (e.g. JSON) is represented by a `Deserializer` called
@@ -359,8 +357,7 @@ But it may also need procedural macros to create bridges for its generics.
 - [luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing
   computer graphics that uses lens API design, including proceducal macros to
   create full prisms for buffers of different pixel types that remain generic
-- [An Article about Lenses in
-  Scala](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
+- [An Article about Lenses in Scala](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
   that is very readable even without Scala expertise.
 - [Paper: Profunctor Optics: Modular Data
   Accessors](https://web.archive.org/web/20220701102832/https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)

@@ -68,26 +68,25 @@ let readable: Box<dyn io::Read> = if arg == "-" {
 ## Discussion
 
 Rust newcomers will usually learn that Rust requires all variables to be
-initialized *before use*, so it's easy to overlook the fact that *unused*
+initialized _before use_, so it's easy to overlook the fact that _unused_
 variables may well be uninitialized. Rust works quite hard to ensure that this
 works out fine and only the initialized values are dropped at the end of their
 scope.
 
 The example meets all the constraints Rust places on us:
 
-* All variables are initialized before using (in this case borrowing) them
-* Each variable only holds values of a single type. In our example, `stdin` is
-of type `Stdin`, `file` is of type `File` and `readable` is of type `&mut dyn
-Read`
-* Each borrowed value outlives all the references borrowed from it
+- All variables are initialized before using (in this case borrowing) them
+- Each variable only holds values of a single type. In our example, `stdin` is
+  of type `Stdin`, `file` is of type `File` and `readable` is of type `&mut dyn Read`
+- Each borrowed value outlives all the references borrowed from it
 
 ## See also
 
-* [Finalisation in destructors](dtor-finally.md) and
-[RAII guards](../patterns/behavioural/RAII.md) can benefit from tight control over
-lifetimes.
-* For conditionally filled `Option<&T>`s of (mutable) references, one can
-initialize an `Option<T>` directly and use its [`.as_ref()`] method to get an
-optional reference.
+- [Finalisation in destructors](dtor-finally.md) and
+  [RAII guards](../patterns/behavioural/RAII.md) can benefit from tight control over
+  lifetimes.
+- For conditionally filled `Option<&T>`s of (mutable) references, one can
+  initialize an `Option<T>` directly and use its [`.as_ref()`] method to get an
+  optional reference.
 
 [`.as_ref()`]: https://doc.rust-lang.org/std/option/enum.Option.html#method.as_ref

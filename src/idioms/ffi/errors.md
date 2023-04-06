@@ -11,7 +11,7 @@ in a usable way:
 
 1. Flat Enums should be converted to integers and returned as codes.
 2. Structured Enums should be converted to an integer code with a string error
-  message for detail.
+   message for detail.
 3. Custom Error Types should become "transparent", with a C representation.
 
 ## Code Example

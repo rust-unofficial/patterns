@@ -7,8 +7,8 @@ not be enough?
 For example, if we want to create a custom `Display` implementation for `String`
 due to security considerations (e.g. passwords).
 
-For such cases we could use the `Newtype` pattern to provide __type safety__
-and __encapsulation__.
+For such cases we could use the `Newtype` pattern to provide **type safety**
+and **encapsulation**.
 
 ## Description
 
@@ -77,7 +77,7 @@ field is private, which it is by default).
 ## Disadvantages
 
 The downside of newtypes (especially compared with type aliases), is that there
-is no special language support. This means there can be *a lot* of boilerplate.
+is no special language support. This means there can be _a lot_ of boilerplate.
 You need a 'pass through' method for every method you want to expose on the
 wrapped type, and an impl for every trait you want to also be implemented for
 the wrapper type.

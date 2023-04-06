@@ -11,17 +11,17 @@ of Rust's compile time guarantees.
 A key part of this idea is the way generic types work. In C++ and Java, for
 example, generic types are a meta-programming construct for the compiler.
 `vector<int>` and `vector<char>` in C++ are just two different copies of the
-same boilerplate code for a `vector` type (known as a `template`)  with two
+same boilerplate code for a `vector` type (known as a `template`) with two
 different types filled in.
 
 In Rust, a generic type parameter creates what is known in functional languages
 as a "type class constraint", and each different parameter filled in by an end
-user *actually changes the type*. In other words, `Vec<isize>` and `Vec<char>`
-*are two different types*, which are recognized as distinct by all parts of the
+user _actually changes the type_. In other words, `Vec<isize>` and `Vec<char>`
+_are two different types_, which are recognized as distinct by all parts of the
 type system.
 
 This is called **monomorphization**, where different types are created from
-**polymorphic** code.  This special behavior requires `impl` blocks to specify
+**polymorphic** code. This special behavior requires `impl` blocks to specify
 generic parameters. Different values for the generic type cause different types,
 and different types can have different `impl` blocks.
 
@@ -48,11 +48,10 @@ and security controls for the actual files.
 
 The requests from machines in the lab for files contain the same basic
 information, no matter what protocol they came from: an authentication method,
-and a file name to retrieve.  A straightforward implementation would look
+and a file name to retrieve. A straightforward implementation would look
 something like this:
 
 ```rust,ignore
-
 enum AuthInfo {
     Nfs(crate::nfs::AuthInfo),
     Bootp(crate::bootp::AuthInfo),
@@ -65,7 +64,7 @@ struct FileDownloadRequest {
 ```
 
 This design might work well enough. But now suppose you needed to support
-adding metadata that was *protocol specific*. For example, with NFS, you
+adding metadata that was _protocol specific_. For example, with NFS, you
 wanted to determine what their mount point was in order to enforce additional
 security rules.
 
@@ -102,7 +101,7 @@ request types were confused. After all, the entire path of the user's code,
 including what functions from the library they use, will know whether a request
 is an NFS request or a BOOTP request.
 
-In Rust, this is actually possible! The solution is to *add a generic type* in
+In Rust, this is actually possible! The solution is to _add a generic type_ in
 order to split the API.
 
 Here is what that looks like:
@@ -227,60 +226,53 @@ improve in the future.
 
 ## Alternatives
 
-* If a type seems to need a "split API" due to construction or partial
-initialization, consider the
-[Builder Pattern](../patterns/creational/builder.md) instead.
+- If a type seems to need a "split API" due to construction or partial
+  initialization, consider the
+  [Builder Pattern](../patterns/creational/builder.md) instead.
 
-* If the API between types does not change -- only the behavior does -- then
-the [Strategy Pattern](../patterns/behavioural/strategy.md) is better used
-instead.
+- If the API between types does not change -- only the behavior does -- then
+  the [Strategy Pattern](../patterns/behavioural/strategy.md) is better used
+  instead.
 
 ## See also
 
 This pattern is used throughout the standard library:
 
-* `Vec<u8>` can be cast from a String, unlike every other type of `Vec<T>`.[^1]
-* They can also be cast into a binary heap, but only if they contain a type
+- `Vec<u8>` can be cast from a String, unlike every other type of `Vec<T>`.[^1]
+- They can also be cast into a binary heap, but only if they contain a type
   that implements the `Ord` trait.[^2]
-* The `to_string` method was specialized for `Cow` only of type `str`.[^3]
+- The `to_string` method was specialized for `Cow` only of type `str`.[^3]
 
 It is also used by several popular crates to allow API flexibility:
 
-* The `embedded-hal` ecosystem used for embedded devices makes extensive use of
+- The `embedded-hal` ecosystem used for embedded devices makes extensive use of
   this pattern. For example, it allows statically verifying the configuration of
   device registers used to control embedded pins. When a pin is put into a mode,
   it returns a `Pin<MODE>` struct, whose generic determines the functions
   usable in that mode, which are not on the `Pin` itself. [^4]
 
-* The `hyper` HTTP client library uses this to expose rich APIs for different
+- The `hyper` HTTP client library uses this to expose rich APIs for different
   pluggable requests. Clients with different connectors have different methods
   on them as well as different trait implementations, while a core set of
   methods apply to any connector. [^5]
 
-* The "type state" pattern -- where an object gains and loses API based on an
+- The "type state" pattern -- where an object gains and loses API based on an
   internal state or invariant -- is implemented in Rust using the same basic
   concept, and a slightly different technique. [^6]
 
-[^1]: See: [impl From\<CString\> for Vec\<u8\>](
-https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811)
+[^1]: See: [impl From\<CString\> for Vec\<u8\>](https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811)
 
-[^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](
-https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
+[^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
 
-[^3]: See: [impl\<'\_\> ToString for Cow\<'\_, str>](
-https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
+[^3]: See: [impl\<'\_\> ToString for Cow\<'\_, str>](https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
 
 [^4]: Example:
-[https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html](
-https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html)
+[https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html](https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html)
 
 [^5]: See:
-[https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html](
-https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html)
+[https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html](https://docs.rs/hyper/0.14.5/hyper/client/struct.Client.html)
 
 [^6]: See:
-[The Case for the Type State Pattern](
-https://web.archive.org/web/20210325065112/https://www.novatec-gmbh.de/en/blog/the-case-for-the-typestate-pattern-the-typestate-pattern-itself/)
+[The Case for the Type State Pattern](https://web.archive.org/web/20210325065112/https://www.novatec-gmbh.de/en/blog/the-case-for-the-typestate-pattern-the-typestate-pattern-itself/)
 and
-[Rusty Typestate Series (an extensive thesis)](
-https://web.archive.org/web/20210328164854/https://rustype.github.io/notes/notes/rust-typestate-series/rust-typestate-index)
+[Rusty Typestate Series (an extensive thesis)](https://web.archive.org/web/20210328164854/https://rustype.github.io/notes/notes/rust-typestate-series/rust-typestate-index)

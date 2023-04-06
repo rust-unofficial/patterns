@@ -9,7 +9,7 @@ followed:
 2. Minimize `unsafe` code during the conversion.
 3. If the C code can modify the string data, use `Vec` instead of `CString`.
 4. Unless the Foreign Function API requires it, the ownership of the string
-  should not transfer to the callee.
+   should not transfer to the callee.
 
 ## Motivation
 
@@ -19,7 +19,7 @@ are being sent to a foreign function call from a Rust function.
 
 The best practice is simple: use `CString` in such a way as to minimize
 `unsafe` code. However, a secondary caveat is that
-*the object must live long enough*, meaning the lifetime should be maximized.
+_the object must live long enough_, meaning the lifetime should be maximized.
 In addition, the documentation explains that "round-tripping" a `CString` after
 modification is UB, so additional work is necessary in that case.
 

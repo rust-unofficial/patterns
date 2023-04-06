@@ -2,7 +2,7 @@
 
 ## Description
 
-Many types in Rust have a [constructor]. However, this is *specific* to the
+Many types in Rust have a [constructor]. However, this is _specific_ to the
 type; Rust cannot abstract over "everything that has a `new()` method". To
 allow this, the [`Default`] trait was conceived, which can be used with
 containers and other generic types (e.g. see [`Option::unwrap_or_default()`]).
@@ -58,7 +58,7 @@ fn main() {
 ## See also
 
 - The [constructor] idiom is another way to generate instances that may or may
-not be "default"
+  not be "default"
 - The [`Default`] documentation (scroll down for the list of implementors)
 - [`Option::unwrap_or_default()`]
 - [`derive(new)`]

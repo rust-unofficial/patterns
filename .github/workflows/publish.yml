@@ -18,7 +18,8 @@ concurrency:
 
 env:
   CARGO_TERM_COLOR: always
-  # Update the language picker in index.hbs to link new languages.
+  # TODO: Update the language picker in index.hbs to link new languages.
+  # TODO: As long as https://github.com/google/mdbook-i18n-helpers/issues/12 is not implemented, yet.
   LANGUAGES: de
 
 jobs:

@@ -13,7 +13,7 @@ methods. Each of these methods should have examples.
 
 For example:
 
-```rust,ignore
+````rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -40,7 +40,7 @@ impl Connection {
         // ...
     }
 }
-```
+````
 
 ## Example
 
@@ -48,7 +48,7 @@ Instead of typing all of this boilerplate to create a `Connection` and
 `Request`, it is easier to just create a wrapping helper function which takes
 them as arguments:
 
-```rust,ignore
+````rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -68,7 +68,7 @@ impl Connection {
         // ...
     }
 }
-```
+````
 
 **Note** in the above example the line `assert!(response.is_ok());` will not
 actually run while testing because it is inside a function which is never

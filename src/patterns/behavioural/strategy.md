@@ -155,7 +155,6 @@ fn main() {
     assert_eq!(0, Adder::add(0, 0, bool_adder));
     assert_eq!(5, Adder::add(1, 3, custom_adder));
 }
-
 ```
 
 In fact, Rust already uses this idea for `Options`'s `map` method:

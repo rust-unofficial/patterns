@@ -5,12 +5,12 @@
 When designing APIs in Rust which are exposed to other languages, there are some
 important design principles which are contrary to normal Rust API design:
 
-1. All Encapsulated types should be *owned* by Rust, *managed* by the user,
-  and *opaque*.
-2. All Transactional data types should be *owned* by the user, and *transparent*.
+1. All Encapsulated types should be _owned_ by Rust, _managed_ by the user,
+   and _opaque_.
+2. All Transactional data types should be _owned_ by the user, and _transparent_.
 3. All library behavior should be functions acting upon Encapsulated types.
 4. All library behavior should be encapsulated into types not based on structure,
-  but *provenance/lifetime*.
+   but _provenance/lifetime_.
 
 ## Motivation
 
@@ -24,7 +24,7 @@ design in Rust as little as possible. There are three goals with any foreign API
 1. Make it easy to use in the target language.
 2. Avoid the API dictating internal unsafety on the Rust side as much as possible.
 3. Keep the potential for memory unsafety and Rust `undefined behaviour` as small
-  as possible.
+   as possible.
 
 Rust code must trust the memory safety of the foreign language beyond a certain
 point. However, every bit of `unsafe` code on the Rust side is an opportunity for
@@ -69,7 +69,7 @@ library's behavior.
 
 It is completely opaque to the user, who cannot create a `DBM` themselves since
 they don't know its size or layout. Instead, they must call `dbm_open`, and that
-only gives them *a pointer to one*.
+only gives them _a pointer to one_.
 
 This means all `DBM`s are "owned" by the library in a Rust sense.
 The internal state of unknown size is kept in memory controlled by the library,
@@ -90,8 +90,8 @@ The user likely has some type they are using, which has a known size.
 But the library does not care, and by the rules of C casting, any type behind a
 pointer can be cast to `void`.
 
-As noted earlier, this type is *transparent* to the user. But also, this type is
-*owned* by the user.
+As noted earlier, this type is _transparent_ to the user. But also, this type is
+_owned_ by the user.
 This has subtle ramifications, due to that pointer inside it.
 The question is, who owns the memory that pointer points to?
 
@@ -99,14 +99,14 @@ The answer for best memory safety is, "the user".
 But in cases such as retrieving a value, the user does not know how to allocate
 it correctly (since they don't know how long the value is). In this case, the library
 code is expected to use the heap that the user has access to -- such as the C library
-`malloc` and `free` -- and then *transfer ownership* in the Rust sense.
+`malloc` and `free` -- and then _transfer ownership_ in the Rust sense.
 
 This may all seem speculative, but this is what a pointer means in C.
 It means the same thing as Rust: "user defined lifetime."
 The user of the library needs to read the documentation in order to use it correctly.
 That said, there are some decisions that have fewer or greater consequences if users
 do it wrong. Minimizing those are what this best practice is about, and the key
-is to *transfer ownership of everything that is transparent*.
+is to _transfer ownership of everything that is transparent_.
 
 ## Advantages
 
@@ -114,10 +114,10 @@ This minimizes the number of memory safety guarantees the user must uphold to a
 relatively small number:
 
 1. Do not call any function with a pointer not returned by `dbm_open` (invalid
-  access or corruption).
+   access or corruption).
 2. Do not call any function on a pointer after close (use after free).
 3. The `dptr` on any `datum` must be `NULL`, or point to a valid slice of memory
-  at the advertised length.
+   at the advertised length.
 
 In addition, it avoids a lot of pointer provenance issues.
 To understand why, let us consider an alternative in some depth: key iteration.
@@ -205,7 +205,7 @@ end-of-iteration marker:
 1. The loop condition sets `l` to zero, and enters the loop because `0 >= 0`.
 2. The length is incremented, in this case by zero.
 3. The if statement is true, so the database is closed. There should be a break
-  statement here.
+   statement here.
 4. The loop condition executes again, causing a `next` call on the closed object.
 
 The worst part about this bug?
@@ -221,7 +221,7 @@ and gave up control of their lifetimes. The C code simply must "play nice".
 
 The programmer must read and understand the API documentation.
 While some consider that par for the course in C, a good API design can mitigate
-this risk. The POSIX API for `DBM` did this by *consolidating the ownership* of
+this risk. The POSIX API for `DBM` did this by _consolidating the ownership_ of
 the iterator with its parent:
 
 ```C
