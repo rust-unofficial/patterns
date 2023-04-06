@@ -29,17 +29,28 @@ mod inner_lib {
         //private
         fn get_acceleration(&self) -> f64;
         fn accelerate(&mut self, duration: f64) {
-            self.set_speed(self.get_speed() + (self.get_acceleration() * duration));
+            self.set_speed(
+                self.get_speed() + (self.get_acceleration() * duration)
+            );
         }
         fn brake(&mut self, force: f64) {
-            self.set_speed(self.get_speed() - (force * self.get_acceleration()));
+            self.set_speed(
+                self.get_speed() - (force * self.get_acceleration())
+            );
         }
     }
-    //Auto implement Car for all InnerCar, by forwarding the Car trait to the InnerCar implementation
+    //Auto implement Car for all InnerCar, by forwarding the Car trait to the
+    //InnerCar implementation
     impl<T: InnerCar> crate::Car for T {
-        fn get_speed(&self) -> f64 {<Self as InnerCar>::get_speed(self)}
-        fn accelerate(&mut self, duration: f64) {<Self as InnerCar>::accelerate(self, duration)}
-        fn brake(&mut self, force: f64) {<Self as InnerCar>::brake(self, force)}
+        fn get_speed(&self) -> f64 {
+            <Self as InnerCar>::get_speed(self)
+        }
+        fn accelerate(&mut self, duration: f64) {
+            <Self as InnerCar>::accelerate(self, duration)
+        }
+        fn brake(&mut self, force: f64) {
+            <Self as InnerCar>::brake(self, force)
+        }
     }
 }
 
@@ -64,21 +75,14 @@ multiple implementations of the public trait.
 
 ## Advantages
 
-* Provides additional functionality to the implementation of a public trait
-while keeping the private methods hidden from the public API.
-* Improves code modularity and maintainability by separating public and private
-functionality.
-* Increases code reusability, since the private functionality can be reused
-across multiple implementations of the public trait.
-* Makes it easier to reason about the code by separating the public and private
-functionality.
+- Provides hidden functionality while keeping the private methods from the API.
+- Improves modularity by separating public and private functionality.
+- Increases code reusability, since the private functionality can be reused.
 
 ## Disadvantages
 
-* Can make the code harder to understand if the private trait and its
-relationship to the public trait are not well documented.
-* Can lead to tight coupling between the public and private functionality if not
-designed carefully.
+- Can be harder to understand if the private trait are not well documented.
+- Can lead to tight coupling between the public and private functionality.
 
 ## Discussion
 
@@ -95,8 +99,7 @@ functionality.
 
 ## See also
 
-Wikipedia [OOP Interface](https://en.wikipedia.org/wiki/Interface_%28object-oriented_programming%29) concept.
+Wikipedia [OOP Interface](https://en.wikipedia.org/wiki/Interface_%28object-oriented_programming%29).
 
-
-Blog post from [Predrag](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/) about sealed, private and other pattern for traits.
-
+Blog post from [Predrag](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/)
+about sealed, private and other patterns for traits.
