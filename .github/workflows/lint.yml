@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Markdown linting
 
 on:
   push:
@@ -6,12 +6,9 @@ on:
   pull_request:
 
 jobs:
-  markdown-lint:
-    runs-on: ubuntu-20.04
+  style:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Lint all original files recursively
-        uses: avto-dev/markdown-lint@v1
-        with:
-          config: ".markdownlint.yaml"
-          args: "**/*.md"
+
+      - uses: dprint/check@v2.2
