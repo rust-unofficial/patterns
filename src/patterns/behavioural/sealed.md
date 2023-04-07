@@ -27,6 +27,31 @@ sealed trait to only happen locally.
 
 ## Example
 
+One possible use of the sealed trait is to limit what kind of implementation a
+function can receive, allowing only a limited number of types to be passed as
+parameters.
+
+```rust,ignore
+pub(crate) mod private {
+    pub(crate) trait Sealed {}
+}
+// MyStruct is Sealed, and only this crate have access to it. Other crates will
+// be able to implement it.
+pub trait MyStruct: private::Sealed {...}
+// auto implement Sealed for any type that implement MyStruct
+impl<T: MyStruct> private::Sealed for T {}
+
+pub struct MyStructA {...}
+impl MyStruct for MyStructA {...}
+
+pub struct MyStructB {...}
+impl MyStruct for MyStructB {...}
+
+// this function will only receive MyStructA or MyStructB because they are the
+// only ones that implement the MyStruct trait
+pub fn receive_my_struct(my_struct: impl MyStruct) {...}
+```
+
 The standard library makes use of a sealed trait, one example is the
 `OsStrExt` trait for
 [unix](https://doc.rust-lang.org/std/os/unix/ffi/trait.OsStrExt.html),
