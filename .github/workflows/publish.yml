@@ -20,7 +20,8 @@ env:
   CARGO_TERM_COLOR: always
   # TODO: Update the language picker in index.hbs to link new languages.
   # TODO: As long as https://github.com/google/mdbook-i18n-helpers/issues/12 is not implemented, yet.
-  LANGUAGES: de
+  # TODO: Activate when first translation is available
+  # LANGUAGES: xx
 
 jobs:
   publish:
@@ -41,15 +42,16 @@ jobs:
       - name: Build course in English
         run: mdbook build -d book
 
-      - name: Build all translations
-        run: |
-          for po_lang in ${{ env.LANGUAGES }}; do
-              echo "::group::Building $po_lang translation"
-              MDBOOK_BOOK__LANGUAGE=$po_lang \
-              MDBOOK_OUTPUT__HTML__SITE_URL=/patterns/$po_lang/ \
-              mdbook build -d book/$po_lang
-              echo "::endgroup::"
-          done
+      # TODO: Activate when first translation is available
+      # - name: Build all translations
+      #   run: |
+      #     for po_lang in ${{ env.LANGUAGES }}; do
+      #         echo "::group::Building $po_lang translation"
+      #         MDBOOK_BOOK__LANGUAGE=$po_lang \
+      #         MDBOOK_OUTPUT__HTML__SITE_URL=/patterns/$po_lang/ \
+      #         mdbook build -d book/$po_lang
+      #         echo "::endgroup::"
+      #     done
 
       - name: Setup Pages
         uses: actions/configure-pages@v2
