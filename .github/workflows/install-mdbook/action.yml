@@ -1,0 +1,29 @@
+name: Install mdbook and dependencies
+
+description: Install the mdbook with the dependencies we need.
+
+runs:
+  using: composite
+  steps:
+    - name: Read mdbook version from .env
+      id: mdbook-version
+      run: |
+        . ./.env
+        echo "::set-output name=MDBOOK_VERSION::${MDBOOK_VERSION}"
+      shell: bash
+
+    - name: Read mdbook-i8n-helpers version from .env
+      id: mdbook-i8n-helpers-version
+      run: |
+        . ./.env
+        echo "::set-output name=MDBOOK_I8N_HELPERS_VERSION::${MDBOOK_I8N_HELPERS_VERSION}"
+      shell: bash
+
+    # The --locked flag is important for reproducible builds.
+    - name: Install mdbook
+      run: cargo install mdbook --locked --version '${{ steps.mdbook-version.outputs.MDBOOK_VERSION }}'
+      shell: bash
+
+    - name: Install i18n-helpers
+      run: cargo install mdbook-i18n-helpers --locked --version '${{ steps.mdbook-i8n-helpers-version.outputs.MDBOOK_I8N_HELPERS_VERSION }}'
+      shell: bash
