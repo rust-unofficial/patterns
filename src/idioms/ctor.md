@@ -5,13 +5,15 @@
 Rust does not have constructors as a language construct. Instead, the
 convention is to use an [associated function][associated function] `new` to create an object:
 
-```rust
+````rust
 /// Time in seconds.
 ///
 /// # Example
+///
+/// ```
 /// let s = Second::new(42);
 /// assert_eq!(42, s.value());
-
+/// ```
 pub struct Second {
     value: u64
 }
@@ -28,19 +30,21 @@ impl Second {
         self.value
     }
 }
-```
+````
 
 ## Default Constructors
 
 Rust supports default constructors with the [`Default`][std-default] trait:
 
-```rust
+````rust
 /// Time in seconds.
 ///
 /// # Example
 ///
+/// ```
 /// let s = Second::default();
 /// assert_eq!(0, s.value());
+/// ```
 pub struct Second {
     value: u64
 }
@@ -57,12 +61,20 @@ impl Default for Second {
         Self { value: 0 }
     }
 }
-```
+````
 
 `Default` can also be derived if all types of all fields implement `Default`,
 like they do with `Second`:
 
-```rust
+````rust
+/// Time in seconds.
+///
+/// # Example
+///
+/// ```
+/// let s = Second::default();
+/// assert_eq!(0, s.value());
+/// ```
 #[derive(Default)]
 pub struct Second {
     value: u64
@@ -74,7 +86,7 @@ impl Second {
         self.value
     }
 }
-```
+````
 
 **Note:** It is common and expected for types to implement both
 `Default` and an empty `new` constructor. `new` is the constructor

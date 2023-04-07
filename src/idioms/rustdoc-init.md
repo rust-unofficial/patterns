@@ -13,7 +13,7 @@ methods. Each of these methods should have examples.
 
 For example:
 
-```rust,ignore
+````rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -23,12 +23,14 @@ impl Connection {
     /// Sends a request over the connection.
     ///
     /// # Example
-    /// # Boilerplate are required to get an example working.
+    /// ```no_run
+    /// # // Boilerplate are required to get an example working.
     /// # let stream = TcpStream::connect("127.0.0.1:34254");
     /// # let connection = Connection { name: "foo".to_owned(), stream };
     /// # let request = Request::new("RequestId", RequestType::Get, "payload");
     /// let response = connection.send_request(request);
     /// assert!(response.is_ok());
+    /// ```
     fn send_request(&self, request: Request) -> Result<Status, SendErr> {
         // ...
     }
@@ -38,7 +40,7 @@ impl Connection {
         // ...
     }
 }
-```
+````
 
 ## Example
 
@@ -46,7 +48,7 @@ Instead of typing all of this boilerplate to create a `Connection` and
 `Request`, it is easier to just create a wrapping helper function which takes
 them as arguments:
 
-```rust,ignore
+````rust,ignore
 struct Connection {
     name: String,
     stream: TcpStream,
@@ -56,15 +58,17 @@ impl Connection {
     /// Sends a request over the connection.
     ///
     /// # Example
+    /// ```
     /// # fn call_send(connection: Connection, request: Request) {
     /// let response = connection.send_request(request);
     /// assert!(response.is_ok());
     /// # }
+    /// ```
     fn send_request(&self, request: Request) {
         // ...
     }
 }
-```
+````
 
 **Note** in the above example the line `assert!(response.is_ok());` will not
 actually run while testing because it is inside a function which is never
