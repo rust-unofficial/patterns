@@ -74,7 +74,7 @@ implementations already present on the standard library.
 The documentation describes it's motivation as the following:
 
 > This trait is sealed: it cannot be implemented outside the standard library.
-This is so that future additional methods are not breaking changes.
+> This is so that future additional methods are not breaking changes.
 
 ## Advantages
 
