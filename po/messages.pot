@@ -281,7 +281,7 @@ msgstr ""
 msgid ""
 "We are utilizing "
 "[mdbook-i18n-helper](https://github.com/google/mdbook-i18n-helpers).\n"
-"Please read up on how to *add* and *update* translations in [their "
+"Please read up on how to _add_ and _update_ translations in [their "
 "repository](https://github.com/google/mdbook-i18n-helpers#creating-and-updating-translations)"
 msgstr ""
 
@@ -340,7 +340,6 @@ msgstr ""
 
 #: src\idioms/coercion-arguments.md:3
 #: src\idioms/concat-format.md:3
-#: src\idioms/ctor.md:3
 #: src\idioms/default.md:3
 #: src\idioms/deref.md:3
 #: src\idioms/dtor-finally.md:3
@@ -352,7 +351,6 @@ msgstr ""
 #: src\idioms/option-iter.md:3
 #: src\idioms/pass-var-to-closure.md:3
 #: src\idioms/priv-extend.md:3
-#: src\idioms/rustdoc-init.md:3
 #: src\idioms/temporary-mutability.md:3
 #: src\idioms/return-consumed-arg-on-error.md:3
 #: src\patterns/behavioural/command.md:3
@@ -412,7 +410,6 @@ msgstr ""
 #: src\idioms/on-stack-dyn-dispatch.md:10
 #: src\idioms/pass-var-to-closure.md:12
 #: src\idioms/priv-extend.md:18
-#: src\idioms/rustdoc-init.md:45
 #: src\idioms/temporary-mutability.md:12
 #: src\idioms/return-consumed-arg-on-error.md:8
 #: src\patterns/behavioural/command.md:18
@@ -601,7 +598,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/coercion-arguments.md:133
-#: src\idioms/ctor.md:101
 #: src\idioms/default.md:58
 #: src\idioms/deref.md:76
 #: src\idioms/dtor-finally.md:88
@@ -674,7 +670,6 @@ msgstr ""
 #: src\idioms/ffi/accepting-strings.md:68
 #: src\idioms/ffi/passing-strings.md:68
 #: src\idioms/pass-var-to-closure.md:48
-#: src\idioms/rustdoc-init.md:77
 #: src\idioms/temporary-mutability.md:38
 #: src\idioms/return-consumed-arg-on-error.md:55
 #: src\patterns/behavioural/newtype.md:66
@@ -707,7 +702,6 @@ msgstr ""
 #: src\idioms/ffi/accepting-strings.md:141
 #: src\idioms/ffi/passing-strings.md:103
 #: src\idioms/pass-var-to-closure.md:57
-#: src\idioms/rustdoc-init.md:81
 #: src\idioms/temporary-mutability.md:42
 #: src\idioms/return-consumed-arg-on-error.md:59
 #: src\patterns/behavioural/newtype.md:77
@@ -733,145 +727,144 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ctor.md:1
-msgid "# Constructors"
+msgid "# Constructors\r"
+msgstr ""
+
+#: src\idioms/ctor.md:3
+#: src\idioms/rustdoc-init.md:3
+msgid "## Description\r"
 msgstr ""
 
 #: src\idioms/ctor.md:5
 msgid ""
-"Rust does not have constructors as a language construct. Instead, the\n"
+"Rust does not have constructors as a language construct. Instead, the\r\n"
 "convention is to use an [associated function][associated function] `new` to "
 "create an object:"
 msgstr ""
 
 #: src\idioms/ctor.md:8
 msgid ""
-"````rust\n"
-"/// Time in seconds.\n"
-"///\n"
-"/// # Example\n"
-"///\n"
-"/// ```\n"
-"/// let s = Second::new(42);\n"
-"/// assert_eq!(42, s.value());\n"
-"/// ```\n"
-"pub struct Second {\n"
-"    value: u64\n"
-"}\n"
-"\n"
-"impl Second {\n"
-"    // Constructs a new instance of [`Second`].\n"
-"    // Note this is an associated function - no self.\n"
-"    pub fn new(value: u64) -> Self {\n"
-"        Self { value }\n"
-"    }\n"
-"\n"
-"    /// Returns the value in seconds.\n"
-"    pub fn value(&self) -> u64 {\n"
-"        self.value\n"
-"    }\n"
-"}\n"
-"````"
+"```rust\r\n"
+"/// Time in seconds.\r\n"
+"///\r\n"
+"/// # Example\r\n"
+"/// let s = Second::new(42);\r\n"
+"/// assert_eq!(42, s.value());\r\n"
+"\r\n"
+"pub struct Second {\r\n"
+"    value: u64\r\n"
+"}\r\n"
+"\r\n"
+"impl Second {\r\n"
+"    // Constructs a new instance of [`Second`].\r\n"
+"    // Note this is an associated function - no self.\r\n"
+"    pub fn new(value: u64) -> Self {\r\n"
+"        Self { value }\r\n"
+"    }\r\n"
+"\r\n"
+"    /// Returns the value in seconds.\r\n"
+"    pub fn value(&self) -> u64 {\r\n"
+"        self.value\r\n"
+"    }\r\n"
+"}\r\n"
+"```"
+msgstr ""
+
+#: src\idioms/ctor.md:33
+msgid "## Default Constructors\r"
 msgstr ""
 
 #: src\idioms/ctor.md:35
-msgid "## Default Constructors"
-msgstr ""
-
-#: src\idioms/ctor.md:37
 msgid ""
 "Rust supports default constructors with the [`Default`][std-default] trait:"
 msgstr ""
 
-#: src\idioms/ctor.md:39
+#: src\idioms/ctor.md:37
 msgid ""
-"````rust\n"
-"/// Time in seconds.\n"
-"///\n"
-"/// # Example\n"
-"///\n"
-"/// ```\n"
-"/// let s = Second::default();\n"
-"/// assert_eq!(0, s.value());\n"
-"/// ```\n"
-"pub struct Second {\n"
-"    value: u64\n"
-"}\n"
-"\n"
-"impl Second {\n"
-"    /// Returns the value in seconds.\n"
-"    pub fn value(&self) -> u64 {\n"
-"        self.value\n"
-"    }\n"
-"}\n"
-"\n"
-"impl Default for Second {\n"
-"    fn default() -> Self {\n"
-"        Self { value: 0 }\n"
-"    }\n"
-"}\n"
-"````"
+"```rust\r\n"
+"/// Time in seconds.\r\n"
+"///\r\n"
+"/// # Example\r\n"
+"///\r\n"
+"/// let s = Second::default();\r\n"
+"/// assert_eq!(0, s.value());\r\n"
+"pub struct Second {\r\n"
+"    value: u64\r\n"
+"}\r\n"
+"\r\n"
+"impl Second {\r\n"
+"    /// Returns the value in seconds.\r\n"
+"    pub fn value(&self) -> u64 {\r\n"
+"        self.value\r\n"
+"    }\r\n"
+"}\r\n"
+"\r\n"
+"impl Default for Second {\r\n"
+"    fn default() -> Self {\r\n"
+"        Self { value: 0 }\r\n"
+"    }\r\n"
+"}\r\n"
+"```"
 msgstr ""
 
-#: src\idioms/ctor.md:66
+#: src\idioms/ctor.md:62
 msgid ""
 "`Default` can also be derived if all types of all fields implement "
-"`Default`,\n"
+"`Default`,\r\n"
 "like they do with `Second`:"
 msgstr ""
 
-#: src\idioms/ctor.md:69
+#: src\idioms/ctor.md:65
 msgid ""
-"````rust\n"
-"/// Time in seconds.\n"
-"///\n"
-"/// # Example\n"
-"///\n"
-"/// ```\n"
-"/// let s = Second::default();\n"
-"/// assert_eq!(0, s.value());\n"
-"/// ```\n"
-"#[derive(Default)]\n"
-"pub struct Second {\n"
-"    value: u64\n"
-"}\n"
-"\n"
-"impl Second {\n"
-"    /// Returns the value in seconds.\n"
-"    pub fn value(&self) -> u64 {\n"
-"        self.value\n"
-"    }\n"
-"}\n"
-"````"
+"```rust\r\n"
+"#[derive(Default)]\r\n"
+"pub struct Second {\r\n"
+"    value: u64\r\n"
+"}\r\n"
+"\r\n"
+"impl Second {\r\n"
+"    /// Returns the value in seconds.\r\n"
+"    pub fn value(&self) -> u64 {\r\n"
+"        self.value\r\n"
+"    }\r\n"
+"}\r\n"
+"```"
+msgstr ""
+
+#: src\idioms/ctor.md:79
+msgid ""
+"**Note:** It is common and expected for types to implement both\r\n"
+"`Default` and an empty `new` constructor. `new` is the constructor\r\n"
+"convention in Rust, and users expect it to exist, so if it is\r\n"
+"reasonable for the basic constructor to take no arguments, then it\r\n"
+"should, even if it is functionally identical to default."
+msgstr ""
+
+#: src\idioms/ctor.md:85
+msgid ""
+"**Hint:** The advantage of implementing or deriving `Default` is that your "
+"type\r\n"
+"can now be used where a `Default` implementation is required, most "
+"prominently,\r\n"
+"any of the [`*or_default` functions in the standard library][std-or-default]."
+msgstr ""
+
+#: src\idioms/ctor.md:89
+msgid "## See also\r"
 msgstr ""
 
 #: src\idioms/ctor.md:91
 msgid ""
-"**Note:** It is common and expected for types to implement both\n"
-"`Default` and an empty `new` constructor. `new` is the constructor\n"
-"convention in Rust, and users expect it to exist, so if it is\n"
-"reasonable for the basic constructor to take no arguments, then it\n"
-"should, even if it is functionally identical to default."
-msgstr ""
-
-#: src\idioms/ctor.md:97
-msgid ""
-"**Hint:** The advantage of implementing or deriving `Default` is that your "
-"type\n"
-"can now be used where a `Default` implementation is required, most "
-"prominently,\n"
-"any of the [`*or_default` functions in the standard library][std-or-default]."
-msgstr ""
-
-#: src\idioms/ctor.md:103
-msgid ""
-"- The [default idiom](default.md) for a more in-depth description of the\n"
-"  `Default` trait.\n"
-"\n"
-"- The [builder pattern](../patterns/creational/builder.md) for constructing\n"
-"  objects where there are multiple configurations.\n"
-"\n"
-"- [API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS] for\n"
-"  implementing both, `Default` and `new`."
+"- The [default idiom](default.md) for a more in-depth description of the\r\n"
+"  `Default` trait.\r\n"
+"\r\n"
+"- The [builder pattern](../patterns/creational/builder.md) for "
+"constructing\r\n"
+"  objects where there are multiple configurations.\r\n"
+"\r\n"
+"- [API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS] for\r\n"
+"  implementing both, `Default` and `new`.\r\n"
+"\r"
 msgstr ""
 
 #: src\idioms/default.md:1
@@ -1007,7 +1000,6 @@ msgstr ""
 #: src\idioms/on-stack-dyn-dispatch.md:37
 #: src\idioms/ffi/accepting-strings.md:12
 #: src\idioms/ffi/passing-strings.md:14
-#: src\idioms/rustdoc-init.md:9
 #: src\idioms/return-consumed-arg-on-error.md:43
 #: src\patterns/behavioural/command.md:8
 #: src\patterns/behavioural/interpreter.md:16
@@ -1057,7 +1049,6 @@ msgstr ""
 #: src\idioms/mem-replace.md:97
 #: src\idioms/on-stack-dyn-dispatch.md:68
 #: src\idioms/priv-extend.md:85
-#: src\idioms/rustdoc-init.md:87
 #: src\patterns/behavioural/command.md:203
 #: src\patterns/behavioural/interpreter.md:103
 #: src\patterns/behavioural/newtype.md:85
@@ -2434,22 +2425,26 @@ msgid ""
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:1
-msgid "# Easy doc initialization"
+msgid "# Easy doc initialization\r"
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:5
 msgid ""
 "If a struct takes significant effort to initialize when writing docs, it can "
-"be\n"
+"be\r\n"
 "quicker to wrap your example with a helper function which takes the struct "
-"as an\n"
+"as an\r\n"
 "argument."
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:9
+msgid "## Motivation\r"
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:11
 msgid ""
 "Sometimes there is a struct with multiple or complicated parameters and "
-"several\n"
+"several\r\n"
 "methods. Each of these methods should have examples."
 msgstr ""
 
@@ -2459,103 +2454,117 @@ msgstr ""
 
 #: src\idioms/rustdoc-init.md:16
 msgid ""
-"````rust,ignore\n"
-"struct Connection {\n"
-"    name: String,\n"
-"    stream: TcpStream,\n"
-"}\n"
-"\n"
-"impl Connection {\n"
-"    /// Sends a request over the connection.\n"
-"    ///\n"
-"    /// # Example\n"
-"    /// ```no_run\n"
-"    /// # // Boilerplate are required to get an example working.\n"
-"    /// # let stream = TcpStream::connect(\"127.0.0.1:34254\");\n"
-"    /// # let connection = Connection { name: \"foo\".to_owned(), stream };\n"
+"```rust,ignore\r\n"
+"struct Connection {\r\n"
+"    name: String,\r\n"
+"    stream: TcpStream,\r\n"
+"}\r\n"
+"\r\n"
+"impl Connection {\r\n"
+"    /// Sends a request over the connection.\r\n"
+"    ///\r\n"
+"    /// # Example\r\n"
+"    /// # Boilerplate are required to get an example working.\r\n"
+"    /// # let stream = TcpStream::connect(\"127.0.0.1:34254\");\r\n"
+"    /// # let connection = Connection { name: \"foo\".to_owned(), stream "
+"};\r\n"
 "    /// # let request = Request::new(\"RequestId\", RequestType::Get, "
-"\"payload\");\n"
-"    /// let response = connection.send_request(request);\n"
-"    /// assert!(response.is_ok());\n"
-"    /// ```\n"
-"    fn send_request(&self, request: Request) -> Result<Status, SendErr> {\n"
-"        // ...\n"
-"    }\n"
-"\n"
-"    /// Oh no, all that boilerplate needs to be repeated here!\n"
-"    fn check_status(&self) -> Status {\n"
-"        // ...\n"
-"    }\n"
-"}\n"
-"````"
+"\"payload\");\r\n"
+"    /// let response = connection.send_request(request);\r\n"
+"    /// assert!(response.is_ok());\r\n"
+"    fn send_request(&self, request: Request) -> Result<Status, SendErr> {\r\n"
+"        // ...\r\n"
+"    }\r\n"
+"\r\n"
+"    /// Oh no, all that boilerplate needs to be repeated here!\r\n"
+"    fn check_status(&self) -> Status {\r\n"
+"        // ...\r\n"
+"    }\r\n"
+"}\r\n"
+"```"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:47
+#: src\idioms/rustdoc-init.md:43
+msgid "## Example\r"
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:45
 msgid ""
-"Instead of typing all of this boilerplate to create a `Connection` and\n"
+"Instead of typing all of this boilerplate to create a `Connection` and\r\n"
 "`Request`, it is easier to just create a wrapping helper function which "
-"takes\n"
+"takes\r\n"
 "them as arguments:"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:51
+#: src\idioms/rustdoc-init.md:49
 msgid ""
-"````rust,ignore\n"
-"struct Connection {\n"
-"    name: String,\n"
-"    stream: TcpStream,\n"
-"}\n"
-"\n"
-"impl Connection {\n"
-"    /// Sends a request over the connection.\n"
-"    ///\n"
-"    /// # Example\n"
-"    /// ```\n"
-"    /// # fn call_send(connection: Connection, request: Request) {\n"
-"    /// let response = connection.send_request(request);\n"
-"    /// assert!(response.is_ok());\n"
-"    /// # }\n"
-"    /// ```\n"
-"    fn send_request(&self, request: Request) {\n"
-"        // ...\n"
-"    }\n"
-"}\n"
-"````"
+"```rust,ignore\r\n"
+"struct Connection {\r\n"
+"    name: String,\r\n"
+"    stream: TcpStream,\r\n"
+"}\r\n"
+"\r\n"
+"impl Connection {\r\n"
+"    /// Sends a request over the connection.\r\n"
+"    ///\r\n"
+"    /// # Example\r\n"
+"    /// # fn call_send(connection: Connection, request: Request) {\r\n"
+"    /// let response = connection.send_request(request);\r\n"
+"    /// assert!(response.is_ok());\r\n"
+"    /// # }\r\n"
+"    fn send_request(&self, request: Request) {\r\n"
+"        // ...\r\n"
+"    }\r\n"
+"}\r\n"
+"```"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:73
+#: src\idioms/rustdoc-init.md:69
 msgid ""
 "**Note** in the above example the line `assert!(response.is_ok());` will "
-"not\n"
-"actually run while testing because it is inside a function which is never\n"
+"not\r\n"
+"actually run while testing because it is inside a function which is never\r\n"
 "invoked."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:79
+#: src\idioms/rustdoc-init.md:73
+msgid "## Advantages\r"
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:75
 msgid "This is much more concise and avoids repetitive code in examples."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:83
+#: src\idioms/rustdoc-init.md:77
+msgid "## Disadvantages\r"
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:79
 msgid ""
 "As example is in a function, the code will not be tested. Though it will "
-"still be\n"
+"still be\r\n"
 "checked to make sure it compiles when running a `cargo test`. So this "
-"pattern is\n"
+"pattern is\r\n"
 "most useful when you need `no_run`. With this, you do not need to add "
 "`no_run`."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:89
+#: src\idioms/rustdoc-init.md:83
+msgid "## Discussion\r"
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:85
 msgid "If assertions are not required this pattern works well."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:91
+#: src\idioms/rustdoc-init.md:87
 msgid ""
 "If they are, an alternative can be to create a public method to create a "
-"helper\n"
+"helper\r\n"
 "instance which is annotated with `#[doc(hidden)]` (so that users won't see "
-"it).\n"
-"Then this method can be called inside of rustdoc because it is part of the\n"
+"it).\r\n"
+"Then this method can be called inside of rustdoc because it is part of "
+"the\r\n"
 "crate's public API."
 msgstr ""
 
