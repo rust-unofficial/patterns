@@ -744,13 +744,15 @@ msgstr ""
 
 #: src\idioms/ctor.md:8
 msgid ""
-"```rust\r\n"
+"````rust\r\n"
 "/// Time in seconds.\r\n"
 "///\r\n"
 "/// # Example\r\n"
+"///\r\n"
+"/// ```\r\n"
 "/// let s = Second::new(42);\r\n"
 "/// assert_eq!(42, s.value());\r\n"
-"\r\n"
+"/// ```\r\n"
 "pub struct Second {\r\n"
 "    value: u64\r\n"
 "}\r\n"
@@ -767,27 +769,29 @@ msgid ""
 "        self.value\r\n"
 "    }\r\n"
 "}\r\n"
-"```"
-msgstr ""
-
-#: src\idioms/ctor.md:33
-msgid "## Default Constructors\r"
+"````"
 msgstr ""
 
 #: src\idioms/ctor.md:35
-msgid ""
-"Rust supports default constructors with the [`Default`][std-default] trait:"
+msgid "## Default Constructors\r"
 msgstr ""
 
 #: src\idioms/ctor.md:37
 msgid ""
-"```rust\r\n"
+"Rust supports default constructors with the [`Default`][std-default] trait:"
+msgstr ""
+
+#: src\idioms/ctor.md:39
+msgid ""
+"````rust\r\n"
 "/// Time in seconds.\r\n"
 "///\r\n"
 "/// # Example\r\n"
 "///\r\n"
+"/// ```\r\n"
 "/// let s = Second::default();\r\n"
 "/// assert_eq!(0, s.value());\r\n"
+"/// ```\r\n"
 "pub struct Second {\r\n"
 "    value: u64\r\n"
 "}\r\n"
@@ -804,19 +808,27 @@ msgid ""
 "        Self { value: 0 }\r\n"
 "    }\r\n"
 "}\r\n"
-"```"
+"````"
 msgstr ""
 
-#: src\idioms/ctor.md:62
+#: src\idioms/ctor.md:66
 msgid ""
 "`Default` can also be derived if all types of all fields implement "
 "`Default`,\r\n"
 "like they do with `Second`:"
 msgstr ""
 
-#: src\idioms/ctor.md:65
+#: src\idioms/ctor.md:69
 msgid ""
-"```rust\r\n"
+"````rust\r\n"
+"/// Time in seconds.\r\n"
+"///\r\n"
+"/// # Example\r\n"
+"///\r\n"
+"/// ```\r\n"
+"/// let s = Second::default();\r\n"
+"/// assert_eq!(0, s.value());\r\n"
+"/// ```\r\n"
 "#[derive(Default)]\r\n"
 "pub struct Second {\r\n"
 "    value: u64\r\n"
@@ -828,10 +840,10 @@ msgid ""
 "        self.value\r\n"
 "    }\r\n"
 "}\r\n"
-"```"
+"````"
 msgstr ""
 
-#: src\idioms/ctor.md:79
+#: src\idioms/ctor.md:91
 msgid ""
 "**Note:** It is common and expected for types to implement both\r\n"
 "`Default` and an empty `new` constructor. `new` is the constructor\r\n"
@@ -840,7 +852,7 @@ msgid ""
 "should, even if it is functionally identical to default."
 msgstr ""
 
-#: src\idioms/ctor.md:85
+#: src\idioms/ctor.md:97
 msgid ""
 "**Hint:** The advantage of implementing or deriving `Default` is that your "
 "type\r\n"
@@ -849,11 +861,11 @@ msgid ""
 "any of the [`*or_default` functions in the standard library][std-or-default]."
 msgstr ""
 
-#: src\idioms/ctor.md:89
+#: src\idioms/ctor.md:101
 msgid "## See also\r"
 msgstr ""
 
-#: src\idioms/ctor.md:91
+#: src\idioms/ctor.md:103
 msgid ""
 "- The [default idiom](default.md) for a more in-depth description of the\r\n"
 "  `Default` trait.\r\n"
@@ -2454,7 +2466,7 @@ msgstr ""
 
 #: src\idioms/rustdoc-init.md:16
 msgid ""
-"```rust,ignore\r\n"
+"````rust,ignore\r\n"
 "struct Connection {\r\n"
 "    name: String,\r\n"
 "    stream: TcpStream,\r\n"
@@ -2464,7 +2476,8 @@ msgid ""
 "    /// Sends a request over the connection.\r\n"
 "    ///\r\n"
 "    /// # Example\r\n"
-"    /// # Boilerplate are required to get an example working.\r\n"
+"    /// ```no_run\r\n"
+"    /// # // Boilerplate are required to get an example working.\r\n"
 "    /// # let stream = TcpStream::connect(\"127.0.0.1:34254\");\r\n"
 "    /// # let connection = Connection { name: \"foo\".to_owned(), stream "
 "};\r\n"
@@ -2472,6 +2485,7 @@ msgid ""
 "\"payload\");\r\n"
 "    /// let response = connection.send_request(request);\r\n"
 "    /// assert!(response.is_ok());\r\n"
+"    /// ```\r\n"
 "    fn send_request(&self, request: Request) -> Result<Status, SendErr> {\r\n"
 "        // ...\r\n"
 "    }\r\n"
@@ -2481,14 +2495,14 @@ msgid ""
 "        // ...\r\n"
 "    }\r\n"
 "}\r\n"
-"```"
-msgstr ""
-
-#: src\idioms/rustdoc-init.md:43
-msgid "## Example\r"
+"````"
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:45
+msgid "## Example\r"
+msgstr ""
+
+#: src\idioms/rustdoc-init.md:47
 msgid ""
 "Instead of typing all of this boilerplate to create a `Connection` and\r\n"
 "`Request`, it is easier to just create a wrapping helper function which "
@@ -2496,9 +2510,9 @@ msgid ""
 "them as arguments:"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:49
+#: src\idioms/rustdoc-init.md:51
 msgid ""
-"```rust,ignore\r\n"
+"````rust,ignore\r\n"
 "struct Connection {\r\n"
 "    name: String,\r\n"
 "    stream: TcpStream,\r\n"
@@ -2508,18 +2522,20 @@ msgid ""
 "    /// Sends a request over the connection.\r\n"
 "    ///\r\n"
 "    /// # Example\r\n"
+"    /// ```\r\n"
 "    /// # fn call_send(connection: Connection, request: Request) {\r\n"
 "    /// let response = connection.send_request(request);\r\n"
 "    /// assert!(response.is_ok());\r\n"
 "    /// # }\r\n"
+"    /// ```\r\n"
 "    fn send_request(&self, request: Request) {\r\n"
 "        // ...\r\n"
 "    }\r\n"
 "}\r\n"
-"```"
+"````"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:69
+#: src\idioms/rustdoc-init.md:73
 msgid ""
 "**Note** in the above example the line `assert!(response.is_ok());` will "
 "not\r\n"
@@ -2527,19 +2543,19 @@ msgid ""
 "invoked."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:73
+#: src\idioms/rustdoc-init.md:77
 msgid "## Advantages\r"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:75
+#: src\idioms/rustdoc-init.md:79
 msgid "This is much more concise and avoids repetitive code in examples."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:77
+#: src\idioms/rustdoc-init.md:81
 msgid "## Disadvantages\r"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:79
+#: src\idioms/rustdoc-init.md:83
 msgid ""
 "As example is in a function, the code will not be tested. Though it will "
 "still be\r\n"
@@ -2549,15 +2565,15 @@ msgid ""
 "`no_run`."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:83
+#: src\idioms/rustdoc-init.md:87
 msgid "## Discussion\r"
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:85
+#: src\idioms/rustdoc-init.md:89
 msgid "If assertions are not required this pattern works well."
 msgstr ""
 
-#: src\idioms/rustdoc-init.md:87
+#: src\idioms/rustdoc-init.md:91
 msgid ""
 "If they are, an alternative can be to create a public method to create a "
 "helper\r\n"
