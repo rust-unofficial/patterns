@@ -1,4 +1,4 @@
-name: Markdown linting
+name: Lint Markdown style
 
 on:
   push:
