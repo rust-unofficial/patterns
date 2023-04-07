@@ -75,5 +75,5 @@ without compromising the compatibility with existing code uses of it.
 ## See also
 
 Blog post from
-[Predrag](https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/)
+[Predrag](https://web.archive.org/web/20230406211349/https://predr.ag/blog/definitive-guide-to-sealed-traits-in-rust/)
 about sealed, private and other pattern for traits.
