@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 00:44+0200\n"
+"PO-Revision-Date: 2023-04-09 01:55+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -3538,7 +3538,6 @@ msgstr ""
 "(auch bekannt als Drachenbuch)."
 
 #: src\patterns/behavioural/interpreter.md:47
-#, fuzzy
 msgid "## Solution"
 msgstr "## Lösung"
 
@@ -4935,7 +4934,6 @@ msgstr ""
 "das Alte."
 
 #: src\patterns/structural/intro.md:1
-#, fuzzy
 msgid "# Structural Patterns"
 msgstr "# Strukturelle Muster"
 
@@ -5070,12 +5068,10 @@ msgid "Lets you work around limitations in the borrow checker."
 msgstr "Ermöglicht das Umgehen von Einschränkungen in der Ausleihprüfung."
 
 #: src\patterns/structural/compose-structs.md:79
-#, fuzzy
 msgid "Often produces a better design."
 msgstr "Erzeugt oft ein besseres Design."
 
 #: src\patterns/structural/compose-structs.md:83
-#, fuzzy
 msgid "Leads to more verbose code."
 msgstr "Führt zu ausführlicherem Code."
 
@@ -5117,14 +5113,12 @@ msgstr ""
 "leihen Sie das gesamte `a`, was dieses Muster unbrauchbar machen würde."
 
 #: src\patterns/structural/small-crates.md:1
-#, fuzzy
 msgid "# Prefer small crates"
-msgstr "# Bevorzugen Sie kleine Kisten"
+msgstr "# Bevorzugen Sie kleine Pakete"
 
 #: src\patterns/structural/small-crates.md:5
-#, fuzzy
 msgid "Prefer small crates that do one thing well."
-msgstr "Bevorzugen Sie kleine Kisten, die eine Sache gut machen."
+msgstr "Bevorzugen Sie kleine Pakete, die eine Sache und diese gut machen."
 
 #: src\patterns/structural/small-crates.md:7
 #, fuzzy
@@ -5214,9 +5208,8 @@ msgid "- [crates.io: The Rust community crate host](https://crates.io/)"
 msgstr "- [crates.io: Der Crate-Host der Rust-Community](https://crates.io/)"
 
 #: src\patterns/structural/unsafe-mods.md:1
-#, fuzzy
 msgid "# Contain unsafety in small modules"
-msgstr "# Unsicherheit in kleinen Modulen enthalten"
+msgstr "# Unsicherheit in kleinen Modulen isolieren"
 
 #: src\patterns/structural/unsafe-mods.md:5
 #, fuzzy
@@ -5278,7 +5271,6 @@ msgid "- [Ralf Jung's Blog about invariants in unsafe code](https://www.ralfj.de
 msgstr "- [Ralf Jungs Blog über Invarianten in unsicherem Code](https://www.ralfj.de/blog/2018/08/22/two-kinds-of-invariants.html)"
 
 #: src\patterns/ffi/intro.md:1
-#, fuzzy
 msgid "# FFI Patterns"
 msgstr "# FFI-Muster"
 
@@ -5314,7 +5306,6 @@ msgstr ""
 "   zusammen zu einem undurchsichtigen \"Objekt\""
 
 #: src\patterns/ffi/export.md:1
-#, fuzzy
 msgid "# Object-Based APIs"
 msgstr "# Objektbasierte APIs"
 
@@ -6035,17 +6026,14 @@ msgstr ""
 "und manuell verwalten."
 
 #: src\patterns/ffi/wrappers.md:85
-#, fuzzy
 msgid "Suffice it to say, this is _incredibly_ difficult."
 msgstr "Es genügt zu sagen, dass dies _unglaublich_ schwierig ist."
 
 #: src\patterns/ffi/wrappers.md:87
-#, fuzzy
 msgid "Here is an illustration of just _one_ pitfall."
-msgstr "Hier ist eine Illustration von nur _einem_ Fallstrick."
+msgstr "Hier ist eine Illustration von nur _einem_ tückischen Problem."
 
 #: src\patterns/ffi/wrappers.md:89
-#, fuzzy
 msgid "A first version of `MySetWrapper` would look like this:"
 msgstr "Eine erste Version von `MySetWrapper` würde so aussehen:"
 
@@ -6086,7 +6074,6 @@ msgstr ""
 "Bibliotheken erwarten es."
 
 #: src\patterns/ffi/wrappers.md:109
-#, fuzzy
 msgid "A simple implementation of `myset_store` would be:"
 msgstr "Eine einfache Implementierung von `myset_store` wäre:"
 
@@ -6189,7 +6176,6 @@ msgstr ""
 "Diese Beobachtungen können _jederzeit erfolgen, nachdem_ die veränderliche Referenz erstellt wurde."
 
 #: src\anti_patterns/index.md:1
-#, fuzzy
 msgid "# Anti-patterns"
 msgstr "# Anti-Muster"
 
@@ -6363,9 +6349,8 @@ msgstr ""
 "- [Tricks mit Eigentum in Rust](https://web.archive.org/web/20210120233744/https://xion.io/post/code/rust-borrowchk-tricks.html)"
 
 #: src\anti_patterns/deny-warnings.md:1
-#, fuzzy
 msgid "# `#![deny(warnings)]`"
-msgstr "# `#![verweigern(Warnungen)]`"
+msgstr ""
 
 #: src\anti_patterns/deny-warnings.md:5
 #, fuzzy
@@ -6391,7 +6376,6 @@ msgid "It is short and will stop the build if anything is amiss."
 msgstr "Es ist kurz und stoppt den Build, wenn etwas nicht stimmt."
 
 #: src\anti_patterns/deny-warnings.md:20
-#, fuzzy
 msgid "## Drawbacks"
 msgstr "## Nachteile"
 
@@ -6449,7 +6433,6 @@ msgstr ""
 "Flusenfehler in Warnungen umwandeln."
 
 #: src\anti_patterns/deny-warnings.md:42 src\functional/generics-type-classes.md:227
-#, fuzzy
 msgid "## Alternatives"
 msgstr "## Alternativen"
 
@@ -6470,9 +6453,8 @@ msgid "The following command line will build with all warnings set to `deny`:"
 msgstr "Die folgende Befehlszeile wird erstellt, wobei alle Warnungen auf „deny“ gesetzt sind:"
 
 #: src\anti_patterns/deny-warnings.md:50
-#, fuzzy
 msgid "`RUSTFLAGS=\"-D warnings\" cargo build`"
-msgstr "`RUSTFLAGS=\"-D warnings\" Frachtaufbau`"
+msgstr ""
 
 #: src\anti_patterns/deny-warnings.md:52
 #, fuzzy
@@ -6565,7 +6547,6 @@ msgstr ""
 "- [rust-clippy] ist eine Sammlung von Lints für besseren Rust-Code"
 
 #: src\anti_patterns/deref.md:1
-#, fuzzy
 msgid "# `Deref` polymorphism"
 msgstr "# `Deref`-Polymorphismus"
 
@@ -6672,9 +6653,8 @@ msgstr ""
 "sowie \"Bar\"."
 
 #: src\anti_patterns/deref.md:71
-#, fuzzy
 msgid "You save a little boilerplate, e.g.,"
-msgstr "Sie sparen sich eine kleine Vorlage, z."
+msgstr "Sie sparen sich etwas von einem wiederkehrenden Textbaustein, z.B."
 
 #: src\anti_patterns/deref.md:73
 msgid ""
@@ -6827,7 +6807,6 @@ msgstr ""
 "> zwingende Anweisungen, die den Zustand des Programms ändern."
 
 #: src\functional/paradigms.md:1
-#, fuzzy
 msgid "# Programming paradigms"
 msgstr "# Programmierparadigmen"
 
@@ -6845,7 +6824,6 @@ msgstr ""
 "**was zu tun ist. Lassen Sie uns die Zahlen von 1 bis 10 summieren, um dies zu zeigen."
 
 #: src\functional/paradigms.md:8
-#, fuzzy
 msgid "## Imperative"
 msgstr "## Imperativ"
 
@@ -6914,7 +6892,6 @@ msgstr ""
 "von Schritten."
 
 #: src\functional/paradigms.md:40
-#, fuzzy
 msgid "## Declarative"
 msgstr "## Deklarativ"
 
@@ -7209,7 +7186,6 @@ msgstr ""
 "um die API aufzuteilen."
 
 #: src\functional/generics-type-classes.md:107
-#, fuzzy
 msgid "Here is what that looks like:"
 msgstr "So sieht das aus:"
 
@@ -7386,7 +7362,6 @@ msgstr ""
 "  stattdessen."
 
 #: src\functional/generics-type-classes.md:239
-#, fuzzy
 msgid "This pattern is used throughout the standard library:"
 msgstr "Dieses Muster wird in der gesamten Standardbibliothek verwendet:"
 
@@ -7498,7 +7473,6 @@ msgstr ""
 "rust-typestate-series/rust-typestate-index )"
 
 #: src\functional/lenses.md:1
-#, fuzzy
 msgid "# Lenses and Prisms"
 msgstr "# Linsen und Prismen"
 
@@ -7516,9 +7490,8 @@ msgstr ""
 "Sie haben auch Nischenanwendungsfälle."
 
 #: src\functional/lenses.md:8
-#, fuzzy
 msgid "## Lenses: Uniform Access Across Types"
-msgstr "## Lenses: Einheitlicher Zugriff auf alle Typen"
+msgstr "## Linsen: Einheitlicher Zugriff auf alle Typen"
 
 #: src\functional/lenses.md:10
 #, fuzzy
@@ -7558,7 +7531,6 @@ msgid ""
 msgstr ""
 
 #: src\functional/lenses.md:28
-#, fuzzy
 msgid "Another one contains the account information:"
 msgstr "Eine andere enthält die Kontoinformationen:"
 
@@ -7767,7 +7739,6 @@ msgstr ""
 "Hier zeigt sich das Konzept in Rust deutlicher."
 
 #: src\functional/lenses.md:169
-#, fuzzy
 msgid "## Prisms: A Higher-Order form of \"Optics\""
 msgstr "## Prismen: Eine Form der \"Optik\" höherer Ordnung"
 
@@ -8049,7 +8020,6 @@ msgstr ""
 "Merkmal namens `Deserialize`."
 
 #: src\functional/lenses.md:304
-#, fuzzy
 msgid "It is defined this way:"
 msgstr "Es ist so definiert:"
 
@@ -8233,7 +8203,6 @@ msgid "## Books (Online)"
 msgstr "## Bücher (Online)"
 
 #: src\additional_resources/index.md:16
-#, fuzzy
 msgid "- [The Rust API Guidelines](https://rust-lang.github.io/api-guidelines)"
 msgstr "- [Die Rust-API-Richtlinien](https://rust-lang.github.io/api-guidelines)"
 
@@ -8242,7 +8211,6 @@ msgid "# Design principles"
 msgstr "# Design-Prinzipien"
 
 #: src\additional_resources/design-principles.md:3
-#, fuzzy
 msgid "## A brief overview over common design principles"
 msgstr "## Ein kurzer Überblick über gängige Gestaltungsprinzipien"
 
