@@ -29,6 +29,7 @@
     - [Interpreter](./patterns/behavioural/interpreter.md)
     - [Newtype](./patterns/behavioural/newtype.md)
     - [RAII Guards](./patterns/behavioural/RAII.md)
+    - [Sealed Trait](./patterns/behavioural/sealed.md)
     - [Strategy](./patterns/behavioural/strategy.md)
     - [Visitor](./patterns/behavioural/visitor.md)
   - [Creational](./patterns/creational/intro.md)
