@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 00:32+0200\n"
+"PO-Revision-Date: 2023-04-09 00:44+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -129,7 +129,6 @@ msgid "RAII Guards"
 msgstr "RAII-Wachen"
 
 #: src\SUMMARY.md:31
-#, fuzzy
 msgid "Strategy"
 msgstr "Strategie"
 
@@ -154,7 +153,6 @@ msgid "Fold"
 msgstr "Falten"
 
 #: src\SUMMARY.md:36
-#, fuzzy
 msgid "Structural"
 msgstr "Strukturell"
 
@@ -1112,7 +1110,6 @@ msgstr ""
 #: src\patterns/behavioural/newtype.md:85 src\patterns/behavioural/RAII.md:83 src\patterns/behavioural/strategy.md:110
 #: src\patterns/behavioural/visitor.md:79 src\patterns/creational/builder.md:81 src\patterns/creational/fold.md:85
 #: src\patterns/structural/compose-structs.md:89 src\anti_patterns/deref.md:102
-#, fuzzy
 msgid "## Discussion"
 msgstr "## Diskussion"
 
@@ -1685,7 +1682,6 @@ msgstr ""
 "  optionale Referenz."
 
 #: src\idioms/ffi/intro.md:1
-#, fuzzy
 msgid "# FFI Idioms"
 msgstr "# FFI-Idiome"
 
@@ -1723,7 +1719,6 @@ msgstr ""
 "3. [Passing Strings](./passing-strings.md) an FFI-Funktionen"
 
 #: src\idioms/ffi/errors.md:1
-#, fuzzy
 msgid "# Error Handling in FFI"
 msgstr "# Fehlerbehandlung in FFI"
 
@@ -1762,12 +1757,10 @@ msgstr ""
 
 #: src\idioms/ffi/errors.md:17 src\idioms/ffi/accepting-strings.md:29 src\idioms/ffi/passing-strings.md:26 src\patterns/ffi/export.md:40
 #: src\patterns/ffi/wrappers.md:23
-#, fuzzy
 msgid "## Code Example"
 msgstr "## Codebeispiel"
 
 #: src\idioms/ffi/errors.md:19
-#, fuzzy
 msgid "### Flat Enums"
 msgstr "### Flache Aufzählungen"
 
@@ -1789,7 +1782,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ffi/errors.md:35
-#, fuzzy
 msgid "### Structured Enums"
 msgstr "### Strukturierte Aufzählungen"
 
@@ -1864,7 +1856,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ffi/errors.md:104
-#, fuzzy
 msgid "### Custom Error Types"
 msgstr "### Benutzerdefinierte Fehlertypen"
 
@@ -1915,9 +1906,8 @@ msgstr ""
 "zu C."
 
 #: src\idioms/ffi/accepting-strings.md:1
-#, fuzzy
 msgid "# Accepting Strings"
-msgstr "# Strings akzeptieren"
+msgstr "# Akzeptieren von Zeichenketten"
 
 #: src\idioms/ffi/accepting-strings.md:5
 #, fuzzy
@@ -2020,7 +2010,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ffi/accepting-strings.md:70
-#, fuzzy
 msgid "The example is is written to ensure that:"
 msgstr "Das Beispiel wurde geschrieben, um sicherzustellen, dass:"
 
@@ -2141,14 +2130,12 @@ msgstr ""
 "komplett abstürzen."
 
 #: src\idioms/ffi/accepting-strings.md:143 src\idioms/ffi/passing-strings.md:105
-#, fuzzy
 msgid "None?"
 msgstr "Keiner?"
 
 #: src\idioms/ffi/passing-strings.md:1
-#, fuzzy
 msgid "# Passing Strings"
-msgstr "# Zeichenfolgen übergeben"
+msgstr "# Übergeben von Zeichenketten"
 
 #: src\idioms/ffi/passing-strings.md:5
 #, fuzzy
@@ -2327,7 +2314,6 @@ msgstr ""
 "kann mit generischem Code verwendet werden, der einen solchen Typ benötigt."
 
 #: src\idioms/option-iter.md:9 src\patterns/structural/small-crates.md:34 src\patterns/structural/unsafe-mods.md:22
-#, fuzzy
 msgid "## Examples"
 msgstr "## Beispiele"
 
@@ -2446,14 +2432,12 @@ msgstr ""
 "führen Sie eine andere Transformation durch."
 
 #: src\idioms/pass-var-to-closure.md:10
-#, fuzzy
 msgid "Use variable rebinding in separate scope for that."
 msgstr "Verwenden Sie dafür Variablen-Rebinding in einem separaten Bereich."
 
 #: src\idioms/pass-var-to-closure.md:14
-#, fuzzy
 msgid "Use"
-msgstr "Verwenden"
+msgstr "Verwenden Sie"
 
 #: src\idioms/pass-var-to-closure.md:16
 msgid ""
@@ -2475,7 +2459,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/pass-var-to-closure.md:32
-#, fuzzy
 msgid "instead of"
 msgstr "anstatt"
 
@@ -2522,7 +2505,6 @@ msgid "Additional indentation of closure body."
 msgstr "Zusätzliche Einkerbung des Verschlusskörpers."
 
 #: src\idioms/priv-extend.md:1
-#, fuzzy
 msgid "# `#[non_exhaustive]` and private fields for extensibility"
 msgstr "# `#[non_exhaustive]` und private Felder zur Erweiterung"
 
@@ -2538,7 +2520,6 @@ msgstr ""
 "Kompatibilität."
 
 #: src\idioms/priv-extend.md:9
-#, fuzzy
 msgid "Rust offers two solutions to this problem:"
 msgstr "Rust bietet zwei Lösungen für dieses Problem:"
 
@@ -2600,7 +2581,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/priv-extend.md:57
-#, fuzzy
 msgid "## Alternative: `Private fields` for structs"
 msgstr "## Alternative: `Private Felder` für Strukturen"
 
@@ -2703,7 +2683,6 @@ msgstr ""
 "Werkzeug."
 
 #: src\idioms/priv-extend.md:104
-#, fuzzy
 msgid "### Disadvantages"
 msgstr "### Nachteile"
 
@@ -2742,7 +2721,6 @@ msgstr ""
 "exhaustive.md)"
 
 #: src\idioms/rustdoc-init.md:1
-#, fuzzy
 msgid "# Easy doc initialization\r"
 msgstr "# Einfache Dokumenteninitialisierung\r"
 
@@ -2758,9 +2736,8 @@ msgstr ""
 "Streit."
 
 #: src\idioms/rustdoc-init.md:9
-#, fuzzy
 msgid "## Motivation\r"
-msgstr "##Motivation\r"
+msgstr "## Motivation\r"
 
 #: src\idioms/rustdoc-init.md:11
 #, fuzzy
@@ -2857,7 +2834,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:77
-#, fuzzy
 msgid "## Advantages\r"
 msgstr "## Vorteile\r"
 
@@ -2867,7 +2843,6 @@ msgid "This is much more concise and avoids repetitive code in examples."
 msgstr "Dies ist viel prägnanter und vermeidet sich wiederholenden Code in Beispielen."
 
 #: src\idioms/rustdoc-init.md:81
-#, fuzzy
 msgid "## Disadvantages\r"
 msgstr "## Nachteile\r"
 
@@ -2883,7 +2858,6 @@ msgstr ""
 "am nützlichsten, wenn Sie `no_run` brauchen. Damit brauchen Sie `no_run` nicht hinzuzufügen."
 
 #: src\idioms/rustdoc-init.md:87
-#, fuzzy
 msgid "## Discussion\r"
 msgstr "## Diskussion\r"
 
@@ -2906,7 +2880,6 @@ msgstr ""
 "die öffentliche API von Crate."
 
 #: src\idioms/temporary-mutability.md:1
-#, fuzzy
 msgid "# Temporary mutability"
 msgstr "# Vorübergehende Veränderlichkeit"
 
@@ -2931,12 +2904,10 @@ msgstr ""
 "Die Variable."
 
 #: src\idioms/temporary-mutability.md:14
-#, fuzzy
 msgid "Say, vector must be sorted before usage."
 msgstr "Angenommen, der Vektor muss vor der Verwendung sortiert werden."
 
 #: src\idioms/temporary-mutability.md:16
-#, fuzzy
 msgid "Using nested block:"
 msgstr "Verschachtelten Block verwenden:"
 
@@ -2954,7 +2925,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/temporary-mutability.md:28
-#, fuzzy
 msgid "Using variable rebinding:"
 msgstr "Variables Rebinding verwenden:"
 
@@ -3065,12 +3035,10 @@ msgid "Better performance because of moving arguments whenever possible."
 msgstr "Bessere Leistung durch bewegliche Argumente, wann immer möglich."
 
 #: src\idioms/return-consumed-arg-on-error.md:61
-#, fuzzy
 msgid "Slightly more complex error types."
 msgstr "Etwas komplexere Fehlertypen."
 
 #: src\patterns/index.md:1
-#, fuzzy
 msgid "# Design Patterns"
 msgstr "# Designmuster"
 
@@ -3112,7 +3080,6 @@ msgstr ""
 "ganze Problemklassen. Einige von ihnen sind auch Muster, die für Rust _einzigartig_ sind."
 
 #: src\patterns/index.md:19
-#, fuzzy
 msgid "## YAGNI"
 msgstr "## YAGNI"
 
@@ -3142,7 +3109,6 @@ msgstr ""
 "in Rust, weil wir einfach [traits](https://doc.rust-lang.org/book/traits.html) verwenden können."
 
 #: src\patterns/behavioural/intro.md:1
-#, fuzzy
 msgid "# Behavioural Patterns"
 msgstr "# Verhaltensmuster"
 
@@ -3161,7 +3127,6 @@ msgstr ""
 "> Dadurch erhöhen diese Muster die Flexibilität bei der Durchführung der Kommunikation."
 
 #: src\patterns/behavioural/command.md:1
-#, fuzzy
 msgid "# Command"
 msgstr "# Befehl"
 
@@ -8192,7 +8157,6 @@ msgstr ""
 "Es kann jedoch auch prozedurale Makros benötigen, um Brücken für seine Generika zu erstellen."
 
 #: src\functional/lenses.md:350
-#, fuzzy
 msgid "## See Also"
 msgstr "## Siehe auch"
 
@@ -8237,22 +8201,18 @@ msgstr ""
 "school/to-infinity-and-beyond/pick-of- die-woche/ein-kleines-objektiv-starter-tutorial)"
 
 #: src\additional_resources/index.md:1
-#, fuzzy
 msgid "# Additional resources"
 msgstr "# Zusätzliche Ressourcen"
 
 #: src\additional_resources/index.md:3
-#, fuzzy
 msgid "A collection of complementary helpful content"
 msgstr "Eine Sammlung ergänzender hilfreicher Inhalte"
 
 #: src\additional_resources/index.md:5
-#, fuzzy
 msgid "## Talks"
 msgstr "## Gespräche"
 
 #: src\additional_resources/index.md:7
-#, fuzzy
 msgid ""
 "- [Design Patterns in Rust](https://www.youtube.com/watch?v=Pm_oO0N5B9k) by\n"
 "  Nicholas Cameron at the PDRust (2016)\n"
@@ -8261,15 +8221,14 @@ msgid ""
 "- [Rust Programming Techniques](https://www.youtube.com/watch?v=vqavdUGKeb4) by\n"
 "  Nicholas Cameron at LinuxConfAu (2018)"
 msgstr ""
-"- [Designmuster in Rost](https://www.youtube.com/watch?v=Pm_oO0N5B9k) von\n"
+"- [Designmuster in Rust](https://www.youtube.com/watch?v=Pm_oO0N5B9k) von\n"
 "  Nicholas Cameron beim PDRust (2016)\n"
 "- [Idiomatische Bibliotheken in Rust schreiben](https://www.youtube.com/watch?v=0zOg8_B71gE)\n"
 "  von Pascal Hertleif beim RustFest (2017)\n"
-"- [Rust Programming Techniques](https://www.youtube.com/watch?v=vqavdUGKeb4) von\n"
+"- [Techniken zur Programmierung in Rust](https://www.youtube.com/watch?v=vqavdUGKeb4) von\n"
 "  Nicholas Cameron auf der LinuxConfAu (2018)"
 
 #: src\additional_resources/index.md:14
-#, fuzzy
 msgid "## Books (Online)"
 msgstr "## Bücher (Online)"
 
@@ -8279,7 +8238,6 @@ msgid "- [The Rust API Guidelines](https://rust-lang.github.io/api-guidelines)"
 msgstr "- [Die Rust-API-Richtlinien](https://rust-lang.github.io/api-guidelines)"
 
 #: src\additional_resources/design-principles.md:1
-#, fuzzy
 msgid "# Design principles"
 msgstr "# Design-Prinzipien"
 
@@ -8289,7 +8247,6 @@ msgid "## A brief overview over common design principles"
 msgstr "## Ein kurzer Überblick über gängige Gestaltungsprinzipien"
 
 #: src\additional_resources/design-principles.md:7
-#, fuzzy
 msgid "## [SOLID](https://en.wikipedia.org/wiki/SOLID)"
 msgstr "## [SOLID](https://en.wikipedia.org/wiki/SOLID)"
 
@@ -8329,7 +8286,6 @@ msgstr ""
 "  Man sollte „sich auf Abstraktionen verlassen, [nicht] Konkretionen“."
 
 #: src\additional_resources/design-principles.md:25
-#, fuzzy
 msgid "## [DRY (Don’t Repeat Yourself)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)"
 msgstr "## [DRY (Nicht wiederholen)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)"
 
@@ -8343,7 +8299,6 @@ msgstr ""
 "Repräsentation innerhalb eines Systems\""
 
 #: src\additional_resources/design-principles.md:30
-#, fuzzy
 msgid "## [KISS principle](https://en.wikipedia.org/wiki/KISS_principle)"
 msgstr "## [KISS-Prinzip](https://en.wikipedia.org/wiki/KISS_principle)"
 
