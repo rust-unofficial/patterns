@@ -7,7 +7,7 @@ idioms and other explanations. It is a compilation of collective (sometimes
 implicit) knowledge as well as experiences that have emerged through
 collaborative work.
 
-The patterns described here are __not rules__, but should be taken as
+The patterns described here are **not rules**, but should be taken as
 guidelines for writing idiomatic code in Rust. We are collecting Rust patterns
 in this book so people can learn the tradeoffs between Rust idioms and use them
 properly in their own code.
