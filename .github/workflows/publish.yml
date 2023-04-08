@@ -2,7 +2,12 @@ name: Deploy mdBook sites to GH Pages
 
 on:
   push:
-    branches: ["main"]
+    # TODO: Change before merge into main
+    # branches: ["main"]
+    branches:
+      - main
+      - translation-de
+
   workflow_dispatch:
 
 permissions:
