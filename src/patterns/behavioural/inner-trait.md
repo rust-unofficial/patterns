@@ -15,52 +15,43 @@ extra private methods using a auxiliary private trait `InnerCar`.
 ```rust,ignore
 // trait that is public and part of the API
 pub trait Car {
-    fn get_speed(&self) -> f64;
+    fn speed(&self) -> f64;
     fn accelerate(&mut self, duration: f64);
-    fn brake(&mut self, force: f64);
 }
 //not public
 mod inner_lib {
     // trait that is only accessible to this crate
     pub(crate) trait InnerCar {
-        fn get_speed(&self) -> f64;
+        fn speed(&self) -> f64;
         //private
         fn set_speed(&mut self, new_speed: f64);
         //private
-        fn get_acceleration(&self) -> f64;
+        fn acceleration(&self) -> f64;
         fn accelerate(&mut self, duration: f64) {
             self.set_speed(
-                self.get_speed() + (self.get_acceleration() * duration)
-            );
-        }
-        fn brake(&mut self, force: f64) {
-            self.set_speed(
-                self.get_speed() - (force * self.get_acceleration())
+                self.speed() + (self.acceleration() * duration)
             );
         }
     }
     //Auto implement Car for all InnerCar, by forwarding the Car trait to the
     //InnerCar implementation
     impl<T: InnerCar> crate::Car for T {
-        fn get_speed(&self) -> f64 {
-            <Self as InnerCar>::get_speed(self)
+        fn speed(&self) -> f64 {
+            <Self as InnerCar>::speed(self)
         }
         fn accelerate(&mut self, duration: f64) {
             <Self as InnerCar>::accelerate(self, duration)
-        }
-        fn brake(&mut self, force: f64) {
-            <Self as InnerCar>::brake(self, force)
         }
     }
 }
 
 #[derive(Default)]
 pub struct Car1(f64);
-//is not necessary to implement `accelerate` and `brake`, as inner_trait can do that.
+//is not necessary to implement `accelerate`, as inner_trait can do that.
 impl inner_lib::InnerCar for Car1 {
-    fn get_speed(&self) -> f64 {self.0}
+    fn speed(&self) -> f64 {self.0}
     fn set_speed(&mut self, new_speed: f64) {self.0 = new_speed}
-    fn get_acceleration(&self) -> f64 {0.10}
+    fn acceleration(&self) -> f64 {0.10}
 }
 //more Car implementations...
 ```
