@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-08 21:53+0200\n"
+"PO-Revision-Date: 2023-04-09 00:32+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -44,12 +44,10 @@ msgid "The Default Trait"
 msgstr "Die Standardeigenschaft"
 
 #: src\SUMMARY.md:10
-#, fuzzy
 msgid "Collections Are Smart Pointers"
 msgstr "Sammlungen sind intelligente Zeiger"
 
 #: src\SUMMARY.md:11
-#, fuzzy
 msgid "Finalisation in Destructors"
 msgstr "Finalisierung in Destruktoren"
 
@@ -63,7 +61,6 @@ msgid "On-Stack Dynamic Dispatch"
 msgstr "Dynamischer On-Stack-Versand"
 
 #: src\SUMMARY.md:14 src\SUMMARY.md:40
-#, fuzzy
 msgid "Foreign function interface (FFI)"
 msgstr "Fremdfunktionsschnittstelle (FFI)"
 
@@ -72,13 +69,12 @@ msgid "Idiomatic Errors"
 msgstr "Idiomatische Fehlerbehandlung"
 
 #: src\SUMMARY.md:16
-#, fuzzy
 msgid "Accepting Strings"
-msgstr "Zeichenketten akzeptieren"
+msgstr "Akzeptieren von Zeichenketten"
 
 #: src\SUMMARY.md:17
 msgid "Passing Strings"
-msgstr "Zeichenketten übergeben"
+msgstr "Übergeben von Zeichenketten"
 
 #: src\SUMMARY.md:18
 #, fuzzy
@@ -96,42 +92,34 @@ msgid "Privacy For Extensibility"
 msgstr "Datenschutz für Erweiterbarkeit"
 
 #: src\SUMMARY.md:21
-#, fuzzy
 msgid "Easy doc initialization"
-msgstr "Einfache Dokumenteninitialisierung"
+msgstr "Einfache Dokumentationsinitialisierung"
 
 #: src\SUMMARY.md:22
-#, fuzzy
 msgid "Temporary mutability"
 msgstr "Temporäre Veränderlichkeit"
 
 #: src\SUMMARY.md:23
-#, fuzzy
 msgid "Return consumed arg on error"
-msgstr "Bei Fehler verbrauchtes Argument zurückgeben"
+msgstr "Genutztes Argument bei Fehlern zurückgeben"
 
 #: src\SUMMARY.md:25
-#, fuzzy
 msgid "Design Patterns"
 msgstr "Designmuster"
 
 #: src\SUMMARY.md:26
-#, fuzzy
 msgid "Behavioural"
 msgstr "Verhalten"
 
 #: src\SUMMARY.md:27
-#, fuzzy
 msgid "Command"
 msgstr "Befehl"
 
 #: src\SUMMARY.md:28
-#, fuzzy
 msgid "Interpreter"
 msgstr "Dolmetscher"
 
 #: src\SUMMARY.md:29
-#, fuzzy
 msgid "Newtype"
 msgstr "Neuer Typ"
 
@@ -176,17 +164,14 @@ msgid "Compose Structs"
 msgstr "Strukturen komponieren"
 
 #: src\SUMMARY.md:38
-#, fuzzy
 msgid "Prefer Small Crates"
-msgstr "Bevorzugen Sie kleine Kisten"
+msgstr "Bevorzugen Sie kleine Pakete"
 
 #: src\SUMMARY.md:39
-#, fuzzy
 msgid "Contain unsafety in small modules"
-msgstr "Unsicherheit in kleinen Modulen enthalten"
+msgstr "Unsicherheit in kleinen Modulen isolieren"
 
 #: src\SUMMARY.md:41
-#, fuzzy
 msgid "Object-Based APIs"
 msgstr "Objektbasierte APIs"
 
@@ -196,7 +181,6 @@ msgid "Type Consolidation into Wrappers"
 msgstr "Geben Sie Konsolidierung in Wrapper ein"
 
 #: src\SUMMARY.md:44
-#, fuzzy
 msgid "Anti-patterns"
 msgstr "Anti-Muster"
 
@@ -206,66 +190,54 @@ msgid "Clone to satisfy the borrow checker"
 msgstr "Klonen, um den Leihprüfer zu befriedigen"
 
 #: src\SUMMARY.md:46
-#, fuzzy
 msgid "#[deny(warnings)]"
-msgstr "#[verweigern(Warnungen)]"
+msgstr ""
 
 #: src\SUMMARY.md:47
-#, fuzzy
 msgid "Deref Polymorphism"
 msgstr "Deref Polymorphismus"
 
 #: src\SUMMARY.md:49
-#, fuzzy
 msgid "Functional Programming"
 msgstr "Funktionale Programmierung"
 
 #: src\SUMMARY.md:50
-#, fuzzy
 msgid "Programming paradigms"
 msgstr "Programmierparadigmen"
 
 #: src\SUMMARY.md:51
-#, fuzzy
 msgid "Generics as Type Classes"
 msgstr "Generics als Typklassen"
 
 #: src\SUMMARY.md:52
-#, fuzzy
 msgid "Lenses and Prisms"
 msgstr "Linsen und Prismen"
 
 #: src\SUMMARY.md:54
-#, fuzzy
 msgid "Additional Resources"
 msgstr "Zusätzliche Ressourcen"
 
 #: src\SUMMARY.md:55
-#, fuzzy
 msgid "Design principles"
 msgstr "Design-Prinzipien"
 
 #: src\intro.md:1
-#, fuzzy
 msgid "# Introduction"
 msgstr "# Einführung"
 
 #: src\intro.md:3
-#, fuzzy
 msgid "## Participation"
 msgstr "## Beteiligung"
 
 #: src\intro.md:5
-#, fuzzy
 msgid ""
 "If you are interested in contributing to this book, check out the\n"
 "[contribution guidelines](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md)."
 msgstr ""
-"Wenn Sie daran interessiert sind, zu diesem Buch beizutragen, schauen Sie sich das an\n"
-"[Beitragsrichtlinien](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md)."
+"Wenn Sie daran interessiert sind, zu diesem Buch beizutragen, schauen Sie sich\n"
+"die [Beitragsrichtlinien](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md) an."
 
 #: src\intro.md:8
-#, fuzzy
 msgid "## Design patterns"
 msgstr "## Designmuster"
 
@@ -300,9 +272,8 @@ msgstr ""
 "Kommunikation bei der Problemlösung im Team."
 
 #: src\intro.md:22 src\patterns/index.md:14
-#, fuzzy
 msgid "## Design patterns in Rust"
-msgstr "## Designmuster in Rost"
+msgstr "## Designmuster in Rust"
 
 #: src\intro.md:24
 #, fuzzy
@@ -347,7 +318,6 @@ msgstr ""
 "  Anti-Patterns verursachen mehr Probleme."
 
 #: src\translations.md:1
-#, fuzzy
 msgid "# Translations"
 msgstr "# Übersetzungen"
 
@@ -363,28 +333,24 @@ msgstr ""
 "helpers#creating-and-updating-translations)"
 
 #: src\translations.md:6
-#, fuzzy
 msgid "## External translations"
 msgstr "## Externe Übersetzungen"
 
 #: src\translations.md:8
-#, fuzzy
 msgid "- [简体中文](https://fomalhauthmj.github.io/patterns/)"
 msgstr "- [简体中文](https://fomalhauthmj.github.io/patterns/)"
 
 #: src\translations.md:10
-#, fuzzy
 msgid ""
 "If you want to add a translation, please open an issue in the\n"
 "[main repository](https://github.com/rust-unofficial/patterns)."
 msgstr ""
-"Wenn Sie eine Übersetzung hinzufügen möchten, öffnen Sie bitte ein Problem im\n"
+"Wenn Sie eine Übersetzung hinzufügen möchten, öffnen Sie bitte einen Fall im\n"
 "[Haupt-Repository](https://github.com/rust-unofficial/patterns)."
 
 #: src\idioms/index.md:1
-#, fuzzy
 msgid "# Idioms"
-msgstr "# Redewendungen"
+msgstr "# Idiome"
 
 #: src\idioms/index.md:3
 #, fuzzy
@@ -394,7 +360,7 @@ msgid ""
 "Writing idiomatic code allows other developers to understand better what is\n"
 "happening."
 msgstr ""
-"[Redewendungen](https://en.wikipedia.org/wiki/Programming_idiom) werden häufig verwendet\n"
+"[Idiome](https://en.wikipedia.org/wiki/Programming_idiom) werden häufig verwendet\n"
 "Stile, Richtlinien und Muster, auf die sich eine Gemeinschaft weitgehend geeinigt hat.\n"
 "Das Schreiben von idiomatischem Code ermöglicht es anderen Entwicklern, besser zu verstehen, was ist\n"
 "Ereignis."
@@ -421,9 +387,8 @@ msgid ""
 msgstr ""
 
 #: src\idioms/index.md:18
-#, fuzzy
 msgid "> Code is there for humans, not computers, to understand."
-msgstr "> Code ist für Menschen und nicht für Computer da, um ihn zu verstehen."
+msgstr "> Code ist nicht für Computer da, sondern für Menschen und um ihn zu verstehen."
 
 #: src\idioms/coercion-arguments.md:1
 #, fuzzy
@@ -440,7 +405,6 @@ msgstr "# Verwenden Sie geliehene Typen für Argumente"
 #: src\patterns/structural/small-crates.md:3 src\patterns/structural/unsafe-mods.md:3 src\patterns/ffi/export.md:3
 #: src\patterns/ffi/wrappers.md:3 src\anti_patterns/borrow_clone.md:3 src\anti_patterns/deny-warnings.md:3 src\anti_patterns/deref.md:3
 #: src\functional/generics-type-classes.md:3
-#, fuzzy
 msgid "## Description"
 msgstr "## Beschreibung"
 
@@ -490,7 +454,6 @@ msgstr ""
 #: src\patterns/behavioural/strategy.md:28 src\patterns/behavioural/visitor.md:13 src\patterns/creational/builder.md:7
 #: src\patterns/creational/fold.md:12 src\patterns/structural/compose-structs.md:17 src\anti_patterns/borrow_clone.md:11
 #: src\anti_patterns/deny-warnings.md:8 src\anti_patterns/deref.md:8 src\functional/generics-type-classes.md:38
-#, fuzzy
 msgid "## Example"
 msgstr "## Beispiel"
 
@@ -568,7 +531,6 @@ msgstr ""
 "indem Sie einfach den Typ für unser Argument ändern."
 
 #: src\idioms/coercion-arguments.md:67
-#, fuzzy
 msgid "For instance, if we change our function declaration to:"
 msgstr "Wenn wir zum Beispiel unsere Funktionsdeklaration ändern in:"
 
@@ -580,9 +542,8 @@ msgid ""
 msgstr ""
 
 #: src\idioms/coercion-arguments.md:73
-#, fuzzy
 msgid "then both versions will compile and print the same output."
-msgstr "dann kompilieren und drucken beide Versionen dieselbe Ausgabe."
+msgstr "dann können beide Versionen kompiliert warden und geben dasselbe aus."
 
 #: src\idioms/coercion-arguments.md:75
 msgid ""
@@ -621,7 +582,6 @@ msgstr ""
 "Füge jedes Wort aus dem Satz ein."
 
 #: src\idioms/coercion-arguments.md:91
-#, fuzzy
 msgid "An example of this could look like this:"
 msgstr "Ein Beispiel dafür könnte so aussehen:"
 
@@ -692,7 +652,6 @@ msgstr ""
 #: src\patterns/creational/builder.md:108 src\patterns/creational/fold.md:109 src\patterns/structural/small-crates.md:45
 #: src\patterns/structural/unsafe-mods.md:32 src\anti_patterns/borrow_clone.md:68 src\anti_patterns/deny-warnings.md:96
 #: src\anti_patterns/deref.md:123 src\functional/generics-type-classes.md:237
-#, fuzzy
 msgid "## See also"
 msgstr "## Siehe auch"
 
@@ -712,7 +671,6 @@ msgstr ""
 "  von Hermann J. Radtke III"
 
 #: src\idioms/concat-format.md:1
-#, fuzzy
 msgid "# Concatenating strings with `format!`"
 msgstr "# Strings mit `format!` verketten"
 
@@ -753,7 +711,6 @@ msgstr ""
 #: src\patterns/structural/small-crates.md:12 src\patterns/structural/unsafe-mods.md:11 src\patterns/ffi/export.md:111
 #: src\patterns/ffi/wrappers.md:63 src\anti_patterns/deny-warnings.md:16 src\anti_patterns/deref.md:69
 #: src\functional/generics-type-classes.md:210
-#, fuzzy
 msgid "## Advantages"
 msgstr "## Vorteile"
 
@@ -769,7 +726,6 @@ msgstr "Die Verwendung von `format!` ist normalerweise die prägnanteste und les
 #: src\patterns/creational/builder.md:76 src\patterns/structural/compose-structs.md:81 src\patterns/structural/small-crates.md:22
 #: src\patterns/structural/unsafe-mods.md:17 src\patterns/ffi/export.md:234 src\patterns/ffi/wrappers.md:69 src\anti_patterns/deref.md:81
 #: src\functional/generics-type-classes.md:221
-#, fuzzy
 msgid "## Disadvantages"
 msgstr "## Nachteile"
 
@@ -785,12 +741,10 @@ msgstr ""
 "String wurde auf die erwartete Größe vorbelegt)."
 
 #: src\idioms/ctor.md:1
-#, fuzzy
 msgid "# Constructors\r"
 msgstr "# Konstruktoren\r"
 
 #: src\idioms/ctor.md:3 src\idioms/rustdoc-init.md:3
-#, fuzzy
 msgid "## Description\r"
 msgstr "## Beschreibung\r"
 
@@ -834,7 +788,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ctor.md:35
-#, fuzzy
 msgid "## Default Constructors\r"
 msgstr "## Standardkonstruktoren\r"
 
@@ -934,7 +887,6 @@ msgstr ""
 "eine der [`*or_default`-Funktionen in der Standardbibliothek][std-or-default]."
 
 #: src\idioms/ctor.md:101
-#, fuzzy
 msgid "## See also\r"
 msgstr "## Siehe auch\r"
 
@@ -1054,7 +1006,6 @@ msgstr ""
 "- [`ableiten(neu)`]"
 
 #: src\idioms/deref.md:1
-#, fuzzy
 msgid "# Collections are smart pointers"
 msgstr "# Sammlungen sind intelligente Zeiger"
 
@@ -1115,9 +1066,8 @@ msgstr "Auch `String` und `&str` haben eine ähnliche Beziehung."
 #: src\patterns/behavioural/RAII.md:72 src\patterns/behavioural/strategy.md:19 src\patterns/behavioural/visitor.md:72
 #: src\patterns/creational/builder.md:63 src\patterns/creational/fold.md:73 src\patterns/structural/compose-structs.md:71
 #: src\patterns/ffi/export.md:15 src\anti_patterns/borrow_clone.md:30
-#, fuzzy
 msgid "## Motivation"
-msgstr "##Motivation"
+msgstr "## Motivation"
 
 #: src\idioms/deref.md:38
 #, fuzzy
@@ -1221,7 +1171,6 @@ msgstr ""
 "- [Dokumentation für das `Deref`-Merkmal](https://doc.rust-lang.org/std/ops/trait.Deref.html)."
 
 #: src\idioms/dtor-finally.md:1
-#, fuzzy
 msgid "# Finalisation in destructors"
 msgstr "# Finalisierung in Destruktoren"
 
@@ -1430,7 +1379,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/mem-replace.md:32
-#, fuzzy
 msgid "This also works with more variants:"
 msgstr "Das funktioniert auch mit mehr Varianten:"
 
