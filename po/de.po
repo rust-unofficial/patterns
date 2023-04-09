@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 05:41+0200\n"
+"PO-Revision-Date: 2023-04-09 05:48+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -228,7 +228,6 @@ msgid "## Design patterns"
 msgstr "## Entwurfsmuster"
 
 #: src\intro.md:10
-#, fuzzy
 msgid ""
 "In software development, we often come across problems that share\n"
 "similarities regardless of the environment they appear in. Although the\n"
@@ -236,11 +235,11 @@ msgid ""
 "abstract from these particularities to find the common practices that\n"
 "are generically applicable."
 msgstr ""
-"In der Softwareentwicklung stoßen wir oft auf gemeinsame Probleme\n"
-"Ähnlichkeiten unabhängig von der Umgebung, in der sie erscheinen. Obwohl die\n"
-"Implementierungsdetails sind entscheidend, um die anstehende Aufgabe zu lösen, können wir\n"
-"Abstrahieren Sie von diesen Besonderheiten, um die gängigen Praktiken zu finden, die\n"
-"sind allgemein anwendbar."
+"In der Softwareentwicklung stoßen wir oft auf Probleme die \n"
+"Ähnlichkeiten, unabhängig von der Umgebung, in der sie erscheinen, haben. Obwohl die\n"
+"Implementierungsdetails entscheidend sind, um die anstehende Aufgabe zu lösen, können wir\n"
+"sie von diesen Besonderheiten wegabstrahieren, um gängige Praktiken zu finden, die\n"
+"allgemein anwendbar sind."
 
 #: src\intro.md:16
 msgid ""
@@ -306,15 +305,14 @@ msgid "# Translations"
 msgstr "# Übersetzungen"
 
 #: src\translations.md:3
-#, fuzzy
 msgid ""
 "We are utilizing [mdbook-i18n-helper](https://github.com/google/mdbook-i18n-helpers).\n"
 "Please read up on how to _add_ and _update_ translations in [their repository](https://github.com/google/mdbook-i18n-helpers#creating-and-"
 "updating-translations)"
 msgstr ""
 "Wir verwenden [mdbook-i18n-helper](https://github.com/google/mdbook-i18n-helpers).\n"
-"Bitte lesen Sie nach, wie Sie Übersetzungen in [ihrem Repository] _hinzufügen_ und _aktualisieren_ (https://github.com/google/mdbook-i18n-"
-"helpers#creating-and-updating-translations)"
+"Bitte lesen Sie in deren [Repository](https://github.com/google/mdbook-i18n-helpers#creating-and-updating-translations) nach,\n"
+"wie Sie Übersetzungen _hinzufügen_ und _aktualisieren_ können."
 
 #: src\translations.md:6
 msgid "## External translations"
@@ -337,20 +335,18 @@ msgid "# Idioms"
 msgstr "# Idiome"
 
 #: src\idioms/index.md:3
-#, fuzzy
 msgid ""
 "[Idioms](https://en.wikipedia.org/wiki/Programming_idiom) are commonly used\n"
 "styles, guidelines and patterns largely agreed upon by a community.\n"
 "Writing idiomatic code allows other developers to understand better what is\n"
 "happening."
 msgstr ""
-"[Idiome](https://en.wikipedia.org/wiki/Programming_idiom) werden häufig verwendet\n"
+"[Idiome](https://en.wikipedia.org/wiki/Programming_idiom) sind häufig verwendete\n"
 "Stile, Richtlinien und Muster, auf die sich eine Gemeinschaft weitgehend geeinigt hat.\n"
-"Das Schreiben von idiomatischem Code ermöglicht es anderen Entwicklern, besser zu verstehen, was ist\n"
-"Ereignis."
+"Das Schreiben von idiomatischem Code ermöglicht es anderen Entwicklern, besser zu verstehen,\n"
+"was vor sich geht."
 
 #: src\idioms/index.md:8
-#, fuzzy
 msgid ""
 "After all, the computer only cares about the machine code that is generated\n"
 "by the compiler.\n"
@@ -358,7 +354,7 @@ msgid ""
 "So, since we have this abstraction layer, why not make it more readable?"
 msgstr ""
 "Der Computer kümmert sich schließlich nur um den generierten Maschinencode\n"
-"vom Compiler.\n"
+"vom Kompilierer.\n"
 "Stattdessen ist der Quellcode hauptsächlich für den Entwickler von Vorteil.\n"
 "Da wir also diese Abstraktionsebene haben, warum machen wir sie nicht besser lesbar?"
 
@@ -464,7 +460,6 @@ msgstr ""
 "wird eine Referenz nehmen."
 
 #: src\idioms/coercion-arguments.md:30
-#, fuzzy
 msgid "The code might look something like this:"
 msgstr "Der Code könnte etwa so aussehen:"
 
@@ -502,7 +497,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/coercion-arguments.md:62
-#, fuzzy
 msgid ""
 "This works fine because we are passing a `&String` type as a parameter.\n"
 "If we remove the comments on the last two lines, the example will fail. This\n"
@@ -512,7 +506,7 @@ msgstr ""
 "Das funktioniert gut, weil wir einen `&String`-Typ als Parameter übergeben.\n"
 "Wenn wir die Kommentare in den letzten beiden Zeilen entfernen, schlägt das Beispiel fehl. Das\n"
 "liegt daran, dass ein `&str`-Typ nicht in einen `&String`-Typ umgewandelt wird. Wir können das beheben\n"
-"indem Sie einfach den Typ für unser Argument ändern."
+"indem wir einfach den Typ für unser Argument ändern."
 
 #: src\idioms/coercion-arguments.md:67
 msgid "For instance, if we change our function declaration to:"
