@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 01:55+0200\n"
+"PO-Revision-Date: 2023-04-09 02:09+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -6783,13 +6783,12 @@ msgid "# Functional Usage of Rust"
 msgstr "# Funktionale Nutzung von Rust"
 
 #: src\functional/index.md:3
-#, fuzzy
 msgid ""
 "Rust is an imperative language, but it follows many\n"
 "[functional programming](https://en.wikipedia.org/wiki/Functional_programming) paradigms."
 msgstr ""
 "Rust ist eine imperative Sprache, folgt aber vielen\n"
-"[Funktionale Programmierung](https://en.wikipedia.org/wiki/Functional_programming) Paradigmen."
+"Paradigmen [Funktionaler Programmiersprachen](https://en.wikipedia.org/wiki/Functional_programming)."
 
 #: src\functional/index.md:6
 #, fuzzy
@@ -6811,17 +6810,16 @@ msgid "# Programming paradigms"
 msgstr "# Programmierparadigmen"
 
 #: src\functional/paradigms.md:3
-#, fuzzy
 msgid ""
 "One of the biggest hurdles to understanding functional programs when coming\n"
 "from an imperative background is the shift in thinking. Imperative programs\n"
 "describe **how** to do something, whereas declarative programs describe\n"
 "**what** to do. Let's sum the numbers from 1 to 10 to show this."
 msgstr ""
-"Eine der größten Hürden, um funktionale Programme zu verstehen, wenn sie kommen\n"
-"aus zwingendem Hintergrund ist das Umdenken. Imperative Programme\n"
+"Wenn sie von einer imperativen Programmiersprache kommen, ist eine der größten Hürden\n"
+"um funktionale Programme zu verstehen, das Umdenken. Imperative Programme\n"
 "beschreiben **wie** etwas zu tun ist, wohingegen deklarative Programme beschreiben\n"
-"**was zu tun ist. Lassen Sie uns die Zahlen von 1 bis 10 summieren, um dies zu zeigen."
+"**was** zu tun ist. Lassen Sie uns die Zahlen von 1 bis 10 summieren, um dies zu zeigen."
 
 #: src\functional/paradigms.md:8
 msgid "## Imperative"
@@ -7555,7 +7553,6 @@ msgid ""
 msgstr ""
 
 #: src\functional/lenses.md:47
-#, fuzzy
 msgid ""
 "Notice that both types have a customer ID number which corresponds to a person.\n"
 "How would a single function handle both records of different types?"
@@ -7564,13 +7561,12 @@ msgstr ""
 "Wie würde eine einzelne Funktion beide Datensätze unterschiedlichen Typs behandeln?"
 
 #: src\functional/lenses.md:50
-#, fuzzy
 msgid ""
 "In Rust, a `struct` could represent each of these types, and a trait would have\n"
 "a `get_customer_id` function they would implement:"
 msgstr ""
-"In Rust könnte ein `struct` jeden dieser Typen repräsentieren und hätte ein Merkmal\n"
-"eine `get_customer_id`-Funktion, die sie implementieren würden:"
+"In Rust könnte ein `struct` jeden dieser Typen repräsentieren und ein Merkmal\n"
+"hätte eine `get_customer_id`-Funktion, die diese implementieren würden:"
 
 #: src\functional/lenses.md:53
 msgid ""
@@ -7722,7 +7718,6 @@ msgstr ""
 "Das ist es, was `optics!` und `view_ref` im obigen Beispiel simulieren."
 
 #: src\functional/lenses.md:162
-#, fuzzy
 msgid ""
 "The functional approach need not be restricted to accessing members.\n"
 "More powerful lenses can be created which both _set_ and _get_ data in a\n"
@@ -7732,11 +7727,11 @@ msgid ""
 "That is where the concept appears more clearly in Rust."
 msgstr ""
 "Der funktionale Ansatz muss nicht auf den Zugriff auf Mitglieder beschränkt sein.\n"
-"Es können leistungsstärkere Objektive erstellt werden, die sowohl Daten in einem _set_ als auch _get_ erhalten\n"
-"Struktur.\n"
-"Aber das Konzept wird wirklich interessant, wenn es als Baustein für verwendet wird\n"
-"Komposition.\n"
-"Hier zeigt sich das Konzept in Rust deutlicher."
+"Es können leistungsstärkere Linsen erstellt werden, die sowohl Daten in einer Struktur\n"
+"_setzen_ als auch aus ihr _herausholen_.\n"
+"Aber das Konzept wird wirklich interessant, wenn es als Baustein für Komposition\n"
+"verwendet wird.\n"
+"Hier zeigt sich das Konzept von Rust deutlicher."
 
 #: src\functional/lenses.md:169
 msgid "## Prisms: A Higher-Order form of \"Optics\""
