@@ -4,18 +4,32 @@ authors = ["the rust-unofficial authors"]
 description = "A catalogue of Rust design patterns, anti-patterns and idioms"
 language = "en"
 multilingual = false
-src = "."
+src = "src"
 
 [build]
 create-missing = false
+extra-watch-dirs = ["po", "third_party"]
+
+[preprocessor.gettext]
+after = ["links"]
 
 [rust]
 edition = "2021"
 
 [output.html]
+curly-quotes = true
 default-theme = "rust"
+site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
+additional-css = ["./language-picker.css"]
+
+[output.html.fold]
+enable = true
+level = 1
+
+[output.html.playground]
+editable = false
 
 # [output.linkcheck]  # enable the "mdbook-linkcheck" renderer, disabled due to gh-actions
