@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 02:51+0200\n"
+"PO-Revision-Date: 2023-04-09 05:41+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -25,7 +25,6 @@ msgid "Idioms"
 msgstr "Idiome"
 
 #: src\SUMMARY.md:6
-#, fuzzy
 msgid "Use borrowed types for arguments"
 msgstr "Verwenden Sie geliehene Typen für Argumente"
 
@@ -34,9 +33,8 @@ msgid "Concatenating Strings with format!"
 msgstr "Strings mit format! verketten"
 
 #: src\SUMMARY.md:8
-#, fuzzy
 msgid "Constructor"
-msgstr "Konstrukteur"
+msgstr "Konstruktor"
 
 #: src\SUMMARY.md:9
 msgid "The Default Trait"
@@ -76,9 +74,8 @@ msgid "Passing Strings"
 msgstr "Übergeben von Zeichenketten"
 
 #: src\SUMMARY.md:18
-#, fuzzy
 msgid "Iterating over an Option"
-msgstr "Iteration über eine Option"
+msgstr "Iteration über Option"
 
 #: src\SUMMARY.md:19
 #, fuzzy
@@ -86,7 +83,6 @@ msgid "Pass Variables to Closure"
 msgstr "Übergeben Sie Variablen an den Abschluss"
 
 #: src\SUMMARY.md:20
-#, fuzzy
 msgid "Privacy For Extensibility"
 msgstr "Datenschutz für Erweiterbarkeit"
 
@@ -104,7 +100,7 @@ msgstr "Genutztes Argument bei Fehlern zurückgeben"
 
 #: src\SUMMARY.md:25
 msgid "Design Patterns"
-msgstr "Designmuster"
+msgstr "Entwurfsmuster"
 
 #: src\SUMMARY.md:26
 msgid "Behavioural"
@@ -123,42 +119,36 @@ msgid "Newtype"
 msgstr "Neuer Typ"
 
 #: src\SUMMARY.md:30
-#, fuzzy
 msgid "RAII Guards"
-msgstr "RAII-Wachen"
+msgstr "RAII-Wächter"
 
 #: src\SUMMARY.md:31
 msgid "Strategy"
 msgstr "Strategie"
 
 #: src\SUMMARY.md:32
-#, fuzzy
 msgid "Visitor"
 msgstr "Besucher"
 
 #: src\SUMMARY.md:33
-#, fuzzy
 msgid "Creational"
-msgstr "Schöpferisch"
+msgstr "Erzeugend"
 
 #: src\SUMMARY.md:34
-#, fuzzy
 msgid "Builder"
-msgstr "Baumeister"
+msgstr "Erbauer"
 
 #: src\SUMMARY.md:35
-#, fuzzy
 msgid "Fold"
-msgstr "Falten"
+msgstr "Falz"
 
 #: src\SUMMARY.md:36
 msgid "Structural"
 msgstr "Strukturell"
 
 #: src\SUMMARY.md:37
-#, fuzzy
 msgid "Compose Structs"
-msgstr "Strukturen komponieren"
+msgstr "Strukturen zusammensetzen"
 
 #: src\SUMMARY.md:38
 msgid "Prefer Small Crates"
@@ -179,12 +169,11 @@ msgstr "Geben Sie Konsolidierung in Wrapper ein"
 
 #: src\SUMMARY.md:44
 msgid "Anti-patterns"
-msgstr "Anti-Muster"
+msgstr "Antimuster"
 
 #: src\SUMMARY.md:45
-#, fuzzy
 msgid "Clone to satisfy the borrow checker"
-msgstr "Klonen, um den Leihprüfer zu befriedigen"
+msgstr "Klonen, um den Borrow-Checker zu befriedigen"
 
 #: src\SUMMARY.md:46
 msgid "#[deny(warnings)]"
@@ -236,7 +225,7 @@ msgstr ""
 
 #: src\intro.md:8
 msgid "## Design patterns"
-msgstr "## Designmuster"
+msgstr "## Entwurfsmuster"
 
 #: src\intro.md:10
 #, fuzzy
@@ -254,7 +243,6 @@ msgstr ""
 "sind allgemein anwendbar."
 
 #: src\intro.md:16
-#, fuzzy
 msgid ""
 "Design patterns are a collection of reusable and tested solutions to\n"
 "recurring problems in engineering. They make our software more modular,\n"
@@ -263,17 +251,16 @@ msgid ""
 "communication when problem-solving in teams."
 msgstr ""
 "Entwurfsmuster sind eine Sammlung wiederverwendbarer und getesteter Lösungen für\n"
-"wiederkehrende Probleme in der Technik. Sie machen unsere Software modularer,\n"
-"wartbar und erweiterbar. Darüber hinaus stellen diese Muster eine Gemeinsamkeit bereit\n"
-"Sprache für Entwickler, was sie zu einem hervorragenden Werkzeug für effektives\n"
-"Kommunikation bei der Problemlösung im Team."
+"wiederkehrende Probleme im Ingenieurwesen. Sie machen unsere Software modularer,\n"
+"wartbar und erweiterbar. Darüber hinaus stellen diese Muster eine gemeinsame\n"
+"Sprache für Entwickler bereit, welche sie zu einem hervorragenden Werkzeug für effektive\n"
+"Kommunikation bei der Problemlösung im Team macht."
 
 #: src\intro.md:22 src\patterns/index.md:14
 msgid "## Design patterns in Rust"
-msgstr "## Designmuster in Rust"
+msgstr "## Entwurfsmuster in Rust"
 
 #: src\intro.md:24
-#, fuzzy
 msgid ""
 "Rust is not object-oriented, and the combination of all its characteristics,\n"
 "such as functional elements, a strong type system, and the borrow checker,\n"
@@ -285,14 +272,13 @@ msgid ""
 msgstr ""
 "Rust ist nicht objektorientiert, und die Kombination all seiner Eigenschaften,\n"
 "wie funktionale Elemente, ein starkes Typsystem und der Borrow-Checker,\n"
-"macht es einzigartig.\n"
-"Aus diesem Grund variieren Rust-Designmuster in Bezug auf andere\n"
+"machen es einzigartig.\n"
+"Aus diesem Grund variieren Rust-Entwurfsmuster in Bezug auf andere\n"
 "traditionelle objektorientierte Programmiersprachen.\n"
 "Deshalb haben wir uns entschlossen, dieses Buch zu schreiben. Wir wünschen Ihnen viel Spaß beim Lesen!\n"
 "Das Buch ist in drei Hauptkapitel gegliedert:"
 
 #: src\intro.md:32
-#, fuzzy
 msgid ""
 "- [Idioms](./idioms/index.md): guidelines to follow when coding.\n"
 "  They are the social norms of the community.\n"
@@ -304,15 +290,16 @@ msgid ""
 "  However, while design patterns give us benefits,\n"
 "  anti-patterns create more problems."
 msgstr ""
-"- [Redewendungen](./idioms/index.md): Richtlinien, die beim Codieren befolgt werden müssen.\n"
+"- [Idiome](./idioms/index.md): Richtlinien, die beim Programmieren befolgt werden sollten.\n"
 "  Sie sind die sozialen Normen der Gemeinschaft.\n"
-"  Sie sollten sie nur brechen, wenn Sie einen triftigen Grund dafür haben.\n"
-"- [Entwurfsmuster](./patterns/index.md): Methoden zur Lösung häufiger Probleme\n"
-"  beim codieren.\n"
-"- [Anti-Patterns](./anti_patterns/index.md): Methoden zur Lösung häufiger Probleme\n"
-"  beim codieren.\n"
-"  Obwohl uns Designmuster Vorteile bringen,\n"
-"  Anti-Patterns verursachen mehr Probleme."
+"  Sie sollten nur gebrochen werden, wenn Sie einen triftigen Grund dafür haben.\n"
+"- [Entwurfsmuster](./patterns/index.md): Methoden zur Lösung häufig auftretender Probleme\n"
+"  beim Programmieren.\n"
+"- [Antimuster](./anti_patterns/index.md): Methoden zur Lösung häufiger Probleme\n"
+"  beim Programmieren.\n"
+"  Entwurfsmuster bringen uns Vorteile,\n"
+"  wohingegen Antimuster uns mehr Probleme verursachen,\n"
+"  als sie uns Vorteile zu bringen scheinen."
 
 #: src\translations.md:1
 msgid "# Translations"
@@ -1425,8 +1412,8 @@ msgid ""
 msgstr ""
 "Der Borrow-Checker erlaubt uns nicht, `name` aus der Aufzählung herauszunehmen (weil\n"
 "_irgendwas_ muss da sein.) Wir könnten natürlich `.clone()` benennen und den Klon setzen\n"
-"in unser `MyEnum::B`, aber das wäre eine Instanz des Anti-Patterns [Klonen, um den Borrow-Checker zu erfüllen](../anti_patterns/"
-"borrow_clone.md). Jedenfalls wir\n"
+"in unser `MyEnum::B`, aber das wäre eine Instanz des Antimuster [Klonen, um den Borrow-Checker zu erfüllen](../anti_patterns/borrow_clone."
+"md). Jedenfalls wir\n"
 "kann die zusätzliche Zuweisung vermeiden, indem `e` nur mit einem veränderlichen Borgen geändert wird."
 
 #: src\idioms/mem-replace.md:70
@@ -3031,10 +3018,9 @@ msgstr "Etwas komplexere Fehlertypen."
 
 #: src\patterns/index.md:1
 msgid "# Design Patterns"
-msgstr "# Designmuster"
+msgstr "# Entwurfsmuster"
 
 #: src\patterns/index.md:3
-#, fuzzy
 msgid ""
 "[Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) are\n"
 "\"general reusable solutions to a commonly occurring problem within a given\n"
@@ -3043,23 +3029,22 @@ msgid ""
 "what is a pattern in one language may be unnecessary in another due to a\n"
 "language feature, or impossible to express due to a missing feature."
 msgstr ""
-"[Designmuster](https://en.wikipedia.org/wiki/Software_design_pattern) sind\n"
+"[Entwurfsmuster](https://en.wikipedia.org/wiki/Software_design_pattern) sind\n"
 "\"allgemeine wiederverwendbare Lösungen für ein häufig auftretendes Problem innerhalb eines bestimmten Bereichs\n"
-"Kontext im Softwaredesign\". Entwurfsmuster sind eine großartige Möglichkeit, den\n"
-"Kultur einer Programmiersprache. Entwurfsmuster sind sehr sprachspezifisch -\n"
-"Was in einer Sprache ein Muster ist, kann in einer anderen unnötig sein, weil a\n"
-"Sprachmerkmal oder aufgrund eines fehlenden Merkmals nicht ausdrückbar."
+"im Softwaredesign\". Entwurfsmuster sind eine großartige Möglichkeit, die\n"
+"Kultur einer Programmiersprache zu beschreiben. Entwurfsmuster sind sehr sprachspezifisch -\n"
+"Was in einer Sprache ein Muster ist, kann in einer anderen unnötig oder durch ein\n"
+"fehlendes Sprachmerkmal nicht ausdrückbar sein."
 
 #: src\patterns/index.md:10
-#, fuzzy
 msgid ""
 "If overused, design patterns can add unnecessary complexity to programs.\n"
 "However, they are a great way to share intermediate and advanced level knowledge\n"
 "about a programming language."
 msgstr ""
 "Bei übermäßiger Verwendung können Entwurfsmuster Programme unnötig komplex machen.\n"
-"Sie sind jedoch eine großartige Möglichkeit, Wissen auf mittlerem und fortgeschrittenem Niveau zu teilen\n"
-"über eine Programmiersprache."
+"Sie sind jedoch eine großartige Möglichkeit, Wissen über eine Programmiersprache auf mittlerem\n"
+"und fortgeschrittenem Niveau zu teilen."
 
 #: src\patterns/index.md:16
 #, fuzzy
@@ -3089,15 +3074,14 @@ msgid "> The best code I ever wrote was code I never wrote."
 msgstr "> Der beste Code, den ich je geschrieben habe, war Code, den ich nie geschrieben habe."
 
 #: src\patterns/index.md:26
-#, fuzzy
 msgid ""
 "If we apply YAGNI to design patterns, we see that the features of Rust allow us to\n"
 "throw out many patterns. For instance, there is no need for the [strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern)\n"
 "in Rust because we can just use [traits](https://doc.rust-lang.org/book/traits.html)."
 msgstr ""
-"Wenn wir YAGNI auf Designmuster anwenden, sehen wir, dass die Eigenschaften von Rust es uns erlauben\n"
-"Werfen Sie viele Muster aus. Beispielsweise ist das [Strategiemuster](https://en.wikipedia.org/wiki/Strategy_pattern) nicht erforderlich.\n"
-"in Rust, weil wir einfach [traits](https://doc.rust-lang.org/book/traits.html) verwenden können."
+"Wenn wir YAGNI auf Entwurfsmuster anwenden, sehen wir, dass die Eigenschaften von Rust es uns erlauben\n"
+"viele Muster auszurangieren. Beispielsweise ist das [Strategiemuster](https://en.wikipedia.org/wiki/Strategy_pattern) nicht erforderlich\n"
+"in Rust, weil wir [Traits](https://doc.rust-lang.org/book/traits.html) verwenden können."
 
 #: src\patterns/behavioural/intro.md:1
 msgid "# Behavioural Patterns"
@@ -3109,12 +3093,11 @@ msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern):"
 msgstr "Aus [Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern):"
 
 #: src\patterns/behavioural/intro.md:5
-#, fuzzy
 msgid ""
 "> Design patterns that identify common communication patterns among objects.\n"
 "> By doing so, these patterns increase flexibility in carrying out communication."
 msgstr ""
-"> Entwerfen Sie Muster, die gemeinsame Kommunikationsmuster zwischen Objekten identifizieren.\n"
+"> Entwurfsmuster, die gemeinsame Verhaltensweisen zwischen Objekten identifizieren.\n"
 "> Dadurch erhöhen diese Muster die Flexibilität bei der Durchführung der Kommunikation."
 
 #: src\patterns/behavioural/command.md:1
@@ -3597,7 +3580,6 @@ msgid ""
 msgstr ""
 
 #: src\patterns/behavioural/interpreter.md:105
-#, fuzzy
 msgid ""
 "There may be a wrong perception that the Interpreter design pattern is about design\n"
 "grammars for formal languages and implementation of parsers for these grammars.\n"
@@ -3606,12 +3588,12 @@ msgid ""
 "Rust language has `macro_rules!` that allow us to define special syntax and rules\n"
 "on how to expand this syntax into source code."
 msgstr ""
-"Möglicherweise besteht die falsche Wahrnehmung, dass es beim Interpreter-Entwurfsmuster um Design geht\n"
-"Grammatiken für formale Sprachen und Implementierung von Parsern für diese Grammatiken.\n"
-"Tatsächlich geht es bei diesem Muster darum, Probleminstanzen spezifischer auszudrücken\n"
-"Weise und Implementieren von Funktionen/Klassen/Strukturen, die diese Probleminstanzen lösen.\n"
-"Die Rust-Sprache hat `macro_rules!`, die es uns ermöglichen, spezielle Syntax und Regeln zu definieren\n"
-"wie man diese Syntax in Quellcode erweitert."
+"Möglicherweise besteht die falsche Wahrnehmung, dass es beim Interpreter-Entwurfsmuster um das Design von\n"
+"Grammatiken für formale Sprachen und die Implementierung von Parsern für diese Grammatiken geht.\n"
+"Tatsächlich geht es bei diesem Muster aber darum, Probleminstanzen in spezifischer Art und Weise\n"
+"auszudrücken und Funktionen/Klassen/Strukturen zu implementieren, die diese Probleminstanzen lösen.\n"
+"Rust hat `macro_rules!`, welches es uns ermöglicht,mit Hilfe spezieller Syntax Regeln zu definieren\n"
+"wie man diese Syntax im Quellcode erweitert."
 
 #: src\patterns/behavioural/interpreter.md:112
 #, fuzzy
@@ -4069,14 +4051,13 @@ msgid "# Strategy (aka Policy)"
 msgstr "# Strategie (auch bekannt als Richtlinie)"
 
 #: src\patterns/behavioural/strategy.md:5
-#, fuzzy
 msgid ""
 "The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern)\n"
 "is a technique that enables separation of concerns.\n"
 "It also allows to decouple software modules through [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle)."
 msgstr ""
-"Das [Strategy Design Pattern](https://en.wikipedia.org/wiki/Strategy_pattern)\n"
-"ist eine Technik, die die Trennung von Anliegen ermöglicht.\n"
+"Das [Strategy Entwurfsmuster](https://en.wikipedia.org/wiki/Strategy_pattern)\n"
+"ist eine Technik, die die Trennung von Belangen ermöglicht.\n"
 "Es ermöglicht auch die Entkopplung von Softwaremodulen durch [Dependency Inversion](https://en.wikipedia.org/wiki/"
 "Dependency_inversion_principle)."
 
@@ -4519,17 +4500,16 @@ msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern):"
 msgstr "Aus [Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern):"
 
 #: src\patterns/creational/intro.md:5
-#, fuzzy
 msgid ""
 "> Design patterns that deal with object creation mechanisms, trying to create objects\n"
 "> in a manner suitable to the situation. The basic form of object creation could\n"
 "> result in design problems or in added complexity to the design. Creational design\n"
 "> patterns solve this problem by somehow controlling this object creation."
 msgstr ""
-"> Entwerfen Sie Muster, die sich mit Objekterstellungsmechanismen befassen und versuchen, Objekte zu erstellen\n"
-"> in einer der Situation angemessenen Weise. Die Grundform der Objekterstellung könnte\n"
-"> zu Designproblemen oder zu zusätzlicher Komplexität des Designs führen. Kreatives Design\n"
-"> Muster lösen dieses Problem, indem sie diese Objekterstellung irgendwie steuern."
+"> Entwurfsmuster, die sich mit Objekterstellungsmechanismen befassen und versuchen, Objekte\n"
+"> der Situation angemessen zu erstellen. Die Grundform der Objekterstellung könnte\n"
+"> zu Designproblemen oder zu zusätzlicher Komplexität des Designs führen. Erzeugungsmuster\n"
+"> lösen dieses Problem, indem sie diese Objekterstellung steuern."
 
 #: src\patterns/creational/builder.md:1
 #, fuzzy
@@ -4934,13 +4914,12 @@ msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Structural_pattern):"
 msgstr "Aus [Wikipedia] (https://en.wikipedia.org/wiki/Structural_pattern):"
 
 #: src\patterns/structural/intro.md:5
-#, fuzzy
 msgid ""
 "> Design patterns that ease the design by identifying a simple way to realize relationships\n"
 "> among entities."
 msgstr ""
-"> Entwurfsmuster, die das Design vereinfachen, indem sie einen einfachen Weg zur Realisierung von Beziehungen identifizieren\n"
-"> zwischen Entitäten."
+"> Entwurfsmuster, die das Design vereinfachen, indem sie einen einfachen Weg zur Realisierung von Beziehungen\n"
+"> zwischen Entitäten identifizieren."
 
 #: src\patterns/structural/compose-structs.md:1
 #, fuzzy
@@ -5011,13 +4990,12 @@ msgid ""
 msgstr ""
 
 #: src\patterns/structural/compose-structs.md:42
-#, fuzzy
 msgid ""
 "We can apply this design pattern and refactor `A` into two smaller structs, thus\n"
 "solving the borrow checking issue:"
 msgstr ""
-"Wir können dieses Entwurfsmuster anwenden und `A` in zwei kleinere Strukturen umgestalten, also\n"
-"Lösen des Problems mit der Ausleihprüfung:"
+"Wir können dieses Entwurfsmuster anwenden und `A` in zwei kleinere Strukturen umarbeiten, um so das\n"
+"Problem des Borrow-Checkers zu lösen:"
 
 #: src\patterns/structural/compose-structs.md:45
 msgid ""
@@ -6168,10 +6146,9 @@ msgstr ""
 
 #: src\anti_patterns/index.md:1
 msgid "# Anti-patterns"
-msgstr "# Anti-Muster"
+msgstr "# Antimuster"
 
 #: src\anti_patterns/index.md:3
-#, fuzzy
 msgid ""
 "An [anti-pattern](https://en.wikipedia.org/wiki/Anti-pattern) is a solution to\n"
 "a \"recurring problem that is usually ineffective and risks being highly\n"
@@ -6180,12 +6157,12 @@ msgid ""
 "consider relative to design patterns. Anti-patterns are not confined to code.\n"
 "For example, a process can be an anti-pattern, too."
 msgstr ""
-"Ein [Anti-Pattern] (https://en.wikipedia.org/wiki/Anti-Pattern) ist eine Lösung für\n"
-"ein \"wiederkehrendes Problem, das in der Regel unwirksam ist und das Risiko eingeht, hoch zu sein\n"
-"kontraproduktiv\". Genauso wertvoll wie das Wissen, wie man ein Problem löst, ist\n"
-"zu wissen, wie man es _nicht_ löst. Anti-Patterns geben uns großartige Gegenbeispiele dazu\n"
-"relativ zu Entwurfsmustern betrachten. Anti-Patterns sind nicht auf Code beschränkt.\n"
-"Beispielsweise kann ein Prozess auch ein Antimuster sein."
+"Ein [Antimuster](https://en.wikipedia.org/wiki/Anti-Pattern) ist eine Lösung für\n"
+"ein \"wiederkehrendes Problem, das in der Regel unwirksam ist und das Risiko eingeht, höchst\n"
+"kontraproduktiv zu sein\". Genauso wertvoll wie das Wissen, wie man ein Problem löst, ist\n"
+"zu wissen, wie man es _nicht_ löst. Antimuster geben uns deshalb großartige Gegenbeispiele\n"
+"zu Entwurfsmustern. Antimuster sind nicht auf Code beschränkt.\n"
+"Ein Prozess kann beispielsweise auch ein Antimuster sein."
 
 #: src\anti_patterns/borrow_clone.md:1
 #, fuzzy
@@ -6275,7 +6252,7 @@ msgid ""
 msgstr ""
 "Im Allgemeinen sollten Klone bewusst sein, mit vollem Verständnis der\n"
 "Folgen. Wenn ein Klon verwendet wird, um einen Borrow-Checker-Fehler verschwinden zu lassen,\n"
-"das ist ein guter Hinweis darauf, dass dieses Anti-Pattern verwendet wird."
+"das ist ein guter Hinweis darauf, dass dieses Antimuster verwendet wird."
 
 #: src\anti_patterns/borrow_clone.md:51
 #, fuzzy
@@ -6645,7 +6622,7 @@ msgstr ""
 
 #: src\anti_patterns/deref.md:71
 msgid "You save a little boilerplate, e.g.,"
-msgstr "Sie sparen sich etwas von einem wiederkehrenden Textbaustein, z.B."
+msgstr "Sie sparen sich etwas von einem wiederkehrenden Textbaustein, z.B.,"
 
 #: src\anti_patterns/deref.md:73
 msgid ""
