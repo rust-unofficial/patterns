@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 02:09+0200\n"
+"PO-Revision-Date: 2023-04-09 02:31+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -6852,7 +6852,6 @@ msgstr ""
 "Dann drucken wir es aus."
 
 #: src\functional/paradigms.md:24
-#, fuzzy
 msgid ""
 "| `i` | `sum` |\n"
 "| :-: | :---: |\n"
@@ -6867,27 +6866,14 @@ msgid ""
 "|  9  |  45   |\n"
 "| 10  |  55   |"
 msgstr ""
-"| \"ich\" | \"Summe\" |\n"
-"| :-: | :---: |\n"
-"| 1 | 1 |\n"
-"| 2 | 3 |\n"
-"| 3 | 6 |\n"
-"| 4 | 10 |\n"
-"| 5 | 15 |\n"
-"| 6 | 21 |\n"
-"| 7 | 28 |\n"
-"| 8 | 36 |\n"
-"| 9 | 45 |\n"
-"| 10 | 55 |"
 
 #: src\functional/paradigms.md:37
-#, fuzzy
 msgid ""
 "This is how most of us start out programming. We learn that a program is a set\n"
 "of steps."
 msgstr ""
-"So beginnen die meisten von uns mit dem Programmieren. Wir lernen, dass ein Programm eine Menge ist\n"
-"von Schritten."
+"So beginnen die meisten von uns mit dem Programmieren. Wir lernen, dass ein Programm\n"
+"eine Menge von Schritten ist."
 
 #: src\functional/paradigms.md:40
 msgid "## Declarative"
@@ -6980,7 +6966,6 @@ msgstr ""
 "der Kompilierzeitgarantien von Rust."
 
 #: src\functional/generics-type-classes.md:11
-#, fuzzy
 msgid ""
 "A key part of this idea is the way generic types work. In C++ and Java, for\n"
 "example, generic types are a meta-programming construct for the compiler.\n"
@@ -6988,11 +6973,11 @@ msgid ""
 "same boilerplate code for a `vector` type (known as a `template`) with two\n"
 "different types filled in."
 msgstr ""
-"Ein wichtiger Teil dieser Idee ist die Funktionsweise generischer Typen. In C++ und Java, z\n"
-"Beispielsweise sind generische Typen ein Metaprogrammierungskonstrukt für den Compiler.\n"
-"`vector<int>` und `vector<char>` in C++ sind nur zwei verschiedene Kopien der\n"
-"gleichen Boilerplate-Code für einen \"Vektor\"-Typ (bekannt als \"Vorlage\") mit zwei\n"
-"verschiedene Typen ausgefüllt."
+"Ein wichtiger Teil dieser Idee ist die Funktionsweise generischer Typen. In C++ und Java\n"
+"sind generische Typen ein Metaprogrammierungskonstrukt für den Compiler.\n"
+"`vector<int>` und `vector<char>` in C++ sind nur zwei verschiedene Kopien des\n"
+"gleichen Textbaustein-Codes für einen `vector`-Typ (bekannt als `template`) mit zwei\n"
+"verschiedenen Typen ausgefüllt."
 
 #: src\functional/generics-type-classes.md:17
 #, fuzzy
@@ -7010,17 +6995,17 @@ msgstr ""
 "Typ System."
 
 #: src\functional/generics-type-classes.md:23
-#, fuzzy
 msgid ""
 "This is called **monomorphization**, where different types are created from\n"
 "**polymorphic** code. This special behavior requires `impl` blocks to specify\n"
 "generic parameters. Different values for the generic type cause different types,\n"
 "and different types can have different `impl` blocks."
 msgstr ""
-"Dies wird **Monomorphisierung** genannt, wobei verschiedene Typen erstellt werden\n"
-"**polymorpher** Code. Dieses spezielle Verhalten erfordert die Angabe von `impl`-Blöcken\n"
-"generische Parameter. Unterschiedliche Werte für den generischen Typ bewirken unterschiedliche Typen,\n"
-"und unterschiedliche Typen können unterschiedliche \"impl\"-Blöcke haben."
+"Dies wird **Monomorphisierung** genannt, wobei verschiedene Typen von **polymorphem**\n"
+"Code erstellt werden. Dieses spezielle Verhalten erfordert die Angabe von generischen Parametern\n"
+"in `impl`-Blöcken.\n"
+"Unterschiedliche Werte für den generischen Typ bewirken unterschiedliche Typen,\n"
+"und unterschiedliche Typen können unterschiedliche `impl`-Blöcke haben."
 
 #: src\functional/generics-type-classes.md:28
 #, fuzzy
