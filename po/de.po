@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 02:31+0200\n"
+"PO-Revision-Date: 2023-04-09 02:51+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -39,9 +39,8 @@ msgid "Constructor"
 msgstr "Konstrukteur"
 
 #: src\SUMMARY.md:9
-#, fuzzy
 msgid "The Default Trait"
-msgstr "Die Standardeigenschaft"
+msgstr "Der Standard-Trait"
 
 #: src\SUMMARY.md:10
 msgid "Collections Are Smart Pointers"
@@ -790,9 +789,8 @@ msgid "## Default Constructors\r"
 msgstr "## Standardkonstruktoren\r"
 
 #: src\idioms/ctor.md:37
-#, fuzzy
 msgid "Rust supports default constructors with the [`Default`][std-default] trait:"
-msgstr "Rust unterstützt Standardkonstruktoren mit der Eigenschaft [`Default`][std-default]:"
+msgstr "Rust unterstützt Standardkonstruktoren mit dem [`Default`][std-default]-Trait:"
 
 #: src\idioms/ctor.md:39
 msgid ""
@@ -889,7 +887,6 @@ msgid "## See also\r"
 msgstr "## Siehe auch\r"
 
 #: src\idioms/ctor.md:103
-#, fuzzy
 msgid ""
 "- The [default idiom](default.md) for a more in-depth description of the\r\n"
 "  `Default` trait.\r\n"
@@ -901,20 +898,19 @@ msgid ""
 "  implementing both, `Default` and `new`.\r\n"
 "\r"
 msgstr ""
-"- Das [Standard-Idiom] (default.md) für eine ausführlichere Beschreibung der\r\n"
-"  „Standard“-Merkmal.\r\n"
+"- Das [Standard-Idiom] (default.md) für eine ausführlichere Beschreibung des\r\n"
+"  `Standard`-Traits.\r\n"
 "\r\n"
-"- Das [Builder-Muster](../patterns/creational/builder.md) zum Konstruieren\r\n"
-"  Objekte mit mehreren Konfigurationen.\r\n"
+"- Das [Builder-Muster](../patterns/creational/builder.md) zum Konstruieren von\r\n"
+"  Objekten mit mehreren Konfigurationen.\r\n"
 "\r\n"
 "- [API-Richtlinien/C-COMMON-TRAITS][API-Richtlinien/C-COMMON-TRAITS] für\r\n"
-"  sowohl `Default` als auch `new` implementieren.\r\n"
+"  Implementierungen von sowohl `Default` als auch `new`.\r\n"
 "\r"
 
 #: src\idioms/default.md:1
-#, fuzzy
 msgid "# The `Default` Trait"
-msgstr "# Die `Standard`-Eigenschaft"
+msgstr "# Der `Standard`-Trait"
 
 #: src\idioms/default.md:5
 msgid ""
@@ -1014,8 +1010,8 @@ msgid ""
 "trait to treat collections like smart pointers, offering owning\n"
 "and borrowed views of data."
 msgstr ""
-"Verwenden Sie die [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)\n"
-"Eigenschaft, Sammlungen wie intelligente Zeiger zu behandeln und Besitz anzubieten\n"
+"Verwenden Sie den [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)-Trait\n"
+"um Sammlungen wie intelligente Zeiger zu behandeln und Besitz anzubieten\n"
 "und geborgte Ansichten von Daten."
 
 #: src\idioms/deref.md:11
@@ -1095,15 +1091,14 @@ msgid "Gives clients a choice between borrowing or taking ownership of data."
 msgstr "Gibt Kunden die Wahl, ob sie Daten ausleihen oder in Besitz nehmen möchten."
 
 #: src\idioms/deref.md:52
-#, fuzzy
 msgid ""
 "Methods and traits only available via dereferencing are not taken into account\n"
 "when bounds checking, so generic programming with data structures using this\n"
 "pattern can get complex (see the `Borrow` and `AsRef` traits, etc.)."
 msgstr ""
-"Methoden und Merkmale, die nur über Dereferenzierung verfügbar sind, werden nicht berücksichtigt\n"
-"beim Prüfen von Grenzen, also generisches Programmieren mit Datenstrukturen, die diese verwenden\n"
-"Das Muster kann komplex werden (siehe die Eigenschaften `Borrow` und `AsRef` usw.)."
+"Methoden und Traits, die nur über Dereferenzierung verfügbar sind, werden nicht beim\n"
+"Prüfen von Grenzen berücksichtigt. Generisches Programmieren mit diesen Datenstrukturen\n"
+"kann sehr komplex werden (siehe `Borrow`- und `AsRef`-Trait, usw.)."
 
 #: src\idioms/deref.md:56 src\idioms/dtor-finally.md:61 src\idioms/mem-replace.md:97 src\idioms/on-stack-dyn-dispatch.md:68
 #: src\idioms/priv-extend.md:85 src\patterns/behavioural/command.md:203 src\patterns/behavioural/interpreter.md:103
@@ -1159,13 +1154,12 @@ msgstr ""
 "Slicing-Syntax. Das Ziel ist die geliehene Ansicht."
 
 #: src\idioms/deref.md:78
-#, fuzzy
 msgid ""
 "- [Deref polymorphism anti-pattern](../anti_patterns/deref.md).\n"
 "- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html)."
 msgstr ""
 "- [Deref-Polymorphismus-Antimuster](../anti_patterns/deref.md).\n"
-"- [Dokumentation für das `Deref`-Merkmal](https://doc.rust-lang.org/std/ops/trait.Deref.html)."
+"- [Dokumentation für den `Deref`-Trait](https://doc.rust-lang.org/std/ops/trait.Deref.html)."
 
 #: src\idioms/dtor-finally.md:1
 msgid "# Finalisation in destructors"
@@ -1489,15 +1483,13 @@ msgstr ""
 "Sprachen."
 
 #: src\idioms/mem-replace.md:94
-#, fuzzy
 msgid ""
 "Furthermore, the type you are taking needs to implement the [`Default` trait](./default.md). However, if the type you're working with "
 "doesn't\n"
 "implement this, you can instead use `mem::replace`."
 msgstr ""
-"Darüber hinaus muss der von Ihnen gewählte Typ das Merkmal [`Default`](./default.md) implementieren. Wenn der Typ, mit dem Sie arbeiten, "
-"dies jedoch nicht tut\n"
-"Um dies zu implementieren, können Sie stattdessen `mem::replace` verwenden."
+"Darüber hinaus muss der von Ihnen gewählte Typ den [`Default` Trait](./default.md) implementieren. Wenn der Typ, mit dem Sie arbeiten,\n"
+"dies jedoch nicht tut, können Sie stattdessen `mem::replace` verwenden."
 
 #: src\idioms/mem-replace.md:99
 #, fuzzy
@@ -2303,28 +2295,27 @@ msgid "# Iterating over an `Option`"
 msgstr "# Iteration über eine `Option`"
 
 #: src\idioms/option-iter.md:5
-#, fuzzy
 msgid ""
 "`Option` can be viewed as a container that contains either zero or one\n"
 "element. In particular, it implements the `IntoIterator` trait, and as such\n"
 "can be used with generic code that needs such a type."
 msgstr ""
-"„Option“ kann als Container angesehen werden, der entweder Null oder Eins enthält\n"
-"Element. Insbesondere implementiert es das `IntoIterator`-Merkmal und als solches\n"
-"kann mit generischem Code verwendet werden, der einen solchen Typ benötigt."
+"„Option“ kann als Container angesehen werden, der entweder Null oder ein Element\n"
+"enthält.\n"
+"Insbesondere implementiert dieser den `IntoIterator`-Trait und kann als solches\n"
+"mit generischem Code verwendet werden, wenn ein solcher Typ benötigt wird."
 
 #: src\idioms/option-iter.md:9 src\patterns/structural/small-crates.md:34 src\patterns/structural/unsafe-mods.md:22
 msgid "## Examples"
 msgstr "## Beispiele"
 
 #: src\idioms/option-iter.md:11
-#, fuzzy
 msgid ""
 "Since `Option` implements `IntoIterator`, it can be used as an argument to\n"
 "[`.extend()`](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend):"
 msgstr ""
-"Da `Option` `IntoIterator` implementiert, kann es als Argument für verwendet werden\n"
-"[`.extend()`](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend):"
+"Da `Option` `IntoIterator` implementiert, kann es als Argument für\n"
+"[`.extend()`](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend) verwendet werden:"
 
 #: src\idioms/option-iter.md:14
 msgid ""
