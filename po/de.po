@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 05:48+0200\n"
+"PO-Revision-Date: 2023-04-09 06:21+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -727,13 +727,12 @@ msgid "## Description\r"
 msgstr "## Beschreibung\r"
 
 #: src\idioms/ctor.md:5
-#, fuzzy
 msgid ""
 "Rust does not have constructors as a language construct. Instead, the\r\n"
 "convention is to use an [associated function][associated function] `new` to create an object:"
 msgstr ""
-"Rust hat keine Konstruktoren als Sprachkonstrukt. Stattdessen die\r\n"
-"Die Konvention besteht darin, eine [zugehörige Funktion][zugehörige Funktion] \"neu\" zu verwenden, um ein Objekt zu erstellen:"
+"Rust hat keine Konstruktoren als Sprachkonstrukt. Stattdessen besteht die\r\n"
+"Konvention darin, die [zugehörige Funktion][associated function] `new` zu verwenden, um ein Objekt zu erstellen:"
 
 #: src\idioms/ctor.md:8
 msgid ""
@@ -804,13 +803,12 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ctor.md:66
-#, fuzzy
 msgid ""
 "`Default` can also be derived if all types of all fields implement `Default`,\r\n"
 "like they do with `Second`:"
 msgstr ""
 "`Default` kann auch abgeleitet werden, wenn alle Typen aller Felder `Default` implementieren,\r\n"
-"wie bei `Second`:"
+"wie hier bei `Second`:"
 
 #: src\idioms/ctor.md:69
 msgid ""
@@ -1201,13 +1199,12 @@ msgstr ""
 "Durch Panik wird eine Funktion auch vorzeitig beendet."
 
 #: src\idioms/dtor-finally.md:44
-#, fuzzy
 msgid ""
 "Code in destructors will (nearly) always be run - copes with panics, early\n"
 "returns, etc."
 msgstr ""
-"Code in Destruktoren wird (fast) immer ausgeführt - bewältigt frühzeitig Panik\n"
-"Rücksendungen usw."
+"Code in Destruktoren wird (fast) immer ausgeführt - bewältigt `panics`\n"
+"und vorzeitige Rückgaben, usw."
 
 #: src\idioms/dtor-finally.md:49
 #, fuzzy
@@ -1303,7 +1300,6 @@ msgstr ""
 "Ressourcen in einem unerwarteten Zustand."
 
 #: src\idioms/dtor-finally.md:90
-#, fuzzy
 msgid "[RAII guards](../patterns/behavioural/RAII.md)."
 msgstr "[RAII-Wächter](../patterns/behavioral/RAII.md)."
 
@@ -1324,9 +1320,8 @@ msgstr ""
 "`MyEnum::A` zu einem `B` wenn `x` Null ist, während `MyEnum::B` intakt bleibt."
 
 #: src\idioms/mem-replace.md:9
-#, fuzzy
 msgid "We can do this without cloning the `name`."
-msgstr "Wir können dies tun, ohne den \"Namen\" zu klonen."
+msgstr "Wir können dies tun, ohne `name` zu klonen."
 
 #: src\idioms/mem-replace.md:13
 msgid ""
@@ -1446,9 +1441,8 @@ msgstr ""
 "idiomatischere Alternative."
 
 #: src\idioms/mem-replace.md:85
-#, fuzzy
 msgid "Look ma, no allocation! Also you may feel like Indiana Jones while doing it."
-msgstr "Guck ma, keine Zuordnung! Sie können sich dabei auch wie Indiana Jones fühlen."
+msgstr "Guck ma, keine Zuordnung! Wir können uns dabei wie Indiana Jones fühlen."
 
 #: src\idioms/mem-replace.md:89
 #, fuzzy
@@ -1620,7 +1614,6 @@ msgstr ""
 "Umfang."
 
 #: src\idioms/on-stack-dyn-dispatch.md:76
-#, fuzzy
 msgid "The example meets all the constraints Rust places on us:"
 msgstr "Das Beispiel erfüllt alle Einschränkungen, die Rust uns auferlegt:"
 
@@ -1870,26 +1863,24 @@ msgstr ""
 "ohne die API des Rust-Codes zu gefährden."
 
 #: src\idioms/ffi/errors.md:138
-#, fuzzy
 msgid ""
 "It's a lot of typing, and some types may not be able to be converted easily\n"
 "to C."
 msgstr ""
-"Es ist eine Menge Tipparbeit und einige Typen können möglicherweise nicht einfach konvertiert werden\n"
-"zu C."
+"Es ist eine Menge Tipparbeit und einige Typen können möglicherweise nicht einfach nach C\n"
+"konvertiert werden."
 
 #: src\idioms/ffi/accepting-strings.md:1
 msgid "# Accepting Strings"
 msgstr "# Akzeptieren von Zeichenketten"
 
 #: src\idioms/ffi/accepting-strings.md:5
-#, fuzzy
 msgid ""
 "When accepting strings via FFI through pointers, there are two principles that\n"
 "should be followed:"
 msgstr ""
 "Beim Akzeptieren von Zeichenfolgen über FFI durch Zeiger gibt es zwei Prinzipien\n"
-"sollte befolgt werden:"
+"befolgt werden sollten:"
 
 #: src\idioms/ffi/accepting-strings.md:8
 #, fuzzy
@@ -1998,9 +1989,8 @@ msgstr ""
 "   Referenz"
 
 #: src\idioms/ffi/accepting-strings.md:76
-#, fuzzy
 msgid "Consider an alternative, where the string is actually copied:"
-msgstr "Betrachten Sie eine Alternative, bei der die Zeichenfolge tatsächlich kopiert wird:"
+msgstr "Schauen wir uns nun eine Alternative an, bei der die Zeichenfolge tatsächlich kopiert wird:"
 
 #: src\idioms/ffi/accepting-strings.md:78
 msgid ""
@@ -2048,7 +2038,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ffi/accepting-strings.md:120
-#, fuzzy
 msgid "This code in inferior to the original in two respects:"
 msgstr "Dieser Code ist dem Original in zweierlei Hinsicht unterlegen:"
 
@@ -2111,13 +2100,10 @@ msgid "# Passing Strings"
 msgstr "# Übergeben von Zeichenketten"
 
 #: src\idioms/ffi/passing-strings.md:5
-#, fuzzy
 msgid ""
 "When passing strings to FFI functions, there are four principles that should be\n"
 "followed:"
-msgstr ""
-"Beim Übergeben von Zeichenfolgen an FFI-Funktionen sollten vier Prinzipien gelten\n"
-"gefolgt:"
+msgstr "Beim Übergeben von Zeichenfolgen an FFI-Funktionen sollten vier Prinzipien befolgt werden:"
 
 #: src\idioms/ffi/passing-strings.md:8
 #, fuzzy
@@ -2204,7 +2190,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/ffi/passing-strings.md:70
-#, fuzzy
 msgid "The example is written in a way to ensure that:"
 msgstr "Das Beispiel ist so geschrieben, dass Folgendes sichergestellt ist:"
 
@@ -2640,7 +2625,6 @@ msgstr ""
 "Eine `#[non_exhaustive]`-Variante verhält sich genauso wie eine `#[non_exhaustive]`-Struktur."
 
 #: src\idioms/priv-extend.md:98
-#, fuzzy
 msgid ""
 "Use this deliberately and with caution: incrementing the major version when adding\n"
 "fields or variants is often a better option.\n"
@@ -2648,18 +2632,17 @@ msgid ""
 "resource that may change out-of-sync with your library, but is not a general purpose\n"
 "tool."
 msgstr ""
-"Verwenden Sie dies bewusst und mit Vorsicht: Erhöhen Sie die Hauptversion beim Hinzufügen\n"
-"Felder oder Varianten ist oft die bessere Option.\n"
-"`#[non_exhaustive]` kann in Szenarien angemessen sein, in denen Sie eine externe modellieren\n"
-"Ressource, die sich möglicherweise nicht mehr synchron mit Ihrer Bibliothek ändert, aber kein allgemeiner Zweck ist\n"
-"Werkzeug."
+"Verwenden Sie dies bewusst und mit Vorsicht: Das Erhöhen der Hauptversion beim Hinzufügen\n"
+"von Feldern oder Varianten ist oft die bessere Option.\n"
+"`#[non_exhaustive]` kann in Szenarien angemessen sein, in denen Sie eine externe Ressource\n"
+"modellieren, die sich möglicherweise nicht synchron der Entwicklung Ihrer Bibliothek ändert.\n"
+"Es ist aber kein Allzweckwerkzeug."
 
 #: src\idioms/priv-extend.md:104
 msgid "### Disadvantages"
 msgstr "### Nachteile"
 
 #: src\idioms/priv-extend.md:106
-#, fuzzy
 msgid ""
 "`#[non_exhaustive]` can make your code much less ergonomic to use, especially when\n"
 "forced to handle unknown enum variants.\n"
@@ -2667,9 +2650,9 @@ msgid ""
 "incrementing the major version."
 msgstr ""
 "`#[non_exhaustive]` kann Ihren Code viel weniger ergonomisch machen, besonders wenn\n"
-"gezwungen, mit unbekannten Enum-Varianten umzugehen.\n"
-"Es sollte nur verwendet werden, wenn diese Art von Entwicklungen **ohne** erforderlich sind\n"
-"Erhöhen der Hauptversion."
+"Entwickler dadurch gezwungen werden, mit unbekannten Enum-Varianten umzugehen.\n"
+"Es sollte nur verwendet werden, wenn diese Art von Entwicklungen **ohne** Erhöhen der\n"
+"Hauptversion erforderlich sind."
 
 #: src\idioms/priv-extend.md:111
 msgid ""
@@ -2712,7 +2695,6 @@ msgid "## Motivation\r"
 msgstr "## Motivation\r"
 
 #: src\idioms/rustdoc-init.md:11
-#, fuzzy
 msgid ""
 "Sometimes there is a struct with multiple or complicated parameters and several\r\n"
 "methods. Each of these methods should have examples."
@@ -2721,7 +2703,6 @@ msgstr ""
 "Methoden. Für jede dieser Methoden sollten Beispiele vorhanden sein."
 
 #: src\idioms/rustdoc-init.md:14
-#, fuzzy
 msgid "For example:"
 msgstr "Zum Beispiel:"
 
@@ -2758,7 +2739,6 @@ msgid ""
 msgstr ""
 
 #: src\idioms/rustdoc-init.md:45
-#, fuzzy
 msgid "## Example\r"
 msgstr "## Beispiel\r"
 
@@ -2810,7 +2790,6 @@ msgid "## Advantages\r"
 msgstr "## Vorteile\r"
 
 #: src\idioms/rustdoc-init.md:79
-#, fuzzy
 msgid "This is much more concise and avoids repetitive code in examples."
 msgstr "Dies ist viel prägnanter und vermeidet sich wiederholenden Code in Beispielen."
 
@@ -2819,24 +2798,22 @@ msgid "## Disadvantages\r"
 msgstr "## Nachteile\r"
 
 #: src\idioms/rustdoc-init.md:83
-#, fuzzy
 msgid ""
 "As example is in a function, the code will not be tested. Though it will still be\r\n"
 "checked to make sure it compiles when running a `cargo test`. So this pattern is\r\n"
 "most useful when you need `no_run`. With this, you do not need to add `no_run`."
 msgstr ""
-"Da sich das Beispiel in einer Funktion befindet, wird der Code nicht getestet. Obwohl es immer noch sein wird\r\n"
-"überprüft, um sicherzustellen, dass es kompiliert wird, wenn ein `Ladungstest` ausgeführt wird. Also dieses Muster ist\r\n"
-"am nützlichsten, wenn Sie `no_run` brauchen. Damit brauchen Sie `no_run` nicht hinzuzufügen."
+"Da sich das Beispiel in einer Funktion befindet, wird der Code nicht getestet. Obwohl es trotzdem überprüft wird,\r\n"
+"um sicherzustellen, dass es kompiliert werden kann, wenn `cargo test` ausgeführt wird. Also dieses Muster ist\r\n"
+"am nützlichsten, wenn Sie `no_run` brauchen. Damit brauchen Sie `no_run` nicht extra hinzuzufügen."
 
 #: src\idioms/rustdoc-init.md:87
 msgid "## Discussion\r"
 msgstr "## Diskussion\r"
 
 #: src\idioms/rustdoc-init.md:89
-#, fuzzy
 msgid "If assertions are not required this pattern works well."
-msgstr "Wenn Behauptungen nicht erforderlich sind, funktioniert dieses Muster gut."
+msgstr "Wenn `assertions` nicht erforderlich sind, funktioniert dieses Muster gut."
 
 #: src\idioms/rustdoc-init.md:91
 #, fuzzy
@@ -2912,9 +2889,8 @@ msgid ""
 msgstr ""
 
 #: src\idioms/temporary-mutability.md:40
-#, fuzzy
 msgid "Compiler ensures that you don't accidentally mutate data after some point."
-msgstr "Der Compiler stellt sicher, dass Sie nach einem bestimmten Punkt nicht versehentlich Daten mutieren."
+msgstr "Der Compiler stellt sicher, dass Sie nach einem bestimmten Punkt nicht versehentlich Daten ändern."
 
 #: src\idioms/temporary-mutability.md:44
 #, fuzzy
@@ -2989,17 +2965,15 @@ msgstr ""
 "ist nicht sehr effizient."
 
 #: src\idioms/return-consumed-arg-on-error.md:50
-#, fuzzy
 msgid ""
 "The standard library uses this approach in e.g. `String::from_utf8` method.\n"
 "When given a vector that doesn't contain valid UTF-8, a `FromUtf8Error`\n"
 "is returned.\n"
 "You can get original vector back using `FromUtf8Error::into_bytes` method."
 msgstr ""
-"Die Standardbibliothek verwendet diesen Ansatz z. `String::from_utf8`-Methode.\n"
-"Wenn ein Vektor übergeben wird, der kein gültiges UTF-8 enthält, wird ein `FromUtf8Error` ausgegeben\n"
-"ist zurück gekommen.\n"
-"Sie können den ursprünglichen Vektor mit der Methode \"FromUtf8Error::into_bytes\" zurückerhalten."
+"Die Standardbibliothek verwendet diesen Ansatz z.B. in der `String::from_utf8`-Methode.\n"
+"Wenn ein Vektor übergeben wird, der kein gültiges UTF-8 enthält, wird ein `FromUtf8Error` zurückgegeben.\n"
+"Sie können den ursprünglichen Vektor mit der Methode `FromUtf8Error::into_bytes` zurückerhalten."
 
 #: src\idioms/return-consumed-arg-on-error.md:57
 #, fuzzy
@@ -3041,29 +3015,27 @@ msgstr ""
 "und fortgeschrittenem Niveau zu teilen."
 
 #: src\patterns/index.md:16
-#, fuzzy
 msgid ""
 "Rust has many unique features. These features give us great benefit by removing\n"
 "whole classes of problems. Some of them are also patterns that are _unique_ to Rust."
 msgstr ""
-"Rost hat viele einzigartige Eigenschaften. Diese Funktionen bringen uns große Vorteile durch das Entfernen\n"
-"ganze Problemklassen. Einige von ihnen sind auch Muster, die für Rust _einzigartig_ sind."
+"Rust hat viele Besonderheiten, welche uns große Vorteile durch das weglassen\n"
+"ganzer Problemklassen bringen. Einige von ihnen sind auch Muster, die für Rust _einzigartig_ sind."
 
 #: src\patterns/index.md:19
 msgid "## YAGNI"
 msgstr "## YAGNI"
 
 #: src\patterns/index.md:21
-#, fuzzy
 msgid ""
 "YAGNI is an acronym that stands for `You Aren't Going to Need It`.\n"
 "It's a vital software design principle to apply as you write code."
 msgstr ""
 "YAGNI ist ein Akronym, das für \"You Aren't Going to Need It\" steht.\n"
+"Was soviel heist wie: \"Du wirst es nicht brauchen\".\n"
 "Es ist ein wichtiges Software-Designprinzip, das Sie beim Schreiben von Code anwenden müssen."
 
 #: src\patterns/index.md:24
-#, fuzzy
 msgid "> The best code I ever wrote was code I never wrote."
 msgstr "> Der beste Code, den ich je geschrieben habe, war Code, den ich nie geschrieben habe."
 
@@ -3082,7 +3054,6 @@ msgid "# Behavioural Patterns"
 msgstr "# Verhaltensmuster"
 
 #: src\patterns/behavioural/intro.md:3
-#, fuzzy
 msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern):"
 msgstr "Aus [Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern):"
 
@@ -4040,7 +4011,6 @@ msgstr ""
 "(derzeit nur ein Platzhalter)."
 
 #: src\patterns/behavioural/strategy.md:1
-#, fuzzy
 msgid "# Strategy (aka Policy)"
 msgstr "# Strategie (auch bekannt als Richtlinie)"
 
@@ -4240,18 +4210,16 @@ msgstr ""
 "nützlicher und ergonomischer."
 
 #: src\patterns/behavioural/strategy.md:127
-#, fuzzy
 msgid "However, we don't need to use traits in order to design this pattern in Rust."
-msgstr "Wir müssen jedoch keine Eigenschaften verwenden, um dieses Muster in Rust zu entwerfen."
+msgstr "Wir müssen jedoch keine Traits verwenden, um dieses Muster in Rust zu entwerfen."
 
 #: src\patterns/behavioural/strategy.md:129
-#, fuzzy
 msgid ""
 "The following toy example demonstrates the idea of the Strategy pattern using Rust\n"
 "`closures`:"
 msgstr ""
-"Das folgende Spielzeugbeispiel demonstriert die Idee des Strategiemusters mit Rust\n"
-"`Schließungen`:"
+"Das folgende Beispiel demonstriert die Idee des Strategiemusters mit Hilfe von\n"
+"Rust `closures`:"
 
 #: src\patterns/behavioural/strategy.md:132
 msgid ""
@@ -4285,9 +4253,8 @@ msgid ""
 msgstr ""
 
 #: src\patterns/behavioural/strategy.md:160
-#, fuzzy
 msgid "In fact, Rust already uses this idea for `Options`'s `map` method:"
-msgstr "Tatsächlich verwendet Rust diese Idee bereits für die `map`-Methode von `Options`:"
+msgstr "Tatsächlich verwendet Rust diese Idee bereits für die `map`-Methode von `Option`:"
 
 #: src\patterns/behavioural/strategy.md:162
 msgid ""
@@ -4465,12 +4432,10 @@ msgstr ""
 "der die gleiche Aufgabe erfüllt."
 
 #: src\patterns/behavioural/visitor.md:108
-#, fuzzy
 msgid "The visitor pattern is a common pattern in most OO languages."
 msgstr "Das Besuchermuster ist ein allgemeines Muster in den meisten OO-Sprachen."
 
 #: src\patterns/behavioural/visitor.md:110
-#, fuzzy
 msgid "[Wikipedia article](https://en.wikipedia.org/wiki/Visitor_pattern)"
 msgstr "[Wikipedia-Artikel](https://en.wikipedia.org/wiki/Visitor_pattern)"
 
@@ -4484,12 +4449,10 @@ msgstr ""
 "eine neue Version der besuchten Datenstruktur."
 
 #: src\patterns/creational/intro.md:1
-#, fuzzy
 msgid "# Creational Patterns"
-msgstr "# Schöpfungsmuster"
+msgstr "# Erzeugungsmuster"
 
 #: src\patterns/creational/intro.md:3
-#, fuzzy
 msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern):"
 msgstr "Aus [Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern):"
 
@@ -4506,9 +4469,8 @@ msgstr ""
 "> lösen dieses Problem, indem sie diese Objekterstellung steuern."
 
 #: src\patterns/creational/builder.md:1
-#, fuzzy
 msgid "# Builder"
-msgstr "# Baumeister"
+msgstr "# Erbauer"
 
 #: src\patterns/creational/builder.md:5
 #, fuzzy
@@ -4682,9 +4644,8 @@ msgstr ""
 "builder)"
 
 #: src\patterns/creational/fold.md:1
-#, fuzzy
 msgid "# Fold"
-msgstr "# Falten"
+msgstr "# Falz"
 
 #: src\patterns/creational/fold.md:5
 #, fuzzy
@@ -4903,7 +4864,6 @@ msgid "# Structural Patterns"
 msgstr "# Strukturelle Muster"
 
 #: src\patterns/structural/intro.md:3
-#, fuzzy
 msgid "From [Wikipedia](https://en.wikipedia.org/wiki/Structural_pattern):"
 msgstr "Aus [Wikipedia] (https://en.wikipedia.org/wiki/Structural_pattern):"
 
@@ -4921,9 +4881,8 @@ msgid "# Compose structs together for better borrowing"
 msgstr "# Zusammenstellen von Strukturen zum besseren Ausleihen"
 
 #: src\patterns/structural/compose-structs.md:3
-#, fuzzy
 msgid "TODO - this is not a very snappy name"
-msgstr "TODO - das ist kein sehr bissiger Name"
+msgstr ""
 
 #: src\patterns/structural/compose-structs.md:7
 #, fuzzy
@@ -5021,14 +4980,12 @@ msgid ""
 msgstr ""
 
 #: src\patterns/structural/compose-structs.md:73
-#, fuzzy
 msgid "TODO Why and where you should use the pattern"
-msgstr "TODO Warum und wo Sie das Muster verwenden sollten"
+msgstr ""
 
 #: src\patterns/structural/compose-structs.md:77
-#, fuzzy
 msgid "Lets you work around limitations in the borrow checker."
-msgstr "Ermöglicht das Umgehen von Einschränkungen in der Ausleihprüfung."
+msgstr "Ermöglicht das Umgehen von Einschränkungen durch den Borrow-Checker."
 
 #: src\patterns/structural/compose-structs.md:79
 msgid "Often produces a better design."
@@ -5139,34 +5096,30 @@ msgstr ""
 "  führt standardmäßig keine Link-Time-Optimierung (LTO) durch."
 
 #: src\patterns/structural/small-crates.md:36
-#, fuzzy
 msgid ""
 "The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions\n"
 "for converting `&T` to `&[T]`."
 msgstr ""
-"Die Kiste [`ref_slice`](https://crates.io/crates/ref_slice) stellt Funktionen bereit\n"
-"zum Konvertieren von `&T` in `&[T]`."
+"Das [`ref_slice`](https://crates.io/crates/ref_slice) Paket stellt Funktionen\n"
+"zum Konvertieren von `&T` in `&[T]` bereit."
 
 #: src\patterns/structural/small-crates.md:39
-#, fuzzy
 msgid ""
 "The [`url`](https://crates.io/crates/url) crate provides tools for working with\n"
 "URLs."
 msgstr ""
-"Die Kiste [`url`](https://crates.io/crates/url) stellt Werkzeuge zum Arbeiten bereit\n"
-"URLs."
+"Das [`url`](https://crates.io/crates/url) Paket stellt Werkzeuge zum Arbeiten mit\n"
+"URLs bereit."
 
 #: src\patterns/structural/small-crates.md:42
-#, fuzzy
 msgid ""
 "The [`num_cpus`](https://crates.io/crates/num_cpus) crate provides a function to\n"
 "query the number of CPUs on a machine."
 msgstr ""
-"Die Kiste [`num_cpus`](https://crates.io/crates/num_cpus) stellt eine Funktion zur Verfügung\n"
-"die Anzahl der CPUs auf einer Maschine abfragen."
+"Das [`num_cpus`](https://crates.io/crates/num_cpus) Paket stellt eine Funktion zur Verfügung,\n"
+"die die Anzahl der CPUs auf einer Maschine abfragen und zurückgeben kann."
 
 #: src\patterns/structural/small-crates.md:47
-#, fuzzy
 msgid "- [crates.io: The Rust community crate host](https://crates.io/)"
 msgstr "- [crates.io: Der Crate-Host der Rust-Community](https://crates.io/)"
 
@@ -5249,9 +5202,8 @@ msgstr ""
 "für unerfahrene Benutzer von unsicherem Rust."
 
 #: src\patterns/ffi/intro.md:7
-#, fuzzy
 msgid "This section contains design patterns that may be useful when doing FFI."
-msgstr "Dieser Abschnitt enthält Entwurfsmuster, die bei der Durchführung von FFI nützlich sein können."
+msgstr "Dieser Abschnitt enthält Entwurfsmuster, die bei der Nutzung von FFI nützlich sein können."
 
 #: src\patterns/ffi/intro.md:9
 #, fuzzy
@@ -5881,7 +5833,6 @@ msgstr ""
 "durch eine Sammlung."
 
 #: src\patterns/ffi/wrappers.md:28
-#, fuzzy
 msgid "That API looks like this:"
 msgstr "Diese API sieht so aus:"
 
@@ -6333,7 +6284,6 @@ msgid ""
 msgstr ""
 
 #: src\anti_patterns/deny-warnings.md:18
-#, fuzzy
 msgid "It is short and will stop the build if anything is amiss."
 msgstr "Es ist kurz und stoppt den Build, wenn etwas nicht stimmt."
 
@@ -6740,9 +6690,8 @@ msgstr ""
 "- [Dokumentation für das `Deref`-Merkmal](https://doc.rust-lang.org/std/ops/trait.Deref.html)."
 
 #: src\functional/index.md:1
-#, fuzzy
 msgid "# Functional Usage of Rust"
-msgstr "# Funktionale Nutzung von Rust"
+msgstr "# Funktionales Programmieren in Rust"
 
 #: src\functional/index.md:3
 msgid ""
