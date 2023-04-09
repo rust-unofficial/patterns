@@ -25,7 +25,11 @@ env:
   # TODO: Update the language picker in index.hbs to link new languages.
   # TODO: As long as https://github.com/google/mdbook-i18n-helpers/issues/12 is not implemented, yet.
   # These are the languages in addition to 'en', which is the main language
-  LANGUAGES: de
+  # de linked, due to being partly reviewed
+  # es not linked, due to being mostly unreviewed
+  # it not linked, due to being mostly unreviewed
+  # pt-BR not linked, due to being mostly unreviewed
+  LANGUAGES: de es it pt-BR
 
 jobs:
   publish:
