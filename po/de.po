@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-04-09 06:21+0200\n"
+"PO-Revision-Date: 2023-04-09 07:12+0200\n"
 "Last-Translator: EMAIL@ADDRESS\n"
 "Language-Team: German\n"
 "Language: de\n"
@@ -92,7 +92,7 @@ msgstr "Einfache Dokumentationsinitialisierung"
 
 #: src\SUMMARY.md:22
 msgid "Temporary mutability"
-msgstr "Temporäre Veränderlichkeit"
+msgstr "Vorübergehende Veränderlichkeit"
 
 #: src\SUMMARY.md:23
 msgid "Return consumed arg on error"
