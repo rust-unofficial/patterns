@@ -33,6 +33,9 @@ We should take advantage of this tooling, and use smaller, more fine-grained dep
 
 ## Examples
 
+The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions
+for converting `&T` to `&[T]`.
+
 The [`url`](https://crates.io/crates/url) crate provides tools for working with
 URLs.
 
