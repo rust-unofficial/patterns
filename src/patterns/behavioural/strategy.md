@@ -27,8 +27,7 @@ format, or just modify one of the existing formats.
 
 ## Example
 
-In this example our invariants (or abstractions) are `Context`, `Formatter`,
-and `Report`, while `Text` and `Json` are our strategy structs. These strategies
+In this example our invariants (or abstractions) are `Formatter` and `Report`, while `Text` and `Json` are our strategy structs. These strategies
 have to implement the `Formatter` trait.
 
 ```rust
@@ -98,8 +97,9 @@ fn main() {
 The main advantage is separation of concerns. For example, in this case `Report`
 does not know anything about specific implementations of `Json` and `Text`,
 whereas the output implementations does not care about how data is preprocessed,
-stored, and fetched. The only thing they have to know is context and a specific
-trait and method to implement, i.e,`Formatter` and `run`.
+stored, and fetched. The only thing they have to know is a specific
+trait to implement and its method defining the concrete algorithm implementation processing
+the result, i.e., `Formatter` and `format(...)`.
 
 ## Disadvantages
 
