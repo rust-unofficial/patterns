@@ -20,51 +20,81 @@ Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:
 
 ```rust
-struct A {
-    f1: u32,
-    f2: u32,
-    f3: u32,
+struct Database {
+    connection_string: String,
+    timeout: u32,
+    pool_size: u32,
 }
 
-fn foo(a: &mut A) -> &u32 { &a.f2 }
-fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
+fn print_database(database: &Database) {
+    println!("Connection string: {}", database.connection_string);
+    println!("Timeout: {}", database.timeout);
+    println!("Pool size: {}", database.pool_size);
+}
 
-fn baz(a: &mut A) {
-    // The later usage of x causes a to be borrowed for the rest of the function.
-    let x = foo(a);
-    // Borrow checker error:
-    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once
-                       //          at a time
-    println!("{}", x);
+fn main() {
+    let mut db = Database {
+        connection_string: "initial string".to_string(),
+        timeout: 30,
+        pool_size: 100,
+    };
+
+    let connection_string = &mut db.connection_string;
+    print_database(&db);  // Immutable borrow of `db` happens here
+    *connection_string = "new string".to_string();  // Mutable borrow is used here
 }
 ```
 
-We can apply this design pattern and refactor `A` into two smaller structs, thus
-solving the borrow checking issue:
+We can apply this design pattern and refactor `Database` into three smaller
+structs, thus solving the borrow checking issue:
 
 ```rust
-// A is now composed of two structs - B and C.
-struct A {
-    b: B,
-    c: C,
-}
-struct B {
-    f2: u32,
-}
-struct C {
-    f1: u32,
-    f3: u32,
+// Database is now composed of three structs - ConnectionString, Timeout and PoolSize.
+// Let's decompose it into smaller structs
+#[derive(Clone)]
+struct ConnectionString {
+    value: String,
 }
 
-// These functions take a B or C, rather than A.
-fn foo(b: &mut B) -> &u32 { &b.f2 }
-fn bar(c: &mut C) -> u32 { c.f1 + c.f3 }
+struct Timeout {
+    value: u32,
+}
 
-fn baz(a: &mut A) {
-    let x = foo(&mut a.b);
-    // Now it's OK!
-    let y = bar(&mut a.c);
-    println!("{}", x);
+struct PoolSize {
+    value: u32,
+}
+
+// We then compose these smaller structs back into `Database`
+struct Database {
+    connection_string: ConnectionString,
+    timeout: Timeout,
+    pool_size: PoolSize,
+}
+
+// print_database can then take ConnectionString, Timeout and Poolsize struct instead
+fn print_database(connection_str: ConnectionString, 
+                  timeout: Timeout, 
+                  pool_size: PoolSize) {
+    println!("Connection string: {}", connection_str.value);
+    println!("Timeout: {}", timeout.value);
+    println!("Pool size: {}", pool_size.value);
+}
+
+fn main() {
+    // Initialize the three structs
+    let connection_string = ConnectionString { value: "localhost".to_string() };
+    let timeout = Timeout { value: 30 };
+    let pool_size = PoolSize { value: 100 };
+
+    let mut db = Database {
+        connection_string,
+        timeout,
+        pool_size,
+    };
+
+    let connection_string = &mut db.connection_string;
+    print_database(connection_string.clone(), db.timeout, db.pool_size);
+    *connection_string = ConnectionString{ value:"new string".to_string() };
 }
 ```
 
