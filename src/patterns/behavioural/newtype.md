@@ -17,7 +17,7 @@ This creates a new type, rather than an alias to a type (`type` items).
 
 ## Example
 
-```rust,ignore
+```rust
 use std::fmt::Display;
 
 // Create Newtype Password to override the Display trait for String
@@ -32,13 +32,13 @@ impl Display for Password {
 fn main() {
     let unsecured_password: String = "ThisIsMyPassword".to_string();
     let secured_password: Password = Password(unsecured_password.clone());
-    println!("unsecond_password: {}", unsecured_password);
-    println!("secured_password: {}", secured_password);
+    println!("unsecured_password: {unsecured_password}");
+    println!("secured_password: {secured_password}");
 }
 ```
 
 ```shell
-unsecond_password: ThisIsMyPassword
+unsecured_password: ThisIsMyPassword
 secured_password: ****************
 ```
 

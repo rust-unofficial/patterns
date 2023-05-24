@@ -41,7 +41,7 @@ fn main() {
 
     let connection_string = &mut db.connection_string;
     print_database(&db);  // Immutable borrow of `db` happens here
-    *connection_string = "new string".to_string();  // Mutable borrow is used here
+    // *connection_string = "new string".to_string();  // Mutable borrow is used here
 }
 ```
 
