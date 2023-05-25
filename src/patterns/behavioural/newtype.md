@@ -17,40 +17,29 @@ This creates a new type, rather than an alias to a type (`type` items).
 
 ## Example
 
-```rust,ignore
-// Some type, not necessarily in the same module or even crate.
-struct Foo {
-    //..
-}
+```rust
+use std::fmt::Display;
 
-impl Foo {
-    // These functions are not present on Bar.
-    //..
-}
+// Create Newtype Password to override the Display trait for String
+struct Password(String);
 
-// The newtype.
-pub struct Bar(Foo);
-
-impl Bar {
-    // Constructor.
-    pub fn new(
-        //..
-    ) -> Self {
-
-        //..
-
+impl Display for Password {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "****************")
     }
-
-    //..
 }
 
 fn main() {
-    let b = Bar::new(...);
-
-    // Foo and Bar are type incompatible, the following do not type check.
-    // let f: Foo = b;
-    // let b: Bar = Foo { ... };
+    let unsecured_password: String = "ThisIsMyPassword".to_string();
+    let secured_password: Password = Password(unsecured_password.clone());
+    println!("unsecured_password: {unsecured_password}");
+    println!("secured_password: {secured_password}");
 }
+```
+
+```shell
+unsecured_password: ThisIsMyPassword
+secured_password: ****************
 ```
 
 ## Motivation
@@ -108,4 +97,4 @@ with `Bar`.
 - [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
 - [derive_more](https://crates.io/crates/derive_more), a crate for deriving many
   builtin traits on newtypes.
-- [The Newtype Pattern In Rust](https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
+- [The Newtype Pattern In Rust](https://web.archive.org/web/20230519162111/https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
