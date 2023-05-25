@@ -51,18 +51,14 @@ structs, thus solving the borrow checking issue:
 ```rust
 // Database is now composed of three structs - ConnectionString, Timeout and PoolSize.
 // Let's decompose it into smaller structs
-#[derive(Clone)]
-struct ConnectionString {
-    value: String,
-}
+#[derive(Debug, Clone)]
+struct ConnectionString(String);
 
-struct Timeout {
-    value: u32,
-}
+#[derive(Debug)]
+struct Timeout(u32);
 
-struct PoolSize {
-    value: u32,
-}
+#[derive(Debug)]
+struct PoolSize(u32);
 
 // We then compose these smaller structs back into `Database`
 struct Database {
@@ -75,16 +71,16 @@ struct Database {
 fn print_database(connection_str: ConnectionString, 
                   timeout: Timeout, 
                   pool_size: PoolSize) {
-    println!("Connection string: {}", connection_str.value);
-    println!("Timeout: {}", timeout.value);
-    println!("Pool size: {}", pool_size.value);
+    println!("Connection string: {:?}", connection_str);
+    println!("Timeout: {:?}", timeout);
+    println!("Pool size: {:?}", pool_size);
 }
 
 fn main() {
     // Initialize the three structs
-    let connection_string = ConnectionString { value: "localhost".to_string() };
-    let timeout = Timeout { value: 30 };
-    let pool_size = PoolSize { value: 100 };
+    let connection_string = ConnectionString("localhost".to_string());
+    let timeout = Timeout(30);
+    let pool_size = PoolSize(100);
 
     let mut db = Database {
         connection_string,
@@ -94,7 +90,7 @@ fn main() {
 
     let connection_string = &mut db.connection_string;
     print_database(connection_string.clone(), db.timeout, db.pool_size);
-    *connection_string = ConnectionString{ value:"new string".to_string() };
+    *connection_string = ConnectionString("new string".to_string());
 }
 ```
 
