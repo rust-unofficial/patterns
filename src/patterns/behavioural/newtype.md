@@ -21,7 +21,7 @@ This creates a new type, rather than an alias to a type (`type` items).
 use std::fmt::Display;
 
 // Create Newtype Password to override the Display trait for String
-struct Password (String);
+struct Password(String);
 
 impl Display for Password {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {

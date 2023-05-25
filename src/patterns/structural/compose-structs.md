@@ -1,6 +1,4 @@
-# Compose structs together for better borrowing
-
-TODO - this is not a very snappy name
+# Struct decomposition for independent borrowing
 
 ## Description
 
@@ -41,7 +39,8 @@ fn main() {
 
     let connection_string = &mut db.connection_string;
     print_database(&db);  // Immutable borrow of `db` happens here
-    // *connection_string = "new string".to_string();  // Mutable borrow is used here
+    // *connection_string = "new string".to_string();  // Mutable borrow is used
+                                                       // here
 }
 ```
 
@@ -54,10 +53,10 @@ structs, thus solving the borrow checking issue:
 #[derive(Debug, Clone)]
 struct ConnectionString(String);
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct Timeout(u32);
 
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 struct PoolSize(u32);
 
 // We then compose these smaller structs back into `Database`
@@ -77,15 +76,11 @@ fn print_database(connection_str: ConnectionString,
 }
 
 fn main() {
-    // Initialize the three structs
-    let connection_string = ConnectionString("localhost".to_string());
-    let timeout = Timeout(30);
-    let pool_size = PoolSize(100);
-
+    // Initialize the Database with the three structs
     let mut db = Database {
-        connection_string,
-        timeout,
-        pool_size,
+        connection_string: ConnectionString("localhost".to_string()),
+        timeout: Timeout(30),
+        pool_size: PoolSize(100),
     };
 
     let connection_string = &mut db.connection_string;
@@ -96,21 +91,20 @@ fn main() {
 
 ## Motivation
 
-TODO Why and where you should use the pattern
+This pattern is most useful, when you have a struct that ended up with a lot of
+fields that you want to borrow independently. Thus having a more flexible
+behaviour in the end.
 
 ## Advantages
 
-Lets you work around limitations in the borrow checker.
-
-Often produces a better design.
+Decomposition of structs lets you work around limitations in the borrow checker.
+And it often produces a better design.
 
 ## Disadvantages
 
-Leads to more verbose code.
-
-Sometimes, the smaller structs are not good abstractions, and so we end up with
-a worse design. That is probably a 'code smell', indicating that the program
-should be refactored in some way.
+It can lead to more verbose code. And sometimes, the smaller structs are not
+good abstractions, and so we end up with a worse design. That is probably a
+'code smell', indicating that the program should be refactored in some way.
 
 ## Discussion
 
