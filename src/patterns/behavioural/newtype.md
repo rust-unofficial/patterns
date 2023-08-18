@@ -1,14 +1,14 @@
 # Newtype
 
 What if in some cases we want a type to behave similar to another type or
-enforce some behaviour at compile time when using only type aliases would
-not be enough?
+enforce some behaviour at compile time when using only type aliases would not be
+enough?
 
 For example, if we want to create a custom `Display` implementation for `String`
 due to security considerations (e.g. passwords).
 
-For such cases we could use the `Newtype` pattern to provide **type safety**
-and **encapsulation**.
+For such cases we could use the `Newtype` pattern to provide **type safety** and
+**encapsulation**.
 
 ## Description
 
@@ -66,7 +66,7 @@ field is private, which it is by default).
 ## Disadvantages
 
 The downside of newtypes (especially compared with type aliases), is that there
-is no special language support. This means there can be _a lot_ of boilerplate.
+is no special language support. This means there can be *a lot* of boilerplate.
 You need a 'pass through' method for every method you want to expose on the
 wrapped type, and an impl for every trait you want to also be implemented for
 the wrapper type.
@@ -76,7 +76,8 @@ the wrapper type.
 Newtypes are very common in Rust code. Abstraction or representing units are the
 most common uses, but they can be used for other reasons:
 
-- restricting functionality (reduce the functions exposed or traits implemented),
+- restricting functionality (reduce the functions exposed or traits
+  implemented),
 - making a type with copy semantics have move semantics,
 - abstraction by providing a more concrete type and thus hiding internal types,
   e.g.,
@@ -85,10 +86,10 @@ most common uses, but they can be used for other reasons:
 pub struct Foo(Bar<T1, T2>);
 ```
 
-Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal
-types. Users of our module shouldn't know that we implement `Foo` by using a `Bar`,
-but what we're really hiding here is the types `T1` and `T2`, and how they are used
-with `Bar`.
+Here, `Bar` might be some public, generic type and `T1` and `T2` are some
+internal types. Users of our module shouldn't know that we implement `Foo` by
+using a `Bar`, but what we're really hiding here is the types `T1` and `T2`, and
+how they are used with `Bar`.
 
 ## See also
 

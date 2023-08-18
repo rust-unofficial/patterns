@@ -2,33 +2,36 @@
 
 ## Description
 
-The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
-is a technique that enables separation of concerns.
-It also allows to decouple software modules through [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
+The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern) is
+a technique that enables separation of concerns. It also allows to decouple
+software modules through
+[Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
 
-The basic idea behind the Strategy pattern is that, given an algorithm solving
-a particular problem, we define only the skeleton of the algorithm at an abstract
-level, and we separate the specific algorithm’s implementation into different parts.
+The basic idea behind the Strategy pattern is that, given an algorithm solving a
+particular problem, we define only the skeleton of the algorithm at an abstract
+level, and we separate the specific algorithm’s implementation into different
+parts.
 
 In this way, a client using the algorithm may choose a specific implementation,
-while the general algorithm workflow remains the same. In other words, the abstract
-specification of the class does not depend on the specific implementation of the
-derived class, but specific implementation must adhere to the abstract specification.
-This is why we call it "Dependency Inversion".
+while the general algorithm workflow remains the same. In other words, the
+abstract specification of the class does not depend on the specific
+implementation of the derived class, but specific implementation must adhere to
+the abstract specification. This is why we call it "Dependency Inversion".
 
 ## Motivation
 
-Imagine we are working on a project that generates reports every month.
-We need the reports to be generated in different formats (strategies), e.g.,
-in `JSON` or `Plain Text` formats.
-But things vary over time, and we don't know what kind of requirement we may get
-in the future. For example, we may need to generate our report in a completely new
-format, or just modify one of the existing formats.
+Imagine we are working on a project that generates reports every month. We need
+the reports to be generated in different formats (strategies), e.g., in `JSON`
+or `Plain Text` formats. But things vary over time, and we don't know what kind
+of requirement we may get in the future. For example, we may need to generate
+our report in a completely new format, or just modify one of the existing
+formats.
 
 ## Example
 
-In this example our invariants (or abstractions) are `Formatter` and `Report`, while `Text` and `Json` are our strategy structs. These strategies
-have to implement the `Formatter` trait.
+In this example our invariants (or abstractions) are `Formatter` and `Report`,
+while `Text` and `Json` are our strategy structs. These strategies have to
+implement the `Formatter` trait.
 
 ```rust
 use std::collections::HashMap;
@@ -97,37 +100,38 @@ fn main() {
 The main advantage is separation of concerns. For example, in this case `Report`
 does not know anything about specific implementations of `Json` and `Text`,
 whereas the output implementations does not care about how data is preprocessed,
-stored, and fetched. The only thing they have to know is a specific
-trait to implement and its method defining the concrete algorithm implementation processing
-the result, i.e., `Formatter` and `format(...)`.
+stored, and fetched. The only thing they have to know is a specific trait to
+implement and its method defining the concrete algorithm implementation
+processing the result, i.e., `Formatter` and `format(...)`.
 
 ## Disadvantages
 
-For each strategy there must be implemented at least one module, so number of modules
-increases with number of strategies. If there are many strategies to choose from
-then users have to know how strategies differ from one another.
+For each strategy there must be implemented at least one module, so number of
+modules increases with number of strategies. If there are many strategies to
+choose from then users have to know how strategies differ from one another.
 
 ## Discussion
 
-In the previous example all strategies are implemented in a single file.
-Ways of providing different strategies includes:
+In the previous example all strategies are implemented in a single file. Ways of
+providing different strategies includes:
 
-- All in one file (as shown in this example, similar to being separated as modules)
+- All in one file (as shown in this example, similar to being separated as
+  modules)
 - Separated as modules, E.g. `formatter::json` module, `formatter::text` module
 - Use compiler feature flags, E.g. `json` feature, `text` feature
 - Separated as crates, E.g. `json` crate, `text` crate
 
 Serde crate is a good example of the `Strategy` pattern in action. Serde allows
-[full customization](https://serde.rs/custom-serialization.html) of the serialization
-behavior by manually implementing `Serialize` and `Deserialize` traits for our
-type. For example, we could easily swap `serde_json` with `serde_cbor` since they
-expose similar methods. Having this makes the helper crate `serde_transcode` much
-more useful and ergonomic.
+[full customization](https://serde.rs/custom-serialization.html) of the
+serialization behavior by manually implementing `Serialize` and `Deserialize`
+traits for our type. For example, we could easily swap `serde_json` with
+`serde_cbor` since they expose similar methods. Having this makes the helper
+crate `serde_transcode` much more useful and ergonomic.
 
 However, we don't need to use traits in order to design this pattern in Rust.
 
-The following toy example demonstrates the idea of the Strategy pattern using Rust
-`closures`:
+The following toy example demonstrates the idea of the Strategy pattern using
+Rust `closures`:
 
 ```rust
 struct Adder;

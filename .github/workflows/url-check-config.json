@@ -1,7 +1,7 @@
 {
-  "ignorePatterns": [
-    {
-      "pattern": "^(http|https)://crates.io/"
-    }
-  ]
+    "ignorePatterns": [
+        {
+            "pattern": "^(http|https)://crates.io/"
+        }
+    ]
 }

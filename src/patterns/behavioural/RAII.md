@@ -3,10 +3,11 @@
 ## Description
 
 [RAII][wikipedia] stands for "Resource Acquisition is Initialisation" which is a
-terrible name. The essence of the pattern is that resource initialisation is done
-in the constructor of an object and finalisation in the destructor. This pattern
-is extended in Rust by using a RAII object as a guard of some resource and relying
-on the type system to ensure that access is always mediated by the guard object.
+terrible name. The essence of the pattern is that resource initialisation is
+done in the constructor of an object and finalisation in the destructor. This
+pattern is extended in Rust by using a RAII object as a guard of some resource
+and relying on the type system to ensure that access is always mediated by the
+guard object.
 
 ## Example
 
@@ -112,7 +113,8 @@ works just as well.
 
 [Finalisation in destructors idiom](../../idioms/dtor-finally.md)
 
-RAII is a common pattern in C++: [cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
+RAII is a common pattern in C++:
+[cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
 [wikipedia][wikipedia].
 
 [wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization

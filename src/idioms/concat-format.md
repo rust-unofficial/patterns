@@ -24,7 +24,8 @@ fn say_hello(name: &str) -> String {
 
 ## Advantages
 
-Using `format!` is usually the most succinct and readable way to combine strings.
+Using `format!` is usually the most succinct and readable way to combine
+strings.
 
 ## Disadvantages
 

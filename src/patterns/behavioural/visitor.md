@@ -7,8 +7,8 @@ collection of objects. It allows multiple different algorithms to be written
 over the same data without having to modify the data (or their primary
 behaviour).
 
-Furthermore, the visitor pattern allows separating the traversal of
-a collection of objects from the operations performed on each object.
+Furthermore, the visitor pattern allows separating the traversal of a collection
+of objects from the operations performed on each object.
 
 ## Example
 
@@ -72,9 +72,9 @@ to modify the AST data.
 ## Motivation
 
 The visitor pattern is useful anywhere that you want to apply an algorithm to
-heterogeneous data. If data is homogeneous, you can use an iterator-like pattern.
-Using a visitor object (rather than a functional approach) allows the visitor to
-be stateful and thus communicate information between nodes.
+heterogeneous data. If data is homogeneous, you can use an iterator-like
+pattern. Using a visitor object (rather than a functional approach) allows the
+visitor to be stateful and thus communicate information between nodes.
 
 ## Discussion
 
@@ -109,5 +109,5 @@ The visitor pattern is a common pattern in most OO languages.
 
 [Wikipedia article](https://en.wikipedia.org/wiki/Visitor_pattern)
 
-The [fold](../creational/fold.md) pattern is similar to visitor but produces
-a new version of the visited data structure.
+The [fold](../creational/fold.md) pattern is similar to visitor but produces a
+new version of the visited data structure.

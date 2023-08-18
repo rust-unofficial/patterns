@@ -8,9 +8,10 @@ compatibility.
 
 Rust offers two solutions to this problem:
 
-- Use `#[non_exhaustive]` on `struct`s, `enum`s, and `enum` variants.
-  For extensive documentation on all the places where `#[non_exhaustive]` can be
-  used, see [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
+- Use `#[non_exhaustive]` on `struct`s, `enum`s, and `enum` variants. For
+  extensive documentation on all the places where `#[non_exhaustive]` can be
+  used, see
+  [the docs](https://doc.rust-lang.org/reference/attributes/type_system.html#the-non_exhaustive-attribute).
 
 - You may add a private field to a struct to prevent it from being directly
   instantiated or matched against (see Alternative)
@@ -56,22 +57,21 @@ fn print_matched_variants(s: a::S) {
 
 ## Alternative: `Private fields` for structs
 
-`#[non_exhaustive]` only works across crate boundaries.
-Within a crate, the private field method may be used.
+`#[non_exhaustive]` only works across crate boundaries. Within a crate, the
+private field method may be used.
 
-Adding a field to a struct is a mostly backwards compatible change.
-However, if a client uses a pattern to deconstruct a struct instance, they
-might name all the fields in the struct and adding a new one would break that
-pattern.
-The client could name some fields and use `..` in the pattern, in which case adding
-another field is backwards compatible.
-Making at least one of the struct's fields private forces clients to use the latter
-form of patterns, ensuring that the struct is future-proof.
+Adding a field to a struct is a mostly backwards compatible change. However, if
+a client uses a pattern to deconstruct a struct instance, they might name all
+the fields in the struct and adding a new one would break that pattern. The
+client could name some fields and use `..` in the pattern, in which case adding
+another field is backwards compatible. Making at least one of the struct's
+fields private forces clients to use the latter form of patterns, ensuring that
+the struct is future-proof.
 
-The downside of this approach is that you might need to add an otherwise unneeded
-field to the struct.
-You can use the `()` type so that there is no runtime overhead and prepend `_` to
-the field name to avoid the unused field warning.
+The downside of this approach is that you might need to add an otherwise
+unneeded field to the struct. You can use the `()` type so that there is no
+runtime overhead and prepend `_` to the field name to avoid the unused field
+warning.
 
 ```rust
 pub struct S {
@@ -85,37 +85,33 @@ pub struct S {
 ## Discussion
 
 On `struct`s, `#[non_exhaustive]` allows adding additional fields in a backwards
-compatible way.
-It will also prevent clients from using the struct constructor, even if all the
-fields are public.
-This may be helpful, but it's worth considering if you _want_ an additional field
-to be found by clients as a compiler error rather than something that may be silently
-undiscovered.
+compatible way. It will also prevent clients from using the struct constructor,
+even if all the fields are public. This may be helpful, but it's worth
+considering if you *want* an additional field to be found by clients as a
+compiler error rather than something that may be silently undiscovered.
 
-`#[non_exhaustive]` can be applied to enum variants as well.
-A `#[non_exhaustive]` variant behaves in the same way as a `#[non_exhaustive]` struct.
+`#[non_exhaustive]` can be applied to enum variants as well. A
+`#[non_exhaustive]` variant behaves in the same way as a `#[non_exhaustive]`
+struct.
 
-Use this deliberately and with caution: incrementing the major version when adding
-fields or variants is often a better option.
-`#[non_exhaustive]` may be appropriate in scenarios where you're modeling an external
-resource that may change out-of-sync with your library, but is not a general purpose
-tool.
+Use this deliberately and with caution: incrementing the major version when
+adding fields or variants is often a better option. `#[non_exhaustive]` may be
+appropriate in scenarios where you're modeling an external resource that may
+change out-of-sync with your library, but is not a general purpose tool.
 
 ### Disadvantages
 
-`#[non_exhaustive]` can make your code much less ergonomic to use, especially when
-forced to handle unknown enum variants.
-It should only be used when these sorts of evolutions are required **without**
-incrementing the major version.
+`#[non_exhaustive]` can make your code much less ergonomic to use, especially
+when forced to handle unknown enum variants. It should only be used when these
+sorts of evolutions are required **without** incrementing the major version.
 
 When `#[non_exhaustive]` is applied to `enum`s, it forces clients to handle a
-wildcard variant.
-If there is no sensible action to take in this case, this may lead to awkward
-code and code paths that are only executed in extremely rare circumstances.
-If a client decides to `panic!()` in this scenario, it may have been better to
-expose this error at compile time.
-In fact, `#[non_exhaustive]` forces clients to handle the "Something else" case;
-there is rarely a sensible action to take in this scenario.
+wildcard variant. If there is no sensible action to take in this case, this may
+lead to awkward code and code paths that are only executed in extremely rare
+circumstances. If a client decides to `panic!()` in this scenario, it may have
+been better to expose this error at compile time. In fact, `#[non_exhaustive]`
+forces clients to handle the "Something else" case; there is rarely a sensible
+action to take in this scenario.
 
 ## See also
 
