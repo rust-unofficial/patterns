@@ -107,7 +107,8 @@ dispatch to `Foo` manually. We do intend to add a mechanism for inheritance
 similar to this to Rust, but it is likely to be some time before it reaches
 stable Rust. See these [blog](http://aturon.github.io/blog/2015/09/18/reuse/)
 [posts](http://smallcultfollowing.com/babysteps/blog/2015/10/08/virtual-structs-part-4-extended-enums-and-thin-traits/)
-and this [RFC issue](https://github.com/rust-lang/rfcs/issues/349) for more details.
+and this [RFC issue](https://github.com/rust-lang/rfcs/issues/349) for more
+details.
 
 The `Deref` trait is designed for the implementation of custom pointer types.
 The intention is that it will take a pointer-to-`T` to a `T`, not convert
@@ -123,6 +124,7 @@ conversion between arbitrary types.
 ## See also
 
 - [Collections are smart pointers idiom](../idioms/deref.md).
-- Delegation crates for less boilerplate like [delegate](https://crates.io/crates/delegate)
-  or [ambassador](https://crates.io/crates/ambassador)
+- Delegation crates for less boilerplate like
+  [delegate](https://crates.io/crates/delegate) or
+  [ambassador](https://crates.io/crates/ambassador)
 - [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).

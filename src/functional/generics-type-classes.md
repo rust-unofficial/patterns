@@ -4,9 +4,9 @@
 
 Rust's type system is designed more like functional languages (like Haskell)
 rather than imperative languages (like Java and C++). As a result, Rust can turn
-many kinds of programming problems into "static typing" problems. This is one
-of the biggest wins of choosing a functional language, and is critical to many
-of Rust's compile time guarantees.
+many kinds of programming problems into "static typing" problems. This is one of
+the biggest wins of choosing a functional language, and is critical to many of
+Rust's compile time guarantees.
 
 A key part of this idea is the way generic types work. In C++ and Java, for
 example, generic types are a meta-programming construct for the compiler.
@@ -16,8 +16,8 @@ different types filled in.
 
 In Rust, a generic type parameter creates what is known in functional languages
 as a "type class constraint", and each different parameter filled in by an end
-user _actually changes the type_. In other words, `Vec<isize>` and `Vec<char>`
-_are two different types_, which are recognized as distinct by all parts of the
+user *actually changes the type*. In other words, `Vec<isize>` and `Vec<char>`
+*are two different types*, which are recognized as distinct by all parts of the
 type system.
 
 This is called **monomorphization**, where different types are created from
@@ -37,9 +37,9 @@ makes them more usable while remaining safe.
 
 ## Example
 
-Suppose you are designing a storage server for a series of lab machines.
-Because of the software involved, there are two different protocols you need
-to support: BOOTP (for PXE network boot), and NFS (for remote mount storage).
+Suppose you are designing a storage server for a series of lab machines. Because
+of the software involved, there are two different protocols you need to support:
+BOOTP (for PXE network boot), and NFS (for remote mount storage).
 
 Your goal is to have one program, written in Rust, which can handle both of
 them. It will have protocol handlers and listen for both kinds of requests. The
@@ -63,10 +63,10 @@ struct FileDownloadRequest {
 }
 ```
 
-This design might work well enough. But now suppose you needed to support
-adding metadata that was _protocol specific_. For example, with NFS, you
-wanted to determine what their mount point was in order to enforce additional
-security rules.
+This design might work well enough. But now suppose you needed to support adding
+metadata that was *protocol specific*. For example, with NFS, you wanted to
+determine what their mount point was in order to enforce additional security
+rules.
 
 The way the current struct is designed leaves the protocol decision until
 runtime. That means any method that applies to one protocol and not the other
@@ -101,7 +101,7 @@ request types were confused. After all, the entire path of the user's code,
 including what functions from the library they use, will know whether a request
 is an NFS request or a BOOTP request.
 
-In Rust, this is actually possible! The solution is to _add a generic type_ in
+In Rust, this is actually possible! The solution is to *add a generic type* in
 order to split the API.
 
 Here is what that looks like:
@@ -187,8 +187,7 @@ fn main() {
 }
 ```
 
-With this approach, if the user were to make a mistake and use the wrong
-type;
+With this approach, if the user were to make a mistake and use the wrong type;
 
 ```rust,ignore
 fn main() {
@@ -230,8 +229,8 @@ improve in the future.
   initialization, consider the
   [Builder Pattern](../patterns/creational/builder.md) instead.
 
-- If the API between types does not change -- only the behavior does -- then
-  the [Strategy Pattern](../patterns/behavioural/strategy.md) is better used
+- If the API between types does not change -- only the behavior does -- then the
+  [Strategy Pattern](../patterns/behavioural/strategy.md) is better used
   instead.
 
 ## See also
@@ -239,8 +238,8 @@ improve in the future.
 This pattern is used throughout the standard library:
 
 - `Vec<u8>` can be cast from a String, unlike every other type of `Vec<T>`.[^1]
-- They can also be cast into a binary heap, but only if they contain a type
-  that implements the `Ord` trait.[^2]
+- They can also be cast into a binary heap, but only if they contain a type that
+  implements the `Ord` trait.[^2]
 - The `to_string` method was specialized for `Cow` only of type `str`.[^3]
 
 It is also used by several popular crates to allow API flexibility:
@@ -248,8 +247,8 @@ It is also used by several popular crates to allow API flexibility:
 - The `embedded-hal` ecosystem used for embedded devices makes extensive use of
   this pattern. For example, it allows statically verifying the configuration of
   device registers used to control embedded pins. When a pin is put into a mode,
-  it returns a `Pin<MODE>` struct, whose generic determines the functions
-  usable in that mode, which are not on the `Pin` itself. [^4]
+  it returns a `Pin<MODE>` struct, whose generic determines the functions usable
+  in that mode, which are not on the `Pin` itself. [^4]
 
 - The `hyper` HTTP client library uses this to expose rich APIs for different
   pluggable requests. Clients with different connectors have different methods
@@ -260,11 +259,14 @@ It is also used by several popular crates to allow API flexibility:
   internal state or invariant -- is implemented in Rust using the same basic
   concept, and a slightly different technique. [^6]
 
-[^1]: See: [impl From\<CString\> for Vec\<u8\>](https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811)
+[^1]: See:
+[impl From\<CString\> for Vec\<u8\>](https://doc.rust-lang.org/1.59.0/src/std/ffi/c_str.rs.html#803-811)
 
-[^2]: See: [impl\<T\> From\<Vec\<T, Global\>\> for BinaryHeap\<T\>](https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1345-1354)
+[^2]: See:
+[impl\<T: Ord\> FromIterator\<T\> for BinaryHeap\<T\>](https://web.archive.org/web/20201030132806/https://doc.rust-lang.org/stable/src/alloc/collections/binary_heap.rs.html#1330-1335)
 
-[^3]: See: [impl\<'\_\> ToString for Cow\<'\_, str>](https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
+[^3]: See:
+[impl\<'\_\> ToString for Cow\<'\_, str>](https://doc.rust-lang.org/stable/src/alloc/string.rs.html#2235-2240)
 
 [^4]: Example:
 [https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html](https://docs.rs/stm32f30x-hal/0.1.0/stm32f30x_hal/gpio/gpioa/struct.PA0.html)

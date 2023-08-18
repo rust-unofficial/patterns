@@ -3,12 +3,11 @@
 ## Description
 
 Using a target of a deref coercion can increase the flexibility of your code
-when you are deciding which argument type to use for a function argument.
-In this way, the function will accept more input types.
+when you are deciding which argument type to use for a function argument. In
+this way, the function will accept more input types.
 
-This is not limited to slice-able or fat pointer types.
-In fact, you should always prefer using the **borrowed type** over
-**borrowing the owned type**.
+This is not limited to slice-able or fat pointer types. In fact, you should
+always prefer using the **borrowed type** over **borrowing the owned type**.
 Such as `&str` over `&String`, `&[T]` over `&Vec<T>`, or `&T` over `&Box<T>`.
 
 Using borrowed types you can avoid layers of indirection for those instances
@@ -59,10 +58,10 @@ fn main() {
 }
 ```
 
-This works fine because we are passing a `&String` type as a parameter.
-If we remove the comments on the last two lines, the example will fail. This
-is because a `&str` type will not coerce to a `&String` type. We can fix this
-by simply modifying the type for our argument.
+This works fine because we are passing a `&String` type as a parameter. If we
+remove the comments on the last two lines, the example will fail. This is
+because a `&str` type will not coerce to a `&String` type. We can fix this by
+simply modifying the type for our argument.
 
 For instance, if we change our function declaration to:
 
@@ -77,11 +76,11 @@ Ferris: false
 Curious: true
 ```
 
-But wait, that's not all! There is more to this story.
-It's likely that you may say to yourself: that doesn't matter, I will never be
-using a `&'static str` as an input anyways (as we did when we used `"Ferris"`).
-Even ignoring this special example, you may still find that using `&str` will
-give you more flexibility than using a `&String`.
+But wait, that's not all! There is more to this story. It's likely that you may
+say to yourself: that doesn't matter, I will never be using a `&'static str` as
+an input anyways (as we did when we used `"Ferris"`). Even ignoring this special
+example, you may still find that using `&str` will give you more flexibility
+than using a `&String`.
 
 Let's now take an example where someone gives us a sentence, and we want to
 determine if any of the words in the sentence contain three consecutive vowels.
@@ -128,7 +127,8 @@ curious has three consecutive vowels!
 However, this example will not run when our function is declared with an
 argument type `&String`. This is because string slices are a `&str` and not a
 `&String` which would require an allocation to be converted to `&String` which
-is not implicit, whereas converting from `String` to `&str` is cheap and implicit.
+is not implicit, whereas converting from `String` to `&str` is cheap and
+implicit.
 
 ## See also
 

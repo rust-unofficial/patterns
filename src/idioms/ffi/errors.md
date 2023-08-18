@@ -2,9 +2,9 @@
 
 ## Description
 
-In foreign languages like C, errors are represented by return codes.
-However, Rust's type system allows much more rich error information to be
-captured and propogated through a full type.
+In foreign languages like C, errors are represented by return codes. However,
+Rust's type system allows much more rich error information to be captured and
+propogated through a full type.
 
 This best practice shows different kinds of error codes, and how to expose them
 in a usable way:
@@ -135,5 +135,5 @@ while not compromising the Rust code's API at all.
 
 ## Disadvantages
 
-It's a lot of typing, and some types may not be able to be converted easily
-to C.
+It's a lot of typing, and some types may not be able to be converted easily to
+C.

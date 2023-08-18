@@ -39,8 +39,8 @@ There are special cases -- `Rc<T>` is designed to handle clones intelligently.
 It internally manages exactly one copy of the data, and cloning it will only
 clone the reference.
 
-There is also `Arc<T>` which provides shared ownership of a value of type T
-that is allocated in the heap. Invoking `.clone()` on `Arc` produces a new `Arc`
+There is also `Arc<T>` which provides shared ownership of a value of type T that
+is allocated in the heap. Invoking `.clone()` on `Arc` produces a new `Arc`
 instance, which points to the same allocation on the heap as the source `Arc`,
 while increasing a reference count.
 
@@ -48,22 +48,26 @@ In general, clones should be deliberate, with full understanding of the
 consequences. If a clone is used to make a borrow checker error disappear,
 that's a good indication this anti-pattern may be in use.
 
-Even though `.clone()` is an indication of a bad pattern, sometimes
-**it is fine to write inefficient code**, in cases such as when:
+Even though `.clone()` is an indication of a bad pattern, sometimes **it is fine
+to write inefficient code**, in cases such as when:
 
 - the developer is still new to ownership
-- the code doesn't have great speed or memory constraints
-  (like hackathon projects or prototypes)
+- the code doesn't have great speed or memory constraints (like hackathon
+  projects or prototypes)
 - satisfying the borrow checker is really complicated, and you prefer to
   optimize readability over performance
 
-If an unnecessary clone is suspected, The [Rust Book's chapter on Ownership](https://doc.rust-lang.org/book/ownership.html)
-should be understood fully before assessing whether the clone is required or not.
+If an unnecessary clone is suspected, The
+[Rust Book's chapter on Ownership](https://doc.rust-lang.org/book/ownership.html)
+should be understood fully before assessing whether the clone is required or
+not.
 
-Also be sure to always run `cargo clippy` in your project, which will detect some
-cases in which `.clone()` is not necessary, like [1](https://rust-lang.github.io/rust-clippy/master/index.html#redundant_clone),
+Also be sure to always run `cargo clippy` in your project, which will detect
+some cases in which `.clone()` is not necessary, like
+[1](https://rust-lang.github.io/rust-clippy/master/index.html#redundant_clone),
 [2](https://rust-lang.github.io/rust-clippy/master/index.html#clone_on_copy),
-[3](https://rust-lang.github.io/rust-clippy/master/index.html#map_clone) or [4](https://rust-lang.github.io/rust-clippy/master/index.html#clone_double_ref).
+[3](https://rust-lang.github.io/rust-clippy/master/index.html#map_clone) or
+[4](https://rust-lang.github.io/rust-clippy/master/index.html#clone_double_ref).
 
 ## See also
 

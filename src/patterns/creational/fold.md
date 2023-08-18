@@ -5,9 +5,9 @@
 Run an algorithm over each item in a collection of data to create a new item,
 thus creating a whole new collection.
 
-The etymology here is unclear to me. The terms 'fold' and 'folder' are used
-in the Rust compiler, although it appears to me to be more like a map than a
-fold in the usual sense. See the discussion below for more details.
+The etymology here is unclear to me. The terms 'fold' and 'folder' are used in
+the Rust compiler, although it appears to me to be more like a map than a fold
+in the usual sense. See the discussion below for more details.
 
 ## Example
 
@@ -102,9 +102,9 @@ reused; however, a node must be cloned even if unchanged, which can be
 expensive.
 
 Using a reference counted pointer gives the best of both worlds - we can reuse
-the original data structure, and we don't need to clone unchanged nodes. However,
-they are less ergonomic to use and mean that the data structures cannot be
-mutable.
+the original data structure, and we don't need to clone unchanged nodes.
+However, they are less ergonomic to use and mean that the data structures cannot
+be mutable.
 
 ## See also
 
