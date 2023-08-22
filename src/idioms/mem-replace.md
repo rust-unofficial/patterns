@@ -20,7 +20,7 @@ enum MyEnum {
 
 fn a_to_b(e: &mut MyEnum) {
     if let MyEnum::A { name, x: 0 } = e {
-        // this takes out our `name` and put in an empty String instead
+        // This takes out our `name` and puts in an empty String instead
         // (note that empty strings don't allocate).
         // Then, construct the new enum variant (which will
         // be assigned to `*e`).
@@ -69,8 +69,8 @@ into our `MyEnum::B`, but that would be an instance of the
 anti-pattern. Anyway, we can avoid the extra allocation by changing `e` with
 only a mutable borrow.
 
-`mem::take` lets us swap out the value, replacing it with it's default value,
-and returning the previous value. For `String`, the default value is an empty
+`mem::take` lets us swap out the value, replacing it with its default value, and
+returning the previous value. For `String`, the default value is an empty
 `String`, which does not need to allocate. As a result, we get the original
 `name` *as an owned value*. We can then wrap this in another enum.
 
