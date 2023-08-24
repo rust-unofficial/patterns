@@ -499,9 +499,8 @@ following section.
   that is very readable even without Scala expertise.
 - [Paper: Profunctor Optics: Modular Data
   Accessors](https://web.archive.org/web/20220701102832/https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
-- [Musli](https://github.com/udoprog/musli) is a library which attempts to use
-  a similar structure with a different approach, e.g. doing away with the
-  visitor
+- [Musli](https://github.com/udoprog/musli) is a library which attempts to use a
+  similar structure with a different approach, e.g. doing away with the visitor
 
 [^1]: [School of Haskell: A Little Lens Starter Tutorial](https://web.archive.org/web/20221128190041/https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
 
