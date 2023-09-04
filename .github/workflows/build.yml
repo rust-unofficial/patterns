@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Rust cache
         uses: ./.github/workflows/setup-rust-cache
@@ -30,7 +30,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
 
   #     - name: Install Gettext
   #       run: sudo apt install gettext
@@ -69,7 +69,7 @@ jobs:
   #     languages: ${{ steps.find-translations.outputs.languages }}
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
 
   #     - name: Find translations
   #       id: find-translations
@@ -92,7 +92,7 @@ jobs:
   #     MDBOOK_BOOK__LANGUAGE: ${{ matrix.language }}
   #   steps:
   #     - name: Checkout
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
 
   #     - name: Install Gettext
   #       run: sudo apt install gettext
