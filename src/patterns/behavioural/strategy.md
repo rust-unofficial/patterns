@@ -180,3 +180,4 @@ fn main() {
 - [Strategy Pattern](https://en.wikipedia.org/wiki/Strategy_pattern)
 - [Dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection)
 - [Policy Based Design](https://en.wikipedia.org/wiki/Modern_C++_Design#Policy-based_design)
+- [Implementing a TCP server for Space Applications in Rust using the Strategy Pattern](https://web.archive.org/web/20231003171500/https://robamu.github.io/posts/rust-strategy-pattern/)
