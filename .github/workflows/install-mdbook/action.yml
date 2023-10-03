@@ -19,7 +19,7 @@ runs:
         echo "version=$MDBOOK_I18N_HELPERS_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Install cargo-hack
+    - name: Install mdbook
       uses: taiki-e/install-action@2afb713f1c297f70eecb9cb904b36612eba3c25e # v2
       with:
         tool: mdbook@${{ steps.mdbook-version.outputs.version }}
