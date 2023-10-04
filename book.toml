@@ -23,7 +23,7 @@ site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
-additional-css = ["./language-picker.css"]
+additional-css = ["theme/css/language-picker.css"]
 
 [output.html.fold]
 enable = true
@@ -33,3 +33,8 @@ level = 1
 editable = false
 
 # [output.linkcheck]  # enable the "mdbook-linkcheck" renderer, disabled due to gh-actions
+
+[output.html.redirect]
+# Redirects in the form of "old-path" = "new-path", where the new path
+# is relative to the old path.
+"functional/lenses.html" = "optics.html"
