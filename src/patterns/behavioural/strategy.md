@@ -3,20 +3,26 @@
 ## Description
 
 The [Strategy design pattern](https://en.wikipedia.org/wiki/Strategy_pattern) is
-a technique that enables separation of concerns. It also allows to decouple
+a technique that enables separation of concerns. It also allows decoupling into
 software modules through
 [Dependency Inversion](https://en.wikipedia.org/wiki/Dependency_inversion_principle).
 
-The basic idea behind the Strategy pattern is that, given an algorithm solving a
-particular problem, we define only the skeleton of the algorithm at an abstract
-level, and we separate the specific algorithm’s implementation into different
-parts.
+The basic idea behind the Strategy pattern is actually the fundamental idea traits.
+That is, an API or just algorithm can be fully defined for solving some particular problem 
+but have parts whose actual implementation is left abstract or overridable 
+to specific implemenations. Each such implementation then becomes a Strategy for 
+using that API or algorithm to its situation. For instance, an `Iterator` over `Vec<T>` 
+is differnt that one over `HashMap<K,T>` or `String` (variable width utf8 codes).
 
-In this way, a client using the algorithm may choose a specific implementation,
-while the general algorithm workflow remains the same. In other words, the
-abstract specification of the class does not depend on the specific
-implementation of the derived class, but specific implementation must adhere to
-the abstract specification. This is why we call it "Dependency Inversion".
+It is also possible for these implementation pieces to be cemented in a type definition
+but a design can have them be provided through the API or invocation of the algorithm
+at runtime: the overridable parts are well defined since the abstract parts and their
+expectations are strongly typed, the requirements
+of the pieces are well defined and type checked at compile time.
+As a result, the API can be completely oblivious to the actual strategy being provided
+at runtime. As such, instead of only the caller being dependent on the 
+API, the API is now also dependent on the caller's provided strategy. 
+This is why we call it "Dependency Inversion".
 
 ## Motivation
 
@@ -98,17 +104,21 @@ fn main() {
 ## Advantages
 
 The main advantage is separation of concerns. For example, in this case `Report`
-does not know anything about specific implementations of `Json` and `Text`,
-whereas the output implementations does not care about how data is preprocessed,
-stored, and fetched. The only thing they have to know is a specific trait to
-implement and its method defining the concrete algorithm implementation
-processing the result, i.e., `Formatter` and `format(...)`.
+does not need to know anything about specific implementations of `Json` and `Text`
+while the output implementations does not need to care about how data is preprocessed,
+stored, and fetched. The only thing they have to know is a specific trait's API
+or algorithm invocation requirements, i.e., `Formatter` and `format(...)`.
+
+Another advantage is performance tuning. Different algorithms may offer better space,
+time, tracing, or comprehensible logic flow advantages. These may be a factor from
+one deployment or even invocation to the next.
 
 ## Disadvantages
 
-For each strategy there must be implemented at least one module, so number of
-modules increases with number of strategies. If there are many strategies to
-choose from then users have to know how strategies differ from one another.
+Complexity in that a API or algorithm has at least two components, the abstraction
+and the implementation or implementation pieces. Additionally, if a library 
+provides many competing strategies effort must be made to deliniate their benefits and
+drawbacks. 
 
 ## Discussion
 
