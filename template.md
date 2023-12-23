@@ -12,8 +12,8 @@ A short, prose description of the pattern.
 ```
 
 When writing examples, please try to make them compile. This allows us to test
-them. If you fail to write an example that is both complete and readable,
-please at least mark your example code with `ignore` as in here:
+them. If you fail to write an example that is both complete and readable, please
+at least mark your example code with `ignore` as in here:
 
 ```rust,ignore
 // A non-runnable example of the pattern in action, should be mostly code, commented

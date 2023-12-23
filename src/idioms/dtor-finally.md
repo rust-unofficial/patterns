@@ -56,7 +56,8 @@ This pattern introduces some hard to notice, implicit code. Reading a function
 gives no clear indication of destructors to be run on exit. This can make
 debugging tricky.
 
-Requiring an object and `Drop` impl just for finalisation is heavy on boilerplate.
+Requiring an object and `Drop` impl just for finalisation is heavy on
+boilerplate.
 
 ## Discussion
 

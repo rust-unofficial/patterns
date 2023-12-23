@@ -2,9 +2,9 @@
 
 ## Description
 
-`Option` can be viewed as a container that contains either zero or one
-element. In particular, it implements the `IntoIterator` trait, and as such
-can be used with generic code that needs such a type.
+`Option` can be viewed as a container that contains either zero or one element.
+In particular, it implements the `IntoIterator` trait, and as such can be used
+with generic code that needs such a type.
 
 ## Examples
 
@@ -23,8 +23,9 @@ if let Some(turing_inner) = turing {
 }
 ```
 
-If you need to tack an `Option` to the end of an existing iterator, you can
-pass it to [`.chain()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain):
+If you need to tack an `Option` to the end of an existing iterator, you can pass
+it to
+[`.chain()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain):
 
 ```rust
 let turing = Some("Turing");
@@ -39,8 +40,8 @@ Note that if the `Option` is always `Some`, then it is more idiomatic to use
 [`std::iter::once`](https://doc.rust-lang.org/std/iter/fn.once.html) on the
 element instead.
 
-Also, since `Option` implements `IntoIterator`, it's possible to iterate over
-it using a `for` loop. This is equivalent to matching it with `if let Some(..)`,
+Also, since `Option` implements `IntoIterator`, it's possible to iterate over it
+using a `for` loop. This is equivalent to matching it with `if let Some(..)`,
 and in most cases you should prefer the latter.
 
 ## See also
@@ -50,7 +51,8 @@ and in most cases you should prefer the latter.
   `Some(foo).into_iter()`.
 
 - [`Iterator::filter_map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map)
-  is a version of [`Iterator::map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map),
+  is a version of
+  [`Iterator::map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map),
   specialized to mapping functions which return `Option`.
 
 - The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions

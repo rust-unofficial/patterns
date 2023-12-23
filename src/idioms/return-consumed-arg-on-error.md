@@ -2,8 +2,8 @@
 
 ## Description
 
-If a fallible function consumes (moves) an argument, return that argument back inside
-an error.
+If a fallible function consumes (moves) an argument, return that argument back
+inside an error.
 
 ## Example
 
@@ -42,14 +42,12 @@ fn main() {
 
 ## Motivation
 
-In case of error you may want to try some alternative way or to
-retry action in case of non-deterministic function. But if the argument
-is always consumed, you are forced to clone it on every call, which
-is not very efficient.
+In case of error you may want to try some alternative way or to retry action in
+case of non-deterministic function. But if the argument is always consumed, you
+are forced to clone it on every call, which is not very efficient.
 
-The standard library uses this approach in e.g. `String::from_utf8` method.
-When given a vector that doesn't contain valid UTF-8, a `FromUtf8Error`
-is returned.
+The standard library uses this approach in e.g. `String::from_utf8` method. When
+given a vector that doesn't contain valid UTF-8, a `FromUtf8Error` is returned.
 You can get original vector back using `FromUtf8Error::into_bytes` method.
 
 ## Advantages

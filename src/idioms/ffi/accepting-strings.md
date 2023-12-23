@@ -16,12 +16,12 @@ The strings used in C have different behaviours to those used in Rust, namely:
 - C strings are null-terminated while Rust strings store their length
 - C strings can contain any arbitrary non-zero byte while Rust strings must be
   UTF-8
-- C strings are accessed and manipulated using `unsafe` pointer operations
-  while interactions with Rust strings go through safe methods
+- C strings are accessed and manipulated using `unsafe` pointer operations while
+  interactions with Rust strings go through safe methods
 
 The Rust standard library comes with C equivalents of Rust's `String` and `&str`
-called `CString` and `&CStr`, that allow us to avoid a lot of the complexity
-and `unsafe` code involved in converting between C strings and Rust strings.
+called `CString` and `&CStr`, that allow us to avoid a lot of the complexity and
+`unsafe` code involved in converting between C strings and Rust strings.
 
 The `&CStr` type also allows us to work with borrowed data, meaning passing
 strings between Rust and C is a zero-cost operation.
@@ -70,8 +70,7 @@ pub mod unsafe_module {
 The example is is written to ensure that:
 
 1. The `unsafe` block is as small as possible.
-2. The pointer with an "untracked" lifetime becomes a "tracked" shared
-   reference
+2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
 
 Consider an alternative, where the string is actually copied:
 
@@ -121,22 +120,21 @@ This code in inferior to the original in two respects:
 
 1. There is much more `unsafe` code, and more importantly, more invariants it
    must uphold.
-2. Due to the extensive arithmetic required, there is a bug in this version
-   that cases Rust `undefined behaviour`.
+2. Due to the extensive arithmetic required, there is a bug in this version that
+   cases Rust `undefined behaviour`.
 
 The bug here is a simple mistake in pointer arithmetic: the string was copied,
 all `msg_len` bytes of it. However, the `NUL` terminator at the end was not.
 
-The Vector then had its size _set_ to the length of the _zero padded string_ --
-rather than _resized_ to it, which could have added a zero at the end.
-As a result, the last byte in the Vector is uninitialized memory.
-When the `CString` is created at the bottom of the block, its read of the
-Vector will cause `undefined behaviour`!
+The Vector then had its size *set* to the length of the *zero padded string* --
+rather than *resized* to it, which could have added a zero at the end. As a
+result, the last byte in the Vector is uninitialized memory. When the `CString`
+is created at the bottom of the block, its read of the Vector will cause
+`undefined behaviour`!
 
-Like many such issues, this would be difficult issue to track down.
-Sometimes it would panic because the string was not `UTF-8`, sometimes it would
-put a weird character at the end of the string, sometimes it would just
-completely crash.
+Like many such issues, this would be difficult issue to track down. Sometimes it
+would panic because the string was not `UTF-8`, sometimes it would put a weird
+character at the end of the string, sometimes it would just completely crash.
 
 ## Disadvantages
 

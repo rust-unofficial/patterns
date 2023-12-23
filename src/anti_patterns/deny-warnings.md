@@ -53,8 +53,9 @@ This can be done by any individual developer (or be set in a CI tool like
 Travis, but remember that this may break the build when something changes)
 without requiring a change to the code.
 
-Alternatively, we can specify the lints that we want to `deny` in the code.
-Here is a list of warning lints that is (hopefully) safe to deny (as of Rustc 1.48.0):
+Alternatively, we can specify the lints that we want to `deny` in the code. Here
+is a list of warning lints that is (hopefully) safe to deny (as of Rustc
+1.48.0):
 
 ```rust,ignore
 #![deny(bad_style,

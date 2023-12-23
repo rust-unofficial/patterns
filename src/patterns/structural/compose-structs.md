@@ -1,6 +1,4 @@
-# Compose structs together for better borrowing
-
-TODO - this is not a very snappy name
+# Struct decomposition for independent borrowing
 
 ## Description
 
@@ -20,71 +18,93 @@ Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:
 
 ```rust
-struct A {
-    f1: u32,
-    f2: u32,
-    f3: u32,
+struct Database {
+    connection_string: String,
+    timeout: u32,
+    pool_size: u32,
 }
 
-fn foo(a: &mut A) -> &u32 { &a.f2 }
-fn bar(a: &mut A) -> u32 { a.f1 + a.f3 }
+fn print_database(database: &Database) {
+    println!("Connection string: {}", database.connection_string);
+    println!("Timeout: {}", database.timeout);
+    println!("Pool size: {}", database.pool_size);
+}
 
-fn baz(a: &mut A) {
-    // The later usage of x causes a to be borrowed for the rest of the function.
-    let x = foo(a);
-    // Borrow checker error:
-    // let y = bar(a); // ~ ERROR: cannot borrow `*a` as mutable more than once
-                       //          at a time
-    println!("{}", x);
+fn main() {
+    let mut db = Database {
+        connection_string: "initial string".to_string(),
+        timeout: 30,
+        pool_size: 100,
+    };
+
+    let connection_string = &mut db.connection_string;
+    print_database(&db);  // Immutable borrow of `db` happens here
+    // *connection_string = "new string".to_string();  // Mutable borrow is used
+                                                       // here
 }
 ```
 
-We can apply this design pattern and refactor `A` into two smaller structs, thus
-solving the borrow checking issue:
+We can apply this design pattern and refactor `Database` into three smaller
+structs, thus solving the borrow checking issue:
 
 ```rust
-// A is now composed of two structs - B and C.
-struct A {
-    b: B,
-    c: C,
-}
-struct B {
-    f2: u32,
-}
-struct C {
-    f1: u32,
-    f3: u32,
+// Database is now composed of three structs - ConnectionString, Timeout and PoolSize.
+// Let's decompose it into smaller structs
+#[derive(Debug, Clone)]
+struct ConnectionString(String);
+
+#[derive(Debug, Clone, Copy)]
+struct Timeout(u32);
+
+#[derive(Debug, Clone, Copy)]
+struct PoolSize(u32);
+
+// We then compose these smaller structs back into `Database`
+struct Database {
+    connection_string: ConnectionString,
+    timeout: Timeout,
+    pool_size: PoolSize,
 }
 
-// These functions take a B or C, rather than A.
-fn foo(b: &mut B) -> &u32 { &b.f2 }
-fn bar(c: &mut C) -> u32 { c.f1 + c.f3 }
+// print_database can then take ConnectionString, Timeout and Poolsize struct instead
+fn print_database(connection_str: ConnectionString, 
+                  timeout: Timeout, 
+                  pool_size: PoolSize) {
+    println!("Connection string: {:?}", connection_str);
+    println!("Timeout: {:?}", timeout);
+    println!("Pool size: {:?}", pool_size);
+}
 
-fn baz(a: &mut A) {
-    let x = foo(&mut a.b);
-    // Now it's OK!
-    let y = bar(&mut a.c);
-    println!("{}", x);
+fn main() {
+    // Initialize the Database with the three structs
+    let mut db = Database {
+        connection_string: ConnectionString("localhost".to_string()),
+        timeout: Timeout(30),
+        pool_size: PoolSize(100),
+    };
+
+    let connection_string = &mut db.connection_string;
+    print_database(connection_string.clone(), db.timeout, db.pool_size);
+    *connection_string = ConnectionString("new string".to_string());
 }
 ```
 
 ## Motivation
 
-TODO Why and where you should use the pattern
+This pattern is most useful, when you have a struct that ended up with a lot of
+fields that you want to borrow independently. Thus having a more flexible
+behaviour in the end.
 
 ## Advantages
 
-Lets you work around limitations in the borrow checker.
-
-Often produces a better design.
+Decomposition of structs lets you work around limitations in the borrow checker.
+And it often produces a better design.
 
 ## Disadvantages
 
-Leads to more verbose code.
-
-Sometimes, the smaller structs are not good abstractions, and so we end up with
-a worse design. That is probably a 'code smell', indicating that the program
-should be refactored in some way.
+It can lead to more verbose code. And sometimes, the smaller structs are not
+good abstractions, and so we end up with a worse design. That is probably a
+'code smell', indicating that the program should be refactored in some way.
 
 ## Discussion
 

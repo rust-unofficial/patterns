@@ -1,14 +1,14 @@
 # Newtype
 
 What if in some cases we want a type to behave similar to another type or
-enforce some behaviour at compile time when using only type aliases would
-not be enough?
+enforce some behaviour at compile time when using only type aliases would not be
+enough?
 
 For example, if we want to create a custom `Display` implementation for `String`
 due to security considerations (e.g. passwords).
 
-For such cases we could use the `Newtype` pattern to provide **type safety**
-and **encapsulation**.
+For such cases we could use the `Newtype` pattern to provide **type safety** and
+**encapsulation**.
 
 ## Description
 
@@ -17,40 +17,29 @@ This creates a new type, rather than an alias to a type (`type` items).
 
 ## Example
 
-```rust,ignore
-// Some type, not necessarily in the same module or even crate.
-struct Foo {
-    //..
-}
+```rust
+use std::fmt::Display;
 
-impl Foo {
-    // These functions are not present on Bar.
-    //..
-}
+// Create Newtype Password to override the Display trait for String
+struct Password(String);
 
-// The newtype.
-pub struct Bar(Foo);
-
-impl Bar {
-    // Constructor.
-    pub fn new(
-        //..
-    ) -> Self {
-
-        //..
-
+impl Display for Password {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "****************")
     }
-
-    //..
 }
 
 fn main() {
-    let b = Bar::new(...);
-
-    // Foo and Bar are type incompatible, the following do not type check.
-    // let f: Foo = b;
-    // let b: Bar = Foo { ... };
+    let unsecured_password: String = "ThisIsMyPassword".to_string();
+    let secured_password: Password = Password(unsecured_password.clone());
+    println!("unsecured_password: {unsecured_password}");
+    println!("secured_password: {secured_password}");
 }
+```
+
+```shell
+unsecured_password: ThisIsMyPassword
+secured_password: ****************
 ```
 
 ## Motivation
@@ -77,7 +66,7 @@ field is private, which it is by default).
 ## Disadvantages
 
 The downside of newtypes (especially compared with type aliases), is that there
-is no special language support. This means there can be _a lot_ of boilerplate.
+is no special language support. This means there can be *a lot* of boilerplate.
 You need a 'pass through' method for every method you want to expose on the
 wrapped type, and an impl for every trait you want to also be implemented for
 the wrapper type.
@@ -87,7 +76,8 @@ the wrapper type.
 Newtypes are very common in Rust code. Abstraction or representing units are the
 most common uses, but they can be used for other reasons:
 
-- restricting functionality (reduce the functions exposed or traits implemented),
+- restricting functionality (reduce the functions exposed or traits
+  implemented),
 - making a type with copy semantics have move semantics,
 - abstraction by providing a more concrete type and thus hiding internal types,
   e.g.,
@@ -96,10 +86,10 @@ most common uses, but they can be used for other reasons:
 pub struct Foo(Bar<T1, T2>);
 ```
 
-Here, `Bar` might be some public, generic type and `T1` and `T2` are some internal
-types. Users of our module shouldn't know that we implement `Foo` by using a `Bar`,
-but what we're really hiding here is the types `T1` and `T2`, and how they are used
-with `Bar`.
+Here, `Bar` might be some public, generic type and `T1` and `T2` are some
+internal types. Users of our module shouldn't know that we implement `Foo` by
+using a `Bar`, but what we're really hiding here is the types `T1` and `T2`, and
+how they are used with `Bar`.
 
 ## See also
 
@@ -108,4 +98,4 @@ with `Bar`.
 - [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
 - [derive_more](https://crates.io/crates/derive_more), a crate for deriving many
   builtin traits on newtypes.
-- [The Newtype Pattern In Rust](https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
+- [The Newtype Pattern In Rust](https://web.archive.org/web/20230519162111/https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)

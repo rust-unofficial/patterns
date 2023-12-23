@@ -62,8 +62,8 @@ fn builder_test() {
 
 ## Motivation
 
-Useful when you would otherwise require many constructors or where
-construction has side effects.
+Useful when you would otherwise require many constructors or where construction
+has side effects.
 
 ## Advantages
 
@@ -88,8 +88,9 @@ Rust than in C++, Java, or others.
 This pattern is often used where the builder object is useful in its own right,
 rather than being just a builder. For example, see
 [`std::process::Command`](https://doc.rust-lang.org/std/process/struct.Command.html)
-is a builder for [`Child`](https://doc.rust-lang.org/std/process/struct.Child.html)
-(a process). In these cases, the `T` and `TBuilder` naming pattern is not used.
+is a builder for
+[`Child`](https://doc.rust-lang.org/std/process/struct.Child.html) (a process).
+In these cases, the `T` and `TBuilder` naming pattern is not used.
 
 The example takes and returns the builder by value. It is often more ergonomic
 (and more efficient) to take and return the builder as a mutable reference. The
@@ -108,8 +109,8 @@ as well as the `FooBuilder::new().a().b().build()` style.
 ## See also
 
 - [Description in the style guide](https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)
-- [derive_builder](https://crates.io/crates/derive_builder), a crate for automatically
-  implementing this pattern while avoiding the boilerplate.
+- [derive_builder](https://crates.io/crates/derive_builder), a crate for
+  automatically implementing this pattern while avoiding the boilerplate.
 - [Constructor pattern](../../idioms/ctor.md) for when construction is simpler.
 - [Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
 - [Construction of complex values](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)

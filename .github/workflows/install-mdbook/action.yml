@@ -9,21 +9,21 @@ runs:
       id: mdbook-version
       run: |
         . ./.env
-        echo "::set-output name=MDBOOK_VERSION::${MDBOOK_VERSION}"
+        echo "version=$MDBOOK_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Read mdbook-i18n-helpers version from .env
       id: mdbook-i18n-helpers-version
       run: |
         . ./.env
-        echo "::set-output name=MDBOOK_I18N_HELPERS_VERSION::${MDBOOK_I18N_HELPERS_VERSION}"
+        echo "version=$MDBOOK_I18N_HELPERS_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 
-    # The --locked flag is important for reproducible builds.
     - name: Install mdbook
-      run: cargo install mdbook --locked --version '${{ steps.mdbook-version.outputs.MDBOOK_VERSION }}'
-      shell: bash
+      uses: taiki-e/install-action@2afb713f1c297f70eecb9cb904b36612eba3c25e # v2
+      with:
+        tool: mdbook@${{ steps.mdbook-version.outputs.version }}
 
     - name: Install i18n-helpers
-      run: cargo install mdbook-i18n-helpers --locked --version '${{ steps.mdbook-i18n-helpers-version.outputs.MDBOOK_I18N_HELPERS_VERSION }}'
+      run: cargo install mdbook-i18n-helpers --locked --version '${{ steps.mdbook-i18n-helpers-version.outputs.version }}'
       shell: bash
