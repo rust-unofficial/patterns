@@ -14,7 +14,7 @@ extra-watch-dirs = ["po", "third_party"]
 after = ["links"]
 
 [rust]
-edition = "2018"
+edition = "2021"
 
 [output.html]
 curly-quotes = true
