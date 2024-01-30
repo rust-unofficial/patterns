@@ -9,16 +9,16 @@ Construct an object relying on defaults for omitted fields.
 ```rust
 #[derive(Debug, Default, PartialEq)]
 pub struct Foo {
-    pub foo: Some(u32)
+    pub foo: Option<u32>,
     pub bar: String,
     // Private members.
     baz: Vec<u16>
-    // A lots more fields.
+    // A lot more fields.
 }
 
 
 #[test]
-fn inint_struct_test() {
+fn init_struct_test() {
     let foo = Foo {
         bar: "Some string".to_string(),
         ..Default::default
