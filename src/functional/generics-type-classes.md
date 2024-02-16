@@ -193,7 +193,7 @@ With this approach, if the user were to make a mistake and use the wrong type;
 fn main() {
     let mut socket = crate::bootp::listen()?;
     while let Some(request) = socket.next_request()? {
-        match request.mount_point().as_ref()
+        match request.mount_point().as_ref() {
             "/secure" => socket.send("Access denied"),
             _ => {} // continue on...
         }
