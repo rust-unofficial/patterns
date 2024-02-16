@@ -27,7 +27,7 @@ impl<T> Deref for Vec<T> {
 
 A `Vec<T>` is an owning collection of `T`s, while a slice (`&[T]`) is a borrowed
 collection of `T`s. Implementing `Deref` for `Vec` allows implicit dereferencing
-from `&Vec<T>` to `&[T]` and includes the relationship in auto-derefencing
+from `&Vec<T>` to `&[T]` and includes the relationship in auto-dereferencing
 searches. Most methods you might expect to be implemented for `Vec`s are instead
 implemented for slices.
 
