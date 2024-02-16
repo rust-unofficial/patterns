@@ -205,7 +205,7 @@ fn main() {
 If our commands are small and may be defined as functions or passed as a closure
 then using function pointers might be preferable since it does not exploit
 dynamic dispatch. But if our command is a whole struct with a bunch of functions
-and variables defined as seperated module then using trait objects would be more
+and variables defined as separated module then using trait objects would be more
 suitable. A case of application can be found in [`actix`](https://actix.rs/),
 which uses trait objects when it registers a handler function for routes. In
 case of using `Fn` trait objects we can create and use commands in the same way
