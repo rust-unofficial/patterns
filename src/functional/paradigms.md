@@ -12,7 +12,7 @@ let mut sum = 0;
 for i in 1..11 {
     sum += i;
 }
-println!("{}", sum);
+println!("{sum}");
 ```
 
 With imperative programs, we have to play compiler to see what is happening.

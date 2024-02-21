@@ -71,7 +71,7 @@ pub mod c_api {
                 format!("cannot write to read-only database");
             }
             DatabaseError::IOError(e) => {
-                format!("I/O Error: {}", e);
+                format!("I/O Error: {e}");
             }
             DatabaseError::FileCorrupted(s) => {
                 format!("File corrupted, run repair: {}", &s);

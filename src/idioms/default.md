@@ -44,8 +44,8 @@ fn main() {
     let mut conf = MyConfiguration::default();
     // do something with conf here
     conf.check = true;
-    println!("conf = {:#?}", conf);
-        
+    println!("conf = {conf:#?}");
+
     // partial initialization with default values, creates the same instance
     let conf1 = MyConfiguration {
         check: true,

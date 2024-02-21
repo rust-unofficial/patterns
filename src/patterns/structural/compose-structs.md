@@ -67,12 +67,12 @@ struct Database {
 }
 
 // print_database can then take ConnectionString, Timeout and Poolsize struct instead
-fn print_database(connection_str: ConnectionString, 
-                  timeout: Timeout, 
+fn print_database(connection_str: ConnectionString,
+                  timeout: Timeout,
                   pool_size: PoolSize) {
-    println!("Connection string: {:?}", connection_str);
-    println!("Timeout: {:?}", timeout);
-    println!("Pool size: {:?}", pool_size);
+    println!("Connection string: {connection_str:?}");
+    println!("Timeout: {timeout:?}");
+    println!("Pool size: {pool_size:?}");
 }
 
 fn main() {
