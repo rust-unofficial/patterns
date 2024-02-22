@@ -18,7 +18,7 @@ fn say_hello(name: &str) -> String {
     // result
 
     // But using format! is better.
-    format!("Hello {}!", name)
+    format!("Hello {name}!")
 }
 ```
 

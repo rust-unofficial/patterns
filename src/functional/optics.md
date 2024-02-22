@@ -278,7 +278,7 @@ Or do they?
 fn main() {
     let a = TestStruct { a: 5, b: "hello".to_string() };
     let a_data = a.serialize().to_json();
-    println!("Our Test Struct as JSON: {}", a_data);
+    println!("Our Test Struct as JSON: {a_data}");
     let b = TestStruct::deserialize(
         generated_visitor_for!(TestStruct)::from_json(a_data));
 }

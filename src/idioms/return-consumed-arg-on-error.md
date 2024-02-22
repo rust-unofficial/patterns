@@ -36,7 +36,7 @@ fn main() {
         false
     };
 
-    println!("success: {}", success);
+    println!("success: {success}");
 }
 ```
 

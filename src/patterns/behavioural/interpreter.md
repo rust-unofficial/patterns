@@ -76,7 +76,7 @@ impl<'a> Interpreter<'a> {
                 self.term(out);
                 out.push(op);
             } else {
-                panic!("Unexpected symbol '{}'", op);
+                panic!("Unexpected symbol '{op}'");
             }
         }
     }
@@ -84,7 +84,7 @@ impl<'a> Interpreter<'a> {
     fn term(&mut self, out: &mut String) {
         match self.next_char() {
             Some(ch) if ch.is_digit(10) => out.push(ch),
-            Some(ch) => panic!("Unexpected symbol '{}'", ch),
+            Some(ch) => panic!("Unexpected symbol '{ch}'"),
             None => panic!("Unexpected end of string"),
         }
     }
@@ -137,7 +137,7 @@ fn main() {
 
     assert_eq!(3f64, norm!(x));
     assert_eq!(5f64, norm!(x, y));
-    assert_eq!(0f64, norm!(0, 0, 0)); 
+    assert_eq!(0f64, norm!(0, 0, 0));
     assert_eq!(1f64, norm!(0.5, -0.5, 0.5, -0.5));
 }
 ```
