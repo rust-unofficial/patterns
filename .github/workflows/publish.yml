@@ -43,6 +43,7 @@ jobs:
         run: |
           mdbook build -d book
           mv book/html/* book/pandoc/pdf/patterns.pdf book/
+          rm -r book/html book/pandoc
 
       # TODO: Activate when first translation is available
       # - name: Build all translations
