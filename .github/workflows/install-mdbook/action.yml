@@ -19,18 +19,20 @@ runs:
         echo "version=$MDBOOK_I18N_HELPERS_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 
-    - name: Install mdbook
-      uses: taiki-e/install-action@2afb713f1c297f70eecb9cb904b36612eba3c25e # v2
-      with:
-        tool: mdbook@${{ steps.mdbook-version.outputs.version }}
-
-    - name: Install i18n-helpers
-      run: cargo install mdbook-i18n-helpers --locked --version '${{ steps.mdbook-i18n-helpers-version.outputs.version }}'
+    - name: Read mdbook-pandoc version from .env
+      id: mdbook-pandoc-version
+      run: |
+        . ./.env
+        echo "version=$MDBOOK_PANDOC_VERSION" >> $GITHUB_OUTPUT
       shell: bash
+
+    - name: Install dependencies
+      uses: taiki-e/install-action@v2
+      with:
+        tool: mdbook@${{ steps.mdbook-version.outputs.version }},mdbook-pandoc@${{ steps.mdbook-pandoc-version.outputs.version }},mdbook-i18n-helpers@${{ steps.mdbook-i18n-helpers-version.outputs.version }}
 
     - name: Install mdbook-pandoc and related dependencies
       run: |
-        cargo install mdbook-pandoc --locked --version 0.5.0
         sudo apt-get update
         sudo apt-get install -y texlive texlive-luatex texlive-lang-cjk librsvg2-bin fonts-noto
         curl -LsSf https://github.com/jgm/pandoc/releases/download/3.1.12.2/pandoc-3.1.12.2-linux-amd64.tar.gz | tar zxf -
