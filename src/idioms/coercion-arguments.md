@@ -107,8 +107,12 @@ fn three_vowels(word: &str) -> bool {
 }
 
 fn main() {
-    let sentence_string =
-        "Once upon a time, there was a friendly curious crab named Ferris".to_string();
+    let sentence_string = "
+        Once upon a time, there was a friendly
+        curious crabnamed Ferris
+    "
+    .to_string();
+
     for word in sentence_string.split(' ') {
         if three_vowels(word) {
             println!("{word} has three consecutive vowels!");

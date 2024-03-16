@@ -45,7 +45,8 @@ mod visit {
 use visit::*;
 use ast::*;
 
-// An example concrete implementation - walks the AST interpreting it as code.
+// An example concrete implementation - walks the AST interpreting
+// it as code.
 struct Interpreter;
 impl Visitor<i64> for Interpreter {
     fn visit_name(&mut self, n: &Name) -> i64 { panic!() }
@@ -59,8 +60,12 @@ impl Visitor<i64> for Interpreter {
     fn visit_expr(&mut self, e: &Expr) -> i64 {
         match *e {
             Expr::IntLit(n) => n,
-            Expr::Add(ref lhs, ref rhs) => self.visit_expr(lhs) + self.visit_expr(rhs),
-            Expr::Sub(ref lhs, ref rhs) => self.visit_expr(lhs) - self.visit_expr(rhs),
+            Expr::Add(ref lhs, ref rhs) => { 
+                self.visit_expr(lhs) + self.visit_expr(rhs)
+            }
+            Expr::Sub(ref lhs, ref rhs) => {
+                self.visit_expr(lhs) - self.visit_expr(rhs)
+            }
         }
     }
 }

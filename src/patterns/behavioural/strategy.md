@@ -45,7 +45,8 @@ trait Formatter {
 struct Report;
 
 impl Report {
-    // Write should be used but we kept it as String to ignore error handling
+    // Write should be used but we kept it as String to ignore
+    // error handling
     fn generate<T: Formatter>(g: T, s: &mut String) {
         // backend operations...
         let mut data = HashMap::new();

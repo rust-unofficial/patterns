@@ -32,7 +32,10 @@ pub mod unsafe_module {
 
     extern "C" {
         fn seterr(message: *const libc::c_char);
-        fn geterr(buffer: *mut libc::c_char, size: libc::c_int) -> libc::c_int;
+        fn geterr(
+            buffer: *mut libc::c_char,
+            size: libc::c_int,
+        ) -> libc::c_int;
     }
 
     fn report_error_to_ffi<S: Into<String>>(
@@ -41,8 +44,8 @@ pub mod unsafe_module {
         let c_err = std::ffi::CString::new(err.into())?;
 
         unsafe {
-            // SAFETY: calling an FFI whose documentation says the pointer is
-            // const, so no modification should occur
+            // SAFETY: calling an FFI whose documentation says the
+            // pointer is const, so no modification should occur
             seterr(c_err.as_ptr());
         }
 
@@ -81,7 +84,9 @@ pub mod unsafe_module {
 
     // other module content
 
-    fn report_error<S: Into<String>>(err: S) -> Result<(), std::ffi::NulError> {
+    fn report_error<S: Into<String>>(
+        err: S
+    ) -> Result<(), std::ffi::NulError> {
         unsafe {
             // SAFETY: whoops, this contains a dangling pointer!
             seterr(std::ffi::CString::new(err.into())?.as_ptr());

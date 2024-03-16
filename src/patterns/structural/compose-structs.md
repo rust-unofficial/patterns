@@ -38,9 +38,13 @@ fn main() {
     };
 
     let connection_string = &mut db.connection_string;
-    print_database(&db);  // Immutable borrow of `db` happens here
-    // *connection_string = "new string".to_string();  // Mutable borrow is used
-                                                       // here
+
+    // Immutable borrow of `db` happens here
+    print_database(&db);
+
+    // Mutable borrow would be used here
+    // This would cause a compile error           
+    // *connection_string = "new string".to_string();  
 }
 ```
 
@@ -48,7 +52,11 @@ We can apply this design pattern and refactor `Database` into three smaller
 structs, thus solving the borrow checking issue:
 
 ```rust
-// Database is now composed of three structs - ConnectionString, Timeout and PoolSize.
+// Database is now composed of three structs
+// - ConnectionString,
+// - Timeout and
+// - PoolSize.
+//
 // Let's decompose it into smaller structs
 #[derive(Debug, Clone)]
 struct ConnectionString(String);

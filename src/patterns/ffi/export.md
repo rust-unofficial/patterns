@@ -152,18 +152,21 @@ consider what a straightforward API translation would look like:
 ```rust,ignore
 #[no_mangle]
 pub extern "C" fn dbm_iter_new(owner: *const Dbm) -> *mut DbmKeysIter {
-    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
+    // THIS API IS A BAD IDEA! For real applications,
+    // use object-based design instead.
 }
 #[no_mangle]
 pub extern "C" fn dbm_iter_next(
     iter: *mut DbmKeysIter,
     key_out: *const datum
 ) -> libc::c_int {
-    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
+    // THIS API IS A BAD IDEA! For real applications,
+    // use object-based design instead.
 }
 #[no_mangle]
 pub extern "C" fn dbm_iter_del(*mut DbmKeysIter) {
-    // THIS API IS A BAD IDEA! For real applications, use object-based design instead.
+    // THIS API IS A BAD IDEA! For real applications,
+    // use object-based design instead.
 }
 ```
 
@@ -186,13 +189,16 @@ int count_key_sizes(DBM *db) {
     }
 
     int l;
-    while ((l = dbm_iter_next(owner, &key)) >= 0) { // an error is indicated by -1
+
+    // an error is indicated by -1, and end of iteration by 0
+    while ((l = dbm_iter_next(owner, &key)) >= 0) { 
         free(key.dptr);
         len += key.dsize;
         if (l == 0) { // end of the iterator
             dbm_close(owner);
         }
     }
+    
     if l >= 0 {
         return -1;
     } else {

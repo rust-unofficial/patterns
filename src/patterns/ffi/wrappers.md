@@ -118,9 +118,11 @@ pub mod unsafe_module {
         key: datum,
         value: datum) -> libc::c_int {
 
-        // DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM.
+        // DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE
+        // A PROLBEM.
 
-        let myset: &mut MySet = unsafe { // SAFETY: whoops, UB occurs in here!
+        // SAFETY: whoops, UB occurs in here!
+        let myset: &mut MySet = unsafe { 
             &mut (*myset).myset
         };
 

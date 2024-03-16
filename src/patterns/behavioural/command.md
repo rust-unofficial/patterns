@@ -140,9 +140,15 @@ fn remove_field() -> String {
 
 fn main() {
     let mut schema = Schema::new();
-    schema.add_migration(|| "create table".to_string(), || "drop table".to_string());
+    schema.add_migration(
+        || "create table".to_string(),
+        || "drop table".to_string()
+    );
+
     schema.add_migration(add_field, remove_field);
+
     assert_eq!(vec!["create table", "add field"], schema.execute());
+    
     assert_eq!(vec!["remove field", "drop table"], schema.rollback());
 }
 ```

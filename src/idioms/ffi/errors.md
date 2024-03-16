@@ -62,7 +62,8 @@ pub mod c_api {
         ) -> *mut libc::c_char {
 
         let error: &DatabaseError = unsafe {
-            // SAFETY: pointer lifetime is greater than the current stack frame
+            // SAFETY: pointer lifetime is greater than the current
+            // stack frame
             &*e
         };
 
@@ -79,9 +80,10 @@ pub mod c_api {
         };
 
         let c_error = unsafe {
-            // SAFETY: copying error_str to an allocated buffer with a NUL
-            // character at the end
-            let mut malloc: *mut u8 = libc::malloc(error_str.len() + 1) as *mut _;
+            // SAFETY: copying error_str to an allocated buffer
+            // with a NUL character at the end
+            let mut malloc: *mut u8 =
+                libc::malloc(error_str.len() + 1) as *mut _;
 
             if malloc.is_null() {
                 return std::ptr::null_mut();

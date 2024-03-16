@@ -79,13 +79,17 @@ pub mod unsafe_module {
 
     // other module content
 
-    pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
+    pub extern "C" fn mylib_log(
+        msg: *const libc::c_char,
+        level: libc::c_int
+    ) {
         // DO NOT USE THIS CODE.
         // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.
 
         let level: crate::LogLevel = match level { /* ... */ };
 
-        let msg_len = unsafe { /* SAFETY: strlen is what it is, I guess? */
+        let msg_len = unsafe { 
+            // SAFETY: strlen is what it is, I guess?
             libc::strlen(msg)
         };
 

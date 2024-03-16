@@ -51,7 +51,8 @@ impl<'a, T> Drop for MutexGuard<'a, T> {
     }
 }
 
-// Implementing Deref means we can treat MutexGuard like a pointer to T.
+// Implementing Deref means we can treat MutexGuard like a
+// pointer to T.
 impl<'a, T> Deref for MutexGuard<'a, T> {
     type Target = T;
 
@@ -63,10 +64,11 @@ impl<'a, T> Deref for MutexGuard<'a, T> {
 fn baz(x: Mutex<Foo>) {
     let xx = x.lock();
     xx.foo(); // foo is a method on Foo.
-    // The borrow checker ensures we can't store a reference to the underlying
-    // Foo which will outlive the guard xx.
+    // The borrow checker ensures we can't store a reference to the
+    // underlying Foo which will outlive the guard xx.
 
-    // x is unlocked when we exit this function and xx's destructor is executed.
+    // x is unlocked when we exit this function and xx's destructor
+    // is executed.
 }
 ```
 

@@ -28,11 +28,17 @@ implemented by any library which parses a new data format:
 pub trait Deserializer<'de>: Sized {
     type Error: Error;
 
-    fn deserialize_any<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_any<V>(
+        self,
+        visitor: V
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
-    fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_bool<V>(
+        self,
+        visitor: V
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
@@ -262,7 +268,8 @@ independent form, it is even possible to have code generation creating the
 `Visitor` associated with type `T`:
 
 ```rust,ignore
-#[derive(Default, Serde)] // the "Serde" derive creates the trait impl block
+// the "Serde" derive creates the trait impl block
+#[derive(Default, Serde)] 
 struct TestStruct {
   a: usize,
   b: String,
@@ -365,11 +372,17 @@ You can see it on the `Deserializer` trait
 pub trait Deserializer<'de>: Sized {
     type Error: Error;
 
-    fn deserialize_any<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_any<V>(
+        self,
+        visitor: V
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
-    fn deserialize_bool<V>(self, visitor: V) -> Result<V::Value, Self::Error>
+    fn deserialize_bool<V>(
+        self,
+        visitor: V
+    ) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>;
 
