@@ -40,7 +40,9 @@ jobs:
         uses: ./.github/workflows/install-mdbook
 
       - name: Build course in English
-        run: mdbook build -d book
+        run: |
+          mdbook build -d book
+          mv book/html/* book/pandoc/pdf/patterns.pdf book/
 
       # TODO: Activate when first translation is available
       # - name: Build all translations

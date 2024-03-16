@@ -38,3 +38,20 @@ editable = false
 # Redirects in the form of "old-path" = "new-path", where the new path
 # is relative to the old path.
 "functional/lenses.html" = "optics.html"
+
+[output.pandoc]
+optional = true
+hosted-html = "https://rust-unofficial.github.io/patterns/"
+
+[output.pandoc.profile.pdf]
+output-file = "patterns.pdf"
+pdf-engine = "lualatex"
+
+[output.pandoc.profile.pdf.variables]
+mainfont = "Noto Serif"
+sansfont = "Noto Sans"
+monofont = "Noto Sans Mono"
+mainfontfallback = ["NotoSerifCJKSC:"]
+geometry = ["margin=1.25in"]
+linkcolor = "blue"
+urlcolor = "red"
