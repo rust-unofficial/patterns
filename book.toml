@@ -44,7 +44,7 @@ optional = true
 hosted-html = "https://rust-unofficial.github.io/patterns/"
 
 [output.pandoc.profile.pdf]
-output-file = "patterns.pdf"
+output-file = "rust-design-patterns.pdf"
 pdf-engine = "lualatex"
 
 [output.pandoc.profile.pdf.variables]

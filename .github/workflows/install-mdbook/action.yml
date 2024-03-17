@@ -33,8 +33,9 @@ runs:
 
     - name: Install mdbook-pandoc and related dependencies
       run: |
+        . ./.env
         sudo apt-get update
         sudo apt-get install -y texlive texlive-latex-extra texlive-luatex texlive-lang-cjk librsvg2-bin fonts-noto
-        curl -LsSf https://github.com/jgm/pandoc/releases/download/3.1.12.2/pandoc-3.1.12.2-linux-amd64.tar.gz | tar zxf -
-        echo "$PWD/pandoc-3.1.12.2/bin" >> $GITHUB_PATH
+        curl -LsSf https://github.com/jgm/pandoc/releases/download/$PANDOC_VERSION/pandoc-$PANDOC_VERSION-linux-amd64.tar.gz | tar zxf -
+        echo "$PWD/pandoc-$PANDOC_VERSION/bin" >> $GITHUB_PATH
       shell: bash
