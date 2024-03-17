@@ -5,7 +5,7 @@
 If you are interested in contributing to this book, check out the
 [contribution guidelines](https://github.com/rust-unofficial/patterns/blob/master/CONTRIBUTING.md).
 
-## 📯 News
+## News
 
 - **2024-03-17**: You can now download the book in PDF format from
   [this link](https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf).
