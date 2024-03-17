@@ -26,10 +26,17 @@ runs:
         echo "version=$MDBOOK_PANDOC_VERSION" >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Read mdbook-last-changed version from .env
+      id: mdbook-last-changed-version
+      run: |
+        . ./.env
+        echo "version=$MDBOOK_LAST_CHANGED_VERSION" >> $GITHUB_OUTPUT
+      shell: bash
+
     - name: Install dependencies
       uses: taiki-e/install-action@v2
       with:
-        tool: mdbook@${{ steps.mdbook-version.outputs.version }},mdbook-pandoc@${{ steps.mdbook-pandoc-version.outputs.version }},mdbook-i18n-helpers@${{ steps.mdbook-i18n-helpers-version.outputs.version }}
+        tool: mdbook@${{ steps.mdbook-version.outputs.version }},mdbook-pandoc@${{ steps.mdbook-pandoc-version.outputs.version }},mdbook-i18n-helpers@${{ steps.mdbook-i18n-helpers-version.outputs.version }},mdbook-last-changed@${{ steps.mdbook-last-changed-version.outputs.version }}
 
     - name: Install mdbook-pandoc and related dependencies
       run: |

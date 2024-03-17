@@ -23,7 +23,14 @@ site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
 git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
-additional-css = ["theme/css/language-picker.css"]
+additional-css = [
+  "./theme/css/language-picker.css",
+  "./styles/last-changed.css",
+]
+
+[preprocessor.last-changed]
+command = "mdbook-last-changed"
+renderer = ["html"]
 
 [output.html.fold]
 enable = true
