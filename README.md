@@ -25,6 +25,29 @@ information on how contributing to this repository works.
 This book is built with [mdbook](https://rust-lang.github.io/mdBook/). You can
 install it by running `cargo install mdbook`.
 
+### Additional dependencies
+
+- `cargo install mdbook-last-changed` for date changes in the footer
+
+- `cargo install mdbook-pandoc` for rendering the book to PDF
+
+- `cargo install mdbook-i18n-helpers` for translation and i8n support
+
+#### Texlive
+
+```sh
+# Source the .env file to get the PANDOC_VERSION
+. ./.env
+
+sudo apt-get update
+
+sudo apt-get install -y texlive texlive-latex-extra texlive-luatex texlive-lang-cjk librsvg2-bin fonts-noto
+
+curl -LsSf https://github.com/jgm/pandoc/releases/download/$PANDOC_VERSION/pandoc-$PANDOC_VERSION-linux-amd64.tar.gz | tar zxf -
+```
+
+### Building the book
+
 If you want to build it locally you can run one of these two commands in the
 root directory of the repository:
 
