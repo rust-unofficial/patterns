@@ -3,6 +3,9 @@
 An open source book about design patterns and idioms in the Rust programming
 language that you can read [here](https://rust-unofficial.github.io/patterns/).
 
+You can also download the book in PDF format from
+[this link](https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf).
+
 ## Contributing
 
 You are missing content in this repository that can be helpful for others, and
