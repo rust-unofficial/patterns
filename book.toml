@@ -59,6 +59,6 @@ mainfont = "Noto Serif"
 sansfont = "Noto Sans"
 monofont = "Noto Sans Mono"
 mainfontfallback = ["NotoSerifCJKSC:"]
-geometry = ["margin=1.25in"]
+geometry = ["margin=1in"]
 linkcolor = "blue"
 urlcolor = "red"
