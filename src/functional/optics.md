@@ -185,8 +185,8 @@ use anyhow;
 use std::str::FromStr;
 
 struct TestStruct {
-  a: usize,
-  b: String,
+    a: usize,
+    b: String,
 }
 
 impl FromStr for TestStruct {
@@ -203,7 +203,10 @@ impl ToString for TestStruct {
 }
 
 fn main() {
-    let a = TestStruct { a: 5, b: "hello".to_string() };
+    let a = TestStruct {
+        a: 5,
+        b: "hello".to_string(),
+    };
     println!("Our Test Struct as JSON: {}", a.to_string());
 }
 ```
@@ -264,8 +267,8 @@ independent form, it is even possible to have code generation creating the
 ```rust,ignore
 #[derive(Default, Serde)] // the "Serde" derive creates the trait impl block
 struct TestStruct {
-  a: usize,
-  b: String,
+    a: usize,
+    b: String,
 }
 
 // user writes this macro to generate an associated visitor type

@@ -120,8 +120,8 @@ mod bootp {
 
 // private module, lest outside users invent their own protocol kinds!
 mod proto_trait {
-    use std::path::{Path, PathBuf};
     use super::{bootp, nfs};
+    use std::path::{Path, PathBuf};
 
     pub(crate) trait ProtoKind {
         type AuthInfo;
@@ -157,7 +157,7 @@ mod proto_trait {
 }
 
 use proto_trait::ProtoKind; // keep internal to prevent impls
-pub use proto_trait::{Nfs, Bootp}; // re-export so callers can see them
+pub use proto_trait::{Bootp, Nfs}; // re-export so callers can see them
 
 struct FileDownloadRequest<P: ProtoKind> {
     file_name: PathBuf,

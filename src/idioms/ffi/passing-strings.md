@@ -35,9 +35,7 @@ pub mod unsafe_module {
         fn geterr(buffer: *mut libc::c_char, size: libc::c_int) -> libc::c_int;
     }
 
-    fn report_error_to_ffi<S: Into<String>>(
-        err: S
-    ) -> Result<(), std::ffi::NulError>{
+    fn report_error_to_ffi<S: Into<String>>(err: S) -> Result<(), std::ffi::NulError> {
         let c_err = std::ffi::CString::new(err.into())?;
 
         unsafe {

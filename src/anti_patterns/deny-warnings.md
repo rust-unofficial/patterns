@@ -58,35 +58,39 @@ is a list of warning lints that is (hopefully) safe to deny (as of Rustc
 1.48.0):
 
 ```rust,ignore
-#![deny(bad_style,
-       const_err,
-       dead_code,
-       improper_ctypes,
-       non_shorthand_field_patterns,
-       no_mangle_generic_items,
-       overflowing_literals,
-       path_statements,
-       patterns_in_fns_without_body,
-       private_in_public,
-       unconditional_recursion,
-       unused,
-       unused_allocation,
-       unused_comparisons,
-       unused_parens,
-       while_true)]
+#![deny(
+    bad_style,
+    const_err,
+    dead_code,
+    improper_ctypes,
+    non_shorthand_field_patterns,
+    no_mangle_generic_items,
+    overflowing_literals,
+    path_statements,
+    patterns_in_fns_without_body,
+    private_in_public,
+    unconditional_recursion,
+    unused,
+    unused_allocation,
+    unused_comparisons,
+    unused_parens,
+    while_true
+)]
 ```
 
 In addition, the following `allow`ed lints may be a good idea to `deny`:
 
 ```rust,ignore
-#![deny(missing_debug_implementations,
-       missing_docs,
-       trivial_casts,
-       trivial_numeric_casts,
-       unused_extern_crates,
-       unused_import_braces,
-       unused_qualifications,
-       unused_results)]
+#![deny(
+    missing_debug_implementations,
+    missing_docs,
+    trivial_casts,
+    trivial_numeric_casts,
+    unused_extern_crates,
+    unused_import_braces,
+    unused_qualifications,
+    unused_results
+)]
 ```
 
 Some may also want to add `missing-copy-implementations` to their list.

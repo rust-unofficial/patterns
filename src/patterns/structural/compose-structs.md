@@ -38,9 +38,9 @@ fn main() {
     };
 
     let connection_string = &mut db.connection_string;
-    print_database(&db);  // Immutable borrow of `db` happens here
-    // *connection_string = "new string".to_string();  // Mutable borrow is used
-                                                       // here
+    print_database(&db); // Immutable borrow of `db` happens here
+                         // *connection_string = "new string".to_string();  // Mutable borrow is used
+                         // here
 }
 ```
 
@@ -67,9 +67,7 @@ struct Database {
 }
 
 // print_database can then take ConnectionString, Timeout and Poolsize struct instead
-fn print_database(connection_str: ConnectionString,
-                  timeout: Timeout,
-                  pool_size: PoolSize) {
+fn print_database(connection_str: ConnectionString, timeout: Timeout, pool_size: PoolSize) {
     println!("Connection string: {connection_str:?}");
     println!("Timeout: {timeout:?}");
     println!("Pool size: {pool_size:?}");

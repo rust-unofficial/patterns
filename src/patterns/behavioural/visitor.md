@@ -42,13 +42,15 @@ mod visit {
     }
 }
 
-use visit::*;
 use ast::*;
+use visit::*;
 
 // An example concrete implementation - walks the AST interpreting it as code.
 struct Interpreter;
 impl Visitor<i64> for Interpreter {
-    fn visit_name(&mut self, n: &Name) -> i64 { panic!() }
+    fn visit_name(&mut self, n: &Name) -> i64 {
+        panic!()
+    }
     fn visit_stmt(&mut self, s: &Stmt) -> i64 {
         match *s {
             Stmt::Expr(ref e) => self.visit_expr(e),
@@ -87,7 +89,7 @@ example,
 ```rust,ignore
 pub fn walk_expr(visitor: &mut Visitor, e: &Expr) {
     match *e {
-        Expr::IntLit(_) => {},
+        Expr::IntLit(_) => {}
         Expr::Add(ref lhs, ref rhs) => {
             visitor.visit_expr(lhs);
             visitor.visit_expr(rhs);

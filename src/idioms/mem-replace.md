@@ -15,7 +15,7 @@ use std::mem;
 
 enum MyEnum {
     A { name: String, x: u8 },
-    B { name: String }
+    B { name: String },
 }
 
 fn a_to_b(e: &mut MyEnum) {
@@ -24,7 +24,9 @@ fn a_to_b(e: &mut MyEnum) {
         // (note that empty strings don't allocate).
         // Then, construct the new enum variant (which will
         // be assigned to `*e`).
-        *e = MyEnum::B { name: mem::take(name) }
+        *e = MyEnum::B {
+            name: mem::take(name),
+        }
     }
 }
 ```
@@ -38,7 +40,7 @@ enum MultiVariateEnum {
     A { name: String },
     B { name: String },
     C,
-    D
+    D,
 }
 
 fn swizzle(e: &mut MultiVariateEnum) {
@@ -46,10 +48,14 @@ fn swizzle(e: &mut MultiVariateEnum) {
     *e = match e {
         // Ownership rules do not allow taking `name` by value, but we cannot
         // take the value out of a mutable reference, unless we replace it:
-        A { name } => B { name: mem::take(name) },
-        B { name } => A { name: mem::take(name) },
+        A { name } => B {
+            name: mem::take(name),
+        },
+        B { name } => A {
+            name: mem::take(name),
+        },
         C => D,
-        D => C
+        D => C,
     }
 }
 ```

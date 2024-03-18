@@ -16,7 +16,7 @@ object:
 /// assert_eq!(42, s.value());
 /// ```
 pub struct Second {
-    value: u64
+    value: u64,
 }
 
 impl Second {
@@ -47,7 +47,7 @@ Rust supports default constructors with the [`Default`][std-default] trait:
 /// assert_eq!(0, s.value());
 /// ```
 pub struct Second {
-    value: u64
+    value: u64,
 }
 
 impl Second {
@@ -78,7 +78,7 @@ like they do with `Second`:
 /// ```
 #[derive(Default)]
 pub struct Second {
-    value: u64
+    value: u64,
 }
 
 impl Second {

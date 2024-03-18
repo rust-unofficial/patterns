@@ -20,8 +20,8 @@ in a usable way:
 
 ```rust,ignore
 enum DatabaseError {
-    IsReadOnly = 1, // user attempted a write operation
-    IOError = 2, // user should read the C errno() for what it was
+    IsReadOnly = 1,    // user attempted a write operation
+    IOError = 2,       // user should read the C errno() for what it was
     FileCorrupted = 3, // user should run a repair tool to recover it
 }
 
@@ -57,10 +57,7 @@ pub mod c_api {
     use super::errors::DatabaseError;
 
     #[no_mangle]
-    pub extern "C" fn db_error_description(
-        e: *const DatabaseError
-        ) -> *mut libc::c_char {
-
+    pub extern "C" fn db_error_description(e: *const DatabaseError) -> *mut libc::c_char {
         let error: &DatabaseError = unsafe {
             // SAFETY: pointer lifetime is greater than the current stack frame
             &*e
@@ -107,17 +104,19 @@ pub mod c_api {
 struct ParseError {
     expected: char,
     line: u32,
-    ch: u16
+    ch: u16,
 }
 
-impl ParseError { /* ... */ }
+impl ParseError {
+    /* ... */
+}
 
 /* Create a second version which is exposed as a C structure */
 #[repr(C)]
 pub struct parse_error {
     pub expected: libc::c_char,
     pub line: u32,
-    pub ch: u16
+    pub ch: u16,
 }
 
 impl From<ParseError> for parse_error {

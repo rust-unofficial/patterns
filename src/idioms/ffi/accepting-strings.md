@@ -44,10 +44,7 @@ pub mod unsafe_module {
     /// - points to memory ending in a null byte
     /// - won't be mutated for the duration of this function call
     #[no_mangle]
-    pub unsafe extern "C" fn mylib_log(
-        msg: *const libc::c_char,
-        level: libc::c_int
-    ) {
+    pub unsafe extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
         let level: crate::LogLevel = match level { /* ... */ };
 
         // SAFETY: The caller has already guaranteed this is okay (see the

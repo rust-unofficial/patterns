@@ -59,7 +59,6 @@ pub struct Interpreter<'a> {
 }
 
 impl<'a> Interpreter<'a> {
-
     pub fn new(infix: &'a str) -> Self {
         Self { it: infix.chars() }
     }
