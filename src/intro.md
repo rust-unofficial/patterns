@@ -21,7 +21,7 @@ Design patterns are a collection of reusable and tested solutions to recurring
 problems in engineering. They make our software more modular, maintainable, and
 extensible. Moreover, these patterns provide a common language for developers,
 making them an excellent tool for effective communication when problem-solving
-in teams.
+in teams. Remember that each pattern has its own trade-offs. And you need to pay attention more to why you're choosing a certain pattern than to how to implement it.
 
 ## Design patterns in Rust
 
