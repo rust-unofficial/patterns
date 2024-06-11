@@ -22,6 +22,13 @@
 - [Dependency Inversion Principle (DIP)](https://en.wikipedia.org/wiki/Dependency_inversion_principle):
   One should "depend upon abstractions, [not] concretions."
 
+## [CRP (Composite Reuse Principle) or Composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance)
+
+“a the principle that classes should favor polymorphic behavior and code reuse
+by their composition (by containing instances of other classes that implement
+the desired functionality) over inheritance from a base or parent class” -
+Knoernschild, Kirk (2002). Java Design - Objects, UML, and Process
+
 ## [DRY (Don’t Repeat Yourself)](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)
 
 "Every piece of knowledge must have a single, unambiguous, authoritative
@@ -52,7 +59,7 @@ of direct access to some of an object's components. Encapsulation is used to
 hide the values or state of a structured data object inside a class, preventing
 unauthorized parties' direct access to them.
 
-## [Command-Query-Separation(CQS)](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation)
+## [Command-Query-Separation (CQS)](https://en.wikipedia.org/wiki/Command%E2%80%93query_separation)
 
 “Functions should not produce abstract side effects...only commands (procedures)
 will be permitted to produce side effects.” - Bertrand Meyer: Object-Oriented
