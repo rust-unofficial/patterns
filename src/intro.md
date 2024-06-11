@@ -25,7 +25,7 @@ in teams.
 
 Keep in mind: Each pattern comes with its own set of trade-offs. It's crucial to
 focus on why you choose a particular pattern rather than just on how to
-implement it.
+implement it.[^1]
 
 ## Design patterns in Rust
 
@@ -44,3 +44,5 @@ chapters:
 - [Anti-patterns](./anti_patterns/index.md): methods to solve common problems
   when coding. However, while design patterns give us benefits, anti-patterns
   create more problems.
+
+[^1]: https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/
