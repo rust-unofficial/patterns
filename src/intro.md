@@ -23,9 +23,9 @@ extensible. Moreover, these patterns provide a common language for developers,
 making them an excellent tool for effective communication when problem-solving
 in teams.
 
-Keep in mind: Each pattern comes with its own set of trade-offs.
-It's crucial to focus on why you choose a particular pattern rather than
-just on how to implement it.
+Keep in mind: Each pattern comes with its own set of trade-offs. It's crucial to
+focus on why you choose a particular pattern rather than just on how to
+implement it.
 
 ## Design patterns in Rust
 
