@@ -16,16 +16,11 @@ use std::fs;
 # fn main() -> Result<(), Box<dyn std::error::Error>> {
 # let arg = "-";
 
-// These must live longer than `readable`, and thus are declared first:
-let (mut stdin_read, mut file_read);
-
 // We need to describe the type to get dynamic dispatch.
 let readable: &mut dyn io::Read = if arg == "-" {
-    stdin_read = io::stdin();
-    &mut stdin_read
+    &mut io::stdin()
 } else {
-    file_read = fs::File::open(arg)?;
-    &mut file_read
+    &mut fs::File::open(arg)?
 };
 
 // Read from `readable` here.
@@ -53,7 +48,8 @@ whole code that follows to work with both `File` or `Stdin`.
 
 ## Disadvantages
 
-The code needs more moving parts than the `Box`-based version:
+Before Rust 1.79.0, the code needed two `let` bindings with deferred
+initialization, which made up more moving parts than the `Box`-based version:
 
 ```rust,ignore
 // We still need to ascribe the type for dynamic dispatch.
@@ -65,21 +61,21 @@ let readable: Box<dyn io::Read> = if arg == "-" {
 // Read from `readable` here.
 ```
 
+Luckily, this disadvantage is now gone. Yay!
+
 ## Discussion
 
-Rust newcomers will usually learn that Rust requires all variables to be
-initialized *before use*, so it's easy to overlook the fact that *unused*
-variables may well be uninitialized. Rust works quite hard to ensure that this
-works out fine and only the initialized values are dropped at the end of their
-scope.
+Since Rust 1.79.0, the compiler will automatically extend the lifetimes of
+temporary values within `&` or `&mut` as long as possible within the scope of
+the function.
 
-The example meets all the constraints Rust places on us:
+This means we can simply use a `&mut` value here without worrying about placing
+the contents into some `let` binding (which would have been needed for deferred
+initialization, which was the solution used before that change).
 
-- All variables are initialized before using (in this case borrowing) them
-- Each variable only holds values of a single type. In our example, `stdin` is
-  of type `Stdin`, `file` is of type `File` and `readable` is of type
-  `&mut dyn Read`
-- Each borrowed value outlives all the references borrowed from it
+We still have a place for each value (even if that place is temporary), the
+compiler knows the size of each value and each borrowed value outlives all
+references borrowed from it.
 
 ## See also
 
