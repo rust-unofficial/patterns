@@ -12,8 +12,8 @@ to fully get into its abilities. However their applicability in Rust is much
 simpler.
 
 To explain the relevant parts of the concept, the `Serde`-API will be used as an
-example, as it is one that is difficult for many to to understand from simply
-the API documentation.
+example, as it is one that is difficult for many to understand from simply the
+API documentation.
 
 In the process, different specific patterns, called Optics, will be covered.
 These are *The Iso*, *The Poly Iso*, and *The Prism*.
