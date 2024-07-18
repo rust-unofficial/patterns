@@ -55,45 +55,43 @@ pub mod errors {
 
 pub mod c_api {
     use super::errors::DatabaseError;
+    use core::ptr;
 
     #[no_mangle]
-    pub extern "C" fn db_error_description(e: *const DatabaseError) -> *mut libc::c_char {
-        let error: &DatabaseError = unsafe {
-            // SAFETY: pointer lifetime is greater than the current stack frame
-            &*e
-        };
+    pub extern "C" fn db_error_description(
+        e: Option<ptr::NonNull<DatabaseError>>,
+    ) -> Option<ptr::NonNull<libc::c_char>> {
+        // SAFETY: we assume that the lifetime of `e` is greater than
+        // the current stack frame.
+        let error = unsafe { e?.as_ref() };
 
         let error_str: String = match error {
             DatabaseError::IsReadOnly => {
-                format!("cannot write to read-only database");
+                format!("cannot write to read-only database")
             }
             DatabaseError::IOError(e) => {
-                format!("I/O Error: {e}");
+                format!("I/O Error: {e}")
             }
             DatabaseError::FileCorrupted(s) => {
-                format!("File corrupted, run repair: {}", &s);
+                format!("File corrupted, run repair: {}", &s)
             }
         };
+
+        let error_bytes = error_str.as_bytes();
 
         let c_error = unsafe {
-            // SAFETY: copying error_str to an allocated buffer with a NUL
-            // character at the end
-            let mut malloc: *mut u8 = libc::malloc(error_str.len() + 1) as *mut _;
+            // SAFETY: copying error_bytes to an allocated buffer with a '\0'
+            // byte at the end.
+            let buffer = ptr::NonNull::<u8>::new(libc::malloc(error_bytes.len() + 1).cast())?;
 
-            if malloc.is_null() {
-                return std::ptr::null_mut();
-            }
-
-            let src = error_str.as_bytes().as_ptr();
-
-            std::ptr::copy_nonoverlapping(src, malloc, error_str.len());
-
-            std::ptr::write(malloc.add(error_str.len()), 0);
-
-            malloc as *mut libc::c_char
+            buffer
+                .as_ptr()
+                .copy_from_nonoverlapping(error_bytes.as_ptr(), error_bytes.len());
+            buffer.as_ptr().add(error_bytes.len()).write(0_u8);
+            buffer
         };
 
-        c_error
+        Some(c_error.cast())
     }
 }
 ```
