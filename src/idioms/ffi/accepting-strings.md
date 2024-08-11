@@ -64,7 +64,7 @@ pub mod unsafe_module {
 
 ## Advantages
 
-The example is is written to ensure that:
+The example is written to ensure that:
 
 1. The `unsafe` block is as small as possible.
 2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
