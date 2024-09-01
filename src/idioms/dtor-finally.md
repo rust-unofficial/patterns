@@ -10,7 +10,7 @@ be used to run code that must be run before exit.
 
 ```rust,ignore
 fn baz() -> Result<(), ()> {
-// some code
+    // some code
 }
 
 fn bar() -> Result<(), ()> {
