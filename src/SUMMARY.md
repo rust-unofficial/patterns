@@ -21,6 +21,7 @@
   - [Easy doc initialization](./idioms/rustdoc-init.md)
   - [Temporary mutability](./idioms/temporary-mutability.md)
   - [Return consumed arg on error](./idioms/return-consumed-arg-on-error.md)
+  - [Module-companion for a function](./idioms/module-companion.md)
 
 - [Design Patterns](./patterns/index.md)
   - [Behavioural](./patterns/behavioural/intro.md)
