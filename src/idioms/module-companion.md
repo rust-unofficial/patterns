@@ -67,7 +67,7 @@ fn another_fn() -> anyhow::Result<()> {
         // ...
     };
 
-    my_fn::my_fn(args)?;
+    my_fn(args)?;
 
     Ok(())
 }
