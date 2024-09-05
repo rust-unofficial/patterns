@@ -40,7 +40,8 @@ pub fn my_fn(arg: my_fn::Args) -> Result<(), my_fn::Error> {
     let Args {
         first_name,
         last_name,
-        age,
+        is_awesome,
+        is_lovely,
         // ...
     } = arg;
 
