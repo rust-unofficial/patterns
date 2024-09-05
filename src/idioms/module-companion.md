@@ -85,7 +85,7 @@ The *module-companion* can be used to encapsulate the implementation details of 
 
 ### Clean call sites
 
-The *module-companion* can be used to define a "parameter object" pattern, which can help in reducing the number of arguments passed to the *accompanied function*. This can make the call sites cleaner and more readable.
+The *module-companion* can be used to define a struct for the "parameter object" pattern, which can help in reducing the number of arguments passed to the *accompanied function*. This can make the call sites cleaner and more readable due to the "syntactic" parallelism (`my_fn::Args { ... }` and `my_fn()`).
 
 ## Drawbacks
 
