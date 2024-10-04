@@ -54,7 +54,7 @@ Travis, but remember that this may break the build when something changes)
 without requiring a change to the code.
 
 Alternatively, we can specify the lints that we want to `deny` in the code. Here
-is a list of warning lints that is (hopefully) safe to deny (as of Rustc
+is a list of warning lints that is (hopefully) safe to deny (as of rustc
 1.48.0):
 
 ```rust,ignore
