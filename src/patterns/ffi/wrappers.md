@@ -114,7 +114,7 @@ pub mod unsafe_module {
     // other module content
 
     pub fn myset_store(myset: *mut MySetWrapper, key: datum, value: datum) -> libc::c_int {
-        // DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROLBEM.
+        // DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROBLEM.
 
         let myset: &mut MySet = unsafe {
             // SAFETY: whoops, UB occurs in here!
