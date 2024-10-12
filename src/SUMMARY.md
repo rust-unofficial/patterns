@@ -32,6 +32,7 @@
     - [Visitor](./patterns/behavioural/visitor.md)
   - [Creational](./patterns/creational/intro.md)
     - [Builder](./patterns/creational/builder.md)
+    - [Init-Struct](./patterns/creational/init-struct.md)
     - [Fold](./patterns/creational/fold.md)
   - [Structural](./patterns/structural/intro.md)
     - [Compose Structs](./patterns/structural/compose-structs.md)
