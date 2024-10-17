@@ -135,3 +135,4 @@ implicit.
 - For more discussion on how to handle `String` and `&str` see
   [this blog series (2015)](https://web.archive.org/web/20201112023149/https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html)
   by Herman J. Radtke III
+- [Steve Klabnik's Blogpost on 'When should I use String vs &str?'](https://archive.ph/LBpD0)
