@@ -38,11 +38,19 @@ fn main() {
     };
 
     let connection_string = &mut db.connection_string;
-    print_database(&db); // Immutable borrow of `db` happens here
-                         // *connection_string = "new string".to_string();  // Mutable borrow is used
-                         // here
+    print_database(&db);
+    *connection_string = "new string".to_string();
 }
 ```
+
+The compiler throws following errors:
+
+    let connection_string = &mut db.connection_string;
+    						------------------------- mutable borrow occurs here
+    print_database(&db);
+                   ^^^ immutable borrow occurs here
+    *connection_string = "new string".to_string();
+    ------------------ mutable borrow later used here
 
 We can apply this design pattern and refactor `Database` into three smaller
 structs, thus solving the borrow checking issue:
