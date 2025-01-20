@@ -46,7 +46,7 @@ fn main() {
 The compiler throws following errors:
 
     let connection_string = &mut db.connection_string;
-    						------------------------- mutable borrow occurs here
+                            ------------------------- mutable borrow occurs here
     print_database(&db);
                    ^^^ immutable borrow occurs here
     *connection_string = "new string".to_string();
