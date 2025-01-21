@@ -17,7 +17,7 @@ pattern often reveals smaller units of functionality.
 Here is a contrived example of where the borrow checker foils us in our plan to
 use a struct:
 
-```rust
+```rust,ignore
 struct Database {
     connection_string: String,
     timeout: u32,
@@ -44,6 +44,7 @@ fn main() {
 ```
 
 The compiler throws following errors:
+
 ```ignore
 let connection_string = &mut db.connection_string;
                         ------------------------- mutable borrow occurs here
@@ -52,6 +53,7 @@ print_database(&db);
 *connection_string = "new string".to_string();
 ------------------ mutable borrow later used here
 ```
+
 We can apply this design pattern and refactor `Database` into three smaller
 structs, thus solving the borrow checking issue:
 
