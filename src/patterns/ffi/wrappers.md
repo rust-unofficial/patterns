@@ -153,7 +153,7 @@ optimizations that C code cannot attain. Being denied access to certain
 shortcuts is the price Rust programmers need to pay.
 
 [^1]: For the C programmers out there scratching their heads, the iterator need
-not be read *during* this code cause the UB. The exclusivity rule also enables
+not be read *during* this code to cause the UB. The exclusivity rule also enables
 compiler optimizations which may cause inconsistent observations by the
 iterator's shared reference (e.g. stack spills or reordering instructions for
 efficiency). These observations may happen *any time after* the mutable
