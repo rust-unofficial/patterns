@@ -238,7 +238,7 @@ improve in the future.
 This pattern is used throughout the standard library:
 
 - `Vec<u8>` can be cast from a String, unlike every other type of `Vec<T>`.[^1]
-- They can also be cast into a binary heap, but only if they contain a type that
+- Iterators can be cast into a binary heap, but only if they contain a type that
   implements the `Ord` trait.[^2]
 - The `to_string` method was specialized for `Cow` only of type `str`.[^3]
 

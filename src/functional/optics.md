@@ -275,7 +275,7 @@ struct TestStruct {
 generate_visitor!(TestStruct);
 ```
 
-Or do they?
+But let's actually try that approach.
 
 ```rust,ignore
 fn main() {
