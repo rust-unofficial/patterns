@@ -113,7 +113,7 @@ pub mod unsafe_module {
 }
 ```
 
-This code in inferior to the original in two respects:
+This code is inferior to the original in two respects:
 
 1. There is much more `unsafe` code, and more importantly, more invariants it
    must uphold.
