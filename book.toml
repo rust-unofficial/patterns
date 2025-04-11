@@ -3,7 +3,6 @@ title = "Rust Design Patterns"
 authors = ["the rust-unofficial authors"]
 description = "A catalogue of Rust design patterns, anti-patterns and idioms"
 language = "en"
-multilingual = false
 src = "src"
 
 [build]
