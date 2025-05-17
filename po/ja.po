@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-17 14:53+0900\n"
+"PO-Revision-Date: 2025-05-17 23:49+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -26,11 +26,11 @@ msgstr "翻訳"
 
 #: src/SUMMARY.md:5 src/idioms/index.md:1
 msgid "Idioms"
-msgstr "慣習"
+msgstr "イディオム"
 
 #: src/SUMMARY.md:6 src/idioms/coercion-arguments.md:1
 msgid "Use borrowed types for arguments"
-msgstr "引数には借用型を使う"
+msgstr "引数に借用型を使う"
 
 #: src/SUMMARY.md:7
 msgid "Concatenating Strings with format!"
@@ -54,7 +54,7 @@ msgstr "デストラクタでの後処理"
 
 #: src/SUMMARY.md:12
 msgid "`mem::{take(_), replace(_)}`"
-msgstr ""
+msgstr "`mem::{take(_), replace(_)}`"
 
 #: src/SUMMARY.md:13 src/idioms/on-stack-dyn-dispatch.md:1
 msgid "On-Stack Dynamic Dispatch"
@@ -305,9 +305,9 @@ msgid ""
 "social norms of the community. You should break them only if you have a good "
 "reason for it."
 msgstr ""
-"[慣習](./idioms/index.md): コーディングにおいて推奨される書き方。コミュニティ"
-"内の社会的規範。慣習は破っても構いませんが、きちんと理由がある場合に限りま"
-"す。"
+"[イディオム](./idioms/index.md): コーディングにおいて推奨される書き方。コミュ"
+"ニティ内の社会的規範。慣習は破っても構いませんが、きちんと理由がある場合に限"
+"ります。"
 
 #: src/intro.md:42
 msgid ""
@@ -332,6 +332,8 @@ msgid ""
 "https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
 "software-architecture-hard-parts/"
 msgstr ""
+"https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
+"software-architecture-hard-parts/"
 
 #: src/translations.md:3
 msgid ""
@@ -351,7 +353,7 @@ msgstr "外部の翻訳"
 
 #: src/translations.md:10
 msgid "[简体中文](https://fomalhauthmj.github.io/patterns/)"
-msgstr ""
+msgstr "[简体中文](https://fomalhauthmj.github.io/patterns/)"
 
 #: src/translations.md:12
 msgid ""
@@ -368,6 +370,10 @@ msgid ""
 "idiomatic code allows other developers to understand better what is "
 "happening."
 msgstr ""
+"[イディオム](https://en.wikipedia.org/wiki/Programming_idiom)とは、コミュニ"
+"ティの中で広く合意されている、よく使われる書き方やスタイル、設計指針のことで"
+"す。イディオムに則ったコードを書くことで、他の開発者がコードの意図をより理解"
+"しやすくなります。"
 
 #: src/idioms/index.md:7
 msgid ""
@@ -376,6 +382,9 @@ msgid ""
 "developer. So, since we have this abstraction layer, why not make it more "
 "readable?"
 msgstr ""
+"最終的にコンピュータが気にするのは、コンパイラによって生成される機械語だけで"
+"す。ソースコードはむしろ、開発者のための情報です。せっかくある抽象化レイヤー"
+"ならば、それを活かして読みやすくする方がお得ですよね？"
 
 #: src/idioms/index.md:11
 msgid ""
@@ -384,10 +393,14 @@ msgid ""
 "are kept simple rather than made complicated; therefore, simplicity should "
 "be a key goal in design, and unnecessary complexity should be avoided\"."
 msgstr ""
+"ここで思い出したいのが [KISS原則](https://en.wikipedia.org/wiki/"
+"KISS_principle)（Keep It Simple, Stupid） です。これは「システムは複雑にする"
+"よりも、シンプルに保つ方がうまく機能する。したがって、設計ではシンプルさを最"
+"優先し、不要な複雑さは避けるべきである」という考え方です。"
 
 #: src/idioms/index.md:16
 msgid "Code is there for humans, not computers, to understand."
-msgstr ""
+msgstr "Code is there for humans, not computers, to understand."
 
 #: src/idioms/coercion-arguments.md:3 src/idioms/concat-format.md:3
 #: src/idioms/ctor.md:3 src/idioms/default.md:3 src/idioms/deref.md:3
@@ -410,7 +423,7 @@ msgstr ""
 #: src/anti_patterns/deny-warnings.md:3 src/anti_patterns/deref.md:3
 #: src/functional/generics-type-classes.md:3
 msgid "Description"
-msgstr ""
+msgstr "概要"
 
 #: src/idioms/coercion-arguments.md:5
 msgid ""
@@ -418,6 +431,9 @@ msgid ""
 "when you are deciding which argument type to use for a function argument. In "
 "this way, the function will accept more input types."
 msgstr ""
+"関数の引数としてどの型を使うか検討する際、derefによる型強制の対象となる型を使"
+"うことで、コードの柔軟性を高めることができます。これにより、関数がより多くの"
+"入力型を受け取れるようになります。"
 
 #: src/idioms/coercion-arguments.md:9
 msgid ""
@@ -425,6 +441,10 @@ msgid ""
 "always prefer using the **borrowed type** over **borrowing the owned type**. "
 "Such as `&str` over `&String`, `&[T]` over `&Vec<T>`, or `&T` over `&Box<T>`."
 msgstr ""
+"これは、スライス可能な型やファットポインタ型に限定されるものではありません。"
+"むしろ、**所有型の借用**よりも、**借用型**を使うことを基本と考えるべきです。"
+"`&String` よりも `&str`、`&Vec<T>` よりも `&[T]`、`&Box<T>` よりも `&T` のよ"
+"うにです。"
 
 #: src/idioms/coercion-arguments.md:13
 msgid ""
@@ -434,6 +454,11 @@ msgid ""
 "of indirection. We can avoid this by using `&str` instead, and letting "
 "`&String` coerce to a `&str` whenever the function is invoked."
 msgstr ""
+"借用型を使うことで、間接的な層を含んでいる所有型に対して、さらに間接的な層を"
+"重ねてしまう状況を避けることができます。たとえば、`String` はすでにヒープ上の"
+"データを指す間接的な層を持っているので、`&String` は二段階の層を持ちます。こ"
+"のような冗長さを避けるには、`&str` を使い、関数の呼び出し時に `&String` を "
+"`&str` に型強制（coercion）させるのが有効です。"
 
 #: src/idioms/coercion-arguments.md:19 src/idioms/concat-format.md:10
 #: src/idioms/default.md:20 src/idioms/deref.md:9 src/idioms/dtor-finally.md:9
@@ -450,7 +475,7 @@ msgstr ""
 #: src/anti_patterns/borrow_clone.md:11 src/anti_patterns/deny-warnings.md:8
 #: src/anti_patterns/deref.md:8 src/functional/generics-type-classes.md:38
 msgid "Example"
-msgstr ""
+msgstr "例"
 
 #: src/idioms/coercion-arguments.md:21
 msgid ""
@@ -458,6 +483,9 @@ msgid ""
 "a function argument versus using a `&str`, but the ideas apply as well to "
 "using `&Vec<T>` versus using a `&[T]` or using a `&Box<T>` versus a `&T`."
 msgstr ""
+"ここでは、関数の引数として `&String` を使う場合と `&str` を使う場合の違いを例"
+"に挙げて説明します。この考え方は、`&Vec<T>` と `&[T]`、あるいは `&Box<T>` と "
+"`&T` の使い分けにも同様に当てはまります。"
 
 #: src/idioms/coercion-arguments.md:25
 msgid ""
@@ -465,42 +493,44 @@ msgid ""
 "consecutive vowels. We don't need to own the string to determine this, so we "
 "will take a reference."
 msgstr ""
+"ある単語に3つの母音が連続して含まれているかどうかを判定したい場合を考えます。"
+"この処理のために文字列の所有権は必要なく、参照を受け取るだけで十分です。"
 
 #: src/idioms/coercion-arguments.md:29
 msgid "The code might look something like this:"
-msgstr ""
+msgstr "そのときのコードは、次のようになるでしょう："
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'a'"
-msgstr ""
+msgstr "'a'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'e'"
-msgstr ""
+msgstr "'e'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'i'"
-msgstr ""
+msgstr "'i'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'o'"
-msgstr ""
+msgstr "'o'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'u'"
-msgstr ""
+msgstr "'u'"
 
 #: src/idioms/coercion-arguments.md:49
 msgid "\"Ferris\""
-msgstr ""
+msgstr "\"Ferris\""
 
 #: src/idioms/coercion-arguments.md:50
 msgid "\"Curious\""
-msgstr ""
+msgstr "\"Curious\""
 
 #: src/idioms/coercion-arguments.md:51 src/idioms/coercion-arguments.md:52
 msgid "\"{}: {}\""
-msgstr ""
+msgstr "\"{}: {}\""
 
 #: src/idioms/coercion-arguments.md:54
 msgid ""
@@ -508,6 +538,9 @@ msgid ""
 "    // println!(\"Ferris: {}\", three_vowels(\"Ferris\"));\n"
 "    // println!(\"Curious: {}\", three_vowels(\"Curious\"));\n"
 msgstr ""
+"// これは正常に動作しますが、次の2行は失敗します：\n"
+"    // println!(\"Ferris: {}\", three_vowels(\"Ferris\"));\n"
+"    // println!(\"Curious: {}\", three_vowels(\"Curious\"));\n"
 
 #: src/idioms/coercion-arguments.md:60
 msgid ""
@@ -516,14 +549,19 @@ msgid ""
 "because a `&str` type will not coerce to a `&String` type. We can fix this "
 "by simply modifying the type for our argument."
 msgstr ""
+"これは `&String` 型を引数に渡しているため、問題なく動作します。しかし、最後の"
+"2行のコメントを外すと、この例はコンパイルエラーになります。これは、`&str` 型"
+"は `&String` 型には自動で型強制されないためです。この問題は、引数の型を少し変"
+"更するだけで解決できます。"
 
 #: src/idioms/coercion-arguments.md:65
 msgid "For instance, if we change our function declaration to:"
-msgstr ""
+msgstr "具体的には、関数を次のように書き換えます："
 
 #: src/idioms/coercion-arguments.md:71
 msgid "then both versions will compile and print the same output."
 msgstr ""
+"こうすれば、どちらの呼び出し方法でもコンパイルが通り、同じ出力が得られます。"
 
 #: src/idioms/coercion-arguments.md:78
 msgid ""
@@ -533,6 +571,10 @@ msgid ""
 "ignoring this special example, you may still find that using `&str` will "
 "give you more flexibility than using a `&String`."
 msgstr ""
+"話はここで終わりではありません。もしかするとあなたは「そんなの関係ない。どう"
+"せ 'static str を引数に渡す（今回 \"Ferris\" を使ったような）ことなんてない"
+"し。」と思っているかもしれません。ですが、たとえこの特殊な例を無視したとして"
+"も、&str を使う方が &String より柔軟性が高い場面は他にもあります。"
 
 #: src/idioms/coercion-arguments.md:84
 msgid ""
@@ -541,28 +583,32 @@ msgid ""
 "vowels. We probably should make use of the function we have already defined "
 "and simply feed in each word from the sentence."
 msgstr ""
+"次の例では、文章全体を受け取り、その文章の中に3つ連続した母音が含まれる単語が"
+"あるか判定することを考えてみましょう。先ほど定義した関数を再利用して、文の中"
+"の各単語を入力すれば済むはずです。"
 
 #: src/idioms/coercion-arguments.md:89
 msgid "An example of this could look like this:"
-msgstr ""
+msgstr "そのときのコードは、次のようになるでしょう："
 
 #: src/idioms/coercion-arguments.md:110
 msgid "\"Once upon a time, there was a friendly curious crab named Ferris\""
-msgstr ""
+msgstr "\"Once upon a time, there was a friendly curious crab named Ferris\""
 
 #: src/idioms/coercion-arguments.md:111
 msgid "' '"
-msgstr ""
+msgstr "' '"
 
 #: src/idioms/coercion-arguments.md:113
 msgid "\"{word} has three consecutive vowels!\""
-msgstr ""
+msgstr "\"{word} has three consecutive vowels!\""
 
 #: src/idioms/coercion-arguments.md:119
 msgid ""
 "Running this example using our function declared with an argument type "
 "`&str` will yield"
 msgstr ""
+"この例を、引数の型が &str の関数で実行すると、次のような出力が得られます"
 
 #: src/idioms/coercion-arguments.md:126
 msgid ""
@@ -572,6 +618,10 @@ msgid ""
 "which is not implicit, whereas converting from `String` to `&str` is cheap "
 "and implicit."
 msgstr ""
+"しかし、関数の引数を `&String` にしている場合、この例は動作しません。これは、"
+"文字列スライスは `&str` 型であって、`&String` ではないからです。`&String` に"
+"変換するにはヒープ確保が必要になり、暗黙的には行われません。一方で、`String` "
+"から `&str` への変換は安価で暗黙的に行われます。"
 
 #: src/idioms/coercion-arguments.md:132 src/idioms/ctor.md:101
 #: src/idioms/default.md:58 src/idioms/deref.md:76
@@ -588,13 +638,15 @@ msgstr ""
 #: src/anti_patterns/borrow_clone.md:65 src/anti_patterns/deny-warnings.md:101
 #: src/anti_patterns/deref.md:124 src/functional/generics-type-classes.md:236
 msgid "See also"
-msgstr ""
+msgstr "関連資料"
 
 #: src/idioms/coercion-arguments.md:134
 msgid ""
 "[Rust Language Reference on Type Coercions](https://doc.rust-lang.org/"
 "reference/type-coercions.html)"
 msgstr ""
+"[Rust Language Reference on Type Coercions](https://doc.rust-lang.org/"
+"reference/type-coercions.html)"
 
 #: src/idioms/coercion-arguments.md:135
 msgid ""
@@ -603,12 +655,18 @@ msgid ""
 "hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman "
 "J. Radtke III"
 msgstr ""
+"`String` と `&str` の扱いについてもっと知りたい方は、Herman J. Radtke III に"
+"よる [ブログシリーズ(2015)](https://web.archive.org/web/20201112023149/"
+"https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) を"
+"参照してください"
 
 #: src/idioms/coercion-arguments.md:138
 msgid ""
 "[Steve Klabnik's Blogpost on 'When should I use String vs &str?'](https://"
 "archive.ph/LBpD0)"
 msgstr ""
+"[Steve Klabnik's Blogpost on 'When should I use String vs &str?'](https://"
+"archive.ph/LBpD0)"
 
 #: src/idioms/concat-format.md:1
 #, fuzzy
