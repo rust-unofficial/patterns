@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-17 23:49+0900\n"
+"PO-Revision-Date: 2025-05-19 08:50+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -669,9 +669,8 @@ msgstr ""
 "archive.ph/LBpD0)"
 
 #: src/idioms/concat-format.md:1
-#, fuzzy
 msgid "Concatenating strings with `format!`"
-msgstr "format! による文字列連結"
+msgstr "`format!` による文字列連結"
 
 #: src/idioms/concat-format.md:5
 msgid ""
@@ -680,6 +679,10 @@ msgid ""
 "convenient to use `format!`, especially where there is a mix of literal and "
 "non-literal strings."
 msgstr ""
+"文字列を組み立てる方法として、可変な `String` に対して `push` や `push_str` "
+"メソッドを使ったり、`+` 演算子を使うこともできます。しかし、リテラル文字列と"
+"リテラルでない文字列を混ぜて扱いたい場合には、`format!` マクロを使った方が便"
+"利なことが多くあります。"
 
 #: src/idioms/concat-format.md:14
 msgid ""
@@ -689,14 +692,19 @@ msgid ""
 "    // result.push('!');\n"
 "    // result\n"
 msgstr ""
+"// result 文字列を手動で構築することもできます。\n"
+"    // let mut result = \"Hello \".to_owned();\n"
+"    // result.push_str(name);\n"
+"    // result.push('!');\n"
+"    // result\n"
 
 #: src/idioms/concat-format.md:20
 msgid "// But using format! is better.\n"
-msgstr ""
+msgstr "// しかし、format! を使った方が簡潔です。\n"
 
 #: src/idioms/concat-format.md:21
 msgid "\"Hello {name}!\""
-msgstr ""
+msgstr "\"Hello {name}!\""
 
 #: src/idioms/concat-format.md:25 src/idioms/deref.md:43
 #: src/idioms/dtor-finally.md:46 src/idioms/mem-replace.md:91
@@ -714,13 +722,14 @@ msgstr ""
 #: src/patterns/ffi/wrappers.md:64 src/anti_patterns/deny-warnings.md:16
 #: src/anti_patterns/deref.md:69 src/functional/generics-type-classes.md:209
 msgid "Advantages"
-msgstr ""
+msgstr "利点"
 
 #: src/idioms/concat-format.md:27
 msgid ""
 "Using `format!` is usually the most succinct and readable way to combine "
 "strings."
 msgstr ""
+"`format!` を使う方法は、通常、最も簡潔かつ読みやすい文字列結合の手段です。"
 
 #: src/idioms/concat-format.md:30 src/idioms/deref.md:50
 #: src/idioms/dtor-finally.md:51 src/idioms/mem-replace.md:95
@@ -739,7 +748,7 @@ msgstr ""
 #: src/patterns/ffi/wrappers.md:70 src/anti_patterns/deref.md:81
 #: src/functional/generics-type-classes.md:220
 msgid "Disadvantages"
-msgstr ""
+msgstr "欠点"
 
 #: src/idioms/concat-format.md:32
 msgid ""
@@ -747,6 +756,9 @@ msgid ""
 "`push` operations on a mutable string is usually the most efficient "
 "(especially if the string has been pre-allocated to the expected size)."
 msgstr ""
+"最も効率的な方法ではないことが多いです。可変な文字列に対して、`push` を繰り返"
+"す方法の方が、通常は高速に処理できます（特に、文字列にあらかじめ期待されるサ"
+"イズが割り当てられている場合）。"
 
 #: src/idioms/ctor.md:1
 #, fuzzy
