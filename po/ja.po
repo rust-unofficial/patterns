@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-19 08:50+0900\n"
+"PO-Revision-Date: 2025-05-20 00:46+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -761,7 +761,6 @@ msgstr ""
 "イズが割り当てられている場合）。"
 
 #: src/idioms/ctor.md:1
-#, fuzzy
 msgid "Constructors"
 msgstr "コンストラクタ"
 
@@ -772,6 +771,10 @@ msgid ""
 "stable/book/ch05-03-method-syntax.html#associated-functions) `new` to create "
 "an object:"
 msgstr ""
+"Rust には、他の言語にあるような言語仕様としてのコンストラクタは存在しません。"
+"その代わりに、[関連関数](https://doc.rust-lang.org/stable/book/ch05-03-"
+"method-syntax.html#associated-functions) `new` を使ってインスタンスを生成する"
+"のが慣習です："
 
 #: src/idioms/ctor.md:10
 msgid ""
@@ -784,27 +787,39 @@ msgid ""
 "/// assert_eq!(42, s.value());\n"
 "/// ```\n"
 msgstr ""
+"/// 秒数を表す型。\n"
+"///\n"
+"/// # 使用例\n"
+"///\n"
+"/// ```\n"
+"/// let s = Second::new(42);\n"
+"/// assert_eq!(42, s.value());\n"
+"/// ```\n"
 
 #: src/idioms/ctor.md:23
 msgid ""
 "// Constructs a new instance of [`Second`].\n"
 "    // Note this is an associated function - no self.\n"
 msgstr ""
+"/// [`Second`] の新しいインスタンスを生成します。\n"
+"    /// これは関連関数であり、`self` を受け取りません。\n"
 
 #: src/idioms/ctor.md:29 src/idioms/ctor.md:54 src/idioms/ctor.md:85
 msgid "/// Returns the value in seconds.\n"
-msgstr ""
+msgstr "/// 秒数の値を返します。\n"
 
 #: src/idioms/ctor.md:36
-#, fuzzy
 msgid "Default Constructors"
-msgstr "コンストラクタ"
+msgstr "デフォルトコンストラクタ"
 
 #: src/idioms/ctor.md:38
 msgid ""
 "Rust supports default constructors with the [`Default`](https://doc.rust-"
 "lang.org/stable/std/default/trait.Default.html) trait:"
 msgstr ""
+"Rust では、[`Default`](https://doc.rust-lang.org/stable/std/default/"
+"trait.Default.html) トレイトを使うことで、デフォルトコンストラクタを定義でき"
+"ます："
 
 #: src/idioms/ctor.md:41 src/idioms/ctor.md:71
 msgid ""
@@ -817,12 +832,22 @@ msgid ""
 "/// assert_eq!(0, s.value());\n"
 "/// ```\n"
 msgstr ""
+"/// 秒数を表す型。\n"
+"///\n"
+"/// # 使用例\n"
+"///\n"
+"/// ```\n"
+"/// let s = Second::default();\n"
+"/// assert_eq!(0, s.value());\n"
+"/// ```\n"
 
 #: src/idioms/ctor.md:67
 msgid ""
 "`Default` can also be derived if all types of all fields implement "
 "`Default`, like they do with `Second`:"
 msgstr ""
+"すべてのフィールドの型が `Default` を実装している場合は、`Second` のように "
+"derive できます："
 
 #: src/idioms/ctor.md:92
 msgid ""
@@ -832,6 +857,10 @@ msgid ""
 "constructor to take no arguments, then it should, even if it is functionally "
 "identical to default."
 msgstr ""
+"**補足:** Rust では、 `Default` と引数なしの `new` を両方実装するのが一般的で"
+"す。`new` は Rust におけるコンストラクタの慣習であり、ユーザーも存在を期待す"
+"るため、もし引数なしで構築できるために default と同じ内容になるとしても、 "
+"`new` を定義すべきです。"
 
 #: src/idioms/ctor.md:97
 msgid ""
@@ -840,18 +869,26 @@ msgid ""
 "prominently, any of the [`*or_default` functions in the standard library]"
 "(https://doc.rust-lang.org/stable/std/?search=or_default)."
 msgstr ""
+"**ヒント:** `Default` を実装または derive する利点は、 `Default` の実装が必要"
+"とされる場所であなたの型を使えるようになることです。特に顕著なのは、[標準ライ"
+"ブラリ内の `*_or_default` 関数群](https://doc.rust-lang.org/stable/std/?"
+"search=or_default)です。"
 
 #: src/idioms/ctor.md:103
 msgid ""
 "The [default idiom](default.md) for a more in-depth description of the "
 "`Default` trait."
 msgstr ""
+"[Defaultトレイトの活用](default.md) でDefault トレイトについて、より詳しく説"
+"明しています。"
 
 #: src/idioms/ctor.md:106
 msgid ""
 "The [builder pattern](../patterns/creational/builder.md) for constructing "
 "objects where there are multiple configurations."
 msgstr ""
+"[Builder](../patterns/creational/builder.md) は、様々な構成オプションを持つオ"
+"ブジェクトを構築する際に使える設計手法です。"
 
 #: src/idioms/ctor.md:109
 msgid ""
@@ -859,11 +896,13 @@ msgid ""
 "interoperability.html#types-eagerly-implement-common-traits-c-common-traits) "
 "for implementing both, `Default` and `new`."
 msgstr ""
+"[API Guidelines/C-COMMON-TRAITS](https://rust-lang.github.io/api-guidelines/"
+"interoperability.html#types-eagerly-implement-common-traits-c-common-traits) "
+"では、Default と new の両方を実装しています。"
 
 #: src/idioms/default.md:1
-#, fuzzy
 msgid "The `Default` Trait"
-msgstr "Defaultトレイトの活用"
+msgstr "`Default` トレイトの活用"
 
 #: src/idioms/default.md:5
 msgid ""
@@ -876,6 +915,14 @@ msgid ""
 "enum.Option.html#method.unwrap_or_default)). Notably, some containers "
 "already implement it where applicable."
 msgstr ""
+"Rust の多くの型には[コンストラクタ](ctor.md)がありますが、これはそれぞれの型 "
+"_固有_ のものです。Rust では「`new()` メソッドを持つすべての型」というような"
+"抽象化はできません。そのために導入されたのが [`Default`](https://doc.rust-"
+"lang.org/stable/std/default/trait.Default.html) トレイトです。これは、ジェネ"
+"リック型やコンテナ型と組み合わせて使えるよう設計されています（例："
+"[`Option::unwrap_or_default()`](https://doc.rust-lang.org/stable/std/option/"
+"enum.Option.html#method.unwrap_or_default)）。なお、コンテナの中には、適用可"
+"能な場合にすでに `Default` を実装しているものもあります。"
 
 #: src/idioms/default.md:11
 msgid ""
@@ -884,6 +931,11 @@ msgid ""
 "`#[derive(Default)]` for structs whose fields all implement it, so the more "
 "types implement `Default`, the more useful it becomes."
 msgstr ""
+"たとえば、内部の型が `Default` を実装している `Cow`、`Box`、`Arc` などの1要素"
+"コンテナ型は、`Default` を実装しています。また、構造体のすべてのフィールドが "
+"`Default` を実装していれば、`#[derive(Default)]` が使えます。このように、"
+"`Default` を実装する型が増えれば増えるほど、その恩恵を受けられる場面も広がり"
+"ます。"
 
 #: src/idioms/default.md:16
 msgid ""
@@ -891,72 +943,81 @@ msgid ""
 "`default()` method does not. There can even be multiple constructors with "
 "different names, but there can only be one `Default` implementation per type."
 msgstr ""
+"一方で、コンストラクタは複数の引数を取ることができますが、`default()` メソッ"
+"ドはそうではありません。また、複数の異なる名前のコンストラクタを定義すること"
+"は可能ですが、`Default` トレイトの実装は型ごとに1つだけです。"
 
 #: src/idioms/default.md:24
 msgid "// note that we can simply auto-derive Default here.\n"
-msgstr ""
+msgstr "// Default を derive して自動実装できる\n"
 
 #: src/idioms/default.md:28
 msgid "// Option defaults to None\n"
-msgstr ""
+msgstr "// Option はデフォルトで None\n"
 
 #: src/idioms/default.md:30
 msgid "// Vecs default to empty vector\n"
-msgstr ""
+msgstr "// Vec は空のベクタがデフォルト\n"
 
 #: src/idioms/default.md:32
 msgid "// Duration defaults to zero time\n"
-msgstr ""
+msgstr "// Duration はゼロ時間がデフォルト\n"
 
 #: src/idioms/default.md:34
 msgid "// bool defaults to false\n"
-msgstr ""
+msgstr "// bool は false がデフォルト\n"
 
 #: src/idioms/default.md:39
 msgid "// add setters here\n"
-msgstr ""
+msgstr "// セッターなどをここに追加できる\n"
 
 #: src/idioms/default.md:43
 msgid "// construct a new instance with default values\n"
-msgstr ""
+msgstr "// デフォルト値でインスタンスを生成\n"
 
 #: src/idioms/default.md:45
 msgid "// do something with conf here\n"
-msgstr ""
+msgstr "// conf に対して何らか処理を行う\n"
 
 #: src/idioms/default.md:47
 msgid "\"conf = {conf:#?}\""
-msgstr ""
+msgstr "\"conf = {conf:#?}\""
 
 #: src/idioms/default.md:49
 msgid ""
 "// partial initialization with default values, creates the same instance\n"
 msgstr ""
+"// 部分的にデフォルト値を使った初期化。結果は上のインスタンスと同じになる\n"
 
 #: src/idioms/default.md:60
 msgid ""
 "The [constructor](ctor.md) idiom is another way to generate instances that "
 "may or may not be \"default\""
 msgstr ""
+"[コンストラクタ](ctor.md)は、デフォルト値ではないインスタンスを生成する別の手"
+"法です。"
 
 #: src/idioms/default.md:62
 msgid ""
 "The [`Default`](https://doc.rust-lang.org/stable/std/default/"
 "trait.Default.html) documentation (scroll down for the list of implementors)"
 msgstr ""
+"[`Default`](https://doc.rust-lang.org/stable/std/default/trait.Default.html) "
+"トレイトのドキュメント（スクロールすると実装例の一覧があります）。"
 
 #: src/idioms/default.md:63
 msgid ""
 "[`Option::unwrap_or_default()`](https://doc.rust-lang.org/stable/std/option/"
 "enum.Option.html#method.unwrap_or_default)"
 msgstr ""
+"[`Option::unwrap_or_default()`](https://doc.rust-lang.org/stable/std/option/"
+"enum.Option.html#method.unwrap_or_default)"
 
 #: src/idioms/default.md:64
 msgid "[`derive(new)`](https://crates.io/crates/derive-new/)"
-msgstr ""
+msgstr "[`derive(new)`](https://crates.io/crates/derive-new/)"
 
 #: src/idioms/deref.md:1
-#, fuzzy
 msgid "Collections are smart pointers"
 msgstr "コレクションはスマートポインタである"
 
