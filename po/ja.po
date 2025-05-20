@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-20 19:11+0900\n"
+"PO-Revision-Date: 2025-05-20 20:03+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -122,7 +122,7 @@ msgstr ""
 
 #: src/SUMMARY.md:30
 msgid "RAII Guards"
-msgstr ""
+msgstr "RAIIガード"
 
 #: src/SUMMARY.md:31
 msgid "Strategy"
@@ -1185,34 +1185,37 @@ msgid ""
 "executed no matter how a function is exited. Instead, an object's destructor "
 "can be used to run code that must be run before exit."
 msgstr ""
+"Rust には、関数の終了方法にかかわらず常に実行されるコード（finally ブロックの"
+"ような構文）は存在しません。その代わりに、オブジェクトのデストラクタを使っ"
+"て、終了前に必ず実行したい処理を行うことができます。"
 
 #: src/idioms/dtor-finally.md:13
 msgid "// some code\n"
-msgstr ""
+msgstr "// 何らかの処理\n"
 
 #: src/idioms/dtor-finally.md:17
 msgid "// These don't need to be defined inside the function.\n"
-msgstr ""
+msgstr "// 以下の型定義は関数内でなくてもよい。\n"
 
 #: src/idioms/dtor-finally.md:20
 msgid "// Implement a destructor for Foo.\n"
-msgstr ""
+msgstr "// Foo に対してデストラクタを実装\n"
 
 #: src/idioms/dtor-finally.md:23
 msgid "\"exit\""
-msgstr ""
+msgstr "\"exit\""
 
 #: src/idioms/dtor-finally.md:27
 msgid "// The dtor of _exit will run however the function `bar` is exited.\n"
-msgstr ""
+msgstr "// `bar` 関数がどのように終了しても、_exit のデストラクタは呼ばれる\n"
 
 #: src/idioms/dtor-finally.md:29
 msgid "// Implicit return with `?` operator.\n"
-msgstr ""
+msgstr "// `?` 演算子による暗黙の return\n"
 
 #: src/idioms/dtor-finally.md:31
 msgid "// Normal return.\n"
-msgstr ""
+msgstr "// 通常の return\n"
 
 #: src/idioms/dtor-finally.md:38
 msgid ""
@@ -1224,12 +1227,20 @@ msgid ""
 "has `finally`), there is no way to schedule code to run in both the normal "
 "and exceptional cases. Panicking will also exit a function early."
 msgstr ""
+"関数に複数の return パスがある場合、関数終了時に処理を行うのは困難かつ冗長に"
+"なりがちで、結果としてバグの温床にもなります。特にマクロなどにより return が"
+"暗黙的になる場合はさらに顕著です。典型的なのが `?` 演算子です。これは結果が "
+"`Err` の場合に即 return し、`Ok` の場合のみ処理を続けます。例外処理的に使え"
+"る `?` ですが、`finally` ブロックを持つJavaのような言語と違い、Rust には通常"
+"と異常の両方のケースで実行されるコードを明示的に書く方法がないのです。また、"
+"panic が発生した場合も関数は早期に終了します。"
 
 #: src/idioms/dtor-finally.md:48
 msgid ""
 "Code in destructors will (nearly) always be run - copes with panics, early "
 "returns, etc."
 msgstr ""
+"デストラクタ内のコードは、panic や早期 return を含めてほぼ常に実行される。"
 
 #: src/idioms/dtor-finally.md:53
 msgid ""
@@ -1239,6 +1250,10 @@ msgid ""
 "thread. Therefore, destructors cannot be relied on as finalizers where it is "
 "absolutely essential that finalisation happens."
 msgstr ""
+"デストラクタが確実に実行される保証はありません。たとえば、無限ループがある関"
+"数や、処理中にクラッシュした場合などです。また、すでに panic 中のスレッド内で"
+"さらに panic が発生した場合、デストラクタは実行されません。したがって、絶対に"
+"後処理が必要な場面でデストラクタに頼るのは危険です。"
 
 #: src/idioms/dtor-finally.md:59
 msgid ""
@@ -1246,12 +1261,16 @@ msgid ""
 "function gives no clear indication of destructors to be run on exit. This "
 "can make debugging tricky."
 msgstr ""
+"このパターンは、気付きにくい暗黙のコードを含みます。関数を読んだだけでは後処"
+"理コードが見えないため、コードの可読性・デバッグ性を損なう可能性があります。"
 
 #: src/idioms/dtor-finally.md:63
 msgid ""
 "Requiring an object and `Drop` impl just for finalisation is heavy on "
 "boilerplate."
 msgstr ""
+"後処理のためだけに構造体と `Drop` 実装を用意するのは、定型コードが多くなりま"
+"す。"
 
 #: src/idioms/dtor-finally.md:68
 msgid ""
@@ -1262,6 +1281,13 @@ msgid ""
 "finalizer can be kept alive beyond the lifetime of the function. For similar "
 "reasons, the finalizer should not be moved or returned."
 msgstr ""
+"後処理用のオブジェクトをどのように保持するかには注意が必要です。このオブジェ"
+"クトは関数の終了まで生存していなければならず、終了時に破棄される必要がありま"
+"す。このため、値として（または `Box<Foo>` のような一意な所有ポインタとして）"
+"保持しなければなりません。`Rc` のような共有ポインタを使うと、スコープの外でも"
+"オブジェクトが生き残ってしまい、関数の終了と同時に破棄される保証がなくなりま"
+"す。また、後処理用オブジェクトは関数から move したり返したりしてはいけませ"
+"ん。"
 
 #: src/idioms/dtor-finally.md:75
 msgid ""
@@ -1272,6 +1298,10 @@ msgid ""
 "do not call the variable `_` with no suffix - in that case it will be "
 "destroyed immediately."
 msgstr ""
+"もう一点重要なのは、後処理用オブジェクトは変数に束縛しなければならないという"
+"点です。そうしないと、すぐに破棄されてしまい、関数終了時まで生き残りません。"
+"もし変数が使われない目的で定義されるのであれば、 `_` で始めるべきです。ただ"
+"し、変数名をただの `_` にすると、即座に破棄されてしまうので注意が必要です。"
 
 #: src/idioms/dtor-finally.md:81
 msgid ""
@@ -1281,6 +1311,11 @@ msgid ""
 "object in each stack frame. So, destructors get called even if the panic "
 "happens in a function being called."
 msgstr ""
+"Rust においてデストラクタはスコープを抜けたときに実行されます。これは、ブロッ"
+"クの末尾に到達したとき、早期 return、または panic のいずれでも同様です。"
+"panic 時には Rust はスタックを巻き戻しながら、各スタックフレーム内のオブジェ"
+"クトのデストラクタを呼び出します。つまり、呼び出し中の関数で panic が発生して"
+"も、デストラクタは実行されます。"
 
 #: src/idioms/dtor-finally.md:87
 msgid ""
@@ -1290,10 +1325,14 @@ msgid ""
 "means that you must take extra care in your destructors not to panic, since "
 "it could leave resources in an unexpected state."
 msgstr ""
+"しかし、スタック巻き戻し中にデストラクタ内で再度 panic が発生した場合、Rust "
+"は安全のためスレッドを即時中断（abort）し、それ以降のデストラクタは実行されま"
+"せん。そのため、デストラクタ内での panic は避けるべきです。そうでないと、リ"
+"ソースが適切に解放されず、予期せぬ状態が残る可能性があります。"
 
 #: src/idioms/dtor-finally.md:95
 msgid "[RAII guards](../patterns/behavioural/RAII.md)."
-msgstr ""
+msgstr "[RAIIガード](../patterns/behavioural/RAII.md)。"
 
 #: src/idioms/mem-replace.md:1
 msgid "`mem::{take(_), replace(_)}` to keep owned values in changed enums"
