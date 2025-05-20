@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-20 20:03+0900\n"
+"PO-Revision-Date: 2025-05-20 21:38+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: src/SUMMARY.md:45 src/anti_patterns/borrow_clone.md:1
 msgid "Clone to satisfy the borrow checker"
-msgstr ""
+msgstr "借用チェッカーを満足させるためのクローン"
 
 #: src/SUMMARY.md:46
 msgid "`#[deny(warnings)]`"
@@ -1336,7 +1336,7 @@ msgstr "[RAIIガード](../patterns/behavioural/RAII.md)。"
 
 #: src/idioms/mem-replace.md:1
 msgid "`mem::{take(_), replace(_)}` to keep owned values in changed enums"
-msgstr ""
+msgstr "`mem::{take(_), replace(_)}` を使って列挙型の所有値を保持する"
 
 #: src/idioms/mem-replace.md:5
 msgid ""
@@ -1344,10 +1344,14 @@ msgid ""
 "String, x: u8 }` and `B { name: String }`. Now we want to change `MyEnum::A` "
 "to a `B` if `x` is zero, while keeping `MyEnum::B` intact."
 msgstr ""
+"`A { name: String, x: u8 }` と `B { name: String }` という（少なくとも）2つの"
+"バリアントを持つ `&mut MyEnum`があるします。ここで、`x` が 0 の場合に "
+"`MyEnum::A` から `B` に変更したいが、B はそのままにしたい、という状況を考えま"
+"す。"
 
 #: src/idioms/mem-replace.md:9
 msgid "We can do this without cloning the `name`."
-msgstr ""
+msgstr "この変換は、`name` をクローンせずに行うことができます。"
 
 #: src/idioms/mem-replace.md:23
 msgid ""
@@ -1356,16 +1360,21 @@ msgid ""
 "        // Then, construct the new enum variant (which will\n"
 "        // be assigned to `*e`).\n"
 msgstr ""
+"// `name` を取り出し、代わりに空の String を挿入する。\n"
+"        // （空の文字列はヒープ割り当てを伴わない点に注意）\n"
+"        // 新しいバリアントを作って、`*e` に代入する。\n"
 
 #: src/idioms/mem-replace.md:34
 msgid "This also works with more variants:"
-msgstr ""
+msgstr "この手法は、複数のバリアントを持つ列挙型にも使えます："
 
 #: src/idioms/mem-replace.md:49
 msgid ""
 "// Ownership rules do not allow taking `name` by value, but we cannot\n"
 "        // take the value out of a mutable reference, unless we replace it:\n"
 msgstr ""
+"// 所有権ルールにより、name を値として取り出すことはできないが、\n"
+"        // mutable な参照から値を取り出すには何かで置き換える必要がある。\n"
 
 #: src/idioms/mem-replace.md:65
 msgid ""
@@ -1375,6 +1384,9 @@ msgid ""
 "look at its parts to decide what to do next. In the second phase we may "
 "conditionally change the value (as in the example above)."
 msgstr ""
+"列挙型を扱うとき、その場で別のバリアントに切り替えたい場合があります。こうし"
+"た変更は、通常2段階に分けて行います。まず現在の値を観察して、次に何をすべきか"
+"を判断します。そして、条件に応じてバリアントを変更します。（上の例のように）"
 
 #: src/idioms/mem-replace.md:71
 msgid ""
@@ -1385,6 +1397,12 @@ msgid ""
 "Anyway, we can avoid the extra allocation by changing `e` with only a "
 "mutable borrow."
 msgstr ""
+"所有権ルールにより、列挙型から `name` を「そのまま取り出す」ことはできません"
+"（ _何かしら_ 中に残っている必要があるためです）。name を `.clone()` して "
+"`MyEnum::B` に入れる方法もありますが、それは借用チェッカーに合わせるための "
+"[借用チェッカーを満足させるためのクローン](../anti_patterns/borrow_clone.md)"
+"に該当します。ですが、`e` を可変参照のまま変更することで、余分なメモリ割り当"
+"てを回避できます。"
 
 #: src/idioms/mem-replace.md:78
 msgid ""
@@ -1393,6 +1411,10 @@ msgid ""
 "empty `String`, which does not need to allocate. As a result, we get the "
 "original `name` _as an owned value_. We can then wrap this in another enum."
 msgstr ""
+"`mem::take` は、値を取り出して、代わりにその型のデフォルト値を挿入します。そ"
+"して取り出した値を返す関数です。`String` のデフォルト値は空の文字列で、これは"
+"ヒープ割り当てを伴いません。そのため、`name` を _所有された値_ として取得し、"
+"それを別のバリアントに包むことができます。"
 
 #: src/idioms/mem-replace.md:83
 msgid ""
@@ -1400,6 +1422,9 @@ msgid ""
 "replace the value with. An equivalent to our `mem::take` line would be "
 "`mem::replace(name, String::new())`."
 msgstr ""
+"**補足:** `mem::replace` は `mem::take` と非常に似ていますが、代わりに入れる"
+"値を明示的に指定できる点が異なります。たとえば `mem::take(name)` と同じ意味を"
+"持つコードは、`mem::replace(name, String::new())` です。"
 
 #: src/idioms/mem-replace.md:87
 msgid ""
@@ -1407,11 +1432,16 @@ msgid ""
 "value with a `None`, `Option`’s `take()` method provides a shorter and more "
 "idiomatic alternative."
 msgstr ""
+"対象が `Option` の場合で `None` に置き換えたいときは、`Option` の `take()` メ"
+"ソッドを使った方がより簡潔で慣用的です。"
 
 #: src/idioms/mem-replace.md:93
 msgid ""
 "Look ma, no allocation! Also you may feel like Indiana Jones while doing it."
 msgstr ""
+"メモリ割り当てなしで所有値を移動できる！そして何より、インディ・ジョーンズ感"
+"を味わえるかも。（訳注：インディ・ジョーンズが宝を台座から盗るとき、重さを変"
+"えずに罠を作動させないために砂袋と交換する場面）"
 
 #: src/idioms/mem-replace.md:97
 msgid ""
@@ -1420,6 +1450,9 @@ msgid ""
 "resulting in reduced performance as opposed to what you'd do in unsafe "
 "languages."
 msgstr ""
+"コードがやや冗長になりがちです。何度かミスすると、借用チェッカーに嫌気が差す"
+"可能性があります。コンパイラが二重書き換えを最適化できず、パフォーマンスが落"
+"ちる可能性もあります（unsafe な言語であれば回避可能な場面も）。"
 
 #: src/idioms/mem-replace.md:101
 msgid ""
@@ -1427,6 +1460,9 @@ msgid ""
 "(./default.md). However, if the type you're working with doesn't implement "
 "this, you can instead use `mem::replace`."
 msgstr ""
+"また、このパターンでは対象の型が [`Default` トレイト](./default.md) を実装し"
+"ている必要があります。もし対象の型が `Default` を実装していない場合は、代わり"
+"に `mem::replace` を使えます。"
 
 #: src/idioms/mem-replace.md:107
 msgid ""
@@ -1435,6 +1471,9 @@ msgid ""
 "in other low-level languages like C you'd simply alias the pointer and fix "
 "things later."
 msgstr ""
+"このパターンが重要になるのは Rust に限った話です。GC を持つ言語では、値への参"
+"照をそのまま使えばよく、GC が参照の追跡を行ってくれます。C のような低レベル言"
+"語では、ポインタをエイリアスし、後で修正します。"
 
 #: src/idioms/mem-replace.md:112
 msgid ""
@@ -1442,12 +1481,17 @@ msgid ""
 "value may only have one owner, so to take it out, we need to put something "
 "back in – like Indiana Jones, replacing the artifact with a bag of sand."
 msgstr ""
+"しかし Rust では、所有値は1人の所有者しか持てないため、値を取り出すには、代わ"
+"りに何かを入れておく必要があるのです。まるでインディ・ジョーンズが遺物を砂袋"
+"に置き換えるようなイメージですね。"
 
 #: src/idioms/mem-replace.md:118
 msgid ""
 "This gets rid of the [Clone to satisfy the borrow checker](../anti_patterns/"
 "borrow_clone.md) anti-pattern in a specific case."
 msgstr ""
+"これは、[借用チェッカーを満足させるためのクローン](../anti_patterns/"
+"borrow_clone.md)アンチパターンを特定の状況で回避するために使えます。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:5
 msgid ""
