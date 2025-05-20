@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-20 00:46+0900\n"
+"PO-Revision-Date: 2025-05-20 19:11+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -182,7 +182,7 @@ msgstr ""
 
 #: src/SUMMARY.md:47
 msgid "Deref Polymorphism"
-msgstr ""
+msgstr "Deref による多態性"
 
 #: src/SUMMARY.md:49
 msgid "Functional Programming"
@@ -1027,12 +1027,15 @@ msgid ""
 "to treat collections like smart pointers, offering owning and borrowed views "
 "of data."
 msgstr ""
+"[`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) トレイトを使う"
+"ことで、コレクションをスマートポインタのように扱い、所有ビューと借用ビューの"
+"両方を提供できます。"
 
 #: src/idioms/deref.md:16 src/idioms/deref.md:23
 #: src/patterns/behavioural/RAII.md:29 src/patterns/behavioural/RAII.md:41
 #: src/patterns/behavioural/RAII.md:100 src/anti_patterns/deref.md:35
 msgid "//..\n"
-msgstr ""
+msgstr "//..\n"
 
 #: src/idioms/deref.md:28
 msgid ""
@@ -1042,10 +1045,15 @@ msgid ""
 "dereferencing searches. Most methods you might expect to be implemented for "
 "`Vec`s are instead implemented for slices."
 msgstr ""
+"`Vec<T>` は `T` の所有コレクションであり、一方スライス（`&[T]`）は `T` の借用"
+"コレクションです。`Vec` に対して `Deref` を実装することで、`&Vec<T>` から "
+"`&[T]` への暗黙的なデリファレンスが可能になり、この関係性は自動デリファレンス"
+"の探索にも含まれるようになります。`Vec` に実装されているように見える多くのメ"
+"ソッドは、実際にはスライスに対して実装されています。"
 
 #: src/idioms/deref.md:34
 msgid "Also `String` and `&str` have a similar relation."
-msgstr ""
+msgstr "`String` と `&str` の関係もこれと同様です。"
 
 #: src/idioms/deref.md:36 src/idioms/dtor-finally.md:36
 #: src/idioms/mem-replace.md:63 src/idioms/on-stack-dyn-dispatch.md:32
@@ -1060,7 +1068,7 @@ msgstr ""
 #: src/patterns/structural/compose-structs.md:100 src/patterns/ffi/export.md:16
 #: src/anti_patterns/borrow_clone.md:30
 msgid "Motivation"
-msgstr ""
+msgstr "動機"
 
 #: src/idioms/deref.md:38
 msgid ""
@@ -1069,16 +1077,23 @@ msgid ""
 "experience. When implementing a data structure that owns its data, offering "
 "a borrowed view of that data allows for more flexible APIs."
 msgstr ""
+"所有権と借用は、Rust における主要な言語機能です。良い開発体験のために、データ"
+"構造を設計する際にはこれらのセマンティクスを適切に考慮する必要があります。所"
+"有データを持つ構造体に借用ビューを提供することで、より柔軟な API を実現できま"
+"す。"
 
 #: src/idioms/deref.md:45
 msgid ""
 "Most methods can be implemented only for the borrowed view, they are then "
 "implicitly available for the owning view."
 msgstr ""
+"多くのメソッドは借用ビューに対してのみ実装すればよく、所有ビューでも暗黙的に"
+"使用できます。"
 
 #: src/idioms/deref.md:48
 msgid "Gives clients a choice between borrowing or taking ownership of data."
 msgstr ""
+"使用する際に、データの借用と所有権の取得のどちらかを選ぶことができます。"
 
 #: src/idioms/deref.md:52
 msgid ""
@@ -1087,6 +1102,10 @@ msgid ""
 "using this pattern can get complex (see the `Borrow` and `AsRef` traits, "
 "etc.)."
 msgstr ""
+"デリファレンスを通じてのみ利用できるメソッドやトレイトは、境界条件のチェック"
+"において考慮されません。そのため、このパターンを用いたデータ構造では、ジェネ"
+"リックプログラミングが複雑になる可能性があります（`Borrow` や `AsRef` トレイ"
+"トなどを参照）。"
 
 #: src/idioms/deref.md:56 src/idioms/dtor-finally.md:66
 #: src/idioms/mem-replace.md:105 src/idioms/on-stack-dyn-dispatch.md:66
@@ -1100,7 +1119,7 @@ msgstr ""
 #: src/patterns/structural/compose-structs.md:117
 #: src/anti_patterns/deref.md:102
 msgid "Discussion"
-msgstr ""
+msgstr "議論"
 
 #: src/idioms/deref.md:58
 msgid ""
@@ -1113,6 +1132,13 @@ msgid ""
 "If a collection owns its data, it is usually useful to provide a view of the "
 "data as borrowed so that it can be referenced multiple times."
 msgstr ""
+"スマートポインタとコレクションは類似しています：スマートポインタは1つの値を指"
+"し、コレクションは複数の値を指します。型システムの観点から見れば、この2つに大"
+"きな違いはありません。あるコレクションがそのデータへの唯一のアクセス手段であ"
+"り、かつそのコレクションがデータの破棄責任を持っているならば（たとえ共有所有"
+"であっても）、そのコレクションはデータを所有していると言えます。そして、所有"
+"している場合は通常、借用ビューを提供することが有用です。それにより、同じデー"
+"タを複数箇所から参照できるようになります。"
 
 #: src/idioms/deref.md:67
 msgid ""
@@ -1122,25 +1148,34 @@ msgid ""
 "`Foo<T>` can implement `Deref<Target=Bar<T>>` where `Bar` is a dynamically "
 "sized type and `&Bar<T>` is a borrowed view of the data in `Foo<T>`."
 msgstr ""
+"スマートポインタの多く（たとえば `Foo<T>`）は、`Deref<Target = T>` を実装して"
+"います。一方、コレクションは通常、カスタム型にデリファレンスします。`[T]` や "
+"`str` のような型は言語レベルのサポートを受けていますが、一般的にはこれは必須"
+"ではありません。たとえば、`Foo<T>` が `Deref<Target = Bar<T>>` を実装すること"
+"も可能であり、ここで `Bar` は動的サイズ型で、`&Bar<T>` は `Foo<T>` に格納され"
+"たデータの借用ビューになります。"
 
 #: src/idioms/deref.md:73
 msgid ""
 "Commonly, ordered collections will implement `Index` for `Range`s to provide "
 "slicing syntax. The target will be the borrowed view."
 msgstr ""
+"一般的に、順序付きコレクションは `Index` を `Range` に対して実装することで、"
+"スライス構文をサポートします。このとき、ターゲットは借用ビューになります。"
 
 #: src/idioms/deref.md:78
 msgid "[Deref polymorphism anti-pattern](../anti_patterns/deref.md)."
-msgstr ""
+msgstr "[Deref による多態性のアンチパターン](../anti_patterns/deref.md)。"
 
 #: src/idioms/deref.md:79 src/anti_patterns/deref.md:130
 msgid ""
 "[Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/"
 "trait.Deref.html)."
 msgstr ""
+"[`Deref` トレイトのドキュメント](https://doc.rust-lang.org/std/ops/"
+"trait.Deref.html)。"
 
 #: src/idioms/dtor-finally.md:1
-#, fuzzy
 msgid "Finalisation in destructors"
 msgstr "デストラクタでの後処理"
 
