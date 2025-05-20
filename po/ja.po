@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-20 21:38+0900\n"
+"PO-Revision-Date: 2025-05-21 01:02+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -1336,7 +1336,7 @@ msgstr "[RAIIガード](../patterns/behavioural/RAII.md)。"
 
 #: src/idioms/mem-replace.md:1
 msgid "`mem::{take(_), replace(_)}` to keep owned values in changed enums"
-msgstr "`mem::{take(_), replace(_)}` を使って列挙型の所有値を保持する"
+msgstr "`mem::{take(_), replace(_)}` で変更するenumの所有値を保持する"
 
 #: src/idioms/mem-replace.md:5
 msgid ""
@@ -1500,21 +1500,24 @@ msgid ""
 "the lifetime as necessary, we can use deferred conditional initialization, "
 "as seen below:"
 msgstr ""
+"複数の値に対して動的ディスパッチを行うことは可能ですが、異なる型のオブジェク"
+"トを束縛するためには、複数の変数を定義する必要があります。必要に応じてライフ"
+"タイムを延ばすには、以下のように遅延条件付き初期化を使うことができます："
 
 #: src/idioms/on-stack-dyn-dispatch.md:17
 #: src/idioms/on-stack-dyn-dispatch.md:20
 #: src/idioms/on-stack-dyn-dispatch.md:56
 msgid "\"-\""
-msgstr ""
+msgstr "\"-\""
 
 #: src/idioms/on-stack-dyn-dispatch.md:18
 msgid "// We need to describe the type to get dynamic dispatch.\n"
-msgstr ""
+msgstr "// 動的ディスパッチを行うには型を明示する必要があります。\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:25
 #: src/idioms/on-stack-dyn-dispatch.md:60
 msgid "// Read from `readable` here.\n"
-msgstr ""
+msgstr "// ここで `readable` から読み込みを行う。\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:34
 msgid ""
@@ -1524,12 +1527,18 @@ msgid ""
 "places where performance is not of the essence, thus costing compile time "
 "and cache usage."
 msgstr ""
+"Rust はデフォルトでコードを単一型に展開します。つまり、ジェネリクスなどで使わ"
+"れた型ごとに個別のコードが生成され、それぞれ最適化されます。これはホットパス"
+"での高速化には非常に有効ですが、パフォーマンスが重要でない場面ではコードの肥"
+"大化を招き、コンパイル時間やキャッシュ使用量の増大といった副作用があります。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:40
 msgid ""
 "Luckily, Rust allows us to use dynamic dispatch, but we have to explicitly "
 "ask for it."
 msgstr ""
+"幸い、Rust では動的ディスパッチを使用することも可能ですが、明示的に指定する必"
+"要があります。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:45
 msgid ""
@@ -1537,6 +1546,9 @@ msgid ""
 "initialize something we won't use later, nor do we need to monomorphize the "
 "whole code that follows to work with both `File` or `Stdin`."
 msgstr ""
+"ヒープ上に何も割り当てる必要がありません。後で使わないかもしれない値を事前に"
+"初期化する必要もありません。`File` と `Stdin` の両方に対応するために、後続"
+"コード全体を単一型展開する必要もありません。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:51
 msgid ""
@@ -1544,14 +1556,17 @@ msgid ""
 "initialization, which made up more moving parts than the `Box`\\-based "
 "version:"
 msgstr ""
+"Rust 1.79.0 より前のバージョンでは、遅延初期化のために `let` バインディングを"
+"2段階で書く必要があり、`Box` を使ったバージョンよりもコードの構造が煩雑でし"
+"た："
 
 #: src/idioms/on-stack-dyn-dispatch.md:55
 msgid "// We still need to ascribe the type for dynamic dispatch.\n"
-msgstr ""
+msgstr "// 動的ディスパッチのために型注釈が依然として必要です。\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:64
 msgid "Luckily, this disadvantage is now gone. Yay!"
-msgstr ""
+msgstr "とはいえ、この制約は現在では解消されています。やったね！"
 
 #: src/idioms/on-stack-dyn-dispatch.md:68
 msgid ""
@@ -1559,6 +1574,8 @@ msgid ""
 "temporary values within `&` or `&mut` as long as possible within the scope "
 "of the function."
 msgstr ""
+"Rust 1.79.0 以降では、`&` や `&mut` による一時値のライフタイムを、関数スコー"
+"プ内で可能な限り延長するように、コンパイラが自動的に処理してくれます。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:72
 msgid ""
@@ -1566,6 +1583,8 @@ msgid ""
 "placing the contents into some `let` binding (which would have been needed "
 "for deferred initialization, which was the solution used before that change)."
 msgstr ""
+"そのため、値を `let` バインディングに明示的に束縛しなくても、単に `&mut` を使"
+"えばよくなりました（以前のような遅延初期化パターンは不要になります）。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:76
 msgid ""
@@ -1573,12 +1592,17 @@ msgid ""
 "compiler knows the size of each value and each borrowed value outlives all "
 "references borrowed from it."
 msgstr ""
+"各値には一時的にせよ居場所が確保されており、コンパイラはそのサイズを把握して"
+"いて、かつ借用された参照がすべて元の値のライフタイム内にあることを理解してい"
+"ます。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:82
 msgid ""
 "[Finalisation in destructors](dtor-finally.md) and [RAII guards](../patterns/"
 "behavioural/RAII.md) can benefit from tight control over lifetimes."
 msgstr ""
+"[デストラクタでの後処理](dtor-finally.md)と[RAII ガード](../patterns/"
+"behavioural/RAII.md)は、ライフタイム制御の活用例として有益です。"
 
 #: src/idioms/on-stack-dyn-dispatch.md:85
 msgid ""
@@ -1587,6 +1611,10 @@ msgid ""
 "doc.rust-lang.org/std/option/enum.Option.html#method.as_ref) method to get "
 "an optional reference."
 msgstr ""
+"可変な参照の条件付き `Option<&T>` を使いたい場合は、`Option<T>` を直接初期化"
+"して、[`as_ref()`](https://doc.rust-lang.org/std/option/"
+"enum.Option.html#method.as_ref) メソッド を使うことで、Optionの参照が得られま"
+"す。"
 
 #: src/idioms/ffi/intro.md:1
 #, fuzzy
