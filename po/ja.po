@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-21 01:02+0900\n"
+"PO-Revision-Date: 2025-05-23 00:10+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -66,11 +66,11 @@ msgstr "外部関数インターフェース（FFI）"
 
 #: src/SUMMARY.md:15
 msgid "Idiomatic Errors"
-msgstr "FFIに適したエラー処理"
+msgstr "イディオムに則ったエラー処理"
 
 #: src/SUMMARY.md:16 src/idioms/ffi/accepting-strings.md:1
 msgid "Accepting Strings"
-msgstr "文字列の受け取り方"
+msgstr "文字列の受け入れ方"
 
 #: src/SUMMARY.md:17 src/idioms/ffi/passing-strings.md:1
 msgid "Passing Strings"
@@ -1433,7 +1433,7 @@ msgid ""
 "idiomatic alternative."
 msgstr ""
 "対象が `Option` の場合で `None` に置き換えたいときは、`Option` の `take()` メ"
-"ソッドを使った方がより簡潔で慣用的です。"
+"ソッドを使った方がより簡潔でイディオムに則っています。"
 
 #: src/idioms/mem-replace.md:93
 msgid ""
@@ -1617,9 +1617,8 @@ msgstr ""
 "す。"
 
 #: src/idioms/ffi/intro.md:1
-#, fuzzy
 msgid "FFI Idioms"
-msgstr "慣習"
+msgstr "FFI におけるイディオム"
 
 #: src/idioms/ffi/intro.md:3
 msgid ""
@@ -1627,28 +1626,36 @@ msgid ""
 "idioms here that can act as pointers, and avoid traps for inexperienced "
 "users of `unsafe` Rust."
 msgstr ""
+"FFIコードの記述は、それ自体がひとつの講座になるほど奥が深い分野です。このセク"
+"ションでは、FFI に関する 典型的な書き方をいくつか紹介します。これらは "
+"`unsafe` な Rust に不慣れな方が陥りがちな罠を避けるための指針 となるはずで"
+"す。"
 
 #: src/idioms/ffi/intro.md:7
 msgid "This section contains idioms that may be useful when doing FFI."
 msgstr ""
+"このセクションでは、FFI を扱う際に役立つかもしれないイディオムを紹介します。"
 
 #: src/idioms/ffi/intro.md:9
 msgid ""
 "[Idiomatic Errors](./errors.md) - Error handling with integer codes and "
 "sentinel return values (such as `NULL` pointers)"
 msgstr ""
+"整数によるエラーコードや`NULL` ポインタのような番兵値を使った、[イディオムに"
+"則ったエラー処理](./errors.md)"
 
 #: src/idioms/ffi/intro.md:12
 msgid "[Accepting Strings](./accepting-strings.md) with minimal unsafe code"
 msgstr ""
+"unsafe コードを最小限に抑える[文字列の受け入れ方](./accepting-strings.md)"
 
 #: src/idioms/ffi/intro.md:14
 msgid "[Passing Strings](./passing-strings.md) to FFI functions"
-msgstr ""
+msgstr "FFI 関数への[文字列の渡し方](./passing-strings.md)"
 
 #: src/idioms/ffi/errors.md:1
 msgid "Error Handling in FFI"
-msgstr ""
+msgstr "FFI におけるエラー処理"
 
 #: src/idioms/ffi/errors.md:5
 msgid ""
@@ -1656,114 +1663,123 @@ msgid ""
 "However, Rust's type system allows much more rich error information to be "
 "captured and propagated through a full type."
 msgstr ""
+"C のような他言語においては、エラーは通常戻り値のコードで表現されます。一方、"
+"Rust の型システムでは、より豊富なエラー情報を型として安全に表現し、伝播させる"
+"ことができます。"
 
 #: src/idioms/ffi/errors.md:9
 msgid ""
 "This best practice shows different kinds of error codes, and how to expose "
 "them in a usable way:"
 msgstr ""
+"この章では、異なる種類のエラーコードをどのように扱い、FFI 経由で実用的に公開"
+"するかについて、ベストプラクティスを示します："
 
 #: src/idioms/ffi/errors.md:12
 msgid "Flat Enums should be converted to integers and returned as codes."
-msgstr ""
+msgstr "単純な列挙型は整数に変換してコードとして返す。"
 
 #: src/idioms/ffi/errors.md:13
 msgid ""
 "Structured Enums should be converted to an integer code with a string error "
 "message for detail."
-msgstr ""
+msgstr "構造を持つ列挙型は、整数コードと併せて文字列エラーメッセージを返す。"
 
 #: src/idioms/ffi/errors.md:15
 msgid ""
 "Custom Error Types should become \"transparent\", with a C representation."
 msgstr ""
+"カスタムエラー型は C 向けに「透過的（transparent）」な構造体として公開する。"
 
 #: src/idioms/ffi/errors.md:17 src/idioms/ffi/accepting-strings.md:29
 #: src/idioms/ffi/passing-strings.md:26 src/patterns/ffi/export.md:44
 #: src/patterns/ffi/wrappers.md:24
 msgid "Code Example"
-msgstr ""
+msgstr "コード例"
 
 #: src/idioms/ffi/errors.md:19
 msgid "Flat Enums"
-msgstr ""
+msgstr "単純な列挙型"
 
 #: src/idioms/ffi/errors.md:23
 msgid "// user attempted a write operation\n"
-msgstr ""
+msgstr "// 書き込み操作が試みられた\n"
 
 #: src/idioms/ffi/errors.md:24
 msgid "// user should read the C errno() for what it was\n"
-msgstr ""
+msgstr "// 詳細は C の errno() を確認\n"
 
 #: src/idioms/ffi/errors.md:25
 msgid "// user should run a repair tool to recover it\n"
-msgstr ""
+msgstr "// 修復ツールを使って復旧すべき\n"
 
 #: src/idioms/ffi/errors.md:35
 msgid "Structured Enums"
-msgstr ""
+msgstr "構造を持つ列挙型"
 
 #: src/idioms/ffi/errors.md:42
 msgid "// message describing the issue\n"
-msgstr ""
+msgstr "// 問題の説明を含む\n"
 
 #: src/idioms/ffi/errors.md:61 src/idioms/ffi/accepting-strings.md:47
 #: src/idioms/ffi/accepting-strings.md:79 src/idioms/ffi/passing-strings.md:33
 #: src/patterns/ffi/export.md:154 src/patterns/ffi/export.md:158
 #: src/patterns/ffi/export.md:165
 msgid "\"C\""
-msgstr ""
+msgstr "\"C\""
 
 #: src/idioms/ffi/errors.md:64
 msgid ""
 "// SAFETY: we assume that the lifetime of `e` is greater than\n"
 "        // the current stack frame.\n"
-msgstr ""
+msgstr "// SAFETY: `e` のライフタイムが現在のスタックフレームより長いと仮定\n"
 
 #: src/idioms/ffi/errors.md:70
 msgid "\"cannot write to read-only database\""
-msgstr ""
+msgstr "\"cannot write to read-only database\""
 
 #: src/idioms/ffi/errors.md:73
 msgid "\"I/O Error: {e}\""
-msgstr ""
+msgstr "\"I/O Error: {e}\""
 
 #: src/idioms/ffi/errors.md:76
 msgid "\"File corrupted, run repair: {}\""
-msgstr ""
+msgstr "\"File corrupted, run repair: {}\""
 
 #: src/idioms/ffi/errors.md:83
 msgid ""
 "// SAFETY: copying error_bytes to an allocated buffer with a '\\0'\n"
 "            // byte at the end.\n"
-msgstr ""
+msgstr "// SAFETY: error_bytes を'\\0'終端付きで確保したバッファにコピー\n"
 
 #: src/idioms/ffi/errors.md:99
 msgid "Custom Error Types"
-msgstr ""
+msgstr "カスタムエラー型"
 
 #: src/idioms/ffi/errors.md:109 src/idioms/ffi/accepting-strings.md:48
 #: src/idioms/ffi/accepting-strings.md:83 src/patterns/creational/builder.md:30
 #: src/patterns/ffi/export.md:137 src/patterns/ffi/export.md:139
 msgid "/* ... */"
-msgstr ""
+msgstr "/* ... */"
 
 #: src/idioms/ffi/errors.md:111
 msgid "/* Create a second version which is exposed as a C structure */"
-msgstr ""
+msgstr "/* C 言語向けに公開するバージョンを別に定義 */"
 
 #: src/idioms/ffi/errors.md:130
 msgid ""
 "This ensures that the foreign language has clear access to error information "
 "while not compromising the Rust code's API at all."
 msgstr ""
+"この手法を使えば、他言語側からエラー情報に明確にアクセスできるようになりま"
+"す。同時に、Rust 側の API 設計においても一切の妥協が不要です。"
 
 #: src/idioms/ffi/errors.md:135
 msgid ""
 "It's a lot of typing, and some types may not be able to be converted easily "
 "to C."
 msgstr ""
+"記述量が多くなりがちで、また型によってはC に変換しづらい場合があります。"
 
 #: src/idioms/ffi/accepting-strings.md:5
 msgid ""
