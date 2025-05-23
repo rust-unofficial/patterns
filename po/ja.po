@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-23 21:56+0900\n"
+"PO-Revision-Date: 2025-05-23 21:59+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -1836,7 +1836,7 @@ msgid ""
 "Rust strings."
 msgstr ""
 "Rust の標準ライブラリには、C 言語との橋渡し用として `String` / `&str` に対応"
-"する型である。`CString` および `&CStr` が用意されています。これにより、複雑な"
+"する型である、`CString` および `&CStr` が用意されています。これにより、複雑な"
 "処理や `unsafe` コードの多くを回避することができます。"
 
 #: src/idioms/ffi/accepting-strings.md:26
@@ -1918,7 +1918,7 @@ msgstr ""
 
 #: src/idioms/ffi/accepting-strings.md:85
 msgid "/* SAFETY: strlen is what it is, I guess? */"
-msgstr "/* SAFETY: strlen だから仕方ない…？ */"
+msgstr "/* SAFETY: strlen はこういうものだから仕方ない…？ */"
 
 #: src/idioms/ffi/accepting-strings.md:92
 msgid ""
