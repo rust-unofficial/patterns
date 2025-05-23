@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2025-05-23 00:10+0900\n"
+"PO-Revision-Date: 2025-05-23 21:56+0900\n"
 "Last-Translator: Koji Murata <k@malt03.com>\n"
 "Language-Team: Japanese <translation-team-ja@lists.sourceforge.net>\n"
 "Language: ja\n"
@@ -1786,38 +1786,47 @@ msgid ""
 "When accepting strings via FFI through pointers, there are two principles "
 "that should be followed:"
 msgstr ""
+"FFI 経由でポインタとして文字列を受け取る場合には、次の2つの原則を守るべきで"
+"す："
 
 #: src/idioms/ffi/accepting-strings.md:8
 msgid "Keep foreign strings \"borrowed\", rather than copying them directly."
-msgstr ""
+msgstr "外部の文字列は 直接コピーするのではなく「借用」 として扱うこと。"
 
 #: src/idioms/ffi/accepting-strings.md:9
 msgid ""
 "Minimize the amount of complexity and `unsafe` code involved in converting "
 "from a C-style string to native Rust strings."
 msgstr ""
+"Cスタイルの文字列から Rust の文字列への変換において、複雑さと `unsafe` コード"
+"の使用を最小限に抑えること。"
 
 #: src/idioms/ffi/accepting-strings.md:14
 msgid ""
 "The strings used in C have different behaviours to those used in Rust, "
 "namely:"
 msgstr ""
+"C言語の文字列と Rust の文字列は、仕様と扱いが大きく異なります。たとえば："
 
 #: src/idioms/ffi/accepting-strings.md:16
 msgid "C strings are null-terminated while Rust strings store their length"
-msgstr ""
+msgstr "C の文字列は null終端だが、Rust の文字列は 長さ情報を保持"
 
 #: src/idioms/ffi/accepting-strings.md:17
 msgid ""
 "C strings can contain any arbitrary non-zero byte while Rust strings must be "
 "UTF-8"
 msgstr ""
+"C の文字列は 任意の非ゼロバイトを含めることができる が、Rust の文字列は "
+"UTF-8 準拠である必要がある"
 
 #: src/idioms/ffi/accepting-strings.md:19
 msgid ""
 "C strings are accessed and manipulated using `unsafe` pointer operations "
 "while interactions with Rust strings go through safe methods"
 msgstr ""
+"C の文字列操作は `unsafe` なポインタ操作だが、Rust の文字列操作は安全な API "
+"で行える"
 
 #: src/idioms/ffi/accepting-strings.md:22
 msgid ""
@@ -1826,18 +1835,23 @@ msgid ""
 "complexity and `unsafe` code involved in converting between C strings and "
 "Rust strings."
 msgstr ""
+"Rust の標準ライブラリには、C 言語との橋渡し用として `String` / `&str` に対応"
+"する型である。`CString` および `&CStr` が用意されています。これにより、複雑な"
+"処理や `unsafe` コードの多くを回避することができます。"
 
 #: src/idioms/ffi/accepting-strings.md:26
 msgid ""
 "The `&CStr` type also allows us to work with borrowed data, meaning passing "
 "strings between Rust and C is a zero-cost operation."
 msgstr ""
+"さらに `&CStr` 型は 借用として動作する ため、Rust と C 間での文字列受け渡しが"
+"ゼロコストで行えるという利点もあります。"
 
 #: src/idioms/ffi/accepting-strings.md:34
 #: src/idioms/ffi/accepting-strings.md:77 src/idioms/ffi/passing-strings.md:31
 #: src/idioms/ffi/passing-strings.md:80 src/patterns/ffi/wrappers.md:114
 msgid "// other module content\n"
-msgstr ""
+msgstr "// その他のモジュール内容...\n"
 
 #: src/idioms/ffi/accepting-strings.md:36
 msgid ""
@@ -1852,67 +1866,87 @@ msgid ""
 "    /// - points to memory ending in a null byte\n"
 "    /// - won't be mutated for the duration of this function call\n"
 msgstr ""
+"/// 指定されたログレベルでメッセージを記録する\n"
+"    ///\n"
+"    /// # Safety\n"
+"    ///\n"
+"    /// 呼び出し側は `msg` が以下を満たすことを保証しなければならない：\n"
+"    /// - null ポインタではないこと\n"
+"    /// - 有効かつ初期化済みのデータを指していること\n"
+"    /// - 終端に null バイトがあること\n"
+"    /// - 関数呼び出し中に内容が変更されないこと\n"
 
 #: src/idioms/ffi/accepting-strings.md:50
 msgid ""
 "// SAFETY: The caller has already guaranteed this is okay (see the\n"
 "        // `# Safety` section of the doc-comment).\n"
 msgstr ""
+"// SAFETY: この操作が安全であることは、呼び出し側がすでに保証しています。\n"
+"// 詳細はドキュメントコメント内の `# Safety` セクションを参照してください。\n"
 
 #: src/idioms/ffi/accepting-strings.md:55
 #: src/idioms/ffi/accepting-strings.md:105
 msgid "\"FFI string conversion failed\""
-msgstr ""
+msgstr "\"FFI string conversion failed\""
 
 #: src/idioms/ffi/accepting-strings.md:67
 msgid "The example is written to ensure that:"
-msgstr ""
+msgstr "この実装には次のような利点があります："
 
 #: src/idioms/ffi/accepting-strings.md:69 src/idioms/ffi/passing-strings.md:70
 msgid "The `unsafe` block is as small as possible."
-msgstr ""
+msgstr "`unsafe` ブロックを 可能な限り最小化 している"
 
 #: src/idioms/ffi/accepting-strings.md:70
 msgid ""
 "The pointer with an \"untracked\" lifetime becomes a \"tracked\" shared "
 "reference"
 msgstr ""
+"“ライフタイムが追跡されないポインタ” を、追跡可能な借用参照へと昇格させている"
 
 #: src/idioms/ffi/accepting-strings.md:72
 msgid "Consider an alternative, where the string is actually copied:"
-msgstr ""
+msgstr "以下は、文字列がコピーされてしまう方法です："
 
 #: src/idioms/ffi/accepting-strings.md:80
 msgid ""
 "// DO NOT USE THIS CODE.\n"
 "        // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.\n"
 msgstr ""
+"// このコードは使わないでください。\n"
+"        // 冗長で読みづらく、しかも微妙なバグを含んでいます。\n"
 
 #: src/idioms/ffi/accepting-strings.md:85
 msgid "/* SAFETY: strlen is what it is, I guess? */"
-msgstr ""
+msgstr "/* SAFETY: strlen だから仕方ない…？ */"
 
 #: src/idioms/ffi/accepting-strings.md:92
 msgid ""
 "// SAFETY: copying from a foreign pointer expected to live\n"
 "            // for the entire stack frame into owned memory\n"
 msgstr ""
+"// SAFETY: スタックフレームの存続期間全体にわたって\n"
+"            // 有効であると想定される外部ポインタから、所有メモリへコピーして"
+"います。\n"
 
 #: src/idioms/ffi/accepting-strings.md:116
 msgid "This code is inferior to the original in two respects:"
-msgstr ""
+msgstr "このコードは次の2点において、前の実装より劣っています："
 
 #: src/idioms/ffi/accepting-strings.md:118
 msgid ""
 "There is much more `unsafe` code, and more importantly, more invariants it "
 "must uphold."
 msgstr ""
+"`unsafe` コードがはるかに多く、重要なことは、それによって維持すべき不変条件も"
+"多くなっていることです。"
 
 #: src/idioms/ffi/accepting-strings.md:120
 msgid ""
 "Due to the extensive arithmetic required, there is a bug in this version "
 "that cases Rust `undefined behaviour`."
 msgstr ""
+"複雑なポインタ演算により、Rust 的な未定義動作を引き起こすバグを含んでいます"
 
 #: src/idioms/ffi/accepting-strings.md:123
 msgid ""
@@ -1920,6 +1954,8 @@ msgid ""
 "copied, all `msg_len` bytes of it. However, the `NUL` terminator at the end "
 "was not."
 msgstr ""
+"具体的には、ポインタから `msg_len` バイトをコピーしていますが、終端の `NUL` "
+"バイトは含まれていません。"
 
 #: src/idioms/ffi/accepting-strings.md:126
 msgid ""
@@ -1929,6 +1965,11 @@ msgid ""
 "`CString` is created at the bottom of the block, its read of the Vector will "
 "cause `undefined behaviour`!"
 msgstr ""
+"その後、ベクタのサイズは _ゼロ埋めされた文字列_ の長さに _set_ されました"
+"が、 _resized_ されたわけではありません。リサイズされていれば末尾に 0 が追加"
+"された可能性がありました。その結果、ベクタの最後のバイトは 初期化されていない"
+"メモリのまま になっています。ブロックの末尾で `CString` が作成される際に、そ"
+"のベクタを読み取る処理が行われ、結果として未定義動作が発生します！"
 
 #: src/idioms/ffi/accepting-strings.md:132
 msgid ""
@@ -1937,11 +1978,13 @@ msgid ""
 "would put a weird character at the end of the string, sometimes it would "
 "just completely crash."
 msgstr ""
+"このようなバグは検出が難しく、非 `UTF-8` として panic を起こすこともあれば、"
+"末尾に謎の文字がついたり、あるいは完全にクラッシュすることもあります。"
 
 #: src/idioms/ffi/accepting-strings.md:138
 #: src/idioms/ffi/passing-strings.md:103
 msgid "None?"
-msgstr ""
+msgstr "なし？"
 
 #: src/idioms/ffi/passing-strings.md:5
 msgid ""
