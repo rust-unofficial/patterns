@@ -101,9 +101,9 @@ elimination of type parameters. A good name for the new trait will also make the
 bound more expressive. The new trait, an abstraction, also offers opportunities
 in itself, including:
 
-* additional, specialized types implementing the new trait (e.g. representing an
+- additional, specialized types implementing the new trait (e.g. representing an
   idendity of some sort) as well as other useful traits such as `Default` and
-* additional methods, as long as they can be implemented for all relevant types.
+- additional methods, as long as they can be implemented for all relevant types.
 
 ## Disadvantages
 
