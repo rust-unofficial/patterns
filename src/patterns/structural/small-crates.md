@@ -26,10 +26,11 @@ fine-grained dependencies.
   has both versions 1.0 and 0.5. Since the `Url` from `url:1.0` and the `Url`
   from `url:0.5` are different types, an HTTP client that uses `url:0.5` would
   not accept `Url` values from a web scraper that uses `url:1.0`.
+  Use [workspace.dependencies](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table) to neutralize.
 - Packages on crates.io are not curated. A crate may be poorly written, have
   unhelpful documentation, or be outright malicious.
 - Two small crates may be less optimized than one large one, since the compiler
-  does not perform link-time optimization (LTO) by default.
+  does not [perform link-time optimization (LTO)](https://doc.rust-lang.org/cargo/reference/profiles.html#lto) by default.
 
 ## Examples
 
