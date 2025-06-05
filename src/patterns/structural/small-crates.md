@@ -26,9 +26,21 @@ fine-grained dependencies.
   has both versions 1.0 and 0.5. Since the `Url` from `url:1.0` and the `Url`
   from `url:0.5` are different types, an HTTP client that uses `url:0.5` would
   not accept `Url` values from a web scraper that uses `url:1.0`.
-  Use [workspace.dependencies](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table) to neutralize.
+  Rust and Cargo provide several options to handle this disadvantage:
+  - [workspace.dependencies](https://doc.rust-lang.org/cargo/reference/workspaces.html#the-dependencies-table)
+    helps in enforcing the same crate version across all workspace members
+  - dependnecy can be renamed in cargo.toml and in Rust module import 
+  - `package.resolver= "2"` allows to have several indirect and direct dependncies to be in same workspace,
+     so sometimes it fails (for few reasons), one can:
+    - if resolver fails to find compatible versions, can use [patch](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html#the-patch-section)
+      to pin dependecy accross `Cargo.lock`
+    - `resolver = "3" added Rust-version awareness,
+       so incompatible crate versions (based on the `rust-version` field) are not selected,
+       further reducing potential dependency hell 
+      
 - Packages on crates.io are not curated. A crate may be poorly written, have
   unhelpful documentation, or be outright malicious.
+  
 - Two small crates may be less optimized than one large one, since the compiler
   does not [perform link-time optimization (LTO)](https://doc.rust-lang.org/cargo/reference/profiles.html#lto) by default.
 
