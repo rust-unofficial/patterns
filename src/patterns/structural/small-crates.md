@@ -32,7 +32,8 @@ fine-grained dependencies.
   - dependnecy can be renamed in cargo.toml and in Rust module import 
   - `package.resolver= "2"` allows to have several indirect and direct dependncies to be in same workspace,
      so sometimes it fails (for few reasons), one can:
-    - if resolver fails to find compatible versions, can use [patch](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html#the-patch-section)
+    - if resolver fails to find compatible versions,
+      can use [patch](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html#the-patch-section)
       to pin dependecy accross `Cargo.lock`
     - `resolver = "3"` added Rust-version awareness,
        so incompatible crate versions (based on the `rust-version` field) are not selected,
@@ -47,7 +48,9 @@ fine-grained dependencies.
     [`cargo-crev`](https://github.com/crev-dev/cargo-crev)
     and [`cargo-geiger`](https://github.com/rust-secure-code/cargo-geiger)
     can be used to check audit status of dependencies
-  - [`OCI images`](https://opencontainers.org/), [`nix`](https://nixos.org/) and `nix` can be used for lightweight sandbox builds, to prevent `build.rs` and `proc_macro` to access IO.
+  - [`OCI images`](https://opencontainers.org/) and [`nix`](https://nixos.org/)
+    can be used for lightweight sandbox builds,
+    to prevent `build.rs` and `proc_macro` to access IO
   - LLMs can be used for providing documentation and general assessment of dependency
 
 - Two small crates may be less optimized than one large one, since the compiler
