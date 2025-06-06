@@ -119,8 +119,9 @@ people can actually collaborate on things or fix smaller issues themselves.
 ## Maintainers
 
 This repository is maintained by the following people:
+
 - [simonsan](https://github.com/simonsan).
-- [marcoieni](https://github.com/marcoieni). Marco only works on the book CI.
-  He doesn't review the book content and he doesn't receive notifications
-  on new issues and pull requests. If you want him to have a look at a CI issue,
-  ping him directly.
+- [marcoieni](https://github.com/marcoieni). Marco only works on the book CI. He
+  doesn't review the book content and he doesn't receive notifications on new
+  issues and pull requests. If you want him to have a look at a CI issue, ping
+  him directly.
