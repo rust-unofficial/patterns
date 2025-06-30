@@ -17,6 +17,6 @@ jobs:
           toolchain: stable
           components: rustfmt
 
-      - uses: Swatinem/rust-cache@f0deed1e0edfc6a9be95417288c0e1099b1eeec3 # v2
+      - uses: Swatinem/rust-cache@98c8021b550208e191a6a3145459bfc9fb29c4c0 # v2
 
       - uses: dprint/check@v2.2
