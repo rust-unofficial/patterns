@@ -1,15 +1,15 @@
-# Iterating over an `Option`
+# `Option`に対する反復
 
-## Description
+## 説明
 
-`Option` can be viewed as a container that contains either zero or one element.
-In particular, it implements the `IntoIterator` trait, and as such can be used
-with generic code that needs such a type.
+`Option`は、ゼロまたは一つの要素を含むコンテナとして見ることができます。
+特に、`IntoIterator`トレイトを実装しているため、そのような型を必要とする
+汎用コードで使用できます。
 
-## Examples
+## 例
 
-Since `Option` implements `IntoIterator`, it can be used as an argument to
-[`.extend()`](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend):
+`Option`は`IntoIterator`を実装しているため、
+[`.extend()`](https://doc.rust-lang.org/std/iter/trait.Extend.html#tymethod.extend)の引数として使用できます：
 
 ```rust
 let turing = Some("Turing");
@@ -17,15 +17,14 @@ let mut logicians = vec!["Curry", "Kleene", "Markov"];
 
 logicians.extend(turing);
 
-// equivalent to
+// 以下と同等
 if let Some(turing_inner) = turing {
     logicians.push(turing_inner);
 }
 ```
 
-If you need to tack an `Option` to the end of an existing iterator, you can pass
-it to
-[`.chain()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain):
+既存のイテレータの末尾に`Option`を追加する必要がある場合、
+[`.chain()`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.chain)に渡すことができます：
 
 ```rust
 let turing = Some("Turing");
@@ -36,26 +35,25 @@ for logician in logicians.iter().chain(turing.iter()) {
 }
 ```
 
-Note that if the `Option` is always `Some`, then it is more idiomatic to use
-[`std::iter::once`](https://doc.rust-lang.org/std/iter/fn.once.html) on the
-element instead.
+`Option`が常に`Some`である場合、代わりに要素に
+[`std::iter::once`](https://doc.rust-lang.org/std/iter/fn.once.html)を使用する方が
+より慣用的であることに注意してください。
 
-Also, since `Option` implements `IntoIterator`, it's possible to iterate over it
-using a `for` loop. This is equivalent to matching it with `if let Some(..)`,
-and in most cases you should prefer the latter.
+また、`Option`は`IntoIterator`を実装しているため、
+`for`ループを使用して反復することが可能です。これは`if let Some(..)`でマッチさせることと
+同等であり、ほとんどの場合は後者を好むべきです。
 
-## See also
+## 関連項目
 
-- [`std::iter::once`](https://doc.rust-lang.org/std/iter/fn.once.html) is an
-  iterator which yields exactly one element. It's a more readable alternative to
-  `Some(foo).into_iter()`.
+- [`std::iter::once`](https://doc.rust-lang.org/std/iter/fn.once.html)は
+  正確に一つの要素を生成するイテレータです。`Some(foo).into_iter()`の
+  より読みやすい代替案です。
 
-- [`Iterator::filter_map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map)
-  is a version of
-  [`Iterator::map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map),
-  specialized to mapping functions which return `Option`.
+- [`Iterator::filter_map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.filter_map)は
+  [`Iterator::map`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map)のバージョンで、
+  `Option`を返すマッピング関数に特化されています。
 
-- The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions
-  for converting an `Option` to a zero- or one-element slice.
+- [`ref_slice`](https://crates.io/crates/ref_slice)クレートは、
+  `Option`をゼロまたは一要素のスライスに変換する関数を提供します。
 
-- [Documentation for `Option<T>`](https://doc.rust-lang.org/std/option/enum.Option.html)
+- [`Option<T>`のドキュメント](https://doc.rust-lang.org/std/option/enum.Option.html)

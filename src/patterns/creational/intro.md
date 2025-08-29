@@ -1,9 +1,7 @@
-# Creational Patterns
+# 生成パターン
 
-From [Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern):
+[Wikipedia](https://en.wikipedia.org/wiki/Creational_pattern)より：
 
-> Design patterns that deal with object creation mechanisms, trying to create
-> objects in a manner suitable to the situation. The basic form of object
-> creation could result in design problems or in added complexity to the design.
-> Creational design patterns solve this problem by somehow controlling this
-> object creation.
+> オブジェクト生成メカニズムを扱うデザインパターンで、状況に適した方法でオブジェクトを作成しようとします。
+> オブジェクト生成の基本形式は、設計上の問題や設計の複雑さの増加を招く可能性があります。
+> 生成デザインパターンは、このオブジェクト生成を何らかの方法で制御することによってこの問題を解決します。

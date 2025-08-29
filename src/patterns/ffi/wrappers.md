@@ -1,41 +1,37 @@
-# Type Consolidation into Wrappers
+# ラッパーへの型統合
 
-## Description
+## 説明
 
-This pattern is designed to allow gracefully handling multiple related types,
-while minimizing the surface area for memory unsafety.
+このパターンは、メモリの安全性の欠如の表面積を最小限に抑えながら、
+複数の関連する型を優雅に処理できるように設計されています。
 
-One of the cornerstones of Rust's aliasing rules is lifetimes. This ensures that
-many patterns of access between types can be memory safe, data race safety
-included.
+Rustのエイリアシングルールの基礎の1つはライフタイムです。これにより、
+型間のアクセスの多くのパターンがメモリ安全であり、データ競合の安全性も含まれることが保証されます。
 
-However, when Rust types are exported to other languages, they are usually
-transformed into pointers. In Rust, a pointer means "the user manages the
-lifetime of the pointee." It is their responsibility to avoid memory unsafety.
+しかし、Rust型が他の言語にエクスポートされると、通常はポインタに変換されます。
+Rustでは、ポインタは「ユーザーがポインティのライフタイムを管理する」ことを意味します。
+メモリの安全性の欠如を避けるのは彼らの責任です。
 
-Some level of trust in the user code is thus required, notably around
-use-after-free which Rust can do nothing about. However, some API designs place
-higher burdens than others on the code written in the other language.
+したがって、ユーザーコードに対するある程度の信頼が必要です。特に、Rustが何もできない
+解放後使用について注意が必要です。しかし、一部のAPI設計は、他の言語で書かれたコードに
+他よりも高い負担をかけます。
 
-The lowest risk API is the "consolidated wrapper", where all possible
-interactions with an object are folded into a "wrapper type", while keeping the
-Rust API clean.
+最もリスクの低いAPIは「統合ラッパー」で、オブジェクトとのすべての可能な相互作用が
+「ラッパー型」に折り込まれ、Rust APIをクリーンに保ちます。
 
-## Code Example
+## コード例
 
-To understand this, let us look at a classic example of an API to export:
-iteration through a collection.
+これを理解するために、エクスポートするAPIの典型的な例を見てみましょう：
+コレクションを通じた反復。
 
-That API looks like this:
+そのAPIは次のようになります：
 
-1. The iterator is initialized with `first_key`.
-2. Each call to `next_key` will advance the iterator.
-3. Calls to `next_key` if the iterator is at the end will do nothing.
-4. As noted above, the iterator is "wrapped into" the collection (unlike the
-   native Rust API).
+1. イテレータは`first_key`で初期化されます
+2. `next_key`への各呼び出しはイテレータを進めます
+3. イテレータが最後にある場合の`next_key`への呼び出しは何もしません
+4. 上記のように、イテレータはコレクションに「ラップされます」（ネイティブのRust APIとは異なります）
 
-If the iterator implements `nth()` efficiently, then it is possible to make it
-ephemeral to each function call:
+イテレータが`nth()`を効率的に実装している場合、各関数呼び出しに対してエフェメラルにすることができます：
 
 ```rust,ignore
 struct MySetWrapper {
@@ -59,69 +55,65 @@ impl MySetWrapper {
 }
 ```
 
-As a result, the wrapper is simple and contains no `unsafe` code.
+結果として、ラッパーはシンプルで、`unsafe`コードを含みません。
 
-## Advantages
+## 利点
 
-This makes APIs safer to use, avoiding issues with lifetimes between types. See
-[Object-Based APIs](./export.md) for more on the advantages and pitfalls this
-avoids.
+これにより、APIがより安全に使用でき、型間のライフタイムの問題を回避できます。
+これが回避する利点と落とし穴の詳細については、[オブジェクトベースのAPI](./export.md)を参照してください。
 
-## Disadvantages
+## 欠点
 
-Often, wrapping types is quite difficult, and sometimes a Rust API compromise
-would make things easier.
+多くの場合、型のラップは非常に困難であり、時にはRust APIの妥協が物事を簡単にすることがあります。
 
-As an example, consider an iterator which does not efficiently implement
-`nth()`. It would definitely be worth putting in special logic to make the
-object handle iteration internally, or to support a different access pattern
-efficiently that only the Foreign Function API will use.
+例として、`nth()`を効率的に実装しないイテレータを考えてください。
+オブジェクトが内部的に反復を処理するための特別なロジックを入れたり、
+外部関数APIのみが使用する異なるアクセスパターンを効率的にサポートしたりすることは、
+間違いなく価値があります。
 
-### Trying to Wrap Iterators (and Failing)
+### イテレータのラップを試みる（そして失敗する）
 
-To wrap any type of iterator into the API correctly, the wrapper would need to
-do what a C version of the code would do: erase the lifetime of the iterator,
-and manage it manually.
+任意の型のイテレータをAPIに正しくラップするには、ラッパーはCバージョンのコードが行うことを
+する必要があります：イテレータのライフタイムを消去し、手動で管理します。
 
-Suffice it to say, this is *incredibly* difficult.
+これが*信じられないほど*困難であることは言うまでもありません。
 
-Here is an illustration of just *one* pitfall.
+ここに、*1つの*落とし穴の説明があります。
 
-A first version of `MySetWrapper` would look like this:
+`MySetWrapper`の最初のバージョンは次のようになります：
 
 ```rust,ignore
 struct MySetWrapper {
     myset: MySet,
     iter_next: usize,
-    // created from a transmuted Box<KeysIter + 'self>
+    // Box<KeysIter + 'self>からtransmuteされて作成
     iterator: Option<NonNull<KeysIter<'static>>>,
 }
 ```
 
-With `transmute` being used to extend a lifetime, and a pointer to hide it, it's
-ugly already. But it gets even worse: *any other operation can cause Rust
-`undefined behaviour`*.
+`transmute`がライフタイムを延長するために使用され、ポインタがそれを隠すため、
+すでに醜いです。しかし、さらに悪くなります：*他の操作がRustの`未定義動作`を引き起こす可能性があります*。
 
-Consider that the `MySet` in the wrapper could be manipulated by other functions
-during iteration, such as storing a new value to the key it was iterating over.
-The API doesn't discourage this, and in fact some similar C libraries expect it.
+ラッパー内の`MySet`が、反復中に他の関数によって操作される可能性があることを考えてください。
+例えば、反復していたキーに新しい値を格納するなどです。
+APIはこれを抑制せず、実際、いくつかの類似のCライブラリはこれを期待しています。
 
-A simple implementation of `myset_store` would be:
+`myset_store`の単純な実装は次のようになります：
 
 ```rust,ignore
 pub mod unsafe_module {
 
-    // other module content
+    // 他のモジュールの内容
 
     pub fn myset_store(myset: *mut MySetWrapper, key: datum, value: datum) -> libc::c_int {
-        // DO NOT USE THIS CODE. IT IS UNSAFE TO DEMONSTRATE A PROBLEM.
+        // このコードを使用しないでください。問題を示すために安全でありません。
 
         let myset: &mut MySet = unsafe {
-            // SAFETY: whoops, UB occurs in here!
+            // SAFETY: おっと、ここでUBが発生します！
             &mut (*myset).myset
         };
 
-        /* ...check and cast key and value data... */
+        /* ...キーと値のデータをチェックしてキャスト... */
 
         match myset.store(casted_key, casted_value) {
             Ok(_) => 0,
@@ -131,30 +123,24 @@ pub mod unsafe_module {
 }
 ```
 
-If the iterator exists when this function is called, we have violated one of
-Rust's aliasing rules. According to Rust, the mutable reference in this block
-must have *exclusive* access to the object. If the iterator simply exists, it's
-not exclusive, so we have `undefined behaviour`! [^1]
+この関数が呼ばれたときにイテレータが存在する場合、Rustのエイリアシングルールの1つに違反しています。
+Rustによると、このブロック内の可変参照はオブジェクトへの*排他的*アクセスを持つ必要があります。
+イテレータが単に存在する場合、それは排他的ではないため、`未定義動作`があります！[^1]
 
-To avoid this, we must have a way of ensuring that mutable reference really is
-exclusive. That basically means clearing out the iterator's shared reference
-while it exists, and then reconstructing it. In most cases, that will still be
-less efficient than the C version.
+これを避けるには、可変参照が本当に排他的であることを保証する方法が必要です。
+これは基本的に、イテレータの共有参照が存在する間にそれをクリアし、その後再構築することを意味します。
+ほとんどの場合、それでもCバージョンよりも効率が悪くなります。
 
-Some may ask: how can C do this more efficiently? The answer is, it cheats.
-Rust's aliasing rules are the problem, and C simply ignores them for its
-pointers. In exchange, it is common to see code that is declared in the manual
-as "not thread safe" under some or all circumstances. In fact, the
-[GNU C library](https://manpages.debian.org/buster/manpages/attributes.7.en.html)
-has an entire lexicon dedicated to concurrent behavior!
+Cがこれをより効率的に行う方法を尋ねる人もいるでしょう。答えは、それがズルをするということです。
+Rustのエイリアシングルールが問題であり、Cは単にポインタに対してそれらを無視します。
+引き換えに、マニュアルで「スレッドセーフではない」と宣言されているコードを見ることがよくあります。
+実際、[GNU Cライブラリ](https://manpages.debian.org/buster/manpages/attributes.7.en.html)には、
+並行動作専用の用語集全体があります！
 
-Rust would rather make everything memory safe all the time, for both safety and
-optimizations that C code cannot attain. Being denied access to certain
-shortcuts is the price Rust programmers need to pay.
+Rustは、安全性とCコードが達成できない最適化の両方のために、すべてを常にメモリ安全にしたいと考えています。
+特定のショートカットへのアクセスを拒否されることは、Rustプログラマーが支払う必要がある代償です。
 
-[^1]: For the C programmers out there scratching their heads, the iterator need
-not be read *during* this code to cause the UB. The exclusivity rule also
-enables compiler optimizations which may cause inconsistent observations by the
-iterator's shared reference (e.g. stack spills or reordering instructions for
-efficiency). These observations may happen *any time after* the mutable
-reference is created.
+[^1]: 頭を掻いているCプログラマーの皆さんへ、UBを引き起こすためにこのコード*中*にイテレータを
+読み取る必要はありません。排他性ルールにより、イテレータの共有参照による一貫性のない観察を
+引き起こす可能性のあるコンパイラの最適化も可能になります（例：効率のためのスタックスピルや命令の並べ替え）。
+これらの観察は、可変参照が作成された*後のいつでも*発生する可能性があります。

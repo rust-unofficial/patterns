@@ -1,14 +1,13 @@
-# Visitor
+# ビジターパターン
 
-## Description
+## 説明
 
-A visitor encapsulates an algorithm that operates over a heterogeneous
-collection of objects. It allows multiple different algorithms to be written
-over the same data without having to modify the data (or their primary
-behaviour).
+ビジターは、異種のオブジェクトのコレクションに対して動作するアルゴリズムをカプセル化します。
+データ（またはその主要な動作）を変更することなく、同じデータに対して複数の異なるアルゴリズムを
+書くことができます。
 
-Furthermore, the visitor pattern allows separating the traversal of a collection
-of objects from the operations performed on each object.
+さらに、ビジターパターンは、オブジェクトのコレクションの走査と
+各オブジェクトに対して実行される操作を分離することを可能にします。
 
 ## Example
 
@@ -68,23 +67,22 @@ impl Visitor<i64> for Interpreter {
 }
 ```
 
-One could implement further visitors, for example a type checker, without having
-to modify the AST data.
+ASTデータを変更することなく、例えば型チェッカーなどの追加のビジターを実装することができます。
 
-## Motivation
+## 動機
 
-The visitor pattern is useful anywhere that you want to apply an algorithm to
-heterogeneous data. If data is homogeneous, you can use an iterator-like
-pattern. Using a visitor object (rather than a functional approach) allows the
-visitor to be stateful and thus communicate information between nodes.
+ビジターパターンは、異種データにアルゴリズムを適用したい場合に有用です。
+データが同種の場合は、イテレータのようなパターンを使用できます。
+（関数型アプローチではなく）ビジターオブジェクトを使用することで、
+ビジターがステートフルになり、ノード間で情報を通信できます。
 
-## Discussion
+## 議論
 
-It is common for the `visit_*` methods to return void (as opposed to in the
-example). In that case it is possible to factor out the traversal code and share
-it between algorithms (and also to provide noop default methods). In Rust, the
-common way to do this is to provide `walk_*` functions for each datum. For
-example,
+`visit_*`メソッドがvoidを返すことが一般的です（例とは対照的に）。
+その場合、走査コードを分離してアルゴリズム間で共有することが可能になります
+（また、noop デフォルトメソッドを提供することも可能です）。
+Rustでは、各データに対して`walk_*`関数を提供することが一般的な方法です。
+例えば：
 
 ```rust,ignore
 pub fn walk_expr(visitor: &mut Visitor, e: &Expr) {
@@ -102,14 +100,13 @@ pub fn walk_expr(visitor: &mut Visitor, e: &Expr) {
 }
 ```
 
-In other languages (e.g., Java) it is common for data to have an `accept` method
-which performs the same duty.
+他の言語（例：Java）では、データが同じ役割を果たす`accept`メソッドを持つことが一般的です。
 
-## See also
+## 参照
 
-The visitor pattern is a common pattern in most OO languages.
+ビジターパターンは、ほとんどのOO言語で共通のパターンです。
 
-[Wikipedia article](https://en.wikipedia.org/wiki/Visitor_pattern)
+[Wikipedia記事](https://en.wikipedia.org/wiki/Visitor_pattern)
 
-The [fold](../creational/fold.md) pattern is similar to visitor but produces a
-new version of the visited data structure.
+[fold](../creational/fold.md)パターンはビジターに似ていますが、
+訪問されたデータ構造の新しいバージョンを生成します。

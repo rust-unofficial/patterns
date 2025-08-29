@@ -1,18 +1,17 @@
 # Fold
 
-## Description
+## 説明
 
-Run an algorithm over each item in a collection of data to create a new item,
-thus creating a whole new collection.
+データのコレクション内の各アイテムに対してアルゴリズムを実行して新しいアイテムを作成し、
+それによって全く新しいコレクションを作成します。
 
-The etymology here is unclear to me. The terms 'fold' and 'folder' are used in
-the Rust compiler, although it appears to me to be more like a map than a fold
-in the usual sense. See the discussion below for more details.
+ここでの語源は私には不明です。「fold」と「folder」という用語はRustコンパイラで使用されていますが、
+通常の意味でのfoldよりもmapに近いように見えます。詳細については以下の議論を参照してください。
 
-## Example
+## 例
 
 ```rust,ignore
-// The data we will fold, a simple AST.
+// foldするデータ、単純なAST
 mod ast {
     pub enum Stmt {
         Expr(Box<Expr>),
@@ -30,15 +29,15 @@ mod ast {
     }
 }
 
-// The abstract folder
+// 抽象folder
 mod fold {
     use ast::*;
 
     pub trait Folder {
-        // A leaf node just returns the node itself. In some cases, we can do this
-        // to inner nodes too.
+        // リーフノードは単にノード自体を返します。場合によっては、
+        // 内部ノードに対してもこれを行うことができます。
         fn fold_name(&mut self, n: Box<Name>) -> Box<Name> { n }
-        // Create a new inner node by folding its children.
+        // 子をfoldすることで新しい内部ノードを作成します。
         fn fold_stmt(&mut self, s: Box<Stmt>) -> Box<Stmt> {
             match *s {
                 Stmt::Expr(e) => Box::new(Stmt::Expr(self.fold_expr(e))),
@@ -52,71 +51,64 @@ mod fold {
 use fold::*;
 use ast::*;
 
-// An example concrete implementation - renames every name to 'foo'.
+// 具体的な実装例 - すべての名前を'foo'に変更します。
 struct Renamer;
 impl Folder for Renamer {
     fn fold_name(&mut self, n: Box<Name>) -> Box<Name> {
         Box::new(Name { value: "foo".to_owned() })
     }
-    // Use the default methods for the other nodes.
+    // 他のノードにはデフォルトメソッドを使用します。
 }
 ```
 
-The result of running the `Renamer` on an AST is a new AST identical to the old
-one, but with every name changed to `foo`. A real life folder might have some
-state preserved between nodes in the struct itself.
+AST上で`Renamer`を実行した結果は、古いものと同一の新しいASTですが、
+すべての名前が`foo`に変更されています。実際のfolderは、構造体自体にノード間で
+保持される状態を持つかもしれません。
 
-A folder can also be defined to map one data structure to a different (but
-usually similar) data structure. For example, we could fold an AST into a HIR
-tree (HIR stands for high-level intermediate representation).
+folderは、あるデータ構造を異なる（しかし通常は類似した）データ構造にマップするように
+定義することもできます。例えば、ASTをHIRツリーにfoldできます
+（HIRは高レベル中間表現の略です）。
 
-## Motivation
+## 動機
 
-It is common to want to map a data structure by performing some operation on
-each node in the structure. For simple operations on simple data structures,
-this can be done using `Iterator::map`. For more complex operations, perhaps
-where earlier nodes can affect the operation on later nodes, or where iteration
-over the data structure is non-trivial, using the fold pattern is more
-appropriate.
+構造内の各ノードに対して何らかの操作を実行してデータ構造をマップしたいというのは一般的です。
+単純なデータ構造に対する単純な操作の場合、これは`Iterator::map`を使用して実行できます。
+より複雑な操作、おそらく以前のノードが後のノードの操作に影響を与える場合、
+またはデータ構造に対する反復が自明でない場合は、foldパターンを使用する方が適切です。
 
-Like the visitor pattern, the fold pattern allows us to separate traversal of a
-data structure from the operations performed to each node.
+ビジターパターンと同様に、foldパターンにより、データ構造の走査と各ノードに対して実行される
+操作を分離できます。
 
-## Discussion
+## 議論
 
-Mapping data structures in this fashion is common in functional languages. In OO
-languages, it would be more common to mutate the data structure in place. The
-'functional' approach is common in Rust, mostly due to the preference for
-immutability. Using fresh data structures, rather than mutating old ones, makes
-reasoning about the code easier in most circumstances.
+この方法でデータ構造をマッピングすることは、関数型言語では一般的です。
+OO言語では、データ構造をその場で変更する方が一般的です。
+「関数型」アプローチはRustでは一般的であり、主に不変性を好むためです。
+古いデータ構造を変更するのではなく、新しいデータ構造を使用すると、
+ほとんどの状況でコードの推論が容易になります。
 
-The trade-off between efficiency and reusability can be tweaked by changing how
-nodes are accepted by the `fold_*` methods.
+効率性と再利用性のトレードオフは、`fold_*`メソッドがノードを受け入れる方法を
+変更することで調整できます。
 
-In the above example we operate on `Box` pointers. Since these own their data
-exclusively, the original copy of the data structure cannot be re-used. On the
-other hand if a node is not changed, reusing it is very efficient.
+上記の例では、`Box`ポインタで操作しています。これらはデータを排他的に所有するため、
+データ構造の元のコピーは再利用できません。一方、ノードが変更されない場合、
+それを再利用することは非常に効率的です。
 
-If we were to operate on borrowed references, the original data structure can be
-reused; however, a node must be cloned even if unchanged, which can be
-expensive.
+借用参照で操作する場合、元のデータ構造を再利用できます。
+ただし、変更されない場合でもノードをクローンする必要があり、これは高価になる可能性があります。
 
-Using a reference counted pointer gives the best of both worlds - we can reuse
-the original data structure, and we don't need to clone unchanged nodes.
-However, they are less ergonomic to use and mean that the data structures cannot
-be mutable.
+参照カウントポインタを使用すると、両方の長所が得られます - 元のデータ構造を再利用でき、
+変更されないノードをクローンする必要がありません。ただし、使用するのが人間工学的でなく、
+データ構造が可変にできないことを意味します。
 
-## See also
+## 参照
 
-Iterators have a `fold` method, however this folds a data structure into a
-value, rather than into a new data structure. An iterator's `map` is more like
-this fold pattern.
+イテレータには`fold`メソッドがありますが、これはデータ構造を新しいデータ構造ではなく
+値にfoldします。イテレータの`map`は、このfoldパターンに似ています。
 
-In other languages, fold is usually used in the sense of Rust's iterators,
-rather than this pattern. Some functional languages have powerful constructs for
-performing flexible maps over data structures.
+他の言語では、foldは通常、このパターンではなく、Rustのイテレータの意味で使用されます。
+一部の関数型言語には、データ構造に対して柔軟なマップを実行するための強力な構造があります。
 
-The [visitor](../behavioural/visitor.md) pattern is closely related to fold.
-They share the concept of walking a data structure performing an operation on
-each node. However, the visitor does not create a new data structure nor consume
-the old one.
+[ビジター](../behavioural/visitor.md)パターンはfoldと密接に関連しています。
+これらは、各ノードで操作を実行してデータ構造を走査するという概念を共有しています。
+ただし、ビジターは新しいデータ構造を作成せず、古いものを消費しません。

@@ -1,18 +1,18 @@
-# Error Handling in FFI
+# FFIでのエラーハンドリング
 
-## Description
+## 説明
 
-In foreign languages like C, errors are represented by return codes. However,
-Rust's type system allows much more rich error information to be captured and
-propagated through a full type.
+Cのような外部言語では、エラーはリターンコードで表現されます。しかし、
+Rustの型システムは、はるかに豊かなエラー情報をキャプチャし、
+完全な型を通じて伝播することを可能にします。
 
-This best practice shows different kinds of error codes, and how to expose them
-in a usable way:
+このベストプラクティスは、異なる種類のエラーコードと、それらを
+使いやすい方法で公開する方法を示します：
 
-1. Flat Enums should be converted to integers and returned as codes.
-2. Structured Enums should be converted to an integer code with a string error
-   message for detail.
-3. Custom Error Types should become "transparent", with a C representation.
+1. フラットなEnumは整数に変換し、コードとして返すべきです。
+2. 構造化されたEnumは、詳細のための文字列エラーメッセージを伴う
+   整数コードに変換すべきです。
+3. カスタムエラー型は「透明」にし、C表現を持つべきです。
 
 ## Code Example
 
@@ -20,9 +20,9 @@ in a usable way:
 
 ```rust,ignore
 enum DatabaseError {
-    IsReadOnly = 1,    // user attempted a write operation
-    IOError = 2,       // user should read the C errno() for what it was
-    FileCorrupted = 3, // user should run a repair tool to recover it
+    IsReadOnly = 1,    // ユーザーが書き込み操作を試行
+    IOError = 2,       // ユーザーはそれが何であったかをCのerrno()で読むべき
+    FileCorrupted = 3, // ユーザーは修復ツールを実行して復旧すべき
 }
 
 impl From<DatabaseError> for libc::c_int {
@@ -39,7 +39,7 @@ pub mod errors {
     enum DatabaseError {
         IsReadOnly,
         IOError(std::io::Error),
-        FileCorrupted(String), // message describing the issue
+        FileCorrupted(String), // 問題を説明するメッセージ
     }
 
     impl From<DatabaseError> for libc::c_int {
@@ -61,27 +61,27 @@ pub mod c_api {
     pub extern "C" fn db_error_description(
         e: Option<ptr::NonNull<DatabaseError>>,
     ) -> Option<ptr::NonNull<libc::c_char>> {
-        // SAFETY: we assume that the lifetime of `e` is greater than
-        // the current stack frame.
+        // SAFETY: `e`のライフタイムが現在のスタックフレームよりも
+        // 長いことを仮定しています。
         let error = unsafe { e?.as_ref() };
 
         let error_str: String = match error {
             DatabaseError::IsReadOnly => {
-                format!("cannot write to read-only database")
+                format!("読み取り専用データベースに書き込めません")
             }
             DatabaseError::IOError(e) => {
                 format!("I/O Error: {e}")
             }
             DatabaseError::FileCorrupted(s) => {
-                format!("File corrupted, run repair: {}", &s)
+                format!("ファイルが破損しています、修復を実行してください: {}", &s)
             }
         };
 
         let error_bytes = error_str.as_bytes();
 
         let c_error = unsafe {
-            // SAFETY: copying error_bytes to an allocated buffer with a '\0'
-            // byte at the end.
+            // SAFETY: error_bytesを末尾に'\0'バイトを持つ
+            // 割り当てられたバッファにコピー。
             let buffer = ptr::NonNull::<u8>::new(libc::malloc(error_bytes.len() + 1).cast())?;
 
             buffer
@@ -109,7 +109,7 @@ impl ParseError {
     /* ... */
 }
 
-/* Create a second version which is exposed as a C structure */
+/* C構造体として公開される2番目のバージョンを作成 */
 #[repr(C)]
 pub struct parse_error {
     pub expected: libc::c_char,
@@ -125,12 +125,12 @@ impl From<ParseError> for parse_error {
 }
 ```
 
-## Advantages
+## 利点
 
-This ensures that the foreign language has clear access to error information
-while not compromising the Rust code's API at all.
+これはRustコードのAPIを全く損なうことなく、外部言語がエラー情報に
+明確にアクセスできることを保証します。
 
-## Disadvantages
+## 欠点
 
-It's a lot of typing, and some types may not be able to be converted easily to
-C.
+多くのタイピングが必要であり、一部の型はCに簡単に変換できない可能性が
+あります。

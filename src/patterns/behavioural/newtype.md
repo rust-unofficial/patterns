@@ -1,19 +1,16 @@
-# Newtype
+# ニュータイプパターン
 
-What if in some cases we want a type to behave similar to another type or
-enforce some behaviour at compile time when using only type aliases would not be
-enough?
+場合によっては、型が別の型と同じように動作することを求めたり、
+型エイリアスを使用するだけでは不十分な場合にコンパイル時に特定の動作を強制したりしたいことがあります。
 
-For example, if we want to create a custom `Display` implementation for `String`
-due to security considerations (e.g. passwords).
+例えば、セキュリティ上の考慮事項（例：パスワード）のために`String`に対してカスタムの`Display`実装を作成したい場合などです。
 
-For such cases we could use the `Newtype` pattern to provide **type safety** and
-**encapsulation**.
+そのような場合、**型安全性**と**カプセル化**を提供するために`Newtype`パターンを使用できます。
 
-## Description
+## 説明
 
-Use a tuple struct with a single field to make an opaque wrapper for a type.
-This creates a new type, rather than an alias to a type (`type` items).
+単一のフィールドを持つタプル構造体を使用して、型の不透明なラッパーを作成します。
+これは、型へのエイリアス（`type`項目）ではなく、新しい型を作成します。
 
 ## Example
 
@@ -42,60 +39,56 @@ unsecured_password: ThisIsMyPassword
 secured_password: ****************
 ```
 
-## Motivation
+## 動機
 
-The primary motivation for newtypes is abstraction. It allows you to share
-implementation details between types while precisely controlling the interface.
-By using a newtype rather than exposing the implementation type as part of an
-API, it allows you to change implementation backwards compatibly.
+ニュータイプの主要な動機は抽象化です。インターフェースを正確に制御しながら、
+型間で実装の詳細を共有することができます。
+APIの一部として実装型を公開するのではなく、ニュータイプを使用することで、
+後方互換性を保って実装を変更できます。
 
-Newtypes can be used for distinguishing units, e.g., wrapping `f64` to give
-distinguishable `Miles` and `Kilometres`.
+ニュータイプは単位の区別に使用できます。例えば、`f64`をラップして
+区別可能な`Miles`と`Kilometres`を提供することができます。
 
-## Advantages
+## 利点
 
-The wrapped and wrapper types are not type compatible (as opposed to using
-`type`), so users of the newtype will never 'confuse' the wrapped and wrapper
-types.
+ラップされた型とラッパー型は型互換性がない（`type`を使用するのとは対照的に）ため、
+ニュータイプのユーザーはラップされた型とラッパー型を「混同」することはありません。
 
-Newtypes are a zero-cost abstraction - there is no runtime overhead.
+ニュータイプはゼロコスト抽象化です - 実行時のオーバーヘッドはありません。
 
-The privacy system ensures that users cannot access the wrapped type (if the
-field is private, which it is by default).
+プライバシーシステムにより、ユーザーはラップされた型にアクセスできません
+（フィールドがプライベートの場合、デフォルトでそうなります）。
 
-## Disadvantages
+## 欠点
 
-The downside of newtypes (especially compared with type aliases), is that there
-is no special language support. This means there can be *a lot* of boilerplate.
-You need a 'pass through' method for every method you want to expose on the
-wrapped type, and an impl for every trait you want to also be implemented for
-the wrapper type.
+ニュータイプの欠点（特に型エイリアスと比較して）は、特別な言語サポートがないことです。
+これは*多くの*ボイラープレートが存在する可能性があることを意味します。
+ラップされた型で公開したいすべてのメソッドに対して「パススルー」メソッドが必要であり、
+ラッパー型でも実装したいすべてのトレイトに対してimplが必要です。
 
-## Discussion
+## 議論
 
-Newtypes are very common in Rust code. Abstraction or representing units are the
-most common uses, but they can be used for other reasons:
+ニュータイプはRustコードで非常に一般的です。抽象化や単位の表現が最も一般的な用途ですが、
+他の理由でも使用できます：
 
-- restricting functionality (reduce the functions exposed or traits
-  implemented),
-- making a type with copy semantics have move semantics,
-- abstraction by providing a more concrete type and thus hiding internal types,
-  e.g.,
+- 機能の制限（公開される関数や実装されるトレイトを減らす）
+- コピーセマンティクスを持つ型にムーブセマンティクスを持たせる
+- より具体的な型を提供して内部型を隠すことによる抽象化、例：
 
 ```rust,ignore
 pub struct Foo(Bar<T1, T2>);
 ```
 
-Here, `Bar` might be some public, generic type and `T1` and `T2` are some
-internal types. Users of our module shouldn't know that we implement `Foo` by
-using a `Bar`, but what we're really hiding here is the types `T1` and `T2`, and
-how they are used with `Bar`.
+ここで、`Bar`は何らかのパブリックなジェネリック型であり、
+`T1`と`T2`は内部型です。私たちのモジュールのユーザーは、
+`Bar`を使用して`Foo`を実装していることを知る必要はありませんが、
+ここで実際に隠しているのは型`T1`と`T2`、
+そしてそれらが`Bar`でどのように使用されるかです。
 
-## See also
+## 参照
 
-- [Advanced Types in the book](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
-- [Newtypes in Haskell](https://wiki.haskell.org/Newtype)
-- [Type aliases](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
-- [derive_more](https://crates.io/crates/derive_more), a crate for deriving many
-  builtin traits on newtypes.
-- [The Newtype Pattern In Rust](https://web.archive.org/web/20230519162111/https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)
+- [書籍の高度な型](https://doc.rust-lang.org/book/ch19-04-advanced-types.html?highlight=newtype#using-the-newtype-pattern-for-type-safety-and-abstraction)
+- [HaskellのNewtypes](https://wiki.haskell.org/Newtype)
+- [型エイリアス](https://doc.rust-lang.org/stable/book/ch19-04-advanced-types.html#creating-type-synonyms-with-type-aliases)
+- [derive_more](https://crates.io/crates/derive_more)、ニュータイプに多くの組み込みトレイトを派生するためのクレート。
+- [RustのNewtype Pattern](https://web.archive.org/web/20230519162111/https://www.worthe-it.co.za/blog/2020-10-31-newtype-pattern-in-rust.html)

@@ -1,8 +1,7 @@
 # mdBook
 
-This directory contains files copied from mdBook. Please see
-<https://github.com/rust-lang/mdBook/> for the full project.
+このディレクトリには、mdBookからコピーされたファイルが含まれています。完全なプロジェクトについては、<https://github.com/rust-lang/mdBook/>を参照してください。
 
-## License
+## ライセンス
 
-mdBook is licensed under the Mozilla Public License v2.0 ([LICENSE](LICENSE)).
+mdBookはMozilla Public License v2.0（[LICENSE](LICENSE)）の下でライセンスされています。

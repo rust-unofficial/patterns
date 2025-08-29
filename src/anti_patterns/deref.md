@@ -1,14 +1,13 @@
-# `Deref` polymorphism
+# `Deref`ポリモーフィズム
 
-## Description
+## 説明
 
-Misuse the `Deref` trait to emulate inheritance between structs, and thus reuse
-methods.
+構造体間の継承をエミュレートするために`Deref`トレイトを誤用し、
+メソッドを再利用します。
 
-## Example
+## 例
 
-Sometimes we want to emulate the following common pattern from OO languages such
-as Java:
+時々、Javaのような　OO言語の以下の一般的なパターンをエミュレートしたいと思うことがあります：
 
 ```java
 class Foo {
@@ -23,7 +22,7 @@ public static void main(String[] args) {
 }
 ```
 
-We can use the deref polymorphism anti-pattern to do so:
+derefポリモーフィズムアンチパターンを使用してこれを行うことができます：
 
 ```rust
 use std::ops::Deref;
@@ -53,22 +52,19 @@ fn main() {
 }
 ```
 
-There is no struct inheritance in Rust. Instead we use composition and include
-an instance of `Foo` in `Bar` (since the field is a value, it is stored inline,
-so if there were fields, they would have the same layout in memory as the Java
-version (probably, you should use `#[repr(C)]` if you want to be sure)).
+Rustには構造体継承がありません。代わりに、コンポジションを使用して`Bar`に`Foo`のインスタンスを含めます
+（フィールドが値であるため、インラインで格納されるので、フィールドがあれば、
+Javaバージョンと同じメモリレイアウトを持つでしょう（おそらく、確実にしたければ`#[repr(C)]`を使用すべきです））。
 
-In order to make the method call work we implement `Deref` for `Bar` with `Foo`
-as the target (returning the embedded `Foo` field). That means that when we
-dereference a `Bar` (for example, using `*`) then we will get a `Foo`. That is
-pretty weird. Dereferencing usually gives a `T` from a reference to `T`, here we
-have two unrelated types. However, since the dot operator does implicit
-dereferencing, it means that the method call will search for methods on `Foo` as
-well as `Bar`.
+メソッド呼び出しを機能させるために、`Foo`をターゲットとして`Bar`に`Deref`を実装します
+（埋め込まれた`Foo`フィールドを返します）。これは、`Bar`を逆参照すると（例えば、`*`を使用）、
+`Foo`を取得することを意味します。これはかなり奇妙です。
+通常、逆参照は`T`への参照から`T`を与えますが、ここでは関連のない2つの型があります。
+しかし、ドット演算子は暗黙的な逆参照を行うため、メソッド呼び出しは`Bar`だけでなく`Foo`のメソッドも検索することを意味します。
 
-## Advantages
+## 利点
 
-You save a little boilerplate, e.g.,
+少しのボイラープレートを節約できます。例：
 
 ```rust,ignore
 impl Bar {
@@ -78,53 +74,46 @@ impl Bar {
 }
 ```
 
-## Disadvantages
+## 欠点
 
-Most importantly this is a surprising idiom - future programmers reading this in
-code will not expect this to happen. That's because we are misusing the `Deref`
-trait rather than using it as intended (and documented, etc.). It's also because
-the mechanism here is completely implicit.
+最も重要なことは、これは驚くべきイディオムであることです - 
+将来このコードを読むプログラマーは、これが起こることを期待しないでしょう。
+それは、意図された（そして文書化された）通りに使用するのではなく、
+`Deref`トレイトを誤用しているからです。また、ここでのメカニズムが完全に暗黙的だからでもあります。
 
-This pattern does not introduce subtyping between `Foo` and `Bar` like
-inheritance in Java or C++ does. Furthermore, traits implemented by `Foo` are
-not automatically implemented for `Bar`, so this pattern interacts badly with
-bounds checking and thus generic programming.
+このパターンは、JavaやC++の継承のように`Foo`と`Bar`間のサブタイピングを導入しません。
+さらに、`Foo`によって実装されたトレイトは`Bar`に自動的に実装されないため、
+このパターンは境界チェックと悪い相互作用をし、したがってジェネリックプログラミングに影響を与えます。
 
-Using this pattern gives subtly different semantics from most OO languages with
-regards to `self`. Usually it remains a reference to the sub-class, with this
-pattern it will be the 'class' where the method is defined.
+このパターンを使用すると、`self`に関してほとんどのOO言語とは微妙に異なるセマンティクスを与えます。
+通常はサブクラスへの参照のままですが、このパターンではメソッドが定義される「クラス」になります。
 
-Finally, this pattern only supports single inheritance, and has no notion of
-interfaces, class-based privacy, or other inheritance-related features. So, it
-gives an experience that will be subtly surprising to programmers used to Java
-inheritance, etc.
+最後に、このパターンは単一継承のみをサポートし、インターフェース、クラスベースのプライバシー、
+その他の継承関連機能の概念がありません。したがって、Java継承などに慣れたプログラマーには
+微妙に驚くべき経験を与えます。
 
-## Discussion
+## 議論
 
-There is no one good alternative. Depending on the exact circumstances it might
-be better to re-implement using traits or to write out the facade methods to
-dispatch to `Foo` manually. We do intend to add a mechanism for inheritance
-similar to this to Rust, but it is likely to be some time before it reaches
-stable Rust. See these [blog](http://aturon.github.io/blog/2015/09/18/reuse/)
-[posts](http://smallcultfollowing.com/babysteps/blog/2015/10/08/virtual-structs-part-4-extended-enums-and-thin-traits/)
-and this [RFC issue](https://github.com/rust-lang/rfcs/issues/349) for more
-details.
+一つの良い代替案はありません。正確な状況によっては、
+トレイトを使用して再実装するか、`Foo`に手動でディスパッチするファサードメソッドを書き出す方が良いかもしれません。
+これに似た継承メカニズムをRustに追加する意図はありますが、
+安定版Rustに到達するまでにはしばらく時間がかかりそうです。詳細については、
+これらの[ブログ](http://aturon.github.io/blog/2015/09/18/reuse/)
+[記事](http://smallcultfollowing.com/babysteps/blog/2015/10/08/virtual-structs-part-4-extended-enums-and-thin-traits/)
+およびこの[RFC issue](https://github.com/rust-lang/rfcs/issues/349)を参照してください。
 
-The `Deref` trait is designed for the implementation of custom pointer types.
-The intention is that it will take a pointer-to-`T` to a `T`, not convert
-between different types. It is a shame that this isn't (probably cannot be)
-enforced by the trait definition.
+`Deref`トレイトは、カスタムポインタ型の実装のために設計されています。
+意図は、`T`へのポインタを`T`に変換することであり、異なる型間の変換ではありません。
+これがトレイト定義によって強制されない（おそらくできない）のは残念です。
 
-Rust tries to strike a careful balance between explicit and implicit mechanisms,
-favouring explicit conversions between types. Automatic dereferencing in the dot
-operator is a case where the ergonomics strongly favour an implicit mechanism,
-but the intention is that this is limited to degrees of indirection, not
-conversion between arbitrary types.
+Rustは、明示的および暗黙的メカニズム間の慎重なバランスを取ろうとし、
+型間の明示的変換を好みます。ドット演算子での自動逆参照は、
+人間工学が暗黙的メカニズムを強く好む場合ですが、
+意図は、これが間接化の度合いに限定され、任意の型間の変換ではないということです。
 
-## See also
+## 参照
 
-- [Collections are smart pointers idiom](../idioms/deref.md).
-- Delegation crates for less boilerplate like
-  [delegate](https://crates.io/crates/delegate) or
-  [ambassador](https://crates.io/crates/ambassador)
-- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
+- [コレクションはスマートポインタイディオム](../idioms/deref.md)。
+- [delegate](https://crates.io/crates/delegate)や
+  [ambassador](https://crates.io/crates/ambassador)などの少ないボイラープレートのための委譲クレート
+- [`Deref`トレイトのドキュメント](https://doc.rust-lang.org/std/ops/trait.Deref.html)。

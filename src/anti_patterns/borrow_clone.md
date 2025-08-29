@@ -1,70 +1,65 @@
-# Clone to satisfy the borrow checker
+# 借用チェッカーを満たすためのクローン
 
-## Description
+## 説明
 
-The borrow checker prevents Rust users from developing otherwise unsafe code by
-ensuring that either: only one mutable reference exists, or potentially many but
-all immutable references exist. If the code written does not hold true to these
-conditions, this anti-pattern arises when the developer resolves the compiler
-error by cloning the variable.
+借用チェッカーは、「変更可能な参照が1つだけ存在する」か、
+「潜在的に多くの不変参照が存在する」のいずれかを確保することで、
+Rustユーザーが本来なら安全でないコードを開発するのを防ぎます。
+書かれたコードがこれらの条件に従わない場合、
+開発者が変数をクローンすることでコンパイラエラーを解決するときに、
+このアンチパターンが生じます。
 
-## Example
+## 例
 
 ```rust
-// define any variable
+// 任意の変数を定義
 let mut x = 5;
 
-// Borrow `x` -- but clone it first
+// `x` を借用する -- しかし最初にクローンする
 let y = &mut (x.clone());
 
-// without the x.clone() two lines prior, this line would fail on compile as
-// x has been borrowed
-// thanks to x.clone(), x was never borrowed, and this line will run.
+// 2行前のx.clone()がなければ、この行はコンパイル時に失敗する
+// x が借用されているため
+// x.clone()のおかげで、x は決して借用されず、この行は実行される
 println!("{x}");
 
-// perform some action on the borrow to prevent rust from optimizing this
-//out of existence
+// Rustがこれを最適化で除去するのを防ぐために、借用に対して何らかのアクションを実行
 *y += 1;
 ```
 
-## Motivation
+## 動機
 
-It is tempting, particularly for beginners, to use this pattern to resolve
-confusing issues with the borrow checker. However, there are serious
-consequences. Using `.clone()` causes a copy of the data to be made. Any changes
-between the two are not synchronized -- as if two completely separate variables
-exist.
+特に初心者にとって、借用チェッカーとの混乱する問題を解決するために
+このパターンを使用することは誘惑的です。しかし、深刻な結果があります。
+`.clone()`を使用すると、データのコピーが作成されます。
+2つの間での変更は同期されません -- まるで完全に別々の変数が存在するかのようです。
 
-There are special cases -- `Rc<T>` is designed to handle clones intelligently.
-It internally manages exactly one copy of the data. Invoking `.clone()` on `Rc`
-produces a new `Rc` instance, which points to the same data as the source `Rc`,
-while increasing a reference count. The same applies to `Arc`, the thread-safe
-counterpart of `Rc`.
+特別なケース -- `Rc<T>`はクローンをインテリジェントに処理するように設計されています。
+内部的に正確にデータの1つのコピーを管理します。`Rc`に対して`.clone()`を呼び出すと、
+参照カウントを増やしながら、ソース`Rc`と同じデータを指す新しい`Rc`インスタンスが生成されます。
+同じことが、`Rc`のスレッドセーフな対応物である`Arc`にも適用されます。
 
-In general, clones should be deliberate, with full understanding of the
-consequences. If a clone is used to make a borrow checker error disappear,
-that's a good indication this anti-pattern may be in use.
+一般的に、クローンは意図的であるべきで、結果を完全に理解した上で行うべきです。
+借用チェッカーエラーを消すためにクローンが使用される場合、
+それはこのアンチパターンが使用されている可能性がある良い兆候です。
 
-Even though `.clone()` is an indication of a bad pattern, sometimes **it is fine
-to write inefficient code**, in cases such as when:
+`.clone()`は悪いパターンの兆候であっても、以下のような場合に
+**非効率的なコードを書くことは問題ありません**：
 
-- the developer is still new to ownership
-- the code doesn't have great speed or memory constraints (like hackathon
-  projects or prototypes)
-- satisfying the borrow checker is really complicated, and you prefer to
-  optimize readability over performance
+- 開発者が所有権にまだ慣れていない
+- コードに大きな速度やメモリの制約がない（ハッカソンプロジェクトやプロトタイプなど）
+- 借用チェッカーを満足させることが本当に複雑で、パフォーマンスよりも可読性を最適化したい
 
-If an unnecessary clone is suspected, The
-[Rust Book's chapter on Ownership](https://doc.rust-lang.org/book/ownership.html)
-should be understood fully before assessing whether the clone is required or
-not.
+不要なクローンが疑われる場合、
+[Rust Bookの所有権に関する章](https://doc.rust-lang.org/book/ownership.html)
+を、クローンが必要かどうかを評価する前に完全に理解する必要があります。
 
-Also be sure to always run `cargo clippy` in your project, which will detect
-some cases in which `.clone()` is not necessary.
+また、プロジェクトで常に`cargo clippy`を実行することを確認してください。
+これは`.clone()`が不要な場合を検出します。
 
-## See also
+## 参照
 
-- [`mem::{take(_), replace(_)}` to keep owned values in changed enums](../idioms/mem-replace.md)
-- [`Rc<T>` documentation, which handles .clone() intelligently](http://doc.rust-lang.org/std/rc/)
-- [`Arc<T>` documentation, a thread-safe reference-counting pointer](https://doc.rust-lang.org/std/sync/struct.Arc.html)
-- [Tricks with ownership in Rust](https://web.archive.org/web/20210120233744/https://xion.io/post/code/rust-borrowchk-tricks.html)
+- [`mem::{take(_), replace(_)}` で変更されたenumで所有される値を保持する](../idioms/mem-replace.md)
+- [`Rc<T>` ドキュメント、.clone()をインテリジェントに処理する](http://doc.rust-lang.org/std/rc/)
+- [`Arc<T>` ドキュメント、スレッドセーフな参照カウントポインタ](https://doc.rust-lang.org/std/sync/struct.Arc.html)
+- [Rustでの所有権のトリック](https://web.archive.org/web/20210120233744/https://xion.io/post/code/rust-borrowchk-tricks.html)

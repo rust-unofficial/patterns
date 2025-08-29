@@ -1,6 +1,5 @@
-# Structural Patterns
+# 構造パターン
 
-From [Wikipedia](https://en.wikipedia.org/wiki/Structural_pattern):
+[Wikipedia](https://en.wikipedia.org/wiki/Structural_pattern)より：
 
-> Design patterns that ease the design by identifying a simple way to realize
-> relationships among entities.
+> エンティティ間の関係を実現する簡単な方法を特定することで設計を容易にするデザインパターン。

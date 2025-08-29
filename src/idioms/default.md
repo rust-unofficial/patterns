@@ -1,52 +1,50 @@
-# The `Default` Trait
+# `Default`トレイト
 
-## Description
+## 説明
 
-Many types in Rust have a [constructor]. However, this is *specific* to the
-type; Rust cannot abstract over "everything that has a `new()` method". To allow
-this, the [`Default`] trait was conceived, which can be used with containers and
-other generic types (e.g. see [`Option::unwrap_or_default()`]). Notably, some
-containers already implement it where applicable.
+Rustの多くの型は[コンストラクタ][constructor]を持ちます。しかし、これはその型に*固有*です。
+Rustは「`new()`メソッドを持つすべてのもの」で抽象化することはできません。これを可能にするために、
+[`Default`]トレイトが考案されました。これはコンテナやその他のジェネリック型で使用できます
+（例：[`Option::unwrap_or_default()`]を参照）。特に、一部のコンテナは該当する場合にすでに実装しています。
 
-Not only do one-element containers like `Cow`, `Box` or `Arc` implement
-`Default` for contained `Default` types, one can automatically
-`#[derive(Default)]` for structs whose fields all implement it, so the more
-types implement `Default`, the more useful it becomes.
+`Cow`、`Box`、`Arc`などの単一要素コンテナが含まれる`Default`型に対して`Default`を実装するだけでなく、
+すべてのフィールドが実装している構造体に対して自動的に`#[derive(Default)]`を行うことができるため、
+より多くの型が`Default`を実装するほど、より有用になります。
 
-On the other hand, constructors can take multiple arguments, while the
-`default()` method does not. There can even be multiple constructors with
-different names, but there can only be one `Default` implementation per type.
+一方、コンストラクタは複数の引数を取ることができますが、`default()`メソッドはできません。
+異なる名前を持つ複数のコンストラクタが存在することもありますが、一つの型につき
+`Default`実装は一つだけです。
 
 ## Example
 
 ```rust
 use std::{path::PathBuf, time::Duration};
 
-// note that we can simply auto-derive Default here.
+// ここでは単純にDefaultを自動導出できることに注意してください。
 #[derive(Default, Debug, PartialEq)]
 struct MyConfiguration {
-    // Option defaults to None
+    // OptionはデフォルトでNone
     output: Option<PathBuf>,
-    // Vecs default to empty vector
+    // Vecはデフォルトで空のベクタ
     search_path: Vec<PathBuf>,
-    // Duration defaults to zero time
+    // Durationはデフォルトでゼロ時間
     timeout: Duration,
-    // bool defaults to false
+    // boolはデフォルトでfalse
     check: bool,
 }
 
 impl MyConfiguration {
-    // add setters here
+    // ここにセッターを追加
 }
 
 fn main() {
-    // construct a new instance with default values
+    // デフォルト値で新しいインスタンスを構築
     let mut conf = MyConfiguration::default();
-    // do something with conf here
+    // ここでconfで何かをする
     conf.check = true;
     println!("conf = {conf:#?}");
 
-    // partial initialization with default values, creates the same instance
+    // デフォルト値での部分初期化、同じインスタンスを作成
     let conf1 = MyConfiguration {
         check: true,
         ..Default::default()
@@ -55,11 +53,10 @@ fn main() {
 }
 ```
 
-## See also
+## 関連項目
 
-- The [constructor] idiom is another way to generate instances that may or may
-  not be "default"
-- The [`Default`] documentation (scroll down for the list of implementors)
+- [コンストラクタ][constructor]の慣用句は、「デフォルト」であるかどうかに関わらずインスタンスを生成する別の方法です
+- [`Default`]ドキュメント（実装者のリストについてはスクロールダウン）
 - [`Option::unwrap_or_default()`]
 - [`derive(new)`]
 

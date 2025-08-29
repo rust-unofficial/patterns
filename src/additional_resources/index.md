@@ -1,8 +1,8 @@
-# Additional resources
+# 追加リソース
 
-A collection of complementary helpful content
+補完的で有用なコンテンツのコレクション
 
-## Talks
+## 講演
 
 - [Design Patterns in Rust](https://www.youtube.com/watch?v=Pm_oO0N5B9k) by
   Nicholas Cameron at the PDRust (2016)
@@ -11,6 +11,6 @@ A collection of complementary helpful content
 - [Rust Programming Techniques](https://www.youtube.com/watch?v=vqavdUGKeb4) by
   Nicholas Cameron at LinuxConfAu (2018)
 
-## Books (Online)
+## 書籍（オンライン）
 
 - [The Rust API Guidelines](https://rust-lang.github.io/api-guidelines)

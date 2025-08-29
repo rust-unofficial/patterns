@@ -1,11 +1,5 @@
-# Functional Usage of Rust
+# Rustの関数型プログラミング的利用
 
-Rust is an imperative language, but it follows many
-[functional programming](https://en.wikipedia.org/wiki/Functional_programming)
-paradigms.
+Rustは命令型言語ですが、多くの[関数型プログラミング](https://en.wikipedia.org/wiki/Functional_programming)のパラダイムに従っています。
 
-> In computer science, *functional programming* is a programming paradigm where
-> programs are constructed by applying and composing functions. It is a
-> declarative programming paradigm in which function definitions are trees of
-> expressions that each return a value, rather than a sequence of imperative
-> statements which change the state of the program.
+> コンピュータサイエンスにおいて、*関数型プログラミング*とは、関数の適用と合成によってプログラムを構築するプログラミングパラダイムです。これは宣言型プログラミングパラダイムの一種で、関数定義は各々が値を返す式の木構造であり、プログラムの状態を変更する一連の命令文ではありません。

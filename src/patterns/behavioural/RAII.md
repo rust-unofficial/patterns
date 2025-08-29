@@ -1,13 +1,12 @@
-# RAII with guards
+# ガード付きRAII
 
-## Description
+## 説明
 
-[RAII][wikipedia] stands for "Resource Acquisition is Initialisation" which is a
-terrible name. The essence of the pattern is that resource initialisation is
-done in the constructor of an object and finalisation in the destructor. This
-pattern is extended in Rust by using a RAII object as a guard of some resource
-and relying on the type system to ensure that access is always mediated by the
-guard object.
+[RAII][wikipedia]は「Resource Acquisition is Initialisation（リソース取得は初期化）」
+の略で、ひどい名前です。このパターンの本質は、リソースの初期化がオブジェクトの
+コンストラクタで行われ、最終化がデストラクタで行われることです。このパターンは
+Rustでは、RAIIオブジェクトをリソースのガードとして使用し、型システムに依存して
+アクセスが常にガードオブジェクトによって仲介されることを保証することで拡張されています。
 
 ## Example
 
@@ -20,7 +19,7 @@ use std::ops::Deref;
 struct Foo {}
 
 struct Mutex<T> {
-    // We keep a reference to our data: T here.
+    // ここでデータTへの参照を保持します。
     //..
 }
 
@@ -29,13 +28,13 @@ struct MutexGuard<'a, T: 'a> {
     //..
 }
 
-// Locking the mutex is explicit.
+// mutexのロックは明示的です。
 impl<T> Mutex<T> {
     fn lock(&self) -> MutexGuard<T> {
-        // Lock the underlying OS mutex.
+        // 基盤OSのmutexをロックします。
         //..
 
-        // MutexGuard keeps a reference to self
+        // MutexGuardはselfへの参照を保持します
         MutexGuard {
             data: self,
             //..
@@ -43,15 +42,15 @@ impl<T> Mutex<T> {
     }
 }
 
-// Destructor for unlocking the mutex.
+// mutexのロックを解除するためのデストラクタ。
 impl<'a, T> Drop for MutexGuard<'a, T> {
     fn drop(&mut self) {
-        // Unlock the underlying OS mutex.
+        // 基盤OSのmutexのロックを解除します。
         //..
     }
 }
 
-// Implementing Deref means we can treat MutexGuard like a pointer to T.
+// Derefの実装により、MutexGuardをTへのポインターのように扱えます。
 impl<'a, T> Deref for MutexGuard<'a, T> {
     type Target = T;
 
@@ -62,38 +61,37 @@ impl<'a, T> Deref for MutexGuard<'a, T> {
 
 fn baz(x: Mutex<Foo>) {
     let xx = x.lock();
-    xx.foo(); // foo is a method on Foo.
-              // The borrow checker ensures we can't store a reference to the underlying
-              // Foo which will outlive the guard xx.
+    xx.foo(); // fooはFooのメソッドです。
+              // 借用チェッカーは、ガードxxよりも長生きする基盤の
+              // Fooへの参照を保存できないことを保証します。
 
-    // x is unlocked when we exit this function and xx's destructor is executed.
+    // この関数を抜ける際とxxのデストラクタが実行される際にxはロック解除されます。
 }
 ```
 
-## Motivation
+## 動機
 
-Where a resource must be finalised after use, RAII can be used to do this
-finalisation. If it is an error to access that resource after finalisation, then
-this pattern can be used to prevent such errors.
+使用後にリソースを最終化しなければならない場合、RAIIを使用してこの
+最終化を行うことができます。最終化後にそのリソースにアクセスすることがエラーである場合、
+このパターンを使用してそのようなエラーを防ぐことができます。
 
-## Advantages
+## 利点
 
-Prevents errors where a resource is not finalised and where a resource is used
-after finalisation.
+リソースが最終化されない場合や、最終化後にリソースが使用される場合の
+エラーを防ぎます。
 
-## Discussion
+## 議論
 
-RAII is a useful pattern for ensuring resources are properly deallocated or
-finalised. We can make use of the borrow checker in Rust to statically prevent
-errors stemming from using resources after finalisation takes place.
+RAIIは、リソースが適切に割り当て解除または最終化されることを保証するための
+有用なパターンです。Rustでは借用チェッカーを利用して、最終化後にリソースを
+使用することによるエラーを静的に防ぐことができます。
 
-The core aim of the borrow checker is to ensure that references to data do not
-outlive that data. The RAII guard pattern works because the guard object
-contains a reference to the underlying resource and only exposes such
-references. Rust ensures that the guard cannot outlive the underlying resource
-and that references to the resource mediated by the guard cannot outlive the
-guard. To see how this works it is helpful to examine the signature of `deref`
-without lifetime elision:
+借用チェッカーの中核的な目的は、データへの参照がそのデータより長生きしないことを
+保証することです。RAIIガードパターンが機能するのは、ガードオブジェクトが
+基盤リソースへの参照を含み、そのような参照のみを公開するからです。Rustは、
+ガードが基盤リソースより長生きできないこと、およびガードによって仲介されるリソースへの
+参照がガードより長生きできないことを保証します。これがどのように機能するかを確認するには、
+ライフタイム省略なしの`deref`のシグネチャを調べることが有用です：
 
 ```rust,ignore
 fn deref<'a>(&'a self) -> &'a T {
@@ -101,23 +99,23 @@ fn deref<'a>(&'a self) -> &'a T {
 }
 ```
 
-The returned reference to the resource has the same lifetime as `self` (`'a`).
-The borrow checker therefore ensures that the lifetime of the reference to `T`
-is shorter than the lifetime of `self`.
+リソースへの返される参照は`self`と同じライフタイム（`'a`）を持ちます。
+したがって借用チェッカーは、`T`への参照のライフタイムが`self`のライフタイムより
+短いことを保証します。
 
-Note that implementing `Deref` is not a core part of this pattern, it only makes
-using the guard object more ergonomic. Implementing a `get` method on the guard
-works just as well.
+`Deref`の実装はこのパターンの中核部分ではなく、ガードオブジェクトの使用を
+よりエルゴノミクスにするだけであることに注意してください。ガードに`get`メソッドを
+実装することも同様に機能します。
 
-## See also
+## 関連項目
 
-[Finalisation in destructors idiom](../../idioms/dtor-finally.md)
+[デストラクタでの最終処理イディオム](../../idioms/dtor-finally.md)
 
-RAII is a common pattern in C++:
-[cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
-[wikipedia][wikipedia].
+RAIIはC++での一般的なパターンです：
+[cppreference.com](http://en.cppreference.com/w/cpp/language/raii)、
+[wikipedia][wikipedia]。
 
 [wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
 
-[Style guide entry](https://doc.rust-lang.org/1.0.0/style/ownership/raii.html)
-(currently just a placeholder).
+[スタイルガイドエントリ](https://doc.rust-lang.org/1.0.0/style/ownership/raii.html)
+（現在はプレースホルダーのみ）。

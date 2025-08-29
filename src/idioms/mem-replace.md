@@ -1,12 +1,12 @@
-# `mem::{take(_), replace(_)}` to keep owned values in changed enums
+# 変更されたenumで所有値を保持するための`mem::{take(_), replace(_)}`
 
-## Description
+## 説明
 
-Say we have a `&mut MyEnum` which has (at least) two variants,
-`A { name: String, x: u8 }` and `B { name: String }`. Now we want to change
-`MyEnum::A` to a `B` if `x` is zero, while keeping `MyEnum::B` intact.
+「少なくとも」2つのバリアント`A { name: String, x: u8 }`と`B { name: String }`を持つ
+`&mut MyEnum`があるとしましょう。今度は`x`がゼロの場合に`MyEnum::A`を`B`に変更し、
+`MyEnum::B`はそのままにしたいと思います。
 
-We can do this without cloning the `name`.
+`name`をクローンすることなく、これを行うことができます。
 
 ## Example
 
@@ -20,10 +20,10 @@ enum MyEnum {
 
 fn a_to_b(e: &mut MyEnum) {
     if let MyEnum::A { name, x: 0 } = e {
-        // This takes out our `name` and puts in an empty String instead
-        // (note that empty strings don't allocate).
-        // Then, construct the new enum variant (which will
-        // be assigned to `*e`).
+        // これは`name`を取り出し、代わりに空のStringを入れます
+        // （空の文字列は割り当てを行わないことに注意）。
+        // その後、新しいenumバリアントを構築します（これは
+        // `*e`に割り当てられます）。
         *e = MyEnum::B {
             name: mem::take(name),
         }
@@ -31,7 +31,7 @@ fn a_to_b(e: &mut MyEnum) {
 }
 ```
 
-This also works with more variants:
+これはより多くのバリアントでも機能します：
 
 ```rust
 use std::mem;
@@ -46,8 +46,8 @@ enum MultiVariateEnum {
 fn swizzle(e: &mut MultiVariateEnum) {
     use MultiVariateEnum::*;
     *e = match e {
-        // Ownership rules do not allow taking `name` by value, but we cannot
-        // take the value out of a mutable reference, unless we replace it:
+        // 所有権ルールは`name`を値で取ることを許可しませんが、置き換えない限り
+        // 可変参照から値を取り出すことはできません：
         A { name } => B {
             name: mem::take(name),
         },

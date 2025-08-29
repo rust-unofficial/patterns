@@ -1,14 +1,14 @@
-# FFI Idioms
+# FFIイディオム
 
-Writing FFI code is an entire course in itself. However, there are several
-idioms here that can act as pointers, and avoid traps for inexperienced users of
-`unsafe` Rust.
+FFIコードを書くことは、それ自体で一つのコースです。しかし、ここにはポインターとして
+機能し、`unsafe` Rustの経験が浅いユーザーの罠を避けることができるいくつかの
+イディオムがあります。
 
-This section contains idioms that may be useful when doing FFI.
+このセクションには、FFIを行う際に有用なイディオムが含まれています。
 
-1. [Idiomatic Errors](./errors.md) - Error handling with integer codes and
-   sentinel return values (such as `NULL` pointers)
+1. [慣用的エラー](./errors.md) - 整数コードと
+   センチネル戻り値（`NULL`ポインターなど）を使用したエラーハンドリング
 
-2. [Accepting Strings](./accepting-strings.md) with minimal unsafe code
+2. 最小限のunsafeコードで[文字列を受け入れる](./accepting-strings.md)
 
-3. [Passing Strings](./passing-strings.md) to FFI functions
+3. FFI関数に[文字列を渡す](./passing-strings.md)

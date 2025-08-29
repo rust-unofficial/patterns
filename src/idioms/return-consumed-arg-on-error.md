@@ -1,16 +1,16 @@
-# Return consumed argument on error
+# エラー時に消費された引数を返す
 
-## Description
+## 説明
 
-If a fallible function consumes (moves) an argument, return that argument back
-inside an error.
+失敗する可能性のある関数が引数を消費（移動）する場合、その引数を
+エラーの内部に返します。
 
-## Example
+## 例
 
 ```rust
 pub fn send(value: String) -> Result<(), SendError> {
     println!("using {value} in a meaningful way");
-    // Simulate non-deterministic fallible action.
+    // 非決定論的な失敗可能なアクションをシミュレート。
     use std::time::SystemTime;
     let period = SystemTime::now()
         .duration_since(SystemTime::UNIX_EPOCH)
@@ -28,7 +28,7 @@ fn main() {
     let mut value = "imagine this is very long string".to_string();
 
     let success = 's: {
-        // Try to send value two times.
+        // 値を二回送信してみる。
         for _ in 0..2 {
             value = match send(value) {
                 Ok(()) => break 's true,
@@ -42,20 +42,20 @@ fn main() {
 }
 ```
 
-## Motivation
+## 動機
 
-In case of error you may want to try some alternative way or to retry action in
-case of non-deterministic function. But if the argument is always consumed, you
-are forced to clone it on every call, which is not very efficient.
+エラーの場合、代替方法を試したり、非決定論的関数の場合にアクションを再試行したい
+かもしれません。しかし、引数が常に消費される場合、毎回クローンを作成することを
+強制され、これはあまり効率的ではありません。
 
-The standard library uses this approach in e.g. `String::from_utf8` method. When
-given a vector that doesn't contain valid UTF-8, a `FromUtf8Error` is returned.
-You can get original vector back using `FromUtf8Error::into_bytes` method.
+標準ライブラリでは、例えば`String::from_utf8`メソッドでこのアプローチを使用しています。
+有効なUTF-8を含まないベクタが与えられると、`FromUtf8Error`が返されます。
+`FromUtf8Error::into_bytes`メソッドを使用して元のベクタを取り戻すことができます。
 
-## Advantages
+## 利点
 
-Better performance because of moving arguments whenever possible.
+可能な限り引数を移動するため、より良いパフォーマンス。
 
-## Disadvantages
+## 欠点
 
-Slightly more complex error types.
+わずかにより複雑なエラー型。

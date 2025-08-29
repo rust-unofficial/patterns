@@ -1,6 +1,6 @@
-# Behavioural Patterns
+# 振る舞いパターン
 
-From [Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern):
+[Wikipedia](https://en.wikipedia.org/wiki/Behavioral_pattern)より：
 
-> Design patterns that identify common communication patterns among objects. By
-> doing so, these patterns increase flexibility in carrying out communication.
+> オブジェクト間の共通の通信パターンを特定するデザインパターン。そうすることで、
+> これらのパターンは通信を実行する際の柔軟性を向上させます。

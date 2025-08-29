@@ -1,127 +1,119 @@
-# Contributing
+# コントリビューション
 
-## Introduction
+## はじめに
 
-This book is a catalogue of Rust programming techniques, (anti-)patterns, idioms
-and other explanations. It is a compilation of collective (sometimes implicit)
-knowledge as well as experiences that have emerged through collaborative work.
+この書籍は、Rustプログラミングのテクニック、（アンチ）パターン、イディオム、
+その他の説明のカタログです。これは、共同作業を通じて生まれた集合的な（時には暗黙の）
+知識と経験の編纂です。
 
-The patterns described here are **not rules**, but should be taken as guidelines
-for writing idiomatic code in Rust. We are collecting Rust patterns in this book
-so people can learn the tradeoffs between Rust idioms and use them properly in
-their own code.
+ここで説明されているパターンは**ルールではありません**が、Rustで慣用的なコードを書くための
+ガイドラインとして受け取ってください。私たちはこの書籍でRustのパターンを収集しており、
+人々がRustのイディオムのトレードオフを学び、自分のコードで適切に使用できるようにしています。
 
-If you want to be part of this effort here are some ways you can participate:
+この取り組みの一部になりたい場合は、以下の方法で参加できます：
 
-## Discussion board
+## ディスカッションボード
 
-If you have a question or an idea regarding certain content, but you want to
-have feedback of fellow community members, and you think it may not be
-appropriate to file an issue open a discussion in our
-[discussion board](https://github.com/rust-unofficial/patterns/discussions).
+特定のコンテンツに関する質問やアイデアがあるが、仲間のコミュニティメンバーからの
+フィードバックが欲しい場合、そしてイシューを提出するのが適切でないと思われる場合は、
+[ディスカッションボード](https://github.com/rust-unofficial/patterns/discussions)で
+ディスカッションを開いてください。
 
-## Writing a new article
+## 新しい記事の執筆
 
-Before writing a new article please check in one of the following resources if
-there is an existing discussion or if someone is already working on that topic:
+新しい記事を書く前に、以下のリソースのいずれかで既存のディスカッションがあるか、
+誰かがすでにそのトピックに取り組んでいるかを確認してください：
 
-- [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116),
-- [All issues](https://github.com/rust-unofficial/patterns/issues),
-- [Pull Requests](https://github.com/rust-unofficial/patterns/pulls)
+- [Umbrella issue](https://github.com/rust-unofficial/patterns/issues/116)
+- [すべてのイシュー](https://github.com/rust-unofficial/patterns/issues)
+- [プルリクエスト](https://github.com/rust-unofficial/patterns/pulls)
 
-If you don't find an issue regarding your topic, and you are sure it is not more
-feasible to open a thread in the
-[discussion board](https://github.com/rust-unofficial/patterns/discussions)
-please open a new issue, so we can discuss the ideas and future content of the
-article together and maybe give some feedback/input on it.
+あなたのトピックに関するイシューが見つからず、
+[ディスカッションボード](https://github.com/rust-unofficial/patterns/discussions)で
+スレッドを開く方が適切でないと確信している場合は、新しいイシューを開いてください。
+そうすれば、記事のアイデアと将来のコンテンツについて一緒に議論し、
+フィードバック/インプットを提供できます。
 
-When writing a new article it's recommended to copy the
-[pattern template](https://github.com/rust-unofficial/patterns/blob/master/template.md)
-into the appropriate directory and start editing it. You may not want to fill
-out every section and remove it, or you might want to add extra sections.
+新しい記事を書くときは、
+[パターンテンプレート](https://github.com/rust-unofficial/patterns/blob/master/template.md)を
+適切なディレクトリにコピーして編集を開始することをお勧めします。すべてのセクションを
+埋める必要はなく削除してもよいですし、追加のセクションを加えることもできます。
 
-Consider writing your article in a way that has a low barrier of entry so also
-[Rustlings](https://github.com/rust-lang/rustlings) can follow and understand
-the thought process behind it. So we can encourage people to use these patterns
-early on.
+[Rustlings](https://github.com/rust-lang/rustlings)も理解できるような、
+参入障壁の低い方法で記事を書くことを検討してください。
+そうすることで、人々に早い段階でこれらのパターンを使用することを促すことができます。
 
-We encourage you to write idiomatic Rust code that builds in the
-[playground](https://play.rust-lang.org/).
+[playground](https://play.rust-lang.org/)でビルドできる慣用的なRustコードを
+書くことをお勧めします。
 
-If you use links to blogposts or in general content that is not to be sure
-existing in a few years (e.g. pdfs) please take a snapshot with the
-[Wayback Machine](https://web.archive.org/) and use the link to that snapshot in
-your article.
+ブログ投稿へのリンクや、数年後に存在していることが確実でないコンテンツ（PDFなど）への
+リンクを使用する場合は、[Wayback Machine](https://web.archive.org/)でスナップショットを取り、
+記事でそのスナップショットへのリンクを使用してください。
 
-Don't forget to add your new article to the `SUMMARY.md` to let it be rendered
-to the book.
+新しい記事を書籍にレンダリングするために、`SUMMARY.md`に追加することを忘れないでください。
 
-Please make `Draft Pull requests` early, so we can follow your progress and can
-give early feedback (see the following section).
+進捗を追跡し、早期のフィードバックを提供できるように、早めに`Draft Pull requests`を
+作成してください（次のセクションを参照）。
 
-## Style guide
+## スタイルガイド
 
-In order to have a consistent style across the book, we suggest to:
+書籍全体で一貫したスタイルを保つために、以下を提案します：
 
-- Follow the official Rust book's
-  [style guide](https://github.com/rust-lang/book/blob/master/style-guide.md).
-- Follow
-  [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text).
-  Tl;dr:
-  - Prefer full types name. For example `Option<T>` instead of `Option`.
-  - Prefer line comments (`//`) over block comments (`/* */`) where applicable.
+- 公式Rustブックの[スタイルガイド](https://github.com/rust-lang/book/blob/master/style-guide.md)に従う
+- [RFC 1574](https://github.com/rust-lang/rfcs/blob/master/text/1574-more-api-documentation-conventions.md#appendix-a-full-conventions-text)に従う
+  要約：
+  - 完全な型名を優先する。例：`Option`ではなく`Option<T>`
+  - 適用可能な場合は、ブロックコメント（`/* */`）よりも行コメント（`//`）を優先する
 
-## Check the article locally
+## 記事をローカルで確認する
 
-Before submitting the PR launch the commands `mdbook build` to make sure that
-the book builds and `mdbook test` to make sure that code examples are correct.
+PRを提出する前に、`mdbook build`コマンドを実行して書籍がビルドされることを確認し、
+`mdbook test`を実行してコード例が正しいことを確認してください。
 
 ### Markdown lint
 
-To make sure the files comply with our Markdown style we use
-[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli). To spare
-you some manual work to get through the CI test you can use the following
-commands to automatically fix most of the emerging problems when writing
-Markdown files.
+ファイルがMarkdownスタイルに準拠していることを確認するために、
+[markdownlint-cli](https://github.com/igorshubovych/markdownlint-cli)を使用しています。
+CIテストを通過するための手作業を省くために、以下のコマンドを使用して、
+Markdownファイルを書く際に発生する問題のほとんどを自動的に修正できます。
 
-- Install:
+- インストール：
 
   ```sh
   npm install -g markdownlint-cli
   ```
 
-- Check all markdown files:
+- すべてのmarkdownファイルをチェック：
   - unix: `markdownlint '**/*.md'`
   - windows: `markdownlint **/*.md`
 
-- Automatically fix basic errors:
+- 基本的なエラーを自動修正：
   - unix: `markdownlint -f '**/*.md'`
   - windows: `markdownlint -f **/*.md`
 
-## Creating a Pull Request
+## プルリクエストの作成
 
-"Release early and often!" also applies to pull requests!
+「早くリリースし、頻繁にリリースする！」はプルリクエストにも適用されます！
 
-Once your article has some visible work, create a `[WIP]` draft pull request and
-give it a description of what you did or want to do. Early reviews of the
-community are not meant as an offense but to give feedback.
+記事に何か見える作業ができたら、`[WIP]`ドラフトプルリクエストを作成し、
+何をしたか、または何をしたいかの説明を記載してください。コミュニティの早期レビューは、
+攻撃的な意図ではなく、フィードバックを提供するためのものです。
 
-A good principle: "Work together, share ideas, teach others."
+良い原則：「一緒に働き、アイデアを共有し、他の人に教える」
 
-### Important Note
+### 重要な注意事項
 
-Please **don't force push** commits in your branch, in order to keep commit
-history and make it easier for us to see changes between reviews.
+コミット履歴を保持し、レビュー間の変更を確認しやすくするために、
+ブランチのコミットを**強制プッシュしないでください**。
 
-Make sure to `Allow edits of maintainers` (under the text box) in the PR so
-people can actually collaborate on things or fix smaller issues themselves.
+人々が実際に協力したり、小さな問題を自分で修正したりできるように、
+PRで`Allow edits of maintainers`（テキストボックスの下）を有効にしてください。
 
-## Maintainers
+## メンテナー
 
-This repository is maintained by the following people:
+このリポジトリは以下の人々によってメンテナンスされています：
 
-- [simonsan](https://github.com/simonsan).
-- [marcoieni](https://github.com/marcoieni). Marco only works on the book CI. He
-  doesn't review the book content and he doesn't receive notifications on new
-  issues and pull requests. If you want him to have a look at a CI issue, ping
-  him directly.
+- [simonsan](https://github.com/simonsan)
+- [marcoieni](https://github.com/marcoieni) - MarcoはブックのCIのみを担当しています。
+  ブックの内容をレビューせず、新しいイシューやプルリクエストの通知を受け取りません。
+  CIの問題について見てもらいたい場合は、直接pingしてください。

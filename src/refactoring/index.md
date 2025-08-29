@@ -1,23 +1,17 @@
-# Refactoring
+# リファクタリング
 
-Refactoring is very important in relation to these topics. Just as important as
-the other topics covered here, is how to take good code and turn it into great
-code.
+リファクタリングは、これらのトピックに関連して非常に重要です。ここで扱う他のトピックと同じくらい重要なのは、良いコードを優れたコードに変える方法です。
 
-We can use [design patterns](../patterns/index.md) to [DRY] up code and
-generalize abstractions. We must avoid
-[anti-patterns](../anti_patterns/index.md) while we do this. While they may be
-tempting to employ, their costs outweigh their benefits.
+[デザインパターン](../patterns/index.md)を使用してコードを[DRY]にし、抽象化を一般化することができます。その際に[アンチパターン](../anti_patterns/index.md)を避けなければなりません。採用したくなるかもしれませんが、そのコストは利益を上回ります。
 
-> Shortcuts make for long days.
+> 近道は長い一日を作る。
 
-We can also use [idioms](../idioms/index.md) to structure our code in a way that
-is understandable.
+また、[イディオム](../idioms/index.md)を使用してコードを理解しやすい方法で構造化することもできます。
 
-## Tests
+## テスト
 
-Tests are of vital importance during refactoring.
+テストはリファクタリング中に極めて重要です。
 
-## Small changes
+## 小さな変更
 
 [DRY]: https://en.wikipedia.org/wiki/Don%27t_repeat_yourself

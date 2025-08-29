@@ -1,28 +1,18 @@
-# Functional Language Optics
+# 関数型言語のオプティクス
 
-Optics is a type of API design that is common to functional languages. This is a
-pure functional concept that is not frequently used in Rust.
+オプティクスは関数型言語に共通するAPIデザインの一種です。これは純粋関数型の概念で、Rustで頻繁に使用されることはありません。
 
-Nevertheless, exploring the concept may be helpful to understand other patterns
-in Rust APIs, such as [visitors](../patterns/behavioural/visitor.md). They also
-have niche use cases.
+それでも、この概念を探求することは、[ビジター](../patterns/behavioural/visitor.md)などのRust APIの他のパターンを理解するのに役立つかもしれません。また、ニッチな使用例もあります。
 
-This is quite a large topic, and would require actual books on language design
-to fully get into its abilities. However their applicability in Rust is much
-simpler.
+これはかなり大きなトピックであり、その能力を完全に理解するには言語設計に関する実際の書籍が必要でしょう。しかし、Rustでの適用可能性ははるかに単純です。
 
-To explain the relevant parts of the concept, the `Serde`-API will be used as an
-example, as it is one that is difficult for many to understand from simply the
-API documentation.
+概念の関連部分を説明するため、`Serde`-APIを例として使用します。これは、単にAPIドキュメントから理解するのが多くの人にとって困難なものだからです。
 
-In the process, different specific patterns, called Optics, will be covered.
-These are *The Iso*, *The Poly Iso*, and *The Prism*.
+プロセスでは、オプティクスと呼ばれる様々な特定のパターンがカバーされます。これらは*アイソ*、*ポリ・アイソ*、および*プリズム*です。
 
-## An API Example: Serde
+## APIの例：Serde
 
-Trying to understand the way *Serde* works by only reading the API is a
-challenge, especially the first time. Consider the `Deserializer` trait,
-implemented by any library which parses a new data format:
+*Serde*の動作方法をAPIを読むだけで理解しようとするのは困難です、特に初回は。新しいデータフォーマットを解析する任意のライブラリによって実装される`Deserializer`トレイトを考えてみましょう：
 
 ```rust,ignore
 pub trait Deserializer<'de>: Sized {
@@ -62,43 +52,29 @@ pub trait Visitor<'de>: Sized {
 }
 ```
 
-There is a lot of type erasure going on here, with multiple levels of associated
-types being passed back and forth.
+ここでは多くの型消去が行われており、複数レベルの関連型が行き来しています。
 
-But what is the big picture? Why not just have the `Visitor` return the pieces
-the caller needs in a streaming API, and call it a day? Why all the extra
-pieces?
+しかし、全体像は何でしょうか？`Visitor`にストリーミAPIで呼び出し元が必要とするピースを返させ、それで終わりにしないのはなぜでしょうか？なぜこれらの余分なピースがあるのでしょうか？
 
-One way to understand it is to look at a functional languages concept called
-*optics*.
+これを理解する一つの方法は、*オプティクス*と呼ばれる関数型言語の概念を見ることです。
 
-This is a way to do composition of behavior and proprieties that is designed to
-facilitate patterns common to Rust: failure, type transformation, etc.[^1]
+これは、Rustに共通するパターン、すなわち失敗、型変換などを促進するように設計された動作と属性の合成を行う方法です。[^1]
 
-The Rust language does not have very good support for these directly. However,
-they appear in the design of the language itself, and their concepts can help to
-understand some of Rust's APIs. As a result, this attempts to explain the
-concepts with the way Rust does it.
+Rust言語は、これらを直接的にサポートすることはあまり得意ではありません。しかし、これらは言語自体の設計に現れており、その概念はRustのAPIの一部を理解するのに役立ちます。その結果、これはRustが行う方法で概念を説明しようと試みます。
 
-This will perhaps shed light on what those APIs are achieving: specific
-properties of composability.
+これはおそらく、これらのAPIが何を達成しているのかを明らかにします：合成可能性の特定の属性です。
 
-## Basic Optics
+## 基本オプティクス
 
-### The Iso
+### アイソ
 
-The Iso is a value transformer between two types. It is extremely simple, but a
-conceptually important building block.
+アイソは2つの型間の値変換器です。非常にシンプルですが、概念的に重要な構成要素です。
 
-As an example, suppose that we have a custom Hash table structure used as a
-concordance for a document.[^2] It uses strings for keys (words) and a list of
-indexes for values (file offsets, for instance).
+例として、ドキュメントのコンコーダンスとして使用されるカスタムハッシュテーブル構造があると仮定します。[^2]これはキーとして文字列（単語）を使用し、値としてインデックスのリスト（例えばファイルオフセット）を使用します。
 
-A key feature is the ability to serialize this format to disk. A "quick and
-dirty" approach would be to implement a conversion to and from a string in JSON
-format. (Errors are ignored for the time being, they will be handled later.)
+重要な機能は、このフォーマットをディスクにシリアライズする能力です。「簡易で実用的」なアプローチは、JSONフォーマットの文字列との相互変換を実装することです。（エラーは今のところ無視され、後で処理されます。）
 
-To write it in a normal form expected by functional language users:
+関数型言語ユーザーが期待する正規形で書くと：
 
 ```text
 case class ConcordanceSerDe {
@@ -107,10 +83,9 @@ case class ConcordanceSerDe {
 }
 ```
 
-The Iso is thus a pair of functions which convert values of different types:
-`serialize` and `deserialize`.
+アイソは、異なる型の値を変換する関数のペアです：`serialize`と`deserialize`。
 
-A straightforward implementation:
+簡単な実装：
 
 ```rust
 use std::collections::HashMap;
@@ -126,17 +101,16 @@ impl ConcordanceSerde {
     fn serialize(value: Concordance) -> String {
         todo!()
     }
-    // invalid concordances are empty
+    // 無効なコンコーダンスは空です
     fn deserialize(value: String) -> Concordance {
         todo!()
     }
 }
 ```
 
-This may seem rather silly. In Rust, this type of behavior is typically done
-with traits. After all, the standard library has `FromStr` and `ToString` in it.
+これはばからしく見えるかもしれません。Rustでは、この種の動作は通常トレイトで行われます。結局のところ、標準ライブラリには`FromStr`と`ToString`があります。
 
-But that is where our next subject comes in: Poly Isos.
+しかし、ここで私たちの次の主題が登場します：ポリ・アイソ。
 
 ### Poly Isos
 
@@ -482,28 +456,18 @@ the API, and file formats only need to implement the "bottom layer". Each piece
 can then "just work" with the rest of the ecosystem, since generic types will
 bridge them.
 
-In conclusion, Rust's generic-inspired type system can bring it close to these
-concepts and use their power, as shown in this API design. But it may also need
-procedural macros to create bridges for its generics.
+結論として、このAPI設計で示されるように、Rustのジェネリックスにインスパイアされた型システムは、これらの概念に近づけ、その力を使用することができます。しかし、ジェネリックスのためのブリッジを作成するために手続きマクロが必要になる場合もあります。
 
-If you are interested in learning more about this topic, please check the
-following section.
+このトピックについてさらに学びたい場合は、次のセクションをご確認ください。
 
-## See Also
+## 関連項目
 
-- [lens-rs crate](https://crates.io/crates/lens-rs) for a pre-built lenses
-  implementation, with a cleaner interface than these examples
-- [Serde](https://serde.rs) itself, which makes these concepts intuitive for end
-  users (i.e. defining the structs) without needing to understand the details
-- [luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing
-  computer graphics that uses similar API design, including procedural macros to
-  create full prisms for buffers of different pixel types that remain generic
-- [An Article about Lenses in Scala](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
-  that is very readable even without Scala expertise.
-- [Paper: Profunctor Optics: Modular Data
-  Accessors](https://web.archive.org/web/20220701102832/https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
-- [Musli](https://github.com/udoprog/musli) is a library which attempts to use a
-  similar structure with a different approach, e.g. doing away with the visitor
+- これらの例よりもクリーンなインターフェースを持つ、事前に構築されたレンズ実装のための[lens-rsクレート](https://crates.io/crates/lens-rs)
+- 詳細を理解する必要なく、エンドユーザー（すなわち構造体の定義）にとってこれらの概念を直感的にする[Serde](https://serde.rs)自体
+- コンピューターグラフィックスを描画するためのクレートで、ジェネリックのまま異なるピクセルタイプのバッファのための完全なプリズムを作成する手続きマクロを含む、類似のAPI設計を使用する[luminance](https://github.com/phaazon/luminance-rs)
+- Scalaの専門知識がなくても非常に読みやすい[Scalaのレンズに関する記事](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)
+- [論文：Profunctor Optics: Modular Data Accessors](https://web.archive.org/web/20220701102832/https://arxiv.org/ftp/arxiv/papers/1703/1703.10857.pdf)
+- 異なるアプローチで類似の構造を使用しようと試みるライブラリで、例えばビジターを去った[Musli](https://github.com/udoprog/musli)
 
 [^1]: [School of Haskell: A Little Lens Starter Tutorial](https://web.archive.org/web/20221128190041/https://www.schoolofhaskell.com/school/to-infinity-and-beyond/pick-of-the-week/a-little-lens-starter-tutorial)
 

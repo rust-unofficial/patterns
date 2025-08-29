@@ -1,27 +1,25 @@
-# Passing Strings
+# 文字列を渡す
 
-## Description
+## 説明
 
-When passing strings to FFI functions, there are four principles that should be
-followed:
+FFI関数に文字列を渡す際、従うべき4つの原則があります：
 
-1. Make the lifetime of owned strings as long as possible.
-2. Minimize `unsafe` code during the conversion.
-3. If the C code can modify the string data, use `Vec` instead of `CString`.
-4. Unless the Foreign Function API requires it, the ownership of the string
-   should not transfer to the callee.
+1. 所有された文字列のライフタイムを可能な限り長くする。
+2. 変換中の`unsafe`コードを最小化する。
+3. Cコードが文字列データを変更できる場合、`CString`の代わりに`Vec`を使用する。
+4. 外部関数APIが要求しない限り、文字列の所有権は呼び出し先に譲渡すべきではない。
 
-## Motivation
+## 動機
 
-Rust has built-in support for C-style strings with its `CString` and `CStr`
-types. However, there are different approaches one can take with strings that
-are being sent to a foreign function call from a Rust function.
+Rustは`CString`と`CStr`型でC形式の文字列のサポートを組み込んでいます。
+しかし、Rust関数から外部関数呼び出しに送信される文字列について取れる
+異なるアプローチがあります。
 
-The best practice is simple: use `CString` in such a way as to minimize `unsafe`
-code. However, a secondary caveat is that *the object must live long enough*,
-meaning the lifetime should be maximized. In addition, the documentation
-explains that "round-tripping" a `CString` after modification is UB, so
-additional work is necessary in that case.
+ベストプラクティスは簡単です：`unsafe`コードを最小化するような方法で
+`CString`を使用する。しかし、二次的な注意点は*オブジェクトが十分長く生きなければならない*
+ことであり、ライフタイムを最大化すべきことを意味します。さらに、ドキュメントでは
+変更後の`CString`の「往復」はUBであると説明しているため、
+その場合は追加の作業が必要です。
 
 ## Code Example
 
@@ -39,20 +37,20 @@ pub mod unsafe_module {
         let c_err = std::ffi::CString::new(err.into())?;
 
         unsafe {
-            // SAFETY: calling an FFI whose documentation says the pointer is
-            // const, so no modification should occur
+            // SAFETY: ドキュメントでポインターがconstであると述べている
+            // FFIを呼び出すため、変更は発生しないはず
             seterr(c_err.as_ptr());
         }
 
         Ok(())
-        // The lifetime of c_err continues until here
+        // c_errのライフタイムはここまで続く
     }
 
     fn get_error_from_ffi() -> Result<String, std::ffi::IntoStringError> {
         let mut buffer = vec![0u8; 1024];
         unsafe {
-            // SAFETY: calling an FFI whose documentation implies
-            // that the input need only live as long as the call
+            // SAFETY: ドキュメントが入力が呼び出しと同じ期間だけ
+            // 生きていればよいことを示唆するFFIを呼び出し
             let written: usize = geterr(buffer.as_mut_ptr(), 1023).into();
 
             buffer.truncate(written + 1);
@@ -63,16 +61,16 @@ pub mod unsafe_module {
 }
 ```
 
-## Advantages
+## 利点
 
-The example is written in a way to ensure that:
+この例は以下を確保するような方法で書かれています：
 
-1. The `unsafe` block is as small as possible.
-2. The `CString` lives long enough.
-3. Errors with typecasts are always propagated when possible.
+1. `unsafe`ブロックが可能な限り小さい。
+2. `CString`が十分長く生きる。
+3. 型キャストでのエラーが可能な場合常に伝播される。
 
-A common mistake (so common it's in the documentation) is to not use the
-variable in the first block:
+一般的な間違い（ドキュメントに載るほど一般的）は、最初のブロックで
+変数を使用しないことです：
 
 ```rust,ignore
 pub mod unsafe_module {
@@ -81,7 +79,7 @@ pub mod unsafe_module {
 
     fn report_error<S: Into<String>>(err: S) -> Result<(), std::ffi::NulError> {
         unsafe {
-            // SAFETY: whoops, this contains a dangling pointer!
+            // SAFETY: おっと、これはダングリングポインターを含んでいます！
             seterr(std::ffi::CString::new(err.into())?.as_ptr());
         }
         Ok(())
@@ -89,15 +87,14 @@ pub mod unsafe_module {
 }
 ```
 
-This code will result in a dangling pointer, because the lifetime of the
-`CString` is not extended by the pointer creation, unlike if a reference were
-created.
+このコードはダングリングポインターを生成します。なぜなら、参照が作成された場合とは異なり、
+`CString`のライフタイムはポインター作成によって延長されないからです。
 
-Another issue frequently raised is that the initialization of a 1k vector of
-zeroes is "slow". However, recent versions of Rust actually optimize that
-particular macro to a call to `zmalloc`, meaning it is as fast as the operating
-system's ability to return zeroed memory (which is quite fast).
+よく提起されるもう一つの問題は、1kのゼロのベクタの初期化が「遅い」ということです。
+しかし、Rustの最近のバージョンでは実際にその特定のマクロを`zmalloc`への呼び出しに
+最適化しており、これはオペレーティングシステムがゼロ化されたメモリを返す能力と同じ速さ
+（かなり高速）であることを意味します。
 
-## Disadvantages
+## 欠点
 
-None?
+なし？

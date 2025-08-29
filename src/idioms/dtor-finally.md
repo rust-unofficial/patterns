@@ -1,12 +1,12 @@
-# Finalisation in destructors
+# デストラクタでの最終処理
 
-## Description
+## 説明
 
-Rust does not provide the equivalent to `finally` blocks - code that will be
-executed no matter how a function is exited. Instead, an object's destructor can
-be used to run code that must be run before exit.
+Rustは`finally`ブロックの等価な機能を提供していません - 関数がどのような方法で終了しても
+実行されるコードのことです。代わりに、オブジェクトのデストラクタを使用して、
+終了前に実行しなければならないコードを実行できます。
 
-## Example
+## 例
 
 ```rust,ignore
 fn baz() -> Result<(), ()> {
@@ -14,82 +14,82 @@ fn baz() -> Result<(), ()> {
 }
 
 fn bar() -> Result<(), ()> {
-    // These don't need to be defined inside the function.
+    // これらは関数内で定義する必要はありません。
     struct Foo;
 
-    // Implement a destructor for Foo.
+    // Fooのデストラクタを実装。
     impl Drop for Foo {
         fn drop(&mut self) {
             println!("exit");
         }
     }
 
-    // The dtor of _exit will run however the function `bar` is exited.
+    // 関数`bar`がどのように終了しても_exitのdtorが実行される。
     let _exit = Foo;
-    // Implicit return with `?` operator.
+    // `?`演算子による暗黙の戻り。
     baz()?;
-    // Normal return.
+    // 通常の戻り。
     Ok(())
 }
 ```
 
-## Motivation
+## 動機
 
-If a function has multiple return points, then executing code on exit becomes
-difficult and repetitive (and thus bug-prone). This is especially the case where
-return is implicit due to a macro. A common case is the `?` operator which
-returns if the result is an `Err`, but continues if it is `Ok`. `?` is used as
-an exception handling mechanism, but unlike Java (which has `finally`), there is
-no way to schedule code to run in both the normal and exceptional cases.
-Panicking will also exit a function early.
+関数に複数の戻り点がある場合、終了時にコードを実行することは
+困難で反復的（つまりバグが発生しやすく）になります。これは特に
+マクロによって戻りが暗黙的である場合に当てはまります。一般的なケースは`?`演算子で、
+結果が`Err`の場合は戻り、`Ok`の場合は続行します。`?`は
+例外処理メカニズムとして使用されますが、Java（`finally`がある）とは異なり、
+通常の場合と例外的な場合の両方でコードを実行するようにスケジュールする方法がありません。
+パニックも関数を早期に終了させます。
 
-## Advantages
+## 利点
 
-Code in destructors will (nearly) always be run - copes with panics, early
-returns, etc.
+デストラクタ内のコードは（ほぼ）常に実行されます - パニック、早期
+戻りなどに対応します。
 
-## Disadvantages
+## 欠点
 
-It is not guaranteed that destructors will run. For example, if there is an
-infinite loop in a function or if running a function crashes before exit.
-Destructors are also not run in the case of a panic in an already panicking
-thread. Therefore, destructors cannot be relied on as finalizers where it is
-absolutely essential that finalisation happens.
+デストラクタが実行されることは保証されていません。例えば、関数内で
+無限ループがある場合や、関数の実行が終了前にクラッシュした場合です。
+デストラクタは、すでにパニックしているスレッドでのパニックの場合にも実行されません。
+したがって、最終処理が絶対に不可欠な場合、デストラクタをファイナライザーとして
+頼ることはできません。
 
-This pattern introduces some hard to notice, implicit code. Reading a function
-gives no clear indication of destructors to be run on exit. This can make
-debugging tricky.
+このパターンは、気づきにくい暗黙的なコードを導入します。関数を読んでも
+終了時に実行されるデストラクタの明確な指示は得られません。これは
+デバッグを困難にする可能性があります。
 
-Requiring an object and `Drop` impl just for finalisation is heavy on
-boilerplate.
+最終処理のためだけにオブジェクトと`Drop`実装を必要とするのは
+ボイラープレートが重いです。
 
-## Discussion
+## 議論
 
-There is some subtlety about how exactly to store the object used as a
-finalizer. It must be kept alive until the end of the function and must then be
-destroyed. The object must always be a value or uniquely owned pointer (e.g.,
-`Box<Foo>`). If a shared pointer (such as `Rc`) is used, then the finalizer can
-be kept alive beyond the lifetime of the function. For similar reasons, the
-finalizer should not be moved or returned.
+ファイナライザーとして使用するオブジェクトを正確にどのように保存するかについて
+いくつかの微妙な点があります。関数の終了まで生かしておき、その後
+破棄されなければなりません。オブジェクトは常に値または一意に所有されたポインタ（例：
+`Box<Foo>`）でなければなりません。共有ポインタ（`Rc`など）が使用される場合、
+ファイナライザーは関数のライフタイムを超えて生かしておくことができます。同様の理由で、
+ファイナライザーは移動したり返したりしてはいけません。
 
-The finalizer must be assigned into a variable, otherwise it will be destroyed
-immediately, rather than when it goes out of scope. The variable name must start
-with `_` if the variable is only used as a finalizer, otherwise the compiler
-will warn that the finalizer is never used. However, do not call the variable
-`_` with no suffix - in that case it will be destroyed immediately.
+ファイナライザーは変数に代入しなければなりません。そうでなければ、
+スコープから外れたときではなく、すぐに破棄されます。変数がファイナライザーとしてのみ
+使用される場合、変数名は`_`で始まらなければなりません。そうでなければコンパイラは
+ファイナライザーが使用されていないと警告します。ただし、変数を
+サフィックスなしの`_`と呼んではいけません - その場合すぐに破棄されます。
 
-In Rust, destructors are run when an object goes out of scope. This happens
-whether we reach the end of block, there is an early return, or the program
-panics. When panicking, Rust unwinds the stack running destructors for each
-object in each stack frame. So, destructors get called even if the panic happens
-in a function being called.
+Rustでは、オブジェクトがスコープから外れるときにデストラクタが実行されます。これは
+ブロックの終わりに到達するか、早期戻りがあるか、プログラムが
+パニックするかにかかわらず発生します。パニック時、Rustは各スタックフレーム内の
+各オブジェクトのデストラクタを実行してスタックを巻き戻します。したがって、呼び出されている
+関数でパニックが発生してもデストラクタは呼び出されます。
 
-If a destructor panics while unwinding, there is no good action to take, so Rust
-aborts the thread immediately, without running further destructors. This means
-that destructors are not absolutely guaranteed to run. It also means that you
-must take extra care in your destructors not to panic, since it could leave
-resources in an unexpected state.
+巻き戻し中にデストラクタがパニックした場合、取るべき良いアクションがないため、Rustは
+それ以上のデストラクタを実行することなく、すぐにスレッドを中止します。これは
+デストラクタが絶対に実行されることが保証されていないことを意味します。また、
+リソースを予期しない状態に残す可能性があるため、デストラクタでパニックしないよう
+特別な注意を払わなければならないことも意味します。
 
-## See also
+## 関連項目
 
-[RAII guards](../patterns/behavioural/RAII.md).
+[RAIIガード](../patterns/behavioural/RAII.md)。

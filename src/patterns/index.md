@@ -1,30 +1,30 @@
-# Design Patterns
+# デザインパターン
 
-[Design patterns](https://en.wikipedia.org/wiki/Software_design_pattern) are
-"general reusable solutions to a commonly occurring problem within a given
-context in software design". Design patterns are a great way to describe the
-culture of a programming language. Design patterns are very language-specific -
-what is a pattern in one language may be unnecessary in another due to a
-language feature, or impossible to express due to a missing feature.
+[デザインパターン](https://en.wikipedia.org/wiki/Software_design_pattern)は
+「ソフトウェア設計において、与えられたコンテキスト内でよく発生する問題に対する
+一般的な再利用可能な解決策」です。デザインパターンは、プログラミング言語の
+文化を記述する素晴らしい方法です。デザインパターンは非常に言語固有のものです -
+ある言語でのパターンが、言語機能により他の言語では不要である場合や、機能の
+欠如により表現不可能である場合があります。
 
-If overused, design patterns can add unnecessary complexity to programs.
-However, they are a great way to share intermediate and advanced level knowledge
-about a programming language.
+過度に使用すると、デザインパターンはプログラムに不要な複雑さを追加する
+可能性があります。しかし、プログラミング言語に関する中級・上級レベルの
+知識を共有する素晴らしい方法です。
 
-## Design patterns in Rust
+## Rustでのデザインパターン
 
-Rust has many unique features. These features give us great benefit by removing
-whole classes of problems. Some of them are also patterns that are *unique* to
-Rust.
+Rustには多くのユニークな機能があります。これらの機能は、問題のクラス全体を
+取り除くことで大きな利益をもたらします。その中のいくつかは、Rustに*固有*の
+パターンでもあります。
 
 ## YAGNI
 
-YAGNI is an acronym that stands for `You Aren't Going to Need It`. It's a vital
-software design principle to apply as you write code.
+YAGNIは`You Aren't Going to Need It（それは必要ない）`の頭文字です。
+これは、コードを書く際に適用すべき重要なソフトウェア設計原則です。
 
-> The best code I ever wrote was code I never wrote.
+> 私が書いた最高のコードは、書かなかったコードでした。
 
-If we apply YAGNI to design patterns, we see that the features of Rust allow us
-to throw out many patterns. For instance, there is no need for the
-[strategy pattern](https://en.wikipedia.org/wiki/Strategy_pattern) in Rust
-because we can just use [traits](https://doc.rust-lang.org/book/traits.html).
+デザインパターンにYAGNIを適用すると、Rustの機能により多くのパターンを
+捨て去ることができることが分かります。例えば、[トレイト](https://doc.rust-lang.org/book/traits.html)を
+使用できるため、Rustでは[ストラテジーパターン](https://en.wikipedia.org/wiki/Strategy_pattern)は
+必要ありません。

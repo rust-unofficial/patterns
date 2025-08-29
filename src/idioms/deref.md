@@ -1,12 +1,11 @@
-# Collections are smart pointers
+# コレクションはスマートポインタ
 
-## Description
+## 説明
 
-Use the [`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html) trait to
-treat collections like smart pointers, offering owning and borrowed views of
-data.
+[`Deref`](https://doc.rust-lang.org/std/ops/trait.Deref.html)トレイトを使用して、
+コレクションをスマートポインタのように扱い、データの所有ビューと借用ビューを提供します。
 
-## Example
+## 例
 
 ```rust,ignore
 use std::ops::Deref;
@@ -25,55 +24,48 @@ impl<T> Deref for Vec<T> {
 }
 ```
 
-A `Vec<T>` is an owning collection of `T`s, while a slice (`&[T]`) is a borrowed
-collection of `T`s. Implementing `Deref` for `Vec` allows implicit dereferencing
-from `&Vec<T>` to `&[T]` and includes the relationship in auto-dereferencing
-searches. Most methods you might expect to be implemented for `Vec`s are instead
-implemented for slices.
+`Vec<T>`は`T`の所有コレクションであり、一方スライス（`&[T]`）は`T`の借用コレクションです。
+`Vec`に`Deref`を実装することで、`&Vec<T>`から`&[T]`への暗黙的な参照外しが可能になり、
+自動参照外し検索にその関係が含まれます。`Vec`に実装されることが期待されるほとんどのメソッドは、
+代わりにスライスに実装されています。
 
-Also `String` and `&str` have a similar relation.
+また、`String`と`&str`も同様の関係を持っています。
 
-## Motivation
+## 動機
 
-Ownership and borrowing are key aspects of the Rust language. Data structures
-must account for these semantics properly to give a good user experience. When
-implementing a data structure that owns its data, offering a borrowed view of
-that data allows for more flexible APIs.
+所有権と借用はRust言語の重要な側面です。データ構造は、良いユーザー体験を提供するために、
+これらのセマンティクスを適切に考慮する必要があります。データを所有するデータ構造を実装する際、
+そのデータの借用ビューを提供することで、より柔軟なAPIが可能になります。
 
-## Advantages
+## 利点
 
-Most methods can be implemented only for the borrowed view, they are then
-implicitly available for the owning view.
+ほとんどのメソッドは借用ビューのみに実装でき、その後、所有ビューで暗黙的に利用可能になります。
 
-Gives clients a choice between borrowing or taking ownership of data.
+クライアントにデータの借用または所有権の取得の選択肢を提供します。
 
-## Disadvantages
+## 欠点
 
-Methods and traits only available via dereferencing are not taken into account
-when bounds checking, so generic programming with data structures using this
-pattern can get complex (see the `Borrow` and `AsRef` traits, etc.).
+参照外しを介してのみ利用可能なメソッドとトレイトは、境界チェック時に考慮されないため、
+このパターンを使用したデータ構造によるジェネリックプログラミングは複雑になる可能性があります
+（`Borrow`および`AsRef`トレイトなどを参照）。
 
-## Discussion
+## 議論
 
-Smart pointers and collections are analogous: a smart pointer points to a single
-object, whereas a collection points to many objects. From the point of view of
-the type system, there is little difference between the two. A collection owns
-its data if the only way to access each datum is via the collection and the
-collection is responsible for deleting the data (even in cases of shared
-ownership, some kind of borrowed view may be appropriate). If a collection owns
-its data, it is usually useful to provide a view of the data as borrowed so that
-it can be referenced multiple times.
+スマートポインタとコレクションは類似しています：スマートポインタは単一のオブジェクトを指し、
+コレクションは多くのオブジェクトを指します。型システムの観点から見ると、両者の間にはほとんど違いがありません。
+各データにアクセスする唯一の方法がコレクションを介することであり、コレクションがデータの削除を担当している場合
+（共有所有権の場合でも、何らかの借用ビューが適切な場合があります）、コレクションはそのデータを所有しています。
+コレクションがデータを所有している場合、データを借用として表示して、複数回参照できるようにすることは通常有用です。
 
-Most smart pointers (e.g., `Foo<T>`) implement `Deref<Target=T>`. However,
-collections will usually dereference to a custom type. `[T]` and `str` have some
-language support, but in the general case, this is not necessary. `Foo<T>` can
-implement `Deref<Target=Bar<T>>` where `Bar` is a dynamically sized type and
-`&Bar<T>` is a borrowed view of the data in `Foo<T>`.
+ほとんどのスマートポインタ（例：`Foo<T>`）は`Deref<Target=T>`を実装します。
+しかし、コレクションは通常、カスタム型に参照外しされます。`[T]`と`str`には言語サポートがありますが、
+一般的な場合、これは必要ありません。`Foo<T>`は`Deref<Target=Bar<T>>`を実装でき、
+ここで`Bar`は動的サイズ型であり、`&Bar<T>`は`Foo<T>`のデータの借用ビューです。
 
-Commonly, ordered collections will implement `Index` for `Range`s to provide
-slicing syntax. The target will be the borrowed view.
+一般的に、順序付けられたコレクションは、スライス構文を提供するために`Range`に対して`Index`を実装します。
+ターゲットは借用ビューになります。
 
-## See also
+## 参照
 
-- [Deref polymorphism anti-pattern](../anti_patterns/deref.md).
-- [Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/trait.Deref.html).
+- [Deref多態性アンチパターン](../anti_patterns/deref.md)
+- [`Deref`トレイトのドキュメント](https://doc.rust-lang.org/std/ops/trait.Deref.html)

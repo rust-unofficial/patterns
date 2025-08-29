@@ -1,44 +1,43 @@
-# A succinct name for the pattern
+# パターンの簡潔な名前
 
-## Description
+## 説明
 
-A short, prose description of the pattern.
+パターンの短い散文による説明。
 
-## Example
+## 例
 
 ```rust
-// An example of the pattern in action, should be mostly code, commented
-// liberally.
+// パターンの実際の使用例。主にコードで、
+// 豊富にコメントを付けてください。
 ```
 
-When writing examples, please try to make them compile. This allows us to test
-them. If you fail to write an example that is both complete and readable, please
-at least mark your example code with `ignore` as in here:
+例を書く際は、コンパイルできるように努めてください。これにより、
+テストが可能になります。完全かつ読みやすい例を書くことに失敗した場合は、
+少なくとも以下のように例のコードに `ignore` を付けてください：
 
 ```rust,ignore
-// A non-runnable example of the pattern in action, should be mostly code, commented
-// liberally.
+// パターンの実行不可能な使用例。主にコードで、
+// 豊富にコメントを付けてください。
 ```
 
-## Motivation
+## 動機
 
-Why and where you should use the pattern
+パターンをなぜ、どこで使うべきか
 
-## Advantages
+## 利点
 
-Good things about this pattern.
+このパターンの良い点。
 
-## Disadvantages
+## 欠点
 
-Bad things about this pattern. Possible contraindications.
+このパターンの悪い点。可能な禁忌事項。
 
-## Discussion
+## 議論
 
-A deeper discussion about this pattern. You might want to cover how this is done
-in other languages, alternative approaches, why this is particularly nice in
-Rust, etc.
+このパターンについてのより深い議論。他の言語でどのように行われているか、
+代替アプローチ、なぜこれがRustで特に良いのかなどを含めたいかもしれません。
 
-## See also
+## 関連項目
 
-Related patterns (link to the pattern file). Versions of this pattern in other
-languages.
+関連パターン（パターンファイルへのリンク）。他の言語でのこのパターンの
+バージョン。

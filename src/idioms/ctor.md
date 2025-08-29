@@ -1,15 +1,14 @@
-# Constructors
+# コンストラクタ
 
-## Description
+## 説明
 
-Rust does not have constructors as a language construct. Instead, the convention
-is to use an [associated function][associated function] `new` to create an
-object:
+Rustは言語構成としてコンストラクタを持ちません。代わりに、オブジェクトを作成するために
+[関連関数][associated function]`new`を使用することが慣例です：
 
 ````rust
-/// Time in seconds.
+/// 秒単位の時間。
 ///
-/// # Example
+/// # 例
 ///
 /// ```
 /// let s = Second::new(42);
@@ -20,27 +19,27 @@ pub struct Second {
 }
 
 impl Second {
-    // Constructs a new instance of [`Second`].
-    // Note this is an associated function - no self.
+    // [`Second`]の新しいインスタンスを構築します。
+    // これは関連関数であることに注意 - selfはありません。
     pub fn new(value: u64) -> Self {
         Self { value }
     }
 
-    /// Returns the value in seconds.
+    /// 秒単位の値を返します。
     pub fn value(&self) -> u64 {
         self.value
     }
 }
 ````
 
-## Default Constructors
+## デフォルトコンストラクタ
 
-Rust supports default constructors with the [`Default`][std-default] trait:
+Rustは[`Default`][std-default]トレイトでデフォルトコンストラクタをサポートします：
 
 ````rust
-/// Time in seconds.
+/// 秒単位の時間。
 ///
-/// # Example
+/// # 例
 ///
 /// ```
 /// let s = Second::default();
@@ -51,7 +50,7 @@ pub struct Second {
 }
 
 impl Second {
-    /// Returns the value in seconds.
+    /// 秒単位の値を返します。
     pub fn value(&self) -> u64 {
         self.value
     }
@@ -64,13 +63,13 @@ impl Default for Second {
 }
 ````
 
-`Default` can also be derived if all types of all fields implement `Default`,
-like they do with `Second`:
+`Default`は、`Second`のように、すべてのフィールドのすべての型が`Default`を実装している場合は、
+導出することもできます：
 
 ````rust
-/// Time in seconds.
+/// 秒単位の時間。
 ///
-/// # Example
+/// # 例
 ///
 /// ```
 /// let s = Second::default();
@@ -82,32 +81,29 @@ pub struct Second {
 }
 
 impl Second {
-    /// Returns the value in seconds.
+    /// 秒単位の値を返します。
     pub fn value(&self) -> u64 {
         self.value
     }
 }
 ````
 
-**Note:** It is common and expected for types to implement both `Default` and an
-empty `new` constructor. `new` is the constructor convention in Rust, and users
-expect it to exist, so if it is reasonable for the basic constructor to take no
-arguments, then it should, even if it is functionally identical to default.
+**注意:** 型が`Default`と空の`new`コンストラクタの両方を実装することは一般的であり、
+期待されることです。`new`はRustのコンストラクタ慣例であり、ユーザーはその存在を期待しています。
+したがって、基本コンストラクタが引数を取らないことが合理的であるならば、
+機能的にdefaultと同一であっても、そうすべきです。
 
-**Hint:** The advantage of implementing or deriving `Default` is that your type
-can now be used where a `Default` implementation is required, most prominently,
-any of the [`*or_default` functions in the standard library][std-or-default].
+**ヒント:** `Default`を実装または導出する利点は、`Default`実装が必要な場所であなたの型が
+使用できるようになることです。最も目立つのは、
+[標準ライブラリの`*or_default`関数][std-or-default]のいずれかです。
 
-## See also
+## 関連項目
 
-- The [default idiom](default.md) for a more in-depth description of the
-  `Default` trait.
+- `Default`トレイトのより詳細な説明については、[デフォルトの慣用句](default.md)を参照。
 
-- The [builder pattern](../patterns/creational/builder.md) for constructing
-  objects where there are multiple configurations.
+- 複数の設定があるオブジェクトを構築するための[ビルダーパターン](../patterns/creational/builder.md)。
 
-- [API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS] for
-  implementing both, `Default` and `new`.
+- `Default`と`new`の両方を実装するための[API Guidelines/C-COMMON-TRAITS][API Guidelines/C-COMMON-TRAITS]。
 
 [associated function]: https://doc.rust-lang.org/stable/book/ch05-03-method-syntax.html#associated-functions
 [std-default]: https://doc.rust-lang.org/stable/std/default/trait.Default.html

@@ -1,47 +1,44 @@
-# Prefer small crates
+# 小さなクレートを優先する
 
-## Description
+## 説明
 
-Prefer small crates that do one thing well.
+一つのことを上手くこなす小さなクレートを優先しましょう。
 
-Cargo and crates.io make it easy to add third-party libraries, much more so than
-in say C or C++. Moreover, since packages on crates.io cannot be edited or
-removed after publication, any build that works now should continue to work in
-the future. We should take advantage of this tooling, and use smaller, more
-fine-grained dependencies.
+CargoとCrates.ioは、サードパーティライブラリの追加を非常に簡単にします。
+CやC++などと比べてはるかに簡単です。さらに、crates.io上のパッケージは公開後に編集や削除ができないため、
+現在動作するビルドは将来も動作し続けるはずです。
+私たちはこのツールを活用し、より小さく、より細かい粒度の依存関係を使用すべきです。
 
-## Advantages
+## 利点
 
-- Small crates are easier to understand, and encourage more modular code.
-- Crates allow for re-using code between projects. For example, the `url` crate
-  was developed as part of the Servo browser engine, but has since found wide
-  use outside the project.
-- Since the compilation unit of Rust is the crate, splitting a project into
-  multiple crates can allow more of the code to be built in parallel.
+- 小さなクレートは理解しやすく、よりモジュール化されたコードを促進します。
+- クレートはプロジェクト間でコードを再利用できます。例えば、`url`クレートは
+  Servoブラウザエンジンの一部として開発されましたが、その後プロジェクト外で広く使用されています。
+- Rustのコンパイル単位はクレートであるため、プロジェクトを複数のクレートに分割することで、
+  より多くのコードを並列でビルドできます。
 
-## Disadvantages
+## 欠点
 
-- This can lead to "dependency hell", when a project depends on multiple
-  conflicting versions of a crate at the same time. For example, the `url` crate
-  has both versions 1.0 and 0.5. Since the `Url` from `url:1.0` and the `Url`
-  from `url:0.5` are different types, an HTTP client that uses `url:0.5` would
-  not accept `Url` values from a web scraper that uses `url:1.0`.
-- Packages on crates.io are not curated. A crate may be poorly written, have
-  unhelpful documentation, or be outright malicious.
-- Two small crates may be less optimized than one large one, since the compiler
-  does not perform link-time optimization (LTO) by default.
+- プロジェクトが同時に同じクレートの複数の競合するバージョンに依存する場合、
+  「依存関係地獄」につながる可能性があります。例えば、`url`クレートには
+  バージョン1.0と0.5の両方があります。`url:1.0`の`Url`と`url:0.5`の`Url`は
+  異なる型であるため、`url:0.5`を使用するHTTPクライアントは、
+  `url:1.0`を使用するWebスクレイパーからの`Url`値を受け入れません。
+- crates.io上のパッケージはキュレーションされていません。クレートは不十分に書かれていたり、
+  役に立たないドキュメントを持っていたり、明らかに悪意があったりする可能性があります。
+- コンパイラはデフォルトでリンク時最適化（LTO）を実行しないため、
+  2つの小さなクレートは1つの大きなクレートよりも最適化されていない可能性があります。
 
-## Examples
+## 例
 
-The [`url`](https://crates.io/crates/url) crate provides tools for working with
-URLs.
+[`url`](https://crates.io/crates/url)クレートは、URLを扱うためのツールを提供します。
 
-The [`num_cpus`](https://crates.io/crates/num_cpus) crate provides a function to
-query the number of CPUs on a machine.
+[`num_cpus`](https://crates.io/crates/num_cpus)クレートは、マシンのCPU数を
+照会する関数を提供します。
 
-The [`ref_slice`](https://crates.io/crates/ref_slice) crate provides functions
-for converting `&T` to `&[T]`. (Historical example)
+[`ref_slice`](https://crates.io/crates/ref_slice)クレートは、`&T`を`&[T]`に
+変換する関数を提供します。（歴史的な例）
 
-## See also
+## 参照
 
-- [crates.io: The Rust community crate host](https://crates.io/)
+- [crates.io: Rustコミュニティのクレートホスト](https://crates.io/)

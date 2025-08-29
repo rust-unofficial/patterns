@@ -1,30 +1,29 @@
-# Accepting Strings
+# 文字列を受け入れる
 
-## Description
+## 説明
 
-When accepting strings via FFI through pointers, there are two principles that
-should be followed:
+FFIを介してポインターで文字列を受け入れる際、従うべき2つの原則があります：
 
-1. Keep foreign strings "borrowed", rather than copying them directly.
-2. Minimize the amount of complexity and `unsafe` code involved in converting
-   from a C-style string to native Rust strings.
+1. 外部の文字列を直接コピーするのではなく、「借用」状態に保つ。
+2. C形式の文字列をネイティブRust文字列に変換する際の複雑さと
+   `unsafe`コードの量を最小化する。
 
-## Motivation
+## 動機
 
-The strings used in C have different behaviours to those used in Rust, namely:
+Cで使用される文字列は、Rustで使用されるものとは異なる動作を持ちます：
 
-- C strings are null-terminated while Rust strings store their length
-- C strings can contain any arbitrary non-zero byte while Rust strings must be
-  UTF-8
-- C strings are accessed and manipulated using `unsafe` pointer operations while
-  interactions with Rust strings go through safe methods
+- C文字列はnull終端であるのに対し、Rust文字列は長さを格納します
+- C文字列は任意の非ゼロバイトを含むことができるのに対し、Rust文字列は
+  UTF-8でなければなりません
+- C文字列は`unsafe`ポインタ操作を使用してアクセス・操作されるのに対し、
+  Rust文字列との相互作用は安全なメソッドを通じて行われます
 
-The Rust standard library comes with C equivalents of Rust's `String` and `&str`
-called `CString` and `&CStr`, that allow us to avoid a lot of the complexity and
-`unsafe` code involved in converting between C strings and Rust strings.
+Rust標準ライブラリには、RustのC文字列等価物である`CString`と`&CStr`があり、
+これらはC文字列とRust文字列間の変換に関わる多くの複雑さと
+`unsafe`コードを避けることを可能にします。
 
-The `&CStr` type also allows us to work with borrowed data, meaning passing
-strings between Rust and C is a zero-cost operation.
+`&CStr`型は借用データで作業することも可能にし、RustとC間で文字列を
+渡すことがゼロコスト操作であることを意味します。
 
 ## Code Example
 
@@ -33,16 +32,16 @@ pub mod unsafe_module {
 
     // other module content
 
-    /// Log a message at the specified level.
+    /// 指定されたレベルでメッセージをログ出力します。
     ///
     /// # Safety
     ///
-    /// It is the caller's guarantee to ensure `msg`:
+    /// `msg`が以下を満たすことは呼び出し元の保証です：
     ///
-    /// - is not a null pointer
-    /// - points to valid, initialized data
-    /// - points to memory ending in a null byte
-    /// - won't be mutated for the duration of this function call
+    /// - nullポインターではない
+    /// - 有効で初期化されたデータを指す
+    /// - nullバイトで終了するメモリを指す
+    /// - この関数呼び出しの期間中変更されない
     #[no_mangle]
     pub unsafe extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
         let level: crate::LogLevel = match level { /* ... */ };
@@ -62,14 +61,14 @@ pub mod unsafe_module {
 }
 ```
 
-## Advantages
+## 利点
 
-The example is written to ensure that:
+この例は以下を確保するように書かれています：
 
-1. The `unsafe` block is as small as possible.
-2. The pointer with an "untracked" lifetime becomes a "tracked" shared reference
+1. `unsafe`ブロックが可能な限り小さい。
+2. 「追跡されていない」ライフタイムを持つポインターが「追跡される」共有参照になる
 
-Consider an alternative, where the string is actually copied:
+文字列が実際にコピーされる代替案を考えてみましょう：
 
 ```rust,ignore
 pub mod unsafe_module {
@@ -77,20 +76,20 @@ pub mod unsafe_module {
     // other module content
 
     pub extern "C" fn mylib_log(msg: *const libc::c_char, level: libc::c_int) {
-        // DO NOT USE THIS CODE.
-        // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.
+        // このコードは使用しないでください。
+        // 醜く、冗長で、微妙なバグが含まれています。
 
         let level: crate::LogLevel = match level { /* ... */ };
 
-        let msg_len = unsafe { /* SAFETY: strlen is what it is, I guess? */
+        let msg_len = unsafe { /* SAFETY: strlenはそれが何であるかですよね？ */
             libc::strlen(msg)
         };
 
         let mut msg_data = Vec::with_capacity(msg_len + 1);
 
         let msg_cstr: std::ffi::CString = unsafe {
-            // SAFETY: copying from a foreign pointer expected to live
-            // for the entire stack frame into owned memory
+            // SAFETY: スタックフレーム全体で生存すると期待される
+            // 外部ポインターから所有メモリにコピー
             std::ptr::copy_nonoverlapping(msg, msg_data.as_mut(), msg_len);
 
             msg_data.set_len(msg_len + 1);
@@ -113,26 +112,26 @@ pub mod unsafe_module {
 }
 ```
 
-This code is inferior to the original in two respects:
+このコードは元のコードに対して2つの点で劣っています：
 
-1. There is much more `unsafe` code, and more importantly, more invariants it
-   must uphold.
-2. Due to the extensive arithmetic required, there is a bug in this version that
-   cases Rust `undefined behaviour`.
+1. `unsafe`コードがはるかに多く、より重要なことに、維持しなければならない
+   不変条件が多い。
+2. 必要な広範囲な算術演算のため、このバージョンにはRustの
+   `未定義動作`を引き起こすバグがあります。
 
-The bug here is a simple mistake in pointer arithmetic: the string was copied,
-all `msg_len` bytes of it. However, the `NUL` terminator at the end was not.
+ここでのバグは、ポインタ算術での単純な間違いです：文字列はコピーされ、
+その`msg_len`バイトすべてがコピーされました。しかし、末尾の`NUL`終端子は
+コピーされませんでした。
 
-The Vector then had its size *set* to the length of the *zero padded string* --
-rather than *resized* to it, which could have added a zero at the end. As a
-result, the last byte in the Vector is uninitialized memory. When the `CString`
-is created at the bottom of the block, its read of the Vector will cause
-`undefined behaviour`!
+ベクタのサイズは*ゼロパディングされた文字列*の長さに*設定*されました --
+末尾にゼロを追加できた*リサイズ*ではなく。結果として、ベクタの最後のバイトは
+初期化されていないメモリです。ブロックの下部で`CString`が作成される際、
+そのベクタの読み取りは`未定義動作`を引き起こします！
 
-Like many such issues, this would be difficult issue to track down. Sometimes it
-would panic because the string was not `UTF-8`, sometimes it would put a weird
-character at the end of the string, sometimes it would just completely crash.
+多くのこのような問題と同様に、これは追跡が困難な問題でしょう。文字列が
+`UTF-8`でないためにパニックすることもあれば、文字列の末尾に奇妙な
+文字を置くこともあり、完全にクラッシュすることもあります。
 
-## Disadvantages
+## 欠点
 
-None?
+なし？

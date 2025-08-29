@@ -1,20 +1,20 @@
-# Builder
+# ビルダー
 
-## Description
+## 説明
 
-Construct an object with calls to a builder helper.
+ビルダーヘルパーへの呼び出しでオブジェクトを構築します。
 
-## Example
+## 例
 
 ```rust
 #[derive(Debug, PartialEq)]
 pub struct Foo {
-    // Lots of complicated fields.
+    // 多くの複雑なフィールド
     bar: String,
 }
 
 impl Foo {
-    // This method will help users to discover the builder
+    // このメソッドはユーザーがビルダーを発見するのに役立ちます
     pub fn builder() -> FooBuilder {
         FooBuilder::default()
     }
@@ -22,30 +22,30 @@ impl Foo {
 
 #[derive(Default)]
 pub struct FooBuilder {
-    // Probably lots of optional fields.
+    // おそらく多くのオプショナルなフィールド
     bar: String,
 }
 
 impl FooBuilder {
     pub fn new(/* ... */) -> FooBuilder {
-        // Set the minimally required fields of Foo.
+        // Fooの最小限必要なフィールドを設定
         FooBuilder {
             bar: String::from("X"),
         }
     }
 
     pub fn name(mut self, bar: String) -> FooBuilder {
-        // Set the name on the builder itself, and return the builder by value.
+        // ビルダー自体に名前を設定し、ビルダーを値で返す
         self.bar = bar;
         self
     }
 
-    // If we can get away with not consuming the Builder here, that is an
-    // advantage. It means we can use the FooBuilder as a template for constructing
-    // many Foos.
+    // ここでビルダーを消費しないで済むなら、それは利点です。
+    // これは、FooBuilderを多くのFooを構築するためのテンプレートとして
+    // 使用できることを意味します。
     pub fn build(self) -> Foo {
-        // Create a Foo from the FooBuilder, applying all settings in FooBuilder
-        // to Foo.
+        // FooBuilderからFooを作成し、FooBuilderのすべての設定を
+        // Fooに適用します。
         Foo { bar: self.bar }
     }
 }
@@ -60,42 +60,36 @@ fn builder_test() {
 }
 ```
 
-## Motivation
+## 動機
 
-Useful when you would otherwise require many constructors or where construction
-has side effects.
+多くのコンストラクタが必要になる場合や、構築に副作用がある場合に有用です。
 
-## Advantages
+## 利点
 
-Separates methods for building from other methods.
+構築用のメソッドを他のメソッドから分離します。
 
-Prevents proliferation of constructors.
+コンストラクタの増殖を防ぎます。
 
-Can be used for one-liner initialisation as well as more complex construction.
+ワンライナーの初期化にも、より複雑な構築にも使用できます。
 
-## Disadvantages
+## 欠点
 
-More complex than creating a struct object directly, or a simple constructor
-function.
+構造体オブジェクトを直接作成したり、単純なコンストラクタ関数を使用したりするよりも複雑です。
 
-## Discussion
+## 議論
 
-This pattern is seen more frequently in Rust (and for simpler objects) than in
-many other languages because Rust lacks overloading. Since you can only have a
-single method with a given name, having multiple constructors is less nice in
-Rust than in C++, Java, or others.
+このパターンは、Rustにはオーバーロードがないため、他の多くの言語よりもRustで（そしてより単純なオブジェクトに対して）頻繁に見られます。
+指定された名前のメソッドは1つしか持てないため、複数のコンストラクタを持つことは、
+C++、Java、その他の言語よりもRustでは好ましくありません。
 
-This pattern is often used where the builder object is useful in its own right,
-rather than being just a builder. For example, see
-[`std::process::Command`](https://doc.rust-lang.org/std/process/struct.Command.html)
-is a builder for
-[`Child`](https://doc.rust-lang.org/std/process/struct.Child.html) (a process).
-In these cases, the `T` and `TBuilder` naming pattern is not used.
+このパターンは、ビルダーオブジェクトが単なるビルダーではなく、それ自体が有用である場合によく使用されます。
+例えば、[`std::process::Command`](https://doc.rust-lang.org/std/process/struct.Command.html)は
+[`Child`](https://doc.rust-lang.org/std/process/struct.Child.html)（プロセス）のビルダーです。
+これらの場合、`T`と`TBuilder`の命名パターンは使用されません。
 
-The example takes and returns the builder by value. It is often more ergonomic
-(and more efficient) to take and return the builder as a mutable reference. The
-borrow checker makes this work naturally. This approach has the advantage that
-one can write code like
+この例では、ビルダーを値で取得して返します。多くの場合、ビルダーを可変参照として取得して返す方が、
+よりエルゴノミック（そしてより効率的）です。借用チェッカーはこれを自然に機能させます。
+このアプローチには、次のようなコードを書けるという利点があります：
 
 ```rust,ignore
 let mut fb = FooBuilder::new();
@@ -104,13 +98,13 @@ fb.b();
 let f = fb.build();
 ```
 
-as well as the `FooBuilder::new().a().b().build()` style.
+`FooBuilder::new().a().b().build()`スタイルと同様です。
 
-## See also
+## 参照
 
-- [Description in the style guide](https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)
-- [derive_builder](https://crates.io/crates/derive_builder), a crate for
-  automatically implementing this pattern while avoiding the boilerplate.
-- [Constructor pattern](../../idioms/ctor.md) for when construction is simpler.
-- [Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
-- [Construction of complex values](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)
+- [スタイルガイドの説明](https://web.archive.org/web/20210104103100/https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)
+- [derive_builder](https://crates.io/crates/derive_builder)、ボイラープレートを避けながら
+  このパターンを自動的に実装するクレート
+- [コンストラクタパターン](../../idioms/ctor.md) - より単純な構築の場合
+- [ビルダーパターン (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)
+- [複雑な値の構築](https://web.archive.org/web/20210104103000/https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)

@@ -1,4 +1,4 @@
-# Strategy (aka Policy)
+# ストラテジーパターン（またはポリシーパターン）
 
 ## Description
 
