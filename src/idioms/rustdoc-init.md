@@ -64,7 +64,7 @@ impl Connection {
     /// assert!(response.is_ok());
     /// # }
     /// ```
-    fn send_request(&self, request: Request) {
+    fn send_request(&self, request: Request) -> Result<Status, SendErr> {
         // ...
     }
 }

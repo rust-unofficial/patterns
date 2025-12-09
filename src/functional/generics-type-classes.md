@@ -118,7 +118,7 @@ mod bootp {
     pub(crate) struct AuthInfo(); // no authentication in bootp
 }
 
-// private module, lest outside users invent their own protocol kinds!
+// Keep the module private to prevent outside users from inventing their own protocols.
 mod proto_trait {
     use super::{bootp, nfs};
     use std::path::{Path, PathBuf};
