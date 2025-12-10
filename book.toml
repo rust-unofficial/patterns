@@ -16,7 +16,6 @@ after = ["links"]
 edition = "2021"
 
 [output.html]
-curly-quotes = true
 default-theme = "rust"
 site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
