@@ -135,4 +135,11 @@ character at the end of the string, sometimes it would just completely crash.
 
 ## Disadvantages
 
-None?
+While working with borrowed C strings (`&CStr`) minimizes copying and unsafe operations, there are still a few drawbacks:
+
+- **Lifetime Complexity:** Managing lifetimes correctly can be tricky when dealing with borrowed data from C, especially if the lifetime is not clearly documented or known.
+- **Null-Terminated Assumptions:** Rust’s string handling relies on known lengths, whereas C strings rely on null termination. If a C string lacks a proper null terminator, it can lead to undefined behavior.
+- **UTF-8 Enforcement:** Rust strings (`&str`) require valid UTF-8. C strings may contain arbitrary bytes, so converting `&CStr` to `&str` is fallible and may fail at runtime.
+- **Thread Safety:** Raw pointers from C may not be thread-safe, and `&CStr` does not guarantee safety across threads unless explicitly handled.
+
+Despite these, using `&CStr` is often the best trade-off between safety and performance in FFI contexts.
