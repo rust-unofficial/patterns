@@ -24,7 +24,7 @@ fn bar() -> Result<(), ()> {
         }
     }
 
-    // The dtor of _exit will run however the function `bar` is exited.
+    // The destructor of _exit will run however the function `bar` is exited.
     let _exit = Foo;
     // Implicit return with `?` operator.
     baz()?;
