@@ -37,6 +37,7 @@
     - [Compose Structs](./patterns/structural/compose-structs.md)
     - [Prefer Small Crates](./patterns/structural/small-crates.md)
     - [Contain unsafety in small modules](./patterns/structural/unsafe-mods.md)
+    - [Avoid complex type bounds with custom traits](./patterns/structural/trait-for-bounds.md)
   - [Foreign function interface (FFI)](./patterns/ffi/intro.md)
     - [Object-Based APIs](./patterns/ffi/export.md)
     - [Type Consolidation into Wrappers](./patterns/ffi/wrappers.md)
