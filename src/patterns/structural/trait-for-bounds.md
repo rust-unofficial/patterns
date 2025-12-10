@@ -2,12 +2,11 @@
 
 ## Description
 
-Trait bounds can become somewhat unwieldy, especially if one of the `Fn`
-traits[^fn-traits] is involved and there are specific requirements on the output
-type. In such cases the introduction of a new trait may help reduce verbosity,
-eliminate some type parameters and thus increase expressiveness. Such a trait
-can be accompanied with a generic `impl` for all types satisfying the original
-bound.
+Trait bounds can become somewhat unwieldy, especially if one of the `Fn` traits[^fn-traits]
+is involved and there are specific requirements on the output type. In such
+cases the introduction of a new trait may help reduce verbosity, eliminate some
+type parameters and thus increase expressiveness. Such a trait can be
+accompanied with a generic `impl` for all types satisfying the original bound.
 
 ## Example
 
@@ -114,4 +113,5 @@ not be obvious right away that a simple closure may be used as a `Getter` in the
 example above.
 
 [^fn-traits]: i.e. `Fn`, `FnOnce` and `FnMut`
+
 [^read-docs]: meaning they may need to read more documentation
