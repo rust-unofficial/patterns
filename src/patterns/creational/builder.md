@@ -73,8 +73,8 @@ Prevents proliferation of constructors.
 
 Can be used for one-liner initialisation as well as more complex construction.
 
-When the target struct is updated with new fields, the builder can be updated
-to leave client code correct without changes.
+When you add new fields to the target struct, you can update the builder to
+leave client code backwards compatible.
 
 ## Disadvantages
 
