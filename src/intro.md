@@ -7,8 +7,8 @@ If you are interested in contributing to this book, check out the
 
 ## News
 
-- **2024-03-17**: You can now download the book in PDF format from
-  [this link](https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf).
+- **2024-03-17**: You can now download the
+  [book in PDF format](https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf).
 
 ## Design patterns
 
@@ -45,4 +45,5 @@ chapters:
   when coding. However, while design patterns give us benefits, anti-patterns
   create more problems.
 
-[^1]: https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/
+[^1]: <https://www.infoq.com/podcasts/software-architecture-hard-parts/>
+    ([Archive](https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/)]
