@@ -13,7 +13,7 @@ extra-watch-dirs = ["po", "third_party"]
 after = ["links"]
 
 [rust]
-edition = "2021"
+edition = "2024"
 
 [output.html]
 smart-punctuation = true
