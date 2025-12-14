@@ -2,17 +2,36 @@ name: Check Markdown links Periodically
 
 on:
   schedule:
-  # Run everyday at 0:00 AM
-  - cron: "0 0 * * *"
+    # Run everyday at 0:00 AM
+    - cron: "0 0 * * *"
+
+permissions: {}
 
 jobs:
-  markdown-link-check:
+  markdown-link-check-periodic:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
-    - uses: gaurav-nelson/github-action-markdown-link-check@v1
-      with:
-        use-verbose-mode: 'yes'
-        use-quiet-mode: 'yes'
-        config-file: '.github/workflows/url-check-config.json'
-        base-branch: 'main'
+      - name: Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
+
+      - name: Restore lychee cache
+        uses: actions/cache@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Link Checker
+        uses: lycheeverse/lychee-action@a8c4c7cb88f0c7386610c35eb25108e448569cb0 # v2.7.0
+        env:
+          # set the GitHub token to avoid rate limits
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fail: true
+          args: |
+            --no-progress
+            --include-fragments
+            --accept '100..=103, 200..=299, 429'
+            .
