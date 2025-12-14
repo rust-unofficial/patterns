@@ -46,4 +46,4 @@ chapters:
   create more problems.
 
 [^1]: <https://www.infoq.com/podcasts/software-architecture-hard-parts/>
-    ([Archive](https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/)]
+    ([Archive](https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/))
