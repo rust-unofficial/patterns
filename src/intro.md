@@ -7,6 +7,7 @@ If you are interested in contributing to this book, check out the
 
 ## News
 
+- **2025-12-14**: New pattern added: [Use custom traits to avoid complex type bounds](./patterns/structural/trait-for-bounds.md)
 - **2024-03-17**: You can now download the
   [book in PDF format](https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf).
 
