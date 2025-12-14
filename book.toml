@@ -13,14 +13,13 @@ extra-watch-dirs = ["po", "third_party"]
 after = ["links"]
 
 [rust]
-edition = "2021"
+edition = "2024"
 
 [output.html]
-curly-quotes = true
+smart-punctuation = true
 default-theme = "rust"
 site-url = "/patterns/"
 git-repository-url = "https://github.com/rust-unofficial/patterns"
-git-repository-icon = "fa-github"
 edit-url-template = "https://github.com/rust-unofficial/patterns/edit/main/{path}"
 additional-css = [
   "./theme/css/language-picker.css",
@@ -28,6 +27,7 @@ additional-css = [
 ]
 
 [preprocessor.last-changed]
+optional = true
 command = "mdbook-last-changed"
 renderer = ["html"]
 

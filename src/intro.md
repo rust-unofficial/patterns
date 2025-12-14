@@ -45,4 +45,5 @@ chapters:
   when coding. However, while design patterns give us benefits, anti-patterns
   create more problems.
 
-[^1]: <https://www.infoq.com/podcasts/software-architecture-hard-parts/> ([Archive](https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/)]
+[^1]: <https://www.infoq.com/podcasts/software-architecture-hard-parts/>
+    ([Archive](https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/software-architecture-hard-parts/))

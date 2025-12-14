@@ -73,6 +73,9 @@ Prevents proliferation of constructors.
 
 Can be used for one-liner initialisation as well as more complex construction.
 
+When you add new fields to the target struct, you can update the builder to
+leave client code backwards compatible.
+
 ## Disadvantages
 
 More complex than creating a struct object directly, or a simple constructor
@@ -81,9 +84,9 @@ function.
 ## Discussion
 
 This pattern is seen more frequently in Rust (and for simpler objects) than in
-many other languages because Rust lacks overloading. Since you can only have a
-single method with a given name, having multiple constructors is less nice in
-Rust than in C++, Java, or others.
+many other languages because Rust lacks overloading and default values for
+function parameters. Since you can only have a single method with a given name,
+having multiple constructors is less nice in Rust than in C++, Java, or others.
 
 This pattern is often used where the builder object is useful in its own right,
 rather than being just a builder. For example, see
