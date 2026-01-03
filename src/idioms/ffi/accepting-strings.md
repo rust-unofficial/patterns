@@ -118,7 +118,7 @@ This code is inferior to the original in two respects:
 1. There is much more `unsafe` code, and more importantly, more invariants it
    must uphold.
 2. Due to the extensive arithmetic required, there is a bug in this version that
-   cases Rust `undefined behaviour`.
+   causes Rust `undefined behaviour`.
 
 The bug here is a simple mistake in pointer arithmetic: the string was copied,
 all `msg_len` bytes of it. However, the `NUL` terminator at the end was not.
