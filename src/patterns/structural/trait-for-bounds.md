@@ -13,11 +13,11 @@ accompanied with a generic `impl` for all types satisfying the original bound.
 Let's imagine some sort of monitoring or information gathering system. The
 system retrieves values of various types from diverse sources. It may derive
 from them some sort of status indicating issues. For example, the total amount
-of free memory should be above a certain theshold, and the user with the id `0`
+of free memory should be above a certain threshold, and the user with the id `0`
 should always be named "root".
 
 For management reasons, we probably want type erasure on the top level. However,
-we also need to provide specific (user configurable) assesments for specific
+we also need to provide specific (user configurable) assessments for specific
 types of data sources (e.g. thresholds and ranges for numerical types). And
 since sources for these values are diverse, we may choose to supply data sources
 as closures that return a value when called. Because we are probably getting
@@ -62,7 +62,7 @@ struct Error {
 ```
 
 With these types, we will need to repeat the trait bounds for `G` in at least a
-few places. Readability suffers, partially due the the fact that the getter
+few places. Readability suffers, partially due to the fact that the getter
 returns a `Result`. Introducing a bound for "getters" allows a more expressive
 bound and eliminate one of the type parameters:
 
@@ -101,7 +101,7 @@ bound more expressive. The new trait, an abstraction, also offers opportunities
 in itself, including:
 
 - additional, specialized types implementing the new trait (e.g. representing an
-  idendity of some sort) as well as other useful traits such as `Default` and
+  identity of some sort) as well as other useful traits such as `Default` and
 - additional methods, as long as they can be implemented for all relevant types.
 
 ## Disadvantages
