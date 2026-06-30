@@ -13,7 +13,7 @@ accompanied with a generic `impl` for all types satisfying the original bound.
 Let's imagine some sort of monitoring or information gathering system. The
 system retrieves values of various types from diverse sources. It may derive
 from them some sort of status indicating issues. For example, the total amount
-of free memory should be above a certain theshold, and the user with the id `0`
+of free memory should be above a certain threshold, and the user with the id `0`
 should always be named "root".
 
 For management reasons, we probably want type erasure on the top level. However,
