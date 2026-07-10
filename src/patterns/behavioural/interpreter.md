@@ -82,7 +82,7 @@ impl<'a> Interpreter<'a> {
 
     fn term(&mut self, out: &mut String) {
         match self.next_char() {
-            Some(ch) if ch.is_digit(10) => out.push(ch),
+            Some(ch) if ch.is_ascii_digit() => out.push(ch),
             Some(ch) => panic!("Unexpected symbol '{ch}'"),
             None => panic!("Unexpected end of string"),
         }
