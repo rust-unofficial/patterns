@@ -33,7 +33,7 @@ mod ast {
 
 // The abstract visitor
 mod visit {
-    use ast::*;
+    use crate::ast::*;
 
     pub trait Visitor<T> {
         fn visit_name(&mut self, n: &Name) -> T;
