@@ -48,7 +48,7 @@ use visit::*;
 // An example concrete implementation - walks the AST interpreting it as code.
 struct Interpreter;
 impl Visitor<i64> for Interpreter {
-    fn visit_name(&mut self, n: &Name) -> i64 {
+    fn visit_name(&mut self, _n: &Name) -> i64 {
         panic!()
     }
     fn visit_stmt(&mut self, s: &Stmt) -> i64 {
