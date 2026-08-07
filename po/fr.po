@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2026-08-06 10:44+0200\n"
+"PO-Revision-Date: 2026-08-07 12:03+0200\n"
 "Last-Translator: Rémi <nuga_agun@proton.me>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr "Traductions"
 
 #: src/SUMMARY.md:5 src/idioms/index.md:1
 msgid "Idioms"
-msgstr "Bonnes pratiques"
+msgstr "Idiomes"
 
 #: src/SUMMARY.md:6 src/idioms/coercion-arguments.md:1
 msgid "Use borrowed types for arguments"
@@ -211,7 +211,7 @@ msgstr "Principes de conception"
 
 #: src/intro.md:3
 msgid "Participation"
-msgstr ""
+msgstr "Participation"
 
 #: src/intro.md:5
 msgid ""
@@ -219,20 +219,25 @@ msgid ""
 "[contribution guidelines](https://github.com/rust-unofficial/patterns/blob/"
 "master/CONTRIBUTING.md)."
 msgstr ""
+"Si vous souhaitez contribuer à la rédaction de ce livre, consultez les "
+"[règles de contribution](https://github.com/rust-unofficial/patterns/blob/"
+"master/CONTRIBUTING.md)."
 
 #: src/intro.md:8
 msgid "News"
-msgstr ""
+msgstr "Nouveautés"
 
 #: src/intro.md:10
 msgid ""
 "**2024-03-17**: You can now download the book in PDF format from [this link]"
 "(https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf)."
 msgstr ""
+"**2024-03-17**: Le livre est désormais disponible en PDF via [ce lien]"
+"(https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf)."
 
 #: src/intro.md:13
 msgid "Design patterns"
-msgstr ""
+msgstr "Patrons de conception"
 
 #: src/intro.md:15
 msgid ""
@@ -242,6 +247,12 @@ msgid ""
 "abstract from these particularities to find the common practices that are "
 "generically applicable."
 msgstr ""
+"Dans le monde du développement logiciel, malgré la diversité des "
+"environnements et des pratiques, on rencontre souvent les même types de "
+"problèmes. Bien qu'il soit toujours important de tenir compte des détails "
+"d'implémentation, il est possible de s'affranchir de ces détails en se "
+"reposant sur des pratiques standard applicables à un grand nombre de "
+"situations."
 
 #: src/intro.md:20
 msgid ""
@@ -251,6 +262,12 @@ msgid ""
 "language for developers, making them an excellent tool for effective "
 "communication when problem-solving in teams."
 msgstr ""
+"Les patrons de conception sont un ensemble de solutions testées et "
+"approuvées, applicables à certains des problèmes récurrents qu'on rencontre "
+"dans l'ingénierie logicielle. Ils permettent de créer des logiciels plus "
+"modulaires, facilement maintenables et extensibles. De plus, ces patrons "
+"forment un langage commun permettant une communication efficace au sein des "
+"équipes de développeurs."
 
 #: src/intro.md:26
 msgid ""
@@ -258,10 +275,14 @@ msgid ""
 "crucial to focus on why you choose a particular pattern rather than just on "
 "how to implement it.[^1]"
 msgstr ""
+"Mais rappelez-vous que chaque patron de conception possède ses propres "
+"avantages et inconvénients. Il est crucial de déterminer la raison qui "
+"motive le choix d'un patron plutôt que de se concentrer uniquement sur son "
+"implémentation.[^1]"
 
 #: src/intro.md:30 src/patterns/index.md:14
 msgid "Design patterns in Rust"
-msgstr ""
+msgstr "Les patrons de conception en Rust"
 
 #: src/intro.md:32
 msgid ""
@@ -272,6 +293,13 @@ msgid ""
 "decided to write this book. We hope you enjoy reading it! The book is "
 "divided in three main chapters:"
 msgstr ""
+"Rust n'est pas à proprement parler un langage orienté objet. La combinaison "
+"de ses caractéristiques telles que les éléments de programmation "
+"fonctionnelle, le système de typage fort et le vérificateur d'emprunt, le "
+"rendent unique. Pour cette raison, les patrons de conception en Rust varient "
+"par rapport aux langages de programmation orientés objet traditionnels. "
+"C'est pour cela que nous avons décidé d'écrire ce livre. Nous espérons qu'il "
+"vous plaira ! Le livre est divisé en trois chapitres :"
 
 #: src/intro.md:39
 msgid ""
@@ -279,12 +307,17 @@ msgid ""
 "social norms of the community. You should break them only if you have a good "
 "reason for it."
 msgstr ""
+"[Idiomes](./idioms/index.md): recommandations à suivre lors du "
+"développement. Ce sont les normes sociales de la communauté. Il vaut mieux "
+"les respecter à moins d'avoir une bonne raison de faire autrement."
 
 #: src/intro.md:42
 msgid ""
 "[Design patterns](./patterns/index.md): methods to solve common problems "
 "when coding."
 msgstr ""
+"[Patrons de conception](./patterns/index.md): méthodes pour résoudre des "
+"problèmes classiques lors du développement."
 
 #: src/intro.md:44
 msgid ""
@@ -292,6 +325,10 @@ msgid ""
 "when coding. However, while design patterns give us benefits, anti-patterns "
 "create more problems."
 msgstr ""
+"[Anti-patrons](./anti_patterns/index.md): méthodes pour résoudre des "
+"problèmes classiques lors du développement. Mais là où les patrons de "
+"conception nous simplifient la tâche, les anti-patrons créent plus de "
+"problèmes."
 
 #: src/intro.md:48
 msgid ""
@@ -306,20 +343,26 @@ msgid ""
 "repository](https://github.com/google/mdbook-i18n-helpers#creating-and-"
 "updating-translations)"
 msgstr ""
+"Nous utilisons [mdbook-i18n-helper](https://github.com/google/mdbook-i18n-"
+"helpers) pour les traductions. Si vous souhaitez _ajouter_ ou _modifier_ une "
+"traduction, référez-vous à [leur dépôt GitHub](https://github.com/google/"
+"mdbook-i18n-helpers#creating-and-updating-translations)."
 
 #: src/translations.md:8
 msgid "External translations"
-msgstr ""
+msgstr "Traductions externes"
 
 #: src/translations.md:10
 msgid "[简体中文](https://fomalhauthmj.github.io/patterns/)"
-msgstr ""
+msgstr "[简体中文](https://fomalhauthmj.github.io/patterns/)"
 
 #: src/translations.md:12
 msgid ""
 "If you want to add a translation, please open an issue in the [main "
 "repository](https://github.com/rust-unofficial/patterns)."
 msgstr ""
+"Si vous souhaitez ajouter une traduction, veuillez ouvrir une _issue_ dans "
+"le [dépôt principal](https://github.com/rust-unofficial/patterns)."
 
 #: src/idioms/index.md:3
 msgid ""
@@ -328,6 +371,10 @@ msgid ""
 "idiomatic code allows other developers to understand better what is "
 "happening."
 msgstr ""
+"Les [idiomes](https://fr.wikipedia.org/wiki/Idiome_de_programmation) sont "
+"des pratiques répandues, des règles et des patterns largement approuvés par "
+"une communauté. Suivre ces bonnes pratiques permet d'écrire du code "
+"compréhensible facilement par les autres développeurs."
 
 #: src/idioms/index.md:7
 msgid ""
@@ -336,6 +383,10 @@ msgid ""
 "developer. So, since we have this abstraction layer, why not make it more "
 "readable?"
 msgstr ""
+"Après tout, l'ordinateur ne se préoccupe que du code machine généré par le "
+"compilateur. Le code source, lui, bénéficie avant tout aux développeurs. "
+"Puisque ce niveau d'abstraction nous est offert, pourquoi ne pas le rendre "
+"le plus lisible possible ?"
 
 #: src/idioms/index.md:11
 msgid ""
@@ -344,10 +395,16 @@ msgid ""
 "are kept simple rather than made complicated; therefore, simplicity should "
 "be a key goal in design, and unnecessary complexity should be avoided\"."
 msgstr ""
+"Gardez en tête le [principe KISS](https://fr.wikipedia.org/wiki/"
+"Principe_KISS): \"Keep It Simple, Stupid\" (Ne complique pas les choses, "
+"idiot !). Il stipule que \"la plupart des systèmes fonctionnent mieux s'ils "
+"restent simples plutôt que d'être fait de manière alambiquée. La simplicité "
+"devrait donc être un objectif clé de la conception et toute complexité "
+"superflue devrait être évitée\"."
 
 #: src/idioms/index.md:16
 msgid "Code is there for humans, not computers, to understand."
-msgstr ""
+msgstr "Le code est fait pour être lu par des humains, pas par des machines."
 
 #: src/idioms/coercion-arguments.md:3 src/idioms/concat-format.md:3
 #: src/idioms/ctor.md:3 src/idioms/default.md:3 src/idioms/deref.md:3
