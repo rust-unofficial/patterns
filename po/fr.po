@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2026-08-07 12:03+0200\n"
+"PO-Revision-Date: 2026-08-10 09:19+0200\n"
 "Last-Translator: Rémi <nuga_agun@proton.me>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -183,7 +183,7 @@ msgstr "`#[deny(warnings)]`"
 
 #: src/SUMMARY.md:47
 msgid "Deref Polymorphism"
-msgstr "Utiliser deref pour simuler le polymorphisme"
+msgstr "Polymorphisme avec Deref"
 
 #: src/SUMMARY.md:49
 msgid "Functional Programming"
@@ -427,7 +427,7 @@ msgstr "Le code est fait pour être lu par des humains, pas par des machines."
 #: src/anti_patterns/deny-warnings.md:3 src/anti_patterns/deref.md:3
 #: src/functional/generics-type-classes.md:3
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: src/idioms/coercion-arguments.md:5
 msgid ""
@@ -435,6 +435,10 @@ msgid ""
 "when you are deciding which argument type to use for a function argument. In "
 "this way, the function will accept more input types."
 msgstr ""
+"Utiliser la cible d'une _extrapolation de déréferencement_ (deref coercion) "
+"peut rendre votre code plus flexible lorsque vous devez choisir le type d'un "
+"argument à passer à une fonction. De cette façon, la fonction acceptera plus "
+"de types différents."
 
 #: src/idioms/coercion-arguments.md:9
 msgid ""
@@ -442,6 +446,11 @@ msgid ""
 "always prefer using the **borrowed type** over **borrowing the owned type**. "
 "Such as `&str` over `&String`, `&[T]` over `&Vec<T>`, or `&T` over `&Box<T>`."
 msgstr ""
+"Cela ne se limite pas aux types qu'on peut convertir en slice ou aux "
+"_pointeurs élargis_ (fat pointers). En fait, vous devriez toujours "
+"privilégier l'usage d'un **type emprunté** plutôt que d'**emprunter le type "
+"possédé**. Par exemple, privilégier `\n"
+"&str` à `&String`, `&[T]` à `&Vec<T>` ou encore `&T` à `&Box<T>`."
 
 #: src/idioms/coercion-arguments.md:13
 msgid ""
@@ -451,6 +460,12 @@ msgid ""
 "of indirection. We can avoid this by using `&str` instead, and letting "
 "`&String` coerce to a `&str` whenever the function is invoked."
 msgstr ""
+"L'utilisation de types empruntés permet d'éviter des couches d'indirection "
+"pour ces instances lorsque le type propriétaire fournit déjà une couche "
+"d'indirection. Par exemple, un `String` possède une couche d'indirection "
+"donc un `&String` en possédera deux. Nous pouvons éviter cela en lui "
+"préférant `&str` et en laissant `&String` être extrapolé en `&str` lorsque "
+"la fonction sera invoquée."
 
 #: src/idioms/coercion-arguments.md:19 src/idioms/concat-format.md:10
 #: src/idioms/default.md:20 src/idioms/deref.md:9 src/idioms/dtor-finally.md:9
@@ -467,7 +482,7 @@ msgstr ""
 #: src/anti_patterns/borrow_clone.md:11 src/anti_patterns/deny-warnings.md:8
 #: src/anti_patterns/deref.md:8 src/functional/generics-type-classes.md:38
 msgid "Example"
-msgstr ""
+msgstr "Exemple"
 
 #: src/idioms/coercion-arguments.md:21
 msgid ""
@@ -475,6 +490,10 @@ msgid ""
 "a function argument versus using a `&str`, but the ideas apply as well to "
 "using `&Vec<T>` versus using a `&[T]` or using a `&Box<T>` versus a `&T`."
 msgstr ""
+"Pour cet exemple, nous illustrerons certaines différences entre "
+"l'utilisation de `&String` et de `&str`en argument d'une fonction, mais "
+"cette idée s'appliquera aussi bien à l'utilisation de `&Vec<T>` par rapport "
+"à `&[T]` ou à celle de `&Box<T>` par rapport à `&T`."
 
 #: src/idioms/coercion-arguments.md:25
 msgid ""
@@ -482,42 +501,45 @@ msgid ""
 "consecutive vowels. We don't need to own the string to determine this, so we "
 "will take a reference."
 msgstr ""
+"Imaginons que nous voulons déterminer si un mot contiens trois voyelles "
+"consécutives. Inutile de posséder la chaîne de caractère pour cela, donc "
+"nous utilisons une référence."
 
 #: src/idioms/coercion-arguments.md:29
 msgid "The code might look something like this:"
-msgstr ""
+msgstr "Le code pourrait ressembler à quelque chose comme ça :"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'a'"
-msgstr ""
+msgstr "'a'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'e'"
-msgstr ""
+msgstr "'e'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'i'"
-msgstr ""
+msgstr "'i'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'o'"
-msgstr ""
+msgstr "'o'"
 
 #: src/idioms/coercion-arguments.md:36 src/idioms/coercion-arguments.md:96
 msgid "'u'"
-msgstr ""
+msgstr "'u'"
 
 #: src/idioms/coercion-arguments.md:49
 msgid "\"Ferris\""
-msgstr ""
+msgstr "\"Ferris\""
 
 #: src/idioms/coercion-arguments.md:50
 msgid "\"Curious\""
-msgstr ""
+msgstr "\"Curious\""
 
 #: src/idioms/coercion-arguments.md:51 src/idioms/coercion-arguments.md:52
 msgid "\"{}: {}\""
-msgstr ""
+msgstr "\"{}: {}\""
 
 #: src/idioms/coercion-arguments.md:54
 msgid ""
@@ -525,6 +547,9 @@ msgid ""
 "    // println!(\"Ferris: {}\", three_vowels(\"Ferris\"));\n"
 "    // println!(\"Curious: {}\", three_vowels(\"Curious\"));\n"
 msgstr ""
+"// Cela fonctionne, mais les lignes suivantes provoqueraient une erreur :\r\n"
+"    // println!(\"Ferris: {}\", three_vowels(\"Ferris\"));\r\n"
+"    // println!(\"Curious: {}\", three_vowels(\"Curious\"));\r\n"
 
 #: src/idioms/coercion-arguments.md:60
 msgid ""
@@ -533,14 +558,18 @@ msgid ""
 "because a `&str` type will not coerce to a `&String` type. We can fix this "
 "by simply modifying the type for our argument."
 msgstr ""
+"Cela fonctionne parce que nous passons le type `&String` en paramètre. Si on "
+"décommente les deux dernières lignes en revanche, l'exemple provoquera une "
+"erreur. C'est parce que `&str` ne peut pas être extrapolé en `&String`. Nous "
+"pouvons réparer cela simplement en modifiant le type de notre argument."
 
 #: src/idioms/coercion-arguments.md:65
 msgid "For instance, if we change our function declaration to:"
-msgstr ""
+msgstr "Par exemple, si on change la déclaration de notre fonction en :"
 
 #: src/idioms/coercion-arguments.md:71
 msgid "then both versions will compile and print the same output."
-msgstr ""
+msgstr "alors les deux versions compilent et affichent la même chose."
 
 #: src/idioms/coercion-arguments.md:78
 msgid ""
@@ -550,6 +579,11 @@ msgid ""
 "ignoring this special example, you may still find that using `&str` will "
 "give you more flexibility than using a `&String`."
 msgstr ""
+"Mais attendez, ce n'est pas tout ! L'histoire ne s'arrête pas là. Vous vous "
+"dites probablement \"peu importe, je n'utiliserai jamais un `&'static str` "
+"en entrée de toute manière\" (c'est ce que nous avons fait en utilisant "
+"\"Ferris\"). Même si on laisse de côté cet exemple spécifique, vous verrez "
+"qu'utiliser `&str` vous donnera plus de flexibilité que d'utiliser `&String`."
 
 #: src/idioms/coercion-arguments.md:84
 msgid ""
@@ -558,28 +592,35 @@ msgid ""
 "vowels. We probably should make use of the function we have already defined "
 "and simply feed in each word from the sentence."
 msgstr ""
+"Prenons maintenant un exemple dans lequel on nous donne une phrase et où "
+"nous devons déterminer si l'un des mots de cette phrase contient trois "
+"voyelles consécutives. Nous devrions probablement nous servir de la fonction "
+"que nous avons déjà définie et lui fournir simplement chaque mot de la "
+"phrase."
 
 #: src/idioms/coercion-arguments.md:89
 msgid "An example of this could look like this:"
-msgstr ""
+msgstr "Un exemple de solution pourrait ressembler à ça :"
 
 #: src/idioms/coercion-arguments.md:110
 msgid "\"Once upon a time, there was a friendly curious crab named Ferris\""
-msgstr ""
+msgstr "\"Once upon a time, there was a friendly curious crab named Ferris\""
 
 #: src/idioms/coercion-arguments.md:111
 msgid "' '"
-msgstr ""
+msgstr "' '"
 
 #: src/idioms/coercion-arguments.md:113
 msgid "\"{word} has three consecutive vowels!\""
-msgstr ""
+msgstr "\"{word} has three consecutive vowels!\""
 
 #: src/idioms/coercion-arguments.md:119
 msgid ""
 "Running this example using our function declared with an argument type "
 "`&str` will yield"
 msgstr ""
+"Exécuter cet exemple en utilisant notre fonction déclarée avec un argument "
+"de type `&str` nous donnera"
 
 #: src/idioms/coercion-arguments.md:126
 msgid ""
@@ -589,6 +630,11 @@ msgid ""
 "which is not implicit, whereas converting from `String` to `&str` is cheap "
 "and implicit."
 msgstr ""
+"Par contre, cet exemple ne s'exécutera pas si notre fonction est déclarée "
+"avec un argument de type `&String`. C'est parce qu'un _string slice_ a le "
+"type `&str` et pas `&String`, il faudrait donc une allocation supplémentaire "
+"pour le convertir en `&String` ce qui n'est pas implicite. La conversion de "
+"`String` vers `&str` en revanche est rapide et implicite."
 
 #: src/idioms/coercion-arguments.md:132 src/idioms/ctor.md:101
 #: src/idioms/default.md:58 src/idioms/deref.md:76
@@ -605,13 +651,15 @@ msgstr ""
 #: src/anti_patterns/borrow_clone.md:65 src/anti_patterns/deny-warnings.md:101
 #: src/anti_patterns/deref.md:124 src/functional/generics-type-classes.md:236
 msgid "See also"
-msgstr ""
+msgstr "Voir aussi"
 
 #: src/idioms/coercion-arguments.md:134
 msgid ""
 "[Rust Language Reference on Type Coercions](https://doc.rust-lang.org/"
 "reference/type-coercions.html)"
 msgstr ""
+"[Extrapolation de déréférencement dans la Rust Language Reference](https://"
+"doc.rust-lang.org/reference/type-coercions.html)"
 
 #: src/idioms/coercion-arguments.md:135
 msgid ""
@@ -620,16 +668,22 @@ msgid ""
 "hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) by Herman "
 "J. Radtke III"
 msgstr ""
+"Pour approfondir le sujet de la gestion des `String` et `&str`, vous pouvez "
+"lire [cet article de 2015](https://web.archive.org/web/20201112023149/"
+"https://hermanradtke.com/2015/05/03/string-vs-str-in-rust-functions.html) "
+"par Herman J. Radtke III (_en_)"
 
 #: src/idioms/coercion-arguments.md:138
 msgid ""
 "[Steve Klabnik's Blogpost on 'When should I use String vs &str?'](https://"
 "archive.ph/LBpD0)"
 msgstr ""
+"Billet de blog de Steve Klabnik : ['When should I use String vs &str?']"
+"(https://archive.ph/LBpD0)"
 
 #: src/idioms/concat-format.md:1
 msgid "Concatenating strings with `format!`"
-msgstr ""
+msgstr "Concaténer les chaînes de caractères avec `format!`"
 
 #: src/idioms/concat-format.md:5
 msgid ""
@@ -638,6 +692,11 @@ msgid ""
 "convenient to use `format!`, especially where there is a mix of literal and "
 "non-literal strings."
 msgstr ""
+"Il est possible de construire des chaînes de caractères en utilisant `push` "
+"et `push_str` sur un `String` mutable ou encore avec l'opérateur `+`. "
+"Cependant, il est souvent plus pratique d'utiliser la macro `format!`, "
+"surtout quand on mélange des chaînes de caractère littérales et non "
+"littérales."
 
 #: src/idioms/concat-format.md:14
 msgid ""
@@ -647,14 +706,19 @@ msgid ""
 "    // result.push('!');\n"
 "    // result\n"
 msgstr ""
+"//On pourraît construire le résultat manuellement.\n"
+"  // let mut result = \"Hello \".to_owned();\n"
+"  // result.push_str(name);\n"
+"  //result.push('!');\n"
+"  //result\n"
 
 #: src/idioms/concat-format.md:20
 msgid "// But using format! is better.\n"
-msgstr ""
+msgstr "// Mais format! est un meilleur choix.\n"
 
 #: src/idioms/concat-format.md:21
 msgid "\"Hello {name}!\""
-msgstr ""
+msgstr "\"Hello {name}!\""
 
 #: src/idioms/concat-format.md:25 src/idioms/deref.md:43
 #: src/idioms/dtor-finally.md:46 src/idioms/mem-replace.md:91
@@ -672,13 +736,15 @@ msgstr ""
 #: src/patterns/ffi/wrappers.md:64 src/anti_patterns/deny-warnings.md:16
 #: src/anti_patterns/deref.md:69 src/functional/generics-type-classes.md:209
 msgid "Advantages"
-msgstr ""
+msgstr "Avantages"
 
 #: src/idioms/concat-format.md:27
 msgid ""
 "Using `format!` is usually the most succinct and readable way to combine "
 "strings."
 msgstr ""
+"Utiliser `format!` est habituellement la manière la plus succincte et "
+"lisible de combiner des chaînes de caractères."
 
 #: src/idioms/concat-format.md:30 src/idioms/deref.md:50
 #: src/idioms/dtor-finally.md:51 src/idioms/mem-replace.md:95
@@ -697,7 +763,7 @@ msgstr ""
 #: src/patterns/ffi/wrappers.md:70 src/anti_patterns/deref.md:81
 #: src/functional/generics-type-classes.md:220
 msgid "Disadvantages"
-msgstr ""
+msgstr "Inconvénients"
 
 #: src/idioms/concat-format.md:32
 msgid ""
@@ -705,10 +771,14 @@ msgid ""
 "`push` operations on a mutable string is usually the most efficient "
 "(especially if the string has been pre-allocated to the expected size)."
 msgstr ""
+"Ce n'est généralement pas la façon la plus efficace de combiner des chaînes "
+"de caractères : une série de `push` sur une chaîne mutable est généralement "
+"plus efficient (surtout si la chaîne de caractère a été pré-allouée avec la "
+"taille attendue)."
 
 #: src/idioms/ctor.md:1
 msgid "Constructors"
-msgstr ""
+msgstr "Constructeurs"
 
 #: src/idioms/ctor.md:5
 msgid ""
@@ -717,6 +787,10 @@ msgid ""
 "stable/book/ch05-03-method-syntax.html#associated-functions) `new` to create "
 "an object:"
 msgstr ""
+"Rust ne fournit pas de constructeur intégré directement au langage. La "
+"convention est d'utiliser une [fonction associée](https://jimskapt.github.io/"
+"rust-book-fr/ch05-03-method-syntax.html#les-fonctions-associ%C3%A9es) `new` "
+"pour la création d'un objet:"
 
 #: src/idioms/ctor.md:10
 msgid ""
@@ -729,26 +803,39 @@ msgid ""
 "/// assert_eq!(42, s.value());\n"
 "/// ```\n"
 msgstr ""
+"/// Temps en secondes.\r\n"
+"///\r\n"
+"/// # Exemple\r\n"
+"///\r\n"
+"/// ```\r\n"
+"/// let s = Second::new(42);\r\n"
+"/// assert_eq!(42, s.value());\r\n"
+"/// ```\r\n"
 
 #: src/idioms/ctor.md:23
 msgid ""
 "// Constructs a new instance of [`Second`].\n"
 "    // Note this is an associated function - no self.\n"
 msgstr ""
+"// Crée une nouvelle instance de [`Second`].\r\n"
+"    // Notez que c'est une fonction associée, elle ne prend pas self en "
+"paramètre.\r\n"
 
 #: src/idioms/ctor.md:29 src/idioms/ctor.md:54 src/idioms/ctor.md:85
 msgid "/// Returns the value in seconds.\n"
-msgstr ""
+msgstr "/// Renvoie la valeur en secondes.\r\n"
 
 #: src/idioms/ctor.md:36
 msgid "Default Constructors"
-msgstr ""
+msgstr "Constructeurs par défaut"
 
 #: src/idioms/ctor.md:38
 msgid ""
 "Rust supports default constructors with the [`Default`](https://doc.rust-"
 "lang.org/stable/std/default/trait.Default.html) trait:"
 msgstr ""
+"Rust supporte les constructeurs par défaut _via_ le trait [`Default`]"
+"(https://doc.rust-lang.org/stable/std/default/trait.Default.html):"
 
 #: src/idioms/ctor.md:41 src/idioms/ctor.md:71
 msgid ""
@@ -761,12 +848,22 @@ msgid ""
 "/// assert_eq!(0, s.value());\n"
 "/// ```\n"
 msgstr ""
+"/// Temps en secondes.\r\n"
+"///\r\n"
+"/// # Exemple\r\n"
+"///\r\n"
+"/// ```\r\n"
+"/// let s = Second::default();\r\n"
+"/// assert_eq!(0, s.value());\r\n"
+"/// ```\r\n"
 
 #: src/idioms/ctor.md:67
 msgid ""
 "`Default` can also be derived if all types of all fields implement "
 "`Default`, like they do with `Second`:"
 msgstr ""
+"`Default` peut aussi être dérivé si les types de tous les champs "
+"implémentent `Default`, comme c'est le cas pour`Second`:"
 
 #: src/idioms/ctor.md:92
 msgid ""
@@ -776,6 +873,12 @@ msgid ""
 "constructor to take no arguments, then it should, even if it is functionally "
 "identical to default."
 msgstr ""
+"**Note:** Il est habituel et attendu qu'un type implémente à la fois "
+"`Default` et un constructeur `new` vide. `new` est la convention pour les "
+"constructeurs en Rust et les utilisateurs s'attendent à ce que cette "
+"fonction associée existe. S'il est raisonnable d'avoir un constructeur "
+"basique sans argument alors il vaut mieux l'implémenter même s'il fonctionne "
+"de façon identique à `default`."
 
 #: src/idioms/ctor.md:97
 msgid ""
@@ -784,18 +887,27 @@ msgid ""
 "prominently, any of the [`*or_default` functions in the standard library]"
 "(https://doc.rust-lang.org/stable/std/?search=or_default)."
 msgstr ""
+"**Astuce:** L'avantage d'implémenter ou de dériver le trait `Default` est "
+"que votre type peut alors être utilisé partout où une implémentation de "
+"`Default` est requise, particulièrement pour [les fonctions `*or_default` de "
+"la librairie standard](https://doc.rust-lang.org/stable/std/?"
+"search=or_default)."
 
 #: src/idioms/ctor.md:103
 msgid ""
 "The [default idiom](default.md) for a more in-depth description of the "
 "`Default` trait."
 msgstr ""
+"L'[idiome default](default.md) pour une description plus approfondie du "
+"trait `Default`."
 
 #: src/idioms/ctor.md:106
 msgid ""
 "The [builder pattern](../patterns/creational/builder.md) for constructing "
 "objects where there are multiple configurations."
 msgstr ""
+"Le [patron de conception](../patterns/creational/builder.md) pour la "
+"construction d'objets avec plusieurs configurations."
 
 #: src/idioms/ctor.md:109
 msgid ""
@@ -803,10 +915,13 @@ msgid ""
 "interoperability.html#types-eagerly-implement-common-traits-c-common-traits) "
 "for implementing both, `Default` and `new`."
 msgstr ""
+"[API Guidelines/C-COMMON-TRAITS](https://rust-lang.github.io/api-guidelines/"
+"interoperability.html#types-eagerly-implement-common-traits-c-common-traits) "
+"pour l'implémentation à la fois de `Default` et de `new`."
 
 #: src/idioms/default.md:1
 msgid "The `Default` Trait"
-msgstr ""
+msgstr "Le trait `Default`"
 
 #: src/idioms/default.md:5
 msgid ""
@@ -819,6 +934,15 @@ msgid ""
 "enum.Option.html#method.unwrap_or_default)). Notably, some containers "
 "already implement it where applicable."
 msgstr ""
+"De nombreux types en Rust ont un [constructeur](ctor.md). Cependant c'est "
+"_specifique_ à chaque type, ce qui implique que Rust ne peut pas définir une "
+"catégorie \"tous ce qui a une méthode `new()`\". Le trait [`Default`]"
+"(https://doc.rust-lang.org/stable/std/default/trait.Default.html) a été "
+"conçu pour ça et peut être utilisé avec les conteneurs et d'autres types "
+"génériques (voir par exemple [`Option::unwrap_or_default()`](https://"
+"doc.rust-lang.org/stable/std/option/"
+"enum.Option.html#method.unwrap_or_default)). Certains conteneurs "
+"implémentent déjà cette fonctionnalité lorsque c'est possible."
 
 #: src/idioms/default.md:11
 msgid ""
@@ -827,6 +951,11 @@ msgid ""
 "`#[derive(Default)]` for structs whose fields all implement it, so the more "
 "types implement `Default`, the more useful it becomes."
 msgstr ""
+"Non seulement les conteneurs contenant un seul élément comme `Cow`, `Box` ou "
+"`Arc` implémentent `Default` lorsqu'il contiennent un type qui l'implémente, "
+"mais on peut également utiliser `#[Derive(Default)]` sur une structure dés "
+"lors que tous ses champs implémentent `Default`, ce qui signifie que plus ce "
+"trait est implémenté par de nombreux types, plus il devient utile."
 
 #: src/idioms/default.md:16
 msgid ""
@@ -834,73 +963,87 @@ msgid ""
 "`default()` method does not. There can even be multiple constructors with "
 "different names, but there can only be one `Default` implementation per type."
 msgstr ""
+"D'un autre côté, si un constructeur peut prendre plusieurs arguments, ce "
+"n'est pas le cas de la méthode `default()`. Il peut même y avoir plusieurs "
+"constructeurs avec des noms différents, mais il ne peut y avoir qu'une seule "
+"implémentation de `Default` par type."
 
 #: src/idioms/default.md:24
 msgid "// note that we can simply auto-derive Default here.\n"
 msgstr ""
+"// notez qu'on peut se contenter de dériver automatiquement Default ici.\n"
 
 #: src/idioms/default.md:28
 msgid "// Option defaults to None\n"
-msgstr ""
+msgstr "// Par défaut, une Option est initialisée comme None\n"
 
 #: src/idioms/default.md:30
 msgid "// Vecs default to empty vector\n"
-msgstr ""
+msgstr "// un Vec est initialisé comme un vecteur vide\n"
 
 #: src/idioms/default.md:32
 msgid "// Duration defaults to zero time\n"
-msgstr ""
+msgstr "// une Duration est initialisée à zéro\n"
 
 #: src/idioms/default.md:34
 msgid "// bool defaults to false\n"
-msgstr ""
+msgstr "// un booléen est initialisé à false\n"
 
 #: src/idioms/default.md:39
 msgid "// add setters here\n"
-msgstr ""
+msgstr "// ajoutez les setters ici\n"
 
 #: src/idioms/default.md:43
 msgid "// construct a new instance with default values\n"
-msgstr ""
+msgstr "// construit une nouvelle instance avec les valeurs par défaut\n"
 
 #: src/idioms/default.md:45
 msgid "// do something with conf here\n"
-msgstr ""
+msgstr "// on modifie conf ici\n"
 
 #: src/idioms/default.md:47
 msgid "\"conf = {conf:#?}\""
-msgstr ""
+msgstr "\"conf = {conf:#?}\""
 
 #: src/idioms/default.md:49
 msgid ""
 "// partial initialization with default values, creates the same instance\n"
 msgstr ""
+"// une initialisation partielle avec des valeurs par défaut crée la même "
+"instance\n"
 
 #: src/idioms/default.md:60
 msgid ""
 "The [constructor](ctor.md) idiom is another way to generate instances that "
 "may or may not be \"default\""
 msgstr ""
+"L'idiome [constructeur](ctor.md) est une autre manière de générer des "
+"instances qui peuvent ou non avoir des valeurs par défaut"
 
 #: src/idioms/default.md:62
 msgid ""
 "The [`Default`](https://doc.rust-lang.org/stable/std/default/"
 "trait.Default.html) documentation (scroll down for the list of implementors)"
 msgstr ""
+"La documentation du trait [`Default`](https://doc.rust-lang.org/stable/std/"
+"default/trait.Default.html) (la liste des implémentations disponibles est au "
+"bas de la page)"
 
 #: src/idioms/default.md:63
 msgid ""
 "[`Option::unwrap_or_default()`](https://doc.rust-lang.org/stable/std/option/"
 "enum.Option.html#method.unwrap_or_default)"
 msgstr ""
+"[`Option::unwrap_or_default()`](https://doc.rust-lang.org/stable/std/option/"
+"enum.Option.html#method.unwrap_or_default)"
 
 #: src/idioms/default.md:64
 msgid "[`derive(new)`](https://crates.io/crates/derive-new/)"
-msgstr ""
+msgstr "[`derive(new)`](https://crates.io/crates/derive-new/)"
 
 #: src/idioms/deref.md:1
 msgid "Collections are smart pointers"
-msgstr ""
+msgstr "Les collections sont des pointeurs intelligents"
 
 #: src/idioms/deref.md:5
 msgid ""
@@ -908,12 +1051,16 @@ msgid ""
 "to treat collections like smart pointers, offering owning and borrowed views "
 "of data."
 msgstr ""
+"On peut utiliser le trait [`Deref`](https://doc.rust-lang.org/std/ops/"
+"trait.Deref.html) pour traiter les collections comme des pointeurs "
+"intelligents, ce qui permet de visualiser les données avec ou sans "
+"possession."
 
 #: src/idioms/deref.md:16 src/idioms/deref.md:23
 #: src/patterns/behavioural/RAII.md:29 src/patterns/behavioural/RAII.md:41
 #: src/patterns/behavioural/RAII.md:100 src/anti_patterns/deref.md:35
 msgid "//..\n"
-msgstr ""
+msgstr "//..\n"
 
 #: src/idioms/deref.md:28
 msgid ""
@@ -923,10 +1070,16 @@ msgid ""
 "dereferencing searches. Most methods you might expect to be implemented for "
 "`Vec`s are instead implemented for slices."
 msgstr ""
+"Un `Vec<T>` est une collection de `T` avec possession, alors qu'un slice "
+"(`&[T]`) est une collection de `T` empruntée. En implémentant `Deref` pour "
+"`Vec`, on permet un déréférencement implicite de `&Vec<T>` vers `&[T]` et "
+"cette relation peut être utilisée pour l'auto-déréférencement. La plupart "
+"des méthodes qu'on s'attend à trouver implémentées pour `Vec` sont en fait "
+"implémentées pour les slices."
 
 #: src/idioms/deref.md:34
 msgid "Also `String` and `&str` have a similar relation."
-msgstr ""
+msgstr "`String` et `&str` ont une relation similaire."
 
 #: src/idioms/deref.md:36 src/idioms/dtor-finally.md:36
 #: src/idioms/mem-replace.md:63 src/idioms/on-stack-dyn-dispatch.md:32
@@ -941,7 +1094,7 @@ msgstr ""
 #: src/patterns/structural/compose-structs.md:100 src/patterns/ffi/export.md:16
 #: src/anti_patterns/borrow_clone.md:30
 msgid "Motivation"
-msgstr ""
+msgstr "Motivation"
 
 #: src/idioms/deref.md:38
 msgid ""
@@ -950,16 +1103,24 @@ msgid ""
 "experience. When implementing a data structure that owns its data, offering "
 "a borrowed view of that data allows for more flexible APIs."
 msgstr ""
+"La propriété et l'emprunt sont des aspects essentiels du langage Rust. Les "
+"structures de données doivent respecter cette sémantique pour fournir une "
+"bonne expérience utilisateur. Lorsqu'on implémente une structure de données "
+"qui possède ses données, offrir une vue empruntée pour ces données permet de "
+"faire des APIs plus flexibles."
 
 #: src/idioms/deref.md:45
 msgid ""
 "Most methods can be implemented only for the borrowed view, they are then "
 "implicitly available for the owning view."
 msgstr ""
+"La plupart des méthodes peuvent être implémentées seulement pour la vue "
+"empruntée et seront ensuite implicitement disponibles pour la vue "
+"propriétaire."
 
 #: src/idioms/deref.md:48
 msgid "Gives clients a choice between borrowing or taking ownership of data."
-msgstr ""
+msgstr "On laisse le choix d'emprunter les données ou d'en prendre possession."
 
 #: src/idioms/deref.md:52
 msgid ""
@@ -968,6 +1129,11 @@ msgid ""
 "using this pattern can get complex (see the `Borrow` and `AsRef` traits, "
 "etc.)."
 msgstr ""
+"Les méthodes et les traits qui sont seulement disponible _via_ un "
+"déréférencement ne sont pas pris en compte lors de la vérification des "
+"limites, ce qui peut rendre complexe l'utilisation de types génériques avec "
+"des structures de données lorsqu'on utilise ce pattern (voir les traits "
+"`Borrow` et `AsRef`, etc.)"
 
 #: src/idioms/deref.md:56 src/idioms/dtor-finally.md:66
 #: src/idioms/mem-replace.md:105 src/idioms/on-stack-dyn-dispatch.md:66
@@ -981,7 +1147,7 @@ msgstr ""
 #: src/patterns/structural/compose-structs.md:117
 #: src/anti_patterns/deref.md:102
 msgid "Discussion"
-msgstr ""
+msgstr "Discussion"
 
 #: src/idioms/deref.md:58
 msgid ""
@@ -994,6 +1160,15 @@ msgid ""
 "If a collection owns its data, it is usually useful to provide a view of the "
 "data as borrowed so that it can be referenced multiple times."
 msgstr ""
+"Un pointeur intelligent pointe vers un seul objet là où une collection "
+"pointe vers plusieurs. Du point de vue du système de types, il y a peu de "
+"différence entre les deux. Une collection possède ses données si le seul "
+"moyen d'accéder à un élément est _via_ la collection et si la collection est "
+"responsable de la suppression des données (même en cas de propriété "
+"partagée, il peut être approprié d'avoir une vue empruntée à disposition). "
+"Si une collection possède ses données, il est généralement utile de fournir "
+"une vue où les données sont empruntées pour qu'elles puissent être "
+"référencées plusieurs fois."
 
 #: src/idioms/deref.md:67
 msgid ""
@@ -1003,22 +1178,33 @@ msgid ""
 "`Foo<T>` can implement `Deref<Target=Bar<T>>` where `Bar` is a dynamically "
 "sized type and `&Bar<T>` is a borrowed view of the data in `Foo<T>`."
 msgstr ""
+"D'autres pointeurs intelligents (par exemple `Foo<T>`) implémentent "
+"`Deref<Target=T>`. Cependant, les collections sont habituellement "
+"déréférencées vers un type personnalisé. `[T]` et `str` sont supportées par "
+"le langage, mais dans le cas général ce n'est pas nécessaire. `Foo<T>` peut "
+"implémenter `Deref<Target=Bar<T>>` où `Bar` est un type avec une taille "
+"dynamique et `&Bar<T>` est une vue empruntée des données contenues dans "
+"`Foo<T>`."
 
 #: src/idioms/deref.md:73
 msgid ""
 "Commonly, ordered collections will implement `Index` for `Range`s to provide "
 "slicing syntax. The target will be the borrowed view."
 msgstr ""
+"En général, les collections ordonnées vont implémenter `Index` pour fournir "
+"une syntaxe de slice avec `Range` où la cible sera la vue empruntée."
 
 #: src/idioms/deref.md:78
 msgid "[Deref polymorphism anti-pattern](../anti_patterns/deref.md)."
-msgstr ""
+msgstr "Anti-patron : [polymorphisme avec Deref](../anti_patterns/deref.md)"
 
 #: src/idioms/deref.md:79 src/anti_patterns/deref.md:130
 msgid ""
 "[Documentation for `Deref` trait](https://doc.rust-lang.org/std/ops/"
 "trait.Deref.html)."
 msgstr ""
+"[Documentation du trait `Deref`](https://doc.rust-lang.org/std/ops/"
+"trait.Deref.html)."
 
 #: src/idioms/dtor-finally.md:1
 msgid "Finalisation in destructors"
