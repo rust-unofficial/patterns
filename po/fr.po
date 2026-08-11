@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
-"POT-Creation-Date: 2025-05-17T14:07:35+09:00\n"
-"PO-Revision-Date: 2026-08-10 09:19+0200\n"
+"POT-Creation-Date: 2026-08-11T09:33:34+02:00\n"
+"PO-Revision-Date: 2026-08-11 09:57+0200\n"
 "Last-Translator: Rémi <nuga_agun@proton.me>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -60,7 +60,7 @@ msgstr "`mem::{take(_), replace(_)}`"
 msgid "On-Stack Dynamic Dispatch"
 msgstr "Affectation dynamique sur la pile"
 
-#: src/SUMMARY.md:14 src/SUMMARY.md:40
+#: src/SUMMARY.md:14 src/SUMMARY.md:41
 msgid "Foreign function interface (FFI)"
 msgstr "Foreign function interface (FFI)"
 
@@ -161,51 +161,56 @@ msgstr "Réduire la taille des crates"
 msgid "Contain unsafety in small modules"
 msgstr "Restreindre le code non sécurisé dans des petits modules"
 
-#: src/SUMMARY.md:41 src/patterns/ffi/export.md:1
+#: src/SUMMARY.md:40
+msgid "Avoid complex type bounds with custom traits"
+msgstr ""
+"Utiliser des traits personnalisés pour simplifier les restrictions de type"
+
+#: src/SUMMARY.md:42 src/patterns/ffi/export.md:1
 msgid "Object-Based APIs"
 msgstr "APIs basées sur les objets"
 
-#: src/SUMMARY.md:42 src/patterns/ffi/wrappers.md:1
+#: src/SUMMARY.md:43 src/patterns/ffi/wrappers.md:1
 msgid "Type Consolidation into Wrappers"
 msgstr "Consolidation des types par des Wrappers"
 
-#: src/SUMMARY.md:44 src/anti_patterns/index.md:1
+#: src/SUMMARY.md:45 src/anti_patterns/index.md:1
 msgid "Anti-patterns"
 msgstr "Anti-patrons"
 
-#: src/SUMMARY.md:45 src/anti_patterns/borrow_clone.md:1
+#: src/SUMMARY.md:46 src/anti_patterns/borrow_clone.md:1
 msgid "Clone to satisfy the borrow checker"
 msgstr "Cloner pour satisfaire le vérificateur d'emprunt"
 
-#: src/SUMMARY.md:46
+#: src/SUMMARY.md:47
 msgid "`#[deny(warnings)]`"
 msgstr "`#[deny(warnings)]`"
 
-#: src/SUMMARY.md:47
+#: src/SUMMARY.md:48
 msgid "Deref Polymorphism"
 msgstr "Polymorphisme avec Deref"
 
-#: src/SUMMARY.md:49
+#: src/SUMMARY.md:50
 msgid "Functional Programming"
 msgstr "Programmation fonctionnelle"
 
-#: src/SUMMARY.md:50 src/functional/paradigms.md:1
+#: src/SUMMARY.md:51 src/functional/paradigms.md:1
 msgid "Programming paradigms"
 msgstr "Paradigmes de programmation"
 
-#: src/SUMMARY.md:51 src/functional/generics-type-classes.md:1
+#: src/SUMMARY.md:52 src/functional/generics-type-classes.md:1
 msgid "Generics as Type Classes"
 msgstr "Les génériques sont des classes de types"
 
-#: src/SUMMARY.md:52
+#: src/SUMMARY.md:53
 msgid "Functional Optics"
 msgstr "Optics"
 
-#: src/SUMMARY.md:54
+#: src/SUMMARY.md:55
 msgid "Additional Resources"
 msgstr "Ressources additionnelles"
 
-#: src/SUMMARY.md:55 src/additional_resources/design-principles.md:1
+#: src/SUMMARY.md:56 src/additional_resources/design-principles.md:1
 msgid "Design principles"
 msgstr "Principes de conception"
 
@@ -229,17 +234,26 @@ msgstr "Nouveautés"
 
 #: src/intro.md:10
 msgid ""
-"**2024-03-17**: You can now download the book in PDF format from [this link]"
-"(https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf)."
+"**2025-12-14**: New pattern added: [Use custom traits to avoid complex type "
+"bounds](./patterns/structural/trait-for-bounds.md)"
+msgstr ""
+"**2025-12-14**: Nouveau patron ajouté: [Utiliser des traits personnalisés "
+"pour simplifier les restrictions de type](./patterns/structural/trait-for-"
+"bounds.md)"
+
+#: src/intro.md:12
+msgid ""
+"**2024-03-17**: You can now download the [book in PDF format](https://rust-"
+"unofficial.github.io/patterns/rust-design-patterns.pdf)."
 msgstr ""
 "**2024-03-17**: Le livre est désormais disponible en PDF via [ce lien]"
 "(https://rust-unofficial.github.io/patterns/rust-design-patterns.pdf)."
 
-#: src/intro.md:13
+#: src/intro.md:15
 msgid "Design patterns"
 msgstr "Patrons de conception"
 
-#: src/intro.md:15
+#: src/intro.md:17
 msgid ""
 "In software development, we often come across problems that share "
 "similarities regardless of the environment they appear in. Although the "
@@ -254,7 +268,7 @@ msgstr ""
 "reposant sur des pratiques standard applicables à un grand nombre de "
 "situations."
 
-#: src/intro.md:20
+#: src/intro.md:22
 msgid ""
 "Design patterns are a collection of reusable and tested solutions to "
 "recurring problems in engineering. They make our software more modular, "
@@ -269,7 +283,7 @@ msgstr ""
 "forment un langage commun permettant une communication efficace au sein des "
 "équipes de développeurs."
 
-#: src/intro.md:26
+#: src/intro.md:28
 msgid ""
 "Keep in mind: Each pattern comes with its own set of trade-offs. It's "
 "crucial to focus on why you choose a particular pattern rather than just on "
@@ -280,11 +294,11 @@ msgstr ""
 "motive le choix d'un patron plutôt que de se concentrer uniquement sur son "
 "implémentation.[^1]"
 
-#: src/intro.md:30 src/patterns/index.md:14
+#: src/intro.md:32 src/patterns/index.md:14
 msgid "Design patterns in Rust"
 msgstr "Les patrons de conception en Rust"
 
-#: src/intro.md:32
+#: src/intro.md:34
 msgid ""
 "Rust is not object-oriented, and the combination of all its characteristics, "
 "such as functional elements, a strong type system, and the borrow checker, "
@@ -301,7 +315,7 @@ msgstr ""
 "C'est pour cela que nous avons décidé d'écrire ce livre. Nous espérons qu'il "
 "vous plaira ! Le livre est divisé en trois chapitres :"
 
-#: src/intro.md:39
+#: src/intro.md:41
 msgid ""
 "[Idioms](./idioms/index.md): guidelines to follow when coding. They are the "
 "social norms of the community. You should break them only if you have a good "
@@ -311,7 +325,7 @@ msgstr ""
 "développement. Ce sont les normes sociales de la communauté. Il vaut mieux "
 "les respecter à moins d'avoir une bonne raison de faire autrement."
 
-#: src/intro.md:42
+#: src/intro.md:44
 msgid ""
 "[Design patterns](./patterns/index.md): methods to solve common problems "
 "when coding."
@@ -319,7 +333,7 @@ msgstr ""
 "[Patrons de conception](./patterns/index.md): méthodes pour résoudre des "
 "problèmes classiques lors du développement."
 
-#: src/intro.md:44
+#: src/intro.md:46
 msgid ""
 "[Anti-patterns](./anti_patterns/index.md): methods to solve common problems "
 "when coding. However, while design patterns give us benefits, anti-patterns "
@@ -330,10 +344,11 @@ msgstr ""
 "conception nous simplifient la tâche, les anti-patrons créent plus de "
 "problèmes."
 
-#: src/intro.md:48
+#: src/intro.md:50
 msgid ""
-"https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
-"software-architecture-hard-parts/"
+"<https://www.infoq.com/podcasts/software-architecture-hard-parts/> ([Archive]"
+"(https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
+"software-architecture-hard-parts/))"
 msgstr ""
 
 #: src/translations.md:3
@@ -422,7 +437,8 @@ msgstr "Le code est fait pour être lu par des humains, pas par des machines."
 #: src/patterns/creational/builder.md:3 src/patterns/creational/fold.md:3
 #: src/patterns/structural/compose-structs.md:3
 #: src/patterns/structural/small-crates.md:3
-#: src/patterns/structural/unsafe-mods.md:3 src/patterns/ffi/export.md:3
+#: src/patterns/structural/unsafe-mods.md:3
+#: src/patterns/structural/trait-for-bounds.md:3 src/patterns/ffi/export.md:3
 #: src/patterns/ffi/wrappers.md:3 src/anti_patterns/borrow_clone.md:3
 #: src/anti_patterns/deny-warnings.md:3 src/anti_patterns/deref.md:3
 #: src/functional/generics-type-classes.md:3
@@ -479,6 +495,7 @@ msgstr ""
 #: src/patterns/behavioural/visitor.md:13 src/patterns/creational/builder.md:7
 #: src/patterns/creational/fold.md:12
 #: src/patterns/structural/compose-structs.md:15
+#: src/patterns/structural/trait-for-bounds.md:11
 #: src/anti_patterns/borrow_clone.md:11 src/anti_patterns/deny-warnings.md:8
 #: src/anti_patterns/deref.md:8 src/functional/generics-type-classes.md:38
 msgid "Example"
@@ -645,7 +662,7 @@ msgstr ""
 #: src/patterns/behavioural/newtype.md:94 src/patterns/behavioural/RAII.md:112
 #: src/patterns/behavioural/strategy.md:178
 #: src/patterns/behavioural/visitor.md:108
-#: src/patterns/creational/builder.md:109 src/patterns/creational/fold.md:109
+#: src/patterns/creational/builder.md:112 src/patterns/creational/fold.md:109
 #: src/patterns/structural/small-crates.md:45
 #: src/patterns/structural/unsafe-mods.md:33
 #: src/anti_patterns/borrow_clone.md:65 src/anti_patterns/deny-warnings.md:101
@@ -732,9 +749,11 @@ msgstr "\"Hello {name}!\""
 #: src/patterns/creational/builder.md:68
 #: src/patterns/structural/compose-structs.md:106
 #: src/patterns/structural/small-crates.md:13
-#: src/patterns/structural/unsafe-mods.md:12 src/patterns/ffi/export.md:113
-#: src/patterns/ffi/wrappers.md:64 src/anti_patterns/deny-warnings.md:16
-#: src/anti_patterns/deref.md:69 src/functional/generics-type-classes.md:209
+#: src/patterns/structural/unsafe-mods.md:12
+#: src/patterns/structural/trait-for-bounds.md:96
+#: src/patterns/ffi/export.md:113 src/patterns/ffi/wrappers.md:64
+#: src/anti_patterns/deny-warnings.md:16 src/anti_patterns/deref.md:69
+#: src/functional/generics-type-classes.md:209
 msgid "Advantages"
 msgstr "Avantages"
 
@@ -756,12 +775,13 @@ msgstr ""
 #: src/idioms/return-consumed-arg-on-error.md:59
 #: src/patterns/behavioural/newtype.md:66
 #: src/patterns/behavioural/strategy.md:107
-#: src/patterns/creational/builder.md:76
+#: src/patterns/creational/builder.md:79
 #: src/patterns/structural/compose-structs.md:111
 #: src/patterns/structural/small-crates.md:22
-#: src/patterns/structural/unsafe-mods.md:18 src/patterns/ffi/export.md:236
-#: src/patterns/ffi/wrappers.md:70 src/anti_patterns/deref.md:81
-#: src/functional/generics-type-classes.md:220
+#: src/patterns/structural/unsafe-mods.md:18
+#: src/patterns/structural/trait-for-bounds.md:107
+#: src/patterns/ffi/export.md:236 src/patterns/ffi/wrappers.md:70
+#: src/anti_patterns/deref.md:81 src/functional/generics-type-classes.md:220
 msgid "Disadvantages"
 msgstr "Inconvénients"
 
@@ -1142,7 +1162,7 @@ msgstr ""
 #: src/patterns/behavioural/interpreter.md:105
 #: src/patterns/behavioural/newtype.md:74 src/patterns/behavioural/RAII.md:84
 #: src/patterns/behavioural/strategy.md:113
-#: src/patterns/behavioural/visitor.md:81 src/patterns/creational/builder.md:81
+#: src/patterns/behavioural/visitor.md:81 src/patterns/creational/builder.md:84
 #: src/patterns/creational/fold.md:85
 #: src/patterns/structural/compose-structs.md:117
 #: src/anti_patterns/deref.md:102
@@ -1234,7 +1254,8 @@ msgid "\"exit\""
 msgstr ""
 
 #: src/idioms/dtor-finally.md:27
-msgid "// The dtor of _exit will run however the function `bar` is exited.\n"
+msgid ""
+"// The destructor of _exit will run however the function `bar` is exited.\n"
 msgstr ""
 
 #: src/idioms/dtor-finally.md:29
@@ -1814,7 +1835,7 @@ msgstr ""
 #: src/idioms/ffi/accepting-strings.md:120
 msgid ""
 "Due to the extensive arithmetic required, there is a bug in this version "
-"that cases Rust `undefined behaviour`."
+"that causes Rust `undefined behaviour`."
 msgstr ""
 
 #: src/idioms/ffi/accepting-strings.md:123
@@ -2273,7 +2294,10 @@ msgid ""
 msgstr ""
 
 #: src/idioms/rustdoc-init.md:35 src/idioms/rustdoc-init.md:40
-#: src/idioms/rustdoc-init.md:68
+#: src/idioms/rustdoc-init.md:68 src/patterns/structural/trait-for-bounds.md:52
+#: src/patterns/structural/trait-for-bounds.md:56
+#: src/patterns/structural/trait-for-bounds.md:60
+#: src/patterns/structural/trait-for-bounds.md:90
 msgid "// ...\n"
 msgstr ""
 
@@ -3412,21 +3436,28 @@ msgid ""
 "construction."
 msgstr ""
 
-#: src/patterns/creational/builder.md:78
+#: src/patterns/creational/builder.md:76
+msgid ""
+"When you add new fields to the target struct, you can update the builder to "
+"leave client code backwards compatible."
+msgstr ""
+
+#: src/patterns/creational/builder.md:81
 msgid ""
 "More complex than creating a struct object directly, or a simple constructor "
 "function."
 msgstr ""
 
-#: src/patterns/creational/builder.md:83
+#: src/patterns/creational/builder.md:86
 msgid ""
 "This pattern is seen more frequently in Rust (and for simpler objects) than "
-"in many other languages because Rust lacks overloading. Since you can only "
-"have a single method with a given name, having multiple constructors is less "
-"nice in Rust than in C++, Java, or others."
+"in many other languages because Rust lacks overloading and default values "
+"for function parameters. Since you can only have a single method with a "
+"given name, having multiple constructors is less nice in Rust than in C++, "
+"Java, or others."
 msgstr ""
 
-#: src/patterns/creational/builder.md:88
+#: src/patterns/creational/builder.md:91
 msgid ""
 "This pattern is often used where the builder object is useful in its own "
 "right, rather than being just a builder. For example, see "
@@ -3436,7 +3467,7 @@ msgid ""
 "`TBuilder` naming pattern is not used."
 msgstr ""
 
-#: src/patterns/creational/builder.md:95
+#: src/patterns/creational/builder.md:98
 msgid ""
 "The example takes and returns the builder by value. It is often more "
 "ergonomic (and more efficient) to take and return the builder as a mutable "
@@ -3444,33 +3475,33 @@ msgid ""
 "the advantage that one can write code like"
 msgstr ""
 
-#: src/patterns/creational/builder.md:107
+#: src/patterns/creational/builder.md:110
 msgid "as well as the `FooBuilder::new().a().b().build()` style."
 msgstr ""
 
-#: src/patterns/creational/builder.md:111
+#: src/patterns/creational/builder.md:114
 msgid ""
 "[Description in the style guide](https://web.archive.org/web/20210104103100/"
 "https://doc.rust-lang.org/1.12.0/style/ownership/builders.html)"
 msgstr ""
 
-#: src/patterns/creational/builder.md:112
+#: src/patterns/creational/builder.md:115
 msgid ""
 "[derive_builder](https://crates.io/crates/derive_builder), a crate for "
 "automatically implementing this pattern while avoiding the boilerplate."
 msgstr ""
 
-#: src/patterns/creational/builder.md:114
+#: src/patterns/creational/builder.md:117
 msgid ""
 "[Constructor pattern](../../idioms/ctor.md) for when construction is simpler."
 msgstr ""
 
-#: src/patterns/creational/builder.md:115
+#: src/patterns/creational/builder.md:118
 msgid ""
 "[Builder pattern (wikipedia)](https://en.wikipedia.org/wiki/Builder_pattern)"
 msgstr ""
 
-#: src/patterns/creational/builder.md:116
+#: src/patterns/creational/builder.md:119
 msgid ""
 "[Construction of complex values](https://web.archive.org/web/20210104103000/"
 "https://rust-lang.github.io/api-guidelines/type-safety.html#c-builder)"
@@ -3890,6 +3921,92 @@ msgstr ""
 msgid ""
 "[Ralf Jung's Blog about invariants in unsafe code](https://www.ralfj.de/blog/"
 "2018/08/22/two-kinds-of-invariants.html)"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:1
+msgid "Use custom traits to avoid complex type bounds"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:5
+msgid ""
+"Trait bounds can become somewhat unwieldy, especially if one of the `Fn` "
+"traits[^fn-traits] is involved and there are specific requirements on the "
+"output type. In such cases the introduction of a new trait may help reduce "
+"verbosity, eliminate some type parameters and thus increase expressiveness. "
+"Such a trait can be accompanied with a generic `impl` for all types "
+"satisfying the original bound."
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:13
+msgid ""
+"Let's imagine some sort of monitoring or information gathering system. The "
+"system retrieves values of various types from diverse sources. It may derive "
+"from them some sort of status indicating issues. For example, the total "
+"amount of free memory should be above a certain theshold, and the user with "
+"the id `0` should always be named \"root\"."
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:19
+msgid ""
+"For management reasons, we probably want type erasure on the top level. "
+"However, we also need to provide specific (user configurable) assesments for "
+"specific types of data sources (e.g. thresholds and ranges for numerical "
+"types). And since sources for these values are diverse, we may choose to "
+"supply data sources as closures that return a value when called. Because we "
+"are probably getting those values from the operating system, we are likely "
+"confronted with operations that may fail."
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:27
+msgid ""
+"We thus may have settled on the following types and traits for handling "
+"specific values:"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:64
+msgid ""
+"With these types, we will need to repeat the trait bounds for `G` in at "
+"least a few places. Readability suffers, partially due the the fact that the "
+"getter returns a `Result`. Introducing a bound for \"getters\" allows a more "
+"expressive bound and eliminate one of the type parameters:"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:98
+msgid ""
+"Introducing a new trait can help simplify type bounds, particularly via the "
+"elimination of type parameters. A good name for the new trait will also make "
+"the bound more expressive. The new trait, an abstraction, also offers "
+"opportunities in itself, including:"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:103
+msgid ""
+"additional, specialized types implementing the new trait (e.g. representing "
+"an idendity of some sort) as well as other useful traits such as `Default` "
+"and"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:105
+msgid ""
+"additional methods, as long as they can be implemented for all relevant "
+"types."
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:109
+msgid ""
+"Introducing new items such as the trait means we need to find an appropriate "
+"name and place for it. It also means one more item users of the original "
+"functionality need to investigate[^read-docs]. Depending on presentation, it "
+"may not be obvious right away that a simple closure may be used as a "
+"`Getter` in the example above."
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:115
+msgid "i.e. `Fn`, `FnOnce` and `FnMut`"
+msgstr ""
+
+#: src/patterns/structural/trait-for-bounds.md:117
+msgid "meaning they may need to read more documentation"
 msgstr ""
 
 #: src/patterns/ffi/intro.md:1
@@ -5156,7 +5273,8 @@ msgstr ""
 
 #: src/functional/generics-type-classes.md:120
 msgid ""
-"// private module, lest outside users invent their own protocol kinds!\n"
+"// Keep the module private to prevent outside users from inventing their own "
+"protocols.\n"
 msgstr ""
 
 #: src/functional/generics-type-classes.md:149
