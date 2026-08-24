@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Rust Design Patterns\n"
 "POT-Creation-Date: 2026-08-11T09:33:34+02:00\n"
-"PO-Revision-Date: 2026-08-11 09:57+0200\n"
+"PO-Revision-Date: 2026-08-24 15:45+0200\n"
 "Last-Translator: Rémi <nuga_agun@proton.me>\n"
 "Language-Team: French <traduc@traduc.org>\n"
 "Language: fr\n"
@@ -66,7 +66,7 @@ msgstr "Foreign function interface (FFI)"
 
 #: src/SUMMARY.md:15
 msgid "Idiomatic Errors"
-msgstr "Gestion idéale des erreurs"
+msgstr "Gestion des erreurs"
 
 #: src/SUMMARY.md:16 src/idioms/ffi/accepting-strings.md:1
 msgid "Accepting Strings"
@@ -122,7 +122,7 @@ msgstr "Nouveau type"
 
 #: src/SUMMARY.md:30
 msgid "RAII Guards"
-msgstr "Garde RAII"
+msgstr "RAII"
 
 #: src/SUMMARY.md:31
 msgid "Strategy"
@@ -350,6 +350,9 @@ msgid ""
 "(https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
 "software-architecture-hard-parts/))"
 msgstr ""
+"<https://www.infoq.com/podcasts/software-architecture-hard-parts/> ([Archive]"
+"(https://web.archive.org/web/20240124025806/https://www.infoq.com/podcasts/"
+"software-architecture-hard-parts/))"
 
 #: src/translations.md:3
 msgid ""
@@ -1228,7 +1231,7 @@ msgstr ""
 
 #: src/idioms/dtor-finally.md:1
 msgid "Finalisation in destructors"
-msgstr ""
+msgstr "Finalisation dans les destructeurs"
 
 #: src/idioms/dtor-finally.md:5
 msgid ""
@@ -1236,35 +1239,42 @@ msgid ""
 "executed no matter how a function is exited. Instead, an object's destructor "
 "can be used to run code that must be run before exit."
 msgstr ""
+"Rust n'a pas d'équivalent pour les blocs `finally` (du code qui s'exécute "
+"peu importe la façon dont une fonction se termine). Pour remplacer cette "
+"fonctionnalité, on peut utiliser le destructeur d'un objet pour exécuter du "
+"code à la sortie de la fonction."
 
 #: src/idioms/dtor-finally.md:13
 msgid "// some code\n"
-msgstr ""
+msgstr "// du code\n"
 
 #: src/idioms/dtor-finally.md:17
 msgid "// These don't need to be defined inside the function.\n"
 msgstr ""
+"// Ce qui suit n'a pas besoin d'être défini à l'intérieur de la fonction.\n"
 
 #: src/idioms/dtor-finally.md:20
 msgid "// Implement a destructor for Foo.\n"
-msgstr ""
+msgstr "// On implémente un destructeur pour Foo.\n"
 
 #: src/idioms/dtor-finally.md:23
 msgid "\"exit\""
-msgstr ""
+msgstr "\"exit\""
 
 #: src/idioms/dtor-finally.md:27
 msgid ""
 "// The destructor of _exit will run however the function `bar` is exited.\n"
 msgstr ""
+"// Le destructeur de _exit s'exécutera peu importe la façon dont la fonction "
+"`bar` se termine.\n"
 
 #: src/idioms/dtor-finally.md:29
 msgid "// Implicit return with `?` operator.\n"
-msgstr ""
+msgstr "// Retour implicite avec l'opérateur `?`\n"
 
 #: src/idioms/dtor-finally.md:31
 msgid "// Normal return.\n"
-msgstr ""
+msgstr "// Retour classique.\n"
 
 #: src/idioms/dtor-finally.md:38
 msgid ""
@@ -1276,12 +1286,25 @@ msgid ""
 "has `finally`), there is no way to schedule code to run in both the normal "
 "and exceptional cases. Panicking will also exit a function early."
 msgstr ""
+"Si une fonction a plusieurs points de sortie possible, il devient compliqué "
+"d'exécuter du code à la sortie de la fonction et la répétition du même code "
+"à des endroits différents favorise l'apparition d'erreurs. C'est "
+"particulièrement vrai lorsque le retour est implicite à cause d'une macro. "
+"L'opérateur `?` est un cas classique : si le résultat est `Err`, ce résultat "
+"est renvoyé et l'exécution s'arrête, alors que si le résultat est `Ok`, "
+"l'exécution continue. `?` est utilisé comme un mécanisme de gestion des "
+"exceptions, mais contrairement à Java (qui a le mot-clef `finally`), Rust ne "
+"propose pas de solution pour prévoir l'exécution d'un même bloc de code dans "
+"le cas normal et en cas d'exception. Une panique peut également provoquer "
+"l'arrêt anticipé de la fonction."
 
 #: src/idioms/dtor-finally.md:48
 msgid ""
 "Code in destructors will (nearly) always be run - copes with panics, early "
 "returns, etc."
 msgstr ""
+"Le code dans un destructeur sera (presque) toujours exécuté. Il gère la "
+"panique, les retours anticipés, etc."
 
 #: src/idioms/dtor-finally.md:53
 msgid ""
@@ -1291,6 +1314,11 @@ msgid ""
 "thread. Therefore, destructors cannot be relied on as finalizers where it is "
 "absolutely essential that finalisation happens."
 msgstr ""
+"Il n'est pas garanti qu'un destructeur s'exécutera, notamment dans le cas "
+"d'une boucle infinie ou d'un crash avant la fin d'une fonction. Les "
+"destructeurs ne seront pas exécutés non plus en cas de panique dans une "
+"thread déjà en état de panique. Dans les cas où la finalisation est "
+"absolument nécessaire, on ne peut donc pas s'appuyer sur les destructeurs."
 
 #: src/idioms/dtor-finally.md:59
 msgid ""
@@ -1298,12 +1326,17 @@ msgid ""
 "function gives no clear indication of destructors to be run on exit. This "
 "can make debugging tricky."
 msgstr ""
+"Ce pattern implique d’écrire du code difficile à trouver car en lisant une "
+"fonction on n'a aucune indication claire de quels destructeurs seront "
+"appelés à la fin de celle-ci. Cela peut rendre le débogage assez compliqué."
 
 #: src/idioms/dtor-finally.md:63
 msgid ""
 "Requiring an object and `Drop` impl just for finalisation is heavy on "
 "boilerplate."
 msgstr ""
+"Le besoin de créer un objet avec une implémentation de Drop juste pour gérer "
+"la finalisation peut peser lourd dans un code standard."
 
 #: src/idioms/dtor-finally.md:68
 msgid ""
@@ -1314,6 +1347,13 @@ msgid ""
 "finalizer can be kept alive beyond the lifetime of the function. For similar "
 "reasons, the finalizer should not be moved or returned."
 msgstr ""
+"Il y a quelques subtilités sur le stockage de l’objet qu’on utilise comme "
+"finalizer. Il doit être gardé en vie jusqu’à la fin de la fonction et être "
+"détruit à ce moment là. Cet objet doit toujours être une valeur ou bien un "
+"pointeur à propriétaire unique (par exemple Box<Foo>). Si un pointeur "
+"partagé (comme Rc) est utilisé, il pourrait être gardé en vie après la fin "
+"de la fonction. Pour des raisons similaires, le finalizer ne devrait jamais "
+"être déplacé ou renvoyé."
 
 #: src/idioms/dtor-finally.md:75
 msgid ""
@@ -1324,6 +1364,12 @@ msgid ""
 "do not call the variable `_` with no suffix - in that case it will be "
 "destroyed immediately."
 msgstr ""
+"Le finalizer doit être assigné à une variable, sinon il serait détruit "
+"immédiatement et pas lorsqu’il sort de la portée. Si la variable n’est "
+"utilisée que comme finalizer, son nom doit commencer par _ pour éviter que "
+"le compilateur ne nous avertisse que cette variable n’est jamais utilisée. "
+"Attention cependant à ne pas l’appeler simplement _ sans suffixe, car dans "
+"ce cas elle serait détruite immédiatement."
 
 #: src/idioms/dtor-finally.md:81
 msgid ""
@@ -1333,6 +1379,12 @@ msgid ""
 "object in each stack frame. So, destructors get called even if the panic "
 "happens in a function being called."
 msgstr ""
+"En Rust, les destructeurs sont exécutés quand un objet devient hors de "
+"portée. Cela se produit lorsqu’on atteint la fin du bloc de code, lorsqu’il "
+"y a un retour anticipé ou lorsque le programme panique. En cas de panique, "
+"Rust déroule la pile d’exécution et exécute les destructeurs de chaque objet "
+"situé dans chaque bloc mémoire de la pile. Ainsi, les destructeurs seront "
+"appelés même si la panique se produit pendant l’appel d’une fonction."
 
 #: src/idioms/dtor-finally.md:87
 msgid ""
@@ -1342,14 +1394,22 @@ msgid ""
 "means that you must take extra care in your destructors not to panic, since "
 "it could leave resources in an unexpected state."
 msgstr ""
+"Si un destructeur panique pendant le dépilage, il n’y a pas de bonne chose à "
+"faire alors Rust stoppe la thread immédiatement sans exécuter les "
+"destructeurs suivants. Cela signifie que l’exécution d’un destructeur n’est "
+"pas absolument garantie. Cela signifie également qu’il faut être très "
+"précautionneux en écrivant un destructeur, car s’il panique certaines "
+"ressources pourraient être laissées dans un état inattendu."
 
 #: src/idioms/dtor-finally.md:95
 msgid "[RAII guards](../patterns/behavioural/RAII.md)."
-msgstr ""
+msgstr "[RAII](../patterns/behavioural/RAII.md)."
 
 #: src/idioms/mem-replace.md:1
 msgid "`mem::{take(_), replace(_)}` to keep owned values in changed enums"
 msgstr ""
+"Garder les valeurs lors d'un changement d'enum avec `mem::{take(_), "
+"replace(_)}`"
 
 #: src/idioms/mem-replace.md:5
 msgid ""
@@ -1357,10 +1417,14 @@ msgid ""
 "String, x: u8 }` and `B { name: String }`. Now we want to change `MyEnum::A` "
 "to a `B` if `x` is zero, while keeping `MyEnum::B` intact."
 msgstr ""
+"Disons qu'on a une enum avec (au moins) deux variants, `A { name: String, x: "
+"u8 }` et `B { name: String }`. On souhaite, en partant d'une référence "
+"mutable `&mut MyEnum`, transformer un `MyEnum::A` en `B` si jamais `x` vaut "
+"zéro, en gardant `MyEnum::B` intact."
 
 #: src/idioms/mem-replace.md:9
 msgid "We can do this without cloning the `name`."
-msgstr ""
+msgstr "On peut faire cela sans cloner le champ `name`."
 
 #: src/idioms/mem-replace.md:23
 msgid ""
@@ -1369,16 +1433,21 @@ msgid ""
 "        // Then, construct the new enum variant (which will\n"
 "        // be assigned to `*e`).\n"
 msgstr ""
+"// Cela prend notre `name` et le remplace par un String vide\n"
+"        // (notez que les chaînes de caractères vides ne sont pas alloués).\n"
+"        // puis construit le nouveau variant (qui sera assigné à `*e`).\n"
 
 #: src/idioms/mem-replace.md:34
 msgid "This also works with more variants:"
-msgstr ""
+msgstr "Cela marche également si on a plus de variants :"
 
 #: src/idioms/mem-replace.md:49
 msgid ""
 "// Ownership rules do not allow taking `name` by value, but we cannot\n"
 "        // take the value out of a mutable reference, unless we replace it:\n"
 msgstr ""
+"// Les règles de possession ne permettent pas de prendre possession\n"
+"        // de `name` depuis une référence mutable, à moins de le remplacer\n"
 
 #: src/idioms/mem-replace.md:65
 msgid ""
@@ -1388,6 +1457,11 @@ msgid ""
 "look at its parts to decide what to do next. In the second phase we may "
 "conditionally change the value (as in the example above)."
 msgstr ""
+"Lorsqu'on travaille avec des enums, on peut vouloir changer la valeur d'un "
+"enum en place, par exemple pour la remplacer par un autre variant. C'est "
+"généralement fait en deux étapes pour satisfaire le vérificateur d'emprunt. "
+"D'abord, on observe la valeur existante et on décide quoi faire, ensuite on "
+"peut conditionnellement changer la valeur (comme dans l'exemple précédent)."
 
 #: src/idioms/mem-replace.md:71
 msgid ""
@@ -1398,6 +1472,13 @@ msgid ""
 "Anyway, we can avoid the extra allocation by changing `e` with only a "
 "mutable borrow."
 msgstr ""
+"Le vérificateur d'emprunt ne nous laissera pas sortir `name` de l'enum "
+"(parce qu'il faut bien que _quelque chose_ soit là). Bien sûr, on pourrait "
+"utiliser `.clone()` pour cloner `name` et mettre le clone dans notre "
+"`MyEnum::B`, mais ça serait un exemple de l'anti-patron [Cloner pour "
+"satisfaire le vérificateur d'emprunt](../anti_patterns/borrow_clone.md). En "
+"revanche, nous pouvons éviter une allocation supplémentaire en changeant `e` "
+"à partir d'une simple référence mutable."
 
 #: src/idioms/mem-replace.md:78
 msgid ""
@@ -1406,6 +1487,10 @@ msgid ""
 "empty `String`, which does not need to allocate. As a result, we get the "
 "original `name` _as an owned value_. We can then wrap this in another enum."
 msgstr ""
+"`mem::take` nous permet de récupérer la valeur en la remplaçant pas la "
+"valeur par défaut. Pour `String`, la valeur par défaut est une chaîne de "
+"caractères vide, qui n'a donc pas besoin d'être allouée. Nous obtenons donc "
+"le `name` original en tant que valeur _possédée_."
 
 #: src/idioms/mem-replace.md:83
 msgid ""
@@ -1413,6 +1498,9 @@ msgid ""
 "replace the value with. An equivalent to our `mem::take` line would be "
 "`mem::replace(name, String::new())`."
 msgstr ""
+"**NOTE :** `mem::replace` est très similaire, mais il nous permet de "
+"spécifier par quoi remplacer la valeur. Un équivalent de notre `mem::take` "
+"utilisé plus haut serait `mem::replace(name, String::new())`."
 
 #: src/idioms/mem-replace.md:87
 msgid ""
@@ -1420,11 +1508,17 @@ msgid ""
 "value with a `None`, `Option`’s `take()` method provides a shorter and more "
 "idiomatic alternative."
 msgstr ""
+"Notez cependant que si on utilise une `Option` dont on veut remplacer la "
+"valeur par `None`, la fonction `take()` de `Option` est une alternative plus "
+"simple et plus idiomatique."
 
+# "Look ma" donne littéralement "Regarde m'man !". Le ton de cette phrase détonne bizarrement au milieu du reste, c'est peut-être une référence que je ne connais pas (à Indiana Jones ? je ne me souviens plus du tout de ces films). J'ai essayé d'adoucir le côté bizarre que je trouvais à cette phrase, mais je ne comprends pas trop ce que l'auteur a voulu faire ici.
 #: src/idioms/mem-replace.md:93
 msgid ""
 "Look ma, no allocation! Also you may feel like Indiana Jones while doing it."
 msgstr ""
+"Et hop, aucune allocation ! Vous risquez peut-être aussi de vous prendre "
+"pour Indiana Jones en utilisant ce pattern."
 
 #: src/idioms/mem-replace.md:97
 msgid ""
@@ -1433,6 +1527,11 @@ msgid ""
 "resulting in reduced performance as opposed to what you'd do in unsafe "
 "languages."
 msgstr ""
+"Cette méthode peut devenir un peu trop verbeuse. Quelques erreurs répétées "
+"vous feront détester le vérificateur d'emprunt. De plus, le compilateur peut "
+"ne pas réussir à bien optimiser le double stockage, ce qui peut réduire les "
+"performances par rapport à ce que vous auriez fait avec un langage qui ne "
+"vérifie pas la sûreté des références."
 
 #: src/idioms/mem-replace.md:101
 msgid ""
@@ -1440,6 +1539,9 @@ msgid ""
 "(./default.md). However, if the type you're working with doesn't implement "
 "this, you can instead use `mem::replace`."
 msgstr ""
+"Le type que vous souhaitez prendre doit également implémenter [le trait "
+"`Default`](./default.md). Cependant, si ce n'est pas le cas, vous pouvez "
+"toujours utiliser `mem::replace`."
 
 #: src/idioms/mem-replace.md:107
 msgid ""
@@ -1448,6 +1550,11 @@ msgid ""
 "in other low-level languages like C you'd simply alias the pointer and fix "
 "things later."
 msgstr ""
+"Cette pratique n'a d'intérêt qu'en Rust. Dans un langage avec un ramasse-"
+"miette, vous prendriez la référence vers la valeur par défaut (et c'est le "
+"ramasse-miettes qui garderait une trace des références), tandis que dans "
+"d'autres langages bas niveaux comme C, vous feriez un simple alias vers le "
+"pointeur et vous arrangeriez les choses plus tard."
 
 #: src/idioms/mem-replace.md:112
 msgid ""
@@ -1455,12 +1562,19 @@ msgid ""
 "value may only have one owner, so to take it out, we need to put something "
 "back in – like Indiana Jones, replacing the artifact with a bag of sand."
 msgstr ""
+"Cependant en Rust, cela demande un peu plus de travail. Une valeur ne peut "
+"avoir qu'un seul propriétaire donc pour la récupérer il faut mettre quelque "
+"chose à sa place. Comme Indiana Jones, qui remplace l'artéfact par un sac de "
+"sable."
 
 #: src/idioms/mem-replace.md:118
 msgid ""
 "This gets rid of the [Clone to satisfy the borrow checker](../anti_patterns/"
 "borrow_clone.md) anti-pattern in a specific case."
 msgstr ""
+"Ce pattern permet de se débarrasser de l'anti-patron [Cloner pour satisfaire "
+"le vérificateur d'emprunt](../anti_patterns/borrow_clone.md) dans un cas "
+"spécifique."
 
 #: src/idioms/on-stack-dyn-dispatch.md:5
 msgid ""
@@ -1469,21 +1583,26 @@ msgid ""
 "the lifetime as necessary, we can use deferred conditional initialization, "
 "as seen below:"
 msgstr ""
+"Il est possible de choisir dynamiquement entre plusieurs valeurs lors de "
+"l'exécution. Cependant, pour cela, il faut déclarer plusieurs variables pour "
+"les lier à des objets de type différent. Pour étendre la durée de vie autant "
+"que nécessaire, on peut utiliser l'initialisation conditionnelle différée "
+"comme ci-dessous :"
 
 #: src/idioms/on-stack-dyn-dispatch.md:17
 #: src/idioms/on-stack-dyn-dispatch.md:20
 #: src/idioms/on-stack-dyn-dispatch.md:56
 msgid "\"-\""
-msgstr ""
+msgstr "\"-\""
 
 #: src/idioms/on-stack-dyn-dispatch.md:18
 msgid "// We need to describe the type to get dynamic dispatch.\n"
-msgstr ""
+msgstr "// Il faut décrire le type pour avoir une affectation dynamique.\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:25
 #: src/idioms/on-stack-dyn-dispatch.md:60
 msgid "// Read from `readable` here.\n"
-msgstr ""
+msgstr "// On peut lire depuis `readable`\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:34
 msgid ""
@@ -1493,12 +1612,20 @@ msgid ""
 "places where performance is not of the essence, thus costing compile time "
 "and cache usage."
 msgstr ""
+"Rust monomorphise le code par défaut. Cela signifie qu'une copie du code "
+"sera générée pour chaque type avec lequel il est utilisé et chaque copie "
+"sera optimisée indépendamment. Bien que cela permette d'obtenir du code "
+"rapide à l'exécution, lorsque la performance n'est pas l'enjeu principal, la "
+"monomorphisation crée une grande quantité de code avec un impact sur le "
+"temps de compilation et l'utilisation du cache."
 
 #: src/idioms/on-stack-dyn-dispatch.md:40
 msgid ""
 "Luckily, Rust allows us to use dynamic dispatch, but we have to explicitly "
 "ask for it."
 msgstr ""
+"Heureusement, Rust nous permet d'utiliser l'affectation dynamique, mais il "
+"faut la demander explicitement."
 
 #: src/idioms/on-stack-dyn-dispatch.md:45
 msgid ""
@@ -1506,6 +1633,9 @@ msgid ""
 "initialize something we won't use later, nor do we need to monomorphize the "
 "whole code that follows to work with both `File` or `Stdin`."
 msgstr ""
+"Pas besoin d'allouer quoi que ce soit sur le tas. Pas besoin non plus "
+"d'initialiser quelque chose qui ne sera pas utilisé plus tard, ni de "
+"monomorphiser tout le code qui suit pour travailler avec `File` ou `Stdin`."
 
 #: src/idioms/on-stack-dyn-dispatch.md:51
 msgid ""
@@ -1513,14 +1643,17 @@ msgid ""
 "initialization, which made up more moving parts than the `Box`\\-based "
 "version:"
 msgstr ""
+"Avant la version 1.79.0 de Rust, pour utiliser l'initialisation différée, il "
+"fallait deux assignations `let`, ce qui donnait plus de parties changeantes "
+"que la version basée sur `Box` :"
 
 #: src/idioms/on-stack-dyn-dispatch.md:55
 msgid "// We still need to ascribe the type for dynamic dispatch.\n"
-msgstr ""
+msgstr "// Il faut toujours attribuer le type pour l'allocation dynamique.\n"
 
 #: src/idioms/on-stack-dyn-dispatch.md:64
 msgid "Luckily, this disadvantage is now gone. Yay!"
-msgstr ""
+msgstr "Heureusement pour nous, ce désavantage a désormais disparu. Youpi !"
 
 #: src/idioms/on-stack-dyn-dispatch.md:68
 msgid ""
@@ -1528,6 +1661,9 @@ msgid ""
 "temporary values within `&` or `&mut` as long as possible within the scope "
 "of the function."
 msgstr ""
+"Depuis Rust 1.79.0, le compilateur étendra automatiquement la durée de vie "
+"des valeurs temporaires référencées par `&` ou `&mut` aussi loin que "
+"possible dans la portée de la fonction."
 
 #: src/idioms/on-stack-dyn-dispatch.md:72
 msgid ""
@@ -1535,6 +1671,10 @@ msgid ""
 "placing the contents into some `let` binding (which would have been needed "
 "for deferred initialization, which was the solution used before that change)."
 msgstr ""
+"Cela signifie qu'on peut simplement utiliser une valeur derrière `&mut` ici "
+"sans se préoccuper de placer le contenu dans une assignation `let` (qui "
+"aurait été nécessaire pour l'initialisation différée, la solution utilisée "
+"avant ce changement)."
 
 #: src/idioms/on-stack-dyn-dispatch.md:76
 msgid ""
@@ -1542,12 +1682,19 @@ msgid ""
 "compiler knows the size of each value and each borrowed value outlives all "
 "references borrowed from it."
 msgstr ""
+"On a toujours une place pour chaque valeur (même si cette place est "
+"temporaire), le compilateur connaît la taille de chaque valeur et chaque "
+"valeur empruntée vis plus longtemps que toutes les références pointant sur "
+"elle."
 
 #: src/idioms/on-stack-dyn-dispatch.md:82
 msgid ""
 "[Finalisation in destructors](dtor-finally.md) and [RAII guards](../patterns/"
 "behavioural/RAII.md) can benefit from tight control over lifetimes."
 msgstr ""
+"[Finalisation dans les destructeurs](dtor-finally.md) et [RAII](../patterns/"
+"behavioural/RAII.md) peuvent bénéficier d'un contrôle plus strict sur les "
+"durées de vie."
 
 #: src/idioms/on-stack-dyn-dispatch.md:85
 msgid ""
@@ -1556,10 +1703,14 @@ msgid ""
 "doc.rust-lang.org/std/option/enum.Option.html#method.as_ref) method to get "
 "an optional reference."
 msgstr ""
+"Pour remplir conditionnellement une `Option<&T>` avec une référence (mutable "
+"ou non), on peut initialiser une `Option<T>` directement et utiliser sa "
+"méthode [`.as_ref()`](https://doc.rust-lang.org/std/option/"
+"enum.Option.html#method.as_ref) pour avoir une référence optionnelle."
 
 #: src/idioms/ffi/intro.md:1
 msgid "FFI Idioms"
-msgstr ""
+msgstr "Idiomes FFI"
 
 #: src/idioms/ffi/intro.md:3
 msgid ""
@@ -1567,28 +1718,40 @@ msgid ""
 "idioms here that can act as pointers, and avoid traps for inexperienced "
 "users of `unsafe` Rust."
 msgstr ""
+"L'écriture de Foreign Function Interface (FFI) mériterait un cours à part "
+"entière. Il y a cependant quelques bonnes pratiques qui peuvent servir à "
+"éviter les pièges les plus fréquents pour les utilisateurs inexpérimentés du "
+"Rust non sécurisé (`unsafe`)."
 
 #: src/idioms/ffi/intro.md:7
 msgid "This section contains idioms that may be useful when doing FFI."
 msgstr ""
+"Cette section contiens des idiomes qui peuvent être utiles pour écrire des "
+"FFI."
 
 #: src/idioms/ffi/intro.md:9
 msgid ""
 "[Idiomatic Errors](./errors.md) - Error handling with integer codes and "
 "sentinel return values (such as `NULL` pointers)"
 msgstr ""
+"[Gestion des erreurs](./errors.md) - Gestion des erreurs représentées par "
+"des integers ou des valeurs spécifiques (comme un pointeur `NULL`)"
 
 #: src/idioms/ffi/intro.md:12
 msgid "[Accepting Strings](./accepting-strings.md) with minimal unsafe code"
 msgstr ""
+"[Recevoir des chaînes de caractères](./accepting-strings.md) avec le moins "
+"de code non sécurisé possible"
 
 #: src/idioms/ffi/intro.md:14
 msgid "[Passing Strings](./passing-strings.md) to FFI functions"
 msgstr ""
+"[Envoyer des chaînes de caractères](./passing-strings.md) vers des fonctions "
+"FFI"
 
 #: src/idioms/ffi/errors.md:1
 msgid "Error Handling in FFI"
-msgstr ""
+msgstr "Gestion des erreurs dans les FFI"
 
 #: src/idioms/ffi/errors.md:5
 msgid ""
@@ -1596,152 +1759,187 @@ msgid ""
 "However, Rust's type system allows much more rich error information to be "
 "captured and propagated through a full type."
 msgstr ""
+"Dans d'autres langages comme le C, les erreurs sont représentées par des "
+"codes de retour. Cependant, le système de types de Rust permet de capturer "
+"et de propager bien plus d'information en implémentant des types complets "
+"pour les erreurs."
 
 #: src/idioms/ffi/errors.md:9
 msgid ""
 "This best practice shows different kinds of error codes, and how to expose "
 "them in a usable way:"
 msgstr ""
+"Cet idiome montre différents types de codes d'erreur et comment les exposer "
+"pour pouvoir les utiliser :"
 
 #: src/idioms/ffi/errors.md:12
 msgid "Flat Enums should be converted to integers and returned as codes."
 msgstr ""
+"Les enums simples sont converties en entiers et retournées en tant que codes."
 
 #: src/idioms/ffi/errors.md:13
 msgid ""
 "Structured Enums should be converted to an integer code with a string error "
 "message for detail."
 msgstr ""
+"Les enums structurées sont converties en un code entier avec un message "
+"d'erreur sous forme de chaîne de caractère pour le détail."
 
 #: src/idioms/ffi/errors.md:15
 msgid ""
 "Custom Error Types should become \"transparent\", with a C representation."
 msgstr ""
+"Les types d'erreur personnalisés sont \"transparents\" grâce à une "
+"représentation en C."
 
 #: src/idioms/ffi/errors.md:17 src/idioms/ffi/accepting-strings.md:29
 #: src/idioms/ffi/passing-strings.md:26 src/patterns/ffi/export.md:44
 #: src/patterns/ffi/wrappers.md:24
 msgid "Code Example"
-msgstr ""
+msgstr "Exemples de code"
 
 #: src/idioms/ffi/errors.md:19
 msgid "Flat Enums"
-msgstr ""
+msgstr "Enums simples"
 
 #: src/idioms/ffi/errors.md:23
 msgid "// user attempted a write operation\n"
-msgstr ""
+msgstr "// Tentative d'écriture non autorisée\n"
 
 #: src/idioms/ffi/errors.md:24
 msgid "// user should read the C errno() for what it was\n"
-msgstr ""
+msgstr "// L'utilisateur peut lire errno()  pour connaître le problème\n"
 
 #: src/idioms/ffi/errors.md:25
 msgid "// user should run a repair tool to recover it\n"
-msgstr ""
+msgstr "// L'utilisateur peut utiliser un outil de réparation du fichier\n"
 
 #: src/idioms/ffi/errors.md:35
 msgid "Structured Enums"
-msgstr ""
+msgstr "Enums structurées"
 
 #: src/idioms/ffi/errors.md:42
 msgid "// message describing the issue\n"
-msgstr ""
+msgstr "// message qui décrit le problème\n"
 
 #: src/idioms/ffi/errors.md:61 src/idioms/ffi/accepting-strings.md:47
 #: src/idioms/ffi/accepting-strings.md:79 src/idioms/ffi/passing-strings.md:33
 #: src/patterns/ffi/export.md:154 src/patterns/ffi/export.md:158
 #: src/patterns/ffi/export.md:165
 msgid "\"C\""
-msgstr ""
+msgstr "\"C\""
 
 #: src/idioms/ffi/errors.md:64
 msgid ""
 "// SAFETY: we assume that the lifetime of `e` is greater than\n"
 "        // the current stack frame.\n"
 msgstr ""
+"// SÉCURITÉ : on suppose que la durée de vie de `e` est supérieure\n"
+"        // à la position actuelle dans la pile\n"
 
 #: src/idioms/ffi/errors.md:70
 msgid "\"cannot write to read-only database\""
-msgstr ""
+msgstr "\"impossible d'écrire dans une base de données en lecture seule\""
 
 #: src/idioms/ffi/errors.md:73
 msgid "\"I/O Error: {e}\""
-msgstr ""
+msgstr "\"I/O Error: {e}\""
 
 #: src/idioms/ffi/errors.md:76
 msgid "\"File corrupted, run repair: {}\""
-msgstr ""
+msgstr "\"Fichier corrompu, réparez avec {}\""
 
 #: src/idioms/ffi/errors.md:83
 msgid ""
 "// SAFETY: copying error_bytes to an allocated buffer with a '\\0'\n"
 "            // byte at the end.\n"
 msgstr ""
+"// SÉCURITÉ : on copie error_bytes vers un tampon alloué avec `\\0`\n"
+"            // à la fin\n"
 
 #: src/idioms/ffi/errors.md:99
 msgid "Custom Error Types"
-msgstr ""
+msgstr "Types d'erreur personnalisés"
 
 #: src/idioms/ffi/errors.md:109 src/idioms/ffi/accepting-strings.md:48
 #: src/idioms/ffi/accepting-strings.md:83 src/patterns/creational/builder.md:30
 #: src/patterns/ffi/export.md:137 src/patterns/ffi/export.md:139
 msgid "/* ... */"
-msgstr ""
+msgstr "/* ... */"
 
 #: src/idioms/ffi/errors.md:111
 msgid "/* Create a second version which is exposed as a C structure */"
 msgstr ""
+"/* Crée une deuxième version qui est exposée en tant que structure C */"
 
 #: src/idioms/ffi/errors.md:130
 msgid ""
 "This ensures that the foreign language has clear access to error information "
 "while not compromising the Rust code's API at all."
 msgstr ""
+"Cela permet de garantir que le langage extérieur a un accès clair à "
+"l'information de l'erreur sans compromettre l'API du code Rust."
 
 #: src/idioms/ffi/errors.md:135
 msgid ""
 "It's a lot of typing, and some types may not be able to be converted easily "
 "to C."
 msgstr ""
+"C'est très verbeux et certains types peuvent ne pas être facilement "
+"convertibles en C."
 
 #: src/idioms/ffi/accepting-strings.md:5
 msgid ""
 "When accepting strings via FFI through pointers, there are two principles "
 "that should be followed:"
 msgstr ""
+"Lorsqu'on reçoit des chaînes de caractères _via_ des pointeurs FFI, il y a "
+"deux principes à respecter :"
 
 #: src/idioms/ffi/accepting-strings.md:8
 msgid "Keep foreign strings \"borrowed\", rather than copying them directly."
 msgstr ""
+"Garder les chaînes de caractères étrangères \"empruntées\" plutôt que de les "
+"copier directement."
 
 #: src/idioms/ffi/accepting-strings.md:9
 msgid ""
 "Minimize the amount of complexity and `unsafe` code involved in converting "
 "from a C-style string to native Rust strings."
 msgstr ""
+"Limiter au maximum la complexité et l'insécurité du code utilisé pour "
+"convertir un string C vers un string Rust."
 
 #: src/idioms/ffi/accepting-strings.md:14
 msgid ""
 "The strings used in C have different behaviours to those used in Rust, "
 "namely:"
 msgstr ""
+"Les chaînes de caractères utilisées en C ont des comportements différents de "
+"celles utilisées en rust :"
 
 #: src/idioms/ffi/accepting-strings.md:16
 msgid "C strings are null-terminated while Rust strings store their length"
 msgstr ""
+"Les chaînes en C se terminent par null alors que les chaînes en Rust "
+"stockent leur longueur"
 
 #: src/idioms/ffi/accepting-strings.md:17
 msgid ""
 "C strings can contain any arbitrary non-zero byte while Rust strings must be "
 "UTF-8"
 msgstr ""
+"Les chaînes en C peuvent contenir un nombre arbitraire d'octets non nuls "
+"alors que les chaînes en Rust doivent être encodées en UTF-8"
 
 #: src/idioms/ffi/accepting-strings.md:19
 msgid ""
 "C strings are accessed and manipulated using `unsafe` pointer operations "
 "while interactions with Rust strings go through safe methods"
 msgstr ""
+"Les chaînes en C sont manipulées _via_ des opérations de pointeurs non "
+"sécurisées alors que les interactions avec les chaînes en Rust utilisent des "
+"méthodes sécurisées"
 
 #: src/idioms/ffi/accepting-strings.md:22
 msgid ""
@@ -1750,18 +1948,25 @@ msgid ""
 "complexity and `unsafe` code involved in converting between C strings and "
 "Rust strings."
 msgstr ""
+"La librairie standard de Rust comprend des équivalents en C des types "
+"`String` et `&str`. Ils sont nommés `CString` et `&CStr` et permettent "
+"d'éviter la plupart du code complexe et non sécurisé impliqué dans la "
+"conversion de chaînes de caractères du format de C au format de Rust."
 
 #: src/idioms/ffi/accepting-strings.md:26
 msgid ""
 "The `&CStr` type also allows us to work with borrowed data, meaning passing "
 "strings between Rust and C is a zero-cost operation."
 msgstr ""
+"Le type `&CStr` permet également de travailler avec des données empruntées, "
+"ce qui signifie qu'on peut passer des chaînes de caractères entre Rust et C "
+"sans aucun coût."
 
 #: src/idioms/ffi/accepting-strings.md:34
 #: src/idioms/ffi/accepting-strings.md:77 src/idioms/ffi/passing-strings.md:31
 #: src/idioms/ffi/passing-strings.md:80 src/patterns/ffi/wrappers.md:114
 msgid "// other module content\n"
-msgstr ""
+msgstr "// autre contenu du module\n"
 
 #: src/idioms/ffi/accepting-strings.md:36
 msgid ""
@@ -1776,67 +1981,93 @@ msgid ""
 "    /// - points to memory ending in a null byte\n"
 "    /// - won't be mutated for the duration of this function call\n"
 msgstr ""
+"/// Log un message au niveau spécifié.\n"
+"    ///\n"
+"    /// #Sécurité\n"
+"    ///\n"
+"    /// L'utilisateur de la fonction doit s'assurer que `msg`:\n"
+"    ///\n"
+"    /// - n'est pas un pointeur null\n"
+"    /// - pointe vers une donnée valide et initialisée\n"
+"    /// - pointe vers une zone mémoire qui finit par un octet vide\n"
+"    /// - ne sera pas modifié pendant la durée de l'appel de cette fonction\n"
 
 #: src/idioms/ffi/accepting-strings.md:50
 msgid ""
 "// SAFETY: The caller has already guaranteed this is okay (see the\n"
 "        // `# Safety` section of the doc-comment).\n"
 msgstr ""
+"// SÉCURITÉ : L'utilisateur de la fonction a déjà garanti que ce code est "
+"sécurisé\n"
+"        // (voir la section `# Sécurité` du commentaire de documentation)\n"
 
 #: src/idioms/ffi/accepting-strings.md:55
 #: src/idioms/ffi/accepting-strings.md:105
 msgid "\"FFI string conversion failed\""
-msgstr ""
+msgstr "\"La conversion FFI a échoué\""
 
 #: src/idioms/ffi/accepting-strings.md:67
 msgid "The example is written to ensure that:"
-msgstr ""
+msgstr "Cet exemple est écrit pour garantir que :"
 
 #: src/idioms/ffi/accepting-strings.md:69 src/idioms/ffi/passing-strings.md:70
 msgid "The `unsafe` block is as small as possible."
-msgstr ""
+msgstr "Le bloc non sécurisé est aussi petit que possible"
 
 #: src/idioms/ffi/accepting-strings.md:70
 msgid ""
 "The pointer with an \"untracked\" lifetime becomes a \"tracked\" shared "
 "reference"
 msgstr ""
+"Le pointeur avec une durée de vie non suivie devient une référence partagée "
+"suivie."
 
 #: src/idioms/ffi/accepting-strings.md:72
 msgid "Consider an alternative, where the string is actually copied:"
 msgstr ""
+"Considérons une alternative où la chaîne de caractère est effectivement "
+"copiée :"
 
 #: src/idioms/ffi/accepting-strings.md:80
 msgid ""
 "// DO NOT USE THIS CODE.\n"
 "        // IT IS UGLY, VERBOSE, AND CONTAINS A SUBTLE BUG.\n"
 msgstr ""
+"// NE PAS UTILISER CE CODE.\n"
+"// IL EST MOCHE, TROP VERBEUX ET CONTIENT UN BUG INSIDIEUX.\n"
 
 #: src/idioms/ffi/accepting-strings.md:85
 msgid "/* SAFETY: strlen is what it is, I guess? */"
-msgstr ""
+msgstr "/* SÉCURITÉ : strlen est ce qu'il est je suppose ? */"
 
 #: src/idioms/ffi/accepting-strings.md:92
 msgid ""
 "// SAFETY: copying from a foreign pointer expected to live\n"
 "            // for the entire stack frame into owned memory\n"
 msgstr ""
+"// SÉCURITÉ : copie depuis un pointeur externe, censé rester\n"
+"            // en mémoire pendant toute la durée de l'exécution\n"
 
 #: src/idioms/ffi/accepting-strings.md:116
 msgid "This code is inferior to the original in two respects:"
-msgstr ""
+msgstr "Ce code est inférieur à l'original sous deux aspects :"
 
 #: src/idioms/ffi/accepting-strings.md:118
 msgid ""
 "There is much more `unsafe` code, and more importantly, more invariants it "
 "must uphold."
 msgstr ""
+"Il y a bien plus de code non sécurisé et, plus important encore, plus "
+"d'invariants à maintenir."
 
 #: src/idioms/ffi/accepting-strings.md:120
 msgid ""
 "Due to the extensive arithmetic required, there is a bug in this version "
 "that causes Rust `undefined behaviour`."
 msgstr ""
+"À cause de la grande quantité de calcul nécessaire, il y a un bug dans cette "
+"version qui provoque un `comportement non défini` de Rust (`undefined "
+"behaviour`)."
 
 #: src/idioms/ffi/accepting-strings.md:123
 msgid ""
@@ -1844,6 +2075,9 @@ msgid ""
 "copied, all `msg_len` bytes of it. However, the `NUL` terminator at the end "
 "was not."
 msgstr ""
+"Le bug est ici une simple erreur dans l'arithmétique des pointeurs : la "
+"chaîne de caractères a été copiée, avec un nombre d'octet total de "
+"`msg_len`. Cependant, le terminateur `NUL` n'a pas été copié."
 
 #: src/idioms/ffi/accepting-strings.md:126
 msgid ""
@@ -1853,6 +2087,11 @@ msgid ""
 "`CString` is created at the bottom of the block, its read of the Vector will "
 "cause `undefined behaviour`!"
 msgstr ""
+"Le vecteur a ensuite vu sa taille initialisée avec la longueur de la chaîne "
+"caractère et non pas redimensionné, ce qui aurait pu ajouter un zéro à la "
+"fin. En conséquence, le dernier octet du vecteur est de la mémoire non "
+"intialisée. Quand le `CString` est créé à la fin du block, sa lecture du "
+"vecteur provoquera un `comportement non défini` !"
 
 #: src/idioms/ffi/accepting-strings.md:132
 msgid ""
@@ -1861,36 +2100,48 @@ msgid ""
 "would put a weird character at the end of the string, sometimes it would "
 "just completely crash."
 msgstr ""
+"Comme beaucoup de problèmes similaires, ce bug peut être difficile à "
+"localiser. Parfois il provoquerait une panique parce que la chaîne de "
+"caractère n'est pas au format `UTF-8`, parfois il inscrirait un caractère "
+"inattendu à la fin de la chaîne, parfois il provoquerait un crash pur et "
+"simple de l'application."
 
 #: src/idioms/ffi/accepting-strings.md:138
 #: src/idioms/ffi/passing-strings.md:103
 msgid "None?"
-msgstr ""
+msgstr "Aucun ?"
 
 #: src/idioms/ffi/passing-strings.md:5
 msgid ""
 "When passing strings to FFI functions, there are four principles that should "
 "be followed:"
 msgstr ""
+"Lorsqu'on envoie des chaînes de caractères à des fonctions FFI, il y a "
+"quatre principes à respecter :"
 
 #: src/idioms/ffi/passing-strings.md:8
 msgid "Make the lifetime of owned strings as long as possible."
 msgstr ""
+"Réduire au maximum la durée de vie des chaînes de caractères possédées."
 
 #: src/idioms/ffi/passing-strings.md:9
 msgid "Minimize `unsafe` code during the conversion."
-msgstr ""
+msgstr "Minimiser le code non sécurisé pendant la conversion."
 
 #: src/idioms/ffi/passing-strings.md:10
 msgid ""
 "If the C code can modify the string data, use `Vec` instead of `CString`."
 msgstr ""
+"Si le code C peut modifier les données de la chaîne de caractères, utiliser "
+"`Vec` plutôt que `CString`."
 
 #: src/idioms/ffi/passing-strings.md:11
 msgid ""
 "Unless the Foreign Function API requires it, the ownership of the string "
 "should not transfer to the callee."
 msgstr ""
+"À moins que l'API externe ne le requière, la propriété de la chaîne de "
+"caractère ne devrait pas être transférée à la fonction appelée."
 
 #: src/idioms/ffi/passing-strings.md:16
 msgid ""
@@ -1898,6 +2149,10 @@ msgid ""
 "types. However, there are different approaches one can take with strings "
 "that are being sent to a foreign function call from a Rust function."
 msgstr ""
+"Rust a un support intégré pour les chaînes de caractères de style C avec les "
+"types `CString` et `CStr`. Cependant, il y a plusieurs approches possibles "
+"pour les chaînes de caractères à envoyer vers une fonction externe depuis "
+"une fonction Rust."
 
 #: src/idioms/ffi/passing-strings.md:20
 msgid ""
@@ -1907,44 +2162,60 @@ msgid ""
 "documentation explains that \"round-tripping\" a `CString` after "
 "modification is UB, so additional work is necessary in that case."
 msgstr ""
+"La meilleure pratique est simple : utiliser `CString` de sorte à minimiser "
+"le code non sécurisé. Cependant, une autre notion à ne pas négliger est que "
+"_l'objet doit vivre assez longtemps_, ce qui signifie que la durée de vie "
+"doit être maximisée. De plus, la documentation explique qu'un aller-retour "
+"de `CString` après modification provoque un `comportement non sécurisé`, "
+"donc ce cas précis nécessite un peu plus de travail."
 
 #: src/idioms/ffi/passing-strings.md:42
 msgid ""
 "// SAFETY: calling an FFI whose documentation says the pointer is\n"
 "            // const, so no modification should occur\n"
 msgstr ""
+"// SÉCURITÉ : appeler une FFI dont la documentation précise que le pointeur "
+"est \n"
+"            // constant, pour qu'aucune modification n'ait lieu\n"
 
 #: src/idioms/ffi/passing-strings.md:48
 msgid "// The lifetime of c_err continues until here\n"
-msgstr ""
+msgstr "// La durée de vie de c_err continue jusqu'ici\n"
 
 #: src/idioms/ffi/passing-strings.md:54
 msgid ""
 "// SAFETY: calling an FFI whose documentation implies\n"
 "            // that the input need only live as long as the call\n"
 msgstr ""
+"// SÉCURITÉ : appeler une FFI dont la documentation précise\n"
+"            // que l'entrée doit seulement vivre aussi longtemps que "
+"l'appel\n"
 
 #: src/idioms/ffi/passing-strings.md:68
 msgid "The example is written in a way to ensure that:"
-msgstr ""
+msgstr "Cet exemple est écrit pour garantir que :"
 
 #: src/idioms/ffi/passing-strings.md:71
 msgid "The `CString` lives long enough."
-msgstr ""
+msgstr "Le `CString` vit assez longtemps."
 
 #: src/idioms/ffi/passing-strings.md:72
 msgid "Errors with typecasts are always propagated when possible."
 msgstr ""
+"Les erreurs dues aux conversions entre types sont toujours propagées quand "
+"c'est possible."
 
 #: src/idioms/ffi/passing-strings.md:74
 msgid ""
 "A common mistake (so common it's in the documentation) is to not use the "
 "variable in the first block:"
 msgstr ""
+"Une erreur fréquente (tellement fréquente qu'elle est dans la documentation) "
+"est de ne pas utiliser la variable dans le premier bloc :"
 
 #: src/idioms/ffi/passing-strings.md:84
 msgid "// SAFETY: whoops, this contains a dangling pointer!\n"
-msgstr ""
+msgstr "// SÉCURITÉ : ouuuups, il y a un pointeur non résolu !\n"
 
 #: src/idioms/ffi/passing-strings.md:92
 msgid ""
@@ -1952,6 +2223,9 @@ msgid ""
 "`CString` is not extended by the pointer creation, unlike if a reference "
 "were created."
 msgstr ""
+"Ce code produit un pointeur non résolu, car la durée de vie du `CString` "
+"n'est pas étendue par la création du pointeur, ce qui serait le cas si une "
+"référence était créée."
 
 #: src/idioms/ffi/passing-strings.md:96
 msgid ""
@@ -1960,6 +2234,11 @@ msgid ""
 "particular macro to a call to `zmalloc`, meaning it is as fast as the "
 "operating system's ability to return zeroed memory (which is quite fast)."
 msgstr ""
+"Un autre problème fréquent est que l'initialisation d'un vecteur d'1k de "
+"zéros est \"lent\". Cependant les versions récentes de Rust ont optimisé "
+"cette macro en particulier pour appeler `zmalloc`, ce qui signifie que la "
+"vitesse d'exécution est égale à la capacité du système d'exploitation de "
+"renvoyer une zone mémoire remplie de zéros (ce qui est plutôt rapide)."
 
 #: src/idioms/option-iter.md:1
 msgid "Iterating over an `Option`"
