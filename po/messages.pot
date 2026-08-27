@@ -2793,7 +2793,7 @@ msgstr ""
 #: src/patterns/behavioural/RAII.md:116
 msgid ""
 "RAII is a common pattern in C++: "
-"[cppreference.com](http://en.cppreference.com/w/cpp/language/raii), "
+"[cppreference.com](https://en.cppreference.com/w/cpp/language/raii), "
 "[wikipedia](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)."
 msgstr ""
 
@@ -5653,7 +5653,7 @@ msgstr ""
 
 #: src/functional/optics.md:498
 msgid ""
-"[luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing "
+"[luminance](https://github.com/digideskio/luminance-rs) is a crate for drawing "
 "computer graphics that uses similar API design, including procedural macros "
 "to create full prisms for buffers of different pixel types that remain "
 "generic"

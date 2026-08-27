@@ -495,7 +495,7 @@ following section.
   implementation, with a cleaner interface than these examples
 - [Serde](https://serde.rs) itself, which makes these concepts intuitive for end
   users (i.e. defining the structs) without needing to understand the details
-- [luminance](https://github.com/phaazon/luminance-rs) is a crate for drawing
+- [luminance](https://github.com/digideskio/luminance-rs) is a crate for drawing
   computer graphics that uses similar API design, including procedural macros to
   create full prisms for buffers of different pixel types that remain generic
 - [An Article about Lenses in Scala](https://web.archive.org/web/20221128185849/https://medium.com/zyseme-technology/functional-references-lens-and-other-optics-in-scala-e5f7e2fdafe)

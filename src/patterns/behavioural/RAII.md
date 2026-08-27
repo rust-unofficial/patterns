@@ -114,7 +114,7 @@ works just as well.
 [Finalisation in destructors idiom](../../idioms/dtor-finally.md)
 
 RAII is a common pattern in C++:
-[cppreference.com](http://en.cppreference.com/w/cpp/language/raii),
+[cppreference.com](https://en.cppreference.com/w/cpp/language/raii),
 [wikipedia][wikipedia].
 
 [wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
