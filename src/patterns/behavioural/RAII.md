@@ -72,7 +72,7 @@ fn baz(x: Mutex<Foo>) {
 
 ## Motivation
 
-Where a resource must be finalised after use,  can be used to do this
+Where a resource must be finalised after use, RAII can be used to do this
 finalisation. If it is an error to access that resource after finalisation, then
 this pattern can be used to prevent such errors.
 
@@ -88,7 +88,7 @@ finalised. We can make use of the borrow checker in Rust to statically prevent
 errors stemming from using resources after finalisation takes place.
 
 The core aim of the borrow checker is to ensure that references to data do not
-outlive that data. The  guard pattern works because the guard object
+outlive that data. The RAII guard pattern works because the guard object
 contains a reference to the underlying resource and only exposes such
 references. Rust ensures that the guard cannot outlive the underlying resource
 and that references to the resource mediated by the guard cannot outlive the
@@ -113,8 +113,8 @@ works just as well.
 
 [Finalisation in destructors idiom](../../idioms/dtor-finally.md)
 
- is a common pattern in C++:
-[cppreference.com](https://en.cppreference.com/cpp/language/raii),
+RAII is a common pattern in C++:
+[cppreference.com](https://web.archive.org/web/20260918073742/https://en.cppreference.com/cpp/language/raii),
 [wikipedia][wikipedia].
 
 [wikipedia]: https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization
