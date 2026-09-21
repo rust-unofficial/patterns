@@ -83,7 +83,7 @@ after finalisation.
 
 ## Discussion
 
- is a useful pattern for ensuring resources are properly deallocated or
+RAII is a useful pattern for ensuring resources are properly deallocated or
 finalised. We can make use of the borrow checker in Rust to statically prevent
 errors stemming from using resources after finalisation takes place.
 
